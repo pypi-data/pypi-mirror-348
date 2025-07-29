@@ -1,0 +1,207 @@
+
+# **I-face_sort**
+
+# I-face_sort
+
+**Description :**
+
+**face_sort** est un outil en ligne de commande permettant de trier localement des images contenant des visages humains.  
+Il prend en entrée un dossier contenant des images et retourne en sortie un dossier (situé dans le même dossier que le dossier d images en entrée fourni) composé de différents sous-dossiers, dans lesquels les images sont classées selon leur similarité.
+
+L outil propose plusieurs fonctionnalités principales :
+
+- **Tri automatique par visage**  
+  À partir d un dossier d images, face_sort crée un dossier avec différents sous-dossiers correspondant aux visages triés.  
+  Pendant le tri, l outil affiche en temps réel les étapes du traitement.  
+  Les logs sont affichés dans le terminal et renseignent sur les images triées et celles qui ne le sont pas.
+
+- **Choix entre différents modèles d IA**  
+  Face_sort permet de trier les visages en utilisant deux méthodes de mesure de similarité :  
+  - **Distance euclidienne (ED)** : mesure la distance directe entre deux vecteurs de caractéristiques faciales. Plus la distance est faible, plus les visages sont similaires.  
+  - **Distance cosinus (COS)** : mesure l angle entre deux vecteurs. Plus l angle est faible (ou la similarité élevée), plus les visages sont considérés similaires.  
+
+Par défaut, la distance euclidienne est utilisée car elle produit des résultats plus précis sur les jeux de données testés. Elle permet notamment de mieux distinguer des visages visuellement différents, même s ils ont une orientation similaire, ce que la distance cosinus a tendance à regrouper à tort.
+
+L utilisateur peut choisir la méthode souhaitée via l option `--ia_model ED` ou `--ia_model COS`, selon ses besoins.
+
+
+
+### 1.2.3 Niveaux de tri disponibles
+
+L utilisateur peut choisir entre trois niveaux de tri :
+
+- **Strict** : à privilégier lorsque vous recherchez un certain degré de précision, en minimisant autant que possible le risque d erreur (ex : trombinoscope, archives).
+- **Large** : les regroupements effectués sont très larges. Ce niveau est utile lorsque vous souhaitez simplement détecter des visages sans les trier (par exemple pour obtenir des statistiques, tester un modèle d IA ou faire du débogage).
+- **None** : c est le choix par défaut lorsqu aucun niveau de tolérance n est précisé. Il regroupe les visages même avec des différences modérées (angle, lumière). Idéal pour un usage personnel rapide, quitte à corriger manuellement quelques erreurs.
+
+Ces variations dans les options de tri permettent notamment de s adapter à différents besoins : rigueur maximale, rapidité de traitement ou simple pré-analyse.
+
+### 1.3 Ce que le logiciel n est pas
+
+Afin d éviter toute attente irréaliste, il est important de clarifier ce que cet outil n est pas :
+
+- Un outil de reconnaissance nominative : Face Sort ne fournit pas de fichiers de sortie triés avec des noms spécifiques (pas de “Alice”, “Bob”) et ne propose pas non plus la possibilité de nommer les dossiers manuellement. L outil reste centré sur le principe de confidentialité, jusque dans sa logique de tri : les dossiers de sortie ne portent que des alias comme personne_1, personne_2, etc.
+- Un outil permettant une recherche par nom, tag ou métadonnée : Dans la continuité du point précédent, la base de confidentialité sur laquelle repose Face Sort ne permet pas d effectuer de recherche par nom, tag ou autre critère.
+- Un outil avec interface graphique : Assez des logiciels qui vous éblouissent avec leurs mille couleurs et interfaces sophistiquées ! Face Sort a opté pour un style minimaliste, se résumant principalement à des messages de log dans le terminal — au plus grand bonheur des utilisateurs de Linux !
+- Un logiciel cloud ou connecté : Face Sort ne nécessite ni connexion Internet ni accès à un quelconque réseau ou serveur. Il fonctionne entièrement en local, ce qui le rend utilisable en toute circonstance, où que vous soyez.
+
+- Un logiciel d édition de photos : Face Sort ne permet pas l édition des images fournies. Son rôle est strictement limité à leur détection et à leur tri.
+
+### 1.4 Public cible
+
+Ce logiciel s adresse principalement aux utilisateurs ayant des connaissances de base en ligne de commande, souhaitant trier des photos en local, sans dépendre de solutions cloud ou web.
+
+Que vous soyez photographe, désireux de trier vos photos sans les envoyer sur Internet, un parent souhaitant classer d anciennes photos de vos enfants sans les stocker sur Google Drive... car Dieu seul sait ce qu ils font réellement de vos données ! ... ou tout simplement un développeur soucieux de la confidentialité de ses images, Face Sort est l outil qu il vous faut.
+
+
+### 1.5 Licence d utilisation
+
+Le code du projet Face Sort est open source sous licence MIT.  
+La documentation utilisateur est fournie uniquement à titre informatif et n est pas librement redistribuable.
+
+### 1.6 Mentions légales
+
+- **Vie privée** : Aucune image n est envoyée sur un serveur externe. L application fonctionne entièrement hors ligne.
+- **Précision de l IA** : L algorithme utilise des modèles de reconnaissance faciale basés sur la similarité et peut produire des regroupements inexacts. L utilisateur est responsable de vérifier les résultats.
+- **Limitation de responsabilité** : Ce logiciel est fourni "tel quel", sans garantie d exactitude, de performance ou de compatibilité. L auteur ne pourra être tenu responsable d une mauvaise utilisation ou des résultats produits.
+
+### 1.7 Documentation
+
+Ce guide est fourni au format PDF, version 0.2.2, synchronisée avec la version du code source.  
+Une vidéo explicative des étapes élémentaires à suivre pour faire fonctionner le logiciel est disponible ici.
+
+
+
+## 2 Installation et Utilisation
+
+Face Sort est disponible sur le dépôt officiel PyPI.  
+Vous pouvez l installer facilement avec la commande suivante :
+
+```bash
+pip install face-sort
+´´´
+
+Le code source est aussi accessible sur GitHub :
+https://github.com/UNamurCSFaculty/2425_INFOB318_FS_01
+
+### 2.1 Pré-requis
+
+**Compatibilité :**
+
+- Windows 10 et versions supérieures  
+- macOS 12 et versions supérieures  
+- Linux Ubuntu 20.04 et versions supérieures  
+
+**Environnement logiciel requis :**
+
+- Python 3.8 ou supérieur  
+- Connexion Internet requise pour l installation via PyPI  
+
+**Bibliothèques installées automatiquement :**
+
+- opencv-python  
+- face_recognition  
+- numpy  
+- scikit-learn
+
+### 2.2 Démarrage pas à pas (sous Windows)
+
+1. Ouvrir le terminal :  
+   - Cliquez sur la barre de recherche Windows (ou appuyez sur la touche Windows)  
+   - Tapez `cmd` ou `Terminal`, puis appuyez sur Entrée  
+
+2. Vérifier que Python est installé :  
+
+```bash
+python --version
+```
+
+3. (Optionnel mais recommandé) Créer un environnement virtuel :
+
+```bash
+python -m venv env
+.\env\Scripts\activate
+```
+
+### Installation et lancement
+
+1. Installez l outil avec pip :
+
+```bash
+pip install face-sort
+```
+
+2.Créez un dossier contenant vos photos.
+
+3.Lancez Face Sort avec la commande suivante :
+
+```bash
+python -m face_sort.main --seuil_type seuil_choisi --ia_model model_IA -- /chemin/vers/le/do
+
+```
+ou :
+
+/chemin/vers/le/dossier_a_traiter : chemin du dossier contenant les photos à trier.
+
+seuil_choisi : niveau de filtrage des visages (options : strict, large, ou none par défaut).
+
+model_IA : modèle d intelligence artificielle utilisé pour la reconnaissance (ED ou COS).
+
+### 2.2.1 Exemple : Cas minimal
+
+Supposons que vous ayez 300 photos à trier, stockées dans le dossier `photos_to_test` situé dans le répertoire `moi` sur votre bureau.  
+Les étapes minimales pour le tri de ces photos sont :  
+
+- Ouvrez votre terminal.  
+- Tapez la commande suivante :  
+
+```bash
+python -m face_sort.main "C:\Users\X1 Yoga\Desktop\moi\photos_to_test"
+```
+
+À la fin du tri, vous verrez apparaître un dossier output dans le répertoire moi, contenant différents sous-dossiers nommés personne_1, personne_2, etc., correspondant aux différents visages identifiés et triés.
+
+### 2.3 Erreurs courantes et solutions
+
+- **ModuleNotFoundError: cv2**  
+  → Installez la bibliothèque OpenCV :  
+  ```bash
+  pip install opencv-python
+No face detected in image
+→ L image ne contient pas de visage détectable (trop sombre, floue, dos tourné, ou visage de profil...).
+
+Permission denied
+→ L image ou le dossier est protégé en écriture. Relancez avec les droits administrateur.
+
+Unsupported file format
+→ Vérifiez que vos images sont au format .jpg, .jpeg ou .png.
+
+## Bibliographie
+
+Voici la documentation d OpenCV ainsi que quelques tutoriels, à la fois oraux et écrits, qui m ont guidée dans la conception mais aussi dans l implémentation de cet outil.
+
+- Documentation officielle OpenCV :  
+  https://docs.opencv.org/
+
+- Tutoriels YouTube :  
+  - https://www.youtube.com/watch?v=5KEObONUkik  
+  - https://www.youtube.com/watch?v=h6oa_FwzFwU  
+  - https://www.youtube.com/watch?v=Alur5_PCvHM  
+  - https://www.youtube.com/watch?v=4JhGYWhcVlk&t=93s  
+  - https://www.youtube.com/watch?v=Kz6IlDCyOUY  
+  - https://www.youtube.com/watch?v=r0E2GJrGFxk  
+
+- Articles :  
+  - https://blog.vaniila.ai/Reconnaissance_faciale/  
+  - https://pypi.org/project/face-recognition/  
+  - https://webpick.info/la-reconnaissance-faciale-avec-python/  
+  - https://les-enovateurs.com/intelligence-artificielle-debutants-reconnaissance-faciale-1  
+  - https://les-enovateurs.com/intelligence-artificielle-debutants-reconnaissance-faciale-5  
+  - https://medium.com/scrapehero/exploring-image-similarity-approaches-in-python-b8ca0a3e
+
+
+
+
+
+
+
