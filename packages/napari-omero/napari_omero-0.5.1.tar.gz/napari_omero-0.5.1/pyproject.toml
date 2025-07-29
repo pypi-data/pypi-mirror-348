@@ -1,0 +1,192 @@
+# https://peps.python.org/pep-0517/
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src"]
+sources = ["src"]
+
+# https://peps.python.org/pep-0621/
+[project]
+name = "napari-omero"
+dynamic = ["version"]
+description = "napari/OMERO interoperability"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-2.0-or-later" }
+authors = [
+    { name = "Talley Lambert", email = "talley.lambert@gmail.com" },
+    { name = "Will Moore", email = "w.moore@dundee.ac.uk" },
+    { name = "Johannes Soltwedel", email = "johannes_richard.soltwedel@tu-dresden.de" },
+    { name = "Peter Sobolewski" },
+]
+keywords = ["OMERO.CLI", "plugin", "napari", "napari-plugin"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Framework :: napari",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+    "Typing :: Typed",
+]
+# add your package dependencies here
+dependencies = [
+    "napari>=0.5.0",
+    "omero-py",
+    "omero-rois",
+    "omero-marshal",
+    # these come with napari ...
+    # but are directly imported here as well so are included explicitly
+    "qtpy>=1.10.0",
+    "dask[array]>=2021.10.0",
+    "superqt>=0.6.7",
+]
+
+# https://peps.python.org/pep-0621/#dependencies-optional-dependencies
+# "extras" (e.g. for `pip install .[test]`)
+[project.optional-dependencies]
+all = ["napari[all]"]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-qt",
+    "pytest-regressions",
+    "pywin32; sys_platform == 'win32'",
+]
+dev = [
+    "napari-omero[all, test]",
+    "ipython",
+    "mypy",
+    "pdbpp",
+    "pre-commit",
+    "rich",
+    "ruff",
+]
+
+[project.urls]
+homepage = "https://github.com/tlambert03/napari-omero"
+repository = "https://github.com/tlambert03/napari-omero"
+
+# Entry points
+# https://peps.python.org/pep-0621/#entry-points
+# same as console_scripts entry point
+[project.scripts]
+napari-omero = "napari_omero.__main__:main"
+
+[project.entry-points."napari.manifest"]
+napari-omero = "napari_omero:napari.yaml"
+
+# https://docs.astral.sh/ruff
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+src = ["src"]
+
+# https://docs.astral.sh/ruff/rules
+[tool.ruff.lint]
+pydocstyle = { convention = "numpy" }
+select = [
+    "E",    # style errors
+    "W",    # style warnings
+    "F",    # flakes
+    "D",    # pydocstyle
+    "D417", # Missing argument descriptions in Docstrings
+    "I",    # isort
+    "UP",   # pyupgrade
+    "C4",   # flake8-comprehensions
+    "B",    # flake8-bugbear
+    "A001", # flake8-builtins
+    "RUF",  # ruff-specific rules
+    "TC",   # flake8-type-checking
+    "TID",  # flake8-tidy-imports
+]
+ignore = [
+    "D401", # First line should be in imperative mood
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["D", "S"]
+
+# https://docs.astral.sh/ruff/formatter/
+[tool.ruff.format]
+docstring-code-format = true
+skip-magic-trailing-comma = false # default is false
+
+# https://mypy.readthedocs.io/en/stable/config_file.html
+[tool.mypy]
+files = "src/**/"
+strict = false
+check_untyped_defs = true
+ignore_missing_imports = true
+disallow_any_generics = false
+disallow_subclassing_any = false
+show_error_codes = true
+pretty = true
+
+
+# https://docs.pytest.org/en/6.2.x/customize.html
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+filterwarnings = [
+    "error",
+    "ignore:distutils Version classes are deprecated:",
+    "ignore:the imp module is deprecated in:",
+    "ignore:'U' mode is deprecated",
+    "ignore:Please import PackageMetadata from 'npe2'",
+    "ignore:`np.bool8` is a deprecated alias for `np.bool_`:DeprecationWarning:skimage",
+    "ignore:Pickle, copy, and deepcopy support will be removed from itertools in Python 3.14:DeprecationWarning"
+]
+
+
+# https://coverage.readthedocs.io/en/6.4/config.html
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError",
+    "\\.\\.\\.",
+    "raise NotImplementedError()",
+    "pass",
+]
+[tool.coverage.run]
+source = ["src"]
+
+# https://github.com/mgedmin/check-manifest#configuration
+# add files that you want check-manifest to explicitly ignore here
+# (files that are in the repo but shouldn't go in the package)
+[tool.check-manifest]
+ignore = [
+    ".github_changelog_generator",
+    ".pre-commit-config.yaml",
+    ".ruff_cache/**/*",
+    "setup.py",
+    "tests/**/*",
+]
