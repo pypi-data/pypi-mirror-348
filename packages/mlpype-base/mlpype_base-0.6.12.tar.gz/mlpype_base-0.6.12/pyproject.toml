@@ -1,0 +1,48 @@
+[project]
+name = "mlpype-base"
+authors = [
+    {name = "Jeroen van den Hoven"},
+]
+description = "Base package for standardised machine learning"
+
+requires-python = ">=3.9"
+dynamic = ["version"]
+license = {"text" = "MIT"}
+
+dependencies = [
+    "docstring_parser>=0.14.1",
+    "pydantic>=1.10.7",
+    "joblib>=1.1.1",
+    "PyYAML==6.0.1",
+    "jinja2==3.1.6",
+    "loguru>=0.7.3",
+]
+
+[project.optional-dependencies]
+strict = [
+    "docstring_parser==0.14.1",
+    "pydantic==1.10.7",
+    "joblib==1.1.1",
+    "PyYAML==6.0.1",
+    "jinja2==3.1.6",
+]
+
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mlpype"]
+
+[tool.black]
+line-length = 120
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+latest-tag = true
+pattern = '(?P<base>\d+\.\d+\.\d+)'
+format = "{base}"
