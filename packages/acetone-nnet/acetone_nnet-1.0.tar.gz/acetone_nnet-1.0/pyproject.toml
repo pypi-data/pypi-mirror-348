@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+# build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[project]
+name = "acetone-nnet"
+version = "1.0"
+requires-python = ">=3.10"
+
+authors = [
+    { name="Yanis AIT-AISSA", email="Yanis.AIT-AISSA@student.isae-supaero.fr"},
+    { name="Thomas CARLE", email="Thomas.Carle@irit.fr" },
+    { name="Iryna DE ALBUQUERQUE SILVA", email="Iryna.De_Albuquerque_Silva@onera.fr" },
+    { name="Adrien GAUFFRIAU", email="Adrien.Gauffriau@airbus.com" },
+    { name="Benjamin LESAGE", email="benjamin.lesage@onera.fr"},
+    { name="Claire PAGETTI", email="Claire.Pagetti@onera.fr" },
+]
+
+description = "Predictable programming framework for ML applications in safety-critical systems."
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "numpy",
+    "numpyencoder",
+    "onnx",
+    "tensorflow; python_version <= '3.11'",
+    "pystache",
+    "onnxruntime"
+]
+
+[project.optional-dependencies]
+dev = ["ruff", "mypy"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+acetone_nnet = ["templates/**.tpl",
+    "templates/normalization/*.tpl",
+    "templates/memory_layout/*.tpl",
+    "templates/layers/*.tpl",
+    "templates/layers/Resize/*.tpl",
+    "templates/layers/Pad/*.tpl",
+    "templates/layers/Gemm/*.tpl",
+    "templates/layers/Conv/*.tpl"]
+
+[project.scripts]
+acetone_generate = "acetone_nnet.cli.generate:acetone_generate"
+acetone_compare = "acetone_nnet.cli.compare:acetone_compare"
+
+[project.urls]
+Repository = "https://github.com/onera/acetone/"
+"Bug Tracker" = "https://github.com/onera/acetone/issues"
