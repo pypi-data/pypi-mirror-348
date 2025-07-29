@@ -1,0 +1,25 @@
+Metadata-Version: 2.3
+Name: rpi_stt_tts_shell
+Version: 0.1.0
+Summary: Przykładowy projekt dla Raspberry Pi zarządzany przez Poetry
+Author: Tom Sapletta
+Author-email: info@softreck.com
+Requires-Python: >=3.7,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: camera
+Requires-Dist: adafruit-blinka (>=8.19.0,<9.0.0)
+Requires-Dist: adafruit-circuitpython-dht (>=3.7.8,<4.0.0)
+Requires-Dist: click (>=8.1.3,<9.0.0)
+Requires-Dist: paho-mqtt (>=2.2.1,<3.0.0)
+Requires-Dist: picamera (>=1.13,<2.0) ; extra == "camera"
+Requires-Dist: rpi-gpio (>=0.7.1,<0.8.0)
+Description-Content-Type: text/markdown
+
+# rpi-stt-tts-shell
