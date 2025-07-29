@@ -1,0 +1,5 @@
+backend_llm: ollama # This is your backend LLM
+aws_region: us-east-1 # Your AWS region
+sns_topic_arn: arn:aws:sns:us-east-1:124355681547:K8sGPTAlerts  # Your SNS ARN
+log_group: /k8sgpt/notifications # log group
+log_stream: kaas  # log stream
