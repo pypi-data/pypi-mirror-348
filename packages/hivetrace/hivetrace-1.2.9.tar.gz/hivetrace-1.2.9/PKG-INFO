@@ -1,0 +1,387 @@
+Metadata-Version: 2.1
+Name: hivetrace
+Version: 1.2.9
+Summary: Hivetrace SDK for monitoring LLM applications
+Home-page: http://hivetrace.ai
+Author: Raft
+Author-email: sales@raftds.com
+License: UNKNOWN
+Description: # Hivetrace SDK
+        
+        ## Overview
+        
+        Hivetrace SDK is designed for integration with the Hivetrace service, providing monitoring of user prompts and LLM responses.
+        
+        ## Installation
+        
+        Install the SDK via pip:
+        
+        ```bash
+        pip install hivetrace
+        ```
+        
+        ## Usage
+        
+        ```python
+        from hivetrace.hivetrace import HivetraceSDK
+        ```
+        
+        ## Synchronous and Asynchronous Modes
+        
+        Hivetrace SDK supports both synchronous and asynchronous execution modes. By default, it operates in asynchronous mode. You can specify the mode explicitly during initialization.
+        
+        ### Sync Mode
+        
+        #### Sync Mode Initialization
+        
+        ```python
+        # Sync mode
+        hivetrace = HivetraceSDK(async_mode=False)
+        ```
+        
+        #### Sending a User Prompt
+        
+        ```python
+        # Sync mode
+        response = hivetrace.input(
+            application_id="your-application-id",  # obtained after registering the application in the UI
+            message="User prompt here"
+        )
+        ```
+        
+        #### Sending LLM Response
+        
+        ```python
+        # Sync mode
+        response = hivetrace.output(
+            application_id="your-application-id",  # obtained after registering the application in the UI
+            message="LLM response here"
+        )
+        ```
+        
+        ### Async Mode
+        
+        #### Async Mode Initialization
+        
+        ```python
+        # Async mode (default)
+        hivetrace = HivetraceSDK(async_mode=True)
+        ```
+        
+        #### Sending a User Prompt
+        
+        ```python
+        # Async mode
+        response = await hivetrace.input_async(
+            application_id="your-application-id",  # obtained after registering the application in the UI
+            message="User prompt here"
+        )
+        ```
+        
+        #### Sending LLM Response
+        
+        ```python
+        # Async mode
+        response = await hivetrace.output_async(
+            application_id="your-application-id",  # obtained after registering the application in the UI
+            message="LLM response here"
+        )
+        ```
+        
+        ## Example with Additional Parameters
+        
+        ```python
+        response = hivetrace.input(
+            application_id="your-application-id", 
+            message="User prompt here",
+            additional_parameters={
+                "session_id": "your-session-id",
+                "user_id": "your-user-id",
+                "agents": {
+                    "agent-1-id": {"name": "Agent 1", "description": "Agent description"},
+                    "agent-2-id": {"name": "Agent 2"},
+                    "agent-3-id": {}
+                }
+            }
+        )
+        ```
+        
+        > **Note:** `session_id`, `user_id`, and `agent_id` must be valid UUIDs.
+        
+        ## API
+        
+        ### `input`
+        
+        ```python
+        def input(application_id: str, message: str, additional_parameters: dict = None) -> dict:
+            ...
+        ```
+        
+        Sends a user prompt to Hivetrace.
+        
+        * `application_id`: Application identifier (must be a valid UUID, created in the UI)
+        * `message`: User prompt
+        * `additional_parameters`: Dictionary of additional parameters (optional)
+        
+        **Response Example:**
+        
+        ```json
+        {
+            "status": "processed",
+            "monitoring_result": {
+                "is_toxic": false,
+                "type_of_violation": "benign",
+                "token_count": 9,
+                "token_usage_warning": false,
+                "token_usage_unbounded": false
+            }
+        }
+        ```
+        
+        ### `output`
+        
+        ```python
+        def output(application_id: str, message: str, additional_parameters: dict = None) -> dict:
+            ...
+        ```
+        
+        Sends an LLM response to Hivetrace.
+        
+        * `application_id`: Application identifier (must be a valid UUID, created in the UI)
+        * `message`: LLM response
+        * `additional_parameters`: Dictionary of additional parameters (optional)
+        
+        **Response Example:**
+        
+        ```json
+        {
+            "status": "processed",
+            "monitoring_result": {
+                "is_toxic": false,
+                "type_of_violation": "safe",
+                "token_count": 21,
+                "token_usage_warning": false,
+                "token_usage_unbounded": false
+            }
+        }
+        ```
+        
+        ## Sending Requests in Sync Mode
+        
+        ```python
+        def main():
+            hivetrace = HivetraceSDK(async_mode=False)
+            response = hivetrace.input(
+                application_id="your-application-id",
+                message="User prompt here"
+            )
+        
+        main()
+        ```
+        
+        ## Sending Requests in Async Mode
+        
+        ```python
+        import asyncio
+        
+        async def main():
+            hivetrace = HivetraceSDK(async_mode=True)
+            response = await hivetrace.input_async(
+                application_id="your-application-id",
+                message="User prompt here"
+            )
+            await hivetrace.close()
+        
+        asyncio.run(main())
+        ```
+        
+        ### Closing the Async Client
+        
+        ```python
+        await hivetrace.close()
+        ```
+        
+        ## Configuration
+        
+        The SDK loads configuration from environment variables. The allowed domain (`HIVETRACE_URL`) and API token (`HIVETRACE_ACCESS_TOKEN`) are automatically retrieved from the environment.
+        
+        ### Configuration Sources
+        
+        Hivetrace SDK can retrieve configuration from the following sources:
+        
+        **.env File:**
+        
+        ```bash
+        HIVETRACE_URL=https://your-hivetrace-instance.com
+        HIVETRACE_ACCESS_TOKEN=your-access-token  # obtained in the UI (API Tokens page)
+        ```
+        
+        The SDK will automatically load these settings.
+        
+        You can also use the config when initializing an instance of the havetrace sdk class to load settings.
+        ```bash
+        trace = HivetraceSDK(
+                config={
+                    "HIVETRACE_URL": HIVETRACE_URL,
+                    "HIVETRACE_ACCESS_TOKEN": HIVETRACE_ACCESS_TOKEN,
+                },
+                async_mode=False,
+            )
+        ```
+        
+        # Monitoring Agent Systems with HiveTrace SDK
+        ## CrewAI Integration
+        
+        This guide explains how to monitor multi-agent systems using the [HiveTrace SDK](https://pypi.org/project/hivetrace/) with [CrewAI](https://www.crewai.com/). All agent messages, including intermediate steps, will be automatically sent to the HiveTrace monitoring service.
+        
+        > **Note**: The agent system design shown below (agent roles, number of agents, tools used, etc.) is just an example to illustrate integration with HiveTrace. You can adapt it to your own use case.
+        
+        ---
+        
+        ## 1. Initialize the SDK
+        
+        Create an instance of HivetraceSDK, just like for single LLM monitoring:
+        
+        ```python
+        trace = HivetraceSDK(
+            config={
+                "HIVETRACE_URL": HIVETRACE_URL,
+                "HIVETRACE_ACCESS_TOKEN": HIVETRACE_ACCESS_TOKEN,
+            },
+            async_mode=False,  # or True, depending on your use case
+        )
+        ```
+        
+        ---
+        
+        ## 2. Configure Agents and Tools
+        
+        Create an `agent_id_mapping` that defines a unique UUID, name, and description for each agent. Assign each agent's UUID to the tools they will use:
+        
+        ```python
+        planner_tools = [WebSearchTool()]
+        writer_tools = [WebSearchTool()]
+        editor_tools = [WebSearchTool()]
+        
+        for tool in planner_tools:
+            tool.agent_id = PLANNER_ID
+        for tool in writer_tools:
+            tool.agent_id = WRITER_ID
+        for tool in editor_tools:
+            tool.agent_id = EDITOR_ID
+        
+        agent_id_mapping = {
+            "Content Planner": {"id": PLANNER_ID, "description": "Creates content plans"},
+            "Content Writer": {"id": WRITER_ID, "description": "Writes high-quality articles"},
+            "Editor": {"id": EDITOR_ID, "description": "Edits and improves articles"},
+        }
+        ```
+        
+        Define agents with roles, goals, backstories, and assigned tools:
+        
+        ```python
+        planner = Agent(
+            role="Content Planner",
+            goal="Create a structured content plan for the given topic",
+            backstory="Experienced analyst and researcher.",
+            allow_delegation=False,
+            verbose=True,
+            tools=planner_tools,
+        )
+        
+        writer = Agent(
+            role="Content Writer",
+            goal="Write an informative and engaging article",
+            backstory="Talented writer adapting style to any topic.",
+            allow_delegation=False,
+            verbose=True,
+            tools=writer_tools,
+        )
+        
+        editor = Agent(
+            role="Editor",
+            goal="Improve structure and readability",
+            backstory="Experienced editor ensuring clarity and accuracy.",
+            allow_delegation=False,
+            verbose=True,
+            tools=editor_tools,
+        )
+        ```
+        
+        ---
+        
+        ## 3. Enable Monitoring with Decorator
+        
+        Use the `@trace` decorator to automatically send all agent messages to HiveTrace:
+        
+        ```python
+        from hivetrace.crewai_adapter import trace
+        
+        @trace(
+            hivetrace=trace,
+            application_id=HIVETRACE_APP_ID,
+            user_id=USER_ID,
+            session_id=SESSION_ID,
+            agent_id_mapping=agent_id_mapping,
+        )
+        def create_crew():
+            return Crew(
+                agents=[planner, writer, editor],
+                tasks=[plan, write, edit],
+                verbose=True,
+            )
+        ```
+        
+        ---
+        
+        ## 4. Send Initial User Input
+        
+        To monitor the initial user input, use the standard `input` or `input_async` method depending on your SDK mode:
+        
+        ```python
+        trace.input(
+            application_id=HIVETRACE_APP_ID,
+            message=f"Requesting information from agents on the topic: {topic}",
+            additional_parameters={
+                "session_id": session_id,
+                "user_id": user_id,
+                "agents": {
+                    PLANNER_ID: {
+                        "name": "Content Planner",
+                        "description": "Create a structured content plan",
+                    },
+                    WRITER_ID: {
+                        "name": "Content Writer",
+                        "description": "Write an article",
+                    },
+                    EDITOR_ID: {
+                        "name": "Editor",
+                        "description": "Edit the article",
+                    },
+                },
+            },
+        )
+        ```
+        
+        ---
+        
+        ## 5. Run the Agent System
+        
+        Finally, launch your `Crew` instance. All agent activities will be monitored automatically:
+        
+        ```python
+        crew = create_crew()
+        result = crew.kickoff(inputs={"topic": topic})
+        ```
+        
+        ---
+        
+        You now have full monitoring of your agent-based system integrated with HiveTrace!
+        
+        ## License
+        This project is licensed under the Apache License 2.0.
+Keywords: SDK,monitoring,logging,LLM,AI,Hivetrace
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
