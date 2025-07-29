@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: secnex_notion_webhook_server
+Version: 0.0.1
+Summary: A package to create a webhook server that can be used to handle Notion webhooks and trigger actions
+Author-email: Björn Benouarets <bjoern@secnex.io>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/secnex/notion-webhook-server
+Project-URL: Issues, https://github.com/secnex/notion-webhook-server/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Notion Webhook Server
+
+This is a simple python package to create a webhook server that can be used to handle Notion webhooks and trigger actions.
+
+## Installation
+
+```bash
+pip install secnex-notion-webhook-server
+```
+
+## Usage
+
+```python
+from notion_webhook import WebhookServer, ServerHandler, NotionWebhookHandler
+
+server = WebhookServer()
+server.run(ServerHandler())
+
+handler = NotionWebhookHandler(lambda data: print(data))
+server.webhook(handler)
+```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## Contact
+
+For questions or support, please contact us at [support@secnex.io](mailto:support@secnex.io).
