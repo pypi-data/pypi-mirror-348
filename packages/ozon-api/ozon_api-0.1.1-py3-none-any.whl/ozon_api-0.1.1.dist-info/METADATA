@@ -1,0 +1,548 @@
+Metadata-Version: 2.4
+Name: ozon-api
+Version: 0.1.1
+Summary: Library for interacting with the Ozon API
+Project-URL: Repository, https://github.com/mephistofox/python-ozon-api
+Project-URL: Documentation, https://github.com/mephistofox/python-ozon-api/blob/main/README.md
+Author-email: FxCode <dev@fxcode.ru>
+License-Expression: MIT
+License-File: LICENSE
+License-File: NOTICE
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: ~=3.10
+Requires-Dist: aiohttp<4,>=3.10.5
+Requires-Dist: loguru<0.8,>=0.7.2
+Requires-Dist: pydantic<3,>=2.9.2
+Description-Content-Type: text/markdown
+
+# Ozon API Python Client
+
+Асинхронная Python библиотека для работы с Ozon Seller API
+
+[![PyPI version](https://img.shields.io/pypi/v/ozon-api)](https://pypi.org/project/ozon-api/)<!-- -->[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)<!-- -->[![Downloads](https://img.shields.io/pypi/dm/ozon-api)](https://pypi.org/project/ozon-api/)<!-- -->[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+## Вклад в проект
+__Мы приветствуем вклад в развитие проекта! Если вы хотите внести свой вклад, пожалуйста, следуйте этим шагам:__
+1. Форкните репозиторий
+2. Создайте ветку для вашей функции (`git checkout -b feature/AmazingFeature`)
+3. Зафиксируйте ваши изменения (`git commit -m 'Add some AmazingFeature'`)
+4. Отправьте изменения в вашу ветку (`git push origin feature/AmazingFeature`)
+5. Откройте Pull Request
+
+__Пожалуйста, убедитесь, что ваш код соответствует стилю проекта (мы используем Black для форматирования) и все тесты проходят успешно.__
+## Установка
+```bash
+pip install ozon-api
+```
+
+## Использование
+Получите API ключи в личном кабинете Ozon Seller
+Создайте файл .env:
+`.env`
+```bash
+# Данные полученные в ЛК Ozon API
+CLIENT_ID = client_id
+API_KEY = api_key
+```
+`main.py`
+```python
+import os
+from dotenv import load_dotenv
+from ozon_api import OzonAPI
+
+load_dotenv()
+
+api = OzonAPI(
+    client_id=os.getenv("CLIENT_ID"),
+    api_key=os.getenv("API_KEY")
+)
+```
+
+_**Устанавливаем язык на котором будем получать ответ от API**_
+
+```python
+api.language = "RU"
+```
+
+_Наименование методов класса OzonAPI полностью соответствует фактическим_
+
+## Атрибуты и характеристики Ozon
+
+### _**[api.get_description_category_tree](https://docs.ozon.ru/api/seller/#operation/DescriptionCategoryAPI_GetTree)**_
+
+_**Получаем список всех категорий Ozon**_
+___
+
+```python
+categories = asyncio.run(
+    api.get_description_category_tree()
+)
+```
+
+_**Пример части ответа (данные которые будут использоваться в дальнейшем)**_
+
+```json
+{
+    "description_category_id": 17027949,
+    "category_name": "Шины",
+    "disabled": false,
+    "children": [
+        {
+            "type_name": "Шины для легковых автомобилей",
+            "type_id": 94765,
+            "disabled": false,
+            "children": []
+        },
+    ]
+}
+```
+
+___
+
+### _**[api.get_description_category_attribute](https://docs.ozon.ru/api/seller/#operation/DescriptionCategoryAPI_GetAttributes)**_
+
+_**Устанавливаем категорию и подкатегорию полученные с помощью метода get_description_category_tree**_
+_**Получаем список атрибутов для указанной категории**_
+___
+
+```python
+api.description_category_id = 17027949 # id категории
+api.type_id = 94765 # id подкатегории
+
+# Атрибуты для товара категории
+attributes = ayncio.run(api.get_description_category_attribute())
+
+```
+
+_**Часть полученных данных:**_
+
+```json
+{
+    "id": 85,
+    "attribute_complex_id": 0,
+    "name": "Бренд",
+    "description": "Укажите наименование бренда, под которым произведен товар. Если товар не имеет бренда, используйте значение \"Нет бренда\".",
+    "type": "String",
+    "is_collection": false,
+    "is_required": true,
+    "is_aspect": false,
+    "max_value_count": 0,
+    "group_name": "Общие",
+    "group_id": 1,
+    "dictionary_id": 28732849,
+    "category_dependent": true
+}
+```
+
+___
+
+### _**[api.get_description_category_attribute_values](https://docs.ozon.ru/api/seller/#operation/DescriptionCategoryAPI_GetAttributeValues)**_
+
+_**Получаем список значений атрибута**_
+___
+
+```python
+# Возможные значения для указанного атрибута
+attribute_values = ayncio.run(
+    api.get_description_category_attribute_values(
+        name="Бренд", # name нужного атрибута
+        attribute_id=85, # id нужного атрибута
+        last_value_id=0, # Идентификатор справочника, с которого нужно начать ответ
+        limit=5000 # Количество значений в ответе. Максимум - 5000, минимум - 1
+    )
+)
+```
+
+_**Часть запрошенных данных:**_
+
+```json
+... {
+    "id": 971010234,
+    "value": "WINDFORCE",
+    "info": "Автотовары",
+    "picture": "https://cdn1.ozone.ru/s3/multimedia-p/6065115817.jpg"
+}, ...
+```
+
+___
+
+### _**[api.get_description_category_attribute_values_search](https://docs.ozon.ru/api/seller/#operation/DescriptionCategoryAPI_SearchAttributeValues)**_
+
+_**Поиск значения характеристики по заданному значению value в запросе.**_
+___
+
+```python
+attribute_values = ayncio.run(
+    api.get_description_category_attribute_values(
+        attribute_id=85, # id атрибута
+        value="WINDFORCE", # Искомое значение
+        limit=100 # Количество значений в ответе. Максимум - 100, минимум - 1
+    )
+)
+```
+
+_**Пример ответа:**_
+
+```json
+{
+    "id": 971010234,
+    "value": "WINDFORCE",
+    "info": "Автотовары",
+    "picture": "https://cdn1.ozone.ru/s3/multimedia-p/6065115817.jpg"
+}
+```
+
+___
+
+### _**[api.get_full_category_info](#)**_
+
+_**Дополнительный метод, реализованный на базе методов get_description_category_attribute и get_description_category_attribute_values.**_
+
+`Метод позволяет получить полный список значений всех атрибутов категории`
+___
+
+```python
+# Возвращает массив с полной информации о категории
+full_category_info = asyncio.run(api.get_full_category_info())
+```
+
+_**Пример ответа:**_
+
+```json
+{
+    "id": 85,
+    "name": "Бренд",
+    "description": "...",
+    "values": [...],
+    "is_required": true
+},
+{
+    "id": 4080,
+    "name": "3D-изображение",
+    "description": "...",
+    "values": [],
+    "is_required": false
+},
+{
+    "id": 4180,
+    "name": "Название",
+    "description": "...",
+    "values": [],
+    "is_required": false
+}, ...
+```
+
+`Поле values содержит массив возможных значений`
+___
+
+## Загрузка и обновление товаров
+
+### Модели данных
+
+_Для валидации данных используйте модели из модуля ozon_api.models_
+
+_**Пример:**_
+
+```python
+from ozon_api.models import (
+    product_import,
+    product_import_info,
+    product_attributes_update,
+    import_by_sku    
+)
+
+... работа с данными, формирование списка товаров ...
+product_import_model = product_import.ProductImport
+items = product_import_model.model_validate(<подготовленные данные>)
+validated_items = items.model_dump(mode="json")
+```
+
+___
+
+### _**[api.product_import](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ImportProductsV3)**_
+
+_**Метод для создания товаров и обновления информации о них.**_
+
+**В сутки можно создать или обновить определённое количество товаров. Чтобы узнать лимит, используйте `api.product_info_limit()`**
+
+_В одном запросе можно передать до 100 товаров. Каждый товар — это отдельный элемент в массиве `items`._
+
+```python
+imported_products = asyncio.run(
+    api.product_import(validated_items)
+)
+```
+
+___
+
+### _**[api.product_info_limit](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetUploadQuota)**_
+
+_**Метод для получения информации о лимитах.**_
+
+```python
+limits = api.product_info_limit()
+```
+
+___
+
+### _**[api.product_import_info](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoV2)**_
+
+_**Узнать статус добавления товара.**_
+
+```python
+import_info = asyncio.run(
+    api.product_import_info(
+        product_import_info.ProductImportInfo(
+            task_id=1234567  # task id полученный при выполнении метода product_import
+        )
+    )
+)
+```
+___
+### _**[api.product_import_by_sku](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ImportProductsBySKU)**_
+
+_**Создать товар по Ozon ID.**_
+
+```python
+product_import_by_sku_info = api.product_import_by_sku(
+    product_import_by_sku.ImportBySku(
+        ...
+    )
+)
+```
+___
+### _**[api.product_attributes_update](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ImportProductsBySKU)**_
+
+_**Создать товар по Ozon ID.**_
+
+```python
+product_attributes_update_item = api.product_attributes_update(
+    product_attributes_update.ProductAttributesUpdate(
+        ...
+    )
+)
+```
+___
+
+### _**[api.product_pictures_import](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductImportPictures)**_
+
+_**Метод для загрузки изображений товаров на Ozon.**_
+
+**В одном запросе можно загрузить изображения для нескольких товаров.**  
+Для каждого товара указывается его идентификатор (`product_id`), список ссылок на изображения (`images`), а также опционально маркетинговый цвет (`color_image`) и изображения 360 (`images360`).
+
+```python
+from ozon_api.models.product_pictures_import import ProductPicturesImport
+
+pictures_import_model = [
+    ProductPicturesImport(
+        product_id=12345,  # обязательный идентификатор товара
+        color_image="Красный",  # опционально
+        images=[
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg"
+        ],
+        images360=[
+            "https://example.com/360_1.jpg"
+        ]
+    ),
+    # ... другие товары
+]
+
+result = asyncio.run(
+    api.product_pictures_import(pictures_import_model)
+)
+```
+
+_**Описание полей:**_
+- `product_id` (int, **обязательный**) — идентификатор товара в системе продавца
+- `color_image` (str, опционально) — маркетинговый цвет
+- `images` (list[str], **обязательный**) — массив ссылок на изображения. Первое изображение — главное
+- `images360` (list[str], опционально) — массив ссылок на 360° изображения (до 70 штук)
+
+_**Пример ответа:**_
+
+```json
+{
+    "task_id": 1234567
+}
+```
+
+_**task_id** — идентификатор задачи, по которому можно узнать статус загрузки изображений с помощью метода
+
+
+### _**[api.product_pictures_info](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductInfoPicturesV2)**_
+
+_**Метод для получения статуса обработки изображений товаров.**_
+
+**Позволяет узнать статус загрузки и обработки изображений для товаров по идентификатору задачи (`task_id`).**
+
+```python
+from ozon_api.models.product_import_info import ProductPicturesInfoRequest
+
+# Запрос статуса по task_id, полученному после загрузки изображений
+request = ProductPicturesInfoRequest(task_id=1234567)
+
+result = asyncio.run(
+    api.product_pictures_info(request)
+)
+```
+
+_**Описание полей запроса:**_
+- `task_id` (int, **обязательный**) — идентификатор задачи загрузки изображений
+
+_**Пример ответа:**_
+```json
+{
+    "status": "success",
+    "items": [
+        {
+            "product_id": 12345,
+            "status": "success",
+            "errors": []
+        },
+        {
+            "product_id": 67890,
+            "status": "error",
+            "errors": ["Некорректный формат изображения"]
+        }
+    ]
+}
+```
+
+_**Описание полей ответа:**_
+- `status` (str) — общий статус задачи (`success`, `error` и др.)
+- `items` (list) — список товаров с результатами обработки изображений:
+    - `product_id` (int) — идентификатор товара
+    - `status` (str) — статус обработки изображений для товара
+    - `errors` (list[str]) — список ошибок, если есть
+___
+
+### _**[api.product_list](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductList)**_
+
+_**Метод для получения списка товаров продавца.**_
+
+**Позволяет получить список товаров с возможностью фильтрации, сортировки и постраничного вывода.**
+
+```python
+from ozon_api.models import ProductListRequest, ProductListFilter
+
+request = ProductListRequest(
+    filter=ProductListFilter(
+        offer_id=["ABC-123", "XYZ-789"],  # фильтрация по артикулам (опционально)
+        visibility="ALL"  # фильтрация по видимости (ALL, VISIBLE, INVISIBLE)
+    ),
+    limit=100,  # количество товаров в ответе (1-1000)
+    last_id=None,  # для пагинации (опционально)
+    sort_by="product_id",  # поле сортировки (опционально)
+    sort_dir="ASC"  # направление сортировки (ASC или DESC, опционально)
+)
+
+result = asyncio.run(
+    api.product_list(request)
+)
+```
+
+_**Описание полей запроса:**_
+- `filter` (ProductListFilter, **обязательный**) — фильтр товаров:
+    - `offer_id` (list[str], опционально) — список артикулов
+    - `product_id` (list[int], опционально) — список ID товаров
+    - `visibility` (str, опционально) — видимость товара (ALL, VISIBLE, INVISIBLE)
+- `limit` (int, **обязательный**) — количество товаров в ответе (1-1000)
+- `last_id` (str, опционально) — идентификатор последнего товара для пагинации
+- `sort_by` (str, опционально) — поле сортировки (например, 'product_id')
+- `sort_dir` (str, опционально) — направление сортировки ('ASC' или 'DESC')
+
+_**Пример ответа:**_
+```json
+{
+    "items": [
+        {
+            "product_id": 12345,
+            "offer_id": "ABC-123",
+            "visibility": "VISIBLE"
+        },
+        {
+            "product_id": 67890,
+            "offer_id": "XYZ-789",
+            "visibility": "INVISIBLE"
+        }
+    ],
+    "total": 2,
+    "last_id": null
+}
+```
+
+_**Описание полей ответа:**_
+- `items` (list) — список товаров:
+    - `product_id` (int) — идентификатор товара
+    - `offer_id` (str) — артикул товара
+    - `visibility` (str) — видимость товара
+- `total` (int) — общее количество товаров
+- `last_id` (str, опционально) — идентификатор последнего товара для пагинации
+
+___
+
+### _**[api.product_rating_by_sku](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductRatingBySku)**_
+
+_**Метод для получения контент-рейтинга товаров и рекомендаций по его увеличению.**_
+
+```python
+from ozon_api.models import ProductRatingRequest, ProductRatingResponse
+
+# Получение рейтинга для списка SKU
+request = ProductRatingRequest(skus=[123456, 789012])
+response = asyncio.run(api.product_rating_by_sku(request.skus))
+
+for product in response.products:
+    print(f"SKU: {product.sku}, Рейтинг: {product.rating}")
+    for group in product.groups:
+        print(f"  Группа: {group.name}, Баллы: {group.rating}")
+        if group.recommendations:
+            print("  Рекомендации:")
+            for rec in group.recommendations:
+                print(f"    - {rec}")
+```
+
+_**Описание моделей:**_
+- `ProductRatingRequest` — модель запроса:
+    - `skus` (list[int]) — список SKU товаров
+- `ProductRatingResponse` — модель ответа:
+    - `products` (list[ProductRatingItem]) — список товаров с рейтингом
+        - `sku` (int) — идентификатор товара
+        - `rating` (float) — контент-рейтинг товара (0-100)
+        - `groups` (list[ProductRatingGroup]) — группы характеристик рейтинга
+            - `name` (str) — название группы
+            - `rating` (float) — баллы за группу
+            - `recommendations` (list[str], опционально) — рекомендации по улучшению
+
+_**Пример ответа:**_
+```json
+{
+    "products": [
+        {
+            "sku": 123456,
+            "rating": 85.5,
+            "groups": [
+                {
+                    "name": "Фото",
+                    "rating": 20.0,
+                    "recommendations": [
+                        "Добавьте больше фотографий товара"
+                    ]
+                },
+                {
+                    "name": "Описание",
+                    "rating": 15.0,
+                    "recommendations": [
+                        "Уточните описание товара"
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+___
