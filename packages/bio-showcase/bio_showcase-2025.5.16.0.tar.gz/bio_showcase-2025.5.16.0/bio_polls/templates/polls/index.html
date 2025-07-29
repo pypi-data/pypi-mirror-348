@@ -1,0 +1,21 @@
+{% load static %}
+{% include 'polls/header.html' %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+<a
+    href='https://docs.djangoproject.com/en/5.2/intro/tutorial02/'>https://docs.djangoproject.com/en/5.2/intro/tutorial02/</a>
+<br>Hello,
+world. You're at the polls index.
+
+<h1>PCR Primer Design</h1>
+<a href="{% url 'primer:index' %}">PCR Primer Design</a>
+
+{% if latest_question_list %}
+<ul>
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
