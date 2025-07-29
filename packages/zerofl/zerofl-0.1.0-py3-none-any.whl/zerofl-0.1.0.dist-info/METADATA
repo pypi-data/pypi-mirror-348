@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: zerofl
+Version: 0.1.0
+Summary: A lightweight, production-ready micro web framework in Python.
+Author: MD Imran 
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+# Zero – A Lightweight Micro Web Framework 🚀
+
+Zero is a Flask-like micro web framework written in pure Python with support for:
+- Route parameters (e.g., /user/<id>)
+- Async routes
+- Static file serving
+- Middleware hooks
+- Easy deployment
+
+## Installation
+
+```
+pip install -e .
+```
+
+## Usage
+
+```
+python run_server.py
+```
+
+Visit `http://localhost:8000/`
