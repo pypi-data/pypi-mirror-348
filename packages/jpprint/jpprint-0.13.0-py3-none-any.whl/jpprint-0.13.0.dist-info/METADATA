@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: jpprint
+Version: 0.13.0
+Summary: Basic print and comparison of two dictionaries and/or json files
+Author-email: voidnologo <dev@voidnologo.com>
+Project-URL: Homepage, https://github.com/voidnologo/jpprint
+Project-URL: Repository, https://github.com/voidnologo/jpprint
+Keywords: json,print
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pip-tools; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
+
+# JPPrint
+
+## Json Pretty Print
+
+----
+
+Format and print two dictionaries or json strings side by side
+to give a quick overview of differences.
+
+Use for quick and dirty debugging.
