@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="{{ settings.accessibility.lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ settings.seo.title }}</title>
+    <meta name="description" content="{{ settings.seo.description }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: {{ settings.fonts.body | tojson }},
+            },
+            colors: {
+              primary: {{ settings.theme.colors.primary }},
+              secondary: {{ settings.theme.colors.secondary }},
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="overflow-x-hidden text-[#1F2937]">
+    <div class="navbar border-b border-gray-100 shadow-sm">
+      {{ sections.navigation | safe }}
+    </div>
+
+    <main class="space-y-32">
+      <section id="hero">{{ sections.hero | safe }}</section>
+      <section id="about">{{ sections.about | safe }}</section>
+      <section id="features">{{ sections.features | safe }}</section>
+      <section id="gallery">{{ sections.gallery | safe }}</section>
+      <section id="testimonials">{{ sections.testimonials | safe }}</section>
+      <section id="pricing">{{ sections.pricing | safe }}</section>
+      <section id="contact">{{ sections.contact | safe }}</section>
+      <section id="faq">{{ sections.faq | safe }}</section>
+      <section id="events">{{ sections.events | safe }}</section>
+      <footer>{{ sections.footer | safe }}</footer>
+    </main>
+
+    <script>
+      AOS.init({ once: true, duration: 700, easing: "ease-in-out" });
+    </script>
+  </body>
+</html>

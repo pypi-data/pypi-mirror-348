@@ -1,0 +1,160 @@
+{
+  "brand_product_physical": {
+    "pages": {
+      "index": {
+        "template_path": "templates/layouts/brand_product_physical.html",
+        "sections": [
+          "navigation",
+          "hero",
+          "about",
+          "features",
+          "challenges",
+          "faq",
+          "contact",
+          "community",
+          "footer"
+        ]
+      },
+      "shop": {
+        "template_path": "templates/layouts/brand_product_physical.html",
+        "sections": ["navigation", "footer"]
+      },
+      "services": {
+        "template_path": "templates/layouts/brand_product_physical.html",
+        "sections": ["navigation", "cta", "footer"]
+      }
+    },
+    "section_variants": {
+      "index": {
+        "navigation": "v1",
+        "hero": "v1",
+        "about": "v1",
+        "features": "v1",
+        "challenges": "v1",
+        "faq": "v1",
+        "contact": "v1",
+        "community": "v1",
+        "footer": "v1",
+        "testimonials": "v1",
+        "cta": "v1"
+      },
+      "shop": {
+        "navigation": "v1",
+        "footer": "v1"
+      },
+      "services": {
+        "navigation": "v1",
+        "cta": "v1",
+        "footer": "v1"
+      }
+    }
+  },
+  "brand_service_physical": {
+    "pages": {
+      "index": {
+        "template_path": "templates/layouts/brand_service_physical.html",
+        "sections": [
+          "navigation",
+          "hero",
+          "challenges",
+          "features",
+          "about",
+          "testimonials",
+          "faq",
+          "contact",
+          "cta",
+          "footer"
+        ]
+      },
+      "shop": {
+        "template_path": "templates/layouts/brand_service_physical.html",
+        "sections": ["navigation", "pricing", "footer"]
+      },
+      "services": {
+        "template_path": "templates/layouts/brand_service_physical.html",
+        "sections": ["navigation", "cta", "footer"]
+      }
+    },
+    "section_variants": {
+      "index": {
+        "navigation": "v2",
+        "hero": "v2",
+        "challenges": "v2",
+        "features": "v2",
+        "about": "v2",
+        "testimonials": "v2",
+        "faq": "v2",
+        "contact": "v2",
+        "cta": "v2",
+        "footer": "v2",
+        "pricing": "v2"
+      },
+      "shop": {
+        "navigation": "v2",
+        "pricing": "v2",
+        "footer": "v2"
+      },
+      "services": {
+        "navigation": "v2",
+        "cta": "v2",
+        "footer": "v2"
+      }
+    }
+  },
+  "brand_service_digital_saas": {
+    "pages": {
+      "index": {
+        "template_path": "templates/layouts/brand_service_digital_saas.html",
+        "sections": [
+          "navigation",
+          "hero",
+          "challenges",
+          "features",
+          "about",
+          "testimonials",
+          "pricing",
+          "faq",
+          "contact",
+          "cta",
+          "footer"
+        ]
+      },
+      "shop": {
+        "template_path": "templates/layouts/brand_service_digital_saas.html",
+        "sections": ["navigation", "product_grid", "footer"]
+      },
+      "services": {
+        "template_path": "templates/layouts/brand_service_digital_saas.html",
+        "sections": ["navigation", "service_features", "cta", "footer"]
+      }
+    },
+    "section_variants": {
+      "index": {
+        "navigation": "v3",
+        "hero": "v3",
+        "challenges": "v3",
+        "features": "v3",
+        "about": "v3",
+        "testimonials": "v3",
+        "pricing": "v3",
+        "faq": "v3",
+        "contact": "v3",
+        "cta": "v3",
+        "product_grid": "v3",
+        "service_features": "v3",
+        "footer": "v3"
+      },
+      "shop": {
+        "navigation": "v3",
+        "product_grid": "v3",
+        "footer": "v3"
+      },
+      "services": {
+        "navigation": "v3",
+        "service_features": "v3",
+        "cta": "v3",
+        "footer": "v3"
+      }
+    }
+  }
+}
