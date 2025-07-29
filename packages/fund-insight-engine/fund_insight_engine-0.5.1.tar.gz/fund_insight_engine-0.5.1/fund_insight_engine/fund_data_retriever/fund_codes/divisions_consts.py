@@ -1,0 +1,7 @@
+MANAGERS_OF_DIVISION_01 = ['강대권', '이대상']
+MANAGERS_OF_DIVISION_02 = ['남두우', '이시우']
+
+MAPPING_DIVISION = {
+    'division_01': MANAGERS_OF_DIVISION_01,
+    'division_02': MANAGERS_OF_DIVISION_02
+}
