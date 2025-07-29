@@ -1,0 +1,40 @@
+[project]
+name = "nonebot-plugin-picmenu-next"
+dynamic = []
+description = "Template plugin project"
+authors = [
+    { name = "LgCookie", email = "lgc2333@126.com" },
+]
+dependencies = [
+    "nonebot2>=2.4.1",
+    "nonebot-plugin-alconna>=0.54.2",
+    "cookit[jinja,loguru,nonebot-alconna,nonebot-localstore,pw,pyd]>=0.11.2",
+    "pypinyin>=0.54.0",
+    "jieba>=0.42.1",
+    "thefuzz>=0.22.1",
+]
+requires-python = ">=3.9,<4.0"
+readme = "README.md"
+version = "0.1.0.dev1"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+homepage = "https://github.com/lgc-NB2Dev/nonebot-plugin-picmenu-next"
+
+[dependency-groups]
+dev = []
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm.build]
+includes = []
+
+[tool.pdm.version]
+source = "file"
+path = "nonebot_plugin_picmenu_next/__init__.py"
