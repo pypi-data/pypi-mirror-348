@@ -1,0 +1,53 @@
+package:
+  name: ep_bolfi
+  version: ${VERSION}
+
+requirements:
+  build:
+    - python=3.11
+    - setuptools
+
+  run:
+    - python=3.11
+    - elfi
+    - h5py
+    - kadi_apy
+    - matplotlib
+    - numpy
+    - pyarrow
+    - pybamm
+    - pyimpspec
+    - scikit-learn
+    - scipy
+    - sympy
+    - tabulate
+    - xmlhelpy
+    - wheel
+
+test:
+  substitution_dict:
+   - 
+
+outputs:
+ - name: ep_bolfi
+   files:
+     - dist
+     - documentation
+     - ep_bolfi
+     - examples
+     - kadi
+     - tests
+     - bld.bat
+     - build.sh
+     - CODE_OF_CONDUCT.md
+     - CONTRIBUTING.md
+     - ep_bolfi.yml
+     - MANIFEST.in
+     - meta.yaml
+     - pip_only_requirements.txt
+     - pyproject.toml
+     - pythonversion.txt
+     - README.md
+     - requirements.txt
+     - setup.cfg
+     - version.txt
