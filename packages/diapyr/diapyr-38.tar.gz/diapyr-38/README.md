@@ -1,0 +1,124 @@
+# diapyr
+Constructor injection for Python.
+
+This README is auto-generated, see [project wiki](https://wikiwheel.net/s/foyono/w/diapyr) for details.
+
+## API
+
+<a id="diapyr"></a>
+
+### diapyr
+
+<a id="diapyr.DI"></a>
+
+###### DI
+
+Convenience import.
+
+<a id="diapyr.types"></a>
+
+###### types
+
+Convenience import.
+
+<a id="diapyr.diapyr"></a>
+
+### diapyr.diapyr
+
+<a id="diapyr.diapyr.types"></a>
+
+###### types
+
+```python
+def types(*deptypes, **kwargs)
+```
+
+Declare that the decorated function or method expects args of the given types. Use square brackets to request all instances of a type as a list. Use `this` kwarg to declare the type of result returned by a factory.
+
+<a id="diapyr.diapyr.DI"></a>
+
+#### DI Objects
+
+```python
+class DI()
+```
+
+<a id="diapyr.diapyr.DI.add"></a>
+
+###### add
+
+```python
+def add(obj)
+```
+
+Register the given class, factory or instance.
+
+<a id="diapyr.diapyr.DI.all"></a>
+
+###### all
+
+```python
+def all(type)
+```
+
+Return all objects of the given type, instantiating them and collaborators if necessary.
+
+<a id="diapyr.diapyr.DI.__call__"></a>
+
+###### \_\_call\_\_
+
+```python
+def __call__(clazz)
+```
+
+Return unique object of the given type, instantiating it and its collaborators if necessary.
+
+<a id="diapyr.diapyr.DI.__exit__"></a>
+
+###### \_\_exit\_\_
+
+```python
+def __exit__(*exc_info)
+```
+
+Discard all instances created by this container, calling `dispose` if they have it.
+
+<a id="diapyr.start"></a>
+
+### diapyr.start
+
+<a id="diapyr.util"></a>
+
+### diapyr.util
+
+<a id="diapyr.util.bfs"></a>
+
+###### bfs
+
+```python
+def bfs(keys)
+```
+
+Breadth-first search starting with the given iterable of keys, intended to be used as a decorator.
+If a function is decorated it should take an info object and key, and yield subsequent keys.
+If a class is decorated, a new instance of it is used as info object:
+The class should have a `newdepth` method that will be called before each depth, and a `process` method that takes a key and yields subsequent keys as in the function case.
+The info object is kept updated with the list of `currentkeys`, current `depth` and the set of `donekeys`.
+Note that the first `currentkeys` (`depth` 0) is exactly the passed in `keys` iterable, subsequent `currentkeys` will be non-empty lists.
+The process function is only invoked for keys that have not yet been processed, i.e. unique keys.
+When finished the decorated function/class is replaced with the last state of the info object.
+
+<a id="setuphacks"></a>
+
+### setuphacks
+
+<a id="setuphacks.getsetupkwargs"></a>
+
+###### getsetupkwargs
+
+```python
+def getsetupkwargs(setuppath, fields)
+```
+
+Extract the kwargs passed to `setup` at the given path (typically some setup.py) that have names in the given `fields`.
+
