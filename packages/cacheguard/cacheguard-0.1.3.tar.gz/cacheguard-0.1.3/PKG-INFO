@@ -1,0 +1,35 @@
+Metadata-Version: 2.3
+Name: cacheguard
+Version: 0.1.3
+Summary: A simple secure Python key-value store protected by Sops
+License: MIT
+Author: Michael Buckley
+Author-email: michaelcbuckley@proton.me
+Requires-Python: >=3.13
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: orjson (>=3.10.18,<4.0.0)
+Requires-Dist: sopsy (>=1.1.0,<2.0.0)
+Description-Content-Type: text/markdown
+
+# CacheGuard
+
+A simple and secure Python key-value store protected by [Sops](https://getsops.io/).
+
+## Requires
+
+This is an integration with Sops, and will *require* a functional Sops setup.
+
+For assistance with Sops, see their [documentation](https://getsops.io/docs/).
+
+## Threat Models
+
+This modules protects data at rest.  It does not protect data at run time.  It may be possible for other modules/processes/logging/etc to view it.
+
+Potenmtially useful for operational caches and other sensitive record keeping that needs to be local and transferred via git.
+
+## Examples
+
+<Coming Soon>
+
