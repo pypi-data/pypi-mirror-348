@@ -1,0 +1,18 @@
+cryptography<43.0.0,>=42.0.0
+argon2-cffi<24.0.0,>=23.1.0
+PyYAML
+
+[:python_version < "3.11"]
+Whirlpool
+
+[:python_version >= "3.11"]
+whirlpool-py311
+
+[:sys_platform == "win32"]
+pywin32<307,>=306
+
+[dev]
+pytest>=8.0.0
+pytest-cov>=4.1.0
+black>=24.1.0
+pylint>=3.0.0
