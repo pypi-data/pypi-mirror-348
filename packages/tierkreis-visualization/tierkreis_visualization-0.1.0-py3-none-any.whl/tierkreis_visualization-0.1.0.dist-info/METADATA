@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: tierkreis_visualization
+Version: 0.1.0
+Summary: Browser based visualization tool for tierkreis
+Requires-Python: >=3.12
+Requires-Dist: fastapi[standard]>=0.115.11
+Requires-Dist: jinja2>=3.1.6
+Requires-Dist: pydantic-settings>=2.8.1
+Requires-Dist: tierkreis
+Requires-Dist: watchfiles>=1.0.4
+Description-Content-Type: text/markdown
+
+# Tierkreis visualizer
+
+WIP browser based visualizer.
+
+```
+uv run fastapi dev tierkreis_visualization/main.py
+```
+
+for the development server.
