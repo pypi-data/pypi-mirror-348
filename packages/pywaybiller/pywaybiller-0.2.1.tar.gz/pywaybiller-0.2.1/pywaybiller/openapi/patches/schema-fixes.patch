@@ -1,0 +1,202 @@
+--- ./pywaybiller/openapi/waybiller_schema.json	2025-03-11 16:48:40.477272399 +0200
++++ ./pywaybiller/openapi/waybiller_schema-patched.json	2025-03-11 16:47:57.964260939 +0200
+@@ -1,7 +1,7 @@
+ {
+   "openapi": "3.0.3",
+   "info": {
+-    "title": "Waybiller External API",
++    "title": "Waybiller External API - with fixes",
+     "version": "v1",
+     "description": "The **Waybiller External API** is a feature that allows companies to access **Waybiller** data as JSON objects and\ncreate **Waybiller** instances out of their own data.\n\nTo make integration easier for the companies, the external API provides mapping support - it is possible to create\ncompany-specific mappings for object identifiers (such as destination and origin).\n\nThese mappings will be used for representing companies data from external API, and for converting the values during the\ncreation of **Waybiller** instances (such as transport orders and waybills).\n\nMost of the API responses contain mapped values, which may be null if the company doesn't have a mapping for this\nobject.\n\nUnique **Waybiller** identifiers and values can be accessed via the `raw_data` key.\n\nThe API is HTTPS and JSON based.\n\n### Pagination\n\nBy default, list endpoint responses are presented in pages of 30 items.\n\nIt is possible to control the page size using the `limit` parameter:\n`/external-api/<some-list-endpoint>/?limit=<number>`, where `<number>` is an integer between 1 and 1000.\n"
+   },
+@@ -2595,6 +2595,22 @@
+               "default": 0,
+               "minimum": 0
+             }
++          },
++          {
++            "name": "dispatcher_timestamp__gt",
++            "in": "query",
++            "required": false,
++            "schema": {
++              "type": "string"
++            }
++          },
++          {
++            "name": "dispatcher_timestamp__lt",
++            "in": "query",
++            "required": false,
++            "schema": {
++              "type": "string"
++            }
+           }
+         ],
+         "tags": [
+@@ -3495,18 +3511,14 @@
+           "latitude": {
+             "type": "number",
+             "format": "double",
+-            "maximum": 90,
+-            "minimum": -90,
+             "readOnly": true,
+-            "description": "Latitude coordinate of the destination's location"
++            "description": "Latitude coordinate of the destination's location (People also put X coordinate of Lambert-EST here)"
+           },
+           "longitude": {
+             "type": "number",
+             "format": "double",
+-            "maximum": 180,
+-            "minimum": -180,
+             "readOnly": true,
+-            "description": "Longitude coordinate of the destination's location"
++            "description": "Longitude coordinate of the destination's location (People also put Y coordinate of Lambert-EST here)"
+           },
+           "owner_name": {
+             "type": "string",
+@@ -4954,14 +4966,16 @@
+             "readOnly": true,
+             "description": "Name of the origin where the assortment is available",
+             "maxLength": 255,
+-            "minLength": 1
++            "minLength": 1,
++            "nullable": true
+           },
+           "assortment": {
+             "type": "string",
+             "readOnly": true,
+             "description": "Name of the assortment",
+             "maxLength": 255,
+-            "minLength": 1
++            "minLength": 1,
++            "nullable": true
+           },
+           "subset_type": {
+             "type": "string",
+@@ -4984,6 +4998,7 @@
+               }
+             ],
+             "readOnly": true,
++            "nullable": true,
+             "description": "The IDs of the Waybiller internal objects"
+           }
+         },
+@@ -7876,6 +7890,7 @@
+           "project": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Project code in your system."
+           },
+           "raw_data": {
+@@ -8035,6 +8050,7 @@
+             "type": "object",
+             "additionalProperties": {},
+             "readOnly": true,
++            "nullable": true,
+             "description": "User defined fields."
+           }
+         },
+@@ -8383,6 +8399,7 @@
+             "type": "string",
+             "format": "date-time",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Time when waybill reached destination."
+           },
+           "confirmed_timestamp": {
+@@ -8408,16 +8425,19 @@
+           "navision_bin_code": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Bin code."
+           },
+           "evr_waybill_number": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "EVR waybill number."
+           },
+           "project": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Project code in your system."
+           },
+           "raw_data": {
+@@ -8480,7 +8500,7 @@
+           "assortment_id": {
+             "type": "string",
+             "nullable": true,
+-            "read_only": false,
++            "readOnly": false,
+             "description": "The external ID of the assortment. Usually `null` if waybill was created in Waybiller UI and not over Waybiller External API."
+           },
+           "assortment_ids": {
+@@ -8489,7 +8509,6 @@
+               "type": "string"
+             },
+             "nullable": true,
+-            "read_only": true,
+             "readOnly": true,
+             "description": "The external IDs of the assortment. Usually `null` if waybill was created in Waybiller UI and not over Waybiller External API."
+           },
+@@ -8523,6 +8542,7 @@
+           "subset_type_name": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Subset type (eg fraction)."
+           },
+           "subset_object_raw_id": {
+@@ -8532,6 +8552,7 @@
+           "subset_object_name": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "Subset object (eg 0-32mm)."
+           },
+           "extra_information_long": {
+@@ -8564,7 +8585,6 @@
+               "type": "string"
+             },
+             "nullable": true,
+-            "read_only": true,
+             "readOnly": true,
+             "description": "The external IDs of the assortment. Usually `null` if waybill was created in Waybiller UI and not over Waybiller External API."
+           },
+@@ -8643,7 +8663,6 @@
+               "type": "string"
+             },
+             "nullable": true,
+-            "read_only": true,
+             "readOnly": true,
+             "description": "The external IDs of the assortment. Usually `null` if waybill was created in Waybiller UI and not over Waybiller External API."
+           },
+@@ -8707,6 +8726,7 @@
+           "assortment_id": {
+             "type": "string",
+             "readOnly": true,
++            "nullable": true,
+             "description": "The ID of the assortment."
+           },
+           "assortment_ids": {
+@@ -8773,7 +8793,8 @@
+           },
+           "subset_id": {
+             "type": "integer",
+-            "readOnly": true
++            "readOnly": true,
++            "nullable": true
+           },
+           "subset_type_id": {
+             "type": "integer",
+@@ -8793,7 +8814,7 @@
+           "assortment_id": {
+             "type": "string",
+             "nullable": true,
+-            "read_only": false,
++            "readOnly": false,
+             "description": "The external ID of the assortment. Usually `null` if waybill was created in Waybiller UI and not over Waybiller External API."
+           },
+           "assortment_raw_id": {
