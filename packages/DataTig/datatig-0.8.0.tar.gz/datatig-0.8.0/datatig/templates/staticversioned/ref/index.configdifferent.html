@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Ref {{ git_commit.get_refs_str() }}{% endblock %}
+
+
+{% block breadcrumbs %}
+  <span class="breadcrumb"><a href="{{ url }}/">Home</a></span>
+  <span class="seperator">></span>
+  <span class="breadcrumb">Ref: {{ git_commit.get_refs_str() }}</span>
+{% endblock %}
+
+{% block body %}
+
+<h2>Ref {{ git_commit.get_refs_str() }}</h2>
+
+<p class="text-right">
+    <a href="{{ url }}/ref/{{ git_commit.get_ref() }}/errors.html" class="button">Errors</a>
+</p>
+
+<h3>Comparison to default ref, {{  default_ref_str }}</h3>
+
+<p>The config has changed, so no comparison can be made.</p>
+
+{% endblock %}

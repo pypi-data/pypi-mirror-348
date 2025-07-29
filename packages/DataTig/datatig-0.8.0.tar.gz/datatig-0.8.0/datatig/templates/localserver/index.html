@@ -1,0 +1,30 @@
+{% extends "localserver/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block breadcrumbs %}
+    <span class="breadcrumb">Home</span>
+{% endblock %}
+
+{% block body %}
+
+
+<p>{{ site.get_description() }}</p>
+
+
+<table class="data">
+    <tr>
+        <th>id</th>
+        <th>&nbsp;</th>
+    </tr>
+    {% for type_id, type in site.get_types().items() %}
+        <tr>
+            <td>{{ type_id }}</td>
+            <td><a href="/type/{{ type_id }}/" class="button">View <i class="fa-solid fa-arrow-right"></i></a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+
