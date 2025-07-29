@@ -1,0 +1,35 @@
+version: 2.1
+orbs:
+  python: circleci/python@1
+jobs:
+  build-python:
+    executor:
+      name: python/default
+      tag: '3.13'
+    steps:
+      - checkout
+      - run:
+          name: Install uv
+          command: pip install uv
+      - run:
+          name: Install ruff
+          command: pip install ruff
+      - run:
+          name: Run code checks with ruff
+          command: ruff check .
+      - run:
+          name: Run build with uv
+          command: uv build
+      - run:
+          name: Create the ~/artifacts directory if it doesn't exist
+          command: mkdir -p ~/artifacts
+      - run:
+          name: Copy artifacts
+          command: cp -R dist build .output ~/artifacts 2>/dev/null || true
+      - store_artifacts:
+          path: ~/artifacts
+          destination: python-build
+workflows:
+  build-test:
+    jobs:
+      - build-python
