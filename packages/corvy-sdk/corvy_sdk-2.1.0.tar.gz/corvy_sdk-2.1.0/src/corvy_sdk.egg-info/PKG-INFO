@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: corvy_sdk
+Version: 2.1.0
+Summary: An officially sponsored, community maintained SDK for Corvy.
+Author-email: SimuCorps Team <contact@simucorps.org>
+License-Expression: GPL-3.0-or-later
+Keywords: CORVY
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: aiohttp>=3.11
+Requires-Dist: websockets>=15.0
+
+# Corvy SDK
+> Note: The Corvy SDKs are all officially sponsored, community maintained.
+
+## Quickstart
+
+Start by creating a CorvyBot:
+```python
+bot = CorvyBot("your_corvy_sdk_token")
+```
+
+Then, attach a command:
+```python
+@bot.command()
+async def hello(message: Message):
+    return f"Hello, {message.user.username}! How are you today?"
+```
+
+Lastly, start your bot:
+```python
+if __name__ == "__main__":
+    bot.start() 
+```
