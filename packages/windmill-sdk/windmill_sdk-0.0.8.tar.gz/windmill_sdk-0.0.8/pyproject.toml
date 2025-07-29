@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "windmill-sdk"
+version = "0.0.8"
+description = "Libreria Python asincrona per interagire con PocketBase e SDC, pensata per Windmill"
+authors = ["Emily Lancietti <emily.lancietti@opencontent.it>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "windmill_sdk" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.27.0"
+pydantic = "^2.6"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+respx = "^0.20"
+coverage = "^7.8.0"
+pre-commit = "^4.2.0"
+black = "^25.1.0"
+ruff = "^0.11.6"
+pytest-cov = "^6.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
