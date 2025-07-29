@@ -1,0 +1,20 @@
+[project]
+name = "kisesi"
+version = "0.4.0"
+description = "Light wrapper around Python's `logging` built-in module."
+readme = "README.md"
+authors = [
+    { name = "myxi", email = "myxi@envs.net" }
+]
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+dependencies = []
+keywords = ["python", "logging", "wrapper", "color"]
+
+[project.urls]
+Repository = "https://github.com/eeriemyxi/kisesi"
+Issues = "https://github.com/eeriemyxi/kisesi/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
