@@ -1,0 +1,193 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para gestión WiFi ESP32 con FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para inicializar WiFi, conectarse a red,
+ * desconectarse y consultar estado, con sincronización para tareas.
+ */
+
+#include <WiFi.h>
+#include "{{HAL_NAME}}.h"
+
+static SemaphoreHandle_t wifi_mutex = NULL;
+static bool wifi_initialized = false;
+
+/**
+ * @brief Inicializa la interfaz WiFi y crea mutex para sincronización.
+ * 
+ * @return true si inicialización exitosa
+ * @return false en caso de error
+ */
+bool {{HAL_NAME}}_init() {
+    if (!wifi_initialized) {
+        wifi_mutex = xSemaphoreCreateMutex();
+        if (wifi_mutex == NULL) {
+            return false;
+        }
+        WiFi.mode(WIFI_STA);
+        wifi_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Conecta a una red WiFi protegida por mutex.
+ * 
+ * @param ssid Nombre de la red WiFi
+ * @param password Contraseña de la red WiFi
+ * @param timeout_ms Tiempo máximo de espera en ms
+ * @return true si conexión exitosa
+ * @return false si fallo o timeout
+ */
+bool {{HAL_NAME}}_connect(const char* ssid, const char* password, uint32_t timeout_ms) {
+    if (!wifi_mutex) return false;
+
+    if (xSemaphoreTake(wifi_mutex, pdMS_TO_TICKS(timeout_ms))) {
+        WiFi.begin(ssid, password);
+
+        uint32_t start = millis();
+        while (WiFi.status() != WL_CONNECTED) {
+            if (millis() - start >= timeout_ms) {
+                xSemaphoreGive(wifi_mutex);
+                return false; // Timeout
+            }
+            vTaskDelay(pdMS_TO_TICKS(100));
+        }
+
+        xSemaphoreGive(wifi_mutex);
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @brief Desconecta de la red WiFi.
+ */
+void {{HAL_NAME}}_disconnect() {
+    if (!wifi_mutex) return;
+
+    if (xSemaphoreTake(wifi_mutex, pdMS_TO_TICKS(100))) {
+        WiFi.disconnect(true);
+        xSemaphoreGive(wifi_mutex);
+    }
+}
+
+/**
+ * @brief Obtiene el estado actual de la conexión WiFi.
+ * 
+ * @return wl_status_t Estado WiFi (WL_CONNECTED, WL_DISCONNECTED, etc)
+ */
+wl_status_t {{HAL_NAME}}_status() {
+    wl_status_t status = WL_DISCONNECTED;
+    if (!wifi_mutex) return status;
+
+    if (xSemaphoreTake(wifi_mutex, pdMS_TO_TICKS(100))) {
+        status = WiFi.status();
+        xSemaphoreGive(wifi_mutex);
+    }
+    return status;
+}
+
+/**
+ * @brief Obtiene la IP asignada cuando está conectado.
+ * 
+ * @return IPAddress Dirección IP
+ */
+IPAddress {{HAL_NAME}}_localIP() {
+    IPAddress ip;
+    if (!wifi_mutex) return ip;
+
+    if (xSemaphoreTake(wifi_mutex, pdMS_TO_TICKS(100))) {
+        ip = WiFi.localIP();
+        xSemaphoreGive(wifi_mutex);
+    }
+    return ip;
+}
+
+/**
+ * @brief Detiene y limpia recursos del WiFi.
+ */
+void {{HAL_NAME}}_stop() {
+    if (wifi_initialized) {
+        if (wifi_mutex) {
+            vSemaphoreDelete(wifi_mutex);
+            wifi_mutex = NULL;
+        }
+        WiFi.disconnect(true);
+        wifi_initialized = false;
+    }
+}
+
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interfaz para HAL WiFi ESP32 con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para gestionar WiFi con acceso seguro entre tareas.
+ */
+
+#pragma once
+
+#include <WiFi.h>
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Inicializa la interfaz WiFi.
+ * 
+ * @return true si éxito
+ * @return false si error
+ */
+bool {{HAL_NAME}}_init();
+
+/**
+ * @brief Conecta a una red WiFi.
+ * 
+ * @param ssid Nombre de la red
+ * @param password Contraseña
+ * @param timeout_ms Tiempo máximo para conectar (ms)
+ * @return true si conectado
+ * @return false si fallo o timeout
+ */
+bool {{HAL_NAME}}_connect(const char* ssid, const char* password, uint32_t timeout_ms);
+
+/**
+ * @brief Desconecta de la red WiFi.
+ */
+void {{HAL_NAME}}_disconnect();
+
+/**
+ * @brief Consulta el estado de la conexión WiFi.
+ * 
+ * @return wl_status_t Estado WiFi
+ */
+wl_status_t {{HAL_NAME}}_status();
+
+/**
+ * @brief Obtiene la IP local asignada.
+ * 
+ * @return IPAddress IP local
+ */
+IPAddress {{HAL_NAME}}_localIP();
+
+/**
+ * @brief Detiene WiFi y libera recursos.
+ */
+void {{HAL_NAME}}_stop();
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,0 +1,74 @@
+/**
+ * @file hal_rtc.h
+ * @brief Real-Time Clock (RTC) HAL interface for ESP32
+ * 
+ * Provides abstraction for RTC operations using FreeRTOS and Arduino framework.
+ * 
+ * @date May 2025
+ */
+
+#ifndef HAL_RTC_H
+#define HAL_RTC_H
+
+#include <Arduino.h>
+#include <time.h>
+
+/**
+ * @brief Initialize the RTC module.
+ * 
+ * This function configures the RTC hardware and synchronizes time if needed.
+ * 
+ * @return true if initialized successfully, false otherwise.
+ */
+bool hal_rtc_init();
+
+/**
+ * @brief Get the current date and time.
+ * 
+ * @param out_time A pointer to a `tm` structure where the time will be written.
+ * @return true if successful, false on failure.
+ */
+bool hal_rtc_get_time(struct tm* out_time);
+
+/**
+ * @brief Set the current date and time.
+ * 
+ * @param in_time A pointer to a `tm` structure with the new time to set.
+ * @return true if successful, false on failure.
+ */
+bool hal_rtc_set_time(const struct tm* in_time);
+
+#endif // HAL_RTC_H
+--- END ---
+
+--- hal_rtc.cpp ---
+/**
+ * @file hal_rtc.cpp
+ * @brief Real-Time Clock (RTC) HAL implementation for ESP32
+ * 
+ * Implements the RTC interface using standard C time functions.
+ * 
+ * @date May 2025
+ */
+
+#include "hal_rtc.h"
+
+bool hal_rtc_init() {
+    configTime(0, 0, "pool.ntp.org", "time.nist.gov");
+    struct tm timeinfo;
+    return getLocalTime(&timeinfo);
+}
+
+bool hal_rtc_get_time(struct tm* out_time) {
+    if (!getLocalTime(out_time)) {
+        return false;
+    }
+    return true;
+}
+
+bool hal_rtc_set_time(const struct tm* in_time) {
+    time_t rawtime = mktime((struct tm*)in_time);
+    struct timeval now = { .tv_sec = rawtime };
+    return settimeofday(&now) == 0;
+}
+--- END ---
