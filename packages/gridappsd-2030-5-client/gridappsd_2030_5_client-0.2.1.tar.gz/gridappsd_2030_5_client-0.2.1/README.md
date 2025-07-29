@@ -1,0 +1,140 @@
+# GridAPPSD IEEE 2030.5 Client
+
+[![Python Tests](https://github.com/GRIDAPPSD/gridappsd-2030_5-client/actions/workflows/python-test.yml/badge.svg)](https://github.com/GRIDAPPSD/gridappsd-2030_5-client/actions/workflows/python-test.yml)
+[![PyPI version](https://badge.fury.io/py/gridappsd-2030-5-client.svg)](https://badge.fury.io/py/gridappsd-2030-5-client)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+A Python client library for IEEE 2030.5 (Smart Energy Profile 2.0) servers with persistent connections and extensible event handling.
+
+## Features
+
+- **Persistent Connections**: Uses modern HTTP client with connection pooling
+- **Extensible Event Handling**: Abstract base class for custom event processing
+- **Async Support**: Full asyncio integration for non-blocking operations
+- **Subscription Management**: Automatic tracking and renewal of subscriptions
+- **Multi-format Support**: Handles XML, JSON, and EXI content types
+- **TLS Authentication**: Certificate-based authentication for secure communications
+- **Type Annotations**: Modern Python typing for better IDE support and validation
+
+## Installation
+
+```bash
+# Install from PyPI
+pip install gridappsd-2030-5-client
+
+# Or with Poetry
+poetry add gridappsd-2030-5-client
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+import logging
+from gridappsd_2030_5_client import IEEE2030Client, IEEE2030EventHandler
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+# Create a custom event handler
+class MyEventHandler(IEEE2030EventHandler):
+    def on_connect(self, client):
+        print("Connected to IEEE 2030.5 server!")
+
+    def on_subscription_update(self, client, resource, data):
+        print(f"Received update for {resource}: {data}")
+
+# Create and use the client
+client = IEEE2030Client(
+    base_url="https://ieee2030server.example.com/api",
+    event_handler=MyEventHandler(),
+    cert_path="client_cert.pem",
+    key_path="client_key.pem",
+    ca_cert_path="ca_cert.pem"
+)
+
+try:
+    # Connect to the server
+    if client.connect():
+    # Get device capability
+    capability = client.get_device_capability()
+    print(f"Device capability: {capability}")
+
+    # Subscribe to resources
+    client.create_subscription("drp/1/dre") # Demand response events
+
+    # Start polling for updates
+    client.start_polling()
+
+    # Wait for events
+    input("Press Enter to stop...")
+finally:
+    # Disconnect and clean up
+    client.disconnect()
+```
+
+### Async Usage
+
+```python
+import asyncio
+from gridappsd_2030_5_client import IEEE2030Client, IEEE2030EventHandler
+
+# Create a custom event handler
+class MyEventHandler(IEEE2030EventHandler):
+    def on_connect(self, client):
+        print("Connected to IEEE 2030.5 server!")
+
+async def main():
+    # Create client
+    client = IEEE2030Client(
+        base_url="https://ieee2030server.example.com/api",
+        event_handler=MyEventHandler(),
+        cert_path="client_cert.pem",
+        key_path="client_key.pem",
+        ca_cert_path="ca_cert.pem"
+    )
+
+    try:
+        # Connect to the server asynchronously
+        if await client.async_connect():
+            # Start polling for updates
+            client.start_polling()
+
+        # Wait for some time
+        await asyncio.sleep(300) # Run for 5 minutes
+    finally:
+    # Disconnect and clean up
+    client.disconnect()
+
+# Run the async program
+asyncio.run(main())
+```
+
+## Development
+
+```bash
+# Clone the repository
+git clone https://github.com/GRIDAPPSD/gridappsd-2030-5-client.git
+cd gridappsd-2030-5-client
+
+# Install dependencies with Poetry
+poetry install
+
+# Run tests
+poetry run pytest
+
+# Run tests with coverage
+poetry run pytest --cov=gridappsd_2030_5_client
+
+# Format code
+poetry run black gridappsd_2030_5_client
+```
+
+## License
+
+BSD 3-Clause License
+
+Copyright (c) 2023, GridAPPSD Contributors
+All rights reserved.
