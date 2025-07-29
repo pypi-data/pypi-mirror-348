@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: ida-domain
+Version: 0.0.1.dev7
+Summary: IDA Domain API
+Author: Hex-Rays SA
+Author-email: support@hex-rays.com
+License: MIT
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Disassemblers
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: summary
+
+
+# IDA Domain API
+
+**⚠️ This is a dev pre-release version. APIs may change without notice and pre-release versions may be deleted at any time.**
+
+
+## The IDA Domain API provides a Domain Model on top of IDA SDK
+
+## Usage example:
+
+```python
+import ida_domain
+
+print(f"IDA Domain usage example, version {ida_domain.VersionInfo.api_version}")
+
+db = ida_domain.Database()
+if db.open("program.exe"):
+
+  print("Segments:")
+  for s in db.segments.get_all():
+    print(f"- Segment ({hex(s.start_ea)} - {hex(s.end_ea)})")
+
+  print("Functions:")
+  for f in db.functions.get_all():
+    print(f"- Function {f.name}, ({hex(f.start_ea)} - {hex(f.end_ea)})")
+
+    print(" - Basic blocks:")
+    for b in db.functions.get_basic_blocks(f):
+      print(f"  - Basic block ({hex(b.start_ea)} - {hex(b.end_ea)})")
+
+    print(" - Disassembly:")
+    for line in db.functions.get_disassembly(f):
+      print(f"   {line}")
+  db.close(False)
+```
