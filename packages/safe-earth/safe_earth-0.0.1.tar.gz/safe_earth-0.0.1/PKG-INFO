@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: safe-earth
+Version: 0.0.1
+Summary: Stratified Assessments of Forecasts over Earth
+Project-URL: Repository, https://github.com/N-Masi/safe
+Author-email: Nick Masi <nicholas_masi@brown.edu>, Daniel Cai <daniel_cai@brown.edu>, Randall Balestriero <randall_balestriero@brown.edu>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: climate,earth,fairness,machine learning,stratification,weather
+Requires-Dist: cfsgrib
+Requires-Dist: fsspec
+Requires-Dist: gcsfs
+Requires-Dist: geopandas
+Requires-Dist: kaleido
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pickle
+Requires-Dist: plotly
+Requires-Dist: pygeoboundaries-geolab
+Requires-Dist: pytest
+Requires-Dist: requests-cache
+Requires-Dist: shapely
+Requires-Dist: xarray
+Requires-Dist: zarr
+Description-Content-Type: text/markdown
+
+# SAFE
+Stratified Assessment of Forecasts over Earth
+
+To unify the coordinate system across all integrated data sources, latitude ranges [-90, 90] with index 0 at -90, and longitude [-180, 180) but with index 0 at 0 and a wraparound from 180 to -180 in the middle. This is because metadata sourced from pygeoboundaries_geolab follows this coordinate system, and it is easiest to bring tabular data into conformance.
+
+### Testing
+
+Run `pytest` in the terminal

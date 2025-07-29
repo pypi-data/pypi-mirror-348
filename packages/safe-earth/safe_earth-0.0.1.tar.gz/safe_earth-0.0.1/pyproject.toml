@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[project]
+name = "safe-earth"
+version = "0.0.1"
+dependencies = [
+  'numpy',
+  'pandas',
+  'geopandas',
+  'xarray',
+  'zarr',
+  'plotly',
+  'shapely',
+  'gcsfs',
+  'fsspec',
+  'cfsgrib',
+  'pickle',
+  'pytest',
+  'requests_cache',
+  'pygeoboundaries-geolab',
+  'kaleido'
+]
+authors = [
+  {name = "Nick Masi", email = "nicholas_masi@brown.edu"},
+  {name = "Daniel Cai", email = "daniel_cai@brown.edu"},
+  {name = "Randall Balestriero", email = "randall_balestriero@brown.edu"}
+]
+description = "Stratified Assessments of Forecasts over Earth"
+readme = "README.md"
+keywords = ["fairness", "machine learning", "climate", "weather", "earth", "stratification"]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Repository = "https://github.com/N-Masi/safe"
