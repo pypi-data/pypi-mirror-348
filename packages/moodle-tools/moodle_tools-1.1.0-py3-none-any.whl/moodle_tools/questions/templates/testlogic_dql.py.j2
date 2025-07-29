@@ -1,0 +1,61 @@
+from __future__ import annotations
+
+import os
+import re
+import shutil
+
+import duckdb
+
+MAX_ROWS = 50
+MAX_WIDTH = 500
+
+# Use Twig to get students answer
+student_answer = """{{ STUDENT_ANSWER | e('py') }}""".rstrip()
+
+# Parsing the student answer
+if not student_answer.endswith(";"):
+    student_answer = student_answer + ";"
+if "pragma" in student_answer.lower():
+    raise ValueError("It is not allowed to use PRAGMA statements.")
+
+# Getting the database file
+db_files = [fname for fname in os.listdir() if fname.endswith(".db")]
+if len(db_files) == 0:
+    db_working = ":memory:"
+elif len(db_files) == 1:
+    db_working = db_files[0]  # Strip .db extension
+else:
+    raise Exception("Multiple DB files not implemented yet, sorry!")
+
+SEPARATOR = "#<ab@17943918#@>#"
+
+# Running each test in isolation
+{% for TEST in TESTCASES %}
+
+if db_working != ":memory:":
+    db_working = f"{db_working}.copy"
+    shutil.copyfile(db_files[0], db_working)  # Copy clean writeable db file
+
+testcode = """{{ TEST.testcode | e('py') }}"""
+extra = """{{ TEST.extra | e('py') }}"""
+con = duckdb.connect(db_working, config={"temp_directory": os.getcwd()})
+
+# Set DB parameters
+con.sql("SET memory_limit = '{{ QUESTION.memlimitmb - 50 }}MB'; SET threads = 1;")
+
+# Execute database modification
+con.sql(testcode)
+
+# Execute student answer
+try:
+    res = con.sql(student_answer)
+    res.show(max_width=MAX_WIDTH, max_rows=MAX_ROWS) if res else print(res)
+except Exception as e:
+    raise e
+finally:
+    con.close()
+
+{% if not loop.last %}
+print(SEPARATOR)
+{% endif %}
+{% endfor %}

@@ -1,0 +1,28 @@
+{% extends "question.xml.j2" %}
+{% block content %}
+    {{ super() }}
+    <single>true</single>
+    <shuffleanswers>
+        {{ "1" if shuffle_answers else "0" }}
+    </shuffleanswers>
+    <answernumbering>none</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+        <text>{{ "<![CDATA[{}]]>".format(correct_feedback) if correct_feedback }}</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+        <text>{{ "<![CDATA[{}]]>".format(partially_correct_feedback) if partially_correct_feedback }}</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+        <text>{{ "<![CDATA[{}]]>".format(incorrect_feedback) if incorrect_feedback }}</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    {% for answer in answers %}
+    <answer fraction="{{ answer.points }}" format="html">
+        <text><![CDATA[{{ answer.answer }}]]></text>
+        <feedback format="html">
+            <text>{{ "<![CDATA[{}]]>".format(answer.feedback) if answer.feedback }}</text>
+        </feedback>
+    </answer>
+    {% endfor %}
+{% endblock%}
