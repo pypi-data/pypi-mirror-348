@@ -1,0 +1,15 @@
+site_name: AsFlow
+site_url: https://github.com/k24d/asflow
+repo_url: https://github.com/k24d/asflow
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "asflow"
+version = "0.0.3"
+description = "A lightweight, asynchronous workflow runner for ETL pipelines"
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 3 - Alpha",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "rich>=14.0.0",
+]
+
+[project.urls]
+Documentation = "https://asflow.readthedocs.io/en/latest/"
+Repository = "https://github.com/k24d/asflow"
+
+[dependency-groups]
+dev = [
+    "daft>=0.4.14",
+    "duckdb>=1.2.2",
+    "httpx>=0.28.1",
+    "joblib>=1.5.0",
+    "polars>=1.29.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "streamlit>=1.45.0",
+]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.12",
+]
+zstandard = [
+    "zstandard>=0.23.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["asflow"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["examples"]
+
+[tool.ruff.lint]
+select = [
+  "F",      # Pyflakes
+  "E",      # pycodestyle (error)
+  "W",      # pycodestyle (warning)
+  "I",      # isort
+  "UP",     # pyupgrade
+  "B",      # flake8-bugbear
+  "A",      # flake8-builtins
+]
+ignore = [
+  # Found useless expression. Either assign it to a variable or remove it.
+  #"B018",
+]
+
+[tool.uv]
+default-groups = ["dev", "docs", "zstandard"]
