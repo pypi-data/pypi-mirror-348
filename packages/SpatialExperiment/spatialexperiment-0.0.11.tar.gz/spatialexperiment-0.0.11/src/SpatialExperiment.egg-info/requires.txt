@@ -1,0 +1,23 @@
+biocframe>=0.6.3
+biocutils>=0.2
+singlecellexperiment>=0.5.7
+pillow>=11.0
+requests
+scipy~=1.13
+rasterio
+
+[:python_version < "3.8"]
+importlib-metadata
+
+[optional]
+pandas
+anndata
+delayedarray
+
+[testing]
+setuptools
+pytest
+pytest-cov
+pandas
+anndata
+delayedarray
