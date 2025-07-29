@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: vibetrading
+Version: 0.0.2
+Summary: A simple Python library
+Author-email: Ning Ren <renning22@gmail.com>
+Maintainer-email: Ning Ren <renning22@gmail.com>
+Project-URL: Homepage, https://github.com/renning22/vb
+Project-URL: Bug Reports, https://github.com/renning22/vb/issues
+Project-URL: Funding, https://github.com/renning22/vb
+Project-URL: Say Thanks!, https://github.com/renning22/vb
+Project-URL: Source, https://github.com/renning22/vb
+Keywords: setuptools,development
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: ray[default]
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == "dev"
+Provides-Extra: test
+Requires-Dist: coverage; extra == "test"
+Dynamic: license-file
+
+# vb
+VibeTrading python library
