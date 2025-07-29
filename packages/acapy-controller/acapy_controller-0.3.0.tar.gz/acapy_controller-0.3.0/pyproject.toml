@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "acapy-controller"
+version = "0.3.0"
+description = "ACA-Py Controller"
+authors = ["Daniel Bluhm <dbluhm@pm.me>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/indicio-tech/acapy-minimal-example"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+async-selective-queue = "^0.1.1"
+aiohttp = "^3.9.5"
+pydantic = {version = "^2.8.2", optional = true}
+blessings = "^1.7"
+
+[tool.poetry.extras]
+models = ["pydantic"]
+
+[tool.poetry.dev-dependencies]
+ruff = "^0.11.7"
+pre-commit = "^4.2.0"
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+
+[tool.pytest.ini_options]
+markers = "examples: test the examples"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+lint.select = ["E", "F", "C", "D"]
+
+lint.ignore = [
+    # Google Python Doc Style
+    "D203", "D204", "D213", "D215", "D400", "D401", "D404", "D406", "D407",
+    "D408", "D409", "D413",
+    "D202", # Allow blank line after docstring
+    "D104", # Don't require docstring in public package
+]
+
+# The models module is generated
+extend-exclude = [
+    "acapy_controller/models.py",
+    "scripts/import_check.py"
+]
+
+line-length = 90
+
+[tool.ruff.lint.per-file-ignores]
+"**/{tests}/*" = ["F841", "D", "E501"]
