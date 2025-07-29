@@ -1,0 +1,46 @@
+[build-system]
+requires = [ 
+    "setuptools>=64", 
+    "setuptools_scm[toml]>=8",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scene-rir"
+dynamic = ["version"]
+description = "Room Impulse Response extraction package."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file="LICEN[CS]E*" }
+authors = [
+    { name="Christos Sevastiadis", email="csevast@auth.gr"},
+]
+keywords = [ 
+    "room impulse response",
+    "rir"
+]
+classifiers=[
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: MacOS X",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+]
+[project.urls] 
+Home = "https://sr.ht/~csevast/scene-rir/"
+Source = "https://git.sr.ht/~csevast/scene_rir"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools_scm]
+version_file = "src/scene_rir/_version.py"
