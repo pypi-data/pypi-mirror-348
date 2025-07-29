@@ -1,0 +1,44 @@
+Metadata-Version: 2.4
+Name: tomato-bronkhorst
+Version: 2.1rc1
+Summary: Tomato driver package for the automation of Bronkhorst devices.
+Author: Alexandre Gbocho, Peter Kraus
+Maintainer-email: Peter Kraus <peter.kraus@ceramics.tu-berlin.de>
+Project-URL: Repository, https://github.com/dgbowl/tomato-bronkhorst
+Project-URL: Issues, https://github.com/dgbowl/tomato-bronkhorst/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: bronkhorst_propar>=1.1.1
+Requires-Dist: tomato>=2.1rc1
+Provides-Extra: testing
+Requires-Dist: pytest; extra == "testing"
+Dynamic: license-file
+
+# tomato-bronkhorst
+`tomato` driver for Bronkhorst flow and pressure controllers.
+
+This driver is a wrapper around the [`bronkhorst-propar`](https://github.com/bronkhorst-developer/bronkhorst-propar) library. This driver is developed by the [ConCat lab at TU Berlin](https://tu.berlin/en/concat).
+
+## Supported functions
+
+### Capabilities
+- `constant_pressure` for pressure controllers only (`0` in `SENSOR_MAP`)
+- `constant_flow` for (mass) flow controllers (`1` and `3` in `SENSOR_MAP`)
+
+### Attributes
+- `setpoint` for all devices, `pint.Quantity(float, self.device_unit)` within the capacity range of the device
+- `control_mode` for all devices, dictates valve status, `str` from the `MODE_MAP`
+- `temperature` optional - if available, `RO`, `pint.Quantity(float, "celsius")`
+
+## Contributors
+
+- Peter Kraus
+- Alexandre Gbocho

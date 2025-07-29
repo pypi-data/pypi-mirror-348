@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-git-versioning"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "tomato-bronkhorst"
+authors = [
+  {name="Alexandre Gbocho"},
+  {name="Peter Kraus"},
+]
+maintainers = [
+  {name="Peter Kraus", email="peter.kraus@ceramics.tu-berlin.de"},
+]
+
+description = "Tomato driver package for the automation of Bronkhorst devices."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "bronkhorst_propar >= 1.1.1",
+    "tomato >= 2.1rc1",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+testing = ["pytest"]
+
+[project.urls]
+Repository = "https://github.com/dgbowl/tomato-bronkhorst"
+Issues = "https://github.com/dgbowl/tomato-bronkhorst/issues"
+
+[tool.setuptools-git-versioning]
+enabled = true
+dev_template = "{tag}.dev{ccount}"
+dirty_template = "{tag}.dev{ccount}"
