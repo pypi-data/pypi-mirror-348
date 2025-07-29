@@ -1,0 +1,21 @@
+[project]
+name = "evalyn_sdk_harishatmecs"
+version = "0.0.5"
+description = "Python SDK to send evaluation data to an API with support for batch processing"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.7"
+authors = [
+  { name = "Harish Nankani", email = "harish.nankani@atmecs.com" }
+]
+dependencies = [
+  "requests",
+  "pandas",
+  "openpyxl",
+  "python-dotenv"
+]
+
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
