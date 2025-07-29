@@ -1,0 +1,21 @@
+Installed {{ $.Chart.Name }} (release name: {{ $.Release.Name }}{{ with $.Values.namespace }}, namespace: {{ . }}{{ end }}).
+
+Accessing Elasticsearch {{ $.Values.elasticsearch.host }}:{{ $.Values.elasticsearch.port }} (authenticating with user {{ $.Values.elasticsearch.username }}).
+
+Started workers:
+- Build sources (replicas: {{ $.Values.sourcesBuild.replicas }}).
+- Fetch captures (replicas: {{ $.Values.capturesFetch.replicas }}).
+- Parse SERP URL queries (replicas: {{ $.Values.serpsParseUrlQuery.replicas }}).
+- Parse SERP URL pages (replicas: {{ $.Values.serpsParseUrlPage.replicas }}).
+- Parse SERP URL offsets (replicas: {{ $.Values.serpsParseUrlOffset.replicas }}).
+- Download SERP WARCs (replicas: {{ $.Values.serpsDownloadWarc.replicas }}).
+- Parse SERP WARC queries (replicas: {{ $.Values.serpsParseWarcQuery.replicas }}).
+- Parse SERP WARC queries (replicas: {{ $.Values.serpsParseWarcSnippets.replicas }}).
+{{- if $.Values.capturesImportAql22.enabled }}
+
+Started jobs:
+- Import captures from AQL-22:
+  Running {{ $.Values.capturesImportAql22.completions }}x (search providers: {{ $.Values.capturesImportAql22.completions }}, parallelism: {{ $.Values.capturesImportAql22.parallelism }}, backoff limit: {{ $.Values.capturesImportAql22.backoffLimit }}).
+{{- end }}
+
+Serving monitoring web interface at {{ if $.Values.monitoring.forceSslRedirect }}https{{ else }}http{{ end }}://{{ $.Values.monitoring.host }}{{ $.Values.monitoring.path }}.
