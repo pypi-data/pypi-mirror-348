@@ -1,0 +1,13 @@
+# This file specifies the versions of Demonstrable and other tools required to
+# run the project.
+
+[project]
+name = "your-project-name"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "demonstrable-deca>=9.21.2",
+    "demonstrable-script-editor>=1.14.2",
+]
