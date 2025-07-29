@@ -1,0 +1,10 @@
+struct walk_data_lcmt {
+  float v[2];
+  float swing_state[2];
+  float mpc_swing_v_gain[2];
+  float pf_rel[2];
+  float planed_v[3];
+
+  float other_swing_leg_compensation_v_sum;
+  float other_swing_leg_compensation_r_sum;
+}
