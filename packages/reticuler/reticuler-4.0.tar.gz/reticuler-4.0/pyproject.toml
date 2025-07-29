@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools<=75.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]  # list of folders that contain the packages (["."] by default)
+include = ["reticuler*"]  # package names should match these glob patterns (["*"] by default)
+
+[project]
+name = "reticuler"
+version = "4.0"
+authors = [
+	{name="Stanisław Żukowski"},
+	{email="zukowski.st@gmail.com"}
+]
+description = "Simulations of spatial networks growth"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy >= 1.23",
+    "matplotlib >= 3.6",
+	"scipy >= 1.11.4",
+	"shapely >= 2.0.3",
+	]
+
+[project.urls]
+"Source" = "https://github.com/stzukowski/reticuler"
+
+[project.scripts]
+reticulate = "reticuler.user_interface.reticulate:main"
+reticulate_back = "reticuler.user_interface.reticulate_back:main"
+plot_ret = "reticuler.user_interface.plot_ret:main"
+clip_ret = "reticuler.user_interface.clip_ret:main"
+script_ret = "reticuler.user_interface.script_ret:main"
