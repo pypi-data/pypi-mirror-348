@@ -1,0 +1,1 @@
+print("hello world pyszz v2.1")
