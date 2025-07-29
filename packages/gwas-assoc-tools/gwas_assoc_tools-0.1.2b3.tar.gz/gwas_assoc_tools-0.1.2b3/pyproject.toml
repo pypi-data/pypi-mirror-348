@@ -1,0 +1,74 @@
+[tool.poetry]
+name = "gwas-assoc-tools"
+version = "0.1.2-beta.3"
+description = "GWAS Association Tools"
+authors = ["Karatug Ozan Bircan <karatugo@ebi.ac.uk>"]
+readme = "README.md"
+packages = [{include = "gwas_assoc", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+click = ">=8.0.0"
+pandas = "2.2.3"
+numpy = "2.2.3"
+pydantic = ">=2.0.0"
+requests = "^2.28.0"
+openpyxl = "^3.1.0"
+rich = ">=13.0.0"
+iniconfig = "2.0.0"
+typing-extensions = "4.13.0"
+griffe = "1.6.2"
+pytz = "2025.1"
+tzdata = "2025.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "7.4.4"
+pytest-cov = ">=4.0.0"
+black = ">=23.0.0"
+isort = ">=5.12.0"
+mypy = ">=1.0.0"
+ruff = ">=0.0.260"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = ">=1.4.0"
+mkdocstrings = {extras = ["python"], version = "0.29.0"}
+mkdocs-material = ">=9.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pandas-stubs = "^2.2.3.241126"
+types-requests = "^2.32.0.20250301"
+pre-commit = "^4.1.0"
+
+[tool.poetry.scripts]
+gwas-assoc = "gwas_assoc.cli:cli"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "--cov=gwas_assoc"
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+lint.select = ["E", "F", "I", "N", "B", "C4", "SIM", "ERA"]
+lint.ignore = []
