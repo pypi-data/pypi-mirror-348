@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noahs_local_ollama_chat_agent"  # Must be unique on PyPI!
+version = "0.1.1"
+description = "A local agent module with semantic DB, SQL, and web scraping tools."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+  { name = "Noah Jones", email = "jonesnoah45010@gmail.com" }
+]
+dependencies = [
+  "chromadb",
+  "sentence-transformers",
+  "numpy<2.0",
+  "textsplit",
+  "beautifulsoup4",
+  "requests",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jonesnoah45010/local_ollama_chat_agent"
