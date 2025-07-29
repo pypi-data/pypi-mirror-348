@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "report-of-monaco-2018"
+dynamic = ["version"]
+description = "Monaco 2018 Q1 lap-time report generator"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+keywords = ["F1", "Monaco", "lap-time", "report"]
+authors = [
+  { name = "Yurii Andrushko", email = "medium12345q@gmail.com" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+  "pathlib",
+  "argparse"
+]
+
+[project.urls]
+Documentation = "https://git.foxminded.ua/YuriiAndrushko/task_6_report_of_monaco_2018"
+
+
+[project.scripts]
+report-monaco = "report_of_monaco_2018.main:main"
+
+[tool.hatch.version]
+path = "src/report_of_monaco_2018/__about__.py"
+
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/report_of_monaco_2018 tests}"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/report_of_monaco_2018/data/*"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/report_of_monaco_2018"]
