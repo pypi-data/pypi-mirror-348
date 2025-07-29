@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ukraine-phone-formatter"
+version = "0.1.0"
+authors = [
+  { name="Andrii Stavskyi", email="an.stawski@outlook.com" },
+]
+description = "Ukraine Phone Formatter is a simple Python library that formats Ukrainian phone numbers into a readable and standardized format."
+readme = "README.md"
+requires-python = ">=3.6"
+license = { file="LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
