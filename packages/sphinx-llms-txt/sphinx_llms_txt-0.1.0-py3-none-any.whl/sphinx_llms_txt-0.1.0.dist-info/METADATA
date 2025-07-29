@@ -1,0 +1,66 @@
+Metadata-Version: 2.4
+Name: sphinx-llms-txt
+Version: 0.1.0
+Summary: llms-full.txt generator for Sphinx
+Author-email: Jared Dillard <jared.dillard@gmail.com>
+License: MIT
+Project-URL: download, https://pypi.org/project/sphinx-llms-txt/
+Project-URL: source, https://github.com/jdillard/sphinx-llms-txt
+Project-URL: changelog, https://github.com/jdillard/sphinx-llms-txt/blob/master/CHANGELOG.rst
+Classifier: Framework :: Sphinx :: Extension
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Documentation :: Sphinx
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Dynamic: license-file
+
+# Sphinx llms-full.txt Extension
+
+A Sphinx extension that creates a single combined documentation `llms-full.txt` file, written in reStructuredText.
+
+## Installation
+
+```bash
+pip install sphinx-llms-txt
+```
+
+## Usage
+
+1. Add the extension to your Sphinx configuration (`conf.py`):
+
+```python
+extensions = [
+    'sphinx_llms_txt',
+]
+```
+
+## Configuration Options
+
+### `llms_txt_filename`
+
+- **Type**: string
+- **Default**: `'llms-full.txt'`
+- **Description**: Name of the output file
+
+### `llms_txt_verbose`
+
+- **Type**: boolean  
+- **Default**: `False`
+- **Description**: Whether to include a summary in the build output
+
+## License
+
+MIT License - see LICENSE file for details.
