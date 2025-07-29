@@ -1,0 +1,31 @@
+
+## getUSB
+
+A simple Python script to get the USB device name and its mount point. Works in **Windows**.
+
+### Install
+```bash
+pip install getUSB
+```
+
+### Usage
+```bash
+python getUSB.py
+```
+
+### Citation
+
+If you use this code in your research, please cite it as:
+Garau, Pere (2025). *getUSB* [Python package]. Zenodo. <doi>.
+```bibtex
+@software{garau_2025_1234567,
+  author       = {Pere Garau},
+  title        = {getUSB},
+  month        = feb,
+  year         = 2025,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.1234567},
+  url          = {https://doi.org/10.5281/zenodo.1234567}
+}
+```
