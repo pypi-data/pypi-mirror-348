@@ -1,0 +1,71 @@
+!System
+name: FireSat
+components: !Component
+  - name: 'Orbit'
+    model: !!python/name:amisc.examples.models.orbit_fun
+    data_fidelity: (2, 2)
+    inputs: !VariableList
+      - name: H
+        distribution: N(18e6, 1e6)
+      - name: Φ
+        distribution: N(235e3, 10e3)
+    outputs: !VariableList
+      - name: Vsat
+        distribution: U(3000, 3100)
+      - name: To
+        distribution: U(30000, 50000)
+      - name: Te
+        distribution: U(2000, 4000)
+      - name: Slew
+        description: Max slewing angle
+        units: rad
+  - name: 'Power'
+    model: !!python/name:amisc.examples.models.power_fun
+    model_fidelity: (2,)
+    data_fidelity: (2, 2, 2, 2, 2)
+    inputs: !VariableList
+      - name: Po
+        distribution: N(1000, 50)
+      - name: Fs
+        distribution: N(1400, 20)
+      - name: To  # duplicate
+      - name: Te  # duplicate
+      - name: Pat
+        distribution: U(60, 80)
+    outputs: !VariableList
+      - name: Imin
+        distribution: U(4500, 5500)
+        description: Min moment of inertia
+        units: '$kg\cdot m^2$'
+      - name: Imax
+        distribution: U(6200, 6800)
+      - name: Ptot
+        domain: (800, 1200)
+      - name: Asa
+        domain: (5, 15)
+  - name: 'Attitude'
+    model: !!python/name:amisc.examples.models.attitude_fun
+    model_fidelity: (2,)
+    data_fidelity: (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+    inputs: !VariableList
+      - name: H
+      - name: Fs
+      - name: Lsp
+        distribution: N(2, 0.4)
+      - name: q
+        distribution: N(0.5, 0.1)
+      - name: La
+        distribution: N(2, 0.4)
+      - name: Cd
+        distribution: N(1, 0.2)
+      - name: Vsat
+      - name: Slew
+      - name: Imin
+      - name: Imax
+    outputs: !VariableList
+      - name: Pat
+        description: Attitude control power
+        units: W
+      - name: tau_tot
+        description: Total torque
+        units: '$N\cdot m$'
