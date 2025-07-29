@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pybujia"
+version = "0.1.0-rc2"
+description = "Enables human-readable formats like Markdown or Spark's .show() for unit test tables — easy to parse, document, and version, making test data changes simple to track and review"
+authors = [{ name = "Juan Pablo Guereca", email = "juanpablo@guereca.com" }]
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = ["pyspark>=3.0.0"]
+keywords = ["pyspark", "fixtures", "tests", "readable"]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+"Repository" = "https://github.com/jpgerek/pybujia"
+
+[tool.ruff]
+line-length = 120
+
+[tool.mypy]
+strict = false
+ignore_missing_imports = true
