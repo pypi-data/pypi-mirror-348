@@ -1,0 +1,274 @@
+# Qcog Client CLI
+
+This document provides documentation for the command-line interface (CLI) of the Qcog Client.
+
+## Table of Contents
+
+- [Global Options](#global-options)
+- [Admin Commands (`admin`)](#admin-commands-admin)
+- [Project Commands (`project`)](#project-commands-project)
+- [Experiment Commands (`experiment`)](#experiment-commands-experiment)
+- [Qcog Clients](#qcog-clients)
+
+## Global Options
+
+```
+--log-level [DEBUG|INFO|WARNING|ERROR|CRITICAL]  Set the logging level (default: INFO)
+--log-file LOG_FILE                            Log file to write to
+```
+
+## Admin Commands (`admin`)
+
+Administrative commands for managing users, projects, environments, and experiments.
+
+### `admin project create`
+
+Create a new project.
+
+```
+--name NAME          The name of the project to create (required)
+--description DESC   The description of the project to create (required)
+--user-name USERNAME The name of the user to create (required)
+--user-email EMAIL   The email of the user to create (required)
+```
+
+### `admin login`
+
+Login to the admin API using an API key.
+
+```
+--api-key API_KEY    The API key to login with (required)
+```
+
+### `admin logout`
+
+Logout from the admin API.
+
+### `admin whoami`
+
+Show the current logged-in user.
+
+### `admin api-key create`
+
+Create a new API key for a user.
+
+```
+--user-id USER_ID        The user ID to create the API key for (required)
+--project-id PROJECT_ID  The project ID to scope the API key to (optional)
+--basic-username USER    Username for basic auth if project-id is not given (optional)
+--basic-password PASS    Password for basic auth if project-id is not given (optional)
+```
+
+### `admin environment create`
+
+Create a new environment.
+
+```
+--name NAME              The name of the environment to create (required)
+--description DESC       The description of the environment (optional)
+--docker-image IMAGE     The docker image to use (required)
+--tag TAG                The image tag to use (required)
+--provider PROVIDER      The provider (default: modal) (optional)
+--version VERSION        The environment version (default: 0.0.1) (optional)
+```
+
+### `admin environment get`
+
+Get details of a specific environment.
+
+```
+--environment-id ENV_ID  The ID of the environment to get (required)
+--identifier [id|name]   Identifier type to use (default: id) (optional)
+```
+
+### `admin environment list`
+
+List available environments.
+
+```
+--limit LIMIT    Maximum number of environments to list (default: 100) (optional)
+--offset OFFSET  Offset for pagination (default: 0) (optional)
+```
+
+### `admin experiment create`
+
+Create a new experiment definition.
+
+```
+--name NAME          The name of the experiment to create (required)
+--description DESC   The description of the experiment (optional)
+--file-path PATH     Path to the experiment file (e.g., zip) (required)
+--format FORMAT      Format of the experiment file (default: zip) (optional)
+```
+
+### `admin experiment get`
+
+Get details of a specific experiment definition.
+
+```
+--experiment-id EXP_ID The ID of the experiment to get (required)
+--identifier [id|name] Identifier type to use (default: id) (optional)
+```
+
+### `admin experiment list`
+
+List available experiment definitions.
+
+```
+--limit LIMIT    Maximum number of experiments to list (default: 100) (optional)
+--offset OFFSET  Offset for pagination (default: 0) (optional)
+```
+
+## Project Commands (`project`)
+
+Commands for managing project-specific resources like datasets.
+
+### `project dataset list`
+
+List datasets available in the current project.
+
+```
+--limit LIMIT  Maximum number of datasets to return (default: 100) (optional)
+--skip SKIP    Skip the first N datasets (default: 0) (optional)
+```
+
+### `project dataset create`
+
+Create a new dataset within the project.
+
+```
+--name NAME          Name of the dataset (required)
+--location LOCATION  Location of the dataset (e.g., S3 path) (required)
+--provider PROVIDER  Dataset provider (default: modal) (optional)
+--version VERSION    Dataset version (default: 0.0.1) (optional)
+--format FORMAT      Dataset format (default: csv) (optional)
+--access-key KEY     Access key for the dataset location (required)
+--secret-key SECRET  Secret key for the dataset location (required)
+```
+
+### `project dataset get`
+
+Get details of a specific dataset.
+
+```
+--dataset-id DS_ID   The ID of the dataset to get (required)
+--identifier [id|name] Identifier type to use (default: id) (optional)
+--load [true|false]  Load the dataset into the store as default (default: false) (optional)
+```
+
+## Experiment Commands (`experiment`)
+
+Commands for managing and running experiments.
+
+### `experiment run`
+
+Run a new experiment.
+
+```
+--name NAME             Name for this specific run (required)
+--description DESC      Description for this run (optional)
+--experiment EXP_NAME   Name of the experiment definition to run (required)
+--environment ENV_NAME  Name of the environment to use (required)
+--dataset DS_NAME       Name of the dataset to use (required)
+--parameters JSON       Parameters for the experiment run as a JSON string (required)
+```
+
+### `experiment status-run`
+
+Get the status of a specific experiment run.
+
+```
+--run-name RUN_NAME  Name of the experiment run (required)
+```
+
+### `experiment list-runs`
+
+List experiment runs, optionally filtered by experiment definition.
+
+```
+--experiment-name EXP_NAME Name of the experiment definition (optional)
+--limit LIMIT              Maximum number of runs to list (default: 100) (optional)
+--skip SKIP                Skip the first N runs (default: 0) (optional)
+```
+
+### `experiment list-checkpoints`
+
+List checkpoints created during a specific experiment run.
+
+```
+--run-name RUN_NAME  Name of the experiment run (required)
+```
+
+### `experiment deploy-checkpoint`
+
+Deploy a specific checkpoint from an experiment run.
+
+```
+--run-name RUN_NAME          Name of the experiment run containing the checkpoint (required)
+--checkpoint-name CPT_NAME   Name of the checkpoint to deploy (required)
+--deployment-name DEP_NAME   Name for the new deployment (optional, defaults based on checkpoint)
+--release-notes NOTES        Release notes for the deployment (optional)
+--version VERSION            Semantic version for the deployment (default: v0.0.1) (optional)
+```
+
+### `experiment list-deployments`
+
+List deployments created from a specific experiment run.
+
+```
+--run-name RUN_NAME  Name of the experiment run (required)
+--limit LIMIT        Maximum number of deployments to list (default: 100) (optional)
+--skip SKIP          Skip the first N deployments (default: 0) (optional)
+```
+
+### `experiment run-inferences`
+
+Run inferences using a deployed checkpoint.
+
+```
+--dataset-path PATH      Path to the dataset for inference (required)
+--params JSON            Inference parameters as a JSON string (optional)
+--run-name RUN_NAME      Name of the original experiment run (required)
+--deployment-name DEP_NAME Name of the deployment to use (required)
+--file-name FILENAME     Optional file to save inference results (optional)
+```
+
+## Qcog Clients
+
+These classes provide programmatic access to the Qcog API endpoints.
+
+### `AdminClient`
+
+Located in `qcogclient.qcog.admin`.
+
+Handles administrative tasks requiring admin privileges. This includes:
+
+- **Authentication:** `login()`, `logout()`, `whoami()`, `generate_api_key()`.
+- **User Management:** `create_user()`, `get_or_create_user()`.
+- **Project Creation:** `create_project()` (which also handles user creation/association).
+- **Environment Management:** `create_environment()`, `get_environment()`, `list_environments()`. Access the selected environment ID via the `environment_id` property.
+- **Experiment Definition Management:** `create_experiment()`, `get_experiment()`, `list_experiments()`. Access the selected experiment ID via the `experiment_id` property.
+
+Most methods require authentication, typically via an API key set using `AdminClient.login(api_key=...)`.
+
+### `ProjectClient`
+
+Located in `qcogclient.qcog.project`.
+
+Handles resources within a specific project context. The project is determined by the API key used for initialization (which should be scoped to a project).
+
+- **Authentication:** Uses the project-scoped API key. The `whoami()` method can be used to verify the current user and project context.
+- **Dataset Management:** `create_dataset()`, `list_datasets()`, `get_dataset()`. The ID of the dataset retrieved via `get_dataset(..., load=True)` is stored in the `dataset_id` property.
+
+### `ExperimentClient`
+
+Located in `qcogclient.qcog.experiment`.
+
+Orchestrates the full lifecycle of experiments, from running to deployment and inference. It often requires selecting resources before performing actions.
+
+- **Resource Selection:** Methods like `select_experiment()`, `select_environment()`, `select_dataset()`, `select_experiment_run()`, `select_experiment_run_checkpoint()`, `select_deployment()` are used to fetch details and set the internal state for subsequent operations. Selected IDs are accessible via properties (`experiment_id`, `environment_id`, `dataset_id`, `experiment_run_id`, `deployment_id`).
+- **Running Experiments:** `run_experiment()` starts a new run based on selected/provided experiment, environment, dataset, and parameters. Returns an `AsyncGenerator` for status updates.
+- **Managing Runs:** `get_experiment_run()`, `get_experiment_runs()`.
+- **Managing Checkpoints:** `list_experiment_run_checkpoints()`.
+- **Managing Deployments:** `deploy_checkpoint()` (returns `AsyncGenerator`), `list_deployments()`.
+- **Running Inferences:** `run_inferences()` executes a selected deployment on a given dataset path. Returns an `AsyncGenerator`.
