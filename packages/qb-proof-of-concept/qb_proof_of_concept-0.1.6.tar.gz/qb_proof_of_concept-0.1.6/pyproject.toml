@@ -1,0 +1,15 @@
+[project]
+name = "qb_proof_of_concept"
+version = "0.1.6"
+description = ""
+authors = [{name = "henceiusegentoo", email = "61363222+henceiusegentoo@users.noreply.github.com"}]
+requires_python = ">=3.13.2"
+dependencies = ["qb-runtime"]
+readme = "README.md"
+
+[project.scripts]
+"qbpoc" = "qb_proof_of_concept:__main__.main"
+
+[build-system]
+requires = ["hatchling >= 1.27"]
+build-backend = "hatchling.build"
