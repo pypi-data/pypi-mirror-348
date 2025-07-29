@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: small-vlm
+Version: 0.8.3
+Summary: small vlm for training and experiments
+Project-URL: Repository, https://github.com/leo1oel/small-vlm
+Author-email: Yiming Liu <liuym23@mails.tsinghua.edu.cn>
+License-Expression: MIT
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Typing :: Typed
+Requires-Python: <4.0,>=3.11
+Requires-Dist: accelerate==1.6.0
+Requires-Dist: blobfile==3.0.0
+Requires-Dist: deepspeed==0.16.7
+Requires-Dist: hydra-core==1.3.2
+Requires-Dist: pillow==11.2.1
+Requires-Dist: protobuf==6.30.2
+Requires-Dist: rich==14.0.0
+Requires-Dist: sentencepiece==0.2.0
+Requires-Dist: tiktoken==0.9.0
+Requires-Dist: torch==2.6.0
+Requires-Dist: torchvision==0.21.0
+Requires-Dist: transformers==4.51.3
+Requires-Dist: wandb==0.19.10
+Description-Content-Type: text/markdown
+
+# small-vlm
+
+![Architecture](assets/architecture.png)
+
+A small vision-language model (VLM) implementation in PyTorch. The model consists of three main components:
+
+- **Visual Encoder**: Extracts visual features from images using vision transformers
+- **Language Model**: Processes text and generates responses using language_models
+- **Connector**: Connects visual and language features for multimodal understanding
+
+You can switch different visual encoders, language models and connectors by changing the config.
+
+If you want to use flash-attention-2 for training, run
+
+```
+uv pip install flash-attn --no-build-isolation
+```
+
+---
+
+When using Vicuna-v1.5-7b, make sure to manually add "do_sample": true in the generation_config, or you cannot resume training from checkpoints.
+
+## Project Docs
+
+For how to install uv and Python, see [installation.md](installation.md).
+
+For development workflows, see [development.md](development.md).
+
+For instructions on publishing to PyPI, see [publishing.md](publishing.md).
+
+---
+
+_This project was built from
+[simple-modern-uv](https://github.com/jlevy/simple-modern-uv)._
