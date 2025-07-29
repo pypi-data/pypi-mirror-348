@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: chartpy
+Version: 0.1.16
+Summary: chartpy creates a simple easy to use API to plot in a number of great Python chart libraries
+Home-page: https://github.com/cuemacro/chartpy
+Author: Saeed Amen
+Author-email: saeed@cuemacro.com
+License: Apache 2.0
+Keywords: pandas,chart,plot,plotly
+License-File: LICENCE
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: pdfkit
+Requires-Dist: twython
+Requires-Dist: pytz
+Requires-Dist: requests
+Requires-Dist: numpy
+Requires-Dist: plotly >=4.5.1
+Requires-Dist: bokeh
+Requires-Dist: vispy
+Requires-Dist: reportlab
+Requires-Dist: dataframe-image
+
+chartpy creates a simple easy to use API to plot in a number of great Python chart libraries like plotly (via cufflinks),
+bokeh and matplotlib, with a unified interface. You simply need to change a single keyword to change which chart engine
+to use (see below), rather than having to learn the low level details of each library. I've also created new stylesheets
+and formatting to ensure that the default matplotlib styling looks more modern using Open Sans font. The library
+also works well with Dash, plotly's web server library built on top of Flask.
