@@ -1,0 +1,2 @@
+class NotFoundPrompt(Exception):
+    pass
