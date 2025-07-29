@@ -1,0 +1,33 @@
+﻿[
+    {
+        "remove": {
+            "gramm": "NOUN.*,deriv.*",
+            "trans_en": ".*NMLZ.*"
+        },
+        "if_exists": {
+            "gramm": "NOUN.*,inanim.*",
+            "trans_en": "^$|^([^N]|N[^M]|NM[^L]).*$"
+        }
+    },
+    {
+        "remove": {
+            "gramm": "A.*,deriv.*",
+            "trans_en": ".*\\[.*\\]"
+        },
+        "if_exists": {
+            "gramm": "A.*",
+            "trans_en": "[^\\[\\]]*"
+        }
+    },
+    {
+        "remove": {
+            "gramm": "V.*,deriv.*",
+            "trans_en": ".*\\[.*\\]"
+        },
+        "if_exists": {
+            "gramm": "V.*",
+            "trans_en": "[^\\[\\]]*"
+        }
+    }
+]
+
