@@ -1,0 +1,30 @@
+# Model training configuration
+
+# Data parameters
+data:
+  train_path: "data/processed/train"
+  val_path: "data/processed/val"
+  test_path: "data/processed/test"
+  batch_size: 32
+  num_workers: 4
+
+# Model parameters
+model:
+  type: "default"
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.2
+
+# Training parameters
+training:
+  epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  early_stopping_patience: 10
+  save_best_only: true
+  
+# Logging parameters
+logging:
+  log_dir: "logs"
+  save_dir: "models"
+  tensorboard: true
