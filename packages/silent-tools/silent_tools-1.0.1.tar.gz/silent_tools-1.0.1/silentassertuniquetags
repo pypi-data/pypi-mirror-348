@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+import os
+import sys
+# if you pip installed this is wrong but you have silent_tools installed anyways
+silent_tools_dir = os.path.dirname(os.path.realpath(__file__))
+if silent_tools_dir not in sys.path:
+    sys.path.append(silent_tools_dir)
+
+import silent_tools
+from silent_tools import eprint
+
+# Don't throw an error when someone uses head
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE, SIG_DFL) 
+
+if (len(sys.argv) == 1):
+    eprint("")
+    eprint('silentassertuniquetags by bcov - a tool to ensure all tags in silent file are uniqe')
+    eprint("Usage:")
+    eprint("        silentassertuniquetags myfile.silent")
+    sys.exit(1)
+
+silent_file = sys.argv[1]
+
+silent_index = silent_tools.get_silent_index( silent_file )
+
+if ( silent_index['unique_tags'] ):
+    sys.exit(0)
+else:
+    eprint('')
+    eprint('==== WARNING!!! Tags in silent file are not unique! ====')
+    eprint('')
+    eprint('  Fix with: silentls %s | silentrename %s > fixed.silent'%(silent_file, silent_file))
+    sys.exit(1)
