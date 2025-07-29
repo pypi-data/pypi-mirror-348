@@ -1,0 +1,107 @@
+Metadata-Version: 2.3
+Name: aurelian
+Version: 0.3.4
+Summary: aurelian
+License: MIT
+Author: Author 1
+Author-email: author@org.org
+Requires-Python: >=3.11,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: bioservices
+Provides-Extra: chem
+Provides-Extra: gocam
+Provides-Extra: gradio
+Provides-Extra: linkml
+Provides-Extra: pdfminer
+Provides-Extra: rdkit
+Requires-Dist: bioservices (>=1.12.0) ; extra == "bioservices"
+Requires-Dist: bs4 (>=0.0.2)
+Requires-Dist: cairosvg (>=2.7.1,<3.0.0)
+Requires-Dist: click
+Requires-Dist: duckduckgo-search (>=7.3.2)
+Requires-Dist: gocam ; extra == "gocam"
+Requires-Dist: gradio (>=5.23.3,<6.0.0) ; extra == "gradio"
+Requires-Dist: importlib-metadata (>=8.2.0)
+Requires-Dist: linkml ; extra == "linkml"
+Requires-Dist: linkml-store[llm,mongodb] (>=0.2.4)
+Requires-Dist: logfire (>=3.5.3)
+Requires-Dist: markdownify (>=0.14.1)
+Requires-Dist: markitdown (>=0.0.1a4)
+Requires-Dist: mcp[cli] (>=1.3.0,<2.0.0)
+Requires-Dist: oaklib (>=0.6.19)
+Requires-Dist: paper-qa (>=5.20.0,<6.0.0)
+Requires-Dist: pdfminer-six ; extra == "pdfminer"
+Requires-Dist: pydantic-ai (>=0.0.29)
+Requires-Dist: pypaperbot (>=1.4.1)
+Requires-Dist: pytest-asyncio (>=0.25.3,<0.26.0)
+Requires-Dist: rdkit ; extra == "rdkit" or extra == "chem"
+Requires-Dist: tabulate (>=0.9.0)
+Requires-Dist: undetected-chromedriver (>=3.5.5)
+Requires-Dist: wikipedia (>=1.4.0)
+Description-Content-Type: text/markdown
+
+[![DOI](https://zenodo.org/badge/932483388.svg)](https://doi.org/10.5281/zenodo.15299996)
+
+# Aurelian: Agentic Universal Research Engine for Literature, Integration, Annotation, and Navigation
+
+| [Documentation](https://monarch-initiative.github.io/aurelian) |
+
+```
+aurelian --help
+```
+
+Most commands will start up a different AI agent.
+
+## Examples of use
+
+### TALISMAN
+
+gene set enrichment
+
+### Aria
+
+checking papers against checklists
+
+### GO-CAM agent
+
+This agent is for exploring, chatting with, and reviewing GO-CAMs
+
+Docs: [gocam_agent](https://monarch-initiative.github.io/aurelian/agents/gocam_agent/)
+
+It can be used to generate reviews according to guidelines for GO-CAMs:
+
+* [GO-CAM Reviews](https://cmungall.github.io/go-cam-reviews/)
+
+It can also generate SVGs, demonstrating innate knowledge of both the visual grammar of pathway diagrams and the semantics of the underlying biology.
+
+
+<img alt="img" src="https://cmungall.github.io/go-cam-reviews/figures/FIG-646ff70100005137-IL33_signaling_pathway__Human_.svg" />
+
+### GO-Ann agent
+
+This agent is for exploring, chatting with, and reviewing standard annotations
+
+
+Docs: [go_ann_agent](https://monarch-initiative.github.io/aurelian/agents/go_ann_agent/)
+
+Example review using TF guidelines:
+
+https://github.com/geneontology/go-annotation/issues/5743
+
+## Troubleshooting
+
+### Installing linkml-store
+
+Some agents require linkml-store pre-indexed. E.g. a mongodb with gocams for cam agent.
+Consult the [linkml-store documentation](https://linkml.io/linkml-store/) for more information.
+
+### Semantic search over ontologies
+
+If an agent requires ontology search it will use the semsql/OAK sqlite database.
+The first time querying it will use linkml-store to create an LLM index. Requires OAI key.
+This may be slow first iteration. Will be cached until your pystow cache regenerates.
+
