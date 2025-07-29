@@ -1,0 +1,62 @@
+Metadata-Version: 2.1
+Name: ecocrop
+Version: 0.1.0
+Summary: Ecocrop model implementation in Python for crop suitability analysis
+Home-page: https://github.com/ttwiipongwii/Ecocrop
+Author: Troy Wiipongwii, PhD, MPP
+Author-email: ttwiipongwii@wm.edu
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: rasterio
+Requires-Dist: matplotlib
+
+# Ecocrop Python Package
+
+This package implements the FAO Ecocrop model for ecological suitability analysis of crops based on temperature and precipitation thresholds.
+
+## Features
+
+- Load crop parameters from dataset or mock database
+- Integrate environmental predictors from raster files
+- Compute crop suitability using environmental inputs
+- Export suitability maps to GeoTIFF
+- Batch process multiple crops
+- Summarize and visualize suitability outputs
+
+## Installation
+
+```bash
+pip install .
+```
+
+## Usage
+
+```python
+from ecocrop import EcocropModel
+import pandas as pd
+
+df = pd.read_excel("Ecocrop_updated_1312023.xlsx")
+model = EcocropModel()
+
+# Load raster predictors
+model.load_raster_predictor("temperature", "path/to/ta.tif")
+model.load_raster_predictor("precipitation", "path/to/pr.tif")
+
+# Load crop parameters and run model
+model.load_parameters_from_dataframe(df, "maize")
+suitability = model.run()
+model.plot_suitability(suitability)
+
+# Export results
+model.export_suitability(suitability, "outputs/suitability_maize.tif")
+```
+
+## License
+
+MIT License
