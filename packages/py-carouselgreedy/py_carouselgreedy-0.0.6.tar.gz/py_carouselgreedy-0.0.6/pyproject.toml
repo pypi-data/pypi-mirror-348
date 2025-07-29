@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py_carouselgreedy"
+version = "0.0.6"
+description = "A Python library implementing the Carousel Greedy Algorithm."
+authors = [{name = "Carmine Cerrone", email = "carmine.cerrone@unige.it"},
+		   {name = "Raffaele Dragone", email = "raffaele.dragone@edu.unige.it"}]
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+requires-python = ">=3.7"
+
+[project.urls]
+"Homepage" = "https://pypi.org/project/py_carouselgreedy/"
+"Repository" = "https://github.com/CarmineCerrone/py_carouselgreedy"
