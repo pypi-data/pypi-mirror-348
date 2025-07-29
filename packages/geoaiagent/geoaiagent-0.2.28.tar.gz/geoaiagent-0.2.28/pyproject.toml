@@ -1,0 +1,20 @@
+[project]
+name = "geoaiagent"
+version = "0.2.28"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]",
+    "pandas",
+    "openpyxl",
+    "pathlib",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+geoaiagent = "geoaiagent.__main__:thisismain"
+
