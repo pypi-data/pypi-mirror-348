@@ -1,0 +1,68 @@
+Metadata-Version: 2.4
+Name: geometry-calculator
+Version: 0.1.0
+Summary: Advanced geometry calculations library
+Author-email: Your Name <your@email.com>
+Project-URL: Homepage, https://github.com/TemplarD/geometry-calculator
+Project-URL: Documentation, https://github.com/TemplarD/geometry-calculator#readme
+Project-URL: Repository, https://github.com/TemplarD/geometry-calculator
+Project-URL: Changelog, https://github.com/TemplarD/geometry-calculator/releases
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Typing :: Typed
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: mypy>=0.910; extra == "dev"
+Requires-Dist: flake8>=3.9; extra == "dev"
+Requires-Dist: pdoc3>=0.10; extra == "dev"
+Dynamic: license-file
+
+# Geometry Calculator
+
+A Python library for calculating areas of geometric shapes with additional features.
+
+## Features
+
+- Calculate area of circle by radius
+- Calculate area of triangle by three sides
+- Check if triangle is right-angled
+- Easy to extend with new shapes
+- Polymorphic area calculation
+
+## Installation
+
+```bash
+pip install geometry-calculator
+```
+
+## Usage
+
+```python
+from geometry_calculator import Circle, Triangle, calculate_area, is_right_angled
+
+# Circle example
+circle = Circle(5)
+print(calculate_area(circle))  # 78.53981633974483
+
+# Triangle example
+triangle = Triangle(3, 4, 5)
+print(calculate_area(triangle))  # 6.0
+print(is_right_angled(triangle))  # True
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
