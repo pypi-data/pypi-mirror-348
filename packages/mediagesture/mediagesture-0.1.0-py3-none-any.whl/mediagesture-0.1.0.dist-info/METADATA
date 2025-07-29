@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: mediagesture
+Version: 0.1.0
+Summary: Control media players with hand gestures using OpenCV and Mediapipe
+Home-page: https://github.com/akshumgarg/mediacontroller
+Author: Akshum
+Author-email: akshum20@gmail.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: opencv-python
+Requires-Dist: mediapipe
+Requires-Dist: pyautogui
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Media Gesture Controller
+
+Control your media player using hand gestures via webcam using OpenCV and Mediapipe.
+
+## Installation
+
+```bash
+pip install mediagesture
