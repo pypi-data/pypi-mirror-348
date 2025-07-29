@@ -1,0 +1,26 @@
+[project]
+name = "parlaycooker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "colorlog>=6.9.0",
+    "jupyterlab>=4.4.1",
+    "pandas>=2.2.3",
+    "pydantic>=2.11.3",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "typer>=0.15.3",
+]
+scripts = { parlaycooker = "parlaycooker.cli:app" }
+
+[build-system]
+requires = ["setuptools>=80.4.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
