@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zsniff"
+version = "0.0.1"
+description = "Passive ZeroMQ protocol analyzer and traffic sniffer"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Anthony Casagrande"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Networking :: Monitoring",
+]
+dependencies = [
+    "scapy>=2.4.5",
+    "pydantic>=2.0.0",
+    "rich>=12.0.0",
+    "demjson3>=3.0.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "ruff>=0.0.270",
+]
+
+[project.urls]
+Homepage = "https://github.com/ajcasagrande/zsniff"
+"Bug Tracker" = "https://github.com/ajcasagrande/zsniff/issues"
+
+[project.scripts]
+zsniff = "zsniff.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zsniff"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = [
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+]
