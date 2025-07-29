@@ -1,0 +1,90 @@
+# MouseTools
+
+[![PyPI version](https://badge.fury.io/py/MouseTools.svg)](https://badge.fury.io/py/MouseTools) [![Downloads](https://pepy.tech/badge/mousetools)](https://pepy.tech/project/mousetools)
+
+
+An unofficial Python wrapper for the Disney API. Data is pulled directly from Disney. This package supports Walt Disney World and Disneyland.
+
+### Installation
+You can install using pip:
+```bash
+pip install mousetools
+```
+You can also install directly from this repo in case of any changes not uploaded to Pypi.
+```bash
+pip install git+https://gitlab.com/caratozzoloxyz/public/MouseTools
+```
+
+# Usage
+
+The Disney API considers everything an entity. Attractions, resorts, restaurants, etc, are all entities. Entities belong to channels, or a group of entities.
+
+## Getting Started
+
+You'll want to create a facility channel object.
+
+```python
+from mousetools.channels.facilities import Attraction
+
+pirates = Attraction("wdw.facilities.1_0.en_us.attraction.80010177;entityType=Attraction")
+```
+
+
+All Facility Entities inherit from [FacilityChildChannel][mousetools.channels.facilities.FacilityChildChannel]. 
+
+```python
+print(pirates.name)
+# 'Pirates of the Caribbean'
+
+print(big_thunder.ancestor_theme_park_id)
+# '80007944;entityType=theme-park'
+```
+
+In order to access a facility's live data, you'll need a [FacilityStatusChildChannel][mousetools.channels.facilitystatus.FacilityStatusChildChannel]. Fortunately for you, this can be quickly done from the facility object.
+```python
+fs = a.get_facility_status_channel()
+print(fs.get_wait_time())
+# 15
+
+print(fs.get_status())
+# 'Operating'
+```
+
+Alternatively, you can create the object yourself.
+```python
+from mousetools.channels.facilitystatus import FacilityStatusChannel
+
+fsc = FacilityStatusChannel("wdw.facilitystatus.1_0.80010177;entityType=Attraction", lazy_load=False)
+print(fs.last_update)
+# 2025-05-15 22:52:52.176069-04:00
+```
+
+***NOTE: All channels are lazy loaded, meaning there is no request sent to load the data until an object's attributes are accessed. This allows objects to be created faster, and reduce requests to Disney's servers until the data is actually needed.***
+
+
+For ease of use, you can use the available [channel enums][mousetools.channels.enums] or [facility enums][mousetools.channels.facilities.enums] to get access to a destination facility's children channels.
+
+```python
+from mousetools.channels.facilities import FacilityChannel, ThemePark
+from mousetools.channel.facilities.enums import WaltDisneyWorldParkChannelIds
+from mousetools.channels.facilitystatus import FacilityStatusChannel
+from mousetools.channels.enums import WDWCouchbaseChannels, DLRCouchbaseChannels
+
+wdw = FacilityChannel(WDWCouchbaseChannels.FACILITIES)
+print(list(wdw.get_children_attractions()))
+# [Attraction(wdw.facilities.1_0.en_us.123), Attraction(wdw.facilities.1_0.en_us.456), ...]
+
+dlr = FacilityStatusChannel(DLRCouchbaseChannels.FACILITY_STATUS)
+print(dlr.get_children_channel_ids())
+# ["dlr.facilitystatus.1_0.123", "dlr.facilitystatus.1_0.456", ...]
+
+mk = ThemePark(WaltDisneyWorldParkChannelIds.MAGIC_KINGDOM, lazy_load=False)
+print(mk.description)
+# "Enter a Land Where Fantasy Reigns"
+```
+
+### License
+This project is distributed under the MIT license. For more information see [LICENSE](https://gitlab.com/caratozzoloxyz/public/MouseTools/-/blob/master/LICENSE?ref_type=heads)
+
+### Disclaimer
+This project is in no way affiliated with The Walt Disney Company and all use of Disney Services is subject to the [Disney Terms of Use](https://disneytermsofuse.com/).
