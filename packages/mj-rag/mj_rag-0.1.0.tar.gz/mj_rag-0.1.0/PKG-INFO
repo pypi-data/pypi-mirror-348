@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mj-rag
+Version: 0.1.0
+Summary: Complete and unopionated RAG algorithm for LLM
+Author-email: Matt Jeff <jefcolbi@gmail.com>
+Requires-Python: <3.14,>=3.10
+Requires-Dist: litellm>=1.68.1
+Requires-Dist: pyparsing>=3.2.3
+Provides-Extra: milvus
+Requires-Dist: pymilvus[model]; extra == 'milvus'
+Provides-Extra: tests
+Requires-Dist: pymilvus[model]; extra == 'tests'
+Requires-Dist: python-decouple; extra == 'tests'
