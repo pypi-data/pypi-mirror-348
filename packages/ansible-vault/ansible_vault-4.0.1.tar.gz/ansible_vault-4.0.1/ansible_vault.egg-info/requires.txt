@@ -1,0 +1,17 @@
+ansible-core>=2.16
+PyYAML>=5.1
+
+[dev]
+setuptools
+pytest
+pytest-cov
+coveralls
+flake8
+black
+isort
+pylint
+pylint-pytest
+
+[release]
+build
+twine
