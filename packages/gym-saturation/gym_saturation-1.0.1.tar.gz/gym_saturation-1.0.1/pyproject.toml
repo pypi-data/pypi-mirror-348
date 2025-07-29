@@ -1,0 +1,150 @@
+[tool.poetry]
+name = "gym-saturation"
+version = "1.0.1"
+description = "Gymnasium environments for saturation provers"
+authors = ["Boris Shminke <boris@shminke.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/inpefess/gym-saturation"
+readme = "README.rst"
+classifiers=[
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+	"License :: OSI Approved :: Apache Software License",
+	"Operating System :: OS Independent",
+	"Intended Audience :: Science/Research",
+	"Development Status :: 3 - Alpha",
+	"Environment :: Console",
+	"Natural Language :: English",
+	"Topic :: Scientific/Engineering :: Artificial Intelligence",
+	"Typing :: Typed"
+]
+include = ["gym_saturation/py.typed"]
+keywords = ["saturation prover", "OpenAI Gym", "Gymnasium", "automated theorem prover"]
+
+[tool.poetry.dependencies]
+python = ">= 3.10.0, < 3.14"
+pexpect = "*"
+gymnasium = "*"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+mypy = "*"
+pre-commit = "*"
+tbump = "*"
+toml = "*"
+jedi = "*"
+pyroma = "*"
+pydoclint = "*"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+coverage = "*"
+pytest = "*"
+ruff = "*"
+
+[tool.poetry.group.doc]
+optional = true
+
+[tool.poetry.group.doc.dependencies]
+types-dataclasses = "*"
+sphinx-autodoc-typehints = "*"
+furo = "*"
+sphinx-gallery = "*"
+nest-asyncio = "*"
+
+[tool.isort]
+profile = "black"
+src_paths = ["gym_saturation"]
+
+[build-system]
+requires = ["poetry-core>=1.0.1"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--doctest-modules --junit-xml test-results/gym-saturation.xml"
+testpaths = ["gym_saturation"]
+doctest_optionflags = "NORMALIZE_WHITESPACE ELLIPSIS"
+
+[tool.mypy]
+show_error_codes = true
+incremental = false
+disable_error_code = "no-redef"
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["pexpect"]
+ignore_missing_imports = true
+
+[tool.tox]
+env_list = ["py310", "py311", "py312", "py13"]
+
+[tool.tox.env_run_base]
+deps = [
+    "coverage",
+    "pytest",
+    "mypy",
+    "toml",
+    "pyroma",
+    "ruff",
+    "pydoclint"
+]
+commands = [
+    ["ruff", "format"],
+    ["ruff", "check"],
+    ["mypy", "gym_saturation"],
+    ["pydoclint", "gym_saturation"],
+    ["coverage", "run", "-m", "pytest"],
+    ["coverage", "xml", "--fail-under=100"],
+    ["pyroma", "."]
+]
+
+[tool.tbump]
+github_url = "https://github.com/inpfess/gym-saturation/"
+
+[tool.tbump.version]
+current = "1.0.1"
+regex = """
+  (?P<major>\\d+)
+  \\.
+  (?P<minor>\\d+)
+  \\.
+  (?P<patch>\\d+)
+  """
+
+[tool.tbump.git]
+message_template = "Bump to {new_version}"
+tag_template = "v{new_version}"
+
+[[tool.tbump.file]]
+src = "gym_saturation/__init__.py"
+
+[[tool.tbump.file]]
+src = "pyproject.toml"
+
+[[tool.tbump.file]]
+src = "doc/conf.py"
+
+[tool.ruff]
+exclude = ["examples", "doc/auto_examples"]
+line-length = 79
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "D", "S", "UP", "PL"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.pydoclint]
+style = "sphinx"
+arg-type-hints-in-docstring = false
+check-return-types = false
+
+[tool.ruff.lint.pylint]
+max-statements = 10
