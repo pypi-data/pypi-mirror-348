@@ -1,0 +1,31 @@
+struct ecat_p3b_upperbody_data_lcmt {
+    int16_t  stat[15];
+    int16_t  curPos1H[15];
+    int16_t  curPos1L[15];
+    int16_t  curPos2H[15];
+    int16_t  curPos2L[15];
+    int16_t  curVel[15];
+    int16_t  curCur[15];
+    int16_t  curTor[15];
+    int16_t  res1[15];
+    int16_t  res2[15];
+    int16_t  res3[15];
+    int16_t  res4[15];
+
+    float  mc_arm_curPos[15];
+    float  mc_arm_curVel[15];
+    float  mc_arm_curTor[15];
+    float  mc_arm_curCur[15];
+    float  mc_arm_curPosH[15];
+    float  mc_arm_curPosL[15];
+
+
+    float  original_arm_curPos[15];
+    float  original_arm_curVel[15];
+    float  original_arm_curTor[15];
+    float  original_arm_curCur[15];
+
+    int16_t  stat_hand[2];
+    int16_t  pos_hand[14];
+    int16_t  curtor_hand[14];
+}
