@@ -1,0 +1,21 @@
+[project]
+name = "r7kit"
+version = "0.1.0"
+description = "Task/workflow toolkit for Temporal + Redis"
+authors = [{ name = "Lugin Dmitry" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "temporalio>=1.0.0",
+    "redis>=4.6.0",
+    "pydantic>=2.0.0",
+    "orjson>=3.9.0",
+]
+
+[build-system]
+requires = ["setuptools>=67.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["r7kit", "r7kit.*"]
