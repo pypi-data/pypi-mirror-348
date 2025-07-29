@@ -1,0 +1,28 @@
+# Core dependencies
+appdirs==1.4.4
+beautifulsoup4==4.9.3
+certifi==2025.4.26
+charset-normalizer==3.4.1
+click==7.1.2
+dnspython==2.7.0
+dotenv==0.9.9
+idna==3.10
+jugaad-data==0.27
+numpy==1.26.4
+pandas>=2.2.0  # Updated to be compatible with Python 3.13
+psutil==7.0.0
+pymongo==4.12.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.0
+pytz==2025.2
+requests==2.32.3
+six==1.17.0
+soupsieve==2.7
+tzdata==2025.2
+urllib3==2.4.0
+
+# Additional dependencies identified from code
+# tvDatafeed==2.1.0  # Commented out as it's not available for Python 3.13
+packaging==24.2
+wheel==0.45.1
+ta==0.11.0  # Technical Analysis library for ADX calculation

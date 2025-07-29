@@ -1,0 +1,5 @@
+[console_scripts]
+blbr-dhan-mongodb = blbr_scripts.dhan_ohlc_to_mongodb:main
+blbr-dhan-ohlc = blbr_scripts.dhan_ohlc_to_file:main
+blbr-run-step = blbr_scripts.run_step:main
+blbr-tvdatafeed = blbr_scripts.tvdatafeed_ohlcv:main
