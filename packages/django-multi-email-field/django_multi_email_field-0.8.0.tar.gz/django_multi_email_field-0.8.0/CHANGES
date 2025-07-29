@@ -1,0 +1,95 @@
+=========
+CHANGELOG
+=========
+
+0.8.0 (2025-05-16)
+==================
+
+- Django 5 compatibility
+- Python 3.12-3.13 compatibility
+- Removed Django 3.2 compatibility
+- Removed black in favor ruff
+- Dropped Django upper bound version
+
+0.7.0 (2023-07-10)
+==================
+
+- Django 4 compatibility
+- Removed Django (1.11,2.2/3.0/3.1) compatibility
+- Moved CI/CD to Github Actions
+
+0.6.2 (2020-07-23)
+==================
+
+- Set default value to [] in MultiEmailField
+
+
+0.6.1 (2020-02-05)
+==================
+
+- Remove six dependency
+
+
+0.6.0 (2020-02-05)
+==================
+
+- Django (2.2/3.0) compatibility
+
+
+0.5.1 (2017-08-11)
+==================
+
+** New **
+
+- Czech translation (thanks @petrmifek)
+
+** Bugfixes **
+
+- Fix pypi release (thanks @costela)
+
+
+0.5 (2016-10-28)
+==================
+
+- Django 1.10 compatibility (thanks @AGASS007)
+
+** Drop support **
+
+- Django < 1.8 is no longer supported
+
+
+0.4 (2016-04-10)
+==================
+
+- Better Django (1.8/1.9) and Python (3.5) compatibility
+
+
+0.3.1 (2014-12-18)
+==================
+
+** New **
+
+- South is not required anymore
+
+
+0.3 (2014-12-05)
+==================
+
+** New **
+
+- Add support for Python 3 (thanks @Hanan-Natan)
+- Add support for Django 1.7
+
+
+0.2 (2014-04-08)
+==================
+
+** Bugfixes **
+
+- Stupid blocking bad call
+
+
+0.1 (2014-04-07)
+==================
+
+- Initial release
