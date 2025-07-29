@@ -1,0 +1,328 @@
+version = 1
+requires-python = ">=3.8"
+resolution-markers = [
+    "python_full_version >= '3.12'",
+    "python_full_version >= '3.10' and python_full_version < '3.12'",
+    "python_full_version < '3.10'",
+]
+
+[[package]]
+name = "filelock"
+version = "3.16.1"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/filelock-3.16.1-py3-none-any.whl" },
+]
+
+[[package]]
+name = "fsspec"
+version = "2024.10.0"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/fsspec-2024.10.0-py3-none-any.whl" },
+]
+
+[[package]]
+name = "jinja2"
+version = "3.1.4"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "markupsafe" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/Jinja2-3.1.4-py3-none-any.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/jinja2-3.1.4-py3-none-any.whl" },
+]
+
+[[package]]
+name = "markupsafe"
+version = "2.1.5"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+sdist = { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5.tar.gz" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_universal2.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp310-cp310-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-macosx_10_9_universal2.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-macosx_10_9_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp311-cp311-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-macosx_10_9_universal2.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-macosx_10_9_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp312-cp312-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-macosx_10_9_universal2.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-macosx_10_9_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp38-cp38-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-macosx_10_9_universal2.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-macosx_10_9_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/MarkupSafe-2.1.5-cp39-cp39-win_amd64.whl" },
+]
+
+[[package]]
+name = "mpmath"
+version = "1.3.0"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/mpmath-1.3.0-py3-none-any.whl" },
+]
+
+[[package]]
+name = "networkx"
+version = "3.2.1"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+resolution-markers = [
+    "python_full_version < '3.10'",
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/networkx-3.2.1-py3-none-any.whl" },
+]
+
+[[package]]
+name = "networkx"
+version = "3.4.2"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+resolution-markers = [
+    "python_full_version >= '3.12'",
+    "python_full_version >= '3.10' and python_full_version < '3.12'",
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/networkx-3.4.2-py3-none-any.whl" },
+]
+
+[[package]]
+name = "nvidia-cublas-cu12"
+version = "12.6.4.1"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cublas_cu12-12.6.4.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cuda-cupti-cu12"
+version = "12.6.80"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cuda_cupti_cu12-12.6.80-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cuda-nvrtc-cu12"
+version = "12.6.77"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cuda_nvrtc_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cuda-runtime-cu12"
+version = "12.6.77"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cuda_runtime_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cudnn-cu12"
+version = "9.5.1.17"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "nvidia-cublas-cu12" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cudnn_cu12-9.5.1.17-py3-none-manylinux_2_28_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cufft-cu12"
+version = "11.3.0.4"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cufile-cu12"
+version = "1.11.1.6"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cufile_cu12-1.11.1.6-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-curand-cu12"
+version = "10.3.7.77"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_curand_cu12-10.3.7.77-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cusolver-cu12"
+version = "11.7.1.2"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "nvidia-cublas-cu12" },
+    { name = "nvidia-cusparse-cu12" },
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cusparse-cu12"
+version = "12.5.4.2"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-cusparselt-cu12"
+version = "0.6.3"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_cusparselt_cu12-0.6.3-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-nccl-cu12"
+version = "2.26.5"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_nccl_cu12-2.26.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-nvjitlink-cu12"
+version = "12.6.85"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_nvjitlink_cu12-12.6.85-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl" },
+]
+
+[[package]]
+name = "nvidia-nvtx-cu12"
+version = "12.6.77"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl" },
+]
+
+[[package]]
+name = "pytorch-triton"
+version = "3.3.0+git96316ce5"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "setuptools" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp313-cp313t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/pytorch_triton-3.3.0%2Bgit96316ce5-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl" },
+]
+
+[[package]]
+name = "setuptools"
+version = "70.2.0"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/setuptools-70.2.0-py3-none-any.whl" },
+]
+
+[[package]]
+name = "sympy"
+version = "1.13.3"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "mpmath" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/sympy-1.13.3-py3-none-any.whl" },
+]
+
+[[package]]
+name = "torch"
+version = "2.8.0.dev20250515+cu126"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+dependencies = [
+    { name = "filelock" },
+    { name = "fsspec" },
+    { name = "jinja2" },
+    { name = "networkx", version = "3.2.1", source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }, marker = "python_full_version < '3.10'" },
+    { name = "networkx", version = "3.4.2", source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }, marker = "python_full_version >= '3.10'" },
+    { name = "nvidia-cublas-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cuda-cupti-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cuda-nvrtc-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cuda-runtime-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cudnn-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cufft-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cufile-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-curand-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cusolver-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cusparse-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-cusparselt-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-nccl-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-nvjitlink-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvidia-nvtx-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "pytorch-triton", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "setuptools", marker = "python_full_version >= '3.12'" },
+    { name = "sympy" },
+    { name = "typing-extensions" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp310-cp310-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp310-cp310-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp311-cp311-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp311-cp311-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp312-cp312-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp312-cp312-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp313-cp313-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp313-cp313-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp313-cp313t-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp313-cp313t-win_amd64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp39-cp39-manylinux_2_28_x86_64.whl" },
+    { url = "https://download.pytorch.org/whl/nightly/cu126/torch-2.8.0.dev20250515%2Bcu126-cp39-cp39-win_amd64.whl" },
+]
+
+[[package]]
+name = "torch-bench-gpu"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "torch" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "torch", specifier = ">=2.8.0.dev20250515" }]
+
+[[package]]
+name = "typing-extensions"
+version = "4.12.2"
+source = { registry = "https://download.pytorch.org/whl/nightly/cu126" }
+wheels = [
+    { url = "https://download.pytorch.org/whl/nightly/typing_extensions-4.12.2-py3-none-any.whl" },
+]
