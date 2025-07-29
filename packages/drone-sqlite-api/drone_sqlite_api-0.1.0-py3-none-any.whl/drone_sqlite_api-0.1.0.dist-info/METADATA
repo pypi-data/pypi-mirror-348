@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: drone-sqlite-api
+Version: 0.1.0
+Summary: A SQLite API for drone data management
+Author: Drone API Team
+License-Expression: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# Drone SQLite API
+
+A Python package for managing drone data using SQLite database.
+
+## Installation
+
+```bash
+pip install drone-sqlite-api
+```
+
+## Usage
+
+```python
+from drone_sqlite_api import DroneAPI
+
+# Initialize the API
+api = DroneAPI()
+
+# Use the API methods
+# (Add specific usage examples based on your implementation)
+```
+
+## License
+
+This project is licensed under the MIT License.
