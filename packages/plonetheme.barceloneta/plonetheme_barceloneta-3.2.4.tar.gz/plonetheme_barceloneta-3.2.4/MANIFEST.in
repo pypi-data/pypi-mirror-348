@@ -1,0 +1,14 @@
+recursive-include plonetheme *
+include *.rst *.js *.json *.html *.md
+global-exclude *.pyc
+prune design
+include pyproject.toml
+recursive-exclude news *
+exclude news
+# npm/yarn world excludes
+prune scss
+exclude yarn.lock
+exclude package.json
+exclude postcss.config.js
+exclude .stylelint*
+exclude pnpm-lock.yaml

@@ -1,0 +1,35 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="plone"
+    >
+
+  <include package="plone.resource" />
+  <include package="plone.app.theming" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Barceloneta Theme"
+      description="Barceloneta is a modern, minimalist theme for Plone 5."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <!-- upgrade step -->
+  <genericsetup:upgradeDepends
+      title="Upgrade registry"
+      profile="plonetheme.barceloneta:default"
+      source="1"
+      destination="2"
+      import_steps="plone.app.registry"
+      />
+
+  <!-- Diazo themes -->
+  <plone:static
+      directory="theme"
+      name="barceloneta"
+      type="theme"
+      />
+
+</configure>
