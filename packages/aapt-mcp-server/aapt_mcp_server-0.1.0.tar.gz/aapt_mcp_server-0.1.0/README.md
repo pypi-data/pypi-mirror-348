@@ -1,0 +1,84 @@
+# AAPT-MCP
+
+A tool for analyzing Android APK files using the Android Asset Packaging Tool (AAPT) with MCP integration.
+
+## Description
+
+AAPT-MCP is a tool that leverages the Android Asset Packaging Tool (AAPT) to analyze APK files and provide detailed insights about their contents, size, and structure. It uses MCP (Model Control Protocol) to process and analyze the APK data through an LLM (Large Language Model).
+
+## Features
+
+- APK content listing using AAPT
+- Detailed size analysis of APK contents
+- Categorization of files by type (resources, native libraries, dex files, etc.)
+- Identification of largest files and directories
+- Optimization recommendations
+- Potential issues detection
+
+## Prerequisites
+
+- Python 3.7+
+- Android SDK (for AAPT tool)
+- MCP server
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/aapt-mcp.git
+cd aapt-mcp
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Ensure AAPT is in your system PATH:
+   - AAPT is part of the Android SDK build tools
+   - Add the Android SDK build tools directory to your system PATH
+
+## Usage
+
+1. Run the MCP server:
+```bash
+python main.py
+```
+
+2. The tool provides two main functions:
+   - `aapt_tool`: Lists contents of an APK file
+   - `analyze_table`: Analyzes the APK contents and provides detailed insights
+
+## Output Format
+
+The analysis provides:
+- Total APK Size
+- Size Breakdown by category
+- Top 5 Largest Files
+- Optimization Recommendations
+- Potential Issues
+
+## Example
+
+```python
+from mcp.server.fastmcp import FastMCP
+
+# Initialize the tool
+aapt = FastMCP("aapt-mcp")
+
+# Analyze an APK
+result = aapt.analyze_table("path/to/your.apk")
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Android Asset Packaging Tool (AAPT)
+- MCP Framework
