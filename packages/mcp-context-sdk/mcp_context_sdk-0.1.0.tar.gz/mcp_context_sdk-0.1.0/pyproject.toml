@@ -1,0 +1,83 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "mcp-context-sdk"
+version = "0.1.0"
+description = "Model Context Protocol SDK for building context-aware AI systems"
+authors = ["Ankit Gautam <ankit.gautam@example.com>"]
+readme = "README.md"
+packages = [{include = "mcp_context_sdk"}]
+license = "MIT"
+repository = "https://github.com/ankit-gautam23/mcp-context-sdk"
+documentation = "https://ankit-gautam23.github.io/mcp-context-sdk"
+keywords = ["ai", "context", "sdk", "machine-learning", "nlp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4.0"
+pydantic = "^2.0.0"
+fastapi = {version = "^0.100.0", optional = true}
+
+[tool.poetry.extras]
+fastapi = ["fastapi"]
+all = ["fastapi"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0.0"
+black = "^23.0.0"
+isort = "^5.12.0"
+flake8 = "^6.0.0"
+mypy = "^1.0.0"
+pytest-cov = "^4.0.0"
+
+[tool.poetry.scripts]
+mcp = "mcp_context_sdk.cli:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov=mcp_context_sdk --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["mcp_context_sdk"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "pass",
+    "raise ImportError",
+] 
