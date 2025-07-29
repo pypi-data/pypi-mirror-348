@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools-scm>=8.0.4", "setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "mlx/unity2junit/__version__.py"
+
+[project]
+name = "mlx.unity2junit"
+dynamic = ["version","entry-points"]
+readme = "README.rst"
+license = "Apache-2.0"
+authors = [
+    { name = "Anton Manzhelii", email = "amz@melexis.com" },
+    { name = "Crt Mori", email = "cmo@melexis.com" }
+]
+maintainers = [
+    { name = "Crt Mori", email = "cmo@melexis.com" }
+]
+description = "Python script for converting Unity test framework log file to xUnit/JUnit XML"
+requires-python = '>=3.9'
+keywords = ['xUnit', 'JUnit', 'XML', 'Unity test framework', 'testing']
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+]
+
+[project.urls]
+homepage = "https://melexis.github.io/unity2junit/"
+source = "https://github.com/melexis/unity2junit"
+issues = "https://github.com/melexis/unity2junit/issues"
+
+[project.scripts]
+unity2junit = "mlx.unity2junit.unity2junit:main"
