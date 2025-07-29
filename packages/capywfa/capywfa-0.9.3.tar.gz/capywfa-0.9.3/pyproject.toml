@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2019-2025 Siemens
+# SPDX-FileCopyrightText: 2019-2025 Siemens Healthineers
+#
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "capywfa"
+version = "0.9.3"
+description = "Clearing workflow automation for SW360"
+readme = "README.md"
+license = { text = "MIT" }
+include = ["LICENSE"]
+authors = [ { name = "Gernot Hillier", email = "gernot.hillier@siemens.com" } ]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development"
+]
+requires-python = ">=3.9.0,<4.0"
+dependencies = [
+    "packageurl-python (>0.11,<1.0)",
+    "requests (>=2.32.0,<3.0)",
+    "capycli (>=2.8.0,<3.0)",
+    "sw360 (>=1.8.0,<2.0)",
+]
+
+[project.scripts]
+capywfa = "capywfa.capywfa:main"
+verify_sources = "capywfa.verify_sources:main"
+lst_to_sbom = "capywfa.lst_to_sbom:main"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.poetry.group.dev.dependencies]
+vcrpy = "^5.1.0"
+flake8 = "^7.0.0"
+pytest = "^8.3.0"
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
