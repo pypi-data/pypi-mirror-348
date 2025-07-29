@@ -1,0 +1,22 @@
+Metadata-Version: 2.3
+Name: strangeworks-qiskit-runtime
+Version: 0.2.3
+Summary: 
+Author: Your Name
+Author-email: you@example.com
+Requires-Python: >=3.10,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: qiskit-ibm-runtime (==0.29.1)
+Requires-Dist: strangeworks (>=0.6.1,<0.7.0)
+Description-Content-Type: text/markdown
+
+![Tests](https://github.com/strangeworks/strangeworks-braket/actions/workflows/cron_test.yml/badge.svg)
+
+# strangeworks-qiskit-runtime
+
+strangeworks sdk add-on which provides access to ibm-qiskit-runtime
+
