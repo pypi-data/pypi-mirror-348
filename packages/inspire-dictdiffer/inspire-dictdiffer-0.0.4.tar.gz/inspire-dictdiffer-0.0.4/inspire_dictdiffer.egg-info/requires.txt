@@ -1,0 +1,54 @@
+
+[all]
+coverage>=4.0
+mock>=1.3.0
+pydocstyle>=1.0.0
+pytest-cache>=1.0
+pytest-cov==2.6.1
+pytest-pep8>=1.0.6
+
+[all:python_version < "3.7"]
+numpy>=1.13.0
+
+[all:python_version < "3.8"]
+numpy>=1.15.0
+
+[all:python_version < "3.9"]
+numpy>=1.18.0
+
+[all:python_version == "2.7"]
+pytest~=4.6
+
+[all:python_version >= "3"]
+pytest>=6.2.5,~=6.0
+
+[all:python_version >= "3.9"]
+numpy>=1.20.0
+
+[numpy]
+
+[numpy:python_version < "3.7"]
+numpy>=1.13.0
+
+[numpy:python_version < "3.8"]
+numpy>=1.15.0
+
+[numpy:python_version < "3.9"]
+numpy>=1.18.0
+
+[numpy:python_version >= "3.9"]
+numpy>=1.20.0
+
+[tests]
+coverage>=4.0
+mock>=1.3.0
+pydocstyle>=1.0.0
+pytest-cache>=1.0
+pytest-cov==2.6.1
+pytest-pep8>=1.0.6
+
+[tests:python_version == "2.7"]
+pytest~=4.6
+
+[tests:python_version >= "3"]
+pytest>=6.2.5,~=6.0
