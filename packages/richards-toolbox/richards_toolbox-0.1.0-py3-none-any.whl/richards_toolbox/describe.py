@@ -1,0 +1,2 @@
+def describe(obj):
+    pass
