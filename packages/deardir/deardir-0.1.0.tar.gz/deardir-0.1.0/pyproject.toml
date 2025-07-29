@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "deardir"
+version = "0.1.0"
+description = "Validate and optionally create directory structures from YAML or JSON schema files."
+authors = ["Dennis Weiß <dellen2203@googlemail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "deardir", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pyyaml = "^6.0"  
+
+[poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[tool.poetry.scripts]
+deardir = "deardir.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
