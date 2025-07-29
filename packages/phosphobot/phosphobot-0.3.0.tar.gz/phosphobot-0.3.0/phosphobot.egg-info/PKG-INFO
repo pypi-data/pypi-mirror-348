@@ -1,0 +1,137 @@
+Metadata-Version: 2.4
+Name: phosphobot
+Version: 0.3.0
+Summary: The AI-ready robotics dev kit, with built-in remote control and VLA support.
+Author-email: phospho <contact@phospho.ai>
+License-Expression: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: dynamixel-sdk>=3.7.31
+Requires-Dist: fastapi[standard]>=0.115.5
+Requires-Dist: loguru>=0.7.2
+Requires-Dist: rich>=13.9.4
+Requires-Dist: matplotlib>=3.9.3
+Requires-Dist: numpy<2
+Requires-Dist: pybullet>=3.2.7
+Requires-Dist: pydantic>=2.10.2
+Requires-Dist: scipy>=1.14.1
+Requires-Dist: uvicorn>=0.32.1
+Requires-Dist: opencv-python-headless>=4.0
+Requires-Dist: requests>=2.32.0
+Requires-Dist: types-requests>=2.32.0.20241016
+Requires-Dist: json-numpy>=2.1.0
+Requires-Dist: pandas>=2.2
+Requires-Dist: tqdm>=4.67.1
+Requires-Dist: feetech-servo-sdk>=1.0.0
+Requires-Dist: typer>=0.15.1
+Requires-Dist: websockets>=14.1
+Requires-Dist: huggingface-hub>=0.28.0
+Requires-Dist: datasets>=3.2.0
+Requires-Dist: sentry-sdk[fastapi]>=2.20.0
+Requires-Dist: posthog>=3.11.0
+Requires-Dist: piper-sdk>=0.1.16
+Requires-Dist: supabase>=2.15.0
+Requires-Dist: zmq>=0.0.0
+Requires-Dist: toml>=0.10.2
+Requires-Dist: av>=14.3.0
+Requires-Dist: tyro>=0.9.20
+Requires-Dist: types-toml>=0.10.8.20240310
+Requires-Dist: pyrealsense2>=2.54; platform_system == "Linux"
+Requires-Dist: pyrealsense2>=2.54; platform_system == "Windows"
+Requires-Dist: pyrealsense2-macosx>=2.54; platform_system == "Darwin"
+Requires-Dist: fastparquet>=2024.11.0
+Requires-Dist: httpx>=0.28.1
+
+# Teleoperation server
+
+## Setup and run
+
+We instead use the [uv package manager](https://github.com/astral-sh/uv), which handles gracefully python version and dependencies. Think of uv like an alternative to pip, venv, and pyenv.
+
+1. Install uv:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+2. Pin python version
+   In the teleop folder run:
+
+```bash
+uv python pin 3.10
+```
+
+3. Run the fastapi server
+
+```bash
+cd ..
+make
+```
+
+### Run locally on port `8080` with simulation
+
+```bash
+cd ..
+make local
+```
+
+### Run using the CLI
+
+This program is a command line interface
+
+```bash
+# Display cool logo and check config
+uv run teleop info
+# Display help
+uv run teleop --help
+# Run on port 8080
+uv run teleop run --port 8080
+```
+
+### How to add dependencies?
+
+To install a new Python package, use uv:
+
+```bash
+cd teleop
+sudo uv add numpy
+```
+
+Keep the dependencies lean, use optional dependency groups: `dev` and `test`. To add to one of those groups, do this:
+
+```bash
+sudo uv add mypy --optional dev
+```
+
+### Robot logic
+
+The robot logic is in `hardware/base.py`
+
+### GUI vs headless mode
+
+In GUI mode, the FastAPI server launches `simulation/pybullet`.
+
+#### Stop
+
+If you have the error "Cannot connect to pybullet server" in GUI mode, do this
+
+```bash
+# Stop, then relaunch
+make stop
+make
+```
+
+And then relaunch.
+
+## Build binary
+
+We use [nuitka](https://github.com/Nuitka/Nuitka) to build the project into a binary.
+
+```bash
+cd ..
+make build
+```
+
+This takes about 10min on a MacBook pro. The result is a binary `main.bin`
+
+This binary only works for the same platform: eg MacOS. To compile it on Linux, you need to run a Linux machine.
