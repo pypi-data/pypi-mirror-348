@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: convert_doc_2_pdf
+Version: 0.1.0
+Summary: Convert Microsoft Word documents (.doc, .docx) to PDF format
+Author: Swati
+Author-email: your.email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: docx2pdf>=0.1.7
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+
+A Python package for converting Microsoft Word documents (.doc, .docx) to PDF format.
+
+## Features
+
+- Convert single or multiple Word documents to PDF
+- Command-line interface for easy use
+- Support for batch conversion
+- Uses LibreOffice if available (for better conversion quality)
+- Falls back to docx2pdf if LibreOffice is not available
+
+## Installation
+
+```bash
+pip install doc2pdf
+```
