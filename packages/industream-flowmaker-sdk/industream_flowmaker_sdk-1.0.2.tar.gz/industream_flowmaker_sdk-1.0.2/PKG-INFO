@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: industream-flowmaker-sdk
+Version: 1.0.2
+Summary: Industream FlowMaker SDK for Python
+Project-URL: Homepage, https://github.com/industream/industream-flowmaker
+Project-URL: Repository, https://github.com/industream/industream-flowmaker
+Project-URL: Issues, https://github.com/industream/industream-flowmaker/issues
+Author-email: Sylvain Bruyère <sylvain.bruyere@industream.com>
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Typing :: Typed
+Requires-Python: >=3.12
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: msgpack-types>=0.5.0
+Requires-Dist: msgpack>=1.1.0
+Requires-Dist: pyzmq>=26.2.0
+Requires-Dist: reactivex>=4.0.4

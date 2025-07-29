@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "industream-flowmaker-sdk"
+version = "1.0.2"
+description = "Industream FlowMaker SDK for Python"
+authors = [
+  { name = "Sylvain Bruyère", email = "sylvain.bruyere@industream.com" },
+]
+# license = { text = "Apache-2.0" }
+# readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Development Status :: 2 - Pre-Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Typing :: Typed",
+]
+dependencies = [
+  "httpx >= 0.28.1",
+  "pyzmq >= 26.2.0",
+  "msgpack >= 1.1.0",
+  "msgpack-types >= 0.5.0",
+  "reactivex >= 4.0.4"
+]
+
+[project.urls]
+Homepage = "https://github.com/industream/industream-flowmaker"
+# Documentation = ""
+Repository = "https://github.com/industream/industream-flowmaker"
+Issues = "https://github.com/industream/industream-flowmaker/issues"
+# Changelog = ""
+
+[tool.hatch.build]
+include = ["industream"]
