@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphabot-interface"
+version = "0.2.0"
+description = "Interface for the Alphabot sensors and camera"
+authors = [
+    { name = "Sadra", email = "s.s.moosavi.lar@student.tue.nl" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+
+[project.urls]
+Homepage = "https://git.phys.tue.nl/robots/2025-aies-htrbt"
+
+[tool.setuptools.packages.find]
+where = ["."]
