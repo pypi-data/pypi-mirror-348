@@ -1,0 +1,48 @@
+[project]
+name = "atropy_core"
+version = "0.0.2"
+authors = [
+  {name="Julian Mangott", email="julian.mangott@uibk.ac.at"},
+  {name="Lukas Einkemmer", email="lukas.einkemmer@uibk.ac.at"},
+  {name="Martina Prugger", email="martina.prugger@ipp.mpg.de"},
+  {name="Stefan Brunner", email="stefan.brunner@student.uibk.ac.at"}
+]
+description = "Helper scripts for `atropy` and the C++ standalone `atropy_core`"
+readme = "README.md"
+dependencies = [
+  "netCDF4",
+  "networkx",
+  "numba==0.60.0",
+  "numpy==1.26.4",
+  "matplotlib",
+  "regex",
+  "scipy",
+  "xarray==2024.9.0",
+  "xarray-datatree",
+]
+requires-python = ">=3.10"
+
+[project.urls]
+GitLab = "https://gitlab.com/atropy/atropy_core"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # pydocstyle
+    # "D",
+    # isort
+    "I",
+]

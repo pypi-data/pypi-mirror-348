@@ -1,0 +1,56 @@
+[project]
+name = "atropy"
+version = "0.0.3"
+authors = [
+  {name="Julian Mangott", email="julian.mangott@uibk.ac.at"},
+  {name="Lukas Einkemmer", email="lukas.einkemmer@uibk.ac.at"},
+  {name="Martina Prugger", email="martina.prugger@ipp.mpg.de"},
+  {name="Stefan Brunner", email="stefan.brunner@student.uibk.ac.at"}
+]
+description = "Dynamical low-rank solver for stochastic reaction networks"
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+dependencies = [
+  "sympy",
+  "atropy_core",
+]
+requires-python = ">=3.10"
+classifiers = []
+
+[project.urls]
+Homepage = "https://atropy.gitlab.io/"
+GitLab = "https://gitlab.com/atropy/atropy"
+
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+wheel.packages = ["atropy"]
+cmake.args = ['-G Unix Makefiles']
+cmake.build-type = "Release"
+cmake.source-dir = "./atropy/core"
+
+[tool.scikit-build.cmake.define]
+# TODO: Define whether OpenMP and MKL should be enabled by default
+OPENMP="OFF"
+MKL_ENABLED="OFF"
+PYBIND11_ENABLED="ON"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # pydocstyle
+    # "D",
+    # isort
+    "I",
+]

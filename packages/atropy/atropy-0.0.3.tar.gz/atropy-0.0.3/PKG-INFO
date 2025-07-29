@@ -1,0 +1,71 @@
+Metadata-Version: 2.2
+Name: atropy
+Version: 0.0.3
+Summary: Dynamical low-rank solver for stochastic reaction networks
+Author-Email: Julian Mangott <julian.mangott@uibk.ac.at>, Lukas Einkemmer <lukas.einkemmer@uibk.ac.at>, Martina Prugger <martina.prugger@ipp.mpg.de>, Stefan Brunner <stefan.brunner@student.uibk.ac.at>
+License: MIT License
+         Copyright (c) 2024 Julian Mangott, Lukas Einkemmer, Martina Prugger, Stefan Brunner
+         Permission is hereby granted, free of charge, to any person obtaining a copy
+         of this software and associated documentation files (the "Software"), to deal
+         in the Software without restriction, including without limitation the rights
+         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+         copies of the Software, and to permit persons to whom the Software is
+         furnished to do so, subject to the following conditions:
+         The above copyright notice and this permission notice shall be included in all
+         copies or substantial portions of the Software.
+         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+         SOFTWARE.
+         
+Project-URL: Homepage, https://atropy.gitlab.io/
+Project-URL: GitLab, https://gitlab.com/atropy/atropy
+Requires-Python: >=3.10
+Requires-Dist: sympy
+Requires-Dist: atropy_core
+Description-Content-Type: text/markdown
+
+# `atropy`: Dynamical Low-Rank Solver for Stochastic Reaction Networks
+
+## Objective
+`atropy` solves the chemical master equation (CME) with the dynamical low-rank approximation.
+<!-- TODO: Add a low-level description what atropy actually does. -->
+
+`atropy` allows the user to build models and run simulations. Examples of use can be found on our [project website](https://atropy.gitlab.io/).
+
+## Requirements
+- C/C++ and Fortran compilers
+- Python (>=3.10)
+
+The following compilers were successfully tested:
+- gcc-14
+- Apple Clang 16 + gfortran-14
+- Clang 20 + Flang 20
+<!-- MacOS: For OpenBLAS, the gfortran library has to be indicated 
+in the LIBRARY_PATH  -->
+<!-- TODO: Add Stefan's compiler configuration -->
+
+## Installation
+
+Download the package with `pip` or `uv` by invoking
+```shell
+pip install atropy
+```
+or
+```shell
+uv pip install atropy
+```
+
+<!-- The package is installed in `<path_to_environment>/lib/python<python_version>/site-packages` with all the dependencies, which were also downloaded from PyPI. -->
+
+<!-- ## Example problems
+
+After installation several example problems can be run. Those can be found in `<path_to_atropy>/src/examples`. One can run a problem by executing
+```shell
+python3 <path_to_atropy>/src/examples/run_lambda_phage.py
+```
+
+If successful, output files should be generated in the current working directory. -->
