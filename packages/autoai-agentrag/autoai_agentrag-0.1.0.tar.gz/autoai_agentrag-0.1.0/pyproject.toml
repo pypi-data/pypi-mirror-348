@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autoai_agentrag"
+version = "0.1.0"
+description = "AutoAI-AgentRAG: An open-source library integrating AI Agents, RAG, and ML for intelligent automation"
+readme = "README.md"
+authors = [
+    {name = "AutoAI-AgentRAG Team"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.27.0",
+    "click>=8.0.0",
+    "numpy>=1.22.0",
+    "pandas>=1.4.0",
+    "pydantic>=2.0.0",
+    "tqdm>=4.64.0",
+    "fastapi>=0.95.0",
+    "uvicorn>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.10.0",
+    "mypy>=0.991",
+    "flake8>=6.0.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
+ml = [
+    "tensorflow>=2.8.0",
+    "torch>=1.10.0",
+    "transformers>=4.25.0",
+    "langchain>=0.0.267",
+]
+all = [
+    "tensorflow>=2.8.0",
+    "torch>=1.10.0",
+    "transformers>=4.25.0",
+    "langchain>=0.0.267",
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.10.0",
+    "mypy>=0.991",
+    "flake8>=6.0.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/autoai-agentrag/autoai-agentrag"
+"Bug Tracker" = "https://github.com/autoai-agentrag/autoai-agentrag/issues"
+"Documentation" = "https://autoai-agentrag.readthedocs.io"
+
+[project.scripts]
+autoai = "autoai_agentrag.cli:main"
+
+[tool.setuptools]
+packages = ["autoai_agentrag"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true 
