@@ -1,0 +1,31 @@
+from .exceptions import (
+    PineconeConfigurationError,
+    PineconeProtocolError,
+    ListConversionException,
+    PineconeException,
+    PineconeApiAttributeError,
+    PineconeApiTypeError,
+    PineconeApiValueError,
+    PineconeApiKeyError,
+    PineconeApiException,
+    NotFoundException,
+    UnauthorizedException,
+    ForbiddenException,
+    ServiceException,
+)
+
+__all__ = [
+    "PineconeConfigurationError",
+    "PineconeProtocolError",
+    "PineconeException",
+    "PineconeApiAttributeError",
+    "PineconeApiTypeError",
+    "PineconeApiValueError",
+    "PineconeApiKeyError",
+    "PineconeApiException",
+    "NotFoundException",
+    "UnauthorizedException",
+    "ForbiddenException",
+    "ServiceException",
+    "ListConversionException",
+]
