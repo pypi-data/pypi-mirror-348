@@ -1,0 +1,82 @@
+// ======== hal_{{hal_name}}.h ========
+/**
+ * @file hal_{{hal_name}}.h
+ * @brief HAL para módulo BLE usando el stack BLE de Arduino-ESP32
+ * @version 1.0
+ */
+
+#ifndef HAL_{{hal_name.upper()}}_H
+#define HAL_{{hal_name.upper()}}_H
+
+#include <Arduino.h>
+
+/// @brief Inicializa el módulo BLE
+/// @return true si la inicialización fue exitosa
+bool hal_{{hal_name}}_init();
+
+/// @brief Envía un mensaje BLE
+/// @param message Cadena a enviar
+void hal_{{hal_name}}_send(const String& message);
+
+/// @brief Llama para actualizar el estado BLE (por ejemplo, dentro de loop)
+void hal_{{hal_name}}_update();
+
+#endif  // HAL_{{hal_name.upper()}}_H
+
+
+// ======== hal_{{hal_name}}.cpp ========
+/**
+ * @file hal_{{hal_name}}.cpp
+ * @brief Implementación del HAL BLE para ESP32 usando la librería BLE Arduino-ESP32
+ * @version 1.0
+ */
+
+#include "hal_{{hal_name}}.h"
+#include <BLEDevice.h>
+#include <BLEUtils.h>
+#include <BLEServer.h>
+
+namespace {
+BLEServer* pServer = nullptr;
+BLECharacteristic* pCharacteristic = nullptr;
+bool deviceConnected = false;
+
+class ServerCallbacks : public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) override {
+        deviceConnected = true;
+    }
+
+    void onDisconnect(BLEServer* pServer) override {
+        deviceConnected = false;
+    }
+};
+}  // namespace
+
+bool hal_{{hal_name}}_init() {
+    BLEDevice::init("ESP32-BLE-Device");
+    pServer = BLEDevice::createServer();
+    pServer->setCallbacks(new ServerCallbacks());
+
+    BLEService *pService = pServer->createService("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+    pCharacteristic = pService->createCharacteristic(
+        "6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
+        BLECharacteristic::PROPERTY_NOTIFY
+    );
+
+    pService->start();
+    pServer->getAdvertising()->start();
+
+    Serial.println("🔵 BLE iniciado y anunciando...");
+    return true;
+}
+
+void hal_{{hal_name}}_send(const String& message) {
+    if (deviceConnected && pCharacteristic) {
+        pCharacteristic->setValue(message.c_str());
+        pCharacteristic->notify();
+    }
+}
+
+void hal_{{hal_name}}_update() {
+    // Placeholder si se necesita manejar eventos BLE activamente
+}
