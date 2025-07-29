@@ -1,0 +1,85 @@
+--- data/input/sample4_modified1.txt	2025-05-08 10:18:46
++++ data/input/sample4_modified2.txt	2025-05-08 10:19:07
+@@ -2,7 +2,7 @@
+ 
+ ## Overview
+ 
+-This is a sample project documentation file that demonstrates the unified diff format patch application. The project aims to provide a robust framework for testing and applying patches.
++This is a sample project documentation file that demonstrates the unified diff format patch application. The project aims to provide a robust framework for testing and applying patches in various development environments.
+ 
+ ## Features
+ 
+@@ -11,6 +11,8 @@
+ 3. Feature C: Optimizes performance
+ 4. Feature D: Supports multiple file formats
+ 5. Feature E: Automated testing capabilities
++6. Feature F: Cross-platform compatibility
++7. Feature G: Real-time collaboration
+ 
+ ## Installation
+ 
+@@ -47,8 +49,41 @@
+ $ app --help
+ $ app --version
+ $ app --config=config.json --output=output.log
++$ app --mode=advanced --threads=4
++$ app --import=data.json --export=results.json
+ ```
+ 
++## Configuration
++
++The configuration file supports the following options:
++
++```json
++{
++  "server": {
++    "port": 3000,
++    "host": "localhost"
++  },
++  "database": {
++    "url": "mongodb://localhost:27017",
++    "name": "myapp"
++  },
++  "logging": {
++    "level": "info",
++    "file": "app.log"
++  }
++}
++```
++
++## API Reference
++
++The API provides the following endpoints:
++
++- `GET /api/v1/status` - Check server status
++- `POST /api/v1/users` - Create a new user
++- `GET /api/v1/users/:id` - Get user by ID
++- `PUT /api/v1/users/:id` - Update user
++- `DELETE /api/v1/users/:id` - Delete user
++
+ ## Contributing
+ 
+ Contributions are welcome! Please follow these guidelines:
+@@ -59,6 +94,14 @@
+ - Follow the code style guidelines
+ - Submit pull requests for review
+ 
++## Troubleshooting
++
++Common issues and their solutions:
++
++1. **Installation fails**: Make sure you have the correct Node.js version installed
++2. **Application won't start**: Check if the port is already in use
++3. **Database connection error**: Verify your database is running and accessible
++
+ ## License
+ 
+ This project is licensed under the MIT License.
+@@ -66,3 +109,7 @@
+ ## Acknowledgements
+ 
+ Special thanks to all contributors who have helped make this project possible.
++
++## Contact
++
++For questions or support, please contact us at support@example.com.

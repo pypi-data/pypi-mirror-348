@@ -1,0 +1,271 @@
+"""
+Advanced Task Management System
+A comprehensive system for managing tasks with categories, priorities, and deadlines.
+"""
+
+from datetime import datetime, timedelta
+import json
+
+# Task status constants
+STATUS_PENDING = "pending"
+STATUS_IN_PROGRESS = "in_progress"
+STATUS_COMPLETED = "completed"
+STATUS_CANCELLED = "cancelled"
+
+# Task priority constants
+PRIORITY_LOW = "low"
+PRIORITY_MEDIUM = "medium"
+PRIORITY_HIGH = "high"
+PRIORITY_URGENT = "urgent"
+
+class Task:
+    """Represents a single task in the task management system."""
+    
+    def __init__(self, title, description="", due_date=None, priority=PRIORITY_MEDIUM, status=STATUS_PENDING):
+        """Initialize a new task with the given attributes."""
+        self.id = None  # Will be set when added to TaskManager
+        self.title = title
+        self.description = description
+        self.due_date = due_date
+        self.priority = priority
+        self.status = status
+        self.tags = []
+        self.created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.updated_at = self.created_at
+        self.completed_at = None
+    
+    def add_tag(self, tag):
+        """Add a tag to the task if it doesn't already exist."""
+        if tag not in self.tags:
+            self.tags.append(tag)
+            self._update_timestamp()
+    
+    def remove_tag(self, tag):
+        """Remove a tag from the task if it exists."""
+        if tag in self.tags:
+            self.tags.remove(tag)
+            self._update_timestamp()
+    
+    def update_status(self, status):
+        """Update the status of the task."""
+        if status not in [STATUS_PENDING, STATUS_IN_PROGRESS, STATUS_COMPLETED, STATUS_CANCELLED]:
+            raise ValueError(f"Invalid status: {status}")
+        
+        old_status = self.status
+        self.status = status
+        
+        if status == STATUS_COMPLETED and old_status != STATUS_COMPLETED:
+            self.completed_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        elif status != STATUS_COMPLETED:
+            self.completed_at = None
+        
+        self._update_timestamp()
+    
+    def mark_completed(self):
+        """Mark the task as completed."""
+        self.update_status(STATUS_COMPLETED)
+    
+    def mark_pending(self):
+        """Mark the task as pending."""
+        self.update_status(STATUS_PENDING)
+    
+    def mark_in_progress(self):
+        """Mark the task as in progress."""
+        self.update_status(STATUS_IN_PROGRESS)
+    
+    def mark_cancelled(self):
+        """Mark the task as cancelled."""
+        self.update_status(STATUS_CANCELLED)
+    
+    def update_priority(self, priority):
+        """Update the priority of the task."""
+        if priority not in [PRIORITY_LOW, PRIORITY_MEDIUM, PRIORITY_HIGH, PRIORITY_URGENT]:
+            raise ValueError(f"Invalid priority: {priority}")
+        
+        self.priority = priority
+        self._update_timestamp()
+    
+    def _update_timestamp(self):
+        """Update the last modified timestamp."""
+        self.updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    def to_dict(self):
+        """Convert the task to a dictionary for serialization."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "due_date": self.due_date,
+            "priority": self.priority,
+            "status": self.status,
+            "tags": self.tags,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "completed_at": self.completed_at
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        """Create a task from a dictionary."""
+        task = cls(
+            title=data["title"],
+            description=data.get("description", ""),
+            due_date=data.get("due_date"),
+            priority=data.get("priority", PRIORITY_MEDIUM),
+            status=data.get("status", STATUS_PENDING)
+        )
+        task.id = data.get("id")
+        task.tags = data.get("tags", [])
+        task.created_at = data.get("created_at", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        task.updated_at = data.get("updated_at", task.created_at)
+        task.completed_at = data.get("completed_at")
+        return task
+    
+    def __str__(self):
+        """Return a string representation of the task."""
+        tags_str = ", ".join(self.tags) if self.tags else "None"
+        due_date_str = self.due_date if self.due_date else "None"
+        return f"Task {self.id}: {self.title} | Priority: {self.priority} | Status: {self.status} | Due: {due_date_str} | Tags: {tags_str}"
+
+class TaskManager:
+    """Manages a collection of tasks."""
+    
+    def __init__(self):
+        """Initialize a new task manager."""
+        self.tasks = []
+        self.next_id = 1
+    
+    def add_task(self, task):
+        """Add a task to the manager and assign it an ID."""
+        task.id = self.next_id
+        self.next_id += 1
+        self.tasks.append(task)
+        return task.id
+    
+    def remove_task(self, task_id):
+        """Remove a task by its ID."""
+        for i, task in enumerate(self.tasks):
+            if task.id == task_id:
+                del self.tasks[i]
+                return True
+        return False
+    
+    def get_task(self, task_id):
+        """Get a task by its ID."""
+        for task in self.tasks:
+            if task.id == task_id:
+                return task
+        return None
+    
+    def get_all_tasks(self):
+        """Get all tasks."""
+        return self.tasks
+    
+    def get_tasks_by_status(self, status):
+        """Get all tasks with the given status."""
+        return [task for task in self.tasks if task.status == status]
+    
+    def get_tasks_by_priority(self, priority):
+        """Get all tasks with the given priority."""
+        return [task for task in self.tasks if task.priority == priority]
+    
+    def get_tasks_by_tag(self, tag):
+        """Get all tasks with the given tag."""
+        return [task for task in self.tasks if tag in task.tags]
+    
+    def get_overdue_tasks(self):
+        """Get all tasks that are overdue."""
+        today = datetime.now().strftime("%Y-%m-%d")
+        return [
+            task for task in self.tasks 
+            if task.due_date and task.due_date < today and task.status != STATUS_COMPLETED
+        ]
+    
+    def get_tasks_due_soon(self, days=7):
+        """Get all tasks due within the specified number of days."""
+        today = datetime.now()
+        future_date = (today + timedelta(days=days)).strftime("%Y-%m-%d")
+        today_str = today.strftime("%Y-%m-%d")
+        return [
+            task for task in self.tasks 
+            if task.due_date and today_str <= task.due_date <= future_date and task.status != STATUS_COMPLETED
+        ]
+    
+    def save_to_file(self, filename):
+        """Save all tasks to a JSON file."""
+        with open(filename, 'w') as f:
+            json.dump([task.to_dict() for task in self.tasks], f, indent=2)
+    
+    def load_from_file(self, filename):
+        """Load tasks from a JSON file."""
+        try:
+            with open(filename, 'r') as f:
+                tasks_data = json.load(f)
+                self.tasks = [Task.from_dict(task_data) for task_data in tasks_data]
+                # Update next_id to be one more than the highest ID
+                if self.tasks:
+                    self.next_id = max(task.id for task in self.tasks) + 1
+                else:
+                    self.next_id = 1
+        except FileNotFoundError:
+            # If the file doesn't exist, just start with an empty task list
+            self.tasks = []
+            self.next_id = 1
+
+def main():
+    """Main function to demonstrate the task management system."""
+    # Create a task manager
+    manager = TaskManager()
+    
+    # Add some tasks
+    task1 = Task("Complete project", "Finish the Python project", "2023-12-31", PRIORITY_HIGH)
+    task1.add_tag("work")
+    task1.add_tag("python")
+    
+    task2 = Task("Buy groceries", "Milk, eggs, bread", "2023-11-15", PRIORITY_MEDIUM)
+    task2.add_tag("personal")
+    
+    task3 = Task("Read book", "Clean Code by Robert C. Martin", "2023-12-15", PRIORITY_LOW)
+    task3.add_tag("personal")
+    task3.add_tag("learning")
+    
+    task4 = Task("Fix bug in login system", "Users can't reset their passwords", "2023-11-10", PRIORITY_URGENT)
+    task4.add_tag("work")
+    task4.add_tag("bug")
+    
+    manager.add_task(task1)
+    manager.add_task(task2)
+    manager.add_task(task3)
+    manager.add_task(task4)
+    
+    # Update task statuses
+    task2.mark_completed()
+    task4.mark_in_progress()
+    
+    # Print all tasks
+    print("All Tasks:")
+    for task in manager.get_all_tasks():
+        print(task)
+    
+    print("\nPending Tasks:")
+    for task in manager.get_tasks_by_status(STATUS_PENDING):
+        print(task)
+    
+    print("\nIn Progress Tasks:")
+    for task in manager.get_tasks_by_status(STATUS_IN_PROGRESS):
+        print(task)
+    
+    print("\nUrgent Tasks:")
+    for task in manager.get_tasks_by_priority(PRIORITY_URGENT):
+        print(task)
+    
+    print("\nWork-related Tasks:")
+    for task in manager.get_tasks_by_tag("work"):
+        print(task)
+    
+    # Save tasks to a file
+    manager.save_to_file("tasks.json")
+    print("\nTasks saved to tasks.json")
+
+if __name__ == "__main__":
+    main()
