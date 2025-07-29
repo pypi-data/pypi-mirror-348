@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: torchstudio
+Version: 0.0.1.post0
+Summary: Neural Network Models
+Author-email: Jiau Zhang <jiauzhang@163.com>
+Project-URL: Homepage, https://github.com/jiauzhang/torchstudio
+Keywords: PyTorch,Deep Learning,Artificial Intelligence
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: torch
+Requires-Dist: nnm
+Requires-Dist: conippets>=0.1.8
+Provides-Extra: dev
+Requires-Dist: pytest==8.3.4; extra == "dev"
+
+**TorchStudio**: An integrated development environment for PyTorch, designed to streamline deep learning workflows with enhanced visualization, debugging, and experiment management tools for researchers and developers.
+
+----
+
+### Install
+```shell
+pip install torchstudio
+```
+
+### Sponsor
+<table align="center">
+    <thead>
+        <tr>
+            <th colspan="2">公众号</th>
+        </tr>
+    </thead>
+    <tbody align="center" valign="center">
+        <tr>
+            <td colspan="2"><img src="https://jiauzhang.github.io/ghstatic/images/ofa_m.png" style="height: 196px" alt="AliPay.png"></td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>AliPay</th>
+            <th>WeChatPay</th>
+        </tr>
+    </thead>
+    <tbody align="center" valign="center">
+        <tr>
+            <td><img src="https://jiauzhang.github.io/AliPay.png" style="width: 196px; height: 196px" alt="AliPay.png"></td>
+            <td><img src="https://jiauzhang.github.io/WeChatPay.png" style="width: 196px; height: 196px" alt="WeChatPay.png"></td>
+        </tr>
+    </tbody>
+</table>
