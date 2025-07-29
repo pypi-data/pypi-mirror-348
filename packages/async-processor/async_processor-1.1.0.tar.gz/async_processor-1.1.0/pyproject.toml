@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "async-processor"
+version = "1.1.0"
+description = ""
+authors = ["debajyoti-truefoundry <debajyoti@truefoundry.com>"]
+readme = "README.md"
+packages = [{include = "async_processor"}]
+
+[tool.poetry.dependencies]
+# TODO (chiragjn): Loosen these requirements for use as a library dependency. Sidecar method can choose to have exactly pinned versions
+python = ">=3.8,<3.13"
+prometheus_client = ">=0.17.1,<0.18.0"
+fastapi = ">=0.93.0,<0.116.0"
+gunicorn = ">=21.2.0,<24.0.0"
+uvicorn = ">=0.23.2,<0.32.0"
+orjson = ">=3.9.2,<3.10.0"
+starlette = ">=0.27.0,<0.42.0"
+pydantic = ">=1.10.12,<2.10.0"
+requests = ">=2.31.0,<2.33.0"
+aiohttp = ">=3.8.6,<3.11.0"
+# TODO(chiragjn): Allow 2.x because it is backward-compatible
+urllib3 = ">=1.26.18,<2.0.0"
+cryptography = ">=41.0.6,<43.1.0"
+# We use protected methods from nats-py
+# be careful while changing versions
+nats-py = { version = "2.6.0", optional = true }
+boto3 =  { version = ">=1.28.16,<1.29.0", optional = true }
+kafka-python = { version = ">=2.2.0,<2.3.0", optional = true, extras = ["crc32c", "lz4", "snappy", "zstd"] }
+aio-pika = {version = ">=9.4.0,<10.0.0", optional = true}
+
+[tool.poetry.extras]
+amqp = ["aio-pika"]
+nats = ["nats-py"]
+sqs = ["boto3"]
+kafka = ["kafka-python"]
+
+[tool.poetry.dev-dependencies]
+pre-commit = ">=3.3.3,<3.4.0"
+poetry = ">=1.5.1,<1.6.0"
+pytest = ">=7.4.0,<7.5.0"
+openai = "1.3.9"
+
+[tool.black]
+line-length = 88
+safe = true
+target_version = ["py38", "py39", "py310"]
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "Q",  # flake8-quotes
+]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = ["-sv"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
