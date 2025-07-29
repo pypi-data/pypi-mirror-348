@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csv2api"
+version = "0.1.1"
+description = "Turn any CSV into a REST API with one command."
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+  { name="Mridul Sharma", email="sharma.mridul217@gmail.com" }
+]
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pandas",
+  "typer[all]"
+]
+
+[project.scripts]
+csv2api = "csv2api.cli:app"
+
