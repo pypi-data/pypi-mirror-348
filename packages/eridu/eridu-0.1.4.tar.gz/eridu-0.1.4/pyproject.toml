@@ -1,0 +1,122 @@
+[tool.poetry]
+name = "eridu"
+version = "0.1.4"
+description = "Deep fuzzy matching people and company names for multilingual entity resolution using representation learning"
+authors = ["Russell Jurney, Graphlet AI, <rjurney@graphlet.ai>", "Russell Jurney <russell.jurney@gmail.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+repository = "https://github.com/Graphlet-AI/eridu"
+homepage = "https://github.com/Graphlet-AI/eridu"
+documentation = "https://github.com/Graphlet-AI/eridu"
+keywords = [
+    "entity resolution",
+    "fuzzy matching",
+    "representation learning",
+    "deep learning",
+    "machine learning",
+    "graph neural networks",
+    "transformers",
+    "sentence transformers",
+    "pandas",
+    "numpy",
+    "pyspark"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Database :: Database Engines/Servers",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+include = [
+    "LICENSE"
+]
+package-mode = true
+
+[tool.poetry.scripts]
+eridu = "eridu.cli.main:cli"
+
+[[tool.poetry.source]]
+name = "pytorch-nightly"
+url = "https://download.pytorch.org/whl/nightly/gpu"
+priority = "explicit"
+
+[project]
+name = "eridu"
+version = "0.1.4"
+
+[tool.poetry.urls]
+"Company" = "https://graphlet.ai"
+"Code Repository" = "https://github.com/Graphlet-AI/eridu"
+"Bug Tracker" = "https://github.com/Graphlet-AI/eridu/issues"
+"HuggingFace Hub" = "https://huggingface.co/Graphlet-AI/eridu"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ipython = "^9.0.2"
+numpy = "^2.2"
+transformers = { version = "^4.51.3", extras = ["torch"] }
+sentence-transformers = { version = "^3.4.1", extras = ["torch"] }
+pandas = "^2.2.3"
+tqdm = "^4.67.1"
+pyarrow = "^19.0.1"
+wandb = "^0.19.10"
+jupyter = "^1.1.1"
+notebook = "^7.3.3"
+seaborn = "^0.13.2"
+click = "^8.1.7"
+requests = "^2.32.3"
+pyspark = "^3.5.5"
+datasets = "^3.5.1"
+accelerate = "^1.6.0"
+
+[tool.poetry.group.dev.dependencies]
+black = { version = "^25.1.0", extras = ["jupyter"] }
+isort = "^6.0.1"
+flake8 = "^7.1.2"
+mypy = "^1.15.0"
+pytest = "^8.3.5"
+pre-commit = "^4.2.0"
+pandas-stubs = "^2.2.3.250308"
+types-tqdm = "^4.67.0.20250319"
+nbdime = "^4.0.2"
+jupyter-black = "^0.4.0"
+pyarrow-stubs = "^19.1"
+types-seaborn = "^0.13.2.20250111"
+scipy-stubs = "^1.15.2.2"
+validate-pyproject = {extras = ["all"], version = "^0.24.1"}
+huggingface-hub = {extras = ["cli"], version = "^0.31.2"}
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.py$'
+
+[tool.isort]
+profile = "black"
+src_paths = ["."]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = ["."]
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]  # Look for tests in the root directory.
