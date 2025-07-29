@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stm-huong"
+version = "1.0.34"
+description = "A Python package for Spatial-Temporal Mapping for Graph Neural Networks Predictions"
+readme = "README.md"
+requires-python = ">=3.8,<3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Amirhossein Ghaffari", email = "amirhossein.ghaffari@oulu.fi"}
+]
+keywords = ["spatial-temporal", "graph neural networks", "mapping", "torch geometric temporal", "framework"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+]
+
+dependencies = [
+    "contextily",
+    "geopandas",
+    "matplotlib",
+    "networkx",
+    "numpy",
+    "osmnx==1.9.4",
+    "pandas",
+    "pyproj",
+    "scikit_learn",
+    "scipy",
+    "Shapely",
+    "tqdm",
+    "wandb",
+]
+
+[project.optional-dependencies]
+torch-extensions = [
+    "torch_scatter",
+    "torch_sparse8",
+    "torch_cluster",
+    "torch_spline_conv",
+    "torch_geometric",
+    "torch_geometric_temporal",
+]
+
+[project.urls]
+"Repository" = "https://github.com/Ahghaffari/stm_graph"
+"Bug Tracker" = "https://github.com/Ahghaffari/stm_graph/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = {find = {where = ["src"]}}
+
+[tool.pip]
+extra-index-url = ["https://download.pytorch.org/whl/cu118"]
+
