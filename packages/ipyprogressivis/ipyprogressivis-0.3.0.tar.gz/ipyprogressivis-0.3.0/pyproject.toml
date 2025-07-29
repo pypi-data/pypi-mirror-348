@@ -1,0 +1,190 @@
+[build-system]
+requires = [
+    "hatchling>=1.18",
+    "hatch-vcs",
+    "jupyterlab>=4.0.0",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "ipyprogressivis"
+dynamic = ["version"]
+description = "A Custom Jupyter Widget Library for Progressivis"
+readme = "README.md"
+license = "BSD-2-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [
+    { name = "INRIA, Jean-Daniel Fekete, Christian Poli", email = "jean-daniel.fekete@inria.fr" },
+]
+keywords = [
+    "IPython",
+    "Jupyter",
+    "Widgets",
+]
+classifiers = [
+    "Framework :: Jupyter",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 4",
+    "Framework :: Jupyter :: JupyterLab :: Extensions",
+    "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt"
+]
+dependencies = [
+    "ipywidgets<9,>=7.6",
+    "traitlets>=4.3.0",
+    "traittypes>=0.0.6",
+    "numpy>=1.26.4",
+    "pandas>=1.0.0,<3.0.0",
+    "ipydatawidgets",
+    "jupyter-client>=8.6.0",
+    "vega>=4.0.0",
+    "sidecar>=0.7.0",
+    "lz4",
+    "pillow"
+]
+
+
+[project.optional-dependencies]
+
+progressivis = ["progressivis"]
+dev = ["jupyterlab>=4.0.0"]
+
+test = [
+    "nbval",
+    "pytest-cov",
+    "pytest>=6.0",
+]
+
+typing = [
+    "mypy>=1.0.1",
+    "numpy",
+    "ipython",
+    "jinja2",
+    "sqlalchemy-stubs",
+    "pandas-stubs",
+    "traits-stubs",
+    "traittypes",
+    "types-pillow",
+    "types-pytz",
+    "types-pyyaml",
+    "types-requests",
+    "types-urllib3",
+    "typing-extensions",
+    "typing_extensions",
+    "types-setuptools",
+    "typeguard",
+    "duckdb",
+]
+[project.urls]
+Homepage = "https://github.com/progressivis/ipyprogressivis"
+
+[tool.hatch.build]
+artifacts = [
+    "ipyprogressivis/nbextension/index.*",
+    "ipyprogressivis/labextension/*.tgz",
+    "ipyprogressivis/labextension",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "ipyprogressivis/_version.py"
+
+[tool.hatch.build.targets.wheel.shared-data]
+"ipyprogressivis/nbextension" = "share/jupyter/nbextensions/jupyter-progressivis"
+"ipyprogressivis/labextension" = "share/jupyter/labextensions/jupyter-progressivis"
+"ipyprogressivis/install.json" = "share/jupyter/labextensions/jupyter-progressivis/install.json"
+"ipyprogressivis/jupyter-progressivis.json" = "etc/jupyter/nbconfig/notebook.d/jupyter-progressivis.json"
+"jupyter-config/jupyter_server_config.d/ipyprogressivis.json" = "etc/jupyter/jupyter_server_config.d/ipyprogressivis.json"
+
+[tool.hatch.build.targets.sdist]
+
+only-include = [
+    "ipyprogressivis",
+    "ipyprogressivis.widgets",
+    "ipyprogressivis.widgets.chaining",
+
+
+]
+exclude = [
+    "js/.yarn",
+    ".gitmodules",
+    ".github",
+    ".mypy.ini",
+    ".mypy_ci.ini",
+    ".pre-commit-config.yaml",
+    ".pylintrc",
+    ".yarn",
+    "recipe",
+    "notebooks",
+    ".progressivis",
+    "tools",
+    "jupyter-config",
+    "ui-tests",
+]
+
+[tool.hatch.build.targets.wheel]
+
+only-include = [
+    "ipyprogressivis",
+    "ipyprogressivis.widgets",
+    "ipyprogressivis.widgets.chaining",
+
+
+]
+exclude = [
+    "js/.yarn",
+    ".gitmodules",
+    ".github",
+    ".mypy.ini",
+    ".mypy_ci.ini",
+    ".pre-commit-config.yaml",
+    ".pylintrc",
+    ".yarn",
+    "recipe",
+    "notebooks",
+    ".progressivis",
+    "tools",
+    "jupyter-config",
+    "ui-tests",
+]
+
+
+
+[tool.hatch.build.hooks.jupyter-builder]
+build-function = "hatch_jupyter_builder.npm_builder"
+ensured-targets = [
+    "ipyprogressivis/nbextension/index.js",
+    "ipyprogressivis/labextension/package.json",
+]
+skip-if-exists = [
+    "ipyprogressivis/nbextension/index.js",
+    "ipyprogressivis/labextension/package.json",
+]
+dependencies = [
+    "hatch-jupyter-builder>=0.8.1",
+]
+
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
+path = "./ipyprogressivis/js"
+build_cmd = "prepublish"
+npm = [
+    "yarn",
+]
+
+[tool.ruff]
+exclude = [
+    "ipyprogressivis/notebook_templates/",
+    "notebooks/"
+]
