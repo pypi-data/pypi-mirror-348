@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: pinaxai-docker
+Version: 0.0.1
+Summary: Docker resources for Pinaxai
+Author-email: Greg Fitzgerald <Greg.Fitzgerald@pinax.tech>
+Project-URL: homepage, https://pinax.tech
+Project-URL: documentation, https://docs.pinax.tech
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: docker
+Provides-Extra: dev
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
