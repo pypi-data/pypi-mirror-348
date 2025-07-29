@@ -1,0 +1,11 @@
+# Incluir todas las plantillas del CLI
+recursive-include rtos_cli/templates *
+
+# Incluir archivos de documentación si los usas en PyPI
+include README.md
+include LICENSE
+include HDaC.md
+
+# Excluir archivos no deseados
+exclude *.pyc
+exclude __pycache__/

@@ -1,0 +1,30 @@
+# PlatformIO
+.pio/
+.vscode/
+.idea/
+*.pyc
+__pycache__/
+
+# Build output
+build/
+*.elf
+*.bin
+*.hex
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Python
+*.egg-info/
+dist/
+.eggs/
+*.log
+.env
+.venv
+env/
+venv/
+
+# Temporary files
+*.swp
+*.swo

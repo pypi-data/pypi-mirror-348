@@ -1,0 +1,221 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para dispositivo I2C con sincronización FreeRTOS.
+ * @version 1.1.0
+ * @date 2025-05-10
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para inicializar, leer, escribir y gestionar el bus I2C
+ * con protección mediante un mutex para acceso seguro desde múltiples tareas.
+ */
+
+#include <Arduino.h>
+#include <Wire.h>
+#include "{{HAL_NAME}}.h"
+
+// Mutex para sincronización del bus I2C
+static SemaphoreHandle_t i2c_mutex = NULL;
+static bool i2c_initialized = false;
+
+/**
+ * @brief Inicializa el bus I2C y crea mutex para sincronización.
+ * 
+ * @return true si la inicialización fue exitosa
+ * @return false en caso de error (ej. no se pudo crear mutex)
+ */
+bool {{HAL_NAME}}_init() {
+    if (!i2c_initialized) {
+        Wire.begin({{SDA_PIN}}, {{SCL_PIN}});
+        Wire.setClock({{FREQ_HZ}});
+        i2c_mutex = xSemaphoreCreateMutex();
+        if (i2c_mutex == NULL) {
+            return false; // No se pudo crear el mutex
+        }
+        i2c_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Detiene el bus I2C y libera recursos.
+ */
+void {{HAL_NAME}}_stop() {
+    if (i2c_initialized) {
+        Wire.end();
+        i2c_initialized = false;
+    }
+}
+
+/**
+ * @brief Reinicia el bus I2C (stop + init).
+ */
+void {{HAL_NAME}}_reset() {
+    {{HAL_NAME}}_stop();
+    {{HAL_NAME}}_init();
+}
+
+/**
+ * @brief Lee datos desde un dispositivo I2C protegido por mutex.
+ * 
+ * @param device_addr Dirección I2C del dispositivo
+ * @param reg Registro desde donde leer
+ * @param buffer Puntero al buffer donde almacenar los datos
+ * @param length Cantidad de bytes a leer
+ * @return true si la lectura fue exitosa
+ * @return false si hubo error o mutex no disponible
+ */
+bool {{HAL_NAME}}_read(uint8_t device_addr, uint8_t reg, uint8_t* buffer, size_t length) {
+    if (!i2c_mutex || !buffer) return false;
+
+    if (xSemaphoreTake(i2c_mutex, pdMS_TO_TICKS(100))) {
+        Wire.beginTransmission(device_addr);
+        Wire.write(reg);
+        if (Wire.endTransmission(false) != 0) {
+            xSemaphoreGive(i2c_mutex);
+            return false;
+        }
+
+        Wire.requestFrom(device_addr, length);
+        size_t i = 0;
+        while (Wire.available() && i < length) {
+            buffer[i++] = Wire.read();
+        }
+
+        xSemaphoreGive(i2c_mutex);
+        return (i == length);
+    }
+    return false;
+}
+
+/**
+ * @brief Escribe datos en un dispositivo I2C protegido por mutex.
+ * 
+ * @param device_addr Dirección I2C del dispositivo
+ * @param reg Registro donde escribir
+ * @param data Puntero a los datos a escribir
+ * @param length Cantidad de bytes a escribir
+ * @return true si la escritura fue exitosa
+ * @return false si hubo error o mutex no disponible
+ */
+bool {{HAL_NAME}}_write(uint8_t device_addr, uint8_t reg, const uint8_t* data, size_t length) {
+    if (!i2c_mutex || !data) return false;
+
+    if (xSemaphoreTake(i2c_mutex, pdMS_TO_TICKS(100))) {
+        Wire.beginTransmission(device_addr);
+        Wire.write(reg);
+        for (size_t i = 0; i < length; ++i) {
+            Wire.write(data[i]);
+        }
+
+        bool ok = (Wire.endTransmission() == 0);
+        xSemaphoreGive(i2c_mutex);
+        return ok;
+    }
+    return false;
+}
+
+/**
+ * @brief Lee datos con reintentos en caso de fallo.
+ * 
+ * @param device_addr Dirección I2C del dispositivo
+ * @param reg Registro desde donde leer
+ * @param buffer Puntero al buffer para almacenar datos
+ * @param length Cantidad de bytes a leer
+ * @param retries Número de intentos antes de fallar
+ * @return true si se logró leer correctamente
+ * @return false si falló en todos los intentos
+ */
+bool {{HAL_NAME}}_read_retry(uint8_t device_addr, uint8_t reg, uint8_t* buffer, size_t length, uint8_t retries) {
+    for (uint8_t i = 0; i < retries; ++i) {
+        if ({{HAL_NAME}}_read(device_addr, reg, buffer, length)) {
+            return true;
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+    return false;
+}
+
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interface pública para HAL I2C con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-10
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para controlar y acceder al bus I2C de forma segura.
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include <Wire.h>
+#include "project_config.h"
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Inicializa el bus I2C y crea mutex para sincronización.
+ * 
+ * @return true si la inicialización fue exitosa
+ * @return false en caso de error (ej. no se pudo crear mutex)
+ */
+bool {{HAL_NAME}}_init();
+
+/**
+ * @brief Lee datos desde el dispositivo I2C en un registro específico.
+ * 
+ * @param device_addr Dirección del dispositivo I2C
+ * @param reg Registro a leer
+ * @param buffer Buffer para almacenar datos
+ * @param length Cantidad de bytes a leer
+ * @return true si la lectura fue exitosa
+ * @return false en caso contrario
+ */
+bool {{HAL_NAME}}_read(uint8_t device_addr, uint8_t reg, uint8_t* buffer, size_t length);
+
+/**
+ * @brief Escribe datos en un registro del dispositivo I2C.
+ * 
+ * @param device_addr Dirección del dispositivo I2C
+ * @param reg Registro donde escribir
+ * @param data Datos a escribir
+ * @param length Cantidad de bytes a escribir
+ * @return true si la escritura fue exitosa
+ * @return false en caso contrario
+ */
+bool {{HAL_NAME}}_write(uint8_t device_addr, uint8_t reg, const uint8_t* data, size_t length);
+
+/**
+ * @brief Detiene el bus I2C.
+ */
+void {{HAL_NAME}}_stop();
+
+/**
+ * @brief Reinicia el bus I2C.
+ */
+void {{HAL_NAME}}_reset();
+
+/**
+ * @brief Lee datos desde I2C con reintentos.
+ * 
+ * @param device_addr Dirección del dispositivo I2C
+ * @param reg Registro a leer
+ * @param buffer Buffer para datos
+ * @param length Cantidad de bytes
+ * @param retries Número de reintentos
+ * @return true si lectura exitosa
+ * @return false si fallan todos los intentos
+ */
+bool {{HAL_NAME}}_read_retry(uint8_t device_addr, uint8_t reg, uint8_t* buffer, size_t length, uint8_t retries);
+
+#ifdef __cplusplus
+}
+#endif
