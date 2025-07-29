@@ -1,0 +1,7 @@
+prefix=${KARABO}/extern
+includedir=${prefix}/include
+
+Name: nlohmann_json
+Description: Conan package: nlohmann_json
+Version: 3.7.3
+Cflags: -I"${includedir}"

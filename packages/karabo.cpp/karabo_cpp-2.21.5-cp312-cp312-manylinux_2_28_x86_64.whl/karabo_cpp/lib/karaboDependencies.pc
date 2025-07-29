@@ -1,0 +1,13 @@
+prefix=/tmp/tmpdsh_j8sg/wheel/platlib/karabo_cpp
+include="${prefix}/include"
+extern_include="${prefix}/extern/include"
+libdir="${prefix}/lib"
+extern_libdir="${prefix}/extern/lib"
+
+Name: karaboDependencies
+Version: 2.21.5
+Description: This file describes all karabo dependencies. It only works within the software bundle.
+URL: https://rtd.xfel.eu/docs/karabo/en/latest/
+Requires: amqpcpp pugixml boost-chrono boost-date_time boost-filesystem boost-regex boost-system boost-thread spdlog
+Libs: -L${libdir} -lkarabo -L${extern_libdir} -lpthread
+Cflags: -I${include} -I${extern_include} -Dcimg_display=0
