@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "camel-toolkits-mcp"
+version = "0.1.2"
+description = "A server that exports Camel toolkits as MCP-compatible tools"
+authors = [
+    {name = "Xiaotian Jin", email = "jin.xiaotian.kim@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "camel-ai>=0.2.58",
+    "mcp[cli]>=1.8.1",
+    "numpy>=2.2.5",
+    "pandas>=2.2.3",
+    "pillow>=11.2.1",
+    "pyowm>=3.3.0",
+    "pyyaml>=6.0.2",
+    "requests-oauthlib>=2.0.0",
+    "sqlalchemy>=2.0.40",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/MuggleJinx/Camel-toolkits-mcp"
+"Bug Tracker" = "https://github.com/MuggleJinx/Camel-toolkits-mcp/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "build>=0.10.0",
+    "twine>=4.0.2",
+]
+
+[project.scripts]
+camel-toolkits-mcp = "camel_toolkits_mcp.server:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.coverage.run]
+source = ["."]
+omit = ["tests/*", "setup.py"]
+
+[tool.setuptools]
+packages = ["camel_toolkits_mcp"]
