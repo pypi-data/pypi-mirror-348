@@ -1,0 +1,129 @@
+Metadata-Version: 2.4
+Name: optune
+Version: 0.1.1
+Summary: optune.ai python sdk
+Home-page: https://optune.ai/
+Author: optune.ai team
+Author-email: support@optune.ai
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: openai
+Requires-Dist: pydantic
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pandas; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: summary
+
+# OptuneAI SDK
+
+## Installation
+
+```bash
+pip install optune
+```
+
+## Quick Start
+
+```python
+from optuneai import OpenAI
+
+# Initialize the client
+client = OpenAI(
+    optune_url="<your-optune-service-URL>",
+    api_key="<your-openai-api-key>",
+    use_optune_inference=False,
+)
+
+# Use like regular OpenAI client with the optuneai additional field
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": "Hello!"}
+    ],
+    optune={
+        "usecase_name": "greeting",
+    }
+)
+```
+
+## Features
+
+- 🎯 Custom-tailored models optimized for your specific use cases
+- 🚀 Drop-in replacement for OpenAI's official Python client
+- 📊 Automatic request and response logging
+- 🎯 Response optimization capabilities
+- 📈 Advanced analytics integration
+
+## Core Features Explained
+
+### Model Inference Options
+
+The SDK offers two approaches to model inference, controlled by `use_optune_inference`:
+
+```python
+client = OpenAI(
+    api_key="your-key",
+    use_optune_inference=True  # Enable OptuneAI's optimized models
+)
+```
+
+- **Standard Inference** (`use_optune_inference=False`):
+  - Uses OpenAI's models directly
+  - Standard pricing and performance
+  - No optimization layer
+
+- **OptuneAI Inference** (`use_optune_inference=True`):
+  - Uses task-specific models optimized for your use cases
+  - Potential improvements in performance and cost
+  - Automatic fallback to standard OpenAI models if needed
+  - Requires prior data collection for model training
+
+
+### Best Practices
+
+1. **Start with Data Collection**: 
+   - Keep `use_optune_inference=False` initially
+   - This builds up training data for your use cases
+
+2. **Transition to Optimized Models**:
+   - Once sufficient data is collected
+   - Enable `use_optune_inference=True`
+   - Monitor performance improvements
+
+3. **Testing New Features**:
+   - Use A/B testing between standard and optimized models
+   - Compare performance metrics
+   - Gradually roll out optimization to production
+
+
+## Logging
+
+This SDK uses Python's standard logging module. To capture logs from the SDK, 
+configure logging in your application:
+
+```python
+import logging
+
+# Basic console logging
+logging.basicConfig(level=logging.INFO)
+
+# Or for more detailed logs
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+```
+
+## Support
+
+Need help? Contact our support team at support@optune.ai
