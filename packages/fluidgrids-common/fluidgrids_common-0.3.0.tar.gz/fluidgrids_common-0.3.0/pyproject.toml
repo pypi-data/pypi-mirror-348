@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fluidgrids-common"
+version = "0.3.0"
+description = "Common utilities for Fluidgrids backend nodes"
+readme = "README.md"
+authors = [
+    {name = "Fluidgrids Team", email = "info@algoshred.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "ariadne==0.26.2",
+    "nats-py==2.10.0",
+    "websockets==15.0.1",
+    "opentelemetry-api==1.33.0",
+    "opentelemetry-sdk==1.33.0",
+    "opentelemetry-exporter-otlp-proto-grpc==1.33.0",
+    "opentelemetry-exporter-otlp-proto-http==1.33.0",
+    "opentelemetry-instrumentation-fastapi==0.54b0",
+    "opentelemetry-instrumentation-httpx==0.54b0",
+    "opentelemetry-instrumentation-requests==0.54b0",
+    "opentelemetry-instrumentation-logging==0.54b0",
+    "python-dotenv==1.1.0",
+    "fastapi==0.115.12",
+    "uvicorn==0.34.2",
+    "pydantic-core==2.33.2",
+    "pydantic-settings==2.9.1",
+    "watchfiles==1.0.5",
+    "httpx==0.27.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/algoshred/fluidgrids-common"
+"Bug Tracker" = "https://github.com/algoshred/fluidgrids-common/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"] 
