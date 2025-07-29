@@ -1,0 +1,179 @@
+# utils-global
+
+Repositório com funções globais utilizadas em projetos com Python, focado em automações com Selenium.
+
+## Sobre o Projeto
+
+Esta biblioteca contém funções utilitárias para automações usando Selenium, com foco em:
+- Gerenciamento de downloads de arquivos
+- Verificação de arquivos em uso
+- Renomeação segura de arquivos
+- Tratamento de erros estruturado
+- Interação com iframes em páginas complexas
+- Envio de notificações para o Microsoft Teams
+
+## Módulos Principais
+
+- [download_utils](./automacao_utils/download_utils.md): Gerenciamento de downloads e tratamento de erros
+- [selenium_utils](./automacao_utils/selenium_utils.md): Utilitários para interação com iframes no Selenium
+- [notificacao_utils](./automacao_utils/notificacao_utils.md): Envio de notificações para o Microsoft Teams
+- [mover_arquivo_utils](./automacao_utils/mover_arquivo_utils.md): Movimentação de arquivos entre diretórios com opções avançadas
+
+Para mais detalhes sobre cada módulo, clique nos links acima para acessar a documentação específica.
+
+## Instalação
+
+### A partir do GitHub:
+
+```bash
+pip install git+https://github.com/gabrielpelizzari/utils-global.git
+```
+
+### Para uma versão específica:
+
+```bash
+# Usando uma tag específica
+pip install git+https://github.com/gabrielpelizzari/utils-global.git@v0.1.6
+
+# Usando um commit específico
+pip install git+https://github.com/gabrielpelizzari/utils-global.git@commit_hash
+
+# Usando uma branch específica
+pip install git+https://github.com/gabrielpelizzari/utils-global.git@develop
+```
+
+### Atualização:
+
+```bash
+pip install --upgrade git+https://github.com/gabrielpelizzari/utils-global.git
+```
+
+### Em modo de desenvolvimento (edição local):
+
+```bash
+# Clone o repositório
+git clone https://github.com/gabrielpelizzari/utils-global.git
+cd utils-global
+
+# Instale em modo editável
+pip install -e .
+```
+
+## Exemplos Rápidos
+
+### Processamento de Downloads
+
+```python
+from automacao_utils import processar_download
+
+# Download de um arquivo
+caminho_arquivo = processar_download(
+    sb=sb,  # instância do SeleniumBase
+    dir_download="C:/Downloads",
+    btn_download="#botao_download",
+    nome_arquivo="relatorio_mensal"
+)
+```
+
+### Verificação de Arquivos em Uso
+
+```python
+from automacao_utils import is_file_in_use, wait_for_file_access
+
+# Verificar se arquivo está em uso
+if is_file_in_use("C:/Downloads/arquivo.pdf"):
+    print("O arquivo está sendo usado por outro processo")
+
+# Aguardar liberação do arquivo
+wait_for_file_access("C:/Downloads/arquivo.pdf", max_retries=30)
+```
+
+### Movimentação de Arquivos
+
+```python
+from automacao_utils import mover_arquivo
+
+# Mover um arquivo para outro diretório
+arquivos_movidos = mover_arquivo(
+    diretorio_origem="C:/Downloads/documento.pdf",
+    diretorio_destino="C:/Documentos/Importantes"
+)
+
+# Mover todos os arquivos de um diretório (com renomeação automática se já existirem)
+arquivos_movidos = mover_arquivo(
+    diretorio_origem="C:/Downloads/Relatórios",
+    diretorio_destino="C:/Trabalho/Relatórios",
+    substituir=False
+)
+```
+
+## Dependências
+
+- seleniumbase: Para automação web
+- watchdog: Para monitoramento de arquivos
+- psutil: Para gerenciamento de processos
+- requests: Para verificação de versões
+
+## Contribuição
+
+Para contribuir com este projeto:
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
+3. Faça commit das mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Faça push para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## Autores
+
+- Gabriel Pelizzari
+- Gedean Zitkoski
+
+## Versão
+
+Versão atual: 1.8.2
+
+## Histórico de Versões
+
+### Novidades na Versão 1.8.2
+
+- Testes validando o pypi
+
+### Novidades na Versão 1.8.1
+
+- Ajustado para que a função processar_download o parâmetro de renomear: 'nome_arquivo' seja opcional
+- Pequenos ajustes na função garantir_iframe para melhorar a robustez
+
+### Novidades na Versão 1.8
+
+- Adicionado parâmetro `btn_download_js` para permitir o uso de JavaScript para clicar no botão de download
+
+### Novidades na Versão 1.7
+
+- Adicionado suporte para renomear arquivos com extensão e tratamento de erros ao renomear arquivos com pontos antes da extensão
+
+### Novidades na Versão 1.6
+
+- Adicionado módulo `mover_arquivo_utils` para movimentação de arquivos entre diretórios com opções avançadas
+- Documentação detalhada do novo módulo com exemplos de uso
+
+### Novidades na Versão 1.5
+
+- Adicionado módulo `selenium_utils` com função `garantir_iframe` para facilitar a interação com iframes
+- Adicionado módulo `notificacao_utils` para envio de mensagens ao Microsoft Teams
+- Aprimorado o gerenciamento de versão no pacote
+- Melhorias na documentação com arquivos específicos para cada módulo
+
+### Novidades na Versão 1.4
+
+- Adicionado sistema automático de verificação de novas versões
+- A biblioteca agora notifica o usuário quando há uma nova versão disponível
+- Incluída função manual para verificar atualizações
+- Adicionados tratamentos try/except em mais pontos para melhorar a robustez
+
+### Novidades na Versão 1.3
+
+- Melhorado tratamento de erros com suporte para múltiplos seletores
+- Adicionado atributo `elemento_visivel` na classe `DownloadErroException` para identificar qual seletor específico foi encontrado
+- Simplificada a API para permitir uso de string única ou lista de seletores
+- Adicionados tratamentos try/except para captura do texto de elementos de erro
+- Atualizada a documentação e exemplos de uso
