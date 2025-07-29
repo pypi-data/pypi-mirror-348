@@ -1,0 +1,8 @@
+.env
+.env.bak
+.venv/
+__pycache__
+
+# Database backups
+db_backups/*
+!db_backups/schema.sql
