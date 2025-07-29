@@ -1,0 +1,369 @@
+Metadata-Version: 2.4
+Name: fast_inverted_index
+Version: 0.4.7b0
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Typing :: Typed
+License-File: LICENSE
+Summary: High-performance inverted index for search engines
+Author: Lakshmi Narasimman, Gideon Philip
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Source Code, https://github.com/gideonphilip/fast-inverted-index
+
+# Fast Inverted Index
+
+Inverted index system implemented in Rust with Python bindings.
+
+## Overview
+
+This library provides a high-performance, low-latency inverted index implementation for search engines. It is designed to be scalable, extensible, and robust, with a focus on efficient memory usage and query performance.
+
+Key features include:
+
+- Compact Radix Trie dictionary implementation for efficient term-to-postings mapping
+- LRU caching for frequently accessed terms
+- Block-level skip pointers for faster posting list intersections
+- Varint encoding for efficient storage of integers
+- RocksDB-based persistent storage
+- Full Python bindings via PyO3
+- Advanced Query Engine DSL with diverse query types (term, phrase, prefix, fuzzy, range)
+- Multiple ranking algorithms (TF-IDF, BM25, BM25L, Learning-to-Rank)
+- Multi-field indexing with schema definition system
+- Per-field analyzers for customized text processing
+- Field-specific searching with boosting
+- Schema serialization and persistence
+- Term suggestions and autocompletion
+- Score explanations for debugging relevance
+- Comprehensive benchmarks and tests
+- Observability metrics with Prometheus integration
+
+## Architecture
+
+The system consists of the following core components:
+
+1. **Dictionary**: Hybrid dictionary with tiered storage for efficient term lookup
+2. **Cache**: LRU cache for frequently accessed terms and results
+3. **Schema**: Field definition system with customizable field types and analyzers
+4. **Postings**: Compressed posting lists with skip pointers for efficient intersections
+5. **Compression**: Varint encoding for efficient integer storage
+6. **Storage**: RocksDB-based persistent storage
+7. **Query Engine**: Advanced query execution with modular query node tree
+8. **Scoring**: Multiple ranking algorithms with field boosting
+9. **Observability**: Comprehensive metrics for monitoring and debugging
+10. **Python Bindings**: Complete Python API via PyO3
+
+## Installation
+
+### Rust Crate
+
+Add the following to your `Cargo.toml`:
+
+```toml
+[dependencies]
+fast-inverted-index = "0.4.7-beta"
+```
+
+### Python Package
+
+```bash
+pip install fast-inverted-index
+```
+
+## Usage
+
+### Rust API
+
+```rust
+use std::ops::Bound;
+use std::collections::HashMap;
+use fast_inverted_index::{
+    Index, IndexBuilder, Query,
+    query::{QueryNode, QueryExecutionParams, ScoringAlgorithm, Value},
+    schema::{Schema, SchemaBuilder, FieldSchema, FieldType, AnalyzerType}
+};
+
+// Create schema with fields
+let mut schema = SchemaBuilder::new()
+    .add_field(FieldSchema::text("title").with_boost(5.0))
+    .add_field(FieldSchema::text("content").with_boost(1.0))
+    .add_field(FieldSchema::keyword("tag").with_boost(3.0))
+    .default_field("content")
+    .build();
+
+// Create and configure the index with schema
+let mut index = IndexBuilder::new()
+    .with_storage_path("/path/to/storage")
+    .with_cache_size(10_000)
+    .with_schema(schema)
+    .build()
+    .unwrap();
+
+// Add documents with fields
+let mut doc1_fields = HashMap::new();
+doc1_fields.insert("title".to_string(), "Test Document".to_string());
+doc1_fields.insert("content".to_string(), "This is a test document".to_string());
+doc1_fields.insert("tag".to_string(), "test".to_string());
+index.add_document_with_fields(1, doc1_fields).unwrap();
+
+// For backward compatibility, simple add_document still works
+index.add_document(2, "Another example document").unwrap();
+
+// Legacy query API
+let query = Query::term("test");
+let results = index.query(&query).unwrap();
+println!("Found {} documents", results.doc_ids.len());
+
+// Using the new Query Engine
+
+// Simple term query
+let term_query = QueryNode::term("content", "test");
+let results = index.execute_query(&term_query, None).unwrap();
+
+// Boolean queries
+let bool_query = QueryNode::and(vec![
+    QueryNode::term("content", "test"),
+    QueryNode::term("content", "document")
+]);
+let results = index.execute_query(&bool_query, None).unwrap();
+
+// Phrase query with slop (terms can be up to 2 positions apart)
+let phrase_query = QueryNode::phrase("content", vec!["test", "document"], 2);
+
+// Prefix query
+let prefix_query = QueryNode::prefix("title", "Te");
+
+// Fuzzy query with edit distance
+let fuzzy_query = QueryNode::fuzzy("content", "documen", 1);
+
+// Range query
+let range_query = QueryNode::range(
+    "word_count",
+    Bound::Included(Value::Integer(100)),
+    Bound::Excluded(Value::Integer(500))
+);
+
+// Field boosting
+let boosted_query = QueryNode::or(vec![
+    QueryNode::term_with_boost("title", "test", 2.0),
+    QueryNode::term_with_boost("content", "test", 1.0)
+]);
+
+// Execute query with custom parameters
+let mut field_boosts = HashMap::new();
+field_boosts.insert("title".to_string(), 1.5);
+field_boosts.insert("tags".to_string(), 1.2);
+
+let params = QueryExecutionParams {
+    scoring_algorithm: ScoringAlgorithm::BM25L,
+    explain: true,
+    limit: Some(10),
+    field_boosts,
+    ..Default::default()
+};
+
+let results = index.execute_query_with_explanation(&boosted_query, Some(params)).unwrap();
+
+// Process results with explanations
+println!("Found {} documents in {:.2}ms", results.scored_docs.len(), results.time_ms);
+for (doc_id, score) in &results.scored_docs {
+    println!("Document {}: score {:.4}", doc_id, score);
+    
+    // Show explanation if available
+    if let Some(explanations) = &results.explanations {
+        if let Some(explanation) = explanations.get(doc_id) {
+            println!("  Explanation: {}", explanation.to_string_tree());
+        }
+    }
+}
+
+// Get suggestions
+let suggestions = index.suggest_terms("te").unwrap();
+for suggestion in suggestions {
+    println!("{} (score: {})", suggestion.term, suggestion.score);
+}
+
+// Optimize the index
+index.optimize().unwrap();
+```
+
+### Python API
+
+```python
+from fast_inverted_index import (
+    Index, QueryNode, QueryExecutionParams, Value, QueryBound,
+    Schema, SchemaBuilder, FieldSchema, FieldType, AnalyzerType,
+    FieldTypes, AnalyzerTypes
+)
+
+# Create a schema with fields
+schema = Schema()
+schema.add_field(FieldSchema.text("title").with_boost(5.0))
+schema.add_field(FieldSchema.text("content").with_boost(1.0))
+schema.add_field(FieldSchema.keyword("tags").with_boost(3.0))
+schema.add_field(FieldSchema.text("author").with_boost(2.0))
+schema.set_default_field("content")
+
+# Create and configure the index with schema
+index = Index(
+    storage_path="/path/to/storage",
+    cache_size=10000,
+    cache_ttl_secs=3600,
+    store_positions=True,
+    in_memory=False,
+    schema=schema
+)
+
+# Add documents with fields
+doc1_fields = {
+    "title": "Test Document",
+    "content": "This is a test document",
+    "tags": "test example",
+    "author": "John Doe"
+}
+index.add_document_with_fields(doc_id=1, fields=doc1_fields)
+
+# For backward compatibility, add_document still works with metadata
+index.add_document(
+    doc_id=2,
+    content="Another example document",
+    metadata={
+        "title": "Example Document",
+        "author": "Jane Smith",
+        "tags": ["example"],
+        "category": "Example",
+        "language": "en",
+    }
+)
+
+# Basic query using legacy API
+results = index.term_query("test")
+for doc_id in results:
+    doc = index.get_document(doc_id)
+    print(f"{doc['id']}: {doc['title']}")
+
+# Using the new Query Engine
+
+# Simple term query
+term_query = QueryNode.term("content", "test")
+results = index.execute_query(term_query)
+
+# Boolean queries
+bool_query = QueryNode.AND([
+    QueryNode.term("content", "test"),
+    QueryNode.term("content", "document")
+])
+results = index.execute_query(bool_query)
+
+# Phrase query with slop (terms can be up to 2 positions apart)
+phrase_query = QueryNode.phrase("content", ["test", "document"], slop=2)
+
+# Prefix query
+prefix_query = QueryNode.prefix("title", "Te")
+
+# Fuzzy query with edit distance
+fuzzy_query = QueryNode.fuzzy("content", "documen", max_distance=1)
+
+# Range query
+range_query = QueryNode.range(
+    "word_count",
+    QueryBound.included(Value.integer(100)),
+    QueryBound.excluded(Value.integer(500))
+)
+
+# Field boosting
+boosted_query = QueryNode.OR([
+    QueryNode.term("title", "test", boost=2.0),
+    QueryNode.term("content", "test", boost=1.0)
+])
+
+# Field-specific search with analyzer intelligence
+# For text fields, analyzers are applied to both documents and queries
+# This means searches for "john" will find documents with "John Doe"
+title_results = index.search_field("title", "test", ranking_method="bm25", limit=10)
+author_results = index.search_field("author", "john", ranking_method="bm25", limit=10)
+
+# Multi-token search in text fields uses exact phrase matching
+author_phrase_results = index.search_field("author", "john doe", ranking_method="bm25", limit=10)
+
+# Execute query with custom parameters
+params = QueryExecutionParams(
+    scoring_algorithm="bm25l",
+    explain=True,
+    limit=10,
+    field_boosts={"title": 1.5, "tags": 1.2}
+)
+results = index.execute_query(boosted_query, params)
+
+# Process results with explanations
+for doc_id, score in results.scored_docs:
+    doc = index.get_document(doc_id)
+    print(f"{doc['id']}: {doc['title']} (Score: {score:.4f})")
+    
+    # Show explanation if available
+    if results.explanations and doc_id in results.explanations:
+        explanation = results.explanations[doc_id]
+        print(f"  Explanation: {explanation.to_tree()}")
+
+# Get suggestions
+suggestions = index.suggest_terms("te")
+for suggestion in suggestions:
+    print(f"{suggestion['term']} (score: {suggestion['score']})")
+
+# Optimize the index
+index.optimize()
+```
+
+## Performance
+
+The system is designed for high performance, with optimizations for both indexing and querying:
+
+- Hybrid dictionary with tiered storage for optimized term lookup
+- Varint encoding minimizes storage requirements
+- Skip pointers allow for efficient posting list intersections
+- LRU caching reduces disk I/O for frequent terms
+- Parallel indexing leverages multi-core processors
+- RocksDB provides efficient persistent storage
+- Modular query engine with document-at-a-time execution
+- Multiple scoring algorithms optimized for different use cases
+
+Benchmarks are available in the `benches` directory and can be run with:
+
+```bash
+cargo bench
+```
+
+## Development
+
+### Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/gideonphilip/fast-inverted-index.git
+cd fast-inverted-index
+
+# Ubuntu:
+sudo apt install clang libclang-dev
+
+# Build the Rust library
+cargo build --release
+
+# Build the Python bindings
+maturin develop --release
+```
+
+### Running Tests
+
+```bash
+# Run the Rust tests
+cargo test
+
+# Run the Python tests
+python -m unittest discover python/tests
+```
