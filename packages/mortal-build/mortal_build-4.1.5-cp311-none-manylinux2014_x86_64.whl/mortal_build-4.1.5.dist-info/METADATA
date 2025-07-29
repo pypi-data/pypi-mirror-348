@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: mortal_build
+Version: 4.1.5
+Summary: mortal工具集::build
+Home-page: https://www.example.com
+Author: Mortal
+Author-email: mortal9098@163.com
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: Cython
+Requires-Dist: fastapi
+Requires-Dist: requests
+Requires-Dist: setuptools
+Requires-Dist: PyJWT
+Requires-Dist: build
+Requires-Dist: twine
+Requires-Dist: jinja2
+Requires-Dist: aiohttp
+Requires-Dist: pycryptodome
+Requires-Dist: click
+Requires-Dist: uvicorn
+Requires-Dist: wheel
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+mortal工具集::build
