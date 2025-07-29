@@ -1,0 +1,62 @@
+Metadata-Version: 2.4
+Name: envm
+Version: 0.1.2
+Summary: Command to manage environments variables, the idea is because everyday I have to work with .env files with different projects and environments like dev, staging and local.
+Project-URL: Homepage, https://github.com/emmanueloctavi0/envm
+Project-URL: Issues, https://github.com/emmanueloctavi0/envm/issues
+Author-email: Emmanuel Octavio <emmanueloctaviomc@gmail.com>
+License: MIT
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.11
+Requires-Dist: click>=8.2.0
+Description-Content-Type: text/markdown
+
+CLI to manage environment variables. This tool was created to simplify working with multiple .env files across different projects and environments (development, staging, and local).
+
+## Installation
+
+To install the package, simply run:
+
+```bash
+pip install envm
+```
+
+## Commands
+
+### save
+Save the current .env file to the environments database:
+```bash
+$ envm save users.dev
+```
+
+### ls
+List all your saved environment files:
+```bash
+$ envm ls
+```
+
+### use
+Create a .env file in the current directory:
+```bash
+$ envm use users.dev
+```
+
+## Enable Shell Completion
+
+Enable autocompletion for your environment variable files
+
+### zsh
+```shell
+curl https://raw.githubusercontent.com/emmanueloctavi0/envm/refs/heads/main/src/completion/envm_complete.zsh >> ~/.zshrc
+```
+
+### bash
+```shell
+curl https://raw.githubusercontent.com/emmanueloctavi0/envm/refs/heads/main/src/completion/envm_complete.bash >> ~/.bashrc
+```
