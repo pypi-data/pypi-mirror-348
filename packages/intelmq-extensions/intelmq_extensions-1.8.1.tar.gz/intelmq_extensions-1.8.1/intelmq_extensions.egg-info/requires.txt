@@ -1,0 +1,22 @@
+rt<3.0.0,>=1.0.9
+netaddr>=0.7.14
+psycopg2-binary>=2.5.5
+mergedeep
+intelmq
+slixmpp
+tabulate>=0.7.5
+psycopg2-binary
+netaddr>=0.7.14
+python-termstyle>=0.1.10
+
+[:python_version < "3.8"]
+importlib_metadata
+
+[dev]
+pytest
+tox>=4
+ruff
+isort
+flake8
+requests-mock
+freezegun
