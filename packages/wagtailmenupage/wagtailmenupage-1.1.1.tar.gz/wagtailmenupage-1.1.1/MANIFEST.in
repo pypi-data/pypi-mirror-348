@@ -1,0 +1,7 @@
+include pyproject.toml
+recursive-include wagtailmenupage/templates *.html
+recursive-include wagtailmenupage/migrations *.py
+recursive-include wagtailmenupage/templatetags *.py
+include LICENSE
+include README.md
+include changelog.md
