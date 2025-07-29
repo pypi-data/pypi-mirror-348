@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: realtime_visualtracking
+Version: 0.1.0
+Summary: Visual Tracking Platform Client
+Home-page: https://github.com/marceloviana/visualtracking-client
+Author: Marcelo Viana Almeida
+Author-email: marcelovianademaria@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENCE
+
+## How to publish this package:
+
+1. Create distribution files:
+    pip install setuptools wheel
+2. Generate the files:
+    python setup.py sdist bdist_wheel
+3. Installer the Twine para send the package:
+    pip install twine
+4. Send package to pyPip
+    twine upload dist/*
