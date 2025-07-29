@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: cndx
+Version: 0.1.0
+Summary: Minimal CLI wrapper for 'conda project run'
+Author-email: Kyle Kelley <rgbkrk@gmail.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# cndx
+
+Minimal CLI wrapper for `conda project run`. Installable via PyPI. Inspired by tools like `uvx`.
+
+## Install
+
+```bash
+pip install cndx
+```
+
+## Usage
+
+```bash
+cndx python script.py
+```
+
+This is equivalent to:
+
+```bash
+conda project run python script.py
+```
+
+All arguments after `cndx` are passed through.
