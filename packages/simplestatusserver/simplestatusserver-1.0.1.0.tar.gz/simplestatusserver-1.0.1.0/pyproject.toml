@@ -1,0 +1,61 @@
+#pyproject.toml for simplestatusserver python module
+#THX https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#entry-points
+#THX https://pypi.org/project/validate-pyproject/
+
+[project]
+    dynamic = ["readme"]
+    name = "simplestatusserver"
+    description = "A single file python module that simplifies creating and running a simple `Flask` server that reports a json formated dict. Intended to be used with simple apps that run in container style environments, allowing for a basic http server to report the status of the app."
+    authors = [{ name = "Markus Hammer", email = "107761433+MarkusHammer@users.noreply.github.com" }]
+    license = { file = "LICENSE" }
+    version = "1.0.1.0"
+    dependencies = ["flask", "typing-extensions;python_version<'3.10'"]
+    requires-python = ">=3.2"
+    classifiers = [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Typing :: Typed",
+        "Natural Language :: English",
+        "Topic :: Internet :: WWW/HTTP",
+        "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: User Interfaces",
+        "Topic :: System :: Networking :: Monitoring",
+        "Topic :: System :: Monitoring",
+        "Topic :: Utilities",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3"
+    ]
+    keywords = [
+        "http",
+        "https",
+        "server",
+        "simple",
+        "status",
+        "monitor",
+        "monitoring",
+        "quick",
+        "single file",
+        "flask",
+        "json",
+        "page"
+    ]
+    [project.optional-dependencies]
+        dev = ["setuptools>=64.0.0", "pip-tools", "validate-pyproject[all]", "build", "twine>=6", "packaging>=25"]
+        threading = ["threading"]
+    [project.urls]
+        Homepage = "https://github.com/MarkusHammer/SimpleStatusServer"
+        Github  = "https://github.com/MarkusHammer/SimpleStatusServer"
+        Issues = "https://github.com/MarkusHammer/SimpleStatusServer/issues"
+        "Pull Requests" = "https://github.com/MarkusHammer/SimpleStatusServer/pulls"
+        Git = "https://github.com/MarkusHammer/SimpleStatusServer.git"
+
+[build-system]
+    requires = ["setuptools>=64.0.0", "twine>=6", "packaging>=25"]
+    build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+    zip-safe = true
+    [tool.setuptools.dynamic]
+        readme = {file = ["README.md", "SECURITY.md", "LICENSE"], content-type = "text/markdown"}
