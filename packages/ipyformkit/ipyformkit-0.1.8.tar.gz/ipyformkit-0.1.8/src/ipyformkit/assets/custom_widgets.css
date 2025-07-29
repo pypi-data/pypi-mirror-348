@@ -1,0 +1,52 @@
+.file-autocomplete {
+    height: auto;
+    --autocomplete-focus: none;
+}
+             
+.file-autocomplete:focus-within {
+    --autocomplete-focus: block;
+}
+             
+.suggestion-box {
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px;
+    margin: 0px;
+    display: var(--autocomplete-focus);
+}
+
+.suggestion-box input {
+    color: inherit !important;
+}
+
+.suggestion-box:hover {
+    --autocomplete-focus: block;
+}
+
+.autocomplete-suggestions-hbox {
+    background-color: var(--jp-layout-color0);
+}
+                          
+.autocomplete-suggestions-hbox:hover {
+    background-color: var(--jp-layout-color1);
+}
+             
+.autocomplete-suggestions {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    background-color: transparent;
+}  
+
+.file-autocomplete-icon {
+    font-size: 10px;
+    width: 30px;
+    padding-left: 5px;
+    margin: 0;
+    background-color: transparent;
+}
