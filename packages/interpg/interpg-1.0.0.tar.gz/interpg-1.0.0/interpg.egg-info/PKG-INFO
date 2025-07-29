@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: interpg
+Version: 1.0.0
+Summary: Fast bilinear interpolation of 2D or 3D gridded data along a line
+Home-page: https://github.com/marcuskd/interpg
+Author: Marcus Donnelly
+Author-email: marcus.k.donnelly@gmail.com
+License: BSD 3-Clause
+Keywords: Interpolation,Grid
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+License-File: LICENSE.md
+Requires-Dist: numpy>=1.26
+Requires-Dist: numba>=0.60
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
