@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "sql_storage_operations_ivy"
+version = "1.0.0"
+description = "SQL Storage Middleware for SQLite and Postgres"
+authors = ["Patrick White <whitep@alumni.vcu.edu>"]
+
+[project]
+name = "sql_storage_operations_ivy"
+version = "1.0.0"
+description = "SQL Storgage Middleware for SQLite and Postgres"
+authors = [{name="Patrick White", email="whitep@alumni.vcu.edu"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pre-commit = "^4.2.0"
+structlog = "^25.2.0"
+psycopg = {extras = ["binary", "pool"], version = "^3.2.7"}
+psycopg-c = "^3.2.7"
+psycopg2-binary = "^2.9.10"
+pytest = "^8.3.5"
+
+[build-system]
+requires = ["poetry>=1.3.2"]
+build-backend = "poetry.masonry.api"
+
+[project.urls]
+Homepage = "https://github.com/operations-ivy/sql_storage_operations_ivy"
+Issues = "https://github.com/operations-ivy/sql_storage_operations_ivy/issues"

@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: sql-storage-operations-ivy
+Version: 1.0.0
+Summary: SQL Storage Middleware for SQLite and Postgres
+Author: Patrick White
+Author-email: whitep@alumni.vcu.edu
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Dist: pre-commit (>=4.2.0,<5.0.0)
+Requires-Dist: psycopg-c (>=3.2.7,<4.0.0)
+Requires-Dist: psycopg2-binary (>=2.9.10,<3.0.0)
+Requires-Dist: psycopg[binary,pool] (>=3.2.7,<4.0.0)
+Requires-Dist: pytest (>=8.3.5,<9.0.0)
+Requires-Dist: structlog (>=25.2.0,<26.0.0)
