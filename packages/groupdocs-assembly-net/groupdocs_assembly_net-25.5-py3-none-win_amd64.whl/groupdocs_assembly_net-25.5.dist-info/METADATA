@@ -1,0 +1,104 @@
+Metadata-Version: 2.1
+Name: groupdocs-assembly-net
+Version: 25.5
+Summary: GroupDocs.Assembly for Python via .NET solution for automating document creation with advanced data integration.
+Home-page: https://products.groupdocs.com/assembly
+Author: GroupDocs
+License: Other/Proprietary License
+Keywords: assembly,file,render,api,pdf,docx,xlsx,pptx,html,png,word,excel,powerpoint,visio,opendocument,photoshop
+Platform: win_amd64
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities
+Requires-Python: >=3.5,<3.14
+Description-Content-Type: text/markdown
+
+# File Metadata Python API
+
+[![banner](https://raw.githubusercontent.com/Aspose/aspose.github.io/master/img/banners/aspose_slides-for-python-net-banner.png)](https://releases.groupdocs.com/metadata/python-net/)
+
+[Product Page](https://products.groupdocs.com/metadata/python-net/) | [Docs](https://docs.groupdocs.com/metadata/python-net/) | [Demos](https://products.groupdocs.app/metadata/family) | [API Reference](https://references.groupdocs.com/metadata/) | [Blog](https://blog.groupdocs.com/category/metadata/) | [Search](https://search.groupdocs.com/) | [Free Support](https://forum.groupdocs.com/c/metadata) | [Temporary License](https://purchase.groupdocs.com/temporary-license)
+
+[GroupDocs.Metadata for Python via .NET](https://products.groupdocs.com/metadata/python-net/) is a powerful on-premise class library for read, edit, remove, retrieve, search, compare, replace and export metadata information of all popular documents & image file formats.
+
+Without having to install any 3rd party component, you can use GroupDocs.Metadata to build different types applications. For example, GroupDocs, using its own APIs, developed a [free web application](https://products.groupdocs.app/metadata/pdf) that allows people to view their metadata PDF documents online.
+
+>GroupDocs.Metadata for Python requires you to use python programming language. For Node.js, Java and .NET languages, we recommend you get [GroupDocs.Metadata for Node.js](https://products.groupdocs.com/metadata/nodejs-java/), [GroupDocs.Metadata for Java](https://products.groupdocs.com/metadata/java/) and [GroupDocs.Metadata for .NET](https://products.groupdocs.com/metadata/net/), respectively.
+
+## Metadata API Features
+
+GroupDocs.Metadata for Python via .NET provides these popular features:
+- View metadata
+- Edit metadata
+- Remove metadata
+- Export metadata 
+  - Export to XML
+  - Export to CSV
+  - Export to JSON
+  - Export to XLS
+
+
+## Supported File Formats
+
+With GroupDocs.Metadata for Python via .NET, developers and applications can view files of the following categories: 
+
+- Word: DOC, DOCX, DOCM, DOT, DOTX, DOTM, RTF, TXT
+- Excel: XLS, XLSX, XLSM, XLSB, XLTM, XLT, XLTM, XLTX, XLAM, SXC, SpreadsheetML
+- PowerPoint: PPT, PPTX, PPS, PPSX, PPSM, POT, POTM, POTX, PPTM
+- Visio: VSD, VDX, VSS, VSSX, VSX, VST, VSTX, VTX, VSDX, VDW, VSTM, VSSM, VSDM
+- Project: MPP
+- Outlook: MSG, EML, EMLX, PST, OST
+- OneNote: ONE
+- OpenDocument: ODT, ODS
+- Portable: PDF
+- Photoshop: PSD
+- AutoCAD: DWG, DXF
+- Audio: MP3, WAV
+- Video: AVI, MOV, QT, FLV, MKV
+- Metafiles: EMF, WMF
+- vCard: VCF, VCR
+- Image: JPG, JPEG, JPE, JP2, PNG, GIF, TIFF, WebP, BMP, DJVU, DJV, DICOM, CR2
+- Matroska Media Container: MKV, MKA, MK3D, WEBM
+- OpenType Fonts: OTF, OTC, TTF, TTC
+- Archive: ZIP, 7Z, RAR, TAR
+- Models: 3DS, FBX, STL, DAE
+- Others: EPUB, TORRENT, ASF
+
+## Platform Independence
+
+GroupDocs.Metadata for Python via .NET can be used to develop 32-bit and 64-bit applications for different operating systems (such as Windows, Linux and macOS) where Python 3.5 or later is installed. 
+
+## Get Started
+
+Ready to try GroupDocs.Metadata for Python via .NET?
+
+Fetch the package and install **GroupDocs.Metadata**. Run this command: `pip install groupdocs.metadata`
+
+If you already have **GroupDocs.Metadata** installed and want to get the latest version, 
+you have to run `pip install --upgrade groupdocs.metadata` instead. 
+
+Check out GroupDocs.Metadata for Python for .NET [documentation](http://docs.groupdocs.com/metadata/python-net/).  
+
+## Quickly Fetching Metadata Properties
+
+```py
+import groupdocs.metadata as gm
+import groupdocs.metadata.options as gvo
+
+# Instantiate a Metadata object and load a JPEG file
+with gm.Metadata("input.jpeg") as metadata:
+    root = metadata.GetRootPackage()
+    root.RemoveImageResourcePackage()
+    metadata.Save("output.jpeg")
+```
+
+
+[Product Page](https://products.groupdocs.com/metadata/python-net/) | [Docs](https://docs.groupdocs.com/metadata/python-net/) | [Demos](https://products.groupdocs.app/metadata/family) | [API Reference](https://references.groupdocs.com/metadata/) | [Blog](https://blog.groupdocs.com/category/metadata/) | [Search](https://search.groupdocs.com/) | [Free Support](https://forum.groupdocs.com/c/metadata) | [Temporary License](https://purchase.groupdocs.com/temporary-license)
+
