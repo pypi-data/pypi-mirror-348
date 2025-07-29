@@ -1,0 +1,124 @@
+# Paystack4Python
+
+A Python SDK for integrating with the Paystack payment gateway. This library provides a simple and consistent interface for interacting with Paystack's API, making it easy to manage customers, transactions, plans, and more from your Python applications.
+
+## Features
+
+- Customer management (create, fetch, update, list)
+- Transaction initialization, verification, and listing
+- Plan creation and management
+- Utilities for validating data
+- Custom error handling
+- Designed for easy integration with Django, Flask, or any Python project
+
+## Installation
+
+Install via pip (recommended):
+
+```bash
+pip install paystack4python
+```
+
+Or clone this repository and install locally:
+
+```bash
+git clone https://github.com/yourusername/paystack4python.git
+cd paystack4python
+pip install .
+```
+
+## Requirements
+
+- Python 3.6+
+- Requests (install via pip if not already present)
+
+## Usage
+
+### Basic Setup
+
+```python
+from paystack4python.baseapi import PaystackAPI
+
+# Initialize with your secret key
+gateway = PaystackAPI(secret_key='sk_test_xxx')
+```
+
+### Customers
+
+```python
+# Create a customer
+customer = gateway.customers.create(email='user@example.com', first_name='John', last_name='Doe')
+
+# Fetch a customer
+customer = gateway.customers.fetch(customer_id='CUS_xxxxx')
+
+# List customers
+customers = gateway.customers.list()
+```
+
+### Transactions
+
+```python
+# Initialize a transaction
+transaction = gateway.transactions.initialize(email='user@example.com', amount=5000)
+
+# Verify a transaction
+result = gateway.transactions.verify(reference='txn_ref')
+```
+
+### Plans
+
+```python
+# Create a plan
+plan = gateway.plans.create(name='Monthly Plan', amount=10000, interval='monthly')
+
+# List plans
+plans = gateway.plans.list()
+```
+
+### Utilities
+
+```python
+from paystack4python.utils import validate_amount, validate_interval
+
+validate_amount(1000)  # Returns 1000
+validate_interval('monthly')  # Returns 'monthly'
+```
+
+## Error Handling
+
+All errors are raised as subclasses of `paystack4python.errors.InvalidDataError` for easy exception handling.
+
+```python
+from paystack4python.errors import InvalidDataError
+
+try:
+    validate_amount('abc')
+except InvalidDataError as e:
+    print(f"Validation failed: {e}")
+```
+
+## Running Tests
+
+Tests are located in the `tests/` directory. To run all tests:
+
+```bash
+python -m unittest discover tests
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a pull request
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENCE) file for details.
+
+## Acknowledgements
+
+- [Paystack Documentation](https://paystack.com/docs/)
+- Inspired by the official Paystack Python SDKs and community libraries
