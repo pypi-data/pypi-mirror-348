@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: jumpstarter-all
+Version: 0.6.0
+Summary: Jumpstarter meta-package which will install all packages
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Miguel Angel Ajo <majopela@redhat.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: jumpstarter-cli-admin==0.6.0
+Requires-Dist: jumpstarter-cli-common==0.6.0
+Requires-Dist: jumpstarter-cli-driver==0.6.0
+Requires-Dist: jumpstarter-cli==0.6.0
+Requires-Dist: jumpstarter-driver-can==0.6.0
+Requires-Dist: jumpstarter-driver-composite==0.6.0
+Requires-Dist: jumpstarter-driver-corellium==0.6.0
+Requires-Dist: jumpstarter-driver-dutlink==0.6.0
+Requires-Dist: jumpstarter-driver-flashers==0.6.0
+Requires-Dist: jumpstarter-driver-http==0.6.0
+Requires-Dist: jumpstarter-driver-network==0.6.0
+Requires-Dist: jumpstarter-driver-opendal==0.6.0
+Requires-Dist: jumpstarter-driver-power==0.6.0
+Requires-Dist: jumpstarter-driver-probe-rs==0.6.0
+Requires-Dist: jumpstarter-driver-pyserial==0.6.0
+Requires-Dist: jumpstarter-driver-qemu==0.6.0
+Requires-Dist: jumpstarter-driver-raspberrypi==0.6.0
+Requires-Dist: jumpstarter-driver-sdwire==0.6.0
+Requires-Dist: jumpstarter-driver-shell==0.6.0
+Requires-Dist: jumpstarter-driver-snmp==0.6.0
+Requires-Dist: jumpstarter-driver-tftp==0.6.0
+Requires-Dist: jumpstarter-driver-uboot==0.6.0
+Requires-Dist: jumpstarter-driver-ustreamer==0.6.0
+Requires-Dist: jumpstarter-driver-yepkit==0.6.0
+Requires-Dist: jumpstarter-imagehash==0.6.0
+Requires-Dist: jumpstarter-kubernetes==0.6.0
+Requires-Dist: jumpstarter-protocol==0.6.0
+Requires-Dist: jumpstarter-testing==0.6.0
+Requires-Dist: jumpstarter==0.6.0
+Description-Content-Type: text/markdown
+
+# jumpstarter-all
+
+The Jumpstarter project is a collection of tools and services to help automate
+the testing of/on hardware devices.
+
+This is a meta-package that pulls installation of all the Python modules
+produced in the Jumpstarter project.
+
