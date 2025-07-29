@@ -1,0 +1,15 @@
+defaults:
+  - cfg
+  - model: llava-7b
+  - trainer: finetune
+  - inference: default
+  - dataset: llava-finetune
+  - override hydra/job_logging: rich
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  job_logging:
+    root:
+      level: INFO

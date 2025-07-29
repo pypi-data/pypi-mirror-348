@@ -1,0 +1,32 @@
+version: 1
+formatters:
+  simple:
+    (): vlm.utils.logging_utils.ColoredFormatter
+    format: '%(message)s'
+  detailed:
+    format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+filters:
+  rank_zero_filter:
+    (): 'vlm.utils.logging_utils.RankZeroFilter'
+handlers:
+  console:
+    class: rich.logging.RichHandler
+    formatter: simple
+    rich_tracebacks: true
+    markup: true
+    show_time: false
+    show_level: true
+    show_path: true
+    filters:
+      - rank_zero_filter
+  file:
+    class: logging.FileHandler
+    formatter: detailed
+    filename: ${hydra:job.name}.log
+    mode: w
+root:
+  level: DEBUG
+  handlers:
+    - console
+    - file
+disable_existing_loggers: false
