@@ -1,0 +1,14 @@
+import os
+from pybuild import Pybuild2
+
+
+class Package(Pybuild2):
+    NAME = "Test version module"
+    KEYWORDS = "test"
+    LICENSE = "test"
+    DESC = "Test Desc: foo-bar"
+    HOMEPAGE = "https://example.org"
+
+    def src_install(self):
+        with open(os.path.join(self.D, ".get_arch_version.py"), "w") as file:
+            print("print('1.0')", file=file)

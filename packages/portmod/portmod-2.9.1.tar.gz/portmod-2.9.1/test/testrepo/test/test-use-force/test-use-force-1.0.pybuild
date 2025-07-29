@@ -1,0 +1,20 @@
+from pybuild import Pybuild2
+import sys
+
+
+class Package(Pybuild2):
+    NAME = "Test"
+    KEYWORDS = "test"
+    LICENSE = "test"
+    DESC = "test desc"
+    HOMEPAGE = "https://test.homepage"
+    IUSE = "platform_linux platform_win32 platform_darwin"
+    RESTRICT = "fetch"
+
+    def pkg_pretend(self):
+        platforms = {"win32", "darwin", "linux"}
+        assert f"platform_{sys.platform}" in self.USE
+        assert all(
+            f"platform_{platform}" not in self.USE
+            for platform in platforms - {sys.platform}
+        )
