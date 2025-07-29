@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netaio"
+version = "0.0.8"
+authors = [
+  { name="k98kurz", email="k98kurz@gmail.com" },
+]
+description = "Simple asyncio TCP client and server and UDP node library inspired by fastapi"
+readme = "readme.md"
+requires-python = ">=3.10"
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: ISC License (ISCL)",
+  "Operating System :: OS Independent",
+  "Topic :: Internet",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = [
+  "packify >= 0.3.1",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/k98kurz/netaio"
+"Repository" = "https://github.com/k98kurz/netaio"
+"Bug Tracker" = "https://github.com/k98kurz/netaio/issues"
+
+[project.optional-dependencies]
+asymmetric = [
+  "tapescript >= 0.7.2",
+  "PyNaCl >= 1.5.0",
+]
