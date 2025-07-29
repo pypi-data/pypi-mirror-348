@@ -1,0 +1,26 @@
+[project]
+name = "empytools"
+version = "0.0.2"
+description = ""
+authors = [{ name = "Mark Pude", email = "markpude@gmail.com" }]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+dependencies = [
+    "numpy (>=2.2.4,<3.0.0)",
+    "matplotlib (>=3.10.1,<4.0.0)",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5,<9",
+    "pytest-cov>=6.1.1,<7",
+    "pylint>=3.3.6,<4",
+    "ruff>=0.11.5,<0.12",
+    "black>=25.1.0,<26",
+    "pytest-sugar>=1.0.0,<2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
