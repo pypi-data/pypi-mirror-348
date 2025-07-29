@@ -1,0 +1,80 @@
+/**
+ * @file hal_timer.h
+ * @brief HAL (Hardware Abstraction Layer) para control de temporizadores con FreeRTOS.
+ *
+ * @details
+ * Este HAL proporciona una interfaz para configurar y utilizar temporizadores de software
+ * sobre FreeRTOS, permitiendo callbacks periódicos con resolución en milisegundos.
+ *
+ * @author
+ * @date
+ */
+
+#ifndef HAL_TIMER_H
+#define HAL_TIMER_H
+
+#include <Arduino.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/timers.h>
+
+/**
+ * @brief Inicializa un temporizador de FreeRTOS.
+ * 
+ * @param timerName Nombre simbólico del temporizador.
+ * @param periodMs Periodo del temporizador en milisegundos.
+ * @param autoReload true si el temporizador debe reiniciarse automáticamente.
+ * @param callback Función de callback que se ejecuta al expirar el temporizador.
+ * @return TimerHandle_t Manejador del temporizador, o NULL si hubo error.
+ */
+TimerHandle_t hal_timer_create(const char* timerName, uint32_t periodMs, bool autoReload, TimerCallbackFunction_t callback);
+
+/**
+ * @brief Inicia un temporizador.
+ * 
+ * @param timer Manejador del temporizador.
+ * @return true si se inició correctamente, false si hubo error.
+ */
+bool hal_timer_start(TimerHandle_t timer);
+
+/**
+ * @brief Detiene un temporizador.
+ * 
+ * @param timer Manejador del temporizador.
+ * @return true si se detuvo correctamente, false si hubo error.
+ */
+bool hal_timer_stop(TimerHandle_t timer);
+
+#endif // HAL_TIMER_H
+
+/**
+ * @file hal_timer.cpp
+ * @brief Implementación del HAL de temporizador usando FreeRTOS.
+ */
+
+#include "hal_timer.h"
+
+TimerHandle_t hal_timer_create(const char* timerName, uint32_t periodMs, bool autoReload, TimerCallbackFunction_t callback) {
+    TimerHandle_t timer = xTimerCreate(timerName, pdMS_TO_TICKS(periodMs), autoReload ? pdTRUE : pdFALSE, NULL, callback);
+    if (timer == NULL) {
+        Serial.println("Error: No se pudo crear el temporizador.");
+    }
+    return timer;
+}
+
+bool hal_timer_start(TimerHandle_t timer) {
+    if (timer == NULL) return false;
+    if (xTimerStart(timer, pdMS_TO_TICKS(1000)) != pdPASS) {
+        Serial.println("Error: No se pudo iniciar el temporizador.");
+        return false;
+    }
+    return true;
+}
+
+bool hal_timer_stop(TimerHandle_t timer) {
+    if (timer == NULL) return false;
+    if (xTimerStop(timer, pdMS_TO_TICKS(1000)) != pdPASS) {
+        Serial.println("Error: No se pudo detener el temporizador.");
+        return false;
+    }
+    return true;
+}

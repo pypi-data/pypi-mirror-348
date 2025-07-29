@@ -1,0 +1,167 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para UART con FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para inicializar, enviar y recibir datos por UART
+ * con protección mediante mutex para acceso seguro desde múltiples tareas.
+ */
+
+#include <Arduino.h>
+#include "{{HAL_NAME}}.h"
+
+static SemaphoreHandle_t uart_mutex = NULL;
+static bool uart_initialized = false;
+
+/**
+ * @brief Inicializa el puerto UART con los parámetros especificados.
+ * 
+ * @param uart_num Número del puerto UART (0, 1 o 2)
+ * @param tx_pin Pin TX
+ * @param rx_pin Pin RX
+ * @param baudrate Velocidad de baudios
+ * @return true si la inicialización fue exitosa
+ * @return false en caso de error (ej. no se pudo crear mutex)
+ */
+bool {{HAL_NAME}}_init(uart_port_t uart_num, int tx_pin, int rx_pin, uint32_t baudrate) {
+    if (!uart_initialized) {
+        uart_mutex = xSemaphoreCreateMutex();
+        if (uart_mutex == NULL) {
+            return false; // No se pudo crear el mutex
+        }
+
+        Serial1.begin(baudrate, SERIAL_8N1, rx_pin, tx_pin); // Adaptar según uart_num si hay múltiples UARTs
+
+        uart_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Envía datos por UART de forma segura.
+ * 
+ * @param data Puntero a buffer con datos a enviar
+ * @param length Cantidad de bytes a enviar
+ * @return true si envío exitoso
+ * @return false si mutex no disponible o error
+ */
+bool {{HAL_NAME}}_write(const uint8_t* data, size_t length) {
+    if (!uart_mutex || data == nullptr) return false;
+
+    if (xSemaphoreTake(uart_mutex, pdMS_TO_TICKS(100))) {
+        size_t sent = Serial1.write(data, length);
+        xSemaphoreGive(uart_mutex);
+        return (sent == length);
+    }
+    return false;
+}
+
+/**
+ * @brief Lee datos desde UART de forma segura.
+ * 
+ * @param buffer Buffer donde almacenar los datos recibidos
+ * @param length Cantidad máxima de bytes a leer
+ * @param timeout_ms Tiempo máximo de espera en milisegundos
+ * @return Número de bytes leídos
+ */
+size_t {{HAL_NAME}}_read(uint8_t* buffer, size_t length, uint32_t timeout_ms) {
+    if (!uart_mutex || buffer == nullptr) return 0;
+
+    size_t total_read = 0;
+    TickType_t start_tick = xTaskGetTickCount();
+
+    if (xSemaphoreTake(uart_mutex, pdMS_TO_TICKS(timeout_ms))) {
+        while ((xTaskGetTickCount() - start_tick) < pdMS_TO_TICKS(timeout_ms) && total_read < length) {
+            if (Serial1.available()) {
+                buffer[total_read++] = Serial1.read();
+            } else {
+                vTaskDelay(pdMS_TO_TICKS(10)); // Espera breve para nuevos datos
+            }
+        }
+        xSemaphoreGive(uart_mutex);
+    }
+    return total_read;
+}
+
+/**
+ * @brief Detiene el UART y libera recursos.
+ */
+void {{HAL_NAME}}_stop() {
+    if (uart_initialized) {
+        Serial1.end();
+        if (uart_mutex) {
+            vSemaphoreDelete(uart_mutex);
+            uart_mutex = NULL;
+        }
+        uart_initialized = false;
+    }
+}
+
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interfaz pública para HAL UART con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para enviar y recibir datos por UART con sincronización.
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "driver/uart.h"
+
+/**
+ * @brief Inicializa el UART.
+ * 
+ * @param uart_num Número de UART (0, 1, 2)
+ * @param tx_pin Pin TX
+ * @param rx_pin Pin RX
+ * @param baudrate Velocidad de baudios
+ * @return true si se inicializó correctamente
+ * @return false si error
+ */
+bool {{HAL_NAME}}_init(uart_port_t uart_num, int tx_pin, int rx_pin, uint32_t baudrate);
+
+/**
+ * @brief Envía datos por UART.
+ * 
+ * @param data Datos a enviar
+ * @param length Cantidad de bytes
+ * @return true si éxito
+ * @return false si fallo
+ */
+bool {{HAL_NAME}}_write(const uint8_t* data, size_t length);
+
+/**
+ * @brief Lee datos desde UART.
+ * 
+ * @param buffer Buffer para datos recibidos
+ * @param length Máximo de bytes a leer
+ * @param timeout_ms Tiempo máximo de espera (ms)
+ * @return Número de bytes leídos
+ */
+size_t {{HAL_NAME}}_read(uint8_t* buffer, size_t length, uint32_t timeout_ms);
+
+/**
+ * @brief Detiene UART y libera recursos.
+ */
+void {{HAL_NAME}}_stop();
+
+#ifdef __cplusplus
+}
+#endif

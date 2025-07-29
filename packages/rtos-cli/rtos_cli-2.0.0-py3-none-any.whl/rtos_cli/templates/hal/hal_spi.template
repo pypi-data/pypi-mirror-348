@@ -1,0 +1,152 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para dispositivo SPI con sincronización FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para inicializar, transferir datos y gestionar el bus SPI
+ * con protección mediante un mutex para acceso seguro desde múltiples tareas.
+ */
+
+#include <Arduino.h>
+#include <SPI.h>
+#include "{{HAL_NAME}}.h"
+
+static SemaphoreHandle_t spi_mutex = NULL;
+static bool spi_initialized = false;
+static SPIClass* spi_instance = nullptr;
+
+/**
+ * @brief Inicializa el bus SPI con parámetros específicos y crea mutex para sincronización.
+ * 
+ * @param bus_num Número del bus SPI (ej. 1, 2)
+ * @param freq_hz Frecuencia del bus SPI
+ * @param spi_mode Modo SPI (SPI_MODE0, SPI_MODE1, SPI_MODE2, SPI_MODE3)
+ * @param bit_order Orden de bits (MSBFIRST o LSBFIRST)
+ * @return true si la inicialización fue exitosa
+ * @return false en caso de error (ej. no se pudo crear mutex)
+ */
+bool {{HAL_NAME}}_init(uint8_t bus_num, uint32_t freq_hz, uint8_t spi_mode, uint8_t bit_order) {
+    if (!spi_initialized) {
+        // Crear instancia SPI según bus
+        if (bus_num == 1) {
+            spi_instance = &SPI;
+        } else if (bus_num == 2) {
+            spi_instance = new SPIClass(HSPI);
+        } else if (bus_num == 3) {
+            spi_instance = new SPIClass(VSPI);
+        } else {
+            return false; // bus inválido
+        }
+
+        spi_instance->begin(); // Pins por defecto, o parametrizables en futuro
+
+        spi_instance->beginTransaction(SPISettings(freq_hz, bit_order, spi_mode));
+
+        spi_mutex = xSemaphoreCreateMutex();
+        if (spi_mutex == NULL) {
+            return false;
+        }
+        spi_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Finaliza el bus SPI y libera recursos.
+ */
+void {{HAL_NAME}}_stop() {
+    if (spi_initialized) {
+        if (spi_instance) {
+            spi_instance->endTransaction();
+            spi_instance->end();
+            if (spi_instance != &SPI) {
+                delete spi_instance;
+            }
+            spi_instance = nullptr;
+        }
+        if (spi_mutex) {
+            vSemaphoreDelete(spi_mutex);
+            spi_mutex = NULL;
+        }
+        spi_initialized = false;
+    }
+}
+
+/**
+ * @brief Transfiere un buffer de datos SPI (lectura/escritura).
+ * 
+ * @param tx_buffer Puntero al buffer de datos a enviar
+ * @param rx_buffer Puntero al buffer donde almacenar datos recibidos
+ * @param length Cantidad de bytes a transferir
+ * @return true si la transferencia fue exitosa
+ * @return false si hubo error o mutex no disponible
+ */
+bool {{HAL_NAME}}_transfer(const uint8_t* tx_buffer, uint8_t* rx_buffer, size_t length) {
+    if (!spi_mutex || !spi_instance || !tx_buffer || !rx_buffer) return false;
+
+    if (xSemaphoreTake(spi_mutex, pdMS_TO_TICKS(100))) {
+        for (size_t i = 0; i < length; ++i) {
+            rx_buffer[i] = spi_instance->transfer(tx_buffer[i]);
+        }
+        xSemaphoreGive(spi_mutex);
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @brief Transfiere un byte SPI y recibe el byte respuesta.
+ * 
+ * @param data Byte a enviar
+ * @param result Byte recibido
+ * @return true si transferencia exitosa
+ * @return false si mutex no disponible
+ */
+bool {{HAL_NAME}}_transfer_byte(uint8_t data, uint8_t* result) {
+    if (!spi_mutex || !spi_instance || !result) return false;
+
+    if (xSemaphoreTake(spi_mutex, pdMS_TO_TICKS(100))) {
+        *result = spi_instance->transfer(data);
+        xSemaphoreGive(spi_mutex);
+        return true;
+    }
+    return false;
+}
+
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interfaz pública para HAL SPI con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para controlar y acceder al bus SPI de forma segura y sincronizada.
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+bool {{HAL_NAME}}_init(uint8_t bus_num, uint32_t freq_hz, uint8_t spi_mode, uint8_t bit_order);
+
+void {{HAL_NAME}}_stop();
+
+bool {{HAL_NAME}}_transfer(const uint8_t* tx_buffer, uint8_t* rx_buffer, size_t length);
+
+bool {{HAL_NAME}}_transfer_byte(uint8_t data, uint8_t* result);
+
+#ifdef __cplusplus
+}
+#endif
