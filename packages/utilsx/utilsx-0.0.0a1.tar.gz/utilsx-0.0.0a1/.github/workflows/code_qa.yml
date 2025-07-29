@@ -1,0 +1,27 @@
+name: Code quality assurance
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  code-qa:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python ${{ matrix.python-version }}
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: ${{ matrix.python-version }}
+        activate-environment: true
+        enable-cache: true
+    - name: Install dependencies
+      run: uv sync
+    - name: Run QA toolchain
+      run: make all-checks
