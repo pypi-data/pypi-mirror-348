@@ -1,0 +1,17 @@
+{
+    "base_url": "https://www.cia.gov/the-world-factbook",
+    "data_path": "page-data",
+    "field_path": "field",
+    "country_comparison_path":"country-comparison",
+    "references_path": "references",
+    "data_file": "page-data.json",
+    "data_keys": ["result","data"],
+    "field_entry_keys": ["fields","nodes"],
+    "field_place_name_keys": ["placeName"],
+    "field_value_keys": ["formatted"],
+    "country_comparison_entry_keys": ["fields","nodes"],
+    "country_comparison_place_name_keys": ["place", "name"],
+    "country_comparison_fields_keys": ["subfields"],
+    "country_comparison_value_keys": ["value"],
+    "reference_entry_keys": ["appendix","entries"]
+}
