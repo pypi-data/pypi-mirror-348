@@ -1,0 +1,10 @@
+pyyaml
+pytest
+
+[dev]
+pre-commit<4
+ruff
+
+[tests]
+pytest-cov
+pretty-print-directory
