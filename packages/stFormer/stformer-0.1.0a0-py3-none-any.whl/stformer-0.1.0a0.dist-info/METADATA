@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: stFormer
+Version: 0.1.0a0
+Summary: A flexible framework for transformer-based analysis of spatial transcriptomics data.
+Author-email: Qian Zhu <qzhu@bcm.edu>, Ivy Strope <ivystrope@gmail.com>, William Bowie <William.Bowie@bcm.edu>
+Maintainer-email: Qian Zhu <qzhu@bcm.edu>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/Istrope/stFormer
+Project-URL: Issues, https://github.com/Istrope/stFormer/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch
+Requires-Dist: transformers
+Dynamic: license-file
