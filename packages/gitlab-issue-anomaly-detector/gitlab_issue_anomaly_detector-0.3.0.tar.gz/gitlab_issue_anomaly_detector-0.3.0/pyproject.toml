@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gitlab-issue-anomaly-detector"
+version = "0.3.0"
+description = "GitLab issue anomaly detection and page generation"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "MIT"}
+authors = [
+    {name = "Author", email = "author@example.com"}
+]
+dependencies = [
+    "python-dotenv==1.0.0",
+    "python-gitlab==5.6.0",
+    "jinja2==3.1.6",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://gitlab.com/my-group-name2452611/my-project-name"
+"Bug Tracker" = "https://gitlab.com/my-group-name2452611/my-project-name/issues"
+
+[project.scripts]
+gitlab-anomaly-detector = "gitlab_anomaly.main:main"
+
+[tool.setuptools]
+package-dir = {gitlab_anomaly = "scripts"}
+packages = ["gitlab_anomaly", "gitlab_anomaly.page_generator", "gitlab_anomaly.templates"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+gitlab_anomaly = ["templates/*", "page_generator/*"]
