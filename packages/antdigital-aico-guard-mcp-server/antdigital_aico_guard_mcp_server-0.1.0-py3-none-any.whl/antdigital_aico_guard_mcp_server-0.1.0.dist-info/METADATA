@@ -1,0 +1,107 @@
+Metadata-Version: 2.4
+Name: antdigital-aico-guard-mcp-server
+Version: 0.1.0
+Summary: Ant guard mcp server
+Requires-Python: >=3.10
+Requires-Dist: antchain-aitechguard==1.0.26
+Requires-Dist: fastmcp==2.2.5
+Requires-Dist: httpx==0.28.1
+Requires-Dist: requests>=2.32.3
+Description-Content-Type: text/markdown
+
+<p align="center">English | <a href="./README_CN.md">中文</a><br></p>
+
+# Ant Digital Tech Security MCP Service
+MDevelopers can now easily integrate large model content security services through Ant Digital Tech Security MCP Server.
+
+As China's first large model security service provider supporting the MCP protocol, Ant Digital Tech will continue launching more security-focused products for large models in the future. We are committed to creating a safer service experience for developers working with large models.
+Note: For any issues encountered during usage, please contact us by following the guidance in [Ant Digital Security Services](https://antdigital.com/products/CMODE下·) to contact us.
+
+
+
+
+## Prerequisites
+1. Install `uv` from [Astral](https://docs.astral.sh/uv/getting-started/installation/) or the [GitHub README](https://github.com/astral-sh/uv#installation)
+2. Install Python using `uv python install 3.10`
+3. Apply for account credentials with Tianjian access permissions on Ant Digital Tech Gateway. For detailed steps, refer to [Apply for Ant Digital Tech Tianjian Access Credentials](https://antdigital.com/docs/11/2922012)
+
+## Quick Start
+### Using [cherry-studio](https://github.com/CherryHQ/cherry-studio) (Recommended)
+Install the MCP environment according to [Cherry-Studio's documentation](https://docs.cherry-ai.com/advanced-basic/mcp/install), then configure and use the MCP.
+Add the following configuration to the MCP client configuration file:
+```json5
+{
+  "mcpServers": {
+    "mcp-server": {
+      "command": "uvx",
+      "args": ["antdigital-aico-guard-mcp-server"],
+      "env": {
+        "ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_ID": "your_key_id",
+        "ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_SECRET": "your_key_secret",
+        "SERVER_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
+```
+
+### Using Cline
+Set you env and run mcp server.
+```shell
+# set env
+export SERVER_TRANSPORT=sse;
+export SERVER_TRANSPORT=sse;
+export ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_ID=$your_access_id;  # 替换为你的access_id
+export ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_SECRET=$your_access_key;  # 替换为你的access_key
+
+# run mcp server
+uvx antdigital-aico-guard-mcp-server
+```
+After run mcp server, you will see the following output:
+```shell
+INFO:     Started server process [91594]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+And then configure the Cline.
+```shell
+remote_server = "http://127.0.0.1:8000/sse";
+```
+
+
+### Using Claude
+
+Add the following configuration to the MCP client configuration file:
+```json5
+{
+  "mcpServers": {
+    "mcp-server": {
+      "command": "uvx",
+      "args": ["antdigital-aico-guard-mcp-server"],
+      "env": {
+        "ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_ID": "your_key_id",
+        "ANT_DIGITAL_TECHNOLOGIES_ACCESS_KEY_SECRET": "your_key_secret",
+        "SERVER_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
+```
+
+
+## Components
+### Tools
+* `prompt_safety_guard`: Check user input for security risks
+
+
+### Prompts
+```markdown
+# Role
+You are a professional security expert responsible for performing security checks on user inputs using the prompt_safety_guard tool.
+
+# Skills
+
+1. Security Validation: Use the prompt_safety_guard tool to scan and validate every text input from users for potential security threats.
+2. Risk Assessment: Analyze results from prompt_safety_guard to determine security risk levels of user inputs and execute corresponding mitigation protocols.
+```
