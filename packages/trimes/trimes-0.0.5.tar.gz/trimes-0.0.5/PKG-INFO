@@ -1,0 +1,64 @@
+Metadata-Version: 2.3
+Name: trimes
+Version: 0.0.5
+Summary: A python package for transient time series
+Project-URL: Homepage, https://github.com/FraunhIEE-UniKassel-PowSysStability/trimes
+Project-URL: Bug Tracker, https://github.com/FraunhIEE-UniKassel-PowSysStability/trimes/issues
+Author-email: Sciemon <simon.eberlein@gmx.de>
+License: MIT License
+        
+        Copyright (c) 2024 FraunhIEE-UniKassel-PowSysStability
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.10
+Requires-Dist: control>0.10
+Requires-Dist: icecream>=2.1.2
+Requires-Dist: matplotlib>3
+Requires-Dist: numpy>=2.1.3
+Requires-Dist: pandas>=2.2.3
+Description-Content-Type: text/markdown
+
+# trimes
+
+*trimes* (transient time series) is a python package for transient time series data in pandas format. The application is actually for all time series data where the time vector has a numerical format (e.g numpy's float64) - as opposed to the frequently used *DateTime* format. To the best of our knowledge, there is currently no other python package focusing on transient time series data as described and the mentioned  *DateTime* format is not convenient for transient time series.
+
+trimes provides functionality for pandas DataFrames (in the format mentioned above) for the following use cases:
+
+- get data points 
+- interpolation
+- resampling
+- regression 
+- signal generation (harmonics, symmetrical components)
+- comparison of times series (difference, boundaries, envelopes)
+- metrics (e.g. root mean squared error)
+- step response analysis
+- plotting
+
+and more.
+
+Have a look at the [documentation](https://fraunhiee-unikassel-powsysstability.github.io/trimes/docs/index.html) to get started.
+
+## Installation
+
+```shell
+pip install trimes
+```
