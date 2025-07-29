@@ -1,0 +1,49 @@
+[project]
+name = "flask-wiki"
+version = "1.0.0"
+description = "Simple file-based wiki for Flask"
+readme = "README.md"
+authors = [{name = "RERO+", email = "<software@rero.ch>"}]
+license = "BSD-3-Clause"
+requires-python = ">= 3.9.2, <3.13"
+
+dependencies = [
+    "bootstrap-flask",
+    "Flask",
+    "flask-wtf",
+    "babel (>=2.9.1)",
+    "flask-babel (>=3.0.0)",
+    "wtforms (<3.0.0)",
+    "werkzeug (>=0.15)",
+    "jinja2 (>=3.0.0)",
+    "markdown (<3.4.0)",
+    "py (<2.0.0)",
+    "whoosh (<3.0.0)",
+    "beautifulsoup4 (<5.0.0)",
+    "click (<9.0.0)",
+]
+
+[tool.poetry.group.dev.dependencies]
+check-manifest = "*"
+ipython = "*"
+autopep8 = "*"
+poethepoet = "*"
+pytest = "*"
+black = "*"
+pytest-black = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-shell = ">=1.0.1,<2.0.0"
+
+[project.entry-points."flask.commands"]
+flask_wiki = "flask_wiki.cli:flask_wiki"
+
+[tool.poe.tasks]
+extract_messages = "pybabel extract --project Flask-Wiki -F babel.cfg -k gettext -k lazy_gettext -o flask_wiki/translations/messages.pot flask_wiki"
+init_catalog = "pybabel init -i flask_wiki/translations/messages.pot -d flask_wiki/translations -l"
+compile_catalog = "pybabel compile -d flask_wiki/translations"
+update_catalog = "pybabel update -i flask_wiki/translations/messages.pot -d flask_wiki/translations --no-fuzzy-matching --ignore-obsolete true"
