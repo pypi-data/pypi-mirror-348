@@ -1,0 +1,29 @@
+---
+markers:
+  - name: apples
+    description: list of apple types
+    allowed:
+      - gala
+      - golden_delicious
+      - granny_smith
+  - name: colours
+    description: rainbow components
+    allowed:
+      - red
+      - orange
+      - yellow
+      - green
+      - blue
+      - indigo
+      - violet
+    next: apples
+  - name: metals
+    description: precious and not so precious metals
+    allowed:
+      - iron
+      - copper
+      - brass
+      - gold
+      - silver
+      - platinum
+    next: colours

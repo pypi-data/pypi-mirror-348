@@ -1,0 +1,64 @@
+[tool.poetry]
+name = "pytest-coveragemarkers"
+version = "3.3.3"
+description = "Using pytest markers to track functional coverage and filtering of tests"
+authors = ["Gleams API user <Stephen.Swannell+ghapi@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+keywords = ["test", "pytest", "markers", "coverage"]
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<3.13.0"
+pytest = "^7.1.2"
+PyYAML = ">=5.4.1"
+loguru = "^0.6.0"
+pytest-xdist = "^2.5.0"
+pytest-jtr = ">=1.4.0"
+rich = "^13.3.0"
+rule-engine = "^4.5.0"
+urllib3 = ">2.2.1"
+
+[tool.poetry.dev-dependencies]
+nox = "^2022.1.7"
+tox = "^3.25.0"
+nox-poetry = "^1.0.0"
+isort = "^5.10.1"
+bandit = "^1.7.4"
+mypy = "^0.961"
+types-PyYAML = "^6.0.8"
+mkdocs = "^1.3.0"
+pre-commit = "^2.19.0"
+pytest-cov = "^4.0.0"
+safety = "^2.3.3"
+
+[tool.poetry.plugins]
+pytest11 = { coveragemarkers = "pytest_coveragemarkers.plugin" }
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+black = ">=24.3.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core>=1",
+]
+
+[tool.poetry.scripts]
+prep-dev-release = "scripts.prep_release:dev"
+prep-patch-release = "scripts.release_process:prep_patch"
+prep-minor-release = "scripts.release_process:prep_minor"
+prep-major-release = "scripts.release_process:prep_major"
+release = "scripts.release_process:upload_release"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = "true"
+
+[tool.bandit]
+exclude_dirs = ["tests", "scripts", "noxfile.py"]
+tests = []
+skips = ["B101","B506"]
+
+[tool.mypy]
+ignore_missing_imports = true
