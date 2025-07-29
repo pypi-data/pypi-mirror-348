@@ -1,0 +1,80 @@
+# logab 🐢
+A lightweight Python package for structured logging with automatic balance (ab) formatting for cleaner, more readable output.
+- 🤯 Python built-ins only
+- 🤤 No dependencies
+- 🥵 Minimal set-up
+
+
+## 1. Installation 🛠️
+```sh
+pip install logab
+```
+## 2. How to use 🔎
+**logab** provides two functions: `log_wrap()` and `log_init()`
+### a. log_wrap() 🌮
+`log_wrap()` is a ready-to-use wrapper with pre-configured logging. `log_wrap()` should be used **only once** at the program's entry point to configure logging globally. 
+
+**Parameters**:
+- `log_file`: file path for storing logs. Defaults to ***"./app.log"***.
+- `log_level`: severity level of log messages being recorded. Defaults to ***"debug"***
+- `print_level`: severity level of all messages output by `print()` command. Defaults ***"debug"***
+
+### b. log_init() 🍉
+The **logab** package supports logging through three methods:
+- Using `print()`: simple built-in Python function for basic output.
+- Using `logging`: Python's standard logging module for structured and configurable logging.
+- Using `log_init()`: works just like Python's `logging.getLogger(__name__)`, just shorter syntax so I don't have to write some boilerplate code hehe.
+
+All three methods are compatible with the **logab** package, as long as they are used within the `log_wrap()` context. Usage example is provided in the next section.
+
+### c. example 🍻
+```python
+import logging
+from logab import log_init, log_wrap
+
+def main_func():
+    # We can log using Python's logging module
+    logger_python = logging.getLogger(__name__)
+    logger_python.warning("Warning message using Python's logging")
+    # or logab's log_init()
+    logger = log_init()
+    logger.critical("Critical message using logab's log_init()")
+    # or print() (default level is "debug", can be configured through log_wrap())
+    print("Debug message using print()")
+
+if __name__=="__main__":
+    with log_wrap(log_file="./app.log", log_level="debug", print_level="debug" ):
+        logger = log_init()
+        logger.info("Prepare to do main_func")
+        main_func()
+        logger.info("Finish main_func")
+        x = 0
+        print(10/x)
+```
+Output log messages in **"./app.log"**:
+```log
+PID   | Time                    | Level       | Function  |    File:No | Message
+------+-------------------------+-------------+-----------+------------+-----------------------------------------
+35814 | 2025-05-15 14:22:15,950 | 🔵 info     | <module>  | main.py:19 | Prepare to do main_func
+35814 | 2025-05-15 14:22:15,954 | 🟡 warning  | main_func | main.py:9  | Warning message using Python's logging
+35814 | 2025-05-15 14:22:15,955 | 🟣 critical | main_func | main.py:12 | Critical message using logab's log_init()
+35814 | 2025-05-15 14:22:15,955 | 🟢 debug    | main_func | main.py:14 | Debug message using print()
+35814 | 2025-05-15 14:22:15,955 | 🔵 info     | <module>  | main.py:21 | Finish main_func
+35814 | 2025-05-15 14:22:15,958 | 🔴 error    | log_wrap  |   logab:0  | division by zero
+------+-------------------------+-------------+-----------+------------+-----------------------------------------
+Traceback (most recent call last):
+  File "/home/namkha/Documents/mydev/logab/logab/log_utils.py", line 179, in log_wrap
+    yield
+  File "/home/namkha/Documents/mydev/logab/main.py", line 23, in <module>
+    print(10/x)
+          ~~^~
+ZeroDivisionError: division by zero
+------+-------------------------+-------------+-----------+------------+-----------------------------------------
+35814 | 2025-05-15 14:22:15,958 | 🔵 info     | log_wrap  |   logab:0  | Execution time 0.0085 seconds
+
+```
+
+
+## 3. Automatic balance ⚖️
+Log messages will be displayed in a table format. Each column automatically adjusts its width to fit the longest value in that column, ensuring the entire table remains clearly visible and easy to read.
+![Alt Text](https://raw.githubusercontent.com/namkha1032/logab/refs/heads/main/demo.gif)
