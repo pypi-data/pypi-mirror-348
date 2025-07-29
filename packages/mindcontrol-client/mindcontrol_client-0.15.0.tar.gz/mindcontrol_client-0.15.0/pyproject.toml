@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "mindcontrol-client"
+version = "0.15.0"
+description = "Mind Control Python client"
+authors = ["Sasha Koss <koss@nocorp.me>"]
+license = "UNLICENSED"
+readme = "README.md"
+packages = [{ include = "mindcontrol" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "^3.10.10"
+mindcontrol-types = "^0.20.2"
+pydantic = "^2.9.2"
+certifi = "^2025.1.31"
+
+[tool.poetry.extras]
+openai = ["openai"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-watch = "^4.2.0"
+pytest-asyncio = "^0.24.0"
+openai = "^1.51.2"
+mypy = "^1.13.0"
+pytest-describe = "^2.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
