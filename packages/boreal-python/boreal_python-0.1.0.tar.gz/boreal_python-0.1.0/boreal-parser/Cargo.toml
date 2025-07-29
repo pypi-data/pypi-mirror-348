@@ -1,0 +1,22 @@
+[package]
+name = "boreal-parser"
+version = "0.6.0"
+description = "A parser library for YARA files, intended for use with the boreal library"
+repository = "https://github.com/vthib/boreal"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["boreal", "yara", "parser"]
+categories = ["parser-implementations"]
+edition = "2021"
+# MSRV
+rust-version = "1.74"
+
+[dependencies]
+# Parsing library
+nom = "8.0"
+
+# Proper error reporting on parsing
+codespan-reporting = "0.12"
+
+[lints]
+workspace = true
