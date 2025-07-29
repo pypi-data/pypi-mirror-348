@@ -1,0 +1,10 @@
+global-include LICENSE
+global-include *.py
+include README.md
+include requirements.txt
+recursive-include newsapi2/templates *
+recursive-include newsapi2/static *
+recursive-include newsapi2/routers *
+recursive-include newsapi2/middleware *
+recursive-include newsapi2/services *
+recursive-include newsapi2/utils * 
