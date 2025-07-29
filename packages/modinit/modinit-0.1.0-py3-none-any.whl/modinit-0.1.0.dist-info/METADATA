@@ -1,0 +1,75 @@
+Metadata-Version: 2.4
+Name: modinit
+Version: 0.1.0
+Summary: A tool for initializing AI model training repositories
+Home-page: https://github.com/eddiegulay/modinit
+Author: eddiegulay
+Author-email: eddiegulay <edgargulay@outlook.com>
+License: MIT
+Project-URL: Homepage, https://github.com/eddiegulay/modinit
+Project-URL: Bug Tracker, https://github.com/eddiegulay/modinit/issues
+Keywords: ai,machine learning,project structure,initialization
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# modinit
+
+A Python package for initializing AI model training repositories with a standardized structure.
+
+## Features
+
+- Creates a well-structured project directory for AI model training
+- Follows best practices for machine learning project organization
+- Includes helpful docstrings in all generated files
+- Simple command-line interface
+
+## Installation
+
+```bash
+pip install modinit
+```
+
+## Usage
+
+```bash
+modinit my-project
+```
+
+This will create a new directory called `my-project` with the following structure:
+
+```
+my-project/
+├── notebooks/            # Jupyter notebooks for experimentation
+├── src/                  # Main source code package
+├── data/                 # Data directory
+│   ├── raw/              # Raw, immutable data
+│   ├── processed/        # Processed data ready for modeling
+│   └── interim/          # Intermediate data that has been transformed
+├── configs/              # Configuration files
+├── tests/                # Unit tests
+├── main.py               # Entry point with CLI for running training/evaluation
+└── requirements.txt      # Project dependencies
+```
+
+## Development
+
+To contribute to this project:
+
+1. Clone the repository
+2. Create a virtual environment
+3. Install development dependencies: `pip install -e ".[dev]"`
+4. Make your changes
+5. Run tests: `pytest`
+
+## License
+
+MIT
