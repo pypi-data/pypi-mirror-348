@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: openepub
+Version: 0.0.9
+Summary: Library to interact with EPUB files.
+Project-URL: Home, https://github.com/sakolkar/openepub
+Project-URL: Documentation, https://github.com/sakolkar/openepub/wiki
+Project-URL: Issues, https://github.com/sakolkar/openepub/issues
+Author-email: Satyen Akolkar <contact@satyen.dev>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: The Unlicense (Unlicense)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Requires-Dist: beautifulsoup4<5,>=4.12.2
+Requires-Dist: xmltodict<1,>=0.13.0
+Provides-Extra: test
+Requires-Dist: chardet; extra == 'test'
+Description-Content-Type: text/markdown
+
+# openepub
+Python library to interact with EPUB files.
