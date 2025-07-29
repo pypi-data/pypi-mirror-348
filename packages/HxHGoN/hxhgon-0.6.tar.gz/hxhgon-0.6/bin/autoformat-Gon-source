@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+#     Copyright 2025, GONHXH, @T_T_Z_T find license text at end of file
+
+
+""" Launcher for autoformat tool.
+
+"""
+
+import os
+import sys
+
+# Unchanged, running from checkout, use the parent directory, the Gon
+# package ought to be there.
+sys.path.insert(0, os.path.normpath(os.path.join(os.path.dirname(__file__), "..")))
+
+# isort:start
+
+from Gon.tools.quality.auto_format.__main__ import main
+
+main()
+
+

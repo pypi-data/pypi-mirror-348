@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+#     Copyright 2025, GONHXH, @T_T_Z_T find license text at end of file
+
+
+""" Tool to compare XML outputs of two HxHGoN versions.
+
+"""
+
+import os
+import sys
+
+# Unchanged, running from checkout, use the parent directory, the Gon
+# package ought to be there.
+sys.path.insert(0, os.path.normpath(os.path.join(os.path.dirname(__file__), "..")))
+
+# isort:start
+
+import difflib
+
+from Gon.tools.testing.Common import my_print
+from Gon.utils.Execution import executeProcess
+
+Gon1 = sys.argv[1]
+Gon2 = sys.argv[2]
+filename = sys.argv[3]
+
+my_print(
+    """\
+Comparing output of '{filename}' using '{Gon1}' <-> '{Gon2}' ...""".format(
+        filename=filename, Gon1=Gon1, Gon2=Gon2
+    )
+)
+
+extra_options = os.getenv("HUNTER_EXTRA_OPTIONS", "")
+
+Gon1_cmd = "{Gon1} --xml {filename}".format(Gon1=Gon1, filename=filename)
+Gon2_cmd = "{Gon2} --xml {filename}".format(Gon2=Gon2, filename=filename)
+
+stdout_Gon1, stderr_Gon1, exit_Gon1 = executeProcess(Gon1_cmd, shell=True)
+stdout_Gon2, stderr_Gon2, exit_Gon2 = executeProcess(Gon2_cmd, shell=True)
+
+
+def makeDiffable(output):
+    result = []
+
+    for line in output.split(b"\n"):
+        line = str(line)
+        result.append(line)
+
+    return result
+
+
+def compareOutput(kind, out1, out2):
+    diff = difflib.unified_diff(
+        makeDiffable(out1),
+        makeDiffable(out2),
+        "{program} ({detail})".format(program="Gon1 " + filename, detail=kind),
+        "{program} ({detail})".format(program="Gon2 " + filename, detail=kind),
+        None,
+        None,
+        n=3,
+    )
+
+    result = list(diff)
+
+    if result:
+        for line in result:
+            my_print(line, end="\n" if not line.startswith("---") else "")
+        return 1
+    else:
+        return 0
+
+
+exit_code_stdout = compareOutput("stdout", stdout_Gon1, stdout_Gon2)
+exit_code_return = exit_Gon1 != exit_Gon2
+
+if exit_code_return:
+    my_print(
+        """\
+Exit codes {exit_Gon1:d} ({Gon1}) != {exit_Gon2:d} ({Gon2})""".format(
+            exit_Gon1=exit_Gon1,
+            Gon1=Gon1,
+            exit_Gon2=exit_Gon2,
+            Gon2=Gon2,
+        )
+    )
+
+exit_code = exit_code_stdout or exit_code_return
+
+if exit_code:
+    sys.exit("Error, outputs differed.")
+
+my_print("OK, same outputs.")
+
+
