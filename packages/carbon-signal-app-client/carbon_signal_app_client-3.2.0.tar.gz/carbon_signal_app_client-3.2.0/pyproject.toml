@@ -1,0 +1,75 @@
+
+[project]
+name = "carbon-signal-app-client"
+description = "A client library for accessing Carbon Signal API"
+dynamic = ["version"]
+readme = "README.md"
+authors = [{ name = "Carbon Signal", email = "info@carbonsignal.com" }]
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "httpx>=0.20.0,<0.29.0",
+    "attrs>=22.2.0",
+    "python-dateutil>=2.8.0",
+]
+
+[project.urls]
+repository = "https://github.com/Carbon-Signal/carbon-signal-app-client"
+documentation = "https://Carbon-Signal.github.io/carbon-signal-app-client/"
+
+[tool.poetry]
+version = "v3.2.0"
+packages = [
+    { include = "carbonsignal" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+openapi-python-client = ">=0.24.3,<0.25.0"
+pytest = "^8.3.5"
+pytest-cov = "^6.1.0"
+deptry = "^0.23.0"
+pyright = "^1.1.399"
+pre-commit = "^4.2.0"
+tox = "^4.25.0"
+ipykernel = "^6.29.5"
+python-dotenv = "^1.1.0"
+ruff = "^0.11.6"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+include = ["carbonsignal"]
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    "YTT", "S", "B", "A", "C4", "T10", "SIM", "I", "C90", "E", "W", "F", "PGH", "UP", "RUF", "TRY"
+]
+ignore = ["E501", "E731", "S110", "TRY300", "A001", "TRY003", "C901", "RUF034"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["carbonsignal"]
