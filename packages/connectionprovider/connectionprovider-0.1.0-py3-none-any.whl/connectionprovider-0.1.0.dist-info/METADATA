@@ -1,0 +1,155 @@
+Metadata-Version: 2.1
+Name: connectionprovider
+Version: 0.1.0
+Summary: A sample installable Python module.
+Home-page: https://example.com/your_project_url
+Author: Your Name
+Author-email: your.email@example.com
+License: UNKNOWN
+Project-URL: Bug Reports, https://example.com/your_project_url/issues
+Project-URL: Source, https://example.com/your_project_url
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: google-api-python-client (>=2.0.0)
+Requires-Dist: google-auth (>=2.0.0)
+
+# connectionprovider
+
+This is a Python module created to be installable via pip. It provides utilities for connecting to and managing cloud provider services, with an initial focus on Google Cloud Platform (GCP) service accounts.
+
+## Features
+
+-   **GCP Service Account Management (`connectionprovider.gcp`):**
+    -   `create_service_account(project_id, account_id, display_name, credentials=None)`: Creates a new service account in the specified GCP project and generates a new JSON key for it. Returns a tuple `(service_account_object, key_object)`. The base64-encoded private key is in `key_object['privateKeyData']`. **Handle this key securely.**
+    -   `list_service_accounts(project_id, credentials=None)`: Lists all service accounts in the specified GCP project.
+    -   `delete_service_account(project_id, account_email, credentials=None)`: Deletes a specified service account from a GCP project.
+-   **Placeholder GCP Connection Functions (`connectionprovider.gcp`):**
+    -   `connect_to_gcp_service(service_name, credentials=None)`: Placeholder for connecting to various GCP services.
+    -   `list_gcp_buckets(project_id)`: Placeholder for listing GCP Cloud Storage buckets.
+
+
+## Installation
+
+To install this module locally, navigate to the project root directory (where `setup.py` is located) and run:
+
+```bash
+pip install .
+```
+
+For development (editable install):
+
+```bash
+pip install -e .
+```
+
+## Usage
+
+This module provides utilities for connecting to and managing cloud provider services, with a primary focus on Google Cloud Platform (GCP) service account management. The core functionalities for GCP service account management (create, list, delete) are available under the `connectionprovider.gcp` namespace.
+
+For detailed examples of how to use these functionalities, please refer to the `run_sa_management_tests.py` script in the project root and the "Tryout / Local Testing" section below, which explains how to execute this script.
+
+## GCP Service Account Management
+
+The `connectionprovider.gcp.service_accounts` submodule (and functions exposed via `connectionprovider.gcp.*`) allows you to manage Google Cloud Platform (GCP) Service Accounts.
+
+### Authentication
+
+The SDK calls use Application Default Credentials (ADC) by default. To ensure this works:
+
+1.  **Install Google Cloud CLI**: If you haven't already, [install the Google Cloud CLI](https://cloud.google.com/sdk/docs/install).
+2.  **Login for ADC**: Run the following command and follow the prompts to authenticate your user account for ADC:
+    ```bash
+    gcloud auth application-default login
+    ```
+
+Alternatively, you can provide credentials explicitly:
+*   **Service Account Key File**: You can use a service account key JSON file. Either set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the path of this file, or load the credentials in your Python code and pass the credentials object to the respective functions (`create_service_account`, `list_service_accounts`, `delete_service_account`).
+
+### Permissions
+
+The identity (user or service account) used for authentication must have the necessary IAM (Identity and Access Management) permissions in the target GCP project:
+
+*   `iam.serviceAccounts.create`: To create service accounts in the project.
+*   `iam.serviceAccounts.list`: To list service accounts in the project.
+*   `iam.serviceAccounts.delete`: To delete service accounts in the project.
+*   `iam.serviceAccountKeys.create`: To create keys for a service account. This permission is typically granted *on the service account itself* or on the project if you want to allow key creation for any SA.
+
+A common predefined role that grants these permissions is **Service Account Admin** (`roles/iam.serviceAccountAdmin`). The **Service Account Key Admin** role (`roles/iam.serviceAccountKeyAdmin`) grants permissions to manage keys if you want to separate concerns. For more granular control, you can create custom IAM roles with only the required permissions.
+
+### Enable IAM API
+
+Ensure the **Identity and Access Management (IAM) API** is enabled for your GCP project. You can do this through the Google Cloud Console under "APIs & Services" > "Enabled APIs & services". If it's not listed, click "+ ENABLE APIS AND SERVICES" and search for "Identity and Access Management (IAM) API" to enable it.
+
+## Tryout / Local Testing
+
+To test the GCP service account management functionalities locally using the `run_sa_management_tests.py` script, follow these steps:
+
+1.  **Create and Activate a Virtual Environment (Recommended):**
+    Open your terminal in the project root directory.
+    ```bash
+    # Create a virtual environment (e.g., named .venv)
+    python3 -m venv .venv
+
+    # Activate the virtual environment
+    # On macOS/Linux:
+    source .venv/bin/activate
+    # On Windows (Git Bash or WSL):
+    # source .venv/Scripts/activate
+    # On Windows (Command Prompt/PowerShell):
+    # .venv\Scripts\activate
+    ```
+
+2.  **Install Dependencies:**
+    With your virtual environment activated, install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Ensure Authentication and Permissions:**
+    Refer to the "Authentication" and "Permissions" sections above to ensure your environment is set up correctly to interact with GCP.
+
+4.  **Run Test Commands:**
+    You can now use `run_sa_management_tests.py` from the project root.
+
+    **Get Help:**
+    ```bash
+    python run_sa_management_tests.py --help
+    python run_sa_management_tests.py <your-gcp-project-id> create --help
+    ```
+
+    **Example: Create a service account and save its key:**
+    *(Replace placeholders with your actual values)*
+    ```bash
+    python run_sa_management_tests.py your-gcp-project-id create my-test-sa "My Test SA Display Name" --save-key-to ./my-test-sa-key.json
+    ```
+    *Remember to secure the generated key file (`my-test-sa-key.json` in this example)!*
+
+    **Example: Create a service account using a specific credentials file for authentication:**
+    *(Replace placeholders with your actual values)*
+    ```bash
+    python run_sa_management_tests.py your-gcp-project-id create another-sa "Another SA" --save-key-to ./another-sa-key.json --credentials-file /path/to/your/authenticating-sa-key.json
+    ```
+
+    **Example: List service accounts:**
+    *(Replace `your-gcp-project-id`)*
+    ```bash
+    python run_sa_management_tests.py your-gcp-project-id list
+    ```
+
+    **Example: Delete a service account:**
+    *(Replace `your-gcp-project-id` and the service account email)*
+    ```bash
+    python run_sa_management_tests.py your-gcp-project-id delete my-test-sa@your-gcp-project-id.iam.gserviceaccount.com
+    ``` 
+
