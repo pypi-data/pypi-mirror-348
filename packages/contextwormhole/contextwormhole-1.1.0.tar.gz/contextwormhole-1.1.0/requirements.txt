@@ -1,0 +1,19 @@
+# requirements.txt - Dependencies
+# ================================
+
+# Core dependencies
+torch>=1.9.0
+transformers>=4.20.0
+numpy>=1.20.0,<2.0.0
+
+# Development dependencies (install with pip install -e .[dev])
+pytest>=7.0.0
+pytest-cov>=3.0.0
+pytest-mock>=3.6.0
+pytest-benchmark>=3.4.0
+
+# Linting and formatting (install with pip install -e .[lint])
+# black>=22.0.0
+# flake8>=4.0.0
+# isort>=5.10.0
+# mypy>=0.910

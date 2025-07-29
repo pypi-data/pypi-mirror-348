@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+include INSTALL.md
+include requirements.txt
+include .flake8
+include pyproject.toml
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include scripts *.sh
