@@ -1,0 +1,10 @@
+account = $(void)
+cli
+    path = $(void)
+    retry = $(void)
+    upload = $(void)
+golden_remote = $(void)
+path = $(cli path)
+retry = $(cli retry)
+token = $gpg$(token_gpg $(account))
+upload = $(cli upload)
