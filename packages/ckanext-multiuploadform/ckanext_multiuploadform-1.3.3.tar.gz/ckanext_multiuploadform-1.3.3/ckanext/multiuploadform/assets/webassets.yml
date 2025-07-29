@@ -1,0 +1,19 @@
+multiuploadform-css:
+  output: multiuploadform/%(version)s_multiuploadform.css
+  contents:
+    - multi_uploader.css
+
+
+multiuploadform-js:  
+  output: multiuploadform/%(version)s_multiuploadform.js
+  extra:
+    preload:
+      - base/main
+      - vendor/vendor
+      - vendor/bootstrap
+      - vendor/jquery
+      - vendor/jquery.ui.core
+  contents:
+    - multi_uploader.js
+    - drag_drop.js
+  

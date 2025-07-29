@@ -1,0 +1,28 @@
+{% ckan_extends %}
+
+{%- block styles %}
+{{ super() }}
+{% asset 'multiuploadform/multiuploadform-css' %}
+{% endblock %}
+
+{% block content_primary_nav %}
+{{ super() }}
+{{ h.build_nav_icon('multiuploadform.resource_view', _('Multi Upload'), id=pkg.name, icon='upload') }}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Replace the button with id "replace-button" after the content is loaded
+        const link = document.querySelector('.nav-tabs a[href="#"]');
+        if (link) {
+            link.href = "{{ h.url_for(dataset_type ~ '_resource.new', id = pkg_name) }}"
+        }; // Replace with your desired URL
+    });
+</script>
+{% endblock %}
+
+{% block form %}
+{{ super() }}
+{% endblock %}
+
+{%- block scripts %}
+{{ super() }}
+{% endblock %}
