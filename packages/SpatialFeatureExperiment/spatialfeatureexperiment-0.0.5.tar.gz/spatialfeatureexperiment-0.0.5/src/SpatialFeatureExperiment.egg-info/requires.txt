@@ -1,0 +1,25 @@
+spatialexperiment>=0.0.12
+pillow
+geopandas
+shapely
+requests
+rasterio
+aicsimageio
+numcodecs<=0.15.1
+libpysal
+
+[:python_version < "3.8"]
+importlib-metadata
+
+[optional]
+pandas
+anndata
+delayedarray
+
+[testing]
+setuptools
+pytest
+pytest-cov
+pandas
+anndata
+delayedarray
