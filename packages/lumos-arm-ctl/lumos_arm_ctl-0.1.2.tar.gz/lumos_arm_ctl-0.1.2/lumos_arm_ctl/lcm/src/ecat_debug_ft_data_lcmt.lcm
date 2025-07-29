@@ -1,0 +1,23 @@
+struct ecat_debug_ft_data_lcmt {
+    //from motor module(before change)
+    int16_t  stat[2];
+    int32_t  fx[2];
+    int32_t  fy[2];
+    int32_t  fz[2];
+    int32_t  mx[2];
+    int32_t  my[2];
+    int32_t  mz[2];
+    int16_t  res1[2];
+    int16_t  res2[2];
+    int16_t  res3[2];
+    int16_t  res4[2];
+    int16_t  res5[2];
+
+    //send to motion control module(after change)
+    double  original_Fx[2];
+    double  original_Fy[2];
+    double  original_Fz[2];
+    double  original_Mx[2];
+    double  original_My[2];
+    double  original_Mz[2];
+}

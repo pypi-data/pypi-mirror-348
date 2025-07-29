@@ -1,0 +1,10 @@
+struct microstrain_lcmt {
+  float omega[3];
+  float acc[3];
+  float temp;
+  int64_t good_packets;
+  int64_t bad_packets;
+  float navQuat[4];
+  float navOmega[3];
+  float navRPY[3];
+}
