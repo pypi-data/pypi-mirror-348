@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{quiz.title}}</title>
+  {%if render_mode in ["fast", 'latex']%}
+  {%include "hljs_includes.html"%}
+  {%endif%}
+  {%include "katex_includes.html"%}
+  <script>
+    window.onload = () => {
+      document.querySelectorAll('.contains-task-list input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.onchange = () => {
+          checkbox.checked = checkbox.getAttribute('checked') === 'checked'
+        };
+      })
+    }
+  </script>
+  <style>
+    {% include 'base.css' %}
+  </style>
+  {%if render_mode == 'fast'%}
+  <style>
+    {% include 'default.css' %}
+  </style>
+  {%endif%}
+  {%if render_mode== 'latex'%}
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <style>
+    main {
+      font-size: 12pt;
+      font-family: inherit;
+    }
+    pre {
+      margin: .5rem 0;
+      padding: 0;
+      border: thin solid #ddd;
+      border-radius: 5px;
+    }
+
+    body {
+      /* from bootstrap*/
+      max-width: 768px;
+      padding: 20px;
+      margin: auto;
+      background: none;
+    }
+
+  </style>
+  {%endif%}
+
+
+  {# For Live reload #}
+  <script>
+    var ws = new WebSocket( // eslint-disable-line
+      'ws://' + window.location.hostname + ':8765/ws/live-server'); // Adjust port if needed
+
+    ws.onopen = e => {
+      console.log('Connected to Live Server');
+    };
+
+    ws.onmessage = function (msg) {
+      console.log(msg.data); // Log the message
+      if (msg.data === 'reload') {
+        window.location.reload(); // Reload the page on receiving the signal
+      }
+    };
+
+    ws.onclose = function (e) {
+      console.error('Connection to Live Server closed.');
+      console.warn('Please restart Live Server and reload this page.');
+    };
+  </script>
+</head>
+
+<body>
+  <main>
+  {%filter md%}
+  {% include "queck_template.md.jinja" %}
+  {%endfilter%}
+  </main>
+</body>
+
+</html>
