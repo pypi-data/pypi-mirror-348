@@ -1,0 +1,4 @@
+include src/machine_code_analyzer/deps/uiCA/ *.py *.sh *.cmd *html
+recursive-include src/machine_code_analyzer/deps/uiCA/instrData
+recursive-exclude src/machine_code_analyzer/deps/uiCA/XED-to-XML/ *
+recursive-exclude src/machine_code_analyzer/deps/uiCA/mbuild/ *

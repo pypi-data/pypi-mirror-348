@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "machine_code_analyzer"
+version = "0.1.0"
+description = "A simple wrapper class around uiCA and llvm-mca, for easier analysing"
+readme = "README.md"
+requires-python = ">=3.8"
+license-files = ["LICENSE"]
+
+authors = [
+  { name = "FloydZ", email = "floyd.zweydinger+github@rub.de" }
+]
+
+maintainers = [
+  { name = "FloydZ", email = "floyd.zweydinger+github@rub.de" }
+]
+
+keywords = [
+    "uica",
+    "wrapper"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta"
+]
+
+dependencies = [
+    "pytest",
+    "plotly",
+    # "pyxed", # not available
+    "capstone"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/FloydZ/uICA_wrapper"
+"Repository" = "https://github.com/FloydZ/uICA_wrapper"
+
+[project.scripts]
+sample = "sample:main"
+
+[tool.setuptools]
+include-package-data = true 
+package-data = { "machine_code_analyzer" = [ "./deps/uiCA/" ] }
+[packages.find]
+where = ["src"]
+include = ["deps", "src"]
+exclude = ["tests"]
+
