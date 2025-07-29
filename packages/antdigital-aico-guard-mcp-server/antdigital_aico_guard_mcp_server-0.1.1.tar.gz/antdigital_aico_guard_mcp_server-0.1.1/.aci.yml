@@ -1,0 +1,12 @@
+version: "2.0"
+stages:
+  - 镜像构建
+jobs:
+  镜像构建:
+    id: image-build
+    stage: 镜像构建
+    component: docker-image-build
+    inputs:
+      imageName: reg.docker.alibaba-inc.com/antcodebuild/${{parameters.appName}}
+      imageTag: ${{vcs.commitShortSha}}
+      buildArgs: APP_NAME=${{parameters.appName}} #通过内置参数赋值

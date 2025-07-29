@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "mcp-server-guard": {
+      "command": "uv",
+      "args": [
+      "--directory",
+      "/Users/shixiaoyu/Downloads/code/cursor_copy/aico-guard-mcp-server",
+      "run",
+      "guard_mcp_server.py"
+    ],
+      "env": {
+        "ALIBABA_CLOUD_ACCESS_KEY_ID": "your_key_id",
+        "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "your_key_secret",
+        "SERVER_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
