@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item_id }}{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="breadcrumb"><a href="{{ url }}/">Home</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb"><a href="{{ url }}/type/{{ type.get_id() }}/">Type: {{ type.get_id() }}</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb">Record: {{ item.get_id() }}</span>
+{% endblock %}
+
+{% block body %}
+
+<h2>{{ item.get_id() }} - {{ type.get_id() }}</h2>
+
+<table class="data">
+    {% for field_id, field in type.get_fields().items() %}
+        <tr>
+            <th>
+                {{ field.get_title() }}
+            </th>
+            <td>
+                {% if field.get_type() == 'url' %}
+                    <a href="{{ item.get_field_value(field_id).get_value() }}">{{ item.get_field_value(field_id).get_value() }}</a>
+                {% elif field.get_type() == 'list-strings' %}
+                    <ul>
+                        {% for value in item.get_field_value(field_id).get_value() %}
+                            <li>{{ value }}</li>
+                        {% endfor %}
+                    </ul>
+                {% elif field.get_type() == 'boolean' %}
+                    {% if item.get_field_value(field_id).is_value_true() %}
+                        True
+                    {% elif item.get_field_value(field_id).is_value_false() %}
+                        False
+                    {% endif %}
+                {% else %}
+                    {{ item.get_field_value(field_id).get_value() }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+<h3>Errors</h3>
+
+{% if item.get_errors() %}
+    <p><i class="fa-solid fa-square-xmark"></i> There were errors:</p>
+    <div class="links">
+        <a href="#" onclick="$('#validation_errors').toggle(); return false;" class="button">Show/Hide</a>
+    </div>
+    <table class="data" id="validation_errors">
+        <tr>
+            <th>Message</th>
+            <th>Data Path</th>
+            <th>Schema Path</th>
+        </tr>
+        {% for err in item.get_errors() %}
+            <tr>
+                <td>
+                    {{ err.get_message ()}}
+                </td>
+                <td>
+                    {{ err.get_data_path() }}
+                </td>
+                <td>
+                    {{ err.get_schema_path() }}
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p><i class="fa-solid fa-circle-check"></i> No errors</p>
+{% endif %}
+
+<h3>Raw Data</h3>
+
+<div>
+    {{ record_data_html|safe }}
+</div>
+
+<div class="links">
+    {% if default_config.get_github_url() %}
+        <a href="https://github.com/{{ default_config.get_github_url() }}/blob/{{ default_ref_str }}/{{  item.get_git_filename() }}" class="button"><i class="fa-brands fa-github"></i> View on GitHub</a>
+    {% endif %}
+    <a href="data.json" class="button"><i class="fa-solid fa-download"></i> Download Raw JSON data</a>
+</div>
+
+{% for ref_id, ref_data in refs.items() %}
+    <h3>Ref: {{ ref_id }}</h3>
+
+    {% if not ref_data['config_same'] %}
+
+        <p>The config has changed, so no comparison can be made.</p>
+
+    {% elif not ref_data['exists'] %}
+
+        <p>This record does not exist in this ref.</p>
+
+    {% else %}
+
+        <h4>Data Changes</h4>
+
+        {% if ref_data['diff'] %}
+
+            <table class="data">
+                {% for field_id, field_data in ref_data['diff'].items() %}
+                    <tr>
+                        <th>
+                            {{ field_id }}
+                        </th>
+                        <td>
+                            {% if field_data['type'] == 'added' %}
+                                <em>Field was added</em>
+                            {% elif field_data['type'] == 'removed' %}
+                                <em>Field was removed</em>
+                            {% elif field_data['type'] == 'different-type' %}
+                                <em>Field has a different type, so no comparison can be made.</em>
+                            {% elif field_data['type'] == 'diff' %}
+                                <em>New Value:</em>
+                                {# TODO: Display a diff properly #}
+                                {{ ref_data['record'].get_field_value(field_id).get_value() }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+        {% else %}
+
+            <p>There was no data changes.</p>
+
+        {% endif %}
+
+        <h4>Errors added</h4>
+
+        {% if ref_data['record_errors_added'] %}
+
+            <p><i class="fa-solid fa-square-xmark"></i> There were errors added:</p>
+
+            <table class="data">
+                <tr>
+                    <th>Message</th>
+                    <th>Data Path</th>
+                    <th>Schema Path</th>
+                </tr>
+                {% for err in ref_data['record_errors_added'] %}
+                    <tr>
+                        <td>
+                            {{ err.get_message ()}}
+                        </td>
+                        <td>
+                            {{ err.get_data_path() }}
+                        </td>
+                        <td>
+                            {{ err.get_schema_path() }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+        {% else %}
+
+            <p><i class="fa-solid fa-circle-check"></i> No errors were added.</p>
+
+        {% endif %}
+
+        <h4>Errors removed</h4>
+
+        {% if ref_data['record_errors_removed'] %}
+
+            <p><i class="fa-solid fa-circle-check"></i>There were errors removed:</p>
+
+            <table class="data">
+                <tr>
+                    <th>Message</th>
+                    <th>Data Path</th>
+                    <th>Schema Path</th>
+                </tr>
+                {% for err in ref_data['record_errors_removed'] %}
+                    <tr>
+                        <td>
+                            {{ err.get_message ()}}
+                        </td>
+                        <td>
+                            {{ err.get_data_path() }}
+                        </td>
+                        <td>
+                            {{ err.get_schema_path() }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+        {% else %}
+
+            <p>No errors were removed.</p>
+
+        {% endif %}
+
+        <div class="links">
+            {% if default_config.get_github_url() %}
+                <a href="https://github.com/{{ default_config.get_github_url() }}/blob/{{ ref_id }}/{{  item.get_git_filename() }}" class="button">View on GitHub</a>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+{% endfor %}
+
+{% endblock %}

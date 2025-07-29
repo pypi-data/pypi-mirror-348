@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Errors{% endblock %}
+
+
+{% block breadcrumbs %}
+    <span class="breadcrumb"><a href="{{ url }}/">Home</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb"><a href="{{ url }}/ref/{{ git_commit.get_ref() }}/">Ref: {{ git_commit.get_refs_str() }}</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb">Errors</span>
+{% endblock %}
+
+{% block body %}
+
+    <h2>Errors</h2>
+
+    <h3>Site errors</h3>
+
+    {% if datastore.get_count_site_errors(git_commit) %}
+
+        <table class="data">
+            <tr>
+                <th>Filename</th>
+                <th>Message</th>
+            </tr>
+            {% for error in datastore.get_all_errors_generator(git_commit) %}
+                <tr>
+                    <td>{{ error.get_filename() }}</td>
+                    <td>{{ error.get_message() }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+
+        <p>No general errors</p>
+
+    {% endif %}
+
+{% endblock %}

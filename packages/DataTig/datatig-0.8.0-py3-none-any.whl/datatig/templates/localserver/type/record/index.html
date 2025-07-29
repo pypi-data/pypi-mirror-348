@@ -1,0 +1,141 @@
+{% extends "localserver/base.html" %}
+
+{% block title %}{{ type.get_id() }}{% endblock %}
+
+
+{% block breadcrumbs %}
+    <span class="breadcrumb"><a href="/">Home</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb">Type: <a href="/type/{{ type.get_id() }}">{{ type.get_id() }}</a></span>
+    <span class="seperator">></span>
+    <span class="breadcrumb">Record: {{ record.get_id() }}</span>
+{% endblock %}
+
+{% block body %}
+
+
+<h2>{{ record.get_id() }} - {{ type.get_id() }}</h2>
+
+<table class="data">
+    {% for field_id, field in type.get_fields().items() %}
+        {% if field.get_type() != "list-dictionaries" %}
+            <tr>
+                <th>
+                    {{ field.get_title() }}
+                </th>
+                <td>
+                    {% if field.get_type() == 'url' %}
+                        <a href="{{ record.get_field_value(field_id).get_value() }}">{{ record.get_field_value(field_id).get_value() }}</a>
+                    {% elif field.get_type() == 'list-strings' %}
+                        <ul>
+                            {% for value in record.get_field_value(field_id).get_value() %}
+                                <li>{{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% elif field.get_type() == 'boolean' %}
+                        {% if record.get_field_value(field_id).is_value_true() %}
+                            True
+                        {% elif record.get_field_value(field_id).is_value_false() %}
+                            False
+                        {% endif %}
+                    {% else %}
+                        {{ record.get_field_value(field_id).get_value() }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+{% for field_id, field in type.get_fields().items() %}
+    {% if field.get_type() == "list-dictionaries" %}
+        <h4>Field {{ field.get_title() }}</h4>
+        {% if record.get_field_value(field_id).get_sub_records() %}
+            <table class="data">
+                <tr>
+                    {% for sub_field_id, sub_field in field.get_fields().items() %}
+                        <th>{{ sub_field.get_title() }}</th>
+                    {% endfor %}
+                </tr>
+                {% for sub_record in record.get_field_value(field_id).get_sub_records() %}
+                    <tr>
+                        {% for sub_field_id, sub_field in field.get_fields().items() %}
+                            <td>
+                                {% if sub_field.get_type() == 'url' %}
+                                    <a href="{{ record.get_field_value(field_id).get_value() }}">{{ sub_record.get_value(sub_field_id).get_value() }}</a>
+                                {% elif sub_field.get_type() == 'boolean' %}
+                                    {% if sub_record.get_value(sub_field_id).is_value_true() %}
+                                        True
+                                    {% elif sub_record.get_value(sub_field_id).is_value_false() %}
+                                        False
+                                    {% endif %}
+                                {% else %}
+                                    {{ sub_record.get_value(sub_field_id).get_value() }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No data.</p>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<h3>Errors</h3>
+
+{% if record.get_errors() %}
+    <p><i class="fa-solid fa-square-xmark"></i> There were errors:</p>
+    <div class="links">
+        <a href="#" onclick="$('#validation_errors').toggle(); return false;" class="button">Show/Hide</a>
+    </div>
+    <table class="data" id="validation_errors">
+        <tr>
+            <th>Message</th>
+            <th>Data Path</th>
+            <th>Schema Path</th>
+        </tr>
+        {% for err in record.get_errors() %}
+            <tr>
+                <td>
+                    {{ err.get_message ()}}
+                </td>
+                <td>
+                    {{ err.get_data_path() }}
+                </td>
+                <td>
+                    {{ err.get_schema_path() }}
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p><i class="fa-solid fa-circle-check"></i> No errors</p>
+{% endif %}
+
+
+<h3>Edit</h3>
+<div class="links">
+    <a href="/type/{{ type.get_id() }}/record/{{ record.get_id() }}/editweb" class="button"><i class="fa-solid fa-pencil"></i> Edit in Browser</a>
+    {% if site.get_github_url() %}
+        <a href="https://github.com/{{ site.get_github_url() }}/edit/{{ site.get_githost_primary_branch() }}/{{  record.get_git_filename() }}" class="button"><i class="fa-solid fa-pencil"></i> Edit Raw data directly on GitHub</a>
+    {% endif %}
+</div>
+
+<h3>Raw Data</h3>
+
+<div>
+    {{ record_data_html|safe }}
+</div>
+
+<div class="links">
+    {% if site.get_github_url() %}
+        <a href="https://github.com/{{ site.get_github_url() }}/blob/{{ site.get_githost_primary_branch() }}/{{  record.get_git_filename() }}" class="button">View on GitHub</a>
+    {% endif %}
+</div>
+
+
+{% endblock %}
+
