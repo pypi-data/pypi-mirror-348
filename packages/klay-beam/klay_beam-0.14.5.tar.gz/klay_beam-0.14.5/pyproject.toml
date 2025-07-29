@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "klay-beam"
+description = "Toolkit for massively parallel audio processing via Apache Beam"
+readme = "README.md"
+license = { file = "LICENSE" }
+dynamic = ["version"]
+dependencies = [
+  "av",
+  "apache-beam[gcp]==2.64",
+  "boto3==1.35",
+  "dill>=0.3.1.1,<0.3.2",
+  "pydub==0.25.1",
+  "soundfile>=0.13.0",
+  "librosa>=0.10",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+code-style = ["black==24.10", "flake8==7.1"]
+tests = ["pytest", "scipy"]
+type-check = ["mypy==1.14", "pydantic==2.10", "types-setuptools"]
+pytorch = ["torchaudio>=2", "torch>=2"]
+
+[tool.setuptools.dynamic]
+version = {attr = "klay_beam.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+klay_beam = ["py.typed"]
+
+[tool.mypy]
+warn_redundant_casts = true
+check_untyped_defs = true
+allow_redefinition = true
+warn_unreachable = true
+plugins = [
+  "pydantic.mypy",
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "apache_beam.*",
+  "pydub",
+  "scipy.*",
+  "soundfile",
+  "torch.*",
+  "torchaudio",
+  "pkg_resources",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+# Running pytest results in many warnings which are associated with google-cloud
+# apis. These warnings are not relevant to the code we are testing, filter then
+# from the output. See:
+# https://github.com/googleapis/google-cloud-python/issues/11184#issuecomment-1640884088
+filterwarnings = [
+    "ignore:Deprecated call to `pkg_resources\\.declare_namespace\\('.*'\\):DeprecationWarning",
+    "ignore::DeprecationWarning:google.rpc",
+]
