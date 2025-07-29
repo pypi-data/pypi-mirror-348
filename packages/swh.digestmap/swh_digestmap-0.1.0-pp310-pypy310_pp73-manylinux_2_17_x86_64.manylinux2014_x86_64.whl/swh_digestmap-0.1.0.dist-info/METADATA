@@ -1,0 +1,55 @@
+Metadata-Version: 2.4
+Name: swh.digestmap
+Version: 0.1.0
+Author-email: Software Heritage developers <swh-devel@inria.fr>
+License-Expression: GPL-3.0
+Classifier: Programming Language :: Rust
+Classifier: Intended Audience :: Developers
+Classifier: Development Status :: 4 - Beta
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# swh-digestmap Python binding
+
+## Use
+
+```python
+from swh.digestmap import DigestMap
+digestmap = DigestMap("dest_folder")
+digestmap.sha1_from_swhid("swh:1:cnt:0000000000000000000000000000000000000004")
+
+found = digestmap.content_get([b"0000000000000000000000000000000000000004"], algo="sha1_git")
+if found and found[0]:
+    hashes_dict = found[0].hashes()
+```
+
+## Use as a Software Heritage storage backend
+
+The Python package will register `digestmap` as a
+[Software Heritage storage backend]().
+However it only partially implements [content_get]():
+returned content objects should only be used to fetch `.hashes()` as in the example above.
+Note that the returned dict will only contain hashes known to the digestmap,
+`sha1` and `sha1_git`.
+If you are not bothered by these limitations (for example, you're using `swh-fuse`)
+It can be configured as such:
+
+```yaml
+storage:
+  cls: digestmap
+  path: "/path/to/digestmap/folder"
+```
+
+## Develop
+
+```bash
+pip install -r requirements-swh.txt
+pip install -r requirements-tests.txt
+cd pyo3/
+pip install .
+pytest
+```
+
+We test via `pytest` because the `DigestMap` binding needs a Python able to import `swh.model.model`.
+
+Package with `cibuildwheel pyo3` from the repository's root.
