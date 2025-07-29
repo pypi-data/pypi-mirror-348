@@ -1,0 +1,167 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "owlsight"
+dynamic = ["version"]
+description = "Owlsight is a command-line tool combining open-source AI models with Python functionality to create a powerful AI assistant."
+authors = [{ name = "Vincent Ouwendijk" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "psutil",
+    "transformers",
+    "pandas",
+    "numpy",
+    "torch",  # User must install platform-specific wheel
+    "bitsandbytes; sys_platform == 'linux' and platform_machine == 'x86_64'",
+    "accelerate",
+    "sentencepiece",
+    "prompt_toolkit==2.0.10",
+    "scikit-learn",
+    "jinja2",
+    "tqdm",
+    "pynput",
+    "dill",
+    "tika",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build",
+    "twine",
+    "pytest",
+    "pytest-asyncio<=0.24",
+    "ruff",
+    "black",
+    "pylint",
+]
+
+# useful for getting leaderboards from the Hugging Face Hub
+huggingface_metadata = ["gradio"]
+gguf = ["llama-cpp-python"]
+onnx = ["onnxruntime-genai", "onnxruntime-genai-cuda"]
+search = [
+    "lxml",
+    "aiohttp",
+    "duckduckgo_search",
+    "sentence-transformers",
+]
+
+# for huggingface (transformers) models which require additional input like images or audio
+multimodal = [
+    "pytesseract",
+    "pillow",
+    "beautifulsoup4",
+]
+
+# for offline document reading using Apache Tika
+offline = []
+
+# more info: https://pypi.org/project/RealtimeSTT/
+voice = [
+    "pyaudio",
+    "RealtimeSTT",
+    "ctranslate2==3.24.0; python_version < '3.13'",
+]
+
+# Define the "all" option to include most useful features (base + optional dependencies)
+all = [
+    # Base dependencies
+    "psutil",
+    "transformers",
+    "pandas",
+    "numpy",
+    "torch",
+    "bitsandbytes",
+    "accelerate",
+    "sentencepiece",
+    "prompt_toolkit<=2.0.10",
+    "scikit-learn",
+    "jinja2",
+    "tqdm",
+    "pynput",
+    "tika",
+    "lxml",
+    "aiohttp",
+    "duckduckgo_search",
+    # Optional
+    "llama-cpp-python",
+    "onnxruntime-genai",
+    "onnxruntime-genai-cuda",
+    "sentence-transformers",
+    "pytesseract",
+    "beautifulsoup4",
+    "pillow",
+]
+
+
+[project.entry-points.console_scripts]
+owlsight = "owlsight.main:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"owlsight.offline" = ["blobs/**/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["blobs/**/*"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+pythonpath = [".", "src"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+extend-exclude = ["site-packages", ".ruff_cache", "venv", ".venv"]
+line-length = 120
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = ["E4", "E7", "E9", "F", "I", "UP", "B", "C90", "TID"]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[tool.black]
+line-length = 120
+
+[tool.pylint]
+max-line-length = 120
+disable = [
+    "C0111",  # missing-docstring
+    "C0103",  # invalid-name
+    "C0303",  # trailing-whitespace
+    "C0330",  # bad-continuation
+    "C1801",  # len-as-condition
+    "W0511",  # fixme
+    "R0903",  # too-few-public-methods
+    "R0913",  # too-many-arguments
+    "R0914",  # too-many-locals
+]
+ignore = ["CVS", ".git", ".pytest_cache", "__pycache__", "build", "dist"]
+ignore-patterns = ["test_.*\\.py", "conftest\\.py"]
