@@ -1,0 +1,74 @@
+Metadata-Version: 2.4
+Name: petl_addons
+Version: 0.0.1
+Summary: A collection of extensions for PETL
+Project-URL: Homepage, https://codeberg.org/dringtech/petl_addons
+Project-URL: Issues, https://codeberg.org/dringtech/petl_addons/issues
+Author-email: Giles Dring <giles@dringtech.com>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Requires-Dist: petl
+Description-Content-Type: text/markdown
+
+# petl_addons
+
+This is a library that adds
+
+## Installation
+
+```sh
+pip install petl_addons
+```
+
+## Usage
+
+```py
+import petl_addons
+```
+
+### apply
+
+This patches the petl `Table` class with an `apply` method calls the specified function
+with the table. This allows pipeline fragments to be defined and applied in a clear format.
+
+```py
+def filter_values(table):
+    return table.selecteq('value', 10).selectnotnone('name')
+
+table.apply(filter_values)
+```
+
+`args` and `kwargs` are passed through to the function:
+
+```py
+def op(table, field, inflation=10):
+    return table.convert(field, lambda f: f+inflation)
+
+table.apply(op, 'value', inflation=20) // Will inflate the value field by 20
+```
+
+Multiple separate fragments can be chained together, greatly enhancing code readability and
+reusability.
+
+```py
+table.apply(filter_values).apply(summarise_data).apply(write_csv)
+```
+
+The module also overloads the `|` character to allow the following usage, equivalent to the
+example above:
+
+```py
+table | filter_values | summarise_data | write_csv
+```
+
+NB this won't work with parameter functions.
+
+If you wish to load this on its own without any other modules, use the statement below.
+
+```py
+import petl_addons.apply
+```
+
