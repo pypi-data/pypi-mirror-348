@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: zibanu-django-template
+Version: 1.0.2
+Summary: Zibanu repository library for django projects
+Author-email: Mario Cerón <mario.ceron@cqinversiones.co>
+License-Expression: GPL-3.0-or-later
+Keywords: django,zibanu,library,auth
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 3.2
+Classifier: Framework :: Django :: 4
+Classifier: Framework :: Django :: 5
+Classifier: Environment :: Web Environment
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Django>=3.2
+Requires-Dist: zibanu-django>=2.0.0
+Dynamic: license-file
+
+# Zibanu Django Template
+
+Paquete que contiene algunas utilidades para ser utilizadas en los templates de Django.
