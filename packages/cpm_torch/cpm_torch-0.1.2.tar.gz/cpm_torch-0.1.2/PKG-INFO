@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: cpm_torch
+Version: 0.1.2
+Summary: Celluar Potts Model for pytorch
+Author: KotShinZ
+Author-email: s18574s18574@gmail.com
+Requires-Python: >=3.9,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: moviepy (==2.0.0.dev2)
+Requires-Dist: opencv-python (>=4.11.0.86)
+Requires-Dist: torch (>=2.6.0,<3.0.0)
+Requires-Dist: tqdm (>=4.67.1)
+Description-Content-Type: text/markdown
+
+# CelluarPottsModel_Pytorch
+学習可能なCelluarPottsModelをPytorchで実装します。
+
