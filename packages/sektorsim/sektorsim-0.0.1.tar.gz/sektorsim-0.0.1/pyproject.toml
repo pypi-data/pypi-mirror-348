@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sektorsim"
+dynamic = ["version"] # Version is read from sektorsim/__init__.py
+authors = [
+    { name = "Eric Duminil", email = "sektorsim@ericduminil.com" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://transfer.hft-stuttgart.de/gitlab/sektorsim"
+Issues = "https://transfer.hft-stuttgart.de/gitlab/groups/sektorsim/-/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "sektorsim.__version__"}

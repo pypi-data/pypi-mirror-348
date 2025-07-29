@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: sektorsim
+Version: 0.0.1
+Summary: A small example package
+Author-email: Eric Duminil <sektorsim@ericduminil.com>
+License-Expression: MIT
+Project-URL: Homepage, https://transfer.hft-stuttgart.de/gitlab/sektorsim
+Project-URL: Issues, https://transfer.hft-stuttgart.de/gitlab/groups/sektorsim/-/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Example Package for SektorSim
+
+Proof of concept for SektorSim package.
+
+```python
+import sektorsim
+
+print(sektorsim.a(3)) # => 4
+print(sektorsim.b(5)) # => 7
+```
+
+[SektorSim project page](https://www.hft-stuttgart.de/forschung/projekte/aktuell/sektorsim3)
