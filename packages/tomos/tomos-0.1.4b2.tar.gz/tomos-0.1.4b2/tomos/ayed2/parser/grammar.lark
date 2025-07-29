@@ -1,0 +1,106 @@
+// Everything that's defined like <<TYPEDECLARATION>> means to be done later
+
+?program           : typedecl_section funprocdef_section body
+typedecl_section    : (typedecl _SEP)*
+funprocdef_section : funprocdef*
+funprocdef         : "<<FUNPROCDECLARATION>>"
+body               : vardef_section sentences
+vardef_section     : (var_declaration _SEP)*
+var_declaration    : "var" variable ":" type
+
+typedecl           : "type" L_NAME "=" (syn | enum | t_tuple)
+syn                : type
+enum               : "enumerate" (U_NAME _SEP?)+ "end" "enumerate"
+t_tuple            : "tuple" (tuple_field _SEP?)+ "end" "tuple"
+tuple_field        : fieldname ":" type
+
+sentences          : (_sentence _SEP)* _sentence?
+
+_sentence          : SKIP
+                   | if_sent
+                   | while_sent
+                   | for_sent
+                   | assignment
+                   | builtin_call
+
+SKIP               : "skip"
+if_sent            : "if" expr "then" sentences ("else" sentences)? "fi"
+while_sent         : "while" expr "do" sentences "od"
+for_sent           : for_sent_up | for_sent_down
+for_sent_up        : "for" VAR_NAME ":=" expr "to" expr "do" sentences "od"
+for_sent_down      : "for" VAR_NAME ":=" expr "downto" expr "do" sentences "od"
+assignment         : variable ":=" expr
+builtin_call       : builtin_name "(" variable ")"
+!builtin_name      : "alloc" | "free"
+
+expr               : expr_junction
+expr_junction      : expr_equality ( JUNCTION_SYMBOL expr_equality)*
+expr_equality      : expr_comparison ( EQUALITY_SYMBOL expr_comparison )*
+expr_comparison    : expr_term ( COMPARISON_SYMBOL expr_term )*
+expr_term          : expr_factor ( TERM_SYMBOL expr_factor )*
+expr_factor        : expr_unary ( FACTOR_SYMBOL  expr_unary )*
+expr_unary         : UNARY_SYMBOL expr_unary
+                   | _expr_primary
+_expr_primary      : _literal | variable | "(" expr ")"
+_literal           : INT | bool_literal | "'"CHAR_LITERAL"'" | REAL | INF | NULL | ENUM_LITERAL | getenv
+!bool_literal      : "true" | "false"
+INF                : "inf"
+NULL               : "null"
+CHAR_LITERAL       :  /./
+ENUM_LITERAL       : U_NAME
+getenv             : "getenv" "(" "\""ANY_NAME"\"" ":" BASIC_TYPE ")"
+
+// Expression Symbols
+JUNCTION_SYMBOL    : ( "&&" | "||" )
+EQUALITY_SYMBOL    : ( "!=" | "==" )
+COMPARISON_SYMBOL  : ( ">" | ">=" | "<" | "<=" )
+TERM_SYMBOL        : ( "-" | "+" )
+FACTOR_SYMBOL      : ( "/" | "*" | "%" )
+UNARY_SYMBOL       : ( "!" | "-" )
+
+
+variable              : v_indexed
+                      | v_accessed
+                      | v_arrow_access
+                      | _v_primary
+VAR_NAME              : L_NAME
+
+
+v_indexed         : variable "[" expr ("," expr)* "]"
+v_accessed        : variable "." fieldname
+v_arrow_access    : variable "->" fieldname
+
+_v_primary        : VAR_NAME | v_deref | "(" variable ")"
+v_deref           : "*" _v_primary
+fieldname         : L_NAME
+
+
+type              : BASIC_TYPE | pointer_of | array_of | custom_type
+
+BASIC_TYPE.2      : "int" | "bool" | "real" | "char"
+pointer_of.2      : "pointer" "of" type
+array_of.2        : "array" array_axes "of" type
+array_axes        : "[" array_axis ("," array_axis)* "]"
+array_axis        : (array_axis_from "..")? array_axis_to
+array_axis_from   : INT | variable
+array_axis_to     : INT | variable
+custom_type.0     : L_NAME
+
+COMMENT : "//" /[^\n]*/
+_SEP    : (";" | NL)  // separator
+
+L_NAME  : ("_"|LCASE_LETTER) ("_"|LETTER|DIGIT)*
+U_NAME  : (UCASE_LETTER) ("_"|LETTER|DIGIT)*
+
+%import common.CNAME            -> ANY_NAME
+%import common.LETTER           -> LETTER
+%import common.LCASE_LETTER     -> LCASE_LETTER
+%import common.UCASE_LETTER     -> UCASE_LETTER
+%import common.DIGIT            -> DIGIT
+%import common.INT              -> INT
+%import common.FLOAT            -> REAL
+
+%import common.WS
+%import common.NEWLINE          -> NL
+%ignore WS
+%ignore COMMENT
