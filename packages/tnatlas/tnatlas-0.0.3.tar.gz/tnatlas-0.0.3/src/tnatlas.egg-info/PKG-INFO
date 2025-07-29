@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: tnatlas
+Version: 0.0.3
+Summary: Find transposon integrations in reads and align them to genomes.
+Author-email: Lewis Grozinger <lewis.grozinger@cnb.csic.es>, Ana Mariya Anhel <a.valdes@liverpool.ac.uk>, Lorea Alejaldre <lorea.alejaldre@cnb.csic.es>, Angel Goni Moreno <angel.goni@cnb.csic.es>
+Maintainer-email: Lewis Grozinger <lewis.grozinger@cnb.csic.es>
+License-Expression: MIT
+Keywords: bioinformatics,alignment,genetics,transposon,scientific
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: biopython>1.8
+Requires-Dist: numpy>2.2
+Requires-Dist: pandas
+Requires-Dist: openpyxl
+Requires-Dist: psutil
+Dynamic: license-file
+
+# Overview
+
+TnAtlas is a Python package for identifying and annotating transposon integration events into genomes.
+
+Given a set of sequencing reads, transposon sequences, and genomes, the TnAtlas package can:
+
+* Looks for reads which contain genomic DNA preceded by transposon DNA.
+* Annotating the reads with corresponding features from the genome.
+* Produces a summary for a set of reads in excel format.
+
+For those who *do not want to write Python code*, the package also ships with 2 utilities, `tnfind` and `tnmeta`, which can be used to run analysis from the command line. 
+
+# Installing
+
+## Dependencies
+
+* Python >= 3.8 
+* blastn >= 2.12
+
+### Optionally
+Some parts of the pipeline also require
+
+* fastqc (for sequencing quality control reports)
+* sickle (for trimming based on sequencing quality)
+
+## From source code
+
+1. Get the code:
+   
+   `git clone https://github.com/lgrozinger/transposonaligner`
+3. Install using pip:
+   
+   `python3 -m pip install ./transposonaligner`
+
+## From PyPI (using pip)
+
+Coming soon to PyPI...
+
+# Usage
+
+# Contributing
+
+Contributions of all kinds are welcomed, including:
+* Code for new features and bug fixes
+* Test code and examples
+* Bug reports and suggestions for new features (e.g. opening a github issue)
+
+If you plan to change the source code, please open an issue for discussing the proposed changes and fork the repository.
+
+# Citing
+
+If you use this work as part of a publication, please cite as: ___________________
+
+# Acknowledgements
