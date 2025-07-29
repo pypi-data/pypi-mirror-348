@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pandasheets"
+authors = [{ name = "Diego Magela", email = "diego.magela1@gmail.com" }]
+description = "Lightweight wrapper around gspread that simplifies tasks like downloading, uploading, and appending data from Google Sheets using Pandas."
+readme = "README.md"
+maintainers = [{ name = "Diego Magela", email = "diego.magela1@gmail.com" }]
+version = "0.3.2"
+dependencies = [
+  "gspread",
+  "pandas"
+]
+keywords = ["Google Sheets", "API"]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/diegomagela/pandasheets"
+
+[project.license]
+file = "LICENSE.txt"
+
+[tool.setuptools.packages.find]
+where = ["."]
