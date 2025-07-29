@@ -1,0 +1,107 @@
+Metadata-Version: 2.1
+Name: wowool-semantic-themes
+Version: 3.1.2
+Summary: The Wowool Semantic Themes API
+Author: Wowool
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: wowool-sdk
+
+# Categorizing your documents
+
+The themes app identifies the most relevant themes (categories) by collecting entities with the attribute theme. It then determines the most appropriate categories for the document.
+
+<note>Themes are pre-defined categories in which you want to categorize your documents. While [topics](docs/apps/topics) are extracted salient noun groups from the processed documents.</note>
+
+## Prerequisites
+
+The `themes.app` uses the `Theme` entity and the annotation attributes `theme` and `sector` to collect information to identify potential categories. To enable this functionality, ensure that the `semantic-themes` domain is included in your processing pipeline or that you have a custom domain that produces `Theme` entities.
+
+## Options
+
+#### ThemesOptions
+
+```typescript
+interface ThemesOptions {
+    collect?: Record<str, UriInfo>;
+    attributes?: string[];
+    count?: number;
+    threshold?: number;
+}
+```
+
+with:
+
+| Property     | Description                                                                                              |
+|--------------|----------------------------------------------------------------------------------------------------------|
+| `collect`    | Specifies which entities and which information that will be considered during the categorization process |
+| `attributes` | Attributes that are considered as theme candidates. Default: `['theme', 'sector']`                       |
+| `count`      | Maximum number of themes to collect                                                                      |
+| `threshold`  | Minimal probability, expressed as a percentage, for a theme candidate to be considered a theme           |
+
+#### UriInfo
+
+`UriInfo` is used in case you want the app to include or exclude some URI's to be used during the categorization process.
+
+
+```typescript
+interface UriInfo {
+    uri: boolean;
+    attributes: string[];
+}
+```
+
+with:
+
+| Property     | Description                                                                        |
+|--------------|------------------------------------------------------------------------------------|
+| `uri`        | Specifies whether the entity canonical should be considered a theme candidate     |
+| `attributes` | Attributes that are considered as theme candidates. Default: `['theme', 'sector']` |
+
+## Results
+
+#### ThemesResults
+
+```typescript
+type ThemesResults = ThemesResult[];
+```
+
+#### ThemesResult
+
+```typescript
+interface ThemesResult {
+    name: string;
+    relevancy: number;
+}
+```
+
+with:
+
+| Property    | Description                                |
+|-------------|--------------------------------------------|
+| `name`      | Name of the theme                          |
+| `relevancy` | Relevancy of the theme within the document |
+
+# API
+
+## Examples
+
+### Using the Semantic Themes
+
+This sample demonstrates how to use the Themes app from the wowool.semantic_themes package to extract and rank semantic themes from a document.
+
+* PipeLine is used to create a text analysis pipeline.
+* Themes is the app that extracts and ranks themes.
+
+```python
+from wowool.sdk import Pipeline
+from wowool.semantic_themes import Themes
+
+analysis = Pipeline("english,entity,semantic-theme")
+themes = Themes(count=2)
+# run the document analysis
+document = themes(analysis("EyeOnID works on cybercrime prevention"))
+for item in document.results("wowool_themes"):
+    print(f" - {item['name']}: {item['relevancy']}")
+
+```
