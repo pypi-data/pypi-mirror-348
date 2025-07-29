@@ -1,0 +1,1 @@
+from .super_resolution_model import super_resolve
