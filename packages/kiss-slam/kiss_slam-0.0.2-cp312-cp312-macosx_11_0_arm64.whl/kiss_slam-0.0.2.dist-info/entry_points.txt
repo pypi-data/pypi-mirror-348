@@ -1,0 +1,4 @@
+[console_scripts]
+kiss_slam_pipeline = kiss_slam.tools.cli:run
+kiss_slam_dump_config = kiss_slam.config.config:write_config
+
