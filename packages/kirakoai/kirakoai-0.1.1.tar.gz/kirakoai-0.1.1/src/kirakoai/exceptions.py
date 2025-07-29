@@ -1,0 +1,2 @@
+class KirakoError(Exception):
+    """Ошибка"""

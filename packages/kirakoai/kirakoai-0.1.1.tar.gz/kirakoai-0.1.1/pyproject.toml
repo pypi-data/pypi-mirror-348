@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=65.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kirakoai"
+version = "0.1.1"
+description = "KirakoAI — продвинутый ИИ-помощник"
+authors = [{ name = "kirako.ai", email = "help@kirako.ai" }]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "pydantic>=2.0.0"
+]
