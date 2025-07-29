@@ -1,0 +1,32 @@
+Metadata-Version: 2.3
+Name: delta-hybrid-scd
+Version: 0.1.3
+Summary: A package for implementing hybrid SCD1 and SCD2 operations using Delta Tables in Databricks
+Author: Prateek Mishra
+Requires-Python: >=3.8
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: databricks-api (>=0.9.0,<0.10.0)
+Requires-Dist: datetime (>=5.5,<6.0)
+Requires-Dist: delta-spark (>=3.3.1,<4.0.0)
+Requires-Dist: pyspark (>=3.5.5,<4.0.0)
+Description-Content-Type: text/markdown
+
+# Hybrid SCD1 and SCD2 Implementation
+
+This package provides a hybrid implementation of Slowly Changing Dimensions (SCD) Type 1 and Type 2 using Delta Table in Databricks. It allows you to apply SCD2 based on specified columns and SCD1 for other columns.
+
+## Features
+
+1. **Hybrid SCD1 and SCD2**: The code performs a hybrid implementation of SCD1 and SCD2.
+2. **Column-based SCD2**: SCD2 will be applied if any value changes in the specified SCD2 columns.
+3. **Column-based SCD1**: SCD1 will be applied if any value changes in columns other than the specified SCD2 columns.
+
+## Source Code and Instructions
+
+For more details, please visit the [GitHub repository](https://github.com/prateekmshra/delta_lake_platform).
