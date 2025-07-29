@@ -1,0 +1,27 @@
+Metadata-Version: 2.2
+Name: hhsqllib
+Version: 0.52
+Summary: sqllib
+Home-page: https://your.project.url
+Author: hh
+Author-email: hehuang0717@outlook.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: SQLAlchemy==2.0.30
+Requires-Dist: pymssql==2.3.2
+Requires-Dist: mssql==1.0.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+This is for lazy loading sql database
+I modified the sangreal-wind because the inconsistency between the sangreal-wind and others
