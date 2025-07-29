@@ -1,0 +1,30 @@
+[project]
+name = "email-checker-mv"
+version = "0.3.0"
+description = "Batch and CLI email validator"
+license = {text = "MIT"}
+authors = [{ name = "Mykola Vuy", email = "mykola.vuy@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    "pandas",
+    "dnspython",
+    "email-validator",
+    "requests"
+]
+
+[project.scripts]
+check_email = "app.cli:run_cli"
+check_batch = "app.runner:run_batch"
+update_domains = "app.utils.update_disposable_domains:update_domains"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+include-package-data = true
