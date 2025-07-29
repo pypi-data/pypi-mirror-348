@@ -1,0 +1,36 @@
+[project]
+name = "nonebot-plugin-fix-qq-img-ssl"
+dynamic = []
+description = "Fix QQ image hosting SSL issue"
+authors = [
+    { name = "LgCookie", email = "lgc2333@126.com" },
+]
+dependencies = [
+    "nonebot2>=2.4.1",
+    "httpx>=0.28.0",
+]
+requires-python = ">=3.9,<4.0"
+readme = "README.md"
+version = "0.1.0"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+homepage = "https://github.com/lgc-NB2Dev/nonebot-plugin-fix-qq-img-ssl"
+
+[dependency-groups]
+dev = []
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm.build]
+includes = []
+
+[tool.pdm.version]
+source = "file"
+path = "nonebot_plugin_fix_qq_img_ssl/__init__.py"
