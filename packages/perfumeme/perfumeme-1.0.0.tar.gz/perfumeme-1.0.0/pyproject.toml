@@ -1,0 +1,71 @@
+[build-system] 
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "perfumeme"
+readme = "README.md"
+requires-python = ">=3.8"
+description = "PERFUMEme is a pip-installable package for analysis of odorous molecules giving main properties. It checks if the molecule has a smell,is toxic for the skin and simulates its evaporation trace. Finally, it indicates in which famous perfumes the molecule is present and eventually its odor."
+license = "MIT"
+keywords = [
+    "Odorous molecules",
+    "perfume",
+    "fragrance",
+    "chemistry",
+    "toxic",
+    "smell",
+    "evaporation",
+    "chemical-engineering",
+    "chemistry-lab"
+]
+
+dependencies = [
+    "rdkit",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "requests"
+]
+authors = [
+    {name = "Marie Lacroix", email = "marie.lacroix@epfl.ch"},
+    {name = "Lilia Cretegny", email = "lilia.cretegny@epfl.ch"},
+    {name = "Coline Lepers", email = "coline.lepers@epfl.ch"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/mlacrx/PERFUMEme"
+GitHub_Marie_Lacroix = "https://github.com/mlacrx"
+GitHub_Lilia_Cretegny = "https://github.com/lilia-crtny"
+GitHub_Coline_Lepers = "https://github.com/clepers"
+
+[tool.hatch.version]
+path = "src/perfumeme/__init__.py"
+
+[tool.hatch.build]
+sources = ["src"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+doc = [
+    "sphinx",
+    "furo",
+    "myst-parser",
+    "sphinx-copybutton",
+    "sphinx-autodoc-typehints"
+]
+
+
