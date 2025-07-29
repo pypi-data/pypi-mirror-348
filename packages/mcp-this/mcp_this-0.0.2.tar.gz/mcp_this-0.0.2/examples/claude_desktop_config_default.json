@@ -1,0 +1,97 @@
+{
+  "mcpServers": {
+    "mcp-this": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-this",
+        "--tools",
+        {
+          "tools": {
+            "find": {
+              "description": "Find files using the find command",
+              "execution": {
+                "command": "find <<args>>",
+                "uses_working_dir": true
+              },
+              "parameters": {
+                "args": {
+                  "description": "Full find command arguments (e.g., . -type f -name '*.py' -mtime -7)",
+                  "required": false
+                }
+              }
+            },
+            "grep": {
+              "description": "Search file contents using grep",
+              "execution": {
+                "command": "grep <<args>>",
+                "uses_working_dir": true
+              },
+              "parameters": {
+                "args": {
+                  "description": "Full grep command arguments (e.g., -r -n 'function' --include='*.js' .)",
+                  "required": true
+                }
+              }
+            },
+            "find-and-grep": {
+              "description": "Find files and then search within them for patterns",
+              "execution": {
+                "command": "find <<find_args>> -type f | xargs grep <<grep_args>>",
+                "uses_working_dir": true
+              },
+              "parameters": {
+                "find_args": {
+                  "description": "Find command arguments to locate specific files (e.g., . -name '*.py' -mtime -7)",
+                  "required": false
+                },
+                "grep_args": {
+                  "description": "Grep arguments including search pattern (e.g., -n 'TODO')",
+                  "required": true
+                }
+              }
+            },
+            "count-files-by-type": {
+              "description": "Count files by extension or type in a directory",
+              "execution": {
+                "command": "find <<args>> -type f | grep -E '\\.(<<extensions>>)$' | wc -l",
+                "uses_working_dir": true
+              },
+              "parameters": {
+                "args": {
+                  "description": "Find command arguments (e.g., . -mtime -7)",
+                  "required": false
+                },
+                "extensions": {
+                  "description": "File extensions to count, separated by '|' (e.g., 'py|js|html')",
+                  "required": true
+                }
+              }
+            },
+            "search-code-context": {
+              "description": "Search for code patterns with surrounding context",
+              "execution": {
+                "command": "grep -r -n -A <<after>> -B <<before>> <<args>>",
+                "uses_working_dir": true
+              },
+              "parameters": {
+                "args": {
+                  "description": "Pattern and path arguments (e.g., 'function' --include='*.js' .)",
+                  "required": true
+                },
+                "before": {
+                  "description": "Number of lines to show before matches",
+                  "required": false
+                },
+                "after": {
+                  "description": "Number of lines to show after matches",
+                  "required": false
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
