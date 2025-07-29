@@ -1,0 +1,13 @@
+httpx>=0.23.0
+
+[all]
+usepolvo-core[dev]
+
+[dev]
+black
+isort
+pre-commit
+toml
+pytest
+pytest-cov
+pytest-asyncio
