@@ -1,0 +1,70 @@
+Metadata-Version: 2.4
+Name: sdypy-io
+Version: 0.3.1
+Summary: Reading and writing of data in structural dynamics.
+Project-URL: homepage, https://github.com/sdypy/sdypy-io
+Project-URL: documentation, https://sdypy-io.readthedocs.io/en/latest/index.html
+Project-URL: source, https://github.com/sdypy/sdypy-io
+Author-email: "Janko Slavič et al." <janko.slavic@fs.uni-lj.si>
+Maintainer-email: "Janko Slavič et al." <janko.slavic@fs.uni-lj.si>
+License-Expression: MIT
+Keywords: LVM,MRAW,UFF,UNV,Universal File Format,io,read/write,structural dynamics
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.10
+Requires-Dist: lvm-read==1.20
+Requires-Dist: pymraw>=0.30
+Requires-Dist: pyuff==2.1
+Provides-Extra: dev
+Requires-Dist: build; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: sphinx; extra == 'dev'
+Requires-Dist: sphinx-copybutton>=0.5.2; extra == 'dev'
+Requires-Dist: sphinx-rtd-theme; extra == 'dev'
+Requires-Dist: twine; extra == 'dev'
+Requires-Dist: wheel; extra == 'dev'
+Description-Content-Type: text/x-rst
+
+sdypy-io
+========
+
+Read/write experimental and analysis data in the field of structural dynamics. Check out the `documentation <https://sdypy-io.readthedocs.io/en/latest/>`_.
+
+Currently, the ``SDyPy-io`` package supports the reading and writing of the UFF (Universal File Format) files and reading of the LVM files.
+
+To use the package, install the ``sdypy`` package:
+
+.. code:: bash
+
+   pip install sdypy
+
+The ``io`` module is imported as follows:
+
+.. code:: python
+
+   from sdypy import io
+
+Universal File Format read and write
+------------------------------------
+The UFF class is defined to manipulate the UFF (Universal File Format) files.
+
+Currently supported UFF data-set types:
+   - 15
+   - 55
+   - 58
+   - 58b
+   - 82
+   - 151
+   - 164
+   - 2411
+   - 2412
+   - 2414
+   - 2420
+   - 2429
+
+LVM file format
+---------------
+The ``read`` function parses the LVM file and returns a dictionary with the data.
