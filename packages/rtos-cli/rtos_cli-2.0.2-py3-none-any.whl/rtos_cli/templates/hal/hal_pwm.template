@@ -1,0 +1,127 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para control PWM con FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para inicializar y controlar salidas PWM
+ * con sincronización mediante mutex para uso seguro en multitarea.
+ */
+
+#include <Arduino.h>
+#include "{{HAL_NAME}}.h"
+
+static SemaphoreHandle_t pwm_mutex = NULL;
+static bool pwm_initialized = false;
+
+/**
+ * @brief Inicializa el canal PWM en el pin dado con frecuencia y resolución específicas.
+ * 
+ * @param channel Número de canal PWM (0-15)
+ * @param pin Pin GPIO donde se genera la señal PWM
+ * @param freq Frecuencia PWM en Hz
+ * @param resolution_bits Resolución en bits (ej. 8, 10, 12)
+ * @return true si la inicialización fue exitosa
+ * @return false en caso de error (ej. no se pudo crear mutex)
+ */
+bool {{HAL_NAME}}_init(uint8_t channel, uint8_t pin, uint32_t freq, uint8_t resolution_bits) {
+    if (!pwm_initialized) {
+        pwm_mutex = xSemaphoreCreateMutex();
+        if (pwm_mutex == NULL) {
+            return false; // No se pudo crear el mutex
+        }
+
+        ledcSetup(channel, freq, resolution_bits);
+        ledcAttachPin(pin, channel);
+
+        pwm_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Detiene el canal PWM liberando recursos.
+ * 
+ * @param channel Número de canal PWM a detener
+ * @param pin Pin GPIO asociado al canal
+ */
+void {{HAL_NAME}}_stop(uint8_t channel, uint8_t pin) {
+    if (pwm_initialized) {
+        ledcDetachPin(pin);
+        // No existe función para "stop" directo, pero se puede poner duty a 0
+        ledcWrite(channel, 0);
+
+        if (pwm_mutex) {
+            vSemaphoreDelete(pwm_mutex);
+            pwm_mutex = NULL;
+        }
+        pwm_initialized = false;
+    }
+}
+
+/**
+ * @brief Establece el ciclo de trabajo PWM de forma segura.
+ * 
+ * @param channel Canal PWM
+ * @param duty Ciclo de trabajo (valor entero entre 0 y el máximo según resolución)
+ * @return true si se pudo establecer el duty exitosamente
+ * @return false si mutex no disponible
+ */
+bool {{HAL_NAME}}_set_duty(uint8_t channel, uint32_t duty) {
+    if (!pwm_mutex) return false;
+
+    if (xSemaphoreTake(pwm_mutex, pdMS_TO_TICKS(100))) {
+        ledcWrite(channel, duty);
+        xSemaphoreGive(pwm_mutex);
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @brief Obtiene el duty cycle actual (simplemente devuelve el valor pasado,
+ * no hay función nativa para leer duty en Arduino).
+ * 
+ * @param duty Valor duty seteado previamente (debe guardarse externamente)
+ * @return uint32_t Valor duty (0 - máximo)
+ */
+uint32_t {{HAL_NAME}}_get_duty(uint32_t duty) {
+    return duty; // Placeholder: No se puede leer directamente el duty cycle desde hardware
+}
+ 
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interfaz pública para HAL PWM con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para controlar salidas PWM en ESP32 con sincronización.
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+bool {{HAL_NAME}}_init(uint8_t channel, uint8_t pin, uint32_t freq, uint8_t resolution_bits);
+
+void {{HAL_NAME}}_stop(uint8_t channel, uint8_t pin);
+
+bool {{HAL_NAME}}_set_duty(uint8_t channel, uint32_t duty);
+
+uint32_t {{HAL_NAME}}_get_duty(uint32_t duty);
+
+#ifdef __cplusplus
+}
+#endif
