@@ -1,0 +1,5 @@
+if(EXISTS "/Users/azim/CLionProjects/FastLanes/primitives/fls_generated/fallback/scalar_aav_uf1/fallback_scalar_aav_1024_uf1_untranspose_test[1]_tests.cmake")
+  include("/Users/azim/CLionProjects/FastLanes/primitives/fls_generated/fallback/scalar_aav_uf1/fallback_scalar_aav_1024_uf1_untranspose_test[1]_tests.cmake")
+else()
+  add_test(fallback_scalar_aav_1024_uf1_untranspose_test_NOT_BUILT fallback_scalar_aav_1024_uf1_untranspose_test_NOT_BUILT)
+endif()
