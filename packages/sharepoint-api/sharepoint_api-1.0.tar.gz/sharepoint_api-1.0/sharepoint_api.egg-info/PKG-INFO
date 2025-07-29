@@ -1,0 +1,34 @@
+Metadata-Version: 2.2
+Name: sharepoint_api
+Version: 1.0
+Summary: Python SharePoint API for folder or file operations (download, upload, delete)
+Home-page: https://github.com/naseemap-er/sharepoint_api
+Download-URL: https://github.com/naseemap-er/sharepoint_api/archive/refs/tags/v1.0.tar.gz
+Author: Naseem AP
+Author-email: naseemalassampattil@gmail.com
+License: MIT
+Keywords: sharepoint,api,python,sharepoint api,sharepoint folder,sharepoint file
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+License-File: LICENCE.txt
+Requires-Dist: requests
+Requires-Dist: requests_ntlm
+Requires-Dist: beautifulsoup4
+Requires-Dist: lxml
+Requires-Dist: html5lib
+Requires-Dist: office365-rest-python-client
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: download-url
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
