@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77.0", "setuptools_scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    { name = "Jack Whitworth", email = "jack@jackwhitworth.com" }
+]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 6",
+    "Framework :: Wagtail :: 7",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3 :: Only',
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+]
+dependencies = [
+    "wagtail>=5.0,<8.0",
+]
+description = "A Wagtail page model for creating menu pages."
+keywords = [
+    'wagtail',
+    'menu',
+    'page',
+    'pages',
+]
+license = "MIT"
+name = "wagtailmenupage"
+readme = "README.md"
+requires-python = ">=3.9"
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/jmwhitworth/wagtailmenupage"
+Changelog = "https://github.com/jmwhitworth/wagtailmenupage/blob/main/changelog.md"
+
+[tool.setuptools]
+packages = ["wagtailmenupage"]
+
+[tool.setuptools.package-data]
+"wagtailmenupage" = ["templates/**/*.html"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
