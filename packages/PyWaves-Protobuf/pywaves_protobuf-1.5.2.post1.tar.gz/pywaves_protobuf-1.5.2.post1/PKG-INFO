@@ -1,0 +1,44 @@
+Metadata-Version: 2.3
+Name: PyWaves-Protobuf
+Version: 1.5.2.post1
+Summary: Waves Protobufs to interact with the blockchain
+License: MIT
+Author: PyWaves-CE Contributors
+Requires-Python: >=3.8,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: protobuf (>=5.29.4,<6.0.0)
+Description-Content-Type: text/markdown
+
+# PyWaves-Protobuf
+
+[![PyPI version](https://img.shields.io/pypi/v/pywaves-protobuf.svg)](https://pypi.org/project/pywaves-protobuf/)
+
+**Python Protobuf bindings for Waves blockchain.**
+
+## Installation
+
+```bash
+pip install pywaves-protobuf
+```
+
+## Regenerating Bindings
+
+If schema updates require regenerating Python modules:
+
+  ```bat
+generate.bat
+```
+
+This will download `protoc` and Waves `.proto` definitions, compile them into the `waves/` package, and perform a verification count.
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details. 

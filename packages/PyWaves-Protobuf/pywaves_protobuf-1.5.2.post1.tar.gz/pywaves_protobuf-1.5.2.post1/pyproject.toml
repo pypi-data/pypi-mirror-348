@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "PyWaves-Protobuf"
+version = "1.5.2.post1"
+description = "Waves Protobufs to interact with the blockchain"
+authors = ["PyWaves-CE Contributors"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    {include = "waves"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.dependencies]
+protobuf = "^5.29.4"
+python = "^3.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
