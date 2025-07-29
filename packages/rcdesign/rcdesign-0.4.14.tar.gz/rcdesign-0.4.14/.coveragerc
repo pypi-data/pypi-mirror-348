@@ -1,0 +1,14 @@
+[run]
+omit =
+    tests/*
+    example*.py
+    __main__*.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+    def report
+    if __name__ == .__main__.:
+    case _:
