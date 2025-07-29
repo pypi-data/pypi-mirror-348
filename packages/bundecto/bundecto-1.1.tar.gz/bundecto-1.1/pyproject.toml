@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61", "wheel>=0.36"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bundecto"
+version = "1.1"
+description = "A minimal terminal text editor with a curses-based UI"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "voyager-2021", email = "voyager-2019@outlook.com" },
+]
+keywords = ["text-editor", "terminal", "curses", "editor"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Editors",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[project.urls]
+Homepage = "https://github.com/voyager-2021/bundecto"
+Issues = "https://github.com/voyager-2021/bundecto/issues"
+
+[project.scripts]
+bundecto = "bundecto.__main__:run_editor"
+bund = "bundecto.__main__:run_editor"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools]
+include-package-data = true
