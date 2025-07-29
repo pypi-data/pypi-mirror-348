@@ -1,0 +1,136 @@
+Metadata-Version: 2.4
+Name: restfullmonkey
+Version: 0.0.1
+Summary: Simple restfull mockup server
+Author-email: Soldy <4786022+Soldy@users.noreply.github.com>
+Description-Content-Type: text/markdown
+License-Expression: GPL-3.0-or-later
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Science/Research
+Classifier: Environment :: Console
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: AIX
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: POSIX :: BSD :: BSD/OS
+Classifier: Operating System :: POSIX :: BSD :: FreeBSD
+Classifier: Operating System :: POSIX :: BSD :: NetBSD
+Classifier: Operating System :: POSIX :: BSD :: OpenBSD
+Classifier: Operating System :: POSIX :: GNU Hurd
+Classifier: Operating System :: POSIX :: HP-UX
+Classifier: Operating System :: POSIX :: IRIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: POSIX :: Other
+Classifier: Operating System :: POSIX :: SCO
+Classifier: Operating System :: POSIX :: SunOS/Solaris
+Classifier: Operating System :: Unix
+Classifier: Operating System :: Other OS
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Classifier: Operating System :: Microsoft :: Windows :: Windows 11
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Programming Language :: Python :: 3.15
+Classifier: Programming Language :: SQL
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Database
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Database :: Front-Ends
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Internet :: WWW/HTTP :: Indexing/Search
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: Software Development :: Pre-processors
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: Software Development :: Testing :: Mocking
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Networking :: Monitoring
+Classifier: Topic :: System :: Logging
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+License-File: LICENSE
+Project-URL: Bug Tracker, https://github.com/Soldy/anyserver/issues
+Project-URL: Homepage, https://github.com/Soldy/anyserver
+
+
+## Important
+
+This tool does not have any security checks in place. Do not use it for live systems or in any environment outside of your development setup.
+
+
+## AnyServer
+
+This is a lightweight, simple, and dependency-free mockup RESTful API server that can be used right out of the box.
+It is designed to assist developers in creating a RESTful frontend when the backend may not be available for testing or use.
+One of the standout features of this server is its easy integration with mitmproxy, although this functionality will not be documented at this time. 
+Any server is also useful for storing data collection gathered from various sources and can convert it into AXP. Can replicate certain functionalities without human intervention.
+
+
+
+
+### Usage
+
+The server is available in two versions: a single-file version (server.py) and the complete source code in the "include" directory. It is recommended to use the single-file version with command line options.
+
+```
+python3 anyserver.py --port 8999 --host localhost
+
+```
+
+```
+python3 anyserver.py -h
+
+```
+
+
+### Data storage method
+Any server offers two types of data storage: JSON files and GNUDB.
+The JSON store saves data in small JSON files while keeping it in memory,
+ensuring a fast response time for testing purposes.
+On the other hand, GNUDB stores everything in its native format,
+making it ideal for larger data collections. Additionally, SQLITE support will be added in the future
+
+```
+python3 anyserver.py --store_type dbm --port 8999 --host localhost
+
+```
+
+### Please remember
+This tool is intended for local use only. It has not undergone third-party security audits and should not be used in a live environment.
+
+## Alternatives 
+
+
+ + [Apidog - https://apidog.com/](https://apidog.com/)
+ + [HoverFly - https://hoverfly.io/](https://hoverfly.io/)
+ + [ApiGee - https://cloud.google.com/apigee](https://cloud.google.com/apigee)
+ + [Postman - https://www.postman.com/](https://www.postman.com/)
+ + [Mock Api - https://mocki.io/](https://mocki.io/)
+ + [StopLight - https://stoplight.io/](https://stoplight.io/)
+ + [Beexeptor https://beeceptor.com/mock-api/](https://beeceptor.com/mock-api/)
+ + [jsonplaceholder - https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/)
+ + [WireMock - https://wiremock.org/](https://wiremock.org/)
+
+
+## FAQ
+
+### Why Python? 
+
+   I previously built several tools based on Node.js for this purpose,
+ such as [statusBuffer](https://github.com/Soldy/statusBuffer), [predataBuffer](https://github.com/Soldy/preDataBuffer), and prodataBuffer.
+ However, Node.js has changed significantly over time. Because of the lightweight nature of Node.js, the typescript, [the time](https://nodejs.org/en/blog/release) : code updates now take weeks to complete.
+ Since the performance benefits of Node.js are no longer as pronounced, I've found rewriting in Python to be a more logical choice. 
+ Python is preinstalled on most systems and offers various features that make it appealing for tool development,
+ including support for writing [compressed files](https://docs.python.org/3.12/library/archiving.html), the [shelve](https://docs.python.org/3.12/library/shelve.html), [dbm](https://docs.python.org/3.12/library/dbm.html), and [SQLite](https://docs.python.org/3.12/library/sqlite3.html) ([I know I know](https://nodejs.org/docs/latest/api/sqlite.html)). Additionally, the MITM proxy is written in Python. For these reasons, creating a new tool in Python seems like a much more logical..
+
+
+
+
