@@ -1,0 +1,157 @@
+stages:
+  - code_check
+  - build
+  - test_unit
+  - test_integration
+  - test_publish
+  - publish
+
+cache:
+  # creates a cache for each branch and Python version
+  key: "${CI_COMMIT_REF_SLUG}-${PYTHON_VERSION}"
+  paths:
+    - .cache/pip
+    - .cargo/registry/
+    - .cargo/git/
+
+variables:
+  RUST_BACKTRACE: "1"
+  CARGO_TERM_COLOR: always
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  CARGO_HOME: "${CI_PROJECT_DIR}/.cargo"
+
+lint_rust:
+  stage: code_check
+  image: rust:1.86.0
+  before_script:
+    - rustup component add clippy
+  script:
+    - cargo clippy --all-targets --all-features -- -D warnings
+
+format_rust:
+  stage: code_check
+  image: rust:1.86.0
+  before_script:
+    - rustup component add rustfmt
+  script:
+    - cargo fmt --all -- --check
+
+lint_py:
+  stage: code_check
+  image: python:3.13-slim
+  before_script:
+    - pip install -r requirements/requirements.txt
+  script:
+    - ruff check pytest_iso tests
+
+format_py:
+  stage: code_check
+  image: python:3.13-slim
+  before_script:
+    - pip install -r requirements/requirements.txt
+  script:
+    - ruff format --diff pytest_iso tests
+
+typecheck_py:
+  stage: code_check
+  image: python:3.13-slim
+  before_script:
+    - pip install -r requirements/requirements.txt
+  script:
+    - mypy pytest_iso
+
+build:
+  stage: build
+  image: rust:1.86.0
+  before_script:
+    # since a rust image is used, python stuff needs to be installed and the following considered:
+    # use python3 instead of python commands, since python only works in python images
+    # a virtual env is necessary, since in a rust image no env is present by default
+    - apt update
+    - apt install -y python3 python3-pip python3-venv
+  script:
+    - python3 -m venv pipeenv
+    - source pipeenv/bin/activate
+    - python3 -m pip install -r requirements/requirements.txt
+    - python3 -m maturin build --release --sdist --interpreter python3.9 --out target/wheels
+  artifacts:
+    paths:
+      - target/wheels/
+    expire_in: 1 week
+
+test_unit_rust:
+  stage: test_unit
+  image: rust:1.86.0
+  before_script:
+    - apt update
+    - apt install -y gcc python3-dev libpython3-dev
+  script:
+    - cargo test --locked
+
+# pytest stage for general unittests and coverage
+test_unit_py:
+  stage: test_unit
+  image: python:3.13
+  before_script:
+    - pip install --upgrade pip
+    - pip install -e .
+    - pip install -r requirements/requirements.txt
+  script:
+    # see issue: https://gitlab.com/ci-tools3/pytest-iso/-/issues/25
+    - pytest -s --cov-report term-missing --cov=. --cov-append tests
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+
+# pytest stage testing the installation from wheel and pytest-iso plugin functionality (PDF generation)
+test_integration:
+  stage: test_integration
+  image: python:${PYTHON_VERSION}
+  before_script:
+    - pip install --upgrade pip
+    # switch to an empty dir to test if fonts where properly shipped with the wheel
+    - mkdir test_dir && cd test_dir
+    - cp -r ../tests .
+    - pip install ../target/wheels/*.whl
+  script:
+    - pytest -s tests
+    - test -f test_protocol.pdf
+  parallel:
+    matrix:
+      - PYTHON_VERSION: "3.9"
+      - PYTHON_VERSION: "3.10"
+      - PYTHON_VERSION: "3.11"
+      - PYTHON_VERSION: "3.12"
+      - PYTHON_VERSION: "3.13"
+      - PYTHON_VERSION: "3.14.0b1"
+  artifacts:
+    paths:
+      - test_dir/test_protocol.pdf
+    expire_in: 1 week
+
+test_publish:
+  stage: test_publish
+  image: python:3.13
+  variables:
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD: $TESTPYPI_TOKEN
+  before_script:
+    - pip install --upgrade pip
+    - pip install -r requirements/requirements.txt
+  script:
+    - twine check target/wheels/*
+    - twine upload --skip-existing --verbose --repository testpypi target/wheels/*
+
+publish:
+  stage: publish
+  image: python:3.13
+  variables:
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD: $PYPI_TOKEN
+  before_script:
+    - pip install --upgrade pip
+    - pip install -r requirements/requirements.txt
+  script:
+    - twine upload --skip-existing --verbose --repository pypi target/wheels/*
+  rules:
+    - if: '$CI_COMMIT_TAG'
+      when: always
+    - when: never

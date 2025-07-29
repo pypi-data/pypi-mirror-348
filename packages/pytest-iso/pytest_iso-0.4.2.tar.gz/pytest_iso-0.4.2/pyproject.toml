@@ -1,0 +1,63 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "pytest-iso"
+dynamic = ["version", "description", "readme", "authors", "license"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Framework :: Pytest",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Documentation",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "pytest >= 7.4.0, <9.0.0",
+]
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://gitlab.com/sdirndorfer_pr/pytest-iso"
+Source = "https://gitlab.com/sdirndorfer_pr/pytest-iso"
+Issues = "https://gitlab.com/sdirndorfer_pr/pytest-iso/-/issues"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+include = [
+    "fonts/*.ttf",
+    "fonts/OFL.txt",
+]
+
+[project.entry-points.pytest11]
+pytest_iso = "pytest_iso.plugin"
+
+[tool.bumpver]
+current_version = "0.4.2"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "Bump version {old_version} -> {new_version}"
+tag_message = "{new_version}"
+tag_scope = "default"
+pre_commit_hook = ""
+post_commit_hook = ""
+commit = true
+tag = false
+push = false
+
+[tool.bumpver.file_patterns]
+"Cargo.toml" = ['^version = "{version}"']
+
+[tool.mypy]
+ignore_missing_imports = true

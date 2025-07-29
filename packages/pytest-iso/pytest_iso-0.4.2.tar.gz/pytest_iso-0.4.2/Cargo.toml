@@ -1,0 +1,18 @@
+[package]
+name = "pytest-iso"
+version = "0.4.2"
+edition = "2021"
+description = "Plugin for pytest to produce test documentation for code audits."
+readme = "README.md"
+authors = ["Sebastian Dirndorfer <pytest.iso@web.de>"]
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "pytest_iso"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.25.0", features = ["abi3-py39"] }
+genpdf = "0.2.0"
+
