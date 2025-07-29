@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: vehicle_ml
+Version: 0.0.1
+Summary: Forecasting Vehicle Sales with XGBoost: A Modern Approach to Predictive Modeling
+Author-email: Hongying Yue <yuehongyingyhy@gmail.com>
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyyaml
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: xgboost
+Requires-Dist: matplotlib
+Requires-Dist: psutil
+Provides-Extra: dev
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: pylint; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Dynamic: license-file
+
+# 🚗 Vehicle Sales Predictor
+
+Predict future vehicle sales like a pro.
+> This open-source project demonstrates how to build, track, and deploy a state-of-the-art machine learning pipeline — from raw data to actionable predictions. It uses modern MLOps tools like MLflow, DVC, and GitHub for reproducibility and collaboration.
+
+
+## ✨ Features
+
+- 🚀 End-to-End Pipeline: From raw data to predictions
+
+- 🔄 MLOps: Track experiments with MLflow, version data with DVC, and sync code with Git
+
+- 🌟 SOTA Model: Tuned XGBoost delivering high performance, adaptable to any tabular data project
+
+- 🧠 Robust Feature Engineering: Industry-grade preprocessing & encoding practices
+
+- 📈 Production-Ready: Modular design for training, inference, and deployment
+
+
+## 🛠️ Setup
+```shell
+# Clone the repo
+git clone https://github.com/hongyingyue/vehicle-sales-predictor.git
+cd vehicle-sales-predictor
+
+# Set up your virtual environment (recommended)
+uv venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+
+# Install dependencies
+uv pip install -r requirements.txt
+```
+
+
+## 🚀 Getting Started
+
+Train your model:
+```shell
+cd examples
+python run_train.py
+```
+
+Make prediction server with the trained model:
+```shell
+python app.py
+```
+
+Track your experiments
+```
+mlflow ui
+```
+
+
+## Experiments
