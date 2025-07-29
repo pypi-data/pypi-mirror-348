@@ -1,0 +1,35 @@
+[project]
+name = "FStringInterpolation"
+description = "interpolation for python's `configparser` that does f-string substitution" 
+authors = [
+ { name = "IOhannes m zmölnig", email = "zmoelnig@iem.at"}
+]
+license = "BSD-3-Clause"
+license-files = ["LICEN[CSE*"]
+readme = "README.md"
+requires-python = ">=3.6"
+dynamic = [ "version" ]
+dependencies = [ ]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/umlaeute/FStringInterpolation"
+# Documentation = ""
+Repository = "https://github.com/umlaeute/FStringInterpolation.git"
+Issues = "https://github.com/umlaeute/FStringInterpolation/issues"
+# Changelog = ""
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_file = "_version.py"
+
+[tool.pytest.ini_options]
+pythonpath = "."
