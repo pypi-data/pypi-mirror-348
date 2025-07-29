@@ -1,0 +1,24 @@
+[project]
+name = "weighted-general"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "hone-utils>=0.1.8.dev0",
+    "lightning>=2.5.1",
+    "pandas>=2.2.3",
+    "qcog-torch>=1.1.9",
+    "torch>=2.6.0",
+]
+
+[tool.uv.sources]
+qcog_torch = { index = "gemfury" }
+hone-utils = { index = "gemfury" }
+
+[[tool.uv.index]]
+name = "gemfury"
+url = "https://pypi.fury.io/qognitive"
+authenticate = "always"
+explicit=true

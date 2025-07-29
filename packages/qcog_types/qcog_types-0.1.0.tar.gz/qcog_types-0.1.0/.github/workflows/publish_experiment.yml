@@ -1,0 +1,71 @@
+name: Publish Experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: 'The folder to build'
+        required: true
+        type: string
+      environment:
+        description: "The environment to use"
+        required: true
+        type: string
+        default: "staging"
+
+jobs:
+  publish-experiment:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+
+    env:
+      X_API_KEY: ""
+      FOLDER: ${{ github.event.inputs.folder }}
+      BASE_URL: ""
+      BASE_URL_STAGING: "http://qcog-api-staging-lb-690850646.us-east-2.elb.amazonaws.com/api/v1"
+      BASE_URL_PROD: "https://api.qcog.ai/api/v1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Python Setup
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.12
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r scripts/build_types-requirements.txt
+
+      - name: Set X_API_KEY
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
+            echo "X_API_KEY=${{ secrets.PROD_X_API_KEY }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.environment }}" == "staging" ]]; then
+            echo "X_API_KEY=${{ secrets.STAGING_X_API_KEY }}" >> $GITHUB_ENV
+          else
+            echo "Invalid environment: ${GITHUB_EVENT_INPUTS_ENVIRONMENT}"
+            exit 1
+          fi
+
+      - name: Set BASE_URL
+        id: set-base-url
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
+            echo "BASE_URL=${{ env.BASE_URL_PROD }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.environment }}" == "staging" ]]; then
+            echo "BASE_URL=${{ env.BASE_URL_STAGING }}" >> $GITHUB_ENV
+          else
+            echo "Invalid environment: ${GITHUB_EVENT_INPUTS_ENVIRONMENT}"
+            exit 1
+          fi
+
+      - name: Upload Experiment
+        run: |
+          echo "BASE_URL=${{ env.BASE_URL }}"
+          python scripts/create.py \
+            --base-url ${{ env.BASE_URL }} \
+            --folder-path ${{ env.FOLDER }}
+

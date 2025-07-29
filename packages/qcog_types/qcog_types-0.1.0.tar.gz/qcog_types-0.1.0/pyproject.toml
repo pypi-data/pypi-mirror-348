@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qcog_types"
+version = "0.1.0"
+authors = [
+  { name = "Qognitive" },
+]
+description = "A package that exports all hyperparameter classes from different models"
+readme = "QcogTypesReadme.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["qcog_types*"]
