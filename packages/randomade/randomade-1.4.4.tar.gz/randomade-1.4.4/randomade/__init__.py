@@ -1,0 +1,1 @@
+from .main import rand_letter, rand_number, rand_hex
