@@ -1,0 +1,33 @@
+[project]
+name = "mcp-brevo"
+version = "0.2.0"  # Major version update
+description = "Brevo MCP for managing contacts, campaigns, emails, and more"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name = "Antoine Picolet", email = "antoine.picolet@example.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.9.0",
+    "brevo-python>=1.1.2", 
+    "requests>=2.31.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/mcp-brevo"
+"Bug Tracker" = "https://github.com/yourusername/mcp-brevo/issues"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+mcp-brevo = "mcp_brevo.main:main"
