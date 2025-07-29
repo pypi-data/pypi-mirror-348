@@ -1,0 +1,27 @@
+services:
+  vscode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    command: sleep infinity
+
+    environment:
+      - GITHUB_TOKEN
+      - MISE_GITHUB_TOKEN
+
+      # Hardlinking (which is the default on Linux) not possible
+      # as uv cache lives on a different drive in this configuration.
+      - UV_LINK_MODE=symlink
+
+    volumes:
+      # Workspace itself.
+      - ..:/workspaces/exec-cmds-defer-errors:cached
+      # Virtual environment.
+      - venv:/workspaces/exec-cmds-defer-errors/.venv
+      # Workspace cache.
+      - cache:/workspaces/exec-cmds-defer-errors/.cache
+
+volumes:
+  venv: # Virtual environment.
+  cache: # Workspace cache.
