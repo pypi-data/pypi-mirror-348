@@ -1,0 +1,31 @@
+name: dart_vm_service
+description: A CLI tool for interacting with the Dart VM Service API, allowing for debugging and introspection of Dart applications.
+version: 1.0.2
+repository: https://github.com/erickjtorres/dart_vm_client
+homepage: https://github.com/erickjtorres/dart_vm_client
+issue_tracker: https://github.com/erickjtorres/dart_vm_client/issues
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+# Define the CLI executable
+executables:
+  dart_vm_service: dart_vm_service
+
+dependencies:
+  vm_service: ^14.3.1
+  args: ^2.4.0
+  shelf: ^1.4.0
+  shelf_static: ^1.1.0
+  path: ^1.8.0
+  web_socket_channel: ^3.0.3
+  grpc: ^4.0.4
+  protobuf: ^4.0.0
+  crypto: ^3.0.6
+  fixnum: ^1.1.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.16.0
+  build_runner: ^2.4.15
+  protoc_plugin: ^22.0.1
