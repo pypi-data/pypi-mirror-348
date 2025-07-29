@@ -1,0 +1,56 @@
+seed: 10
+
+runtime_files:
+  - "./splitting.lock"
+  - "./test.db"
+  - "./pre-transformed.pkl"
+  - "./split.npz"
+  - "./test_split.npz"
+
+database_path: '../../../data/processed.csv'
+test_path: '../../../data/test_idx.csv'
+cif_file_dir: '../../../data/np_cifs'
+overwrite_db: True
+db_dir: '.'
+extra_plots: True
+show: False
+
+# Data processing parameters
+representation: "painn"
+cutoff: [2]
+n_atom_basis: [10]
+n_interactions: [2]
+batch_size: [32]
+n_train_data: 20
+num_folds: 2
+split_reshuffle: False
+n_param_combs: 1
+actual_list: [runtime_files]
+
+# CIF file reading parameters
+cif_read_options:
+  index: -1
+  store_tags: false
+  primitive_cell: false
+  subtrans_included: true
+  fractional_occupancies: true
+  reader: 'ase'
+
+# Number of workers and memory handling
+num_workers: 0
+pin_memory: false
+
+# Trainer configurations
+max_epochs: 2
+learning_rate: 0.001
+weight_decay: [0]
+
+# Logging and checkpoint paths
+out_dir: 'tests'
+
+# Plot settings
+high_dpi: 300
+
+# Metrics settings
+monitor_metric: 'val_loss'
+save_top_k: 1
