@@ -1,0 +1,44 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - 3.9
+        - '3.10'
+        - 3.11
+        - 3.12
+        - 3.13
+
+    steps:
+    - uses: actions/checkout@main
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@main
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install .[tests]
+    - name: Unit tests
+      run: |
+        make tests
+    - name: Code coverage
+      run: |
+        make coverage
+    - name: Codecov.io
+      uses: codecov/codecov-action@main
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        fail_ci_if_error: true
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@main
+      if: always()
+      with:
+        report_paths: xunit.xml

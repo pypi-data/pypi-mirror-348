@@ -1,0 +1,27 @@
+[tool.black]
+line-length = 119
+target-version = ['py36', 'py37', 'py38']
+skip-string-normalization = true
+
+[tool.coverage.run]
+branch = true
+source = [
+	"figenv"
+]
+omit = [
+    ".tox/*",
+    "tests/*",
+    "setup.py"
+]
+
+[tool.coverage.report]
+skip_covered = false
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.setuptools_scm]
+
+[build-system]
+requires = ["setuptools", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
