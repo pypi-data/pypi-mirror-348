@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: jumpstarter-driver-pyserial
+Version: 0.6.0
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Miguel Angel Ajo Pelayo <majopela@redhat.com>, Nick Cao <ncao@redhat.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: asyncclick>=8.1.7.2
+Requires-Dist: jumpstarter-driver-network==0.6.0
+Requires-Dist: jumpstarter==0.6.0
+Requires-Dist: pyserial-asyncio>=0.6
+Requires-Dist: pyserial>=3.5
+Description-Content-Type: text/markdown
+
+# PySerial driver
+
+`jumpstarter-driver-pyserial` provides functionality for serial port
+communication.
+
+## Installation
+
+```shell
+pip3 install --extra-index-url https://pkg.jumpstarter.dev/simple/ jumpstarter-driver-pyserial
+```
+
+## Configuration
+
+Example configuration:
+
+```yaml
+export:
+  serial:
+    type: jumpstarter_driver_pyserial.driver.PySerial
+    config:
+      url: "/dev/ttyUSB0"
+      baudrate: 115200
+```
+
+### Config parameters
+
+| Parameter      | Description                                                                                                                                          | Type | Required | Default |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ------- |
+| url            | The serial port to connect to, in [pyserial format](https://pyserial.readthedocs.io/en/latest/url_handlers.html)                                     | str  | yes      |         |
+| baudrate       | The baudrate to use for the serial connection                                                                                                        | int  | no       | 115200  |
+| check_existing | Check if the serial port exists during exporter initialization, disable if you are connecting to a dynamically created port (i.e. USB from your DUT) | bool | no       | True    |
+
+## API Reference
+
+```{eval-rst}
+.. autoclass:: jumpstarter_driver_pyserial.client.PySerialClient()
+    :members: pexpect, open, stream, open_stream, close
+```
+
+### Examples
+
+Using expect with a context manager
+```{testcode}
+with pyserialclient.pexpect() as session:
+    session.sendline("Hello, world!")
+    session.expect("Hello, world!")
+```
+
+Using expect without a context manager
+```{testcode}
+session = pyserialclient.open()
+session.sendline("Hello, world!")
+session.expect("Hello, world!")
+pyserialclient.close()
+```
+
+Using a simple BlockingStream with a context manager
+```{testcode}
+with pyserialclient.stream() as stream:
+    stream.send(b"Hello, world!")
+    data = stream.receive()
+```
+
+Using a simple BlockingStream without a context manager
+```{testcode}
+stream = pyserialclient.open_stream()
+stream.send(b"Hello, world!")
+data = stream.receive()
+```
+
+```{testsetup} *
+from jumpstarter_driver_pyserial.driver import PySerial
+from jumpstarter.common.utils import serve
+
+instance = serve(PySerial(url="loop://"))
+
+pyserialclient = instance.__enter__()
+```
+
+```{testcleanup} *
+instance.__exit__(None, None, None)
+```
