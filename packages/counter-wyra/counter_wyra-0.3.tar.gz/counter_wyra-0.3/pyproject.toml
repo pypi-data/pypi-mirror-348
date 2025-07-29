@@ -1,0 +1,23 @@
+[project]
+name = "counter_wyra"
+version = "0.3"
+authors = [
+  { name="Arnay Kumar", email="arnayk@wyra.net" },
+]
+description = "A random Counter thing I made for no reason at all"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "WTFPL"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/I4LYT/counter-thing"
+Issues = "https://github.com/I4LYT/counter-thing/issues"
+
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
