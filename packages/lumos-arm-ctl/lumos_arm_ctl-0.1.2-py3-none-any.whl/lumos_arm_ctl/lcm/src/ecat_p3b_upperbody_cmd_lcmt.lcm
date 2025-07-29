@@ -1,0 +1,23 @@
+struct ecat_p3b_upperbody_cmd_lcmt {
+    int16_t  ctrlWord[15];
+    int16_t  tarPosH[15];
+    int16_t  tarPosL[15];
+    int16_t  tarVel[15];
+    int16_t  tarCur[15];
+    int16_t  tarTor[15];
+    int16_t  res1[15];
+    int16_t  res2[15];
+    int16_t  res3[15];
+    int16_t  res4[15];
+
+    float    mc_arm_tarPos[15];
+    float    mc_arm_tarVel[15];
+    float    mc_arm_tarTor[15];
+
+    float    original_arm_tarPos[15];
+    float    original_arm_tarVel[15];
+    float    original_arm_tarTor[15];
+    
+    int16_t  ctrlword_hand[2];
+    int16_t  pos_hand[14];    
+}
