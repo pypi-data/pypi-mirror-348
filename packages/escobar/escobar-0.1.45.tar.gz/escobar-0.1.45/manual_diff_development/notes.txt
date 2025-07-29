@@ -1,0 +1,135 @@
+# Unified Diff Format Patch Testing Environment
+
+This document describes the file and folder naming logic used in this testing environment and provides instructions on how to generate more samples.
+
+## Directory Structure
+
+- `data/input/`: Contains original source files and their modified versions
+- `data/patch/`: Contains patch files in unified diff format
+- `data/result/`: Contains the results of applying patches to the original files
+
+## File Naming Convention
+
+### Input Files
+
+1. Original files:
+   - Named as `sample<n>.<ext>` where:
+     - `<n>` is a sequential number (1, 2, 3, ...)
+     - `<ext>` is the file extension (py, ts, js, txt, etc.)
+   - Example: `sample1.py`, `sample2.ts`, `sample3.js`
+
+2. Modified versions:
+   - Named as `sample<n>_modified<m>.<ext>` where:
+     - `<n>` is the same number as the original file
+     - `<m>` is the modification version (1, 2, ...)
+     - `<ext>` is the same file extension as the original
+   - Example: `sample1_modified1.py`, `sample1_modified2.py`
+
+### Patch Files
+
+- Named as `sample<n>_<m>.<ext>` where:
+  - `<n>` is the same number as the original file
+  - `<m>` is the patch version (1, 2, ...)
+  - `<ext>` is the same file extension as the original
+- Example: `sample1_1.py`, `sample1_2.py`
+
+### Result Files
+
+- Named the same as the patch files: `sample<n>_<m>.<ext>`
+- Example: `sample1_1.py`, `sample1_2.py`
+
+## Patch Generation Process
+
+1. Create an original file (`sample<n>.<ext>`)
+2. Create a modified version (`sample<n>_modified1.<ext>`)
+3. Generate a patch using diff: 
+   ```
+   diff -u sample<n>.<ext> sample<n>_modified1.<ext> > sample<n>_1.<ext>
+   ```
+4. Create a second modified version (`sample<n>_modified2.<ext>`)
+5. Generate a second patch using diff:
+   ```
+   diff -u sample<n>_modified1.<ext> sample<n>_modified2.<ext> > sample<n>_2.<ext>
+   ```
+
+## Patch Application Process
+
+1. Apply the first patch to the original file:
+   ```
+   patch -o data/result/sample<n>_1.<ext> data/input/sample<n>.<ext> data/patch/sample<n>_1.<ext>
+   ```
+2. Apply the second patch to the result of the first patch:
+   ```
+   patch -o data/result/sample<n>_2.<ext> data/result/sample<n>_1.<ext> data/patch/sample<n>_2.<ext>
+   ```
+
+## How to Generate More Samples
+
+To generate additional samples, follow these steps:
+
+1. Create a new original file in the `data/input/` directory:
+   ```
+   touch data/input/sample<n>.<ext>
+   ```
+   Replace `<n>` with the next sequential number and `<ext>` with the appropriate file extension.
+
+2. Add content to the original file using your preferred text editor or the following command:
+   ```
+   echo "content" > data/input/sample<n>.<ext>
+   ```
+
+3. Create a modified version of the file:
+   ```
+   cp data/input/sample<n>.<ext> data/input/sample<n>_modified1.<ext>
+   ```
+
+4. Edit the modified file to make your desired changes.
+
+5. Generate a patch file:
+   ```
+   diff -u data/input/sample<n>.<ext> data/input/sample<n>_modified1.<ext> > data/patch/sample<n>_1.<ext>
+   ```
+
+6. Create a second modified version based on the first:
+   ```
+   cp data/input/sample<n>_modified1.<ext> data/input/sample<n>_modified2.<ext>
+   ```
+
+7. Edit the second modified file to make additional changes.
+
+8. Generate a second patch file:
+   ```
+   diff -u data/input/sample<n>_modified1.<ext> data/input/sample<n>_modified2.<ext> > data/patch/sample<n>_2.<ext>
+   ```
+
+9. Apply the patches to generate result files:
+   ```
+   patch -o data/result/sample<n>_1.<ext> data/input/sample<n>.<ext> data/patch/sample<n>_1.<ext>
+   patch -o data/result/sample<n>_2.<ext> data/result/sample<n>_1.<ext> data/patch/sample<n>_2.<ext>
+   ```
+
+10. Verify the results:
+    ```
+    diff -u data/input/sample<n>_modified1.<ext> data/result/sample<n>_1.<ext>
+    diff -u data/input/sample<n>_modified2.<ext> data/result/sample<n>_2.<ext>
+    ```
+    If there's no output, the files are identical, which means the patches were applied correctly.
+
+## Tips for Creating Effective Test Cases
+
+1. Include a variety of file types (programming languages, text files, configuration files, etc.)
+2. Create patches that demonstrate different types of changes:
+   - Adding new content
+   - Removing content
+   - Modifying existing content
+   - Moving content around
+   - Changing whitespace and formatting
+3. Include edge cases such as:
+   - Very large files
+   - Files with special characters
+   - Files with complex formatting
+   - Binary files (note that the unified diff format is primarily designed for text files)
+4. Test patch application with different options:
+   - With and without context
+   - With different levels of fuzz
+   - With and without backup files

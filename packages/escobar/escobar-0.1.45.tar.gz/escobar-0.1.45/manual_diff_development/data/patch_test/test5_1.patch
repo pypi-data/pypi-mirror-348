@@ -1,0 +1,52 @@
+--- data/input/test5.py	2025-05-12 13:11:58
++++ data/input/test5_modified1.py	2025-05-12 13:12:12
+@@ -8,14 +8,13 @@
+         self.last_login = None
+     
+     def _encrypt_password(self, password):
+-        # This is a simple simulation of password encryption
+-        # In a real application, use a proper encryption library
+-        import hashlib
+-        return hashlib.sha256(password.encode()).hexdigest()
++        # Using a library for password hashing
++        import bcrypt
++        return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+     
+     def verify_password(self, password):
+-        encrypted = self._encrypt_password(password)
+-        return encrypted == self._password
++        import bcrypt
++        return bcrypt.checkpw(password.encode(), self._password)
+     
+     def activate_account(self):
+         self.is_active = True
+@@ -30,16 +29,26 @@
+             print("Account is not active. Please activate your account first.")
+             return False
+         
++        # Simplified login logic with security checks
+         if self.verify_password(password):
+-            import datetime
++            self._update_login_status(True)
++            return True
++        else:
++            self._update_login_status(False)
++            return False
++    
++    def _update_login_status(self, success):
++        import datetime
++        if success:
+             self.last_login = datetime.datetime.now()
+             self.login_attempts = 0
+             print(f"Login successful for {self.username}.")
+-            return True
+         else:
+             self.login_attempts += 1
+             print(f"Invalid password. Login attempts: {self.login_attempts}")
+-            return False
++            if self.login_attempts >= 3:
++                print("Account locked due to too many failed attempts.")
++                self.is_active = False
+     
+     def reset_password(self, old_password, new_password):
+         if self.verify_password(old_password):

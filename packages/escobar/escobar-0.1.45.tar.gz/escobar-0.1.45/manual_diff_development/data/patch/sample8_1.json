@@ -1,0 +1,174 @@
+--- data/input/sample8.json	2025-05-08 12:11:50
++++ data/input/sample8_modified1.json	2025-05-08 12:12:11
+@@ -1,71 +1,126 @@
+ {
+-  "appName": "SampleApp",
+-  "version": "1.0.0",
+-  "description": "A sample JSON configuration file",
+-  "environment": "development",
+-  "debug": true,
++  "appName": "SampleApp Pro",
++  "version": "2.1.0",
++  "description": "An enhanced sample JSON configuration file",
++  "environment": "production",
++  "debug": false,
++  "appId": "com.example.sampleapp",
+   "server": {
+-    "host": "localhost",
+-    "port": 3000,
+-    "protocol": "http",
+-    "timeout": 30000
++    "host": "api.example.com",
++    "port": 443,
++    "protocol": "https",
++    "timeout": 60000,
++    "maxConnections": 1000,
++    "keepAliveTimeout": 5000
+   },
+   "database": {
+-    "type": "mongodb",
+-    "host": "localhost",
+-    "port": 27017,
+-    "name": "sampledb",
+-    "user": "dbuser",
+-    "password": "dbpassword",
+-    "options": {
+-      "useNewUrlParser": true,
+-      "useUnifiedTopology": true
+-    }
++    "type": "postgresql",
++    "host": "db.example.com",
++    "port": 5432,
++    "name": "sampledb_prod",
++    "user": "dbuser_prod",
++    "password": "dbpassword_prod",
++    "poolSize": 20,
++    "ssl": true
+   },
+   "auth": {
+     "enabled": true,
+-    "provider": "local",
+-    "tokenExpiration": 86400,
+-    "refreshTokenExpiration": 604800
++    "provider": "oauth2",
++    "tokenExpiration": 43200,
++    "refreshTokenExpiration": 2592000,
++    "jwtSecret": "your-jwt-secret-key",
++    "providers": {
++      "google": {
++        "clientId": "google-client-id",
++        "clientSecret": "google-client-secret"
++      },
++      "facebook": {
++        "clientId": "facebook-client-id",
++        "clientSecret": "facebook-client-secret"
++      }
++    }
+   },
+   "logging": {
+-    "level": "info",
++    "level": "error",
+     "format": "json",
+-    "output": "console"
++    "output": "file",
++    "directory": "/var/log/sampleapp",
++    "maxSize": "10m",
++    "maxFiles": 5,
++    "compress": true
+   },
+   "features": {
+     "registration": true,
+     "emailVerification": true,
+     "passwordReset": true,
+-    "socialLogin": false,
+-    "twoFactorAuth": false
++    "socialLogin": true,
++    "twoFactorAuth": true,
++    "contentModeration": true,
++    "analytics": true,
++    "notifications": {
++      "email": true,
++      "push": true,
++      "sms": false
++    }
+   },
+-  "email": {
+-    "service": "smtp",
+-    "host": "smtp.example.com",
+-    "port": 587,
+-    "secure": false,
+-    "auth": {
+-      "user": "noreply@example.com",
+-      "pass": "emailpassword"
+-    },
+-    "from": "Sample App <noreply@example.com>"
++  "storage": {
++    "provider": "s3",
++    "region": "us-east-1",
++    "bucket": "sampleapp-files",
++    "accessKey": "your-access-key",
++    "secretKey": "your-secret-key",
++    "publicUrl": "https://files.example.com"
+   },
++  "cdn": {
++    "enabled": true,
++    "provider": "cloudfront",
++    "domain": "cdn.example.com",
++    "cachePolicy": "CachingOptimized"
++  },
+   "cors": {
+     "enabled": true,
+-    "origins": ["http://localhost:8080"],
+-    "methods": ["GET", "POST", "PUT", "DELETE"],
+-    "allowedHeaders": ["Content-Type", "Authorization"]
++    "origins": ["https://app.example.com", "https://admin.example.com"],
++    "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
++    "allowedHeaders": ["Content-Type", "Authorization", "X-Requested-With"],
++    "exposedHeaders": ["X-Total-Count"],
++    "credentials": true,
++    "maxAge": 86400
+   },
+   "rateLimit": {
+     "enabled": true,
+     "windowMs": 900000,
+-    "max": 100,
+-    "message": "Too many requests, please try again later."
++    "max": 500,
++    "message": "Too many requests, please try again later.",
++    "headers": true,
++    "skipSuccessfulRequests": false,
++    "keyGenerator": "ip"
+   },
+-  "cache": {
+-    "enabled": false,
+-    "type": "memory",
+-    "ttl": 3600
++  "monitoring": {
++    "enabled": true,
++    "provider": "prometheus",
++    "endpoint": "/metrics",
++    "interval": 15000,
++    "alerting": {
++      "enabled": true,
++      "provider": "pagerduty",
++      "apiKey": "your-pagerduty-api-key"
++    }
++  },
++  "security": {
++    "helmet": true,
++    "xssProtection": true,
++    "contentSecurityPolicy": {
++      "defaultSrc": ["'self'"],
++      "scriptSrc": ["'self'", "cdn.example.com"],
++      "styleSrc": ["'self'", "cdn.example.com", "'unsafe-inline'"],
++      "imgSrc": ["'self'", "data:", "cdn.example.com", "img.example.com"],
++      "connectSrc": ["'self'", "api.example.com"]
++    },
++    "hsts": {
++      "enabled": true,
++      "maxAge": 31536000,
++      "includeSubDomains": true,
++      "preload": true
++    }
+   }
+ }

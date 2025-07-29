@@ -1,0 +1,16 @@
+--- data/input/test4.py	2025-05-12 13:11:37
++++ data/input/test4_modified1.py	2025-05-12 13:11:45
+@@ -1,6 +1,12 @@
+ def process_data(data):
+     """Process the input data and return the result."""
+-    result = data * 2
++    # Perform multiple operations on the data
++    result = []
++    for item in data:
++        # Double each item
++        doubled = item * 2
++        # Add to result list
++        result.append(doubled)
+     return result
+ 
+ def main():

@@ -1,0 +1,17 @@
+--- data/input/test1.py	2025-05-12 13:10:30
++++ data/input/test1_modified1.py	2025-05-12 13:10:38
+@@ -1,9 +1,11 @@
+-def hello():
+-    print("Hello, World!")
++import sys
++import os
+ 
++# Removed hello function
++
+ def goodbye():
+     print("Goodbye, World!")
++    print(f"Running on Python {sys.version}")
+ 
+ if __name__ == "__main__":
+-    hello()
+     goodbye()

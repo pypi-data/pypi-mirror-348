@@ -1,0 +1,21 @@
+{
+  "name": "Sample Project",
+  "version": "1.1.0",
+  "description": "A sample project for testing JSON patches",
+  "dependencies": {
+    "react": "^17.0.2",
+    "lodash": "^4.17.21",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "dev": "nodemon index.js"
+  },
+  "author": "Test User",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/sample-project"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Sample Project",
+  "version": "2.0.0",
+  "description": "An enhanced sample project for testing JSON patches",
+  "dependencies": {
+    "react": "^18.0.0",
+    "lodash": "^4.17.21",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "dev": "nodemon index.js",
+    "build": "webpack"
+  },
+  "author": {
+    "name": "Test User",
+    "email": "test@example.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/sample-project"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
