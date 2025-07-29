@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "annextimelog"
+version = "0.15.0"
+description = "Track time spent on projects, backed by Git Annex"
+authors = ["Yann Büchau <nobodyinperson@posteo.de>"]
+homepage = "https://gitlab.com/nobodyinperson/annextimelog"
+repository = "https://gitlab.com/nobodyinperson/annextimelog"
+readme = "README.md"
+classifiers = [ 
+    "Development Status :: 3 - Alpha",
+    "Topic :: Software Development :: Version Control :: Git",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
+
+[tool.poetry.urls]
+Changelog = "https://gitlab.com/nobodyinperson/annextimelog/-/blob/main/CHANGELOG.md?ref_type=heads"
+"Author on Mastodon" = "https://fosstodon.org/@nobodyinperson"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rich = "^13.7.0"
+tzdata = "*"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.18.1"
+black = "^23.12.0"
+pycodestyle = "^2.11.1"
+mypy = "^1.8.0"
+coverage = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+annextimelog = 'annextimelog.__main__:cli'
+atl = 'annextimelog.__main__:cli'
