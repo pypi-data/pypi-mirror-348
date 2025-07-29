@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: 0din-jef
+Version: 0.1.0
+Summary: Jailbreak Evaluation Module
+Author: jiwu-moz
+Project-URL: Homepage, https://0din.ai
+Project-URL: Repository, https://github.com/0din-ai/0din-JEF
+Requires-Python: >=3.12
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: requests; extra == "dev"
+Dynamic: license-file
