@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "unsupervised-bias-detection"
+version = "0.2.6"
+description = "package for unsupervised bias detection"
+authors = ["NGO Algorithm Audit"]
+license = "EUPL-1.2 license"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.26.4"
+scikit-learn = ">=1.6.1"
+kmodes = "^0.12.2"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.2.2"
+pytest = "^8.0.2"
+pandas = "^2.2.2"
+fairlearn = "^0.10.0"
+
+[tool.ruff.lint]
+select = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
