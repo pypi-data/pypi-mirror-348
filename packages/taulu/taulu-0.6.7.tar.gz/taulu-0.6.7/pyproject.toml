@@ -1,0 +1,25 @@
+[project]
+name = "taulu"
+version = "0.6.7"
+description = "Segment a table from an image"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.4",
+    "opencv-python>=4.11.0.86",
+    "pandas>=2.2.3",
+    "scikit-image>=0.25.2",
+]
+
+[project.scripts]
+taulu = "taulu:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8.3.5"]
+
+[tool.pytest.ini_options]
+markers = ["visual: marks tests that require visual confirmation"]
