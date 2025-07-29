@@ -1,0 +1,6 @@
+[console_scripts]
+arc = arc_memory.cli:app
+
+[arc_memory.plugins.frameworks]
+langchain = arc_memory.sdk.adapters.langchain:LangChainAdapter
+openai = arc_memory.sdk.adapters.openai:OpenAIAdapter
