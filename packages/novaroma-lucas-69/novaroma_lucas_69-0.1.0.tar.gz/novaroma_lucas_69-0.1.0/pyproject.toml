@@ -1,0 +1,19 @@
+[project]
+name = "novaroma-lucas-69"
+version = "0.1.0"
+description = "Aquele episódio"
+readme = "README.md"
+authors = [
+    { name = "João Farias", email = "joaofariastn@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2.3",
+]
+
+[project.scripts]
+novaroma-lucas-69 = "novaroma_lucas_69:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
