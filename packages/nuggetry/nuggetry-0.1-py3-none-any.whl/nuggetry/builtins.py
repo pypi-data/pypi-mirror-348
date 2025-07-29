@@ -1,0 +1,1 @@
+def say(*args): print(*args)
