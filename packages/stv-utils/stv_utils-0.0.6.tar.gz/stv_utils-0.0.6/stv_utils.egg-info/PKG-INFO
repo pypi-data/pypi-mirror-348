@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: stv_utils
+Version: 0.0.6
+Summary: 一些常用函数与方法
+Home-page: 
+Author: [96m星灿长风v(github.com/StarWindv)[0m
+Author-email: starwindv.stv@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: summary
+
+# stv_utils
+
+## 简介
+- 
+- 检测操作系统类型
+- 检测是否为中文环境
+- 判断是否在IDLE中运行
+- 根据系统执行清屏命令
+- 提供颜色和文本样式的字典列表
+- 自定义输出流颜色的装饰器
+
+
+## 功能说明
+
+### `is_ch()`
+
+该函数用于检测当前系统是否为Windows系统，并且语言环境是否为中文。如果是，则返回`True`。
+
+### `system_check(verbose=False, more_verbose=False)`
+
+该函数使用`platform`模块检测操作系统类型。参数`verbose`和`more_verbose`用于控制返回的信息格式：
+
+- `verbose=True`：返回系统名称字符串
+- `more_verbose=True`：返回原始检测结果
+- 默认情况下，返回一个布尔值，表示是否为Windows系统
+
+### `is_idle()`
+
+该函数通过检查`sys.modules`来判断当前脚本是否在IDLE中运行。
+
+### `system_clear(force=False)`
+
+该函数根据系统类型执行相应的清屏命令。如果当前在IDLE中运行，则不会执行清屏。参数`force=True`可以强制执行清屏。
+
+### `color()`
+
+该函数返回一个包含前景色、背景色和文本样式的字典列表，用于在终端中输出彩色文本和不同样式的文本。
+
+### `colorize(func=None, *, start_str='|>', color_code='\033[90m'):`
+
+使用类`ColorizedOutput`进行自定义颜色装饰器，允许匹配特定开头的输出，并且修改该`print`流的起始颜色，并自动在当前`print`的末尾添加重置符
+
+
+## 开发者信息
+
+ 星灿长风v(StarWindv)[https://github.com/starwindv]
+
+
+## 许可证
+
+ MIT LICENSE
