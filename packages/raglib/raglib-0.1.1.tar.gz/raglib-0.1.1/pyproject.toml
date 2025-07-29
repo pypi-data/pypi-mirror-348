@@ -1,0 +1,10 @@
+[project]
+name = "raglib"
+version = "0.1.1"
+description = "Librería para consultas RAG"
+authors = [{name = "Harrison Chacon", email = "harrisonlchr@gmail.com"}]
+dependencies = ["openai-agents"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
