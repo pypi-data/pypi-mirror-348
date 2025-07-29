@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: sphinx-click-rst-to-ansi-formatter
+Version: 0.1.5
+Summary: 
+Author: Håkon Hægland
+Author-email: hakon.hagland@gmail.com
+Requires-Python: >=3.10,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: click (>=8.1.7,<9.0.0)
+Requires-Dist: colorama (>=0.4.6,<0.5.0)
+Requires-Dist: docutils (>=0.21.2,<0.22.0)
+Description-Content-Type: text/markdown
+
+# sphinx-click-rst-to-ansi-formatter
+
+Use together with [sphinx-click](https://github.com/click-contrib/sphinx-click) to write
+[click](https://github.com/pallets/click) command docstrings using Sphinx reST formatting.
+
+## Documentation
+
+See: [hakonhagland.github.io/sphinx-click-rst-to-ansi-formatter/](https://hakonhagland.github.io/sphinx-click-rst-to-ansi-formatter/index.html)
+
