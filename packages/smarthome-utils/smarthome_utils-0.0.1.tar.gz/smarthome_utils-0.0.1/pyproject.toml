@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "smarthome-utils"
+version = "0.0.1"
+authors = [
+  { name="Sina Zaker", email="cnazk98@gmail.com" },
+]
+description = "A starting package to work with smarthome robot"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/fira-smarthome/smarthome-utils"
+Issues = "https://github.com/fira-smarthome/smarthome-utils/issues"
