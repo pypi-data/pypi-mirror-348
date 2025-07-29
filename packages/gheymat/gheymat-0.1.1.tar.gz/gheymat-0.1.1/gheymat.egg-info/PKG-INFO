@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: gheymat
+Version: 0.1.1
+Summary: دریافت قیمت دلار و پوند و تبدیل آن به ریال با پایتون
+Author-email: Ali Heydari <imrrobat@gmail.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
+Dynamic: license-file
+
+# قیمت لحظه‌ای دلار و پوند و تبدیل به ریال | Gheymat
+
+کتابخانه‌ای برای دریافت قیمت دلار و پوند به صورت لحظه‌ای و تبدیل آن به ریال.
+
+  
+## نصب
+
+```bash
+pip install gheymat
+```
+## استفاده
+```python
+from gheymat.currency import USD #or GBP
+
+dollar_price = USD()
+print(dollar_price)
+```
