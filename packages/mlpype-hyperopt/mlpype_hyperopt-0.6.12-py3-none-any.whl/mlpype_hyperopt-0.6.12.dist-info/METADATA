@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mlpype-hyperopt
+Version: 0.6.12
+Summary: HyperOPT extension for MLpype
+Author: Jeroen van den Hoven
+License: MIT
+Requires-Python: >=3.9
+Requires-Dist: hyperopt>=0.2.7
+Requires-Dist: mlpype-base
+Provides-Extra: strict
+Requires-Dist: hyperopt==0.2.7; extra == 'strict'
