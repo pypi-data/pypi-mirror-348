@@ -1,0 +1,45 @@
+{% extends base.html %}
+
+{% block content %}
+{% import urllib.parse, re %}
+
+<div class="layui-row">
+  <div class="tree-table layui-col-md12">
+    <table class="filelist layui-table" lay-skin="nob">
+      <thead>
+        <tr class="table-tools" style="background:#fff">
+          <th class="pc" style="width:10px"><input type="checkbox" class="batch-select"></th>
+          <th style="text-align:left !important"><a href="{{ handler.add_args(sort='name', order=((0 - handler.args.order) if handler.args.sort == 'name' and handler.args.order else -1)) }}"><span>文件名</span>{% if handler.args.sort == 'name' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'name' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          <th class="pc" style="width:120px"><a href="{{ handler.add_args(sort='mtime', order=((0 - handler.args.order) if handler.args.sort == 'mtime' and handler.args.order else -1)) }}"><span>修改时间</span>{% if handler.args.sort == 'mtime' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'mtime' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          <th class="pc" style="width:100px"><a href="{{ handler.add_args(sort='size', order=((0 - handler.args.order) if handler.args.sort == 'size' and handler.args.order else -1)) }}"><span>文件大小</span>{% if handler.args.sort == 'size' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'size' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doc in entries %}
+        <tr>
+          {% set suffix = doc.path.suffix.lower()[1:] %}
+          <td class="pc btn-checkbox" style="width:10px"><input type="checkbox"></td>
+          <td class="btn-enter" style="text-align:left !important">
+            {% if handler.is_preview and re.match('(jpeg|jpg|png|gif|bmp|webp|svg|tif|webp|ai|ico)$', suffix) %}
+            <img style="display:block" src="/{{ handler.path }}/{{ doc.path }}" {% if handler.args.w %}width="{{ int(handler.args.w) }}"{% end %} {% if handler.args.h %}height="{{ int(handler.args.h) }}"{% end %}>
+            {% elif handler.is_preview and re.match('(mp3|ogg|amr|wav)$', suffix) %}
+            <audio style="display:block" controls="controls" ><source src="/{{ handler.path }}/{{ doc.path }}"></audio>
+            {% else %}
+            {% set icon = 'folder.png' if doc.is_dir else handler.icon.get(doc.path.suffix.lower(), 'file.png') %}
+            <img class="file-icon" src="{{ static_url(f'img/{icon}') }}">
+            {% end %}
+
+            <a class="{% if handler.args.q %}layui-tips{% end %} file-link {% if doc.is_dir %}dir-link{% end %}" tips="{{ doc.path }}" style="white-space:pre-wrap;word-wrap:break-word;" href="/{{ handler.path }}/{{ doc.path }}" title="{{ doc.path }}">{{ doc.path.name }}</a>
+          </td>
+          <td class="pc btn-enter" style="width:120px">{{ handler.convert_time(doc.mtime) }}</td>
+          <td class="pc btn-enter" style="width:100px">{{ handler.convert_size(doc.size) }}</td>
+        </tr>
+        {% end %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="pagination"></div>
+
+{% end %}

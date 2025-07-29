@@ -1,0 +1,123 @@
+{% extends base.html %}
+
+{% block content %}
+<div class="layui-content">
+
+  <div class="layui-tab layui-tab-brief" lay-filter="admin">
+    <ul class="layui-tab-title">
+      <li lay-id="1">会员信息</li>
+      <li lay-id="2">密码修改</li>
+      <li lay-id="3">网盘设置</li>
+    </ul>
+    <div class="layui-tab-content">
+
+      <div class="layui-tab-item layui-show">
+        <p>用户ID：{{ current_user.id }}</p>
+        <p>用户名：{{ current_user.username or current_user.nickName }}</p>
+        {% if current_user.email %}
+        <p>邮箱：{{ current_user.email }}</p>
+        {% end %}
+
+        {% if current_user.admin %}
+        <p>当前会员等级：管理员</p>
+        {% elif current_user.vip %}
+        <p>当前会员等级：{{ handler.app.vip_map[current_user.vip] }} &nbsp
+          {% if handler.app.auth_server %}
+          <a target="_blank" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-sm" href="/order/{{ current_user.vip }}">续费</a>
+          <a target="_blank" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/vip">升级</a>
+          {% end %}
+        </p>
+        {% for i in range(1, 5) %}
+        {% if getattr(current_user, f'vip{i}_expired_at') %}
+        <p>{{ handler.app.vip_map[i] }}到期时间：{{ str(getattr(current_user, f'vip{i}_expired_at'))[:19] }}</p>
+        {% end %}
+        {% end %}
+        {% else %}
+        <p>当前会员等级：免费版 &nbsp
+          {% if current_user.deny %}您因访问超限已被禁用，请{% elif current_user.suspend %}您因访问超限已被暂停上传，请{% end %}
+          <a target="_blank" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/vip">升级</a>
+        </p>
+        {% end %}
+
+        {% if current_user.admin or current_user.vip %}
+        <p>您的token：{{ current_user.token }} &nbsp
+          <button class="layui-btn layui-btn-sm layui-btn-radius btn-copy" data-clipboard-text="{{ current_user.token }}">复制token</button>
+          <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger btn-token">更换token</button>
+        </p>
+        {% end %}
+
+        {% if not current_user.vip %}
+        <p>您的token：<a <a target="_blank" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/vip">获取token</a></p>
+        {% end %}
+      </div>
+
+
+      <div class="layui-tab-item">
+        <blockquote class="layui-elem-quote">
+          <p>在此处修改您的密码，如果忘记了原密码，请选择 <a href="/reset">重置密码</a></p>
+        </blockquote>
+        <form class="layui-form" action="/user" method="POST">
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="old_password" placeholder="原密码" autocomplete="off" class="layui-input" required lay-verify="required" readonly onfocus="this.removeAttribute('readonly');" lay-affix="eye">
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="password" placeholder="新密码" autocomplete="off" class="layui-input" required lay-verify="required" readonly onfocus="this.removeAttribute('readonly');" lay-affix="eye">
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="confirmPassword" placeholder="确认密码" lay-verify="required|confirmPassword" autocomplete="off" class="layui-input" required lay-verify="required" readonly onfocus="this.removeAttribute('readonly');" lay-affix="eye">
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-wrap">
+              <button class="layui-btn" lay-submit lay-filter="default">保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="layui-tab-item">
+        <blockquote class="layui-elem-quote">
+          <p>开启直链后所有文件可通过直链进行下载</p>
+        </blockquote>
+        <form class="layui-form" action="/admin" method="POST">
+          <div class="layui-form-item">
+            <label class="layui-form-label">开启直链</label>
+            <div class="layui-input-inline">
+              <input type="checkbox" name="direct" lay-skin="switch" lay-text="开启|关闭" {% if current_user.direct %}checked{% end %}>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button style="width:100px" class="layui-btn" lay-submit lay-filter="default">保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% end %}
