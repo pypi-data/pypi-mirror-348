@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling >= 1.26", "stelar-client >= 0.3.6"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stelar_synth_corr_data"
+version = "0.1.0"
+authors = [
+  { name="stelar_synth_corr_data", email="w.r.punter@tue.nl" },
+]
+description = "STELAR Synthetic Correlation Data"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/wiegerpunter/CorrSynth"
+Issues = "https://github.com/wiegerpunter/CorrSynth/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
