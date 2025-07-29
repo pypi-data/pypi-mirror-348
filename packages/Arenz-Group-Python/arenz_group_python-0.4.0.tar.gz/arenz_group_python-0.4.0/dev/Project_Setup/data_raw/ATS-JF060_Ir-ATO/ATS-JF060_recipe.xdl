@@ -1,0 +1,201 @@
+<?xml version="1.0" ?>
+<XDL>
+    <File file_created="2025-04-14 09:51:09 GMT(+02:00)" author="Jonas Forner" filename="ATS-JF060_recipe" GUID="75b3900d-eb75-420d-9e05-cc7893c8bdfe" description="Data File for Chemical Processes" mod_program="EXP_DB.exe" mod_prog_ver="1.0.0" mod_user="Jonas Forner">
+        <file_created>2025-04-14 09:51:09 GMT(+02:00)</file_created>
+        <author>Jonas Forner</author>
+        <filename>ATS-JF060</filename>
+        <GUID>75b3900d-eb75-420d-9e05-cc7893c8bdfe</GUID>
+        <description>Data File for Chemical Processes</description>
+    </File>
+    <Blueprint id="IrCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="IrCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI201479" name="Iridium(III) chloride hydrate" role="" quantity="0.04672897196261682 g" molecular_weight="298.58"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="0.04672897196261682 g" reagent="AAI201479" disc="Add Iridium(III) chloride hydrate(0.04672897196261682 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="RuCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="RuCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI201514" name="Ruthenium(III) chloride hydrate" role="" quantity="1e-13 g" molecular_weight="207.43"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="1e-13 g" reagent="AAI201514" disc="Add Ruthenium(III) chloride hydrate(1e-13 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="FeCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="FeCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI20073" name="Iron(III) chloride" role="" quantity="1e-13 g" molecular_weight="162.2"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="1e-13 g" reagent="AAI20073" disc="Add Iron(III) chloride(1e-13 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="MnCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="MnCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI20093" name="Manganese(II) chloride tetrahydrate" role="" quantity="1e-13 g" molecular_weight="197.91"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="1e-13 g" reagent="AAI20093" disc="Add Manganese(II) chloride tetrahydrate(1e-13 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="NiCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="NiCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI20098" name="Nickel(II) chloride hexahydrate" role="" quantity="1e-13 g" molecular_weight="237.69"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="1e-13 g" reagent="AAI20098" disc="Add Nickel(II) chloride hexahydrate(1e-13 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="AuCl-Stock">
+        <Metadata>
+            <description>5.0 mg/ml</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001" name="AuCl Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI201454" name="Gold(III) chloride trihydrate" role="" quantity="1e-13 g" molecular_weight="393.83"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.005 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="VV0001" dropwise="FALSE" time="0.00 min" mass="1e-13 g" reagent="AAI201454" disc="Add Gold(III) chloride trihydrate(1e-13 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.005 l" vessel="VV0001" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.005 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="NaOH-Stock">
+        <Metadata>
+            <description>2.0 M</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="V_FT050" name="NaOH Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="AAI201391" name="Sodium hydroxide" role="" quantity="3.9997000000000003 g" molecular_weight="40.00"/>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="0.05 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="V_FT050" dropwise="FALSE" time="0.00 min" mass="3.9997000000000003 g" reagent="AAI201391" disc="Add Sodium hydroxide(3.9997000000000003 g)"/>
+                <Dissolve temp="25.0 degC" reagent="WATER" volume="0.05 l" vessel="V_FT050" time="0.00 min" disc="Dissolve the content of VES00 with MilliQ Water(0.05 l) at 25.0 degC"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Blueprint id="H2O-Stock">
+        <Metadata>
+            <description>H2O</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="V_BE0100" name="H2O Stock" role="VES00"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="WATER" name="MilliQ Water" role="" quantity="5.000E-2 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Reaction>
+                <Add vessel="V_BE0100" dropwise="FALSE" time="0.00 min" volume="5.000E-2 l" reagent="WATER" disc="Add water to the vessel (50ml)"/>
+            </Reaction>
+        </Procedure>
+    </Blueprint>
+    <Synthesis id="Synthesis">
+        <Metadata>
+            <description>Solvothermal Synthesis of Nanoparticle Catalyst.</description>
+        </Metadata>
+        <Hardware>
+            <Component type="vessel" id="VV0001#00" name="Reaction Vessel" role="VES00"/>
+            <Component type="stock" id="stock1" name="IrCl" role="VES01"/>
+            <Component type="stock" id="stock2" name="RuCl" role="VES02"/>
+            <Component type="stock" id="stock3" name="FeCl" role="VES03"/>
+            <Component type="stock" id="stock4" name="MnCl" role="VES04"/>
+            <Component type="stock" id="stock5" name="NiCl" role="VES05"/>
+            <Component type="stock" id="stock6" name="AuCl" role="VES06"/>
+            <Component type="stock" id="stock7" name="RA" role="VES07"/>
+            <Component type="stock" id="stock8" name="Solvent" role="VES08"/>
+            <Component type="vessel" id="Reactor#00" name="Reactor" role="VES08"/>
+            <Component type="vessel" id="V_FT050#00" name="Falcon Tube 50 ml" role="VES09"/>
+        </Hardware>
+        <Reagents>
+            <Reagent type="Chemical" id="SUPP0026" name="antimony doped tin oxide (ATO)" role="" quantity="5.000E-3 g" molecular_weight="579.98"/>
+            <Reagent type="Chemical" id="AAI20152" name="Ethanol absolute" role="" quantity="30.0E-2 l" molecular_weight="46.07"/>
+            <Reagent type="Chemical" id="WATER" name="MillQ Water" role="" quantity="30.0E-2 l" molecular_weight="18.02"/>
+        </Reagents>
+        <Procedure>
+            <Prep>
+                <IrCl-Stock id="stock1" description="IrCl-Stock"/>
+                <RuCl-Stock id="stock2" description="RuCl-Stock"/>
+                <FeCl-Stock id="stock3" description="FeCl-Stock"/>
+                <MnCl-Stock id="stock4" description="MnCl-Stock"/>
+                <NiCl-Stock id="stock5" description="NiCl-Stock"/>
+                <AuCl-Stock id="stock6" description="AuCl-Stock"/>
+                <NaOH-Stock id="stock7" description="reducing agent stock"/>
+                <H2O-Stock id="stock8" description="solvent stock"/>
+            </Prep>
+            <Reaction>
+                <Transfer from_vessel="stock1" to_vessel="VV0001" time="NaN min" volume="0.000999544 l" disc="VES01 to VES00"/>
+                <Transfer from_vessel="stock7" to_vessel="VV0001" time="NaN min" volume="0.000104 l" disc="VES07 to VES00"/>
+                <Add vessel="VES00" dropwise="FALSE" time="0.00 min" mass="5.000E-3 g" reagent="SUPP0026" disc="Add ATO (5.000 mg) to VES00"/>
+                <Transfer from_vessel="stock8" to_vessel="VV0001" time="NaN min" volume="0.0038964559999999995 l" disc="VES08 to VES00"/>
+                <Transfer from_vessel="VES00" to_vessel="Reactor" time="NaN min" volume="0.000E+0 l" disc="VES00 to VES09"/>
+                <Purge time="0.5 min" vessel="Reactor" gas="Ar" pressure="300.00k Pa" flow="0.0000E+0 s^-1 m^3" disc="Purge Reactor for 30 s with Ar at 3.00 bar"/>
+                <Stir stir_speed="500.0 /min" time="0.00 min" disc="Stir at 500.0 RPM"/>
+                <HeatChill vessel="Reactor" time="240.0 min" temp="175.0 degC" rate="2.0 K/min" disc="HeatChill in Reactor to 175.0 degC (2.0 K/min) and wait for 240.0 min"/>
+                <HeatChill vessel="Reactor" time="180.00 min" temp="25 degC" disc="HeatChill in Reactor to 25 degC and wait for 3 h"/>
+                <Transfer from_vessel="Reactor" to_vessel="V_FT050" time="NaN min" volume="0.000E+0 l" disc="Transfer the content from Reactor to VES09"/>
+                <WashSolid repeats="2.0" solvent="WATER" volume="0.015 ml" vessel="V_FT050#00" time="15.0 min" Centrifuge_Speed="6000.0 rpm" disc="Wash the content of VES09 with MilliQ Water (0.015 ml) for 15.0 min at 6000.0 rpm, repeat 2.0 times"/>
+                <WashSolid repeats="2.0" solvent="AAI20152" volume="0.015 ml" vessel="V_FT050#00" time="15.0 min" Centrifuge_Speed="6000.0 rpm" disc="Wash the content of VES09 with Ethanol (0.015 ml) for 15.0 min at 6000.0 rpm, repeat 2.0 times"/>
+            </Reaction>
+        </Procedure>
+    </Synthesis>
+</XDL>
