@@ -1,0 +1,56 @@
+[project]
+name = "tacobi"
+version = "0.2.2"
+description = "A framework for building and running BI applications."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "apscheduler>=3.11.0",
+    "diskcache>=5.6.3",
+    "fastapi>=0.115.12",
+    "pandas>=2.2.3",
+    "pandera[polars]>=0.23.1",
+    "polars>=1.29.0",
+    "pyarrow>=20.0.0",
+    "pydantic>=2.11.4",
+    "pytest-asyncio>=0.26.0",
+    "requests>=2.32.3",
+    "rustworkx>=0.16.0",
+    "uvicorn>=0.34.2",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[dependency-groups]
+dev = [
+    "pandas>=2.2.3",
+    "pytest-asyncio>=0.26.0",
+    "pytest>=8.3.5",
+    "pandas-stubs>=2.2.3.250308",
+    "requests>=2.32.3",
+    "httpx>=0.28.1",
+]
+
+[tool.ruff]
+line-length = 88  # Adjust as needed
+
+[tool.ruff.lint]
+select = ["ALL"]  # Enable all linting rules
+ignore = ["RUF022", "COM812", "INP001", "S101", "SLF001"]
+
+[tool.ruff.format]
+quote-style = "double"           # Options: "single" or "double"
+indent-style = "space"           # Options: "space" or "tab"
+docstring-code-format = true     # Format code examples in docstrings
+
+[tool.uv.workspace]
+members = ["test"]
