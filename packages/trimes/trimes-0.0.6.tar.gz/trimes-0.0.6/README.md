@@ -1,0 +1,25 @@
+# trimes
+
+*trimes* (transient time series) is a python package for transient time series data in pandas format. The application is actually for all time series data where the time vector has a numerical format (e.g numpy's float64) - as opposed to the frequently used *DateTime* format. To the best of our knowledge, there is currently no other python package focusing on transient time series data as described and the mentioned  *DateTime* format is not convenient for transient time series.
+
+trimes provides functionality for pandas DataFrames (in the format mentioned above) for the following use cases:
+
+- get data points 
+- interpolation
+- resampling
+- regression 
+- signal generation (harmonics, symmetrical components)
+- comparison of times series (difference, boundaries, envelopes)
+- metrics (e.g. root mean squared error)
+- step response analysis
+- plotting
+
+and more.
+
+Have a look at the [documentation](https://fraunhiee-unikassel-powsysstability.github.io/trimes/docs/index.html) to get started.
+
+## Installation
+
+```shell
+pip install trimes
+```
