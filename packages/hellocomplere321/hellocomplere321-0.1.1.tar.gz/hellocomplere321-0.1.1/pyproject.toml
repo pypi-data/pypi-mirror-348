@@ -1,0 +1,22 @@
+
+[project.urls]
+Homepage = "https://github.com/Ashu28555/hellocomplere"
+
+
+[project]
+name = "hellocomplere321"
+version = "0.1.1"
+description = "A simple Hello World package"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+  { name="Ashutosh Semwal", email="info@complereinfosystem.com" }
+]
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["hellocomplere321"]
