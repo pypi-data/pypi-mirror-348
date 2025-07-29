@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: kisesi
+Version: 0.4.0
+Summary: Light wrapper around Python's `logging` built-in module.
+Project-URL: Repository, https://github.com/eeriemyxi/kisesi
+Project-URL: Issues, https://github.com/eeriemyxi/kisesi/issues
+Author-email: myxi <myxi@envs.net>
+License: Copyright (c) 2024 myxi@envs.net
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: color,logging,python,wrapper
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# Kisesi
+Kisesi is a light wrapper around the built-in `logging` module of Python
+standard library. This module is written in a hacky way and thus is meant for
+personal use.
+
+# Demos
+```python
+import kisesi
+
+
+def main() -> None:
+    kisesi.basic_config(level=kisesi.DEBUG, incdate=True)
+
+    log = kisesi.get_logger(__name__)
+    log.debug("This is a \"debug\" message.")
+    log.info("This is a \"info\" message.")
+    log.warning("This is a \"warning\" message.")
+    log.error("This is a \"error\" message.")
+    log.critical("This is a \"critical\" message.")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## Preview
+### Maple Font
+![Demo Image](https://files.catbox.moe/wmmvsx.png)
+
+### Normal
+![Demo Image](https://files.catbox.moe/o9vvpw.png)
+
+# Guide
+You are expected to read the [source
+code](https://github.com/eeriemyxi/kisesi/blob/main/src/kisesi/__init__.py) to
+figure out all the features.
+
+# Installation
+Pypi
+```shell
+user:~$ pip install kisesi
+```
+Git
+```shell
+user:~$ pip install git+https://github.com/eeriemyxi/kisesi
+```
