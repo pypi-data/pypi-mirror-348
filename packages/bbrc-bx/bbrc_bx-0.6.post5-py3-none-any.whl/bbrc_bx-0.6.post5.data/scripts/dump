@@ -1,0 +1,71 @@
+#!python
+import logging as log
+import os.path as op
+
+import sys
+dd = op.abspath(op.join(op.dirname(__file__), '..'))
+sys.path.append(dd)
+from bx import dump
+
+
+def dir_path(fp):
+    if op.isdir(fp):
+        return fp
+    else:
+        raise NotADirectoryError(fp)
+
+
+def create_parser():
+    import argparse
+    from argparse import RawTextHelpFormatter
+
+    cfgfile = op.join(op.expanduser('~'), '.xnat.cfg')
+
+    desc = 'Run every bx command returning alphanumeric endpoints and store ' \
+           'results as a collection of spreadsheets.'
+    arg_parser = argparse.ArgumentParser(description=desc,
+                                         formatter_class=RawTextHelpFormatter)
+    arg_parser.add_argument('--dest', '-d',
+                            help='Destination directory',
+                            type=dir_path,
+                            required=True)
+    arg_parser.add_argument('--config', '-c',
+                            help='XNAT configuration file',
+                            required=False,
+                            default=cfgfile)
+    arg_parser.add_argument('--python', '--py',
+                            help='Python interpreter',
+                            default='python',
+                            required=False)
+    arg_parser.add_argument('--shell', '--sh',
+                            help='Shell interpreter',
+                            default='/usr/bin/bash',
+                            required=False)
+    arg_parser.add_argument('--debug',
+                            help='Debug mode (dry run)',
+                            action='store_true',
+                            default=False,
+                            required=False)
+    arg_parser.add_argument('--verbose', '-v',
+                            help='Display verbosal information (optional)',
+                            action='store_true',
+                            default=False,
+                            required=False)
+    return arg_parser
+
+
+if __name__ == "__main__":
+    parser = create_parser()
+    args = parser.parse_args()
+    logger = log.getLogger()
+    if args.verbose:
+        logger.setLevel(level=log.DEBUG)
+    else:
+        logger.setLevel(level=log.INFO)
+
+    if not op.isfile(args.config):
+        log.error('Configuration file not found (%s)' % args.config)
+        sys.exit(-1)
+
+    dump.dump(args.dest, config=args.config, debug=args.debug,
+              interpreter=args.python, bash_command=args.shell)
