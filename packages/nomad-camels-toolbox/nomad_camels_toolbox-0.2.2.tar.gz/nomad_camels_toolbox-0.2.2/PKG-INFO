@@ -1,0 +1,58 @@
+Metadata-Version: 2.3
+Name: nomad-camels-toolbox
+Version: 0.2.2
+Summary: This package provides easy access to data generated with nomad-camels
+Author: nomad-camels team
+Author-email: nomad-camels@fau.de
+Requires-Python: >=3.10
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: all
+Provides-Extra: pandas
+Provides-Extra: plotly
+Provides-Extra: qt
+Requires-Dist: PySide6 (>=6.6.0) ; extra == "qt"
+Requires-Dist: h5py (>=3.12.1,<4.0.0)
+Requires-Dist: lmfit (>=0.1.2) ; extra == "plotly"
+Requires-Dist: pandas (>=2.2.3,<3.0.0) ; extra == "pandas"
+Requires-Dist: pandas ; extra == "all"
+Requires-Dist: pandas ; extra == "plotly"
+Requires-Dist: plotly (>=5.15.0) ; extra == "plotly"
+Requires-Dist: plotly ; extra == "all"
+Requires-Dist: pyqtgraph (>=0.13.3) ; extra == "qt"
+Requires-Dist: qt ; extra == "all"
+Description-Content-Type: text/markdown
+
+# NOMAD CAMELS toolbox
+
+This package provides easy access to data generated with [NOMAD CAMELS](https://github.com/FAU-LAP/NOMAD-CAMELS).
+
+Simplify your data evaluation with the NOMAD CAMELS toolbox!
+
+
+# Changelog
+
+### 0.2.2
+Fixes:
+- fixed import problems
+
+### 0.2.1
+Features:
+- custom plots in qt-viewer
+
+Fixes:
+- installation fixed
+- qt viewer more stable
+
+## 0.2.0
+Features:
+- Recreating plots from CAMELS with a single function
+- UI tool to view data in a simplified way
+
+### 0.1.2
+Fixes:
+- fixed returning of dataframes for different shapes of the data
+
