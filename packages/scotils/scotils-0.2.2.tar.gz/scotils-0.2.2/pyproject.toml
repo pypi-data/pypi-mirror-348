@@ -1,0 +1,52 @@
+[project]
+name = "scotils"
+version = "0.2.2"
+description = "Workspace for scotils utilities"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Scott Caratozzolo" }]
+
+[project.urls]
+Homepage = "https://gitlab.com/caratozzoloxyz/public/scotils"
+Repository = "https://gitlab.com/caratozzoloxyz/public/scotils"
+Issues = "https://gitlab.com/caratozzoloxyz/public/scotils/-/issues"
+
+
+
+[tool.uv]
+dev-dependencies = [
+    "commitizen>=4.6.0",
+    "go-task-bin>=3.42.1",
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.6.12",
+    "mkdocstrings[python]>=0.24.0",
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.6",
+]
+
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["scotils"]
+
+[tool.setuptools.exclude-package-data]
+"scotils" = ["tests/*"]
+
+
+
+[tool.commitizen]
+tag_format = "v$version"
+version_provider = "uv"
+version_files = [
+    "scotils/__init__.py:__version__",
+]
+bump_message = "bump: version $current_version → $new_version [skip ci]"
+
+[tool.commitizen.schema]
+scopes = ["finance", "strings", "singletons", "docs", "ci"]
