@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cip-delta"
+version = "0.2.0"
+description = "Cifra de Integridade Primal"
+authors = [{ name="Seu Nome", email="costaalv@alumni.usp.br" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["numpy", "scipy"]
+
+[project.urls]
+Homepage = "https://github.com/costaalv/projeto-delta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"cip" = ["dados/*.npy"]
+
+
+
