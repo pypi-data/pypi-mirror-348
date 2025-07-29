@@ -1,0 +1,1 @@
+from .react_server import create_app
