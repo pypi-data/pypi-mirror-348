@@ -1,0 +1,142 @@
+Metadata-Version: 2.1
+Name: dj-two-factor-social-auth
+Version: 1.0.0
+Summary: App connecting django-two-factor-auth and django-social-auth. If user authenticates through social auth, he will be enforced to go through 2FA (if he has it enabled).
+Home-page: https://github.com/PetrDlouhy/dj-2fa-social-auth
+Author: Petr Dlouhý
+Author-email: petr.dlouhy@email.cz
+License: BSD
+Keywords: dj-2fa-social-auth
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Django :: 3.2
+Classifier: Framework :: Django :: 4.0
+Classifier: Framework :: Django :: 4.1
+Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 5.0
+Classifier: Framework :: Django :: 5.1
+Classifier: Framework :: Django :: 5.2
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: django-model-utils (>=2.0)
+Requires-Dist: django-two-factor-auth
+Requires-Dist: social-auth-app-django
+
+=============================================
+Django two factor auth for Django social auth
+=============================================
+
+.. image:: https://badge.fury.io/py/dj-two-factor-social-auth.svg
+    :target: https://badge.fury.io/py/dj-two-factor-social-auth
+
+.. image:: https://codecov.io/gh/PetrDlouhy/dj-two-factor-social-auth/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/PetrDlouhy/dj-two-factor-social-auth
+
+App connecting `django-two-factor-auth <https://github.com/jazzband/django-two-factor-auth>`_ and `social-app-django <https://github.com/python-social-auth/social-app-django>`_. If user authenticates through social auth, he will be enforced to go through 2FA (if he has 2FA enabled).
+
+Documentation
+-------------
+
+The full documentation is at https://dj-two-factor-social-auth.readthedocs.io.
+
+Quickstart
+----------
+
+We expect, that you have already installed and configured `django-two-factor-auth <https://github.com/jazzband/django-two-factor-auth>`_ and `social-app-django <https://github.com/python-social-auth/social-app-django>`_ according to their documentation.
+
+Install Django two factor auth for Django social auth::
+
+    pip install dj-two-factor-social-auth
+
+Add it to your `INSTALLED_APPS`:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        "two_factor",
+        "social_django",
+        "social_2fa",
+        ...
+    )
+
+Add Django two factor auth for Django social auth's URL patterns:
+
+.. code-block:: python
+
+    from django.urls import path
+    
+    
+    urlpatterns = [
+        ...
+        path("", include("social_2fa.urls")),
+        ...
+    ]
+
+Add social_2fa to your social pipeline in ``settings.py``:
+
+
+.. code-block:: python
+
+    SOCIAL_AUTH_PIPELINE = (
+        ...
+        "social_2fa.social_pipeline.two_factor_auth",
+    )
+
+Running Tests
+-------------
+
+Does the code actually work?
+
+::
+
+    source <YOURVIRTUALENV>/bin/activate
+    (myenv) $ pip install tox
+    (myenv) $ tox
+
+
+Development commands
+---------------------
+
+::
+
+    pip install -r requirements_dev.txt
+    invoke -l
+
+
+
+
+History
+-------
+
+1.0.0 (2025-05-15)
+++++++++++++++++++
+
+* Use session to transfer data (safer, more reliable)
+* Update support up to Django 5.2, Python 3.13 versions
+* Drop support for Python 3.8, Django 4.0 and below
+
+0.1.2 (2023-03-09)
+++++++++++++++++++
+
+* Try to rename package to be compatible with poetry (https://github.com/python-poetry/poetry/issues/6996)
+
+0.1.1 (2023-03-08)
+++++++++++++++++++
+
+* Update testing and setup.py to support newest Django, Python and django-two-factor-auth
+
+0.1.0 (2022-03-21)
+++++++++++++++++++
+
+* First release on PyPI.
