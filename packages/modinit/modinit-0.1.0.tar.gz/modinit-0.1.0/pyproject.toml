@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modinit"
+version = "0.1.0"
+description = "A tool for initializing AI model training repositories"
+readme = "README.md"
+authors = [{name = "eddiegulay", email = "edgargulay@outlook.com"}]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["ai", "machine learning", "project structure", "initialization"]
+dependencies = []
+requires-python = ">=3.6"
+
+[project.urls]
+"Homepage" = "https://github.com/eddiegulay/modinit"
+"Bug Tracker" = "https://github.com/eddiegulay/modinit/issues"
+
+[project.scripts]
+modinit = "modinit.cli:main"

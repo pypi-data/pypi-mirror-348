@@ -1,0 +1,52 @@
+# modinit
+
+A Python package for initializing AI model training repositories with a standardized structure.
+
+## Features
+
+- Creates a well-structured project directory for AI model training
+- Follows best practices for machine learning project organization
+- Includes helpful docstrings in all generated files
+- Simple command-line interface
+
+## Installation
+
+```bash
+pip install modinit
+```
+
+## Usage
+
+```bash
+modinit my-project
+```
+
+This will create a new directory called `my-project` with the following structure:
+
+```
+my-project/
+├── notebooks/            # Jupyter notebooks for experimentation
+├── src/                  # Main source code package
+├── data/                 # Data directory
+│   ├── raw/              # Raw, immutable data
+│   ├── processed/        # Processed data ready for modeling
+│   └── interim/          # Intermediate data that has been transformed
+├── configs/              # Configuration files
+├── tests/                # Unit tests
+├── main.py               # Entry point with CLI for running training/evaluation
+└── requirements.txt      # Project dependencies
+```
+
+## Development
+
+To contribute to this project:
+
+1. Clone the repository
+2. Create a virtual environment
+3. Install development dependencies: `pip install -e ".[dev]"`
+4. Make your changes
+5. Run tests: `pytest`
+
+## License
+
+MIT
