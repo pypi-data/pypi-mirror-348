@@ -1,0 +1,111 @@
+# Copyright 2023 - 2025, Helmholtz-Zentrum Hereon
+# SPDX-License-Identifier: CC0-1.0
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydidas"
+authors = [{name = "Malte Storm"}]
+description = "pydidas - the PYthon DIffraction Data Analysis Suite"
+readme = "README.md"
+requires-python = ">=3.11, <3.13"
+license = "GPL-3.0-only"
+keywords = ["X-ray diffraction", "XRD", "WAXS", "SAXS"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+
+[project.urls]
+homepage = "https://pydidas.hereon.de/"
+documentation = "https://hereon-gems.github.io/pydidas"
+repository = "https://github.com/hereon-GEMS/pydidas"
+changelog = "https://github.com/hereon-GEMS/pydidas/blob/master/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = { attr = "pydidas.version.VERSION" }
+dependencies = { file = ["requirements.txt"]}
+optional-dependencies.dev = { file = ["requirements_dev.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+pydidas-clear-settings = "pydidas_scripts.clear_local_settings:clear_local_settings"
+pydidas-updater = "pydidas_scripts.pydidas_updater_script:run_update"
+pydidas-documentation = "pydidas_scripts.open_documentation:open_documentation"
+pydidas-remove-local-files = "pydidas_scripts.remove_local_files:run"
+run-pydidas-workflow = "pydidas_scripts.run_pydidas_workflow:run_workflow" 
+remove-pydidas = "pydidas_scripts.remove_pydidas_from_system:remove_pydidas_from_system"
+
+[project.gui-scripts]
+pydidas-gui = "pydidas_scripts.pydidas_gui:open_gui"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+omit = ["tests/*", "pydidas/gui/*", "pydidas/widgets/*"]
+
+[tool.coverage.html]
+directory = "coverage_html_report"
+
+[tool.isort]
+profile = 'black'
+extend_skip = ["__init__.py"]
+lines_after_imports = 2
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.bandit]
+skips = ["B311"]
+
+[tool.ruff]
+extend-exclude = ["docs/source/conf.py"]
+show-fixes = true
+line-length = 88
+
+[tool.ruff.lint]
+extend-select = ["I", "C90", "F401"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+known-local-folder = ["pydidas", "pydidas_qtcore"]
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 12.
+max-complexity = 12
+
+[tool.ruff.lint.per-file-ignores]
+# F401 module imported but unused
+# F403 ‘from module import *’ used; unable to detect undefined names
+# F405 name may be undefined, or defined from star imports: module
+# E402 module level import not at top of file
+# E501 line too long
+# W605 invalid escape sequence
+"__init__.py" = ["F401", "F403", "F405", "F821"]
+"pydidas/__init__.py" = ["F401", "F403", "F405", "E402", "I"]
+"app_processor_.py" = ["C901"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: mark test as slow to run only when '-m slow' is specified",
+]
+filterwarnings = [
+    "ignore:Mean of empty slice",
+    "ignore:invalid value encountered in divide",
+    "ignore:All-NaN slice encountered",
+    "ignore:All-NaN axis encountered",
+]

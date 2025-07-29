@@ -1,0 +1,10 @@
+[console_scripts]
+pydidas-clear-settings = pydidas_scripts.clear_local_settings:clear_local_settings
+pydidas-documentation = pydidas_scripts.open_documentation:open_documentation
+pydidas-remove-local-files = pydidas_scripts.remove_local_files:run
+pydidas-updater = pydidas_scripts.pydidas_updater_script:run_update
+remove-pydidas = pydidas_scripts.remove_pydidas_from_system:remove_pydidas_from_system
+run-pydidas-workflow = pydidas_scripts.run_pydidas_workflow:run_workflow
+
+[gui_scripts]
+pydidas-gui = pydidas_scripts.pydidas_gui:open_gui
