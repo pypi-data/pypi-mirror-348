@@ -1,0 +1,62 @@
+{
+  "dependencies": [
+    "wowool/german-entity@3.1.0"
+  ],
+  "concepts": [
+    "City",
+    "Company",
+    "Publisher",
+    "Country",
+    "ChangeManagement",
+    "Position",
+    "Product",
+    "Person",
+    "Organization",
+    "StockIndex",
+    "StockExchange"
+  ],
+  "short_description": "Business news annotations such as: Acquisitions, Mergers, Performance, Lawsuits, Operations.",
+  "long_description": "The German company domain offers annotations that can be of help for business analysis, such as: CompanyAcquisition, CompanyMerger, CompanyPerformance, CompanyLawsuit and CompanyOperation. It includes entities from the entity domain, such as Person, Company, Position and MoneyAmount.",
+  "examples": [
+    {
+      "concept": "City",
+      "sample": "M\u00fcnchen, Mumbai",
+      "desc": "Name of a city"
+    },
+    {
+      "concept": "Company",
+      "sample": "Siemens",
+      "desc": "Name of a company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Deutschland",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Organization",
+      "sample": "European Central Bank",
+      "desc": "An organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Angela Merkel",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "Position",
+      "sample": "Wirtschaftsminister",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "StockExchange",
+      "sample": "Nasdaq stock exchange",
+      "desc": "A Stock exchange."
+    },
+    {
+      "concept": "StockIndex",
+      "sample": "Russell 2000",
+      "desc": "A Stock index."
+    }
+  ]
+}

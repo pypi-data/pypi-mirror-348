@@ -1,0 +1,89 @@
+{
+  "dependencies": [
+    "wowool/german-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "City",
+    "Company",
+    "Country",
+    "Email",
+    "PersonFam",
+    "PersonGiv",
+    "Person",
+    "PhoneNr",
+    "PhoneNrCandidate",
+    "Position",
+    "Street",
+    "Url"
+  ],
+  "short_description": "Contact information annotations, such as: Person name, City, Country, Address, PhoneNr, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "St\u00fclerstra\u00dfe 501, 10787 Berlin",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Kaiserslautern, Dresden, Madrid",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Boeing, Commerzbank, LVMH",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Deutschland, Frankreich, China, Ukraine, Finnland",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Person",
+      "sample": "Peter Altmaier",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "B\u00e4te",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Djamila",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+49 30 311 75 9000",
+      "desc": "A phone number"
+    },
+    {
+      "concept": "PhoneNrCandidate",
+      "sample": "0330 333 1212",
+      "desc": "A possible phone number, but we do not have enough evidence"
+    },
+    {
+      "concept": "Position",
+      "sample": "Philosophin, Musiker, Premierminister",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Street",
+      "sample": "Rheinbabenallee 40",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    }
+  ],
+  "instances": true
+}

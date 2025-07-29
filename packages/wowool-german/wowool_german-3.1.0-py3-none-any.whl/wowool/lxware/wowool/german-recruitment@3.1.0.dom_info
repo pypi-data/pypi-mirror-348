@@ -1,0 +1,78 @@
+{
+  "dependencies": [
+    "wowool/german-syntax@3.1.0",
+    "wowool/german-entity@3.1.0"
+  ],
+  "concepts": [
+    "City",
+    "Company",
+    "Country",
+    "Organization",
+    "Position",
+    "Person",
+    "WorldRegion",
+    "HardSkill",
+    "JobCondition",
+    "SoftSkill",
+    "LegalRequirements",
+    "Perks"
+  ],
+  "short_description": "Job postings and related annotations.",
+  "examples": [
+    {
+      "concept": "City",
+      "sample": "Karlsruhe, Leipzig",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Marriott",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Deutschland, \u00d6sterreich, Schweiz",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "JobCondition",
+      "sample": "Berufserfahrung, Internship, Bewerbungen von Menschen mit Behinderung, Interim",
+      "desc": "General job condition"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Deutschen Caritasverbandes",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Doreen Kaschke",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "SoftSkill",
+      "sample": "kompetente, Verantwortungsbewusstsein",
+      "desc": "Traits related to the desired personality"
+    },
+    {
+      "concept": "Perks",
+      "sample": "Work-Life Balance, pers\u00f6nliche Weiterentwicklung, attraktives Verg\u00fctungspaket, Bonus",
+      "desc": "Things to make job attractive"
+    },
+    {
+      "concept": "HardSkill",
+      "sample": "Online Marketing, MS-Office, Softwareentwicklung",
+      "desc": "The name of a skill"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Baden - W\u00dcrttemberg, Delaware, Europa",
+      "desc": "Geopolitical location, not a city or a country"
+    },
+    {
+      "concept": "Position",
+      "sample": "Kinderkrankenpfleger, Vermessungstechniker, Praktikant",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    }
+  ]
+}

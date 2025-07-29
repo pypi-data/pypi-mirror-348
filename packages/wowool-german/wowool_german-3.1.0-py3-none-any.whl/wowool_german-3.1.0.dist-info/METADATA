@@ -1,0 +1,244 @@
+Metadata-Version: 2.4
+Name: wowool-german
+Version: 3.1.0
+Summary: Wowool NLP german Package
+Description-Content-Type: text/markdown
+
+# Wowool NLP german Package
+This package contains the language file and domains for german.
+To use this package, you need to install the wowool-sdk package and request a license file at info@wowool.com
+
+## Usage
+
+```python
+from wowool.sdk import Pipeline
+from pathlib import Path
+input_text = Path("input.txt").read_text()
+pipeline = Pipeline("german,entity")
+doc = pipeline(input_text)
+print(doc)
+```
+
+## Domains
+
+### german-world-regions.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Afghanistan |The country Afghanistan or a place in Afghanistan. | Afghanistan, Kabul |
+| Albania |The country Albania or a place in Albania. | Albanien, Tirana |
+| Algeria |The country Algeria or a place in Algeria. | Algerien |
+| Angola |The country Angola or a place in Angola. | Angola, Luanda |
+| Argentina |The country Argentina or a place in Argentina. | Argentinien, Buenos Aires |
+| Armenia |The country Armenia or a place in Armenia. | Armenien |
+| Australia |The country Australia or a place in Australia. | Australien, Canberra |
+
+
+### german-entity-extended.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Bahnhofstrasse 194 Berlin 10707 |
+| Animal |Names of common animals. | Seeotter, Vögel, Wolf |
+| Automobile |A car brand or reference to a car. | Jeep Renegade |
+| BaseballTeam |US baseball team | Houston Astros |
+| City |Name of a City | Peking, Münster, Aachen |
+| Company |Name of a Company | Pfizer, Zalando |
+| CurrencyUnit |A currency unit | Euro, BTC |
+| Country |Name of a Country | Deutschland, China, Großbritannien |
+| Date |Date and Month | September 2022, 5. Dezember |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | Rezessionsängsten, Chaos, Kaufvertrag |
+| Facility |A building or place that provides a particular service or is used for a particular industry | Stadion, Wohnung, Kirche |
+| GivenName |First name of a Person | Willem |
+| Measure |Unit of measure |  130 km/h, neun Meter |
+| MoneyAmount |Amount of money | 40 Milliarden USD, zehn Milliarden Pfund |
+| Month |Name of a month | August, April |
+| Organization |Name of an Organization | NASA, Weltgesundheitsorganisation |
+| Percent |A percentage | 45 Prozent |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Hercule Poirot |
+| PersonMention |A mention of a person in a general way | Patient |
+| PhoneNr |Phone number | 1-800-273-5555, 0800 977 8880  |
+| PlaceAdj |Adjective of geographical origin. | Russische helikopter, Duitse pers |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Fußballtrainer, Generalsekretär |
+| SoccerTeam |European soccer team | Juventus, Ajax, SC Freiburg |
+| Sports |Sports | Fußball, Tennis |
+| Street |The name of a street with or without number. | de Mariniersweg |
+| Url |Url | https://www.wowool.com |
+| Vehicle |Name of a vehicle | Elektroauto, Toyota Yaris, Mazda CX-60 |
+| Weapon |Name of a weapon | Rakete, ICBM |
+| WeekDay |Day of the week | Donnerstag |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Côte d'Azur, Nordamerika |
+
+
+### german-semantic-theme.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Theme |Theme | Kaninchen |
+
+
+### german-quotation.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Quotation |A quotation. | « Es fehlt nicht viel » , sagte Andrew Meunier weiter . |
+
+
+### german-unknown.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| UnknownThing |Unknown concept | Yttrium  |
+
+
+### german-entity.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Friedrichstrasse, 12 70174 Stuttgart |
+| City |Name of a City | Freiburg |
+| Company |Name of a Company | Siemens |
+| Country |Name of a Country | England, Deutschland, Dänemark, Schweden |
+| Date |Date and Month | 15 juli 2018 |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | Oktoberfest |
+| Facility |A building or place that provides a particular service or is used for a particular industry | Rathaus |
+| MoneyAmount |Amount of money | 2,4 Milliarden Euro |
+| Month |Name of a month | März |
+| Organization |Name of an Organization | SPD |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Angela Merkel |
+| PersonMention |A mention of a person in a general way | Demonstrant, Kollegin |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Finanzminister |
+| Url |Url | https://www.wowool.com |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Baden - Württembergs |
+
+
+### german-syntax.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| NP |Noun phrase. | abgewählte amerikanische Präsident,den Fluss |
+| PronPhrase |Pronoun phrase. | sich |
+| VP |Verb phrase. | ausgesehen haben |
+
+
+### german-topics.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| TopicCandidate |Possible topics | Tornado, ukrainisch Panzer |
+
+
+### german-event.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Event |An event, in very general terms. | Unfall |
+
+
+### german-semantic-query.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| ReplaceConcept |Replace for Company. | Firma |
+
+
+### german-anonymizer.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Bahnhofstrasse 194 Berlin 10707 |
+| City |Name of a City | München |
+| Company |Name of a Company | Siemens |
+| Country |Name of a Country | Deutschland |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Angela Merkel |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Merkel |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Angela |
+| PhoneNr |A phone number | +49 30 1234567 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Wirtschaftsminister |
+| Street |The name of a street with or without number. | de Mariniersweg |
+| Url |Url | https://www.wowool.com |
+
+
+### german-dates.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Date |An attribute will resolve the absolute date from the date that has been set | 13/01/2021 |
+| TimePhrase |A phrase expressing time, including dates |  in der vergangenen Woche |
+
+
+### german-recruitment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| City |Name of a City | Karlsruhe, Leipzig |
+| Company |Name of a Company | Marriott |
+| Country |Name of a Country | Deutschland, Österreich, Schweiz |
+| JobCondition |General job condition | Berufserfahrung, Internship, Bewerbungen von Menschen mit Behinderung, Interim |
+| Organization |Name of an Organization | Deutschen Caritasverbandes |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Doreen Kaschke |
+| SoftSkill |Traits related to the desired personality | kompetente, Verantwortungsbewusstsein |
+| Perks |Things to make job attractive | Work-Life Balance, persönliche Weiterentwicklung, attraktives Vergütungspaket, Bonus |
+| HardSkill |The name of a skill | Online Marketing, MS-Office, Softwareentwicklung |
+| WorldRegion |Geopolitical location, not a city or a country | Baden - WÜrttemberg, Delaware, Europa |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Kinderkrankenpfleger, Vermessungstechniker, Praktikant |
+
+
+### german-discovery.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | Der Ford GT70 war ein Rennsportwagen von Ford |
+| Descriptor | descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'Architektin' is the descriptor | Monika Thomas ist eine deutsche Architektin |
+| DescriptorMarker |A DescriptorMarker is a descriptor no matter the context | Insel, Dramatiker, Provinz |
+
+
+### german-business-news.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| City |Name of a city | München, Mumbai |
+| Company |Name of a company | Siemens |
+| Country |Name of a Country | Deutschland |
+| Organization |An organization | European Central Bank |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Angela Merkel |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Wirtschaftsminister |
+| StockExchange |A Stock exchange. | Nasdaq stock exchange |
+| StockIndex |A Stock index. | Russell 2000 |
+
+
+### german-sentiment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| PositiveSentiment |A positive opinion. | beruhigende Meeresbilder |
+| NegativeSentiment |A negative opinion. | Beschämende Außendarstellung, schwierigen Corona-Jahr |
+| AdjPos |Positive adjective. | gut, verantwortlich |
+| AdjNeg |Negative adjective. | drastisch, machtlos, irrelevant |
+| NounPos |Positive Noun. | Legitimität, Effektivität |
+| NounNeg |Negative Noun. | Boykott, Risiko, Problem |
+
+
+### german-contact-info.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Stülerstraße 501, 10787 Berlin |
+| City |Name of a City | Kaiserslautern, Dresden, Madrid |
+| Company |Name of a Company | Boeing, Commerzbank, LVMH |
+| Country |Name of a Country | Deutschland, Frankreich, China, Ukraine, Finnland |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Peter Altmaier |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Bäte |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Djamila |
+| PhoneNr |A phone number | +49 30 311 75 9000 |
+| PhoneNrCandidate |A possible phone number, but we do not have enough evidence | 0330 333 1212 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Philosophin, Musiker, Premierminister |
+| Street |The name of a street with or without number. | Rheinbabenallee 40 |
+| Url |Url | https://www.wowool.com |
+
+
+

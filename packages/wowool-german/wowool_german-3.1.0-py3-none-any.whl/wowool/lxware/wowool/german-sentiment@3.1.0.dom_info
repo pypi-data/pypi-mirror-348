@@ -1,0 +1,49 @@
+{
+  "concepts": [
+    "PositiveSentiment",
+    "NegativeSentiment",
+    "SentimentObject",
+    "Gratitude",
+    "AdjPos",
+    "AdjNeg",
+    "NounNeg",
+    "NounPos",
+    "VerbNeg",
+    "VerbPos",
+    "ExprNeg",
+    "ExprPos"
+  ],
+  "short_description": "Sentiment annotations, such as: PositiveSentiment, NegativeSentiment, as well as smaller pieces like AdjPos, AdjNeg, etc.",
+  "examples": [
+    {
+      "concept": "PositiveSentiment",
+      "sample": "beruhigende Meeresbilder",
+      "desc": "A positive opinion."
+    },
+    {
+      "concept": "NegativeSentiment",
+      "sample": "Besch\u00e4mende Au\u00dfendarstellung, schwierigen Corona-Jahr",
+      "desc": "A negative opinion."
+    },
+    {
+      "concept": "AdjPos",
+      "sample": "gut, verantwortlich",
+      "desc": "Positive adjective."
+    },
+    {
+      "concept": "AdjNeg",
+      "sample": "drastisch, machtlos, irrelevant",
+      "desc": "Negative adjective."
+    },
+    {
+      "concept": "NounPos",
+      "sample": "Legitimit\u00e4t, Effektivit\u00e4t",
+      "desc": "Positive Noun."
+    },
+    {
+      "concept": "NounNeg",
+      "sample": "Boykott, Risiko, Problem",
+      "desc": "Negative Noun."
+    }
+  ]
+}

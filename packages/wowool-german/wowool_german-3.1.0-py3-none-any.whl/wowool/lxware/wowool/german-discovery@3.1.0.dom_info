@@ -1,0 +1,28 @@
+{
+  "dependencies": [
+    "wowool/german-syntax@3.1.0"
+  ],
+  "concepts": [
+    "Definition",
+    "Descriptor",
+    "DescriptorMarker"
+  ],
+  "short_description": "Descriptors for knowledge discovery. A descriptor is something like 'painter' to classify an item as a Person. ",
+  "examples": [
+    {
+      "concept": "Definition",
+      "sample": "Der Ford GT70 war ein Rennsportwagen von Ford",
+      "desc": "A definition. A sentence that explains what something or someone is."
+    },
+    {
+      "concept": "Descriptor",
+      "sample": "Monika Thomas ist eine deutsche Architektin",
+      "desc": " descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'Architektin' is the descriptor"
+    },
+    {
+      "concept": "DescriptorMarker",
+      "sample": "Insel, Dramatiker, Provinz",
+      "desc": "A DescriptorMarker is a descriptor no matter the context"
+    }
+  ]
+}

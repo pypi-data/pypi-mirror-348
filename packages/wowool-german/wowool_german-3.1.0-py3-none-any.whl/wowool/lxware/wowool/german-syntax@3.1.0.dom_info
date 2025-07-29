@@ -1,0 +1,32 @@
+{
+  "concepts": [
+    "NP",
+    "PronPhrase",
+    "TimePhrase",
+    "TimeWord",
+    "VP",
+    "VPAux",
+    "VPPart",
+    "VPPrefix",
+    "VPScope",
+    "AdjP"
+  ],
+  "short_description": "Syntax annotations: NP (abgew\u00e4hlte amerikanische Pr\u00e4sident), VP (ausgesehen haben) and PronPhrase (sich). ",
+  "examples": [
+    {
+      "concept": "NP",
+      "sample": "abgew\u00e4hlte amerikanische Pr\u00e4sident,den Fluss",
+      "desc": "Noun phrase."
+    },
+    {
+      "concept": "PronPhrase",
+      "sample": "sich",
+      "desc": "Pronoun phrase."
+    },
+    {
+      "concept": "VP",
+      "sample": "ausgesehen haben",
+      "desc": "Verb phrase."
+    }
+  ]
+}

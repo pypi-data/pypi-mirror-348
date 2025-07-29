@@ -1,0 +1,200 @@
+{
+  "dependencies": [
+    "wowool/german-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "Animal",
+    "Automobile",
+    "BaseballTeam",
+    "City",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "Date",
+    "Email",
+    "Event",
+    "Facility",
+    "GivenName",
+    "Measure",
+    "MoneyAmount",
+    "Month",
+    "Organization",
+    "Percent",
+    "Product",
+    "Person",
+    "PersonMention",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "SoccerTeam",
+    "Sports",
+    "Street",
+    "Time",
+    "Url",
+    "Vehicle",
+    "Weapon",
+    "WeekDay",
+    "WorldRegion"
+  ],
+  "short_description": "All annotations in the entity domain plus others, such as Automobile, BaseballTeam, InsuranceCompany or Measure",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Bahnhofstrasse 194 Berlin 10707",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "Animal",
+      "sample": "Seeotter, V\u00f6gel, Wolf",
+      "desc": "Names of common animals."
+    },
+    {
+      "concept": "Automobile",
+      "sample": "Jeep Renegade",
+      "desc": "A car brand or reference to a car."
+    },
+    {
+      "concept": "BaseballTeam",
+      "sample": "Houston Astros",
+      "desc": "US baseball team"
+    },
+    {
+      "concept": "City",
+      "sample": "Peking, M\u00fcnster, Aachen",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Pfizer, Zalando",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "CurrencyUnit",
+      "sample": "Euro, BTC",
+      "desc": "A currency unit"
+    },
+    {
+      "concept": "Country",
+      "sample": "Deutschland, China, Gro\u00dfbritannien",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "September 2022, 5. Dezember",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "Rezessions\u00e4ngsten, Chaos, Kaufvertrag",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "Stadion, Wohnung, Kirche",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Willem",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Measure",
+      "sample": " 130 km/h, neun Meter",
+      "desc": "Unit of measure"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "40 Milliarden USD, zehn Milliarden Pfund",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "August, April",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "NASA, Weltgesundheitsorganisation",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Percent",
+      "sample": "45 Prozent",
+      "desc": "A percentage"
+    },
+    {
+      "concept": "Person",
+      "sample": "Hercule Poirot",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "Patient",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "1-800-273-5555, 0800 977 8880 ",
+      "desc": "Phone number"
+    },
+    {
+      "concept": "PlaceAdj",
+      "sample": "Russische helikopter, Duitse pers",
+      "desc": "Adjective of geographical origin."
+    },
+    {
+      "concept": "Position",
+      "sample": "Fu\u00dfballtrainer, Generalsekret\u00e4r",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "SoccerTeam",
+      "sample": "Juventus, Ajax, SC Freiburg",
+      "desc": "European soccer team"
+    },
+    {
+      "concept": "Sports",
+      "sample": "Fu\u00dfball, Tennis",
+      "desc": "Sports"
+    },
+    {
+      "concept": "Street",
+      "sample": "de Mariniersweg",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "Vehicle",
+      "sample": "Elektroauto, Toyota Yaris, Mazda CX-60",
+      "desc": "Name of a vehicle"
+    },
+    {
+      "concept": "Weapon",
+      "sample": "Rakete, ICBM",
+      "desc": "Name of a weapon"
+    },
+    {
+      "concept": "WeekDay",
+      "sample": "Donnerstag",
+      "desc": "Day of the week"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "C\u00f4te d'Azur, Nordamerika",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

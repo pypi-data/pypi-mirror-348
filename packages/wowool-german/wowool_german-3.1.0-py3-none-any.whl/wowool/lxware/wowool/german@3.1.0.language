@@ -1,0 +1,58 @@
+{
+  "tokenizer": "wowool/german@3.1.0.tkz",
+  "abbreviations": "wowool/german@3.1.0.abbrev",
+  "apostrophe": "wowool/german@3.1.0.apostrophe",
+  "measure": "wowool/german@3.1.0.measure",
+  "hmm": "wowool/german@3.1.0.hmm",
+  "postagger": "wowool/german@3.1.0.postagger",
+  "detect_headers": false,
+  "morph_chain": [
+    {
+      "file": "wowool/german@3.1.0.morph",
+      "lookup": "plain"
+    },
+    {
+      "file": "wowool/german-numbers-num-std@3.1.0.morph",
+      "lookup": "compound_v3",
+      "transform": "none"
+    },
+    {
+      "file": "wowool/german-endings@3.1.0.morph",
+      "lookup": "endings"
+    },
+    {
+      "file": "wowool/german-compound@3.1.0.morph",
+      "lookup": "compound_v3",
+      "transform": "tolower"
+    },
+    {
+      "file": "wowool/german-verb-compound@3.1.0.morph",
+      "lookup": "compound_v3",
+      "transform": "none"
+    }
+  ],
+  "property_chain": {
+    "abbrev": [
+      {
+        "file": "wowool/german@3.1.0.morph",
+        "lookup": "plain"
+      }
+    ]
+  },
+  "not_found": [
+    {
+      "file": "wowool/german-educated-guesser@3.1.0.morph",
+      "lookup": "plain",
+      "transform": "none"
+    },
+    {
+      "file": "wowool/german@3.1.0.morph",
+      "lookup": "cleaner",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for german",
+  "no_crlf": [
+    "Person"
+  ]
+}
