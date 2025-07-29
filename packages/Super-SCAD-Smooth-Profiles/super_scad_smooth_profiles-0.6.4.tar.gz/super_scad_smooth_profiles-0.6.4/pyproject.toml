@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "Super-SCAD-Smooth-Profiles"
+version = "0.6.4"
+description = "Implementation of smooth profiles."
+authors = ["P.R. Water <p.r.water@setbased.nl>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/SuperSCAD/SmoothProfiles"
+documentation = "https://superscad.readthedocs.io/"
+keywords = ["OpenSCAD", "SuperSCAD", "Smooth Profile"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Topic :: Software Development :: Code Generators",
+]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+super-scad = "^0.11.0"
+super-scad-circle-plus = "^0.9.10"
+super-scad-smooth-profile = "^0.6.3"
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-common = "poetry.core.masonry.api"
