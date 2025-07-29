@@ -1,0 +1,10 @@
+[console_scripts]
+prep-dev-release=scripts.prep_release:dev
+prep-major-release=scripts.release_process:prep_major
+prep-minor-release=scripts.release_process:prep_minor
+prep-patch-release=scripts.release_process:prep_patch
+release=scripts.release_process:upload_release
+
+[pytest11]
+coveragemarkers=pytest_coveragemarkers.plugin
+
