@@ -1,0 +1,9 @@
+struct upper_body_cmd_package
+{
+    int32_t  isUsed;
+    int32_t  control_mode[28];       //control mode for fsm control
+    float    jointPosVec[28];        // -- joint pos     (14 left right actuators + 12  left right finger + 2 waist yaw roll )
+    float    jointSpeedVec[28];      // -- joint speed   (14 left right actuators + 12  left right finger + 2 waist yaw roll )
+    float    jointCurrentVec[28];    // -- joint current/force max value (14 left right actuators + 12  left right finger + 2 waist yaw roll)
+    float    body_yaw;               // -- Rotation by leg 
+}

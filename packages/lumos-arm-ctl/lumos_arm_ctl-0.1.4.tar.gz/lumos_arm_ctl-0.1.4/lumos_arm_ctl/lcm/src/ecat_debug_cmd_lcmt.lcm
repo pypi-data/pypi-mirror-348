@@ -1,0 +1,25 @@
+struct ecat_debug_cmd_lcmt {
+    int16_t  ctrlWord[12];
+    int16_t  tarPosH[12];
+    int16_t  tarPosL[12];
+    int16_t  tarVel[12];
+    int16_t  tarCur[12];
+    int16_t  tarTor[12];
+    int16_t  res1[12];
+    int16_t  res2[12];
+    int16_t  ecat_state[17];
+    float    mc_kp[12];
+    float    mc_kd[12];
+    float    mc_tarPos[12];
+    float    mc_tarVel[12];
+    float    mc_tarCur[12];
+    float    mc_tarTor[12];
+    float    original_kp_joint[12];
+    float    original_kd_joint[12];
+    float    original_kp_motor[12];
+    float    original_kd_motor[12];
+    float    original_tarPos[12];
+    float    original_tarVel[12];
+    float    original_tarCur[12];
+    float    original_tarTor[12];
+}

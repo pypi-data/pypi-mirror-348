@@ -1,0 +1,6 @@
+struct teleop_arms_lcmt {
+    int16_t  ctrlWord[12];
+    float    tarPos[12];
+    float    kp[12];
+    float    kd[12];
+}

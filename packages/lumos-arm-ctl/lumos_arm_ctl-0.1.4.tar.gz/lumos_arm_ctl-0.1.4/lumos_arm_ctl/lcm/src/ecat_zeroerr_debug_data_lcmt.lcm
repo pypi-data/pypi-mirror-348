@@ -1,0 +1,7 @@
+struct ecat_zeroerr_debug_data_lcmt {
+    int16_t  ctrlWord[2];
+    float    original_tarPos[2];
+    float    mc_tarPos[2];
+    float    mc_curPos[2];
+    float    original_curPos[2];
+}

@@ -1,0 +1,23 @@
+struct ecat_debug_data_lcmt {
+    int16_t  stat[12];
+    int16_t  curPos1H[12];
+    int16_t  curPos1L[12];
+    int16_t  curPos2H[12];
+    int16_t  curPos2L[12];
+    int16_t  curVel[12];
+    int16_t  curCur[12];
+    int16_t  curTor[12];
+    int16_t  res1[12];
+    int16_t  res2[12];
+    float  mc_curPos[12];
+    float  mc_curVel[12];
+    float  mc_curCur[12];
+    float  mc_curTor[12];
+    float  original_curPos[12];
+    float  original_curVel[12];
+    float  original_curCur[12];
+    float  original_curTor[12];
+    float  curLssPos[12];
+    float  curLssTorque[12];
+    float  multi_cycle_num[12];
+}
