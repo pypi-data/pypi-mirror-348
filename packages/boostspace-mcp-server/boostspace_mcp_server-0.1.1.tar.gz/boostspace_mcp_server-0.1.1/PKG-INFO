@@ -1,0 +1,102 @@
+Metadata-Version: 2.4
+Name: boostspace-mcp-server
+Version: 0.1.1
+Summary: A Model Context Protocol (MCP) server for Boost.space
+Maintainer-email: "Boost.space" <team@boost.space>
+License: MIT License
+        
+        Copyright (c) 2025 Boost.space
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/boostspace/boostspace-mcp-server
+Project-URL: Bug Tracker, https://github.com/boostspace/boostspace-mcp-server/issues
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: requests>=2.28.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: setuptools; extra == "dev"
+Requires-Dist: liccheck; extra == "dev"
+Provides-Extra: tests
+Requires-Dist: pytest; extra == "tests"
+Dynamic: license-file
+
+# Boost.space MCP server
+
+A Model Context Protocol (MCP) server proxying Boost.Space’s REST API for MCP clients (e.g., Claude Desktop).
+
+## Install
+
+**pip:**
+
+```bash
+pip install boostspace-mcp
+```
+
+**uv:**
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv add boostspace-mcp
+```
+
+## Run
+
+```bash
+# pip
+python -m boostspace_mcp.server
+
+# uv
+uv x boostspace-mcp run
+```
+
+## Claude Desktop config
+
+```jsonc
+"mcpServers": {
+  "boostspace": {
+    "command": "python",
+    "args": ["-m","boostspace_mcp.server"],
+    "env": {
+      "BOOSTSPACE_API_BASE": "{{API_PATH}}",
+      "BOOSTSPACE_TOKEN": "{{TOKEN}}"
+    },
+    "transport": "stdio"
+  }
+}
+```
+
+Restart Claude Desktop.
+
+## Env vars
+
+- `BOOSTSPACE_API_BASE`: API base URL
+- `BOOSTSPACE_TOKEN`: Bearer token
+
+## Test & dev
+
+```bash
+pip install .[dev]
+pytest -q
+ruff check .
+```
