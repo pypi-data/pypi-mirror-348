@@ -1,0 +1,53 @@
+[![PyPI](https://img.shields.io/pypi/v/pyqtwidgetlab.svg)](https://pypi.org/project/pyqtwidgetlab)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pyqtwidgetlab.svg)]()
+[![Release Version](https://img.shields.io/github/v/release/bladewolf7k/PyQtWidgetLab)](https://github.com/bladewolf7k/PyQtWidgetLab/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/bladewolf7k/PyQtWidgetLab/latest/total)](https://github.com/bladewolf7k/PyQtWidgetLab/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![CI](https://github.com/bladewolf7k/PyQtWidgetLab/actions/workflows/ci.yml/badge.svg)
+![WidgetLab Demo](images/demo.png)
+
+# PyQtWidgetLab
+
+An example project including all of the most used PyQt on a basic window. Purely for educational, personal, and experimental purposes.
+
+Used Widgets include: 
+
+- QApplication, QLabel, QWidget, QPushButton, QLineEdit, QComboBox, QCheckBox, QRadioButton
+- QGroupBox, QVBoxLayout, QSlider, QSpinBox, QListWidget, QTableWidget, QHeaderView, QProgressBar, QTextEdit
+
+# Requirements, Installation and Run Instructions
+
+Requirements: 
+
+Software: Python 3.8+
+
+OS: Windows 10/11, MacOS 10.14+, Ubuntu 20.04 LTS+, Debian 11+, Fedora 33+. (Linux distros may require X11 Libraries if old)
+
+Installation and Run:
+
+1. Clone the repo:
+
+        git clone https://github.com/bladewolf7k/PyQtWidgetLab.git
+        cd PyQtWidgetLab
+
+2. Create Virtual Environment:
+
+    For Windows:
+
+       python -m venv .venv
+       .venv\Scripts\Activate.ps1
+
+    For MacOS:
+
+        python3 -m venv .venv
+        source .venv/bin/activate
+
+3. Install PyQt6, Just simply run:
+
+        pip install -r requirements.txt
+
+4. Run Demo
+
+        python src/app.py
+
+A new window will open with a demonstration of all of the widgets used in the source code.

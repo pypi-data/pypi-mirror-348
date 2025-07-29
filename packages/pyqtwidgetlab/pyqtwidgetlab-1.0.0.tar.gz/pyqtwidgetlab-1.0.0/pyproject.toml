@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyqtwidgetlab"
+version = "1.0.0"
+description = "An example project including all of the most used PyQt on a basic window."
+authors = [{ name="Daniel Dunal", email="robindunal@gmail.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+  "PyQt6>=6.5",
+]
