@@ -1,0 +1,214 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+.prepare-grid, .execute-grid {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.prepare-header, .execute-header {
+    flex: 0 0 auto;
+    overflow: visible;
+}
+.prepare-header .navbar, .execute-header .navbar {
+    background-color: #333;
+   
+}
+.prepare-header .navbar-item, .prepare-header label, .prepare-header .navbar-item a h2,
+.execute-header .navbar-item, .execute-header label, .execute-header .navbar-item a h2{
+    color: #fff;
+}
+.prepare-header .navbar-item a:hover, .execute-header .navbar-item a:hover {
+    background-color: transparent;
+}
+.prepare-body, .execute-body {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+.prepare-side, .execute-side {
+    flex: 0 0 auto;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 5px;
+}
+.prepare-side > div:first-child, .execute-side > div:first-child {
+    flex: 0 0 auto;
+}
+.prepare-side > div:last-child, .execute-side > div:last-child {
+    display: block;
+    overflow: auto;
+}
+.prepare-main, .execute-main {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+}
+.prepare-inner, .execute-inner {
+    margin: 20px;
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.node-edit {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.node-edit > :first-child {
+    flex: 0;
+}
+.node-edit > :last-child {
+    flex: 1;
+    overflow: auto;
+}
+.node-edit > .choose-task {
+    display: flex;
+    flex-direction: column;
+}
+.node-edit > .choose-task > :first-child {
+    flex: 0 0 content;
+}
+.node-edit > .choose-task > :last-child {
+    flex: 1;
+    overflow: auto;
+}
+.node-edit > .choose-task > svg-canvas:last-child {
+    overflow: clip;
+}
+
+.execute-inner > .choose-task {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.execute-inner > .choose-task > :first-child {
+    flex: 0 0 content;
+}
+.execute-inner > .choose-task > :last-child {
+    flex: 1;
+    overflow: auto;
+}
+.execute-inner > .choose-task > svg-canvas:last-child {
+    overflow: clip;
+}
+
+.view-with-edit {
+    display: flex;
+    flex-direction: column;
+}
+.view-with-edit > *:first-child {
+    flex: 0 0 content;
+}
+.view-with-edit > *:last-child {
+    flex: 1;
+}
+.treeview {
+    background: white;
+    padding: 10px;
+}
+.treeview li > ul {
+    margin-left: 10px;
+    padding-left: 10px;
+    border: dotted gray;
+    border-width: 0 0 0 2px;
+}
+.treeview li.closed > ul {
+    display: none;
+}
+.treeview li.selected > a {
+    border-radius: 5px;
+    padding: 5px;
+    background: gray;
+    color: white;
+}
+.treeview li.selected > a {
+    color: white;
+}
+.time-display {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.timer-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.timer-control > div:first-child {
+    display: flex;
+}
+.timer-control > div > div {
+    display: flex;
+}
+.timer-control > div > div:not(:last-child) {
+    margin-bottom: 0px;
+}
+
+flex-resizer {
+    width: 5px;
+    background: transparent;
+    cursor: ew-resize;
+    flex: 0 0 auto;
+}
+flex-resizer:hover {
+    background: #eee;
+}
+c2s-editor {
+    border: 1px solid #eee;
+    min-height: 400px;
+}
+
+.toggle {
+    display: inline-block;
+    cursor: pointer;
+}
+.toggle > .switch {
+    display: inline-block;
+    background: #ccc;
+    border-radius: 16px;
+    width: 48px;
+    height: 26px;
+    position: relative;
+    vertical-align: middle;
+}
+.toggle > .switch:before {
+    content: "";
+    display: block;
+    background: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+input:checked + .switch {
+    background: var(--bulma-success);
+}
+input:checked + .switch:before {
+    left: 25px;
+}
+.toggle > span {
+    margin: 0.25em;
+}
+.toggle input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: show;
+}
+
+svg-canvas {
+    border: 1px solid #ccc;
+}
