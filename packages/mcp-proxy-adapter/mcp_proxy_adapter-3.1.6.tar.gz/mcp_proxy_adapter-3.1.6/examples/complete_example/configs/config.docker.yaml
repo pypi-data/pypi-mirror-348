@@ -1,0 +1,40 @@
+# Docker configuration for complete MCP Microservice example
+
+# Server settings
+server:
+  host: "0.0.0.0"    # Bind to all interfaces in Docker
+  port: 8000         # Port to bind server
+  workers: 2         # Number of worker processes
+  debug: false       # Disable debug mode in production
+
+# Logging settings
+logging:
+  level: "INFO"      # Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  file: "/app/logs/complete_example.log"  # Log file path in Docker container
+  rotation:
+    type: "size"     # Log rotation type (size, time)
+    max_bytes: 10485760  # Maximum log file size (10 MB)
+    backup_count: 10  # Number of backup files
+
+# Command discovery settings
+discovery:
+  enabled: true
+  package: "commands"  # Package to discover commands
+
+# Cache settings
+cache:
+  enabled: true
+  type: "file"       # Cache type (file, memory, redis)
+  path: "/app/cache"  # Cache directory in Docker container
+  ttl: 3600          # Default TTL in seconds (1 hour)
+
+# Database settings (for db_command)
+database:
+  enabled: true      # Enable database in Docker environment
+  type: "sqlite"     # Database type
+  path: "/app/data/db.sqlite"  # Database path in Docker container
+
+# File operations settings (for file_command)
+files:
+  base_path: "/app/data"  # Base path for file operations in Docker
+  allowed_extensions: [".txt", ".log", ".json", ".yaml"]  # Allowed file extensions 

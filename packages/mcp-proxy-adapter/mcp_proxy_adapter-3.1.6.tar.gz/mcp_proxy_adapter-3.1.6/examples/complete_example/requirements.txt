@@ -1,0 +1,20 @@
+# Python dependencies for MCP Microservice complete example
+
+# Core dependencies
+fastapi>=0.95.0,<1.0.0
+pydantic>=2.0.0,<3.0.0
+uvicorn>=0.22.0,<1.0.0
+docstring-parser>=0.15,<1.0.0
+typing-extensions>=4.5.0,<5.0.0
+jsonrpc>=1.2.0,<2.0.0
+
+# For system_command
+psutil>=5.9.0,<6.0.0
+pytz>=2023.3
+
+# For file_command
+aiofiles>=23.1.0,<24.0.0
+
+# For db_command
+aiosqlite>=0.17.0,<1.0.0
+SQLAlchemy>=2.0.0,<3.0.0 

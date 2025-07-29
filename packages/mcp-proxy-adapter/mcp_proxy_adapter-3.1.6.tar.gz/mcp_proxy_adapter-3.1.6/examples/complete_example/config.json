@@ -1,0 +1,41 @@
+{
+  "service": {
+    "name": "Complete Example",
+    "version": "1.0.0",
+    "description": "Полный пример MCP Proxy Adapter"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "debug": false,
+    "log_level": "info",
+    "workers": 4
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/complete_example.log",
+    "rotation": {
+      "type": "time",
+      "when": "D",
+      "interval": 1,
+      "backup_count": 30
+    }
+  },
+  "auth": {
+    "enabled": false,
+    "token_expiration": 3600,
+    "secret_key": "change_this_to_a_secure_key_in_production"
+  },
+  "database": {
+    "url": "sqlite:///./data/database.db",
+    "echo": false,
+    "pool_size": 5,
+    "max_overflow": 10
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": 300,
+    "type": "memory",
+    "max_size": 1000
+  }
+} 
