@@ -1,0 +1,192 @@
+Metadata-Version: 2.4
+Name: eazyml-genai
+Version: 0.2.35
+Summary: This package enables Retrieval-Augmented Generation (RAG) for PDF documents, enhancing the ability of Generative AI models to provide accurate and contextually relevant responses based on your document content.
+Home-page: https://eazyml.com/
+Author: EazyML
+Author-email: admin@eazyml.com
+Project-URL: Documentation, https://docs.eazyml.com/
+Project-URL: Homepage, https://eazyml.com/
+Project-URL: Contact Us, https://eazyml.com/trust-in-ai
+Project-URL: eazyml-automl, https://pypi.org/project/eazyml-automl/
+Project-URL: eazyml-counterfactual, https://pypi.org/project/eazyml-counterfactual/
+Project-URL: eazyml-xai, https://pypi.org/project/eazyml-xai/
+Project-URL: eazyml-xai-image, https://pypi.org/project/eazyml-xai-image/
+Project-URL: eazyml-insight, https://pypi.org/project/eazyml-insight/
+Project-URL: eazyml-data-quality, https://pypi.org/project/eazyml-data-quality/
+Keywords: pattern-discovery,rule-mining,data-insights,insight-generation,augmented-intelligence,data-analysis,rule-discovery,data-patterns,machine-learning,data-science,ml-api,training-data-analysis,interpretable-ai
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: Other/Proprietary License
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: PyMuPDF
+Requires-Dist: google-genai
+Requires-Dist: google-cloud-aiplatform
+Requires-Dist: openai
+Requires-Dist: anthropic
+Requires-Dist: pinecone
+Requires-Dist: qdrant-client
+Requires-Dist: pyarrow
+Requires-Dist: sentence-transformers==4.1.*
+Requires-Dist: nltk
+Requires-Dist: pandas==2.2.*
+Requires-Dist: numpy
+Requires-Dist: cryptography
+Requires-Dist: torchvision
+Requires-Dist: doclayout-yolo
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+## EazyML Responsible-AI: Counterfactual
+![Python](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)  ![PyPI package](https://img.shields.io/badge/pypi%20package-0.2.35-brightgreen) ![Code Style](https://img.shields.io/badge/code%20style-black-black)
+
+![EazyML](https://github.com/EazyML/eazyml-docs/raw/refs/heads/master/EazyML_logo.png)
+
+The `eazyml-genai` framework offers a robust and professional solution for developing knowledge-intensive applications, seamlessly integrating document processing, advanced retrieval techniques, and generative language models. It is particularly well-suited for applications demanding robust question-answering capabilities over extensive PDF document repositories, with a key feature being its ability to provide precise provenance for generated answers by citing the specific PDF file and corresponding page number, thereby facilitating user verification and enhancing trust in the system's output.
+
+### Features
+- **Document Ingestion and Structuring**: The system is equipped to process PDF documents, extracting textual content and converting it into a structured JSON format. This process facilitates efficient downstream processing and retrieval.
+- **Advanced Embedding Generation**: To enable semantic search and relevance scoring, the framework supports the generation of both sparse and dense vector embeddings. This includes integration with state-of-the-art embedding models from prominent providers such as OpenAI, Google (e.g., Vertex AI Embeddings), and Hugging Face Transformers. This dual approach allows for capturing both lexical and semantic relationships within the document corpus.
+- **Vector Database Integration**: The generated vector embeddings are efficiently indexed and managed within high-performance vector databases, specifically supporting Qdrant and Pinecone. These integrations enable rapid and scalable retrieval of relevant document segments based on vector similarity.
+- **Hybrid Retrieval Mechanism**: The retrieval pipeline is engineered to support hybrid search strategies, combining the strengths of sparse and dense vector retrieval. This allows for a more comprehensive and nuanced identification of relevant information, considering both keyword matching and semantic understanding.
+- **Generative Model Augmentation**: The core functionality of this RAG framework lies in its ability to augment the input to generative language models. By retrieving and injecting relevant document excerpts into the prompt, the system provides the necessary context for the language model to generate more informed, accurate, and contextually appropriate responses. This significantly mitigates the issue of hallucination and enhances the overall reliability of the generated content.
+- **Citation**: Its ability to provide precise provenance for generated answers, and citing the specific PDF file and corresponding page number, thereby facilitating user verification and enhancing trust in the system's output.
+
+
+
+## Installation
+### User installation
+The easiest way to install counterfactual package is using pip:
+```bash
+pip install -U eazyml-genai
+```
+### Dependencies
+EazyML Generative AI requires :
+- numpy
+- pandas
+- nltk
+- doclayout-yolo
+- torchvision
+- PyMuPDF
+- pinecone
+- qdrant-client
+- sentence-transformers
+- google-genai
+- google-cloud-aiplatform
+- openai
+- anthropic
+
+## Usage
+This EazyML GenAI package lets you turn PDFs into searchable JSONs. It uses smart techniques (sparse and dense vector embeddings from OpenAI, Google, or Hugging Face) with vector databases like Qdrant and Pinecone to find the most relevant parts of your documents. 
+
+Then, it feeds this information to a generative AI to get better, more accurate answers to your questions. It's all about making AI responses smarter by giving them the right context from your documents.
+
+#### Imports
+```python
+import os
+from eazyml_genai import ez_init
+from eazyml_genai.components import PDFLoader
+from eazyml_genai.components import QdrantDB
+from eazyml_genai.components import GoogleGM
+from eazyml_genai.components import(
+    GoogleEmbeddingModel
+)
+```
+
+#### Initialize and load PDF Document
+```python
+# Initialize the EazyML library.
+_ = ez_init()
+
+# process pdf documents with unstructured data into semi-structured data or in json format
+pdf_loader = PDFLoader(max_chunk_words=1000)
+documents = pdf_loader.load(file_path=r'YOUR PDF FILE')
+
+# set your api key below
+os.environ['GEMINI_API_KEY'] = "YOUR GOOGLE API KEY"
+```
+
+#### Index your document
+```python
+# give a name to collection which can hold multiple pdf documents
+collection_name = 'yolo'
+# initialize vector database such as qdrant or pinecone
+qdrant_db = QdrantDB(location=':memory:')
+# index your document in vector database by giving text/image embedding model
+# you could use huggingface/openai/google embedding model for text embedding model
+qdrant_db.index_documents(collection_name=collection_name,
+                          documents=documents,
+                          text_embedding_model=GoogleEmbeddingModel.TEXT_EMBEDDING_004,
+                          )
+```
+
+#### Retrieve relevant document for given question
+```python
+question = 'YOUR QUESTION'
+# retrieved document from vector database
+total_hits = qdrant_db.retrieve_documents(collection_name, question, top_k=5)
+# get json format document
+payloads = [hit.payload for hit in total_hits]
+```
+
+#### Sample Output Preview
+```python
+# initialized generative model such as Google/OpenAI 
+google_gm = GoogleGM(model="gemini-2.0-flash",
+                     api_key=os.getenv('GEMINI_API_KEY'))
+# generated response, total input token and output token
+response, input_tokens, output_tokens = google_gm.predict(question=question,
+                            payloads=payloads,
+                            show_token_details=True
+                            )
+```
+
+
+You can find more information in the [documentation](https://eazyml.readthedocs.io/en/latest/packages/eazyml_cf.html).
+
+## Useful links, other packages from EazyML family
+- [Documentation](https://docs.eazyml.com)
+- [Homepage](https://eazyml.com)
+- If you have questions or would like to discuss a use case, please contact us [here](https://eazyml.com/trust-in-ai)
+- Here are the other packages from EazyML suite:
+
+    - [eazyml-automl](https://pypi.org/project/eazyml-automl/): eazyml-automl provides a suite of APIs for training, optimizing and validating machine learning models with built-in AutoML capabilities, hyperparameter tuning, and cross-validation.
+    - [eazyml-data-quality](https://pypi.org/project/eazyml-data-quality/): eazyml-data-quality provides APIs for comprehensive data quality assessment, including bias detection, outlier identification, and drift analysis for both data and models.
+    - [eazyml-counterfactual](https://pypi.org/project/eazyml-counterfactual/): eazyml-counterfactual provides APIs for optimal prescriptive analytics, counterfactual explanations, and actionable insights to optimize predictive outcomes to align with your objectives.
+    - [eazyml-insight](https://pypi.org/project/eazyml-insight/): eazyml-insight provides APIs to discover patterns, generate insights, and mine rules from your datasets.
+    - [eazyml-xai](https://pypi.org/project/eazyml-xai/): eazyml-xai provides APIs for explainable AI (XAI), offering human-readable explanations, feature importance, and predictive reasoning.
+    - [eazyml-xai-image](https://pypi.org/project/eazyml-xai-image/): eazyml-xai-image provides APIs for image explainable AI (XAI).
+
+## License
+This project is licensed under the [Proprietary License](https://github.com/EazyML/eazyml-docs/blob/master/LICENSE).
+
+---
+
+Maintained by [EazyML](https://eazyml.com)  
+Â© 2025 EazyML. All rights reserved.
