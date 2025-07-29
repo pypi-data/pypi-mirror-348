@@ -1,0 +1,116 @@
+# Rule: Testing and Build Guidelines
+
+**Description:** This rule provides essential instructions for testing and building the project correctly, avoiding common pitfalls with test environment management.
+
+## Testing Guidelines
+
+### Always Use Hatch for Running Tests
+
+Standard tests should **always** be run through Hatch or the provided test script, not directly with pytest:
+
+```bash
+# Preferred: Using the test script (runs test matrix, handles coverage)
+./scripts/test.sh
+
+# Alternative: Using Hatch directly
+hatch run test
+```
+
+### Common Test Commands
+
+```bash
+# Run all tests with coverage report
+./scripts/test.sh --coverage
+
+# Run tests with HTML coverage report
+./scripts/test.sh --html
+
+# Force environment rebuild before testing (when dependencies change)
+./scripts/test.sh --clean
+
+# Run specific tests within the test matrix (new feature)
+./scripts/test.sh tests/tools/test_auto_log_chat_bridge.py
+
+# Run tests for a specific Python version only
+./scripts/test.sh --python 3.10
+# or
+./scripts/test.sh --py 3.11
+
+# Combine options
+./scripts/test.sh --coverage --python 3.12 tests/tools/
+```
+
+### Avoid Direct pytest Usage
+
+❌ **Incorrect:**
+
+```bash
+python -m pytest tests/
+```
+
+✅ **Correct:**
+
+```bash
+hatch run test
+```
+
+Using Hatch ensures:
+
+- The proper Python matrix is used
+- Dependencies are correctly resolved
+- Environment variables are properly set
+- Coverage reports are correctly generated
+
+## Build Guidelines
+
+Build the package using either:
+
+```bash
+# Using the provided script (cleans first)
+./scripts/build.sh
+
+# Or with Hatch directly
+hatch build
+```
+
+This generates the distributable files in the `dist/` directory.
+
+## Installing for IDE and CLI Usage
+
+After modifying and testing the MCP server package, you need to rebuild and install it in the Hatch environment for the changes to take effect in Cursor (or any other IDE) or when using the `chroma-client` CLI:
+
+### Full Version (with AI models for embeddings)
+
+Use this approach when you need all embedding models available and have configured them in `mcp.json` or `.env`:
+
+```bash
+# Replace <version> with the actual version built (e.g., 0.2.7)
+hatch build && hatch run pip uninstall chroma-mcp-server -y && hatch run pip install 'dist/chroma_mcp_server-<version>-py3-none-any.whl[full,dev]'
+```
+
+### Smaller Version (default embeddings only)
+
+Use this lighter approach for faster installation with only fast and accurate embedding variants:
+
+```bash
+# Replace <version> with the actual version built (e.g., 0.2.7)
+hatch build && hatch run pip uninstall chroma-mcp-server -y && hatch run pip install 'dist/chroma_mcp_server-<version>-py3-none-any.whl[client,dev]'
+```
+
+Please note, that for the MCP to be updated within the IDE, ask the user to manually reload the MCP server as there is no automated way available as of now, before continuing to try to talk to the updated MCP via tools call.
+
+## Development Environment
+
+Remember to activate the Hatch environment before making changes:
+
+```bash
+# Using the script
+./scripts/develop.sh
+
+# Or directly with Hatch
+hatch shell
+```
+
+## Complete Documentation
+
+For comprehensive instructions, refer to the [Developer Guide](../developer_guide.md).
