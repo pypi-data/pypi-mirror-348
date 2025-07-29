@@ -1,0 +1,27 @@
+2025-05-16 23:27:16,584:    [INFO]    ***NEW SET OF ANALYSES HAS BEGUN***
+2025-05-16 23:27:16,595:    [INFO]    
+***ANALYSIS OF A NEW TRANSCRIPT HAS BEGUN: ENST00000380152
+2025-05-16 23:27:16,596:    [INFO]    Arguments used in this run: [Namespace(t_ids_file='./sample_ids.txt', tf_ids_file=None, promoter_before_tss=900, promoter_after_tss=100, top_x_tfs=10, pval=1, pvalc=1, exp_data_update=False, nofig=False), './sample_ids.txt', 'ENST00000380152', None, 900, 100, 10, 1, 1]
+2025-05-16 23:27:16,596:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/lookup/id/ENST00000380152?feature=transcript;content-type=application/json
+2025-05-16 23:27:16,963:    [INFO]    Results will be output to: /home/harl/Dropbox/github/TFBS_footprinting3/sample_analysis/tfbs_results/ENST00000380152(900_100)_1
+2025-05-16 23:27:16,963:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/lookup/id/ENSG00000139618?feature=transcript;content-type=application/json
+2025-05-16 23:27:17,068:    [INFO]    Downloading most current experimental data for homo_sapiens.
+2025-05-16 23:27:47,500:    [INFO]    Species-specific data: loading
+2025-05-16 23:27:48,667:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/sequence/region/homo_sapiens/13:32314608-32315607:1?content-type=application/json
+2025-05-16 23:27:48,800:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/overlap/region/homo_sapiens/13:32314608-32315607:1?feature=regulatory;content-type=application/json
+2025-05-16 23:27:52,586:    [INFO]    total time for tfbs_finder() for this transcript: 3.554857015609741 seconds
+2025-05-16 23:28:07,347:    [INFO]    total time for find_clusters() for this transcript: 14.760794639587402 seconds
+2025-05-16 23:28:19,535:    [INFO]    
+***ANALYSIS OF A NEW TRANSCRIPT HAS BEGUN: ENST00000680887
+2025-05-16 23:28:19,535:    [INFO]    Arguments used in this run: [Namespace(t_ids_file='./sample_ids.txt', tf_ids_file=None, promoter_before_tss=900, promoter_after_tss=100, top_x_tfs=10, pval=1, pvalc=1, exp_data_update=False, nofig=False), './sample_ids.txt', 'ENST00000680887', None, 900, 100, 10, 1, 1]
+2025-05-16 23:28:19,535:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/lookup/id/ENST00000680887?feature=transcript;content-type=application/json
+2025-05-16 23:28:19,803:    [INFO]    Results will be output to: /home/harl/Dropbox/github/TFBS_footprinting3/sample_analysis/tfbs_results/ENST00000680887(900_100)_1
+2025-05-16 23:28:19,803:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/lookup/id/ENSG00000139618?feature=transcript;content-type=application/json
+2025-05-16 23:28:23,094:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/sequence/region/homo_sapiens/13:32315172-32316171:1?content-type=application/json
+2025-05-16 23:28:23,214:    [INFO]    Ensembl REST query made: http://rest.ensembl.org/overlap/region/homo_sapiens/13:32315172-32316171:1?feature=regulatory;content-type=application/json
+2025-05-16 23:28:26,970:    [INFO]    total time for tfbs_finder() for this transcript: 3.52274227142334 seconds
+2025-05-16 23:28:41,999:    [INFO]    total time for find_clusters() for this transcript: 15.028919458389282 seconds
+2025-05-16 23:28:55,004:    [INFO]    Total time for 2 transcripts: 98.4209463596344 seconds
+
+
+2025-05-16 23:52:22,253:    [INFO]    ***NEW SET OF ANALYSES HAS BEGUN***
