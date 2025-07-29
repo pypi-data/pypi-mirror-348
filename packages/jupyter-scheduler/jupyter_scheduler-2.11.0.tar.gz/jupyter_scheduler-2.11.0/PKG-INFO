@@ -1,0 +1,122 @@
+Metadata-Version: 2.4
+Name: jupyter_scheduler
+Version: 2.11.0
+Summary: A JupyterLab extension for running notebook jobs
+Project-URL: Homepage, https://github.com/jupyter-server/jupyter-scheduler
+Author: Project Jupyter
+License: BSD 3-Clause License
+        
+        Copyright (c) 2022, Project Jupyter
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its
+           contributors may be used to endorse or promote products derived from
+           this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+License-File: LICENSE
+Keywords: Jupyter,JupyterLab,JupyterLab4
+Classifier: Framework :: Jupyter
+Classifier: Framework :: Jupyter :: JupyterLab
+Classifier: Framework :: Jupyter :: JupyterLab :: 4
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.9
+Requires-Dist: croniter~=1.4
+Requires-Dist: fsspec!=2025.3.1,<=2025.3.2,>=2023.6.0
+Requires-Dist: jupyter-server<3,>=1.6
+Requires-Dist: nbconvert~=7.0
+Requires-Dist: psutil~=5.9
+Requires-Dist: pydantic<3,>=1.10
+Requires-Dist: pytz<=2024.2,>=2023.3
+Requires-Dist: sqlalchemy<3,>=2.0
+Requires-Dist: traitlets~=5.0
+Provides-Extra: dev
+Requires-Dist: click; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: myst-parser; extra == 'docs'
+Requires-Dist: pydata-sphinx-theme; extra == 'docs'
+Requires-Dist: sphinx; extra == 'docs'
+Provides-Extra: test
+Requires-Dist: jupyter-server[test]<3,>=1.6; extra == 'test'
+Requires-Dist: pytest; extra == 'test'
+Requires-Dist: pytest-cov; extra == 'test'
+Description-Content-Type: text/markdown
+
+# jupyter_scheduler
+
+[![Github Actions Status](https://github.com/jupyter-server/jupyter-scheduler/workflows/Build/badge.svg)](https://github.com/jupyter-server/jupyter-scheduler/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyter-server/jupyter-scheduler/main?urlpath=lab)
+
+A JupyterLab extension for running notebook jobs. Documentation is available on
+[ReadTheDocs](https://jupyter-scheduler.readthedocs.io).
+
+This extension is composed of a Python package named `jupyter_scheduler`
+for the server extension and a NPM package named `@jupyterlab/scheduler`
+for the frontend extension. Installation of this extension provides a
+REST API to run, query, stop and delete
+notebook jobs; the UI provides an interface to create, list and view job
+details.
+
+## Requirements
+
+- JupyterLab 4.x (for newer Jupyter Scheduler versions)
+- JupyterLab 3.x (for Jupyter Scheduler 1.x)
+
+> [!IMPORTANT]
+> Starting with v2.7.0, Jupyter Scheduler requires SQLAlchemy 2.x instead of SQLAlchemy 1.x.
+
+> [!IMPORTANT]
+> JupyterLab 3 reached its end of maintenance date on May 15, 2024. As a result, we will not backport new features to the v1 branch supporting JupyterLab 3 after this date. Fixes for critical issues will still be backported until December 31, 2024. If you are still using JupyterLab 3, we strongly encourage you to **upgrade to JupyterLab 4 as soon as possible**. For more information, see [JupyterLab 3 end of maintenance](https://blog.jupyter.org/jupyterlab-3-end-of-maintenance-879778927db2) on the Jupyter Blog.
+
+## Install
+
+To install the extension, execute:
+
+```bash
+pip install jupyter_scheduler
+```
+
+## Uninstall
+
+To remove the extension, execute:
+
+```bash
+pip uninstall jupyter_scheduler
+```
+
+## User's guide
+
+Please refer to our [user's guide](https://jupyter-scheduler.readthedocs.io/en/latest/users/index.html)
+for more information on installation and usage.
+
+## Contributing
+
+Please refer to our [contributor's guide](https://jupyter-scheduler.readthedocs.io/en/latest/contributors/index.html)
+for more information on installation and usage.
