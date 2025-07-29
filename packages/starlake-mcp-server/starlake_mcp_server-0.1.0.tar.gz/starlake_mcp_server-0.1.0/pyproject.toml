@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "starlake-mcp-server"
+requires-python = ">=3.10"
+version = "0.1.0"
+description = "Starlake MCP server."
+readme = "README.md"
+
+dependencies = [
+  "mcp[cli]>=1.2.0",
+  "python-dotenv>=1.0.1",
+  "requests>=2.25.0",
+  "fastapi>=0.100.0", # For OpenAPI parsing utils if used later, and data validation
+  "pydantic>=2.0",
+  "prance>=23.6.21.0",
+  "openapi-spec-validator>=0.7.1",
+  "jmespath>=1.0.1",
+]
+
+[project.scripts]
+starlake-mcp-server = "starlake_mcp_server:main"  # Correct entry pointing to __init__.py:main
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0"
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: mark a test as an integration test"
+]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.setuptools.packages]
+find = {include = ["starlake_mcp_server", "starlake_mcp_server.*"]}
