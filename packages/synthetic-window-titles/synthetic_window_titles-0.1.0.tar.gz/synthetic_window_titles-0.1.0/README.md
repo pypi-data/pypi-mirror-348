@@ -1,0 +1,109 @@
+# Synthetic Data Generation for Window Titles
+
+Generating synthetic window title data using NLP augmentation technique.
+
+## Overview
+
+This project provides tools to generate synthetic data from window title strings collected from various applications. It supports two primary methods:
+
+* **Substitution**: Uses a BERT-based model to substitute words in context.
+* **Substitution With N Variants**: Uses a BERT-based model to substitute words in context, creating N variants of each window title.
+* **Random Augmentation**: Applies random swap, delete, or insert operations, with a fallback to contextual substitution when necessary.
+
+## Requirements
+
+* Python 3.10 or higher
+* [nlpaug](https://github.com/makcedward/nlpaug)
+* [torch](https://pytorch.org/) and [transformers](https://github.com/huggingface/transformers)
+
+
+## 📦 Installation
+
+To install the package, run
+  ```bash
+  pip install synthetic-window-titles@git+https://github.com/paxray/synthetic-window-titles.git
+  ```
+  to install without cloning the repository. If the repository is already cloned, running
+  ```bash
+  pip install .
+  ```
+  in the root folder also works.
+
+
+## Configuration
+
+All configurable parameters live in `constants.py`. Here’s a full list of fields and example values:
+
+* **PRESERVE\_WORDS**: List of substrings to keep intact during augmentation. (**optional**)
+
+  ```python
+  PRESERVE_WORDS = [
+      " Google Chrome", " Microsoft Edge", " Word ",
+      " NAME ", "YEAR", "Explorer", "Outlook", " PKF "
+  ]
+  ```
+
+
+* **METHOD**: Integer selector for the active augmentation strategy (**mandatory**):
+
+  * `1` ⇒ single contextual substitution
+  * `2` ⇒ multiple contextual variants (requires `N_VARIANTS`)
+  * `3` ⇒ random augmentation
+
+  ```python
+  METHOD = 1
+  ```
+
+* **AUG\_PERCENTAGE**: Tune how many tokens are augmented. (**mandatory if Method = 1 or 2**):
+
+  ```python
+  AUG_PERCENTAGE = 0.3   # used by substitution methods
+  N_VARIANTS = 3        # used when METHOD == 2
+  ```
+
+* **N\_VARIANTS**: Tune how many variants to generate. (**mandatory if Method = 2**):
+
+* **INPUT\_FILE\_PATH**, **OUTPUT\_FILE\_PATH**: Source and destination JSON files.
+
+  ```python
+  INPUT_FILE_PATH = r"src\data\input\windowTitlesTranslated.json"
+  OUTPUT_FILE_PATH = r"src\data\output\syntheticDataUsingRandomAugmentation.json"
+
+## Usage
+
+1. Select an augmentation method by setting the METHOD constant in constants.py:
+
+    - '1' for a single substitution pass
+    - '2' to generate multiple contextual variants (controlled by N_VARIANTS)
+    - '3' for a random augmentation
+
+2. Configure augmentation parameters in the same file:
+
+    - AUG_PERCENTAGE determines the probability of applying contextual substitution
+    - N_VARIANTS (used when METHOD is 2) specifies how many variants to create per input
+
+3. Run the main script from the project root:
+
+    - python main.py
+
+4. Inspect your results at the location defined by OUTPUT_FILE_PATH. The script will load window titles from INPUT_FILE_PATH, apply the chosen augmentation strategy, and write the synthetic dataset accordingly.
+
+
+
+## Project Structure
+
+```
+.
+└── src
+    ├── common.py                                 # Shared utility functions
+    ├── constants.py                              # Configuration constants
+    ├── main.py                                   # Entry point script
+    ├── syntheticData.py                          # Data preparation logic
+    ├── syntheticDataUsingRandomAugmentation.py   # Random augmentation implementation
+    ├── syntheticDataUsingSubstitution.py         # Contextual substitution implementation
+    └── data
+        ├── input
+        │   └── windowTitlesTranslated.json   # Example input file
+        └── output
+            └── syntheticDataUsingRandomAugmentation.json  # Example output file
+```
