@@ -1,0 +1,116 @@
+Metadata-Version: 2.4
+Name: modinit
+Version: 0.1.1
+Summary: A tool for initializing AI model training repositories
+Home-page: https://github.com/eddiegulay/modinit
+Author: eddiegulay
+Author-email: eddiegulay <edgargulay@outlook.com>
+License: MIT
+Project-URL: Homepage, https://github.com/eddiegulay/modinit
+Project-URL: Bug Tracker, https://github.com/eddiegulay/modinit/issues
+Keywords: ai,machine learning,project structure,initialization
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# modinit
+
+**modinit** is a Python package that helps you quickly scaffold AI model training repositories with a standardized, best-practice structure. It saves you time and ensures consistency across your machine learning projects.
+
+## Why use modinit?
+
+- **Instant project setup:** Get started with a ready-to-use directory structure in seconds.
+- **Best practices built-in:** Follows common conventions for organizing data, code, configs, and tests.
+- **Docstring templates:** All generated Python files include helpful docstrings.
+- **Easy to use:** Simple command-line interface.
+
+## Demo
+
+![modinit demo](demo/modinit.gif)
+
+## Installation
+
+```bash
+pip install modinit
+```
+
+## Usage
+
+To create a new project, run:
+
+```bash
+modinit my-project
+```
+
+This will generate a new directory called `my-project` with a recommended structure for AI/ML projects.
+
+### Example
+
+Below is a real example of using `modinit` to create a project called `voice-rumba`:
+
+```bash
+$ pip install modinit
+$ modinit voice-rumba
+Successfully created project: voice-rumba
+To get started, navigate to the project directory:
+  cd voice-rumba
+```
+
+The generated structure looks like this:
+
+```
+voice-rumba/
+├── README.md
+├── .gitignore
+├── configs/
+│   └── config.yaml
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── interim/
+├── main.py
+├── notebooks/
+│   └── prototype.ipynb
+├── requirements.txt
+├── src/
+│   ├── __init__.py
+│   ├── data.py
+│   ├── evaluate.py
+│   ├── model.py
+│   ├── train.py
+│   └── utils.py
+└── tests/
+    ├── __init__.py
+    ├── test_data.py
+    ├── test_model.py
+    └── test_train.py
+```
+
+## Features
+
+- Creates a well-structured project directory for AI model training
+- Follows best practices for machine learning project organization
+- Includes helpful docstrings in all generated files
+- Simple command-line interface
+
+## Development
+
+To contribute to this project:
+
+1. Clone the repository
+2. Create a virtual environment
+3. Install development dependencies: `pip install -e ".[dev]"`
+4. Make your changes
+5. Run tests: `pytest`
+
+## License
+
+MIT
