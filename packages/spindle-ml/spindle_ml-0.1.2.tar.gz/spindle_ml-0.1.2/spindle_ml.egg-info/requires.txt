@@ -1,0 +1,15 @@
+torch>=1.8.0
+numpy>=1.19.0
+matplotlib>=3.3.0
+fastapi>=0.68.0
+uvicorn>=0.15.0
+pydantic>=1.8.0
+
+[server]
+fastapi>=0.68.0
+uvicorn>=0.15.0
+pydantic>=1.8.0
+
+[transformers]
+transformers>=4.0.0
+sentence-transformers>=2.0.0

@@ -1,0 +1,147 @@
+Metadata-Version: 2.4
+Name: spindle-ml
+Version: 0.1.2
+Summary: A library for training and deploying Sparse Autoencoders
+Home-page: https://github.com/wafer-inc/spindle
+Author: Sam Hall
+Author-email: sam@wafer.systems
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=1.8.0
+Requires-Dist: numpy>=1.19.0
+Requires-Dist: matplotlib>=3.3.0
+Requires-Dist: fastapi>=0.68.0
+Requires-Dist: uvicorn>=0.15.0
+Requires-Dist: pydantic>=1.8.0
+Provides-Extra: transformers
+Requires-Dist: transformers>=4.0.0; extra == "transformers"
+Requires-Dist: sentence-transformers>=2.0.0; extra == "transformers"
+Provides-Extra: server
+Requires-Dist: fastapi>=0.68.0; extra == "server"
+Requires-Dist: uvicorn>=0.15.0; extra == "server"
+Requires-Dist: pydantic>=1.8.0; extra == "server"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Spindle: Sparse Autoencoder Library
+
+Structured Projection INdex for Dense Latent Embeddings
+
+Spindle is a Python library for training and deploying Sparse Autoencoders (SAEs). It provides a simple, flexible API for working with SAEs in PyTorch.
+
+## Features
+
+- Train sparse autoencoders with configurable architectures
+- Analyze feature activations and reconstruction quality
+- Serve SAE models via a FastAPI server
+- Utilities for working with embeddings and weights
+- Visualization tools for interpreting SAE features
+
+## Installation
+
+Install from PyPI:
+
+```bash
+pip install spindle
+```
+
+For additional features:
+
+```bash
+# For transformer model support
+pip install "spindle[transformers]"
+
+# For server components
+pip install "spindle[server]"
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/wafer-inc/spindle
+cd spindle
+pip install -e .
+```
+
+## Quick Start
+
+### Training an SAE
+
+```python
+import torch
+import numpy as np
+from spindle.models.autoencoder import SAE
+from spindle.models.trainer import train_sae
+
+# Load your data
+embedding_data = np.load('vectors.npy')
+data = torch.tensor(embedding_data, dtype=torch.float32)
+
+# Create and train the model
+input_dim = data.shape[1]  # Embedding dimension
+hidden_dim = 500  # Sparse feature dimension
+
+model = SAE(input_dim, hidden_dim)
+train_stats = train_sae(
+    model=model,
+    data=data,
+    epochs=10,
+    batch_size=128,
+    sparsity_weight=1e-3,
+    save_path='sae_model.pt'
+)
+
+print(f"Training complete! Final loss: {train_stats['final_loss']}")
+```
+
+### Analyzing Features
+
+```python
+from spindle.utils.analysis import compute_feature_statistics
+from torch.utils.data import DataLoader, TensorDataset
+
+# Load model and data
+model = SAE.load('sae_model.pt', input_dim, hidden_dim)
+dataset = TensorDataset(data)
+loader = DataLoader(dataset, batch_size=128)
+
+# Compute statistics
+stats = compute_feature_statistics(model, loader)
+print(f"Dead features: {stats['dead_feature_count']} ({stats['dead_feature_ratio']:.2%})")
+```
+
+### Running a Server
+
+```python
+from transformers import AutoTokenizer, AutoModel
+from spindle.utils.server import SaeServer
+
+# Load tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
+embedding_model = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
+
+# Create and run server
+server = SaeServer(
+    encoder_weights="encoder_weights.npz",
+    tokenizer=tokenizer,
+    embedding_model=embedding_model
+)
+server.run()
+```
+
+## Documentation
+
+For detailed documentation and examples, see the [examples](./examples) directory.
