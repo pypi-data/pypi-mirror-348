@@ -1,0 +1,53 @@
+{
+
+    "elements" : { 
+        "Title" {  "label": "Title","name":"Title" } , 
+        "Type": { "label":"Type" , "name" : "Path(document.id).parts[-2]" },
+        "genre" : { "label": "genre" },
+        "CharacterAttr" : { "name" : "Character" , "attributes": ["type"] },
+        "plays_in" : { "label": "plays_in" },
+        "Weapon" : { "name" : "Weapon" },
+        "appears" : { "label": "appears" },
+        "Event" : { "name" : "Event" },
+        "event" : { "label": "event" },
+        "Character" : { "name" : "Character" },
+        "Victim" : { "name" : "Character", "label": "Victim" },
+        "PersonMentionVictim" : { "name" : "PersonMention" , "label": "Victim"},
+        "Harm" : { "name": "Harm" }
+
+    },
+    "topics" : { "to" : "Title"  },
+    "links" :[
+        {
+            "from"      : "Title",
+            "to"        : "Type",
+            "relation"  : "genre"
+        },
+        {
+            "from"      : CharacterAttr,
+            "to"        : "Title",
+            "relation"  : "plays_in"
+        },
+        {
+            "from"      : "Weapon",
+            "to"        : "Title",
+            "relation"  : "appears"
+        },
+        {
+            "from"      : "Event",
+            "to"        : "Title",
+            "relation"  : "event"
+        },
+        {
+            "from"      : "Character",
+            "to"        : "Victim",
+            "relation"  : "Harm"
+        },
+        {
+            "from"      : "Character",
+            "to"        : "PersonMention",
+            "relation"  : "Harm"
+        }
+    ]
+}
+

@@ -1,0 +1,38 @@
+{
+
+    "slots" : [  { "uri":"Title" } , { "label":"Type" , "content" : "{Path(document.id).parts[-2]}" } ],
+    "topics" : { "to" : "Title"  },
+    "links" :[
+        {
+            "from"      : { "uri":"Title" },
+            "to"        : { "slot" : "Type" },
+            "relation"  : { "label": "genre"}
+        },
+        {
+            "from"      : { "uri" : "Character" , "attributes": ["type"] },
+            "to"        : { "slot" : "Title" },
+            "relation"  : { "label": "plays_in"}
+        },
+        {
+            "from"      : { "uri" : "Weapon" },
+            "to"        : { "slot" : "Title" },
+            "relation"  : { "label": "appears"}
+        },
+        {
+            "from"      : { "uri" : "Event" },
+            "to"        : { "slot" : "Title" },
+            "relation"  : { "label": "event"}
+        },
+        {
+            "from"      : { "uri" : "Character" },
+            "to"        : { "uri" : "Character", "label": "Victim" },
+            "relation"  : { "uri": "Harm"}
+        },
+        {
+            "from"      : { "uri" : "Character" },
+            "to"        : { "uri" : "PersonMention", "label": "Victim" },
+            "relation"  : { "uri": "Harm"}
+        }
+    ]
+}
+
