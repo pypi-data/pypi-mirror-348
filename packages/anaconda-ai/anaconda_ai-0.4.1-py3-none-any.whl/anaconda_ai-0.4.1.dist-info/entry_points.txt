@@ -1,0 +1,5 @@
+[anaconda_cli.subcommand]
+ai = anaconda_ai.cli:app
+
+[llm]
+anaconda = anaconda_ai.integrations.llm
