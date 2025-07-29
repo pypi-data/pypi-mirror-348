@@ -1,0 +1,14 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "gammafileops"
+author = "HusseinGM"
+author-email = "husseingm73@gmail.com"
+home-page = "https://www.husseingm73.github.io/projects/gammafileops"
+description-file = "README.md"
+license = "MIT"
+
+[tool.flit.scripts]
+# Add any CLI scripts here if needed
