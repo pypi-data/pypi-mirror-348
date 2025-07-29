@@ -1,0 +1,85 @@
+<nav class="navbar">
+    <img src="images/logo.png" alt="logo" style="height: 30px; width: auto; margin-right: 1rem; object-fit: contain;">
+    <span class="navbar-title">Issue Anomaly Report</span>
+    <div class="view-switcher">
+        <button class="view-btn" data-view="iterations" type="button" aria-haspopup="true" aria-expanded="false">
+            Iterations
+        </button>
+        <div class="iteration-dropdown" role="menu">
+             <div class="iteration-dropdown-item" data-iteration="all" role="menuitem">
+                 <div class="iteration-dropdown-title">Loading Iterations...</div>
+             </div>
+        </div>
+        <button class="view-btn" data-view="milestones" type="button" aria-haspopup="true" aria-expanded="false">
+            Milestones
+        </button>
+        <div class="milestone-dropdown" role="menu">
+             <div class="milestone-dropdown-item" data-milestone="all" role="menuitem">
+                 <div class="milestone-dropdown-title">Loading Milestones...</div>
+             </div>
+        </div>
+        <button class="view-btn" data-view="issues" type="button">Backlog</button>
+    </div>
+</nav>
+
+<main class="content">
+    <h1>GitLab Issue Anomaly Report</h1>
+    <p class="generation-info">Report generated at: <span id="generation-time">Loading...</span></p>
+
+    <div id="issues-view" class="view" role="tabpanel" aria-labelledby="issues-view-button">
+        <div class="anomaly-filter-container top-filter">
+            <label for="anomaly-category-filter">Show: </label>
+            <select id="anomaly-category-filter" class="anomaly-category-filter anomaly-filter-btn" aria-label="Filter anomalies by category">
+                <option value="all" selected>All Anomalies (Default)</option>
+                <option value="impediment">Impediments</option>
+                <option value="hygiene">Hygiene</option>
+            </select>
+            <button id="export-issues-btn" class="export-btn" title="Export anomalies to Excel">Export to Excel</button>
+        </div>
+        <div class="stats">
+            <div class="stat-card"><h3>Total Issues Scanned</h3><p id="total-issues">...</p></div>
+            <div class="stat-card"><h3>Total Anomalies</h3><p id="total-anomalies">...</p></div>
+            <div class="stat-card"><h3>High Severity</h3><p><a href="#" id="high-severity-link" class="severity-high">...</a></p></div>
+            <div class="stat-card"><h3>Medium Severity</h3><p><a href="#" id="medium-severity-link" class="severity-medium">...</a></p></div>
+            <div class="stat-card"><h3>Low Severity</h3><p><a href="#" id="low-severity-link" class="severity-low">...</a></p></div>
+        </div>
+        <h2>Anomalies</h2>
+        <div id="anomalies-list">Loading anomalies...</div>
+    </div>
+
+    <div id="milestones-view" class="view" role="tabpanel" aria-labelledby="milestones-view-button">
+         <div class="anomaly-filter-container top-filter">
+            <label for="milestone-anomaly-filter">Show: </label>
+            <select id="milestone-anomaly-filter" class="anomaly-category-filter anomaly-filter-btn" aria-label="Filter milestone anomalies by category">
+                <option value="all" selected>All Anomalies (Default)</option>
+                <option value="impediment">Impediments</option>
+                <option value="hygiene">Hygiene</option>
+            </select>
+            <button id="export-milestones-btn" class="export-btn" title="Export milestone anomalies to Excel">Export to Excel</button>
+        </div>
+         <div class="stats">
+             <div class="stat-card"><h3>Active Milestones</h3><p id="total-milestones">...</p></div>
+             <div class="stat-card"><h3>Anomalies in Active Milestones</h3><p id="total-milestone-anomalies">...</p></div>
+         </div>
+        <h2>Milestone Details</h2>
+        <div id="milestones-list">Loading milestones...</div>
+    </div>
+
+    <div id="iterations-view" class="view active" role="tabpanel" aria-labelledby="iterations-view-button">
+         <div class="anomaly-filter-container top-filter">
+            <label for="iteration-anomaly-filter">Show: </label>
+            <select id="iteration-anomaly-filter" class="anomaly-category-filter anomaly-filter-btn" aria-label="Filter iteration anomalies by category">
+                <option value="all" selected>All Anomalies (Default)</option>
+                <option value="impediment">Impediments</option>
+                <option value="hygiene">Hygiene</option>
+            </select>
+            <button id="export-iterations-btn" class="export-btn" title="Export iteration anomalies to Excel">Export to Excel</button>
+        </div>
+         <div class="stats">
+             <div class="stat-card"><h3>Active Iterations</h3><p id="total-iterations">...</p></div>
+             <div class="stat-card"><h3>Anomalies in Active Iterations</h3><p id="total-iteration-anomalies">...</p></div>
+         </div>
+        <h2>Iteration Details</h2>
+        <div id="iterations-list">Loading iterations...</div>
+    </div>
+</main>
