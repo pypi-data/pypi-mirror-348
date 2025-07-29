@@ -1,0 +1,122 @@
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  background-color: var(--jp-toolbar-background);
+  border-bottom: 1px solid var(--jp-border-color2);
+}
+
+.chat-header h2 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--jp-ui-font-color1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  margin-right: 8px;
+  background-color: var(--jp-layout-color0);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.header-controls {
+  display: flex;
+  gap: 8px;
+  position: relative;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--jp-ui-font-color2);
+  font-size: 18px;
+  padding: 0;
+}
+
+.header-button:hover {
+  background-color: var(--jp-layout-color2);
+}
+
+/* 
+.close-button:hover {
+  background-color: rgba(234, 67, 53, 0.1);
+}  */
+
+/* Added styles for the history container */
+.history-container {
+  position: relative;
+}
+
+.history-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background-color: var(--jp-layout-color0);
+  border: 1px solid var(--jp-border-color2);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 250px;
+  width: auto;
+  padding: 4px 0;
+}
+
+/* Style the list inside the dropdown */
+.history-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style individual history items */
+.history-dropdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.history-dropdown li:hover {
+  background-color: var(--jp-layout-color2);
+}
+
+/* Style the chat title within the list item */
+.history-dropdown .chat-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 16px;
+  flex-grow: 1;
+}
+
+/* Style the chat time within the list item */
+.history-dropdown .chat-time {
+  flex-shrink: 0;
+  color: var(--jp-ui-font-color2);
+  font-size: 11px;
+}
+
+/* Style for empty history message */
+.history-dropdown p {
+  padding: 8px 12px;
+  color: var(--jp-ui-font-color2);
+  font-style: italic;
+  margin: 0;
+}

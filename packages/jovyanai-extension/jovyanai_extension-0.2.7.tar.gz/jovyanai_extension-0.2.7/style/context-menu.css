@@ -1,0 +1,46 @@
+/* style/context-menu.css */
+
+.context-menu {
+  position: absolute;
+  bottom: 100%; /* Position above the input area */
+  left: 0;
+  background-color: var(
+    --jp-layout-color1,
+    white
+  ); /* Use JupyterLab variable or fallback */
+
+  border: 1px solid var(--jp-border-color1, #ccc);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  padding: 4px 0;
+  margin-bottom: 5px; /* Space between menu and input area */
+  z-index: 1000; /* Ensure it's above other elements */
+  min-width: 150px; /* Ensure minimum width */
+}
+
+.context-menu-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: var(--jp-ui-font-size1, 13px);
+  color: var(--jp-ui-font-color1, #333);
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space between text and checkmark */
+  align-items: center;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.context-menu-item:hover {
+  background-color: var(--jp-layout-color2, #eee); /* Hover effect */
+}
+
+.context-menu-item.disabled {
+  color: var(--jp-ui-font-color3, #999); /* Grey out disabled text */
+  cursor: default;
+  background-color: transparent; /* Remove hover effect */
+}
+
+/* Simple checkmark styling */
+.context-menu-item span:last-child {
+  margin-left: 10px; /* Space before checkmark */
+  color: var(--jp-brand-color1, #2196f3); /* Use brand color for checkmark */
+}

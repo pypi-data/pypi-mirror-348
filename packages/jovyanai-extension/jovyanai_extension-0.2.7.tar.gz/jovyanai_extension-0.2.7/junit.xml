@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="21" failures="0" errors="0" time="9.115">
+  <testsuite name="@jovyanai/labextension" errors="0" failures="0" skipped="0" timestamp="2025-05-12T14:29:38" time="1.49" tests="1">
+    <testcase classname="@jovyanai/labextension should be tested" name="@jovyanai/labextension should be tested" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="NotebookController" errors="0" failures="0" skipped="0" timestamp="2025-05-12T14:29:38" time="1.669" tests="15">
+    <testcase classname="NotebookController activeCell should return the active cell from the current notebook" name="NotebookController activeCell should return the active cell from the current notebook" time="0.004">
+    </testcase>
+    <testcase classname="NotebookController activeCell should return undefined when no notebook is active" name="NotebookController activeCell should return undefined when no notebook is active" time="0">
+    </testcase>
+    <testcase classname="NotebookController addElementAfterCellInput should add element after input area when it exists" name="NotebookController addElementAfterCellInput should add element after input area when it exists" time="0.005">
+    </testcase>
+    <testcase classname="NotebookController addElementAfterCellInput should append element to cell node when input area does not exist" name="NotebookController addElementAfterCellInput should append element to cell node when input area does not exist" time="0.001">
+    </testcase>
+    <testcase classname="NotebookController addElementInCellChild should append element to cell node" name="NotebookController addElementInCellChild should append element to cell node" time="0">
+    </testcase>
+    <testcase classname="NotebookController writeCodeInCell should set the cell source code" name="NotebookController writeCodeInCell should set the cell source code" time="0">
+    </testcase>
+    <testcase classname="NotebookController runCell should execute the run-cell command" name="NotebookController runCell should execute the run-cell command" time="0">
+    </testcase>
+    <testcase classname="NotebookController insertCell should insert a new cell at the specified index" name="NotebookController insertCell should insert a new cell at the specified index" time="0">
+    </testcase>
+    <testcase classname="NotebookController currentCell should return the current active cell" name="NotebookController currentCell should return the current active cell" time="0">
+    </testcase>
+    <testcase classname="NotebookController currentCellIndex should return the current cell index" name="NotebookController currentCellIndex should return the current cell index" time="0">
+    </testcase>
+    <testcase classname="NotebookController getPreviousCells should return cells before the current cell" name="NotebookController getPreviousCells should return cells before the current cell" time="0">
+    </testcase>
+    <testcase classname="NotebookController getNextCells should return cells after the current cell" name="NotebookController getNextCells should return cells after the current cell" time="0">
+    </testcase>
+    <testcase classname="NotebookController getLanguage should return the notebook kernel language" name="NotebookController getLanguage should return the notebook kernel language" time="0">
+    </testcase>
+    <testcase classname="NotebookController getLanguage should return python as default when no language is set" name="NotebookController getLanguage should return python as default when no language is set" time="0">
+    </testcase>
+    <testcase classname="NotebookController runCommand should execute the specified command" name="NotebookController runCommand should execute the specified command" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="handleCodeGeneration" errors="0" failures="0" skipped="0" timestamp="2025-05-12T14:29:38" time="8.081" tests="5">
+    <testcase classname="handleCodeGeneration correctly converts code cell with execution result" name="handleCodeGeneration correctly converts code cell with execution result" time="0.031">
+    </testcase>
+    <testcase classname="handleCodeGeneration correctly converts code cell with stream output" name="handleCodeGeneration correctly converts code cell with stream output" time="0.002">
+    </testcase>
+    <testcase classname="handleCodeGeneration correctly converts code cell with error output" name="handleCodeGeneration correctly converts code cell with error output" time="0.001">
+    </testcase>
+    <testcase classname="handleCodeGeneration correctly handles multiple cells in context" name="handleCodeGeneration correctly handles multiple cells in context" time="0.006">
+    </testcase>
+    <testcase classname="handleCodeGeneration correctly handles markdown cells" name="handleCodeGeneration correctly handles markdown cells" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>

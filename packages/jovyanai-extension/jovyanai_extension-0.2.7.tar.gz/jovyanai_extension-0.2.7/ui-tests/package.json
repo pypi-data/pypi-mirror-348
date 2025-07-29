@@ -1,0 +1,17 @@
+{
+  "name": "@jovyanai/labextension-ui-tests",
+  "version": "1.0.0",
+  "description": "JupyterLab @jovyanai/labextension Integration Tests",
+  "private": true,
+  "scripts": {
+    "start": "jlpm install && jupyter labextension develop .. && jupyter lab --config jupyter_server_test_config.py --port 8899",
+    "test": "./node_modules/.bin/playwright test",
+    "test:update": "./node_modules/.bin/playwright test --update-snapshots"
+  },
+  "devDependencies": {
+    "@jupyterlab/galata": "^4.2.0"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0"
+  }
+}

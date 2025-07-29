@@ -1,0 +1,61 @@
+.context-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: var(--jp-layout-color2);
+  color: var(--jp-ui-font-color2);
+  gap: 4px;
+}
+
+.context-badge.ts {
+  background-color: #e3f2fd;
+  color: #0277bd;
+}
+
+.context-badge.js {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.context-badge.tsx {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.context-badge-prefix {
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+}
+
+.context-badge-icon > svg {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+}
+
+.context-badge-name {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.context-badge-remove {
+  background: none;
+  border: none;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 2px;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.context-badge-remove:hover {
+  opacity: 1;
+}
