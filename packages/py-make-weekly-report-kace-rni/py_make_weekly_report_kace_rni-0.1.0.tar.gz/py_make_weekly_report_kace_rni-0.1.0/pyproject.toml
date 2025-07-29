@@ -1,0 +1,27 @@
+[project]
+name = "py_make_weekly_report_kace_rni"
+version = "0.1.0"
+description = "CLI to generate weekly report"
+authors = [{ name = "Anthony Asamoah", email = "anthonyasamoah48@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "rich",
+    "pyperclip"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Anthony-Asamoah/py_make_weekly_report_kace_rni"
+"Bug Tracker" = "https://github.com/Anthony-Asamoah/py_make_weekly_report_kace_rni/issues"
+
+[project.scripts]
+py_make_weekly_report = "py_make_weekly_report_kace_rni.__main__:main"
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,68 @@
+# GI-KACE Weekly Report Generator
+
+A simple CLI tool to generate and save a structured weekly report for GI-KACE RNI Department.
+Outputs a text file and also copies the content to the clipboard for quick sharing.
+
+The aim of this project was to speed up my weekly reporting by letting me do the important part and automating the rest.
+
+## Features
+
+- Automatically detects the current week's date range
+- Prompts for achievements and challenges
+- Formats the report with a clean layout
+- Saves report as a text file:  
+  `Week [n] [Month] [monday's date] - [friday's date].txt`
+- Copies report to clipboard
+
+## Installation
+
+```bash
+git clone https://github.com/anthony-asamoah/build-weekly-report.git
+cd build-weekly-report
+pip install -e .
+```
+
+## Usage
+
+```bash
+build-weekly-report
+```
+
+A prompt is given to enter:
+
+- Project name
+- Key achievements (press Enter twice to finish)
+- Challenges and next steps (press Enter twice to finish)
+
+## Example Output
+
+```txt
+Subject: Week Report of May 13th – May 17th, [Anthony]
+Unit: SE
+Project: Internal Tooling
+
+Key Achievement(s):
+  • Refactored legacy codebase to improve testability.
+  • Automated weekly report generation using Python.
+
+Challenges and Next Steps:
+  • Integration testing for the new reporting module.
+  • Coordinate with DevOps to deploy updates.
+```
+
+## Requirements
+
+- Python 3.7+
+- rich
+- pyperclip
+
+1. Install python
+  ```text
+  google 'install python on <your machine/environment>'
+  follow the steps provided
+  ```
+
+2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
