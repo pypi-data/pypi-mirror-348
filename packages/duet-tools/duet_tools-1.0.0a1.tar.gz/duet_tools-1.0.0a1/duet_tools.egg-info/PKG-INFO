@@ -1,0 +1,78 @@
+Metadata-Version: 2.4
+Name: duet-tools
+Version: 1.0.0a1
+Summary: Output management tools for LANL DUET program
+Home-page: https://github.com/nmc-cafes/duet-tools
+License: MIT
+Project-URL: Bug Tracker, https://github.com/nmc-cafes/duet-tools/issues
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scipy
+Provides-Extra: landfire
+Requires-Dist: pandas; extra == "landfire"
+Requires-Dist: geojson; extra == "landfire"
+Requires-Dist: shapely; extra == "landfire"
+Requires-Dist: pyproj; extra == "landfire"
+Requires-Dist: landfire[geospatial]; extra == "landfire"
+Requires-Dist: rasterio; extra == "landfire"
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# duet-tools
+
+## Quick-Links
+
+[Documentation](https://nmc-cafes.github.io/duet-tools/) - [PyPi Package](https://pypi.org/project/duet-tools/)
+
+## What is duet-tools?
+
+duet-tools is a Python package that provides a convenient interface for programmatically working with the inputs and outputs of the DUET program developed by [McDanold et al. (2023)](https://doi.org/10.1016/j.ecolmodel.2023.110425) at Los Alamos National Lab. Central to the package is the ability to calibrate the values in DUET outputs to match targets supplied by the user or national datasets.
+
+The goals of duet-tools are to:
+
+1. Write a DUET input file.
+2. Read in DUET outputs for easy manipulation.
+3. Calibrate DUET outputs by scaling the magnitude of the parameter values while retaining the spatial distributions from DUET.
+4. Provide a platform for the future development of additional tools centered around DUET.
+
+## Installation
+
+quicfire-tools can be installed using `pip`.
+
+### pip
+
+```bash
+pip install duet-tools
+```
+
+To use the [landfire](reference.md#duet_tools.landfire) module, install using the `landfire` extra using `pip`.
+
+```bash
+pip install duet-tools[landfire]
+```
+
+## Issues
+
+If you encounter any issues with the quicfire-tools package, please submit an issue on the duet-tools GitHub
+repository [issues page](https://github.com/nmc-cafes/duet-tools/issues).
