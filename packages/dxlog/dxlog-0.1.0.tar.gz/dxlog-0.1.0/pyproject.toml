@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dxlog"
+dynamic = ["version"]
+description = 'A DNAnexus log reader.'
+readme = "README.md"
+requires-python = ">=3.8.1"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Gloria Benoit", email = "gloriabenoit921@gmail.com" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = ["textual>=3.0.1", "dxpy>=0.388.0"]
+
+[project.urls]
+Documentation = "https://github.com/gloriabenoit/dxlog#readme"
+Issues = "https://github.com/gloriabenoit/dxlog/issues"
+Source = "https://github.com/gloriabenoit/dxlog"
+
+[project.scripts]
+dxlog = "dxlog.log_reader:run"
+
+[tool.hatch.version]
+path = "src/dxlog/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/dxlog tests}"
+
+[tool.coverage.run]
+source_pkgs = ["dxlog", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/dxlog/__about__.py",
+]
+
+[tool.coverage.paths]
+dxlog = ["src/dxlog", "*/dxlog/src/dxlog"]
+tests = ["tests", "*/dxlog/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
