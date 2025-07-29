@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: graphcast
+Version: 0.14.0
+Summary: ETL to cast tabular and hierarchical data (json) types into graphs and graph databases (ArangoDB, Neo4j)
+Author-email: Alexander Belikov <alexander@growgraph.dev>
+License-File: LICENSE
+Requires-Python: ~=3.11
+Requires-Dist: click<9,>=8.2.0
+Requires-Dist: ijson<4,>=3.2.3
+Requires-Dist: neo4j<6,>=5.22.0
+Requires-Dist: networkx~=3.3
+Requires-Dist: pandas<3,>=2.0.3
+Requires-Dist: python-arango<9,>=8.1.2
+Requires-Dist: suthing<0.5,>=0.4.1
+Requires-Dist: xmltodict<0.15,>=0.14.2
