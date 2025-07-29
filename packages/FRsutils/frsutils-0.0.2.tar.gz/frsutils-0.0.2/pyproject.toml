@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "FRsutils"
+version = "0.0.2"
+description = "A Python library for fuzzy-rough set utility functions."
+authors = [{ name = "Mehran Amiri", email = "meam64@gmail.com" }]
+readme = "README.md"
+license = {text = " AGPL-3.0"}
+keywords = ["fuzzy-rough sets", "mathematics", "data science"]
+dependencies = [
+    "numpy>=1.21.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mehi64/FRsutils"
+"Documentation" = "https://mehi64.github.io/FRsutils/"
