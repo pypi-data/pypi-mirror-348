@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools >= 77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whatschecker"
+authors = [
+  { name="Hasan Rasel", email="rrss.mahmud@gmail.com" },
+]
+description = "Discover who uses WhatsApp and Extract"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "LicenseRef-Proprietary"
+license-files = ["LICEN[CS]E*"]
+keywords = ["WhatsApp Checker", "WhatsApp", "Checker", "WhatsApp Validator"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications :: Chat",
+    "Topic :: Communications :: Telephony",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+dependencies = [
+    "undetected-chromedriver",
+    "selenium"
+]
+dynamic = ["version"]
+
+[project.scripts]
+whatschecker = "whatschecker.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "whatschecker.__VERSION__"}
+
+[tool.setuptools.packages.find]
+include = ["whatschecker*"]
+exclude = ["docs*", "tests*", "local*", "dist*", "whatschecker.egg-info*", ".venv*", ".run*"]
+
+[project.urls]
+Homepage = "https://github.com/bitbytelab/WhatsChecker"
+Issues = "https://github.com/bitbytelab/WhatsChecker/issues"
