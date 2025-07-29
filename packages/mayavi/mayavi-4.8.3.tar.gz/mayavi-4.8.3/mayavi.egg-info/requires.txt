@@ -1,0 +1,17 @@
+apptools
+configobj
+envisage
+numpy
+pyface>=6.1.1
+pygments
+traits>=6.0.0
+traitsui>=7.0.0
+packaging
+vtk
+puremagic
+
+[:python_version < "3.11"]
+importlib_resources
+
+[app]
+envisage
