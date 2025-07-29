@@ -1,0 +1,72 @@
+# Simple Project Template Configuration
+
+_version: "0.1.0"
+_description: "Creates a project with basic file structure, example module, readme file, setup for packaging and testing enablement"
+
+# Template configuration
+_templates_suffix: ".jinja"
+
+# Conditional file exclusion
+_tasks:
+  # Remove tests folder if pytest is not used
+  - >
+    {% if enable_testing == 'no' %}
+    python -c "import shutil; import os; shutil.rmtree('tests') if os.path.exists('tests') else None"
+    {% endif %}
+  
+  # Ensure the project directory is properly initialized
+  # This is necessary for project detection to work correctly
+  - >
+    python -c "import os; os.makedirs('.app_cache', exist_ok=True)"
+
+# Project Information
+project_name:
+  type: str
+  help: "Name of the project"
+  default: "simple-project"
+
+project_description:
+  type: str
+  help: "Short description of the project"
+  default: "A simple Python project"
+
+author_name:
+  type: str
+  help: "Author name"
+  default: "Your Name"
+
+author_email:
+  type: str
+  help: "Author email"
+  default: "your.email@example.com"
+
+# Project Configuration
+python_version:
+  type: str
+  help: "Python version"
+  default: "3.8"
+  choices:
+    - "3.8"
+    - "3.9"
+    - "3.10"
+    - "3.11"
+    - "3.12"
+
+license:
+  type: str
+  help: "License"
+  default: "MIT"
+  choices:
+    - "MIT"
+    - "Apache-2.0"
+    - "GPL-3.0"
+    - "BSD-3-Clause"
+
+# Package Configuration
+enable_testing:
+  type: str
+  help: "Enable testing with pytest: Pytest is a powerful testing framework that simplifies test writing with its concise syntax. It offers features like fixtures, parameterization, and plugins that make testing more efficient and maintainable compared to the standard unittest library."
+  default: "yes"
+  choices:
+    - "yes"
+    - "no"

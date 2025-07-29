@@ -1,0 +1,52 @@
+MANIFEST.in
+README.md
+pyproject.toml
+cicd_tools/__init__.py
+cicd_tools/cli.py
+cicd_tools.egg-info/PKG-INFO
+cicd_tools.egg-info/SOURCES.txt
+cicd_tools.egg-info/dependency_links.txt
+cicd_tools.egg-info/entry_points.txt
+cicd_tools.egg-info/requires.txt
+cicd_tools.egg-info/top_level.txt
+cicd_tools/menus/__init__.py
+cicd_tools/menus/app_menu.py
+cicd_tools/menus/create_menu.py
+cicd_tools/menus/menu_utils.py
+cicd_tools/project_templates/__init__.py
+cicd_tools/project_templates/development_project/.bumpversion.cfg.jinja
+cicd_tools/project_templates/development_project/.gitignore.jinja
+cicd_tools/project_templates/development_project/.pre-commit-config.yaml.jinja
+cicd_tools/project_templates/development_project/Dockerfile.jinja
+cicd_tools/project_templates/development_project/LICENSE.jinja
+cicd_tools/project_templates/development_project/README.md.jinja
+cicd_tools/project_templates/development_project/copier.yaml
+cicd_tools/project_templates/development_project/docker-compose.yml.jinja
+cicd_tools/project_templates/development_project/pyproject.toml.jinja
+cicd_tools/project_templates/development_project/.github/workflows/deploy.yml.jinja
+cicd_tools/project_templates/development_project/.github/workflows/pytest.yml.jinja
+cicd_tools/project_templates/development_project/.github/workflows/release.yml.jinja
+cicd_tools/project_templates/development_project/tests/__init__.py.jinja
+cicd_tools/project_templates/development_project/tests/test_main.py.jinja
+cicd_tools/project_templates/development_project/{{project_name.replace('-', '_')}}_module/__init__.py.jinja
+cicd_tools/project_templates/development_project/{{project_name.replace('-', '_')}}_module/main.py.jinja
+cicd_tools/project_templates/simple_project/.gitignore.jinja
+cicd_tools/project_templates/simple_project/LICENSE.jinja
+cicd_tools/project_templates/simple_project/README.md.jinja
+cicd_tools/project_templates/simple_project/copier.yaml
+cicd_tools/project_templates/simple_project/setup.py.jinja
+cicd_tools/project_templates/simple_project/tests/__init__.py.jinja
+cicd_tools/project_templates/simple_project/tests/test_main.py.jinja
+cicd_tools/project_templates/simple_project/{{project_name.replace('-', '_')}}_module/__init__.py.jinja
+cicd_tools/project_templates/simple_project/{{project_name.replace('-', '_')}}_module/main.py.jinja
+cicd_tools/project_types/__init__.py
+cicd_tools/project_types/base_project.py
+cicd_tools/project_types/development_project.py
+cicd_tools/project_types/mixins.py
+cicd_tools/project_types/simple_project.py
+cicd_tools/templates/__init__.py
+cicd_tools/templates/template_manager.py
+cicd_tools/templates/template_utils.py
+cicd_tools/utils/__init__.py
+cicd_tools/utils/config_manager.py
+cicd_tools/utils/jinja_utils.py
