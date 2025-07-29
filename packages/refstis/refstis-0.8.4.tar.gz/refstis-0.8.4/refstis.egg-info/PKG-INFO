@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: refstis
+Version: 0.8.4
+Summary: Pipeline to create STIS CCD superdarks and superbiases
+Home-page: https://refstis.readthedocs.io
+Author: Allyssa Riley, Sean Lockwood, Justin Ely
+Keywords: astronomy
+Classifier: Programming Language :: Python :: 3
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE
+Requires-Dist: pyyaml
+Requires-Dist: numpy
+Requires-Dist: astropy>=3.1
+Requires-Dist: stistools
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+STIS superdark and superbias reference file creation routines
+-------------------------------------------------------------
+
+Contribute
+----------
+
+This library primarily serves the internal needs of the STIS instrument team at
+STScI, and as such not all requested changes will be able to be accommodated.  
+Still, we'd love to know what issues and modifications are out there, so please
+don't be shy!
+
+For bugs, issues, suggestions, please use the github issue tracker.
+For code, please *fork* the repo, make your changes, and issue a pull request.
+
+Build Status and things
+-----------------------
+
+[![build](https://github.com/spacetelescope/refstis/actions/workflows/build.yml/badge.svg)](https://github.com/spacetelescope/refstis/actions/workflows/build.yml)
+
+Documentation: [![Documentation Status](https://readthedocs.org/projects/refstis/badge/?version=latest)](http://refstis.readthedocs.io/en/latest/?badge=latest)
+
+Conda install: [![Anaconda-Server Badge](https://anaconda.org/justincely/refstis/badges/installer/conda.svg)](https://conda.anaconda.org/justincely)
