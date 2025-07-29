@@ -1,0 +1,15 @@
+{
+  "name": "hello_world",
+  "version": "0.0.0",
+  "description": "Node.js Addons Example #1",
+  "main": "hello.js",
+  "private": true,
+  "dependencies": {
+    "bindings": "~1.5.0",
+    "xmake-build-system": "^2.9.7"
+  },
+  "scripts": {
+    "install": "xmake -y && xmake install",
+    "test": "node hello.js"
+  }
+}
