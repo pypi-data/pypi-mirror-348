@@ -1,0 +1,132 @@
+Metadata-Version: 2.1
+Name: teleexception
+Version: 0.3.54
+Summary: Python Package for tele exception
+Author: imason
+Author-email: 635761952@qq.com
+Keywords: python exception
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6,
+Description-Content-Type: text/markdown
+
+# Tele Log
+
+统一的异常类 python package。
+
+## how to commpile
+
+```bash
+python setup.py sdist bdist_wheel
+```
+
+## how to release
+
+```bash
+twine upload -r pypi dist/*.whl
+```
+
+## how to install
+
+```bash
+pip install teleexception
+```
+
+## how to use
+
+```python
+from teleexception import HTTPStatus, StatusException
+status = HTTPStatus.FORBIDDEN
+raise StatusException(status.value, status.phrase)
+```
+
+## 版本：
+
+错误码定义规范（2022.10.18）：https://doc.weixin.qq.com/sheet/e3_AQ4AhgZUAJ83tl2k4qhSeaoRLQ2T0?scode=AGIACAeJAA0NBzCa2KARYAMgazAD0
+
+- 0.1.x：旧版错误码（没有复用，已弃用）
+- 0.2.x：新版错误码（复用错误码）
+- 0.3.x: 增加数字生活错误码
+
+**错误码位数均为 6 位数，共分为 8 大类：**
+
+- 通用错误码：4xxxxx
+  - 通用：40xxxx
+  - 图片：41xxxx
+  - 文本：42xxxx
+  - 音频：43xxxx
+  - 视频：44xxxx
+  - 数据库：45xxxx
+- 系统运行错误码：5xxxxx
+
+- 业务相关错误码：6xxxxx
+  - 人体相关业务：600xxx
+  - 人脸相关业务：601xxx
+
+**说明：错误码和 message 一一对应，details 根据业务字段选择性返回描述性说明，不做强制规定。**
+
+| 错误码 |           message            | details |
+| :----: | :--------------------------: | :-----: |
+| 400001 |         请求路径错误         |         |
+| 400002 |         请求方法错误         |         |
+| 400003 |        请求体内容为空        |         |
+| 400004 |      请求体非 json 格式      |         |
+| 400005 |        请求体类型错误        |         |
+| 400006 |        必传的参数未传        |         |
+| 400007 |         传递非法参数         |         |
+| 400008 |   请求体的参数字段类型错误   |         |
+| 400009 |    请求体的参数字段值为空    |         |
+| 400010 |  请求体的参数字段值设置错误  |         |
+| 400011 |     base64 数据处理异常      |         |
+| 400012 |        文件格式不合法        |         |
+| 400013 |      文件大小不符合要求      |         |
+| 400014 |      请求时间范围不合法      |         |
+| 400015 |         文件下载错误         |         |
+| 400016 |        必传的参数重复        |         |
+| 400017 |        时间戳格式不对        |         |
+| 400018 |         超过个数限制         |         |
+| 400019 |   请求体的参数字段长度错误   |         |
+| 410001 |         图片解码错误         |         |
+| 410002 |      图片尺寸不符合要求      |         |
+| 420001 |       文本长度超过限制       |         |
+| 420002 |       文本长度低于阈值       |         |
+| 420003 |         中文占比过低         |         |
+| 420004 |      文本不是 UTF8 格式      |         |
+| 420005 |       文本含有非法字符       |         |
+| 420006 |       文本操作失败       |         |
+| 430001 |         音频解码错误         |         |
+| 430002 |     音频采样率不符合要求     |         |
+| 430003 |    音频采样精度不符合要求    |         |
+| 430004 |     音频声道数不符合要求     |         |
+| 430005 |      音频长度不符合要求      |         |
+| 440001 |         视频解码错误         |         |
+| 440002 |      视频长度不符合要求      |         |
+| 440003 |      视频尺寸不符合要求      |         |
+| 450001 |        数据库操作失败        |         |
+| 450002 |      请求的数据库不存在      |         |
+| 450003 |      请求的数据库已存在      |         |
+| 450004 |    请求的数据库实体不存在    |         |
+| 450005 |    请求的数据库实体已存在    |         |
+| 500001 |  服务接口异常，请联系管理员  |         |
+| 500002 | 操作数据库异常，请联系管理员 |         |
+| 500003 |  模型推理错误，请联系管理员  |         |
+| 600001 |       人体特征提取错误       |         |
+| 600002 |         未检测到人体         |         |
+| 601001 |       人脸特征提取错误       |         |
+| 610002 |         未检测到人脸         |         |
+| 620001 |        Roi 不符合规范        |         |
+
+**数字生活错误码**
+
+| 错误码 |     message      | details |
+| :----: | :--------------: | :-----: |
+|   0    |     请求成功     |         |
+|  1001  |     参数错误     |         |
+|  1002  |     请求异常     |         |
+|  1003  |   内部服务异常   |         |
+|  1004  | 获取刷新地址异常 |         |
+|  1005  |   上传文件异常   |         |
+|  1006  |  图像等资源异常  |         |
+|  1007  |   流文件不合法   |         |
+|  1008  |   算法编码错误   |         |
