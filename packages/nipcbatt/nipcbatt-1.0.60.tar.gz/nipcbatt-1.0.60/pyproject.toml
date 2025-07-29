@@ -1,0 +1,94 @@
+[tool.poetry]
+name = "nipcbatt"
+version = "1.0.60"
+license = "MIT"
+description = "Python PCB Assembly Test Toolkit"
+authors = ["NI <opensource@ni.com>"]
+maintainers = ["John Meeker <john.meeker@emerson.com>", "Emmanuel ROSET <emmanuel.roset@emerson.com>", "Srinivasan J <srinivasan.j@emerson.com>", "Aditya Saxena <adityasaxena@emerson.com>"]
+include = ["requirements.txt", "requirements_for_packaging.txt"]
+readme = "README.rst"
+repository = "https://github.com/ni/nipcbatt"
+keywords = ["nipcbatt", "pcbatt", "pcba", "pcb"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: Science/Research",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+packages = [{ include = "nipcbatt", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "1.26.4"
+scipy = "1.13.0"
+nidaqmx = "0.9.0"
+pyvisa = "1.14.1"
+colorama = "0.4.6"
+varname = "0.12.0"
+executing = "2.0.1"
+pandas = "2.2.2"
+matplotlib = "3.9.2"
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "*"
+wheel = "*"
+asttokens = "2.4.1"
+build = "1.0.3"
+colorama = "0.4.6"
+decorator = "5.1.1"
+deprecation = "2.1.0"
+executing = "2.0.1"
+ipython = "8.17.2"
+jedi = "0.19.1"
+matplotlib-inline = "0.1.6"
+packaging = "23.2"
+parso = "0.8.3"
+prompt-toolkit = "3.0.40"
+pure-eval = "0.2.2"
+Pygments = "2.16.1"
+pyproject_hooks = "1.0.0"
+six = "1.16.0"
+stack-data = "0.6.3"
+toml = "0.10.2"
+traitlets = "5.13.0"
+varname = "0.12.0"
+wcwidth = "0.2.9"
+pytest = ">=6.2.3"
+pytest-cov = "^4.1.0"
+mock = ">=4.0.3"
+pep8-naming = ">=0.13.2"
+parameterized = "^0.8.1"
+ni-python-styleguide = ">=0.4.6"
+black = "^23.3.0"
+flake8 = ">=5.0.4"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.setuptools.package-data]
+"*" = [ "win_amd64/NI.*.dll",]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = "src"
+# Skipping the tests as they require NI DAQmx
+norecursedirs = [
+    "tests/nipcbatt_tests/*"
+]
+
+[tool.distutils.bdist_wheel]
+plat-name = "win_amd64"
+
+[tool.black]
+line-length = 100
+extend_exclude = "src/docs"
+
+[tool.ni-python-styleguide]
+extend_exclude = "src/docs,src/nipcbatt/pcbatt_automation,src/nipcbatt/pcbatt_ft_demo_test_sequence,src/nipcbatt/pcbatt_validation_examples"
