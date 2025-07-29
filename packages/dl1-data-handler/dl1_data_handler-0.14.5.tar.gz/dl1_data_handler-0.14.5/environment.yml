@@ -1,0 +1,18 @@
+# conda env create -f environment.yml
+name: dl1dh
+channels:
+    - anaconda
+    - conda-forge
+dependencies:
+    - python>=3.10
+    - astropy
+    - setuptools
+    - numpy
+    - scipy
+    - pip
+    - ctapipe==0.25.1
+    - traitlets
+    - pyyaml
+    - pandas
+    - pip:
+        - pydot
