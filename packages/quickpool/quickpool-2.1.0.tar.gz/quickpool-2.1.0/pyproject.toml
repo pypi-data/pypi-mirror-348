@@ -1,0 +1,32 @@
+[project]
+name = "quickpool"
+description = "Use ProcessPoolExecutor and ThreadPoolExecutor from concurrent.futures with a progress bar and less boilerplate."
+version = "2.1.0"
+dependencies = ["printbuddies", "pytest", "noiftimer", "rich"]
+readme = "README.md"
+keywords = ["multithread", "multiprocess", "concurrent", "futures"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent"]
+requires-python = ">=3.10"
+
+[[project.authors]]
+name = "Matt Manes"
+email = "mattmanes@pm.me"
+
+[project.urls]
+Homepage = "https://github.com/matt-manes/quickpool"
+Documentation = "https://github.com/matt-manes/quickpool/tree/main/docs"
+"Source code" = "https://github.com/matt-manes/quickpool/tree/main/src/quickpool"
+
+[project.scripts]
+
+[tool]
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]
+pythonpath = "src"
+
+[tool.hatch.build.targets.sdist]
+exclude = [".coverage", ".pytest_cache", ".vscode", "tests", "htmlcov", "docs", "*.md"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
