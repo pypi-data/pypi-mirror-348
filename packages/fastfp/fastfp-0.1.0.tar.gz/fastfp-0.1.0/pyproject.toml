@@ -1,0 +1,45 @@
+[build-system]
+requires = ["flit_core >= 3.4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "fastfp"
+authors = [{name = "Gabe Freedman", email = "freedma5@uwm.edu"}]
+description = "JAX implementation of pulsar timing Fp-statistic"
+readme = "README.md"
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+dynamic = ["version"]
+requires-python = ">=3.9"
+dependencies = [
+    "jax[cpu]",
+    "jaxlib",
+    "enterprise-pulsar",
+    "enterprise_extensions",
+    "tqdm"
+]
+
+[project.optional-dependencies]
+
+dev = [
+    "black",
+    "flake8",
+    "flake8-pyprojecttoml"
+]
+
+gpu = [
+    "jax[cuda12]"
+]
+
+[tool.flake8]
+max-line-length = 120
+exclude = [
+    "__pycache__",
+    ".git",
+    ".ipynb_checkpoints",
+    ".tox",
+    ".venv",
+    "build",
+    "dist",
+    "docs",
+    "venv",
+]
