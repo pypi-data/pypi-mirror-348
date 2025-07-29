@@ -1,0 +1,17 @@
+[project]
+name = "ngiab"
+version = "0.0.1"
+description = "A collection of tools to run NextGen In A Box (NGIAB)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["ngiab_data_preprocess"]
+
+[project.urls]
+Homepage = "https://github.com/CIROH-UA/NGIAB_data_preprocess"
+Issues = "https://github.com/CIROH-UA/NGIAB_data_preprocess/issues"
+
+[project.scripts]
+#ngiab = "main:main"
+prep = "ngiab_data_cli.__main__:main"
+map_app = "map_app.__main__:main"
+forcings = "ngiab_data_cli.forcing_cli:main"
