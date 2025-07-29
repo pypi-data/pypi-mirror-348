@@ -1,0 +1,61 @@
+Metadata-Version: 2.4
+Name: pudo
+Version: 1.6.0
+Summary: Python version of linux sudo command without password prompt
+Home-page: https://github.com/kasulamadhusudhan/pudo
+Author: Madhusudhan Kasula
+Author-email: kasula.madhusudhan@gmail.com
+Classifier: Programming Language :: C
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: summary
+
+**Pudo Package**
+
+This is an Python Package for running Linux commands with root permission.
+We can see this as an alternative to Linux sudo command without password prompt.
+This is very handy when you are writing python automation scripts and need to deal with root privileges.
+You can use this as an python module or an Linux command.
+
+Before using the pudo, please accept the Disclaimer:
+
+    user$ sudo /usr/local/bin/pudo --accept-disclamer
+	We trust you have received the usual lecture from the local System
+	Administrator. It usually boils down to these three things:
+
+		#1) Respect the privacy of others.
+		#2) Think before you type.
+		#3) With great power comes great responsibility.
+
+	PLEASE NOTE:
+		Pudo Developers are not responsible for any misuse of Root Privileges
+
+	Thank You for Accepting the Disclaimer:
+	    It is great quality of you to respect other's privacy
+
+Below is the code snippet for using in python automation for running commands under root privilege:
+
+    user$ python3 # or python2
+    >>> from pudo import pudo
+    >>> (ret, out) = pudo.run(('ls', '/root')) # or pudo.run('ls /root')
+    >>> print(ret)
+    0
+    >>> print(out)
+    b'Desktop\nDownloads\nPictures\nMusic\n'
+
+Below is the cmd example for running commands under root privilege:
+
+    user$ pudo ls /root
+    Desktop  Downloads  Pictures  Music
