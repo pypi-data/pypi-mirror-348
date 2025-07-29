@@ -1,0 +1,36 @@
+
+version 2.3 [15.05.2025]  - Reorganized handling of reactivities (soft restraints).
+			    Now all values of -10 and lower are treated as missing
+			    values, and all other values are clipped to 0.0-1.0 range
+			    by min(max(x,0),1).
+
+version 2.0 [12.04.2025]  - Major Version 2.0 release. Updated built-in configs.
+			    Merged GitHub and PyPi versions. SQUARNA CLI command.
+
+version 1.95 [11.03.2025] - added "bpp" parameter to incorporate ViennaRNA-derived BPPs
+			    in the calculations. Updated built-in configs.
+
+version 1.91 [10.01.2025] - report all config names that produce the given structure
+			    (previously only the first producing config was shown).
+
+version 1.9  [08.01.2025] - implemented new algorithms for single-sequence SQUARNA:
+				Edmonds algorithm [10.6028/jres.069B.013];
+				Hungarian algorithm [10.1002/nav.3800020109];
+				Nussinov algorithm [10.1073/pnas.77.11.6309];
+				see the "config" parameter description in the README.
+
+version 1.05 [09.07.2024] - introduced built-in configs;
+			    implemented SQUARNA as a Python function;
+			    added demo.ipynb.
+
+version 1.03 [06.05.2024] - added "ignore" parameter to ignore warnings.
+
+version 1.02 [27.04.2024] - added "fileformat" parameter, see README.
+
+version 1.01 [02.04.2024] - adjusted for very large inputs in the single-sequence mode: 
+				handle fasta/default input formats on the fly, not storing them; 
+				added byseq parameter for parallelizing over input sequences; 
+				added fastest.conf for fast crude predictions;
+				see the usage example #6.
+version 1.0c [23.03.2024] - added a benchmark in terms of covarying base pairs.
+
