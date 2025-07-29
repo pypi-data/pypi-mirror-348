@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Copyright © 2016-2022 Jakub Wilk <jwilk@jwilk.net>
+# Copyright © 2022-2024 FriedrichFroebel
+#
+# This file is part of djvulibre-python.
+#
+# djvulibre-python is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 as published by
+# the Free Software Foundation.
+#
+# djvulibre-python is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+
+set -e -u
+set -o pipefail
+here=${0%/*}
+here=${here#./}
+root="$here/../"
+root=${root#private/../}
+rst2xml=$(command -v rst2xml) \
+|| rst2xml=$(command -v rst2xml.py) \
+|| { printf 'rst2xml not found\n' >&2; exit 1; }
+rst2xml=${rst2xml##*/}
+options='--input-encoding=UTF-8 --strict'
+if [ $# -eq 0 ]
+then
+    print_desc='python setup.py --long-description'
+    echo "(cd ${root:-.} && $print_desc) | $rst2xml $options - /dev/null" >&2
+    (cd "${root:-.}" && $print_desc) | "$rst2xml" $options - /dev/null
+fi
+if [ $# -eq 0 ]
+then
+    echo 'doc/README'
+    echo 'doc/todo'
+else
+    printf '%s\n' "$@"
+fi |
+xargs -t -I{} "$rst2xml" $options {} /dev/null

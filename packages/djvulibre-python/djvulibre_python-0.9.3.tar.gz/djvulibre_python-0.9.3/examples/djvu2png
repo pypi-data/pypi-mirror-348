@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+
+# Copyright © 2010-2021 Jakub Wilk <jwilk@jwilk.net>
+# Copyright © 2022-2024 FriedrichFroebel
+#
+# This file is part of djvulibre-python.
+#
+# djvulibre-python is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 as published by
+# the Free Software Foundation.
+#
+# djvulibre-python is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+
+import argparse
+import os
+import sys
+
+try:
+    import cairo  # pycairo
+except ImportError:
+    import cairocffi as cairo
+import djvu.decode
+import numpy
+
+
+CAIRO_PIXEL_FORMAT = cairo.FORMAT_ARGB32
+DJVU_PIXEL_FORMAT = djvu.decode.PixelFormatRgbMask(0xFF0000, 0xFF00, 0xFF, bpp=32)
+DJVU_PIXEL_FORMAT.rows_top_to_bottom = 1
+DJVU_PIXEL_FORMAT.y_top_to_bottom = 0
+
+
+class Context(djvu.decode.Context):
+
+    def handle_message(self, message):
+        if isinstance(message, djvu.decode.ErrorMessage):
+            print(message, file=sys.stderr)
+            # Exceptions in handle_message() are ignored, so sys.exit()
+            # wouldn't work here.
+            os._exit(1)
+
+    def process(self, djvu_path, png_path, mode):
+        document = self.new_document(djvu.decode.FileURI(djvu_path))
+        document.decoding_job.wait()
+        for page in document.pages:
+            page_job = page.decode(wait=True)
+            width, height = page_job.size
+            rect = (0, 0, width, height)
+            bytes_per_line = cairo.ImageSurface.format_stride_for_width(CAIRO_PIXEL_FORMAT, width)
+            assert bytes_per_line % 4 == 0
+            color_buffer = numpy.zeros((height, bytes_per_line // 4), dtype=numpy.uint32)
+            page_job.render(mode, rect, rect, DJVU_PIXEL_FORMAT, row_alignment=bytes_per_line, buffer=color_buffer)
+            mask_buffer = numpy.zeros((height, bytes_per_line // 4), dtype=numpy.uint32)
+            if mode == djvu.decode.RENDER_FOREGROUND:
+                page_job.render(djvu.decode.RENDER_MASK_ONLY, rect, rect, DJVU_PIXEL_FORMAT, row_alignment=bytes_per_line, buffer=mask_buffer)
+                mask_buffer <<= 24
+                color_buffer |= mask_buffer
+            color_buffer ^= 0xFF000000
+            surface = cairo.ImageSurface.create_for_data(color_buffer, CAIRO_PIXEL_FORMAT, width, height)
+            surface.write_to_png(png_path)
+            # Multi-page documents are not yet supported:
+            break
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.set_defaults(mode=djvu.decode.RENDER_COLOR)
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('--foreground', dest='mode', action='store_const', const=djvu.decode.RENDER_FOREGROUND)
+    group.add_argument('--background', dest='mode', action='store_const', const=djvu.decode.RENDER_BACKGROUND)
+    group.add_argument('--mask', dest='mode', action='store_const', const=djvu.decode.RENDER_MASK_ONLY)
+    parser.add_argument('djvu_path', metavar='DJVU-FILE')
+    parser.add_argument('png_path', metavar='PNG-FILE')
+    options = parser.parse_args(sys.argv[1:])
+    context = Context()
+    context.process(options.djvu_path, options.png_path, options.mode)
+
+
+if __name__ == '__main__':
+    main()

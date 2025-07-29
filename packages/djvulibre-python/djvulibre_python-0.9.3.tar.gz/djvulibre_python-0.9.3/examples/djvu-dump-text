@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+# Copyright © 2008-2018 Jakub Wilk <jwilk@jwilk.net>
+# Copyright © 2022-2024 FriedrichFroebel
+#
+# This file is part of djvulibre-python.
+#
+# djvulibre-python is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 as published by
+# the Free Software Foundation.
+#
+# djvulibre-python is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+
+import argparse
+import os
+import sys
+
+import djvu.decode
+
+
+def print_text(sexpr, level=0):
+    if level > 0:
+        print(' ' * (2 * level - 1), end=' ')
+    if isinstance(sexpr, djvu.sexpr.ListExpression):
+        if len(sexpr) == 0:
+            return
+        print(str(sexpr[0].value), [sexpr[i].value for i in range(1, 5)])
+        for child in sexpr[5:]:
+            print_text(child, level + 1)
+    else:
+        print(sexpr)
+
+
+class Context(djvu.decode.Context):
+
+    def handle_message(self, message):
+        if isinstance(message, djvu.decode.ErrorMessage):
+            print(message, file=sys.stderr)
+            # Exceptions in handle_message() are ignored, so sys.exit()
+            # wouldn't work here.
+            os._exit(1)
+
+    def process(self, path):
+        document = self.new_document(djvu.decode.FileURI(path))
+        document.decoding_job.wait()
+        for page in document.pages:
+            page.get_info()
+            print_text(page.text.sexpr)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('path', metavar='DJVU-FILE')
+    options = ap.parse_args()
+    context = Context()
+    context.process(options.path)
+
+
+if __name__ == '__main__':
+    main()
