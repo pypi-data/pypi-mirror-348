@@ -1,0 +1,25 @@
+# `lambeq/version.py` is generated automatically by setuptools-scm
+lambeq/version.py
+
+# development files
+*.egg-info/
+.conda/
+.coverage
+.ipynb_checkpoints/
+__pycache__/
+build/
+dist/
+htmlcov/
+
+# ignore the built documentation
+docs/_*
+!docs/_static/
+!docs/_templates/
+docs/puml/img
+
+# ignore runs and related artifacts
+**/runs/
+**/*.lt
+
+# ignore notebooks not part of the official docs
+**/ntbks/
