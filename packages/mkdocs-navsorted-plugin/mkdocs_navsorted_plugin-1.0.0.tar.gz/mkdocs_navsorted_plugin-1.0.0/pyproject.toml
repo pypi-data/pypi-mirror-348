@@ -1,0 +1,68 @@
+[project]
+name = "mkdocs-navsorted-plugin"
+dynamic = ["version"]
+description = "mkdocs plugin to get nav sorted without yml directives"
+authors = [
+    { name = "Igor Starikov", email = "idlesign@yandex.ru" }
+]
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+keywords = ["mkdocs", "navigation", "plugin"]
+dependencies = [
+    "mkdocs",
+]
+
+[project.urls]
+Homepage = "https://github.com/idlesign/mkdocs-navsorted-plugin"
+Documentation = "https://mkdocs-navsorted-plugin.readthedocs.org/"
+
+[project.entry-points."mkdocs.plugins"]
+"navsorted" = "mkdocs_navsorted.plugin:SortedPlugin"
+
+[dependency-groups]
+dev = [
+    {include-group = "docs"},
+    {include-group = "linters"},
+    {include-group = "tests"},
+]
+docs = [
+    "mkdocs",
+    "mkdocs-material",
+]
+linters = [
+    "ruff",
+]
+tests = [
+    "pytest",
+    "pytest-cov",
+    "pytest-datafixtures",
+    "coverage",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/mkdocs_navsorted/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mkdocs_navsorted"]
+
+[tool.hatch.build.targets.sdist]
+packages = ["src/"]
+
+[tool.coverage.run]
+source = [
+    "src/",
+]
+omit = []
+
+[tool.coverage.report]
+fail_under = 98.00
+exclude_also = [
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
