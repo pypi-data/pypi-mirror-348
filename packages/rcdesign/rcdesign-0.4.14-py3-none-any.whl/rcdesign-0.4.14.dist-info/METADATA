@@ -1,0 +1,88 @@
+Metadata-Version: 2.4
+Name: rcdesign
+Version: 0.4.14
+Summary: A Python package for reinforced concrete analysis and design as per IS 456:2000
+Project-URL: Documentation, https://github.com/satish-annigeri/rcdesign#readme
+Project-URL: Issues, https://github.com/satish-annigeri/rcdesign/issues
+Project-URL: Source, https://github.com/satish-annigeri/rcdesign
+Project-URL: Home, https://github.com/satish-annigeri/rcdesign
+Author-email: Satish Annigeri <satish.annigeri@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2021 Satish Annigeri
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE.md
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.13
+Requires-Dist: numpy>=2.2.5
+Requires-Dist: scipy>=1.15.3
+Requires-Dist: sympy>=1.14.0
+Description-Content-Type: text/markdown
+
+# `rcdesign`
+<img alt="PyPI - License" src="https://img.shields.io/pypi/l/rcdesign"> [![PyPI version shields.io](https://img.shields.io/pypi/v/rcdesign.svg)](https://pypi.python.org/pypi/rcdesign/) [![Documentation Status](https://readthedocs.org/projects/rcdesign/badge/?version=latest)](http://rcdesign.readthedocs.io/?badge=latest) [![PyPI download month](https://img.shields.io/pypi/dm/rcdesign.svg)](https://pypi.python.org/pypi/rcdesign/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+`rcdesign` is a Python package for analysis and design of reinforced concrete sections as per IS&nbsp;456:2000, the Indian Standard code of practice for plain and reinforced concrete.
+
+[Documentation](https://rcdesign.readthedocs.io/en/latest/)
+
+## Installing
+Install using [`pip`](https://pip.pypa.io/en/stable/getting-started/).
+```bash
+$ pip install rcdesign
+```
+
+## Run the built-in examples
+
+Run the two built-in example problems and study the output.
+```bash
+$ python -m rcdesign
+```
+
+## Contribute
+Contributions are welcome. Contributions can be in a variety of forms:
+
+1. Bug reports
+2. Additional features
+3. Documentation
+4. Additional examples
+
+## Links
+- Documentation: [Documentation](https://rcdesign.readthedocs.io/en/latest/)
+- PyPI release: [0.4.13](https://pypi.org/project/rcdesign/)
+- Github repository: https://github.com/satish-annigeri/rcdesign
+
+## References
+1. IS 456:2000 Indian Standard Code of Practice for Plain and Reinforced Concrete (Fourth Revision), Bureau of Indian Standards, New Delhi, 2000.
+2. SP:24 (S&T)-1983 Explanatory Handbook on Indian Standard Code of Practice for Plain and Reinforced Concrete (IS 456:1978), Bureau of Indian Standards, New Delhi, 1984.
+3. SP 16:1980 Design Aids for Reinforced Concrete to IS:456-1978, Bureau of Indian Standards, New Delhi, 1980.
