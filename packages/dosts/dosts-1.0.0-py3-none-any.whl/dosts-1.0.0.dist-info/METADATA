@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: dosts
+Version: 1.0.0
+Summary: A Python-based De-Orbiting Satellite Tracking System (D-OSTS)
+Author: Jai Bharaj, Tom Miller, David Dukov, Linan Yang, Kunlin Cai
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: scipy
+Requires-Dist: ussa1976
+Dynamic: license-file
+
+# D-OSTS (RHESSI Group Project)
+## Overview
+
+This project focuses on modeling the re-entry trajectory of a satellite currently in a deteriorating orbit around Earth. As atmospheric drag significantly influences its path near perigee, the satellite has become uncontrollable. Ground-based radar stations are monitoring its position periodically. The primary objective is to predict the potential impact location of the satellite upon re-entry.
+
+### Project Structure
+**Introduction:** Provides background information and the motivation behind the project.
+
+**System Architecture:** Details the design and components of the predictive modeling system.
+
+**Documentation:** Offers comprehensive information on the methodologies and tools used.
+
+**Tutorial:** Guides users through the setup and execution of the predictive models.
+
+### Getting Started
+To explore the project's documentation and tutorials, visit the [Documentation](https://rhessi-docs.readthedocs.io/en/latest/).
+
+License
+© 2025 Jai Bharaj, Tom Miller, David Dukov, Linan Yang, Kunlin Cai.
