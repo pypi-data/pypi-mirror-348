@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "amis-py-model"
+version = "1.0.0"
+description = "基于百度amis前端框架的python pydantic模型封装。"
+authors = ["CM-Edelweiss <2633668472@qq.com>"]
+readme = "README.md"
+packages = [
+    { include = "amis"}
+]
+
+[[tool.poetry.source]]
+name = "ali"
+default = true
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pydantic = "^1.9.2"
+jinja2 = "^3.1.2"
+
+[tool.poetry.dev-dependencies]
+
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
