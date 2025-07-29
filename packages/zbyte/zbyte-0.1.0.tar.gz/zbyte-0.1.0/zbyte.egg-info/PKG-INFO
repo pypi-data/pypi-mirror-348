@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: zbyte
+Version: 0.1.0
+Summary: Python SDK for 0byte image generation and proof anchoring
+Author-email: 0byte <nitinmewar28@gmail.com>
+License: MIT
+Project-URL: Homepage, https://www.0byte.tech
+Project-URL: Source, https://github.com/0byte-lab/python-sdk
+Keywords: ai,proof,solana,image verification,zero byte
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.28
+Requires-Dist: pydantic>=1.10
+Requires-Dist: pillow
+Requires-Dist: diffusers
+Requires-Dist: transformers
+Requires-Dist: torch
+Requires-Dist: accelerate
+Dynamic: license-file
+
+`pip install 0byte-sdk`
+
+## Features
+- Generate images via Stability AI
+- Anchor proofs via 0byte Rust backend
+- Returns image bytes with embedded proof and Solana txn ID
+
+## Quick Start
+```python
+from 0byte_sdk import Config, Client
+
+# Initialize
+cfg = Config(
+    stability_api_key="YOUR_STABILITY_KEY",
+    backend_url="https://api.0byte.tech/proof",
+    model="stable-diffusion-v1"
+)
+client = Client(cfg)
+
+# Generate an image
+result = client.generate_image(prompt="A futuristic city skyline at dawn")
+print(result.transaction_id)
+with open("output.png", "wb") as f:
+    f.write(result.image_bytes)
+```
