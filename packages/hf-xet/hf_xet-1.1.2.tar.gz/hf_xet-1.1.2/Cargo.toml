@@ -1,0 +1,31 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "cas_client",
+    "cas_object",
+    "cas_types",
+    "data",
+    "error_printer",
+    "file_utils",
+    "merklehash",
+    "mdb_shard",
+    "parutils",
+    "utils",
+    "cas_object",
+    "cas_types",
+    "chunk_cache",
+    "xet_threadpool", 
+    "deduplication", "progress_tracking"]
+
+exclude = ["hf_xet", "chunk_cache_bench", "wasm_xet"]
+
+[profile.release]
+opt-level = 3
+lto = true
+debug = 1
+
+[profile.opt-test]
+inherits = "dev"
+opt-level = 3
+debug = 1
