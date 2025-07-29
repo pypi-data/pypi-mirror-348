@@ -1,0 +1,6 @@
+
+[:platform_system != "Windows"]
+jeepney>=0.9.0
+
+[:platform_system == "Windows"]
+pywin32>=221
