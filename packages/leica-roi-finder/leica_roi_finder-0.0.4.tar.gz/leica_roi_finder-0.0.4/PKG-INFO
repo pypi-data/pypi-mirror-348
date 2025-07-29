@@ -1,0 +1,53 @@
+Metadata-Version: 2.4
+Name: leica_roi_finder
+Version: 0.0.4
+Summary: Automatic ROI detection using cellpose, exports to .rgn files
+Author: KJ van Beem
+License: GPL-3.0
+Project-URL: Homepage, https://github.com/JvB22/Leica_ROI_finder
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: cellpose==3.1.1.2
+Requires-Dist: numpy>=2.0.2
+Requires-Dist: pyshortcuts>=1.9.5
+Requires-Dist: PyQt6>=6.9.0
+Requires-Dist: lxml>=5.4.0
+Requires-Dist: pyqtgraph>=0.13.7
+Requires-Dist: superqt>=0.7.3
+Requires-Dist: scikit-image>=0.25.2
+Requires-Dist: pandas>=2.2.3
+Dynamic: license-file
+
+# Leica_ROI_finder
+Automatic ROI finder for Leica Stellaris 8
+- Automatic segmentation using cellpose 3
+- ROI filtering using intensity, size and circularity
+- Exports ROIs to Leica .rgn files, can be imported into LAS X navigator
+
+![](./assets/images/leica_roi_finder.png)
+
+## Installation
+Leica ROI finder is available on PyPi and can be installed as follows:
+```shell
+pip install leica-roi-finder
+```
+
+# Workflow
+Load LIF image into ROI finder:
+
+![](./assets/images/image_loaded.png)
+
+Perform segmentation using cellpose, filter ROIs using intensity, size and circularity:
+
+![](./assets/images/segmentation.png)
+
+Export ROIs to Leica .rgn format and import into LAS X Navigator:
+
+![](./assets/images/regions_loaded.png)
+
+Perform imaging on all regions:
+
+![](./assets/images/experiment.png)
