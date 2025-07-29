@@ -1,0 +1,79 @@
+name: Publish Python Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Set up Git user identity
+      run: |
+        git config --global user.email "admin@aquilax.io"
+        git config --global user.name "AquilaX AI"
+
+    - name: Bump version
+      run: |
+        current_version=$(cat VERSION)
+        new_version=$(python -c "import sys; v = sys.argv[1].split('.'); v[-1] = str(int(v[-1]) + 1); print('.'.join(v))" $current_version)
+        echo "Current version: $current_version"
+        echo "New version: $new_version"
+        echo $new_version > VERSION
+        git add VERSION
+        git commit -m "Bump version to $new_version"
+        git tag -a "v$new_version" -m "Release $new_version"
+
+    - name: Push version bump and tags
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ORG_GH_TOKEN }}  
+        branch: main
+        tags: true
+
+  publish:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install build twine
+
+    - name: Clean up previous builds
+      run: |
+        rm -rf build/ dist/ *.egg-info
+
+    - name: Build the package
+      run: |
+        python -m build
+
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: __token__ 
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        python -m twine upload dist/*
