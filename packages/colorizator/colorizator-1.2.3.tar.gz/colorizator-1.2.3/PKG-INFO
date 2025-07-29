@@ -1,0 +1,151 @@
+Metadata-Version: 2.4
+Name: colorizator
+Version: 1.2.3
+Summary: Python Debugging Toolkit
+Home-page: https://github.com/
+Author: Lukasa
+Author-email: me@lukasa.org
+Project-URL: Bug Tracker, https://github.com/
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-python
+Dynamic: summary
+
+# colorizator - Python Debugging Toolkit
+
+![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![PyPI Version](https://img.shields.io/pypi/v/colorizator.svg)
+
+colorizator is a powerful Python debugging library that provides utilities for setting breakpoints, inspecting variables, and debugging Python scripts with ease.
+
+## Features
+
+- 🛑 **Flexible Breakpoints**: Set breakpoints in your code with a simple function call
+- 🔍 **Variable Inspection**: Examine variables and their values at runtime
+- 📝 **Debug Logging**: Enhanced logging capabilities for debugging sessions
+- ⏱️ **Execution Timing**: Measure execution time of code blocks
+- 🧩 **Lightweight**: Minimal dependencies and easy to integrate
+
+## Installation
+
+Install colorizator using pip:
+
+```bash
+pip install colorizator
+```
+
+## Quick Start
+
+```python
+from colorizator import debugger
+
+# Set a breakpoint
+debugger.breakpoint()
+
+# Inspect variables
+debugger.inspect(locals())
+
+# Time a code block
+with debugger.timer("Important operation"):
+    # Your code here
+    result = expensive_operation()
+```
+
+## Usage
+
+### Setting Breakpoints
+
+```python
+from colorizator import debugger
+
+def my_function():
+    debugger.breakpoint()  # Execution will pause here
+    print("This will execute after continuing")
+```
+
+### Variable Inspection
+
+```python
+from colorizator import debugger
+
+def calculate(a, b):
+    debugger.inspect(locals())  # Show all local variables
+    return a * b
+```
+
+### Timing Code Execution
+
+```python
+from colorizator import debugger
+
+with debugger.timer("Database query"):
+    results = db.query("SELECT * FROM large_table")
+```
+
+### Conditional Breakpoints
+
+```python
+from colorizator import debugger
+
+def process_data(data):
+    debugger.break_if(len(data) > 1000)  # Only breaks if condition is True
+    # Process data...
+```
+
+## Advanced Features
+
+### Remote colorizator
+
+```python
+from colorizator import remote_debugger
+
+# Connect to remote debugger
+remote_debugger.connect(host='localhost', port=9000)
+
+# Set remote breakpoint
+remote_debugger.breakpoint()
+```
+
+### Custom Debug Output
+
+```python
+from colorizator import debugger
+
+# Configure debug output
+debugger.configure(
+    output_file="debug.log",
+    verbose=True,
+    max_depth=3
+)
+```
+
+## Configuration
+
+debugging can be configured via environment variables or programmatically:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `DBG_VERBOSE` | Enable verbose output | `False` |
+| `DBG_OUTPUT_FILE` | File path for debug output | `None` |
+| `DBG_MAX_DEPTH` | Maximum recursion depth for inspection | `2` |
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+
+debugging is released under the MIT License. See [LICENSE](LICENSE) for details.
