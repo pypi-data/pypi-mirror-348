@@ -1,0 +1,35 @@
+Metadata-Version: 2.3
+Name: pytopdrawer
+Version: 0.0.8
+Summary: Plot top files with python and matplotlib (mainly from POWHEG)
+Author: Alexander Puck Neuwirth
+Author-email: alexander@neuwirth-informatik.de
+Requires-Python: >=3.8,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: smpl
+Requires-Dist: uncertainties
+Project-URL: Repository, https://github.com/APN-Pucky/pytopdrawer
+Description-Content-Type: text/markdown
+
+# pytopdrawer
+
+
+[![PyPI version][pypi image]][pypi link] [![PyPI version][pypi versions]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/pytopdrawer.svg)
+
+This project plots .top files (primarily from powheg, but also mcfm `[-m]`).
+
+```
+$ pip install pytopdrawer
+$ pytopdrawer pwg-btl.top
+```
+
+[pypi image]: https://badge.fury.io/py/pytopdrawer.svg
+[pypi link]: https://pypi.org/project/pytopdrawer/
+[pypi versions]: https://img.shields.io/pypi/pyversions/pytopdrawer.svg
+
