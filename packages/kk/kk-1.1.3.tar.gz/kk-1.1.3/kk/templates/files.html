@@ -1,0 +1,42 @@
+{% extends base.html %}
+
+{% block css %}
+<style> 
+#header {
+  display: none
+} 
+</style>
+{% end %}
+
+{% block content %}
+{% import urllib.parse, re %}
+
+<div class="layui-row">
+  <div class="tree-table layui-col-md12">
+    <table class="filelist layui-table" lay-skin="nob">
+      <thead>
+        <tr class="table-tools" style="background:#fff">
+          <th style="text-align:left !important"><a href="{{ handler.add_args(sort='name', order=((0 - handler.args.order) if handler.args.sort == 'name' and handler.args.order else -1)) }}"><span>文件名</span>{% if handler.args.sort == 'name' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'name' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          <th class="pc" style="width:120px"><a href="{{ handler.add_args(sort='mtime', order=((0 - handler.args.order) if handler.args.sort == 'mtime' and handler.args.order else -1)) }}"><span>修改时间</span>{% if handler.args.sort == 'mtime' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'mtime' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          <th class="pc" style="width:100px"><a href="{{ handler.add_args(sort='size', order=((0 - handler.args.order) if handler.args.sort == 'size' and handler.args.order else -1)) }}"><span>文件大小</span>{% if handler.args.sort == 'size' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'size' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doc in entries %}
+        <tr>
+          {% set suffix = doc.path.suffix.lower()[1:] %}
+          <td style="text-align:left !important">
+            {% set icon = 'folder.png' if doc.is_dir else handler.icon.get(doc.path.suffix.lower(), 'file.png') %}
+            <img class="file-icon" src="{{ static_url(f'img/{icon}') }}">
+            <a class="file-link {% if doc.is_dir %}dir-link{% end %}" style="white-space:pre-wrap;word-wrap:break-word;" href="javascript:void(0)" title="{{ doc.path }}">{{ doc.path }}</a>
+          </td>
+          <td class="pc" style="width:120px">{{ handler.convert_time(doc.mtime) }}</td>
+          <td class="pc" style="width:100px">{{ handler.convert_size(doc.size) }}</td>
+        </tr>
+        {% end %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% end %}
