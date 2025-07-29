@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: el
+Version: 0.0.5
+Summary: Includes functions to manipulate adwords datasets
+Home-page: https://github.com/thorwhalen/uu/tree/master/el
+Author: Thor Whalen
+License: apache-2.0
+Platform: any
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# el
+Includes functions to manipulate adwords datasets
+
+To install:	```pip install el```
+
+## Features
+
+This package provides essential tools for analyzing and managing advertising campaigns, particularly focusing on budget pacing and anomaly detection in spending data. Below are the main functionalities provided:
+
+### 1. Budget Pacing Calculation
+
+The `calculate_budget_pacing` function calculates how a budget should be spent over a campaign period to ensure even distribution of funds. It adds columns for daily budget, cumulative budget, and pacing to the DataFrame.
+
+#### Usage
+
+```python
+import pandas as pd
+from el import calculate_budget_pacing
+
+# Example DataFrame
+df = pd.DataFrame({
+    'date': pd.to_datetime(['2021-01-01', '2021-01-02']),
+    'total_budget': [1000, 1000],
+    'current_spend': [100, 300]
+})
+
+# Calculate budget pacing
+result = calculate_budget_pacing(df, 'total_budget', 'current_spend', 'date', 30)
+print(result)
+```
+
+### 2. Anomaly Detection in Spend
+
+The `detect_anomalies_in_spend` function identifies anomalies in spending data using a rolling Z-score method. It considers fluctuations in spending over a specified window and marks those that deviate significantly from the norm.
+
+#### Usage
+
+```python
+import pandas as pd
+from el import detect_anomalies_in_spend
+
+# Example DataFrame
+df = pd.DataFrame({
+    'date': pd.to_datetime(['2021-01-01', '2021-01-02', '2021-01-03', '2021-01-04', '2021-01-05']),
+    'spend': [100, 150, 200, 1200, 180]
+})
+
+# Detect anomalies in spending
+result = detect_anomalies_in_spend(df, 'spend')
+print(result)
+```
+
+## Documentation
+
+### Functions
+
+#### `calculate_budget_pacing(df, budget_col, spend_col, date_col, total_days)`
+
+- **Parameters**:
+  - `df` (pd.DataFrame): DataFrame containing the campaign data.
+  - `budget_col` (str): Column name for the total budget.
+  - `spend_col` (str): Column name for the current spend.
+  - `date_col` (str): Column name for the date of the spend.
+  - `total_days` (int): Total number of days in the campaign period.
+- **Returns**:
+  - pd.DataFrame: DataFrame with additional columns for daily budget, cumulative budget, and pacing.
+
+#### `detect_anomalies_in_spend(df, spend_col, window=7, z_threshold=3)`
+
+- **Parameters**:
+  - `df` (pd.DataFrame): DataFrame containing the spend data.
+  - `spend_col` (str): Column name for the spend data.
+  - `window` (int): Number of days to consider for the rolling mean and standard deviation.
+  - `z_threshold` (float): Z-score threshold to identify an anomaly.
+- **Returns**:
+  - pd.DataFrame: DataFrame with an additional column indicating if the spend is an anomaly.
+
+These tools are designed to help advertisers and marketers optimize their campaigns and detect any irregularities in their spending patterns efficiently.
