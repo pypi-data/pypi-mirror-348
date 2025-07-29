@@ -1,0 +1,1 @@
+This is the homepage of our project. Feel free to explore and hope you have a nice day ;>
