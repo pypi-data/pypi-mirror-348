@@ -1,0 +1,48 @@
+struct ecat_p3_upperbody_cmd_lcmt {
+    int16_t  ctrlWord_1to5[10];
+    int16_t  tarPosH_1to5[10];
+    int16_t  tarPosL_1to5[10];
+    int16_t  tarVel_1to5[10];
+    int16_t  tarCur_1to5[10];
+    int16_t  tarTor_1to5[10];
+    int16_t  res1_1to5[10];
+    int16_t  res2_1to5[10];
+    int16_t  res3_1to5[10];
+    int16_t  res4_1to5[10];
+
+    int16_t  ctrlWordMotor_6to7[2];
+    int16_t  tarPos1H_6to7[2];
+    int16_t  tarPos1L_6to7[2];
+    int16_t  tarPos2H_6to7[2];
+    int16_t  tarPos2L_6to7[2];
+    int16_t  tarVel1_6to7[2];
+    int16_t  tarVel2_6to7[2];
+    int16_t  tarCur1_6to7[2];
+    int16_t  tarCur2_6to7[2];
+    int16_t  tarTor1_6to7[2];
+    int16_t  tarTor2_6to7[2];
+    int16_t  res1_6to7[2];
+    int16_t  res2_6to7[2];
+    int16_t  res3_6to7[2];
+    int16_t  res4_6to7[2];
+    int16_t  res5_6to7[2];
+    int16_t  res6_6to7[2];
+
+    int16_t  ctrlWord_hand[2];
+    int16_t  tar1_hand[2];
+    int16_t  tar2_hand[2];
+    int16_t  tar3_hand[2];
+    int16_t  tar4_hand[2];
+    int16_t  tar5_hand[2];
+    int16_t  tar6_hand[2];
+    int16_t  tar7_hand[2];
+
+    float    mc_arm_tarPos[14];
+    float    mc_arm_tarVel[14];
+    float    mc_arm_tarTor[14];
+
+    float    original_arm_tarPos[14];
+    float    original_arm_tarVel[14];
+    float    original_arm_tarTor[14];
+    float    original_hand_tarPos[12];
+}

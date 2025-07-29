@@ -1,0 +1,31 @@
+[project]
+name = "lumos-arm-ctl"
+version = "0.1.1"
+description = "lumos上位机机械臂控制"
+authors = [
+    {name = "yuanhuan",email = "704881169@qq.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lcm (>=1.5.1,<2.0.0)",
+    "numpy",
+    "psutil (>=7.0.0,<8.0.0)",
+    "matplotlib (>=3.10.3,<4.0.0)",
+    "colorlog (>=6.9.0,<7.0.0)",
+    "loop-rate-limiters (>=1.1.0,<2.0.0)",
+    "pin (>=3.4.0,<4.0.0)",
+    "pynput (>=1.8.1,<2.0.0)",
+    "mujoco (>=3.3.2,<4.0.0)"
+]
+
+
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+priority = "primary"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
