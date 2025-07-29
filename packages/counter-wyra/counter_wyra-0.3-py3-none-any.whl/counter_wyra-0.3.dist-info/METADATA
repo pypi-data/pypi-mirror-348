@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: counter_wyra
+Version: 0.3
+Summary: A random Counter thing I made for no reason at all
+Project-URL: Homepage, https://github.com/I4LYT/counter-thing
+Project-URL: Issues, https://github.com/I4LYT/counter-thing/issues
+Author-email: Arnay Kumar <arnayk@wyra.net>
+License-Expression: WTFPL
+License-File: LICENSE
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# Counter Thing
+Run 
+```python
+pip install counter_wyra
+```
+to install the thing.
+
+## For Maintainers: Setting up Trusted Publishing
+
+To enable trusted publishing for this package on PyPI, follow these steps:
+
+1. Log in to your PyPI account
+2. Navigate to the "counter_wyra" project
+3. Go to the "Settings" tab
+4. Under "Publishing", select "Add a new publisher"
+5. Choose "GitHub Actions"
+6. Enter the following details:
+   - Owner: I4LYT
+   - Repository name: counter-thing
+   - Workflow name: python-publish.yml
+   - Environment name: pypi
+7. Save the configuration
+
+This will allow GitHub Actions to publish new versions of the package to PyPI without requiring API tokens.
