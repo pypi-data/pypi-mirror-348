@@ -1,0 +1,10 @@
+prefix=${KARABO}/extern
+libdir=${prefix}/lib
+includedir=${prefix}/include
+bindir=${prefix}/bin
+
+Name: boost-process
+Description: Conan component: boost-process
+Version: 1.85.0
+Libs: -L"${libdir}"
+Cflags: -I"${includedir}" -DBOOST_PROCESS_DYN_LINK
