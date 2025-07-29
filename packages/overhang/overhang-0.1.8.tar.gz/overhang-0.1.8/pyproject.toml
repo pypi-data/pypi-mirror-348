@@ -1,0 +1,29 @@
+[project]
+name = "overhang"
+version = "0.1.8"
+license = "MIT"
+authors = [{ name = "Peter Vegh" }]
+description = "Compendium of overhangs"
+readme = "pypi-readme.rst"
+keywords = ["biology", "overhang", "dna"]
+dependencies = [
+    "matplotlib",
+    "minotaor",
+    "networkx",
+    "numpy",
+    "pdf_reports",
+    "tatapov",
+]
+
+[project.urls]
+Homepage = "https://github.com/Edinburgh-Genome-Foundry/overhang"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["docs*", "examples*", "tests*"]
+
+[tool.setuptools.package-data]
+overhang = ["report_assets/*"]
