@@ -1,0 +1,57 @@
+Metadata-Version: 2.3
+Name: Super-SCAD-Prism-Hedron
+Version: 0.9.2
+Summary: SuperSCAD widgets for smooth prisms.
+License: MIT
+Keywords: OpenSCAD,SuperSCAD,Prism
+Author: P.R. Water
+Author-email: p.r.water@setbased.nl
+Requires-Python: >=3.13.0,<4.0.0
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Manufacturing
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Multimedia :: Graphics :: 3D Modeling
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Dist: super-scad (>=0.11.0,<0.12.0)
+Requires-Dist: super-scad-polygon (>=0.9.9,<0.10.0)
+Requires-Dist: super-scad-smooth-profile (>=0.6.3,<0.7.0)
+Project-URL: Documentation, https://superscad.readthedocs.io/
+Project-URL: Repository, https://github.com/SuperSCAD/PrismHedron
+Description-Content-Type: text/markdown
+
+# SuperSCAD: Prism
+
+SuperSCAD widgets for prisms with smooth edges implemented as pure polyhedrons.
+
+<table>
+<thead>
+<tr>
+<th>Legal</th>
+<th>Release</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://pypi.org/project/Super-SCAD-Prism-Hedron/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD-Prism-Hedron">
+</a>
+</td>
+<td>
+<a href="https://badge.fury.io/py/Super-SCAD-Prism-Hedron" target="_blank"><img src="https://badge.fury.io/py/Super-SCAD-Prism-Hedron.svg" alt="Latest Stable Version"/></a><br/>
+</td>
+<td>
+<a href="https://codecov.io/gh/SuperSCAD/PrismHedron" target="_blank"><img src="https://codecov.io/gh/SuperSCAD/PrismHedron/graph/badge.svg" alt="Code Coverage"/></a>
+<a href="https://github.com/SuperSCAD/PrismHedron/actions/workflows/unit.yml"><img src="https://github.com/SuperSCAD/PrismHedron/actions/workflows/unit.yml/badge.svg" alt="unit Tests"/></a>
+</td>
+</tr>
+</tbody>
+</table>
+
+# License
+
+This project is licensed under the terms of the [MIT license](LICENSE).
+
