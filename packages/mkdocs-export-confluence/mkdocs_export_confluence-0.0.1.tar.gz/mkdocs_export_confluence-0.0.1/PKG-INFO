@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: mkdocs-export-confluence
+Version: 0.0.1
+Summary: MkDocs plugin for uploading markdown documentation to Confluence via Confluence REST API
+Home-page: https://github.com/kreemer/mkdocs-export-confluence/
+Author: kreemer
+Author-email: kevin@familie-studer.ch
+License: MIT
+Keywords: mkdocs markdown confluence documentation rest python
+Requires-Python: >=3.11
+Requires-Dist: mkdocs>=1.1
+Requires-Dist: jinja2
+Requires-Dist: mistune>=3.0
+Requires-Dist: requests
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
