@@ -1,0 +1,18 @@
+manifest_in_content = """
+include README.md
+include LICENSE
+include data/*.xlsx
+recursive-include ecocrop *.py
+recursive-include scripts *.py
+"""
+
+# Write the new setup.py and MANIFEST.in files
+setup_py_path = "/Ecocrop/Ecocrop/setup.py"
+manifest_in_path = "Ecocrop/Ecocrop/MANIFEST.in"
+
+with open(setup_py_path, "w") as file:
+    file.write(refined_setup_py)
+
+with open(manifest_in_path, "w") as file:
+    file.write(manifest_in_content)
+
