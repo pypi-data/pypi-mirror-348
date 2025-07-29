@@ -1,0 +1,12 @@
+pyautogui
+pygetwindow
+pyttsx3
+requests
+pillow
+
+[:platform_system == "Darwin"]
+pyobjc-core
+pyobjc
+
+[:platform_system == "Windows"]
+pywin32
