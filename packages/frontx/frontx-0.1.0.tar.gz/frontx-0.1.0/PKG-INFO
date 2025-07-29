@@ -1,0 +1,48 @@
+Metadata-Version: 2.3
+Name: frontx
+Version: 0.1.0
+Summary: Nonlinear diffusion problems with JAX
+Author: Gabriel S. Gerlero
+Author-email: Gabriel S. Gerlero <ggerlero@cimec.unl.edu.ar>
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Typing :: Typed
+Classifier: Operating System :: OS Independent
+Requires-Dist: diffrax>=0.7,<0.8
+Requires-Dist: equinox>=0.12.1,<0.13
+Requires-Dist: interpax>=0.3.8,<0.4
+Requires-Dist: jax>=0.6,<0.7
+Requires-Dist: numpy>=1,<3
+Requires-Dist: optimistix>=0.0.10,<0.1
+Requires-Dist: mkdocs>=1.6.1,<2 ; extra == 'docs'
+Requires-Dist: mkdocs-material>=9.6.12,<10 ; extra == 'docs'
+Requires-Dist: mkdocstrings[python]>=0.29.1,<0.30 ; extra == 'docs'
+Requires-Python: >=3.10
+Project-URL: Documentation, https://frontx.readthedocs.io
+Project-URL: Homepage, https://github.com/gerlero/frontx
+Project-URL: Repository, https://github.com/gerlero/frontx
+Provides-Extra: docs
+Description-Content-Type: text/markdown
+
+# [<img src="logo.png" alt="Frontx logo" width=300></img>](https://github.com/gerlero/frontx)
+
+**[JAX](https://github.com/jax-ml/jax)-accelerated numerical library for nonlinear diffusion problems in semi-infinite domains**
+
+[![Documentation](https://img.shields.io/readthedocs/frontx)](https://frontx.readthedocs.io/)
+[![CI](https://github.com/gerlero/frontx/actions/workflows/ci.yml/badge.svg)](https://github.com/gerlero/frontx/actions/workflows/ci.yml)
+[![Codecov](https://codecov.io/gh/gerlero/frontx/branch/main/graph/badge.svg)](https://codecov.io/gh/gerlero/frontx)
+[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Publish](https://github.com/gerlero/frontx/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/gerlero/frontx/actions/workflows/pypi-publish.yml)
+[![PyPI](https://img.shields.io/pypi/v/frontx)](https://pypi.org/project/frontx/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/frontx)](https://pypi.org/project/frontx/)
