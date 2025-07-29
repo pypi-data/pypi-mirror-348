@@ -1,0 +1,23 @@
+[project]
+name = "mcp-server-foxit-cloudapi"
+version = "1.0.0"
+description = "MCP server for using the Foxit Cloud API"
+authors = [
+    { name = "Foxit Software Inc.", email = "support@foxitsoftware.com"}
+]
+license = {text = "Commercial License"}
+keywords = ["MCP", "Foxit", "Cloud API"]
+readme = "README.md"
+requires-python = ">=3.11.1"
+dependencies = [
+    "httpx>=0.28.1",
+    "jsonschema>=4.23.0",
+    "mcp>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-server-foxit-cloudapi = "mcp_server_foxit_cloudapi:main"
