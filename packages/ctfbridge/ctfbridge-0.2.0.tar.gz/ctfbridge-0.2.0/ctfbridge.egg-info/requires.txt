@@ -1,0 +1,11 @@
+requests<3.0,>=2.25
+beautifulsoup4<5.0,>=4.9
+pydantic<3.0,>=2.0
+httpx>=0.28
+
+[dev]
+mypy
+pytest
+ruff
+types-beautifulsoup4
+pre-commit
