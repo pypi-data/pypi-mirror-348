@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Wisdom_Data_Library"
+version = "0.1.20"
+description = "This is a help library for Data ETL jobs using notebooks in either Databricks or MS Fabric"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { file = "LICENSE" }
+authors = [
+  { name = "David Turner", email = "david@wisdomservices.com" }
+]
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}  # ⬅️ tells setuptools where to find the code
+
+[tool.setuptools.packages.find]
+where = ["src"]             # ⬅️ tells setuptools to search in /src
