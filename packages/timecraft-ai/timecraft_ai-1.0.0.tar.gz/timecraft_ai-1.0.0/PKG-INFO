@@ -1,0 +1,148 @@
+Metadata-Version: 2.4
+Name: timecraft-ai
+Version: 1.0.0
+Summary: A Python package for time series analysis and forecasting
+Project-URL: Homepage, https://github.com/faelmori/timecraft
+Project-URL: Documentation, https://github.com/faelmori/timecraft/docs
+Project-URL: Repository, https://github.com/faelmori/timecraft
+Project-URL: Bug Tracker, https://github.com/faelmori/timecraft/issues
+Author-email: Rafael Mori <faelmori@gmail.com>
+Maintainer-email: Rafael Mori <faelmori@gmail.com>
+License: MIT
+License-File: LICENSE
+Keywords: automation,data analysis,database,forecasting,regression,time series
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Requires-Dist: jinja2
+Requires-Dist: kaleido
+Requires-Dist: matplotlib>=3.4.0
+Requires-Dist: mysql-connector-python
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: plotly
+Requires-Dist: prophet
+Requires-Dist: pymongo
+Requires-Dist: pyodbc
+Requires-Dist: requests
+Requires-Dist: scikit-learn
+Requires-Dist: seaborn
+Requires-Dist: sqlalchemy
+Requires-Dist: xarray
+Provides-Extra: ml
+Requires-Dist: prophet; extra == 'ml'
+Requires-Dist: scikit-learn; extra == 'ml'
+Provides-Extra: mssql
+Requires-Dist: pymssql; extra == 'mssql'
+Provides-Extra: oracle
+Requires-Dist: cx-oracle; extra == 'oracle'
+Provides-Extra: viz
+Requires-Dist: kaleido; extra == 'viz'
+Requires-Dist: plotly; extra == 'viz'
+Requires-Dist: seaborn; extra == 'viz'
+Description-Content-Type: text/markdown
+
+# ⏳ TimeCraft
+
+Welcome to **TimeCraft**! This project was created to simplify time series analysis, database integration, and task automation.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) ![Last Commit](https://img.shields.io/github/last-commit/faelmori/timecraft) ![Repo Size](https://img.shields.io/github/repo-size/faelmori/timecraft)
+
+---
+
+## 🚀 Key Features
+
+* 📈 **Time Series Analysis**
+  Robust scripts for modeling, forecasting, and evaluating temporal data.
+
+* 🛢️ **Database Integration**
+  Tools to efficiently connect to and query various database systems.
+
+* ⚙️ **Automation & Notifications**
+  Modules to automate data workflows and send notifications or alerts.
+
+---
+
+## 📁 Project Structure
+
+```
+timecraft/
+├── /src/                # Core logic and modules
+├── /docs/               # Documentation files (README, INSTALL, CONTRIBUTING)
+├── /tutorials/          # Step-by-step guides and advanced use cases
+├── /data/               # Sample datasets and generated results
+├── /assets/             # Visual content for outreach and publications
+├── /venv/               # Virtual environment and dependency management
+└── requirements.txt     # Python dependencies
+```
+
+---
+
+## 🧭 Getting Started
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/faelmori/timecraft.git
+   cd timecraft
+   ```
+
+2. **Create and activate a virtual environment** *(optional but recommended)*:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install the dependencies**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Explore the tutorials**:
+   Navigate to the `/tutorials` folder for usage examples and best practices.
+
+---
+
+## 📚 Tutorials & Examples
+
+| Topic                                               | Description                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------ |
+| [Time Series Forecasting](tutorials/forecasting.md) | Learn how to model and predict future data points.           |
+| [Database Connection](tutorials/database.md)        | Connect to and retrieve data from supported databases.       |
+| [Automation Pipeline](tutorials/automation.md)      | Build and schedule tasks using TimeCraft’s automation tools. |
+
+---
+
+## 🤝 Contributing
+
+Contributions of all kinds are welcome!
+Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to help improve TimeCraft.
+
+---
+
+## 🛣️ Planned Features (Roadmap)
+
+* ✅ Plug-and-play models for ARIMA, Prophet, and LSTM
+* 🚧 Support for cloud-based data sources (e.g., BigQuery, Snowflake)
+* 🔔 Email and webhook notification system
+* 📊 Dashboard interface for visual result presentation (optional module)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+
+## 📧 Contact
+
+If you have any questions or feedback, please feel free to reach out:
+
+- Email: [faelmori@gmail.com](mailto:faelmori@gmail.com)
+- GitHub: [faelmori/timecraft](https://github.com/faelmori/timecraft)
+- LinkedIn: [Rafa Mori](https://www.linkedin.com/in/rafa-mori)
