@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: sphinx-termynal
+Version: 0.2.1
+Summary: Animated terminal window for Sphinx
+Author-email: Prajeesh Ag <prajeeshag@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2024 Prajeesh Ag
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: homepage, https://sphinx-termynal.prajeeshag.com
+Project-URL: repository, https://github.com/prajeeshag/sphinx-termynal
+Project-URL: documentation, https://sphinx-termynal.prajeeshag.com
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: sphinx
+Dynamic: license-file
+
+___
+
+# Sphinx Termynal
+
+![PyPI - Version](https://img.shields.io/pypi/v/sphinx-termynal)
+![Test Status](https://github.com/prajeeshag/sphinx-termynal/actions/workflows/test.yml/badge.svg)
+[![codecov](https://codecov.io/gh/prajeeshag/sphinx-termynal/graph/badge.svg?token=UNNUW30IQL)](https://codecov.io/gh/prajeeshag/sphinx-termynal)
+![Doc Build Status](https://github.com/prajeeshag/sphinx-termynal/actions/workflows/build-docs.yml/badge.svg)
+
+**Documentation**: [https://prajeesh-ag.com/sphinx-termynal](https://prajeesh-ag.com/sphinx-termynal/)
+
+___
+
+![Animation1](./animation1.gif)
+
+
+Create animated terminal window in your [Sphinx](https://www.sphinx-doc.org) documentation.
+
+## Installation
+
+```console
+pip install sphinx-termynal
+```
+
+## Usage
+
+1. **Add the extension to `conf.py`:**
+
+   ```python
+   extensions = [
+       ...
+       "sphinx_termynal",
+       ...
+   ]
+   
+2. **Use the extension in your documentation:**
+You can now use it in your .rst files. For example:
+
+```rst
+.. termynal:: 
+   $ pip install sphinx-termynal
+   -->
+   sphinx-termynal installed
+
+```
+This will produce the following terminal animation:
+
+![Animation1](./animation1.gif)
+
+
+For more examples check the [Documentation](https://prajeesh-ag.com/sphinx-termynal/) 
+
+## Credits
+
+Thanks [ines](https://github.com/ines/termynal), [termynal.py](https://github.com/termynal/termynal.py)
