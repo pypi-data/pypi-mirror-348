@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: gheymat
+Version: 0.1.0
+Summary: دریافت قیمت دلار و تبدیل آن به ریال با پایتون
+Author-email: Ali <your@email.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
+Dynamic: license-file
+
+# gheymat
+
+کتابخانه‌ای برای دریافت قیمت دلار به صورت لحظه‌ای و تبدیل آن به ریال.
+
+## نصب
+
+```bash
+pip install gheymat
