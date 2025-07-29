@@ -1,0 +1,78 @@
+Metadata-Version: 2.4
+Name: MSIght
+Version: 1.0.24
+Summary: MSIght is an open-source Python-based algorithm designed for proteome characterization from the automated integration of histology, LC-MS/MS, and MSI datasets.
+Home-page: https://github.com/laurenfields/MSIght_1.0.0
+Author: Li Labs (University of Wisconsin-Madison)
+Author-email: lafields2@wisc.edu
+Project-URL: Documentation, https://msight-100.readthedocs.io/en/latest/?badge=latest
+Project-URL: PyPI, https://pypi.org/project/msight/
+Project-URL: Source, https://github.com/laurenfields/MSIght_1.0.0
+Project-URL: User manual, https://docs.google.com/document/d/1LNEW0XPbH9mTnc5Fh0l7QC1vW48mU75P3hPOI2Tp66E/pub
+Project-URL: Tracker, https://github.com/laurenfields/MSIght_1.0.0/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: matplotlib>=3.7.2
+Requires-Dist: numpy>=1.24.4
+Requires-Dist: opencv_python>=4.8.1.78
+Requires-Dist: pandas>=1.5.3
+Requires-Dist: plotly>=5.22.0
+Requires-Dist: pyimzML>=1.5.3
+Requires-Dist: pytest>=8.2.2
+Requires-Dist: scikit_image>=0.19.3
+Requires-Dist: scikit_learn>=1.3.0
+Requires-Dist: scipy>=1.10.1
+Requires-Dist: seaborn>=0.11.2
+Requires-Dist: SimpleITK>=2.4.0
+Requires-Dist: tifffile>=2023.4.12
+Requires-Dist: sphinx_rtd_theme>=1.0.0
+Requires-Dist: notebook>=7.3.1
+Requires-Dist: jupyter_server>=2.14.2
+Requires-Dist: plotly>=5.22.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+[![Documentation Status](https://readthedocs.org/projects/msight-100/badge/?version=latest)](https://msight-100.readthedocs.io/en/latest/?badge=latest)
+![Unit Tests](https://github.com/laurenfields/MSIght_1.0.0/actions/workflows/ci.yml/badge.svg)
+[![PyPI version](https://badge.fury.io/py/msight.svg?cache-bust=1)](https://pypi.org/project/msight/)
+
+<div align="center">
+<img src="https://github.com/laurenfields/MSIght/blob/main/MSIght_logo.png">
+</div>
+
+# MSIght
+
+MSIght is a program produced by the Lingjun Li Lab at the University of Wisconsin-Madison for automated integration of H&E, MSI, and LC-MS/MS datasets
+
+#### Getting started
+* [User manual](https://docs.google.com/document/d/e/2PACX-1vRg7HEovZCDG1IdLaVpfKdxXk9n3LBGevGVzZj9DhtYL69CmZ8VAwbSIM4Tm7bsCUkNBI8ixcHTqp6f/pub)
+* [Documentation](https://msight-100.readthedocs.io/en/latest/)
+* [Video tutorial](https://drive.google.com/file/d/1caKp6fv9s_aWqJw8W0Bl-qT7vrga0kWd/view?usp=sharing)
+
+## Installation
+
+You can install MSIght directly from [PyPI](https://pypi.org/project/msight/):
+
+```
+pip install msight
+```
+
+### How to Cite
+Fields, L.; Miles, H. N.; Adrian, A. E.; Patrenets, E.; Ricke, W. A.; Li, L. (2025). MSIght: A Modular Platform for Improved Confidence in Global, Untargeted Mass Spectrometry Imaging Annotation. J. Proteome Res. https://doi.org/10.1021/acs.jproteome.4c01140
+
+#### Major release notes
+##### Version 0.0.1 (Released 9/17/2024)
+* Initial release
