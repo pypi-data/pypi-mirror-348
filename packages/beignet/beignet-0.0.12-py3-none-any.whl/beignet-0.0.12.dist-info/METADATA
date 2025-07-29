@@ -1,0 +1,82 @@
+Metadata-Version: 2.4
+Name: beignet
+Version: 0.0.12
+Author-email: Allen Goodman <allen.goodman@icloud.com>, Joseph Kleinhenz <kleinhej@gene.com>
+License: Copyright © 2024 Genentech, Inc.
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy of
+        this software and associated documentation files (the “Software”), to deal in
+        the Software without restriction, including without limitation the rights to
+        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+        the Software, and to permit persons to whom the Software is furnished to do so,
+        subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+        FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+        COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+        IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+        CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: biotite
+Requires-Dist: einops>=0.8.1
+Requires-Dist: fastpdb
+Requires-Dist: numpy>=2
+Requires-Dist: optree
+Requires-Dist: pooch
+Requires-Dist: torch
+Requires-Dist: tqdm
+Provides-Extra: all
+Requires-Dist: beignet[datasets,docs,mdtraj,test]; extra == "all"
+Provides-Extra: datasets
+Requires-Dist: biopython; extra == "datasets"
+Requires-Dist: lmdb; extra == "datasets"
+Requires-Dist: pandas; extra == "datasets"
+Requires-Dist: pooch; extra == "datasets"
+Provides-Extra: docs
+Requires-Dist: mkdocs-material; extra == "docs"
+Requires-Dist: mkdocstrings[python]; extra == "docs"
+Provides-Extra: mdtraj
+Requires-Dist: mdtraj; extra == "mdtraj"
+Provides-Extra: test
+Requires-Dist: hypothesis; extra == "test"
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-mock; extra == "test"
+Requires-Dist: scipy; extra == "test"
+Dynamic: license-file
+
+_Beignet is a work-in-progress. Contributions and feedback are encouraged!_
+
+# Beignet
+
+A standard library for biological research.
+
+## Installation
+
+```bash
+pip install beignet
+```
+
+_Requires Python 3.10 or later and PyTorch 2.2.0 or later._
+
+## Layout
+
+*   `beignet`: PyTorch operators
+    *   `beignet.datasets`: PyTorch [datasets](https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset)
+    *   `beignet.func`: [composable PyTorch function transforms](https://pytorch.org/docs/stable/func.html)
+    *   `beignet.lightning`: Lightning [modules](https://lightning.ai/docs/pytorch/stable/common/lightning_module.html)
+        *   `beignet.lightning.datamodules`: Lightning [datamodules](https://lightning.ai/docs/pytorch/stable/data/datamodule.html)
+    *   `beignet.metrics`: [TorchMetrics](https://lightning.ai/docs/torchmetrics/stable/) metrics
+        *   `beignet.metrics.functional`: functional [TorchMetrics](https://lightning.ai/docs/torchmetrics/stable/) metrics
+    *   `beignet.nn`: PyTorch [modules](https://pytorch.org/docs/stable/generated/torch.nn.Module.html)
+        *   `beignet.nn.functional`: 
+    *   `beignet.optim`: PyTorch [optimizers](https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer)
+    *   `beignet.samplers`: PyTorch [samplers](https://pytorch.org/docs/stable/data.html#torch.utils.data.Sampler)
+    *   `beignet.transforms`: 
+        *   `beignet.transforms.functional`:
