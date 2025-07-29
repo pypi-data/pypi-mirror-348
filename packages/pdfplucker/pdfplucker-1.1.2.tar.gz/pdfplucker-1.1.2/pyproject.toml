@@ -1,0 +1,47 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "pdfplucker"
+version = "v1.1.2"
+description = "Docling wrapper for PDF parsing"
+homepage = "https://github.com/ipeadata-lab/pdfplucker"
+license = "MIT" 
+authors = ["rafaelghiorzi <rafael.ghiorzi@gmail.com>"]
+keywords = [
+    "docling",
+    "pdf",
+    "ocr",
+    "parser"
+]
+readme = "README.md"
+repository = "https://github.com/ipeadata-lab/pdfplucker"
+packages = [
+    { include = "pdfplucker" }
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: Microsoft :: Windows"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+docling = "^2.30.0"
+PyMuPDF = "^1.25.5"
+psutil = "^7.0.0"
+torch = "^2.6.0"
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "^78.1.0"
+
+[tool.poetry.scripts]
+pdfplucker = "pdfplucker.cli:main"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/ipeadata-lab/pdfplucker/issues"
