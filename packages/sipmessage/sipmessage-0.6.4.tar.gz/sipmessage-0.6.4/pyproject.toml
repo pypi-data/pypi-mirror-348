@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Version
+name = "sipmessage"
+version = "0.6.4"
+
+# Dependencies
+dependencies = []
+requires-python = ">= 3.10"
+
+# Development
+authors = [
+    {name = "Spacinov Engineering", email="opensource@spacinov.com"},
+]
+license = "BSD-2-Clause"
+
+# Description
+description = "Pure python parsing of SIP messages and headers"
+readme = {file = "README.rst", content-type = "text/x-rst"}
+
+# PyPI
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Telecommunications Industry",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Telephony",
+    "Typing :: Typed",
+]
+keywords = ["SIP", "RFC3261"]
+
+[project.optional-dependencies]
+dev = [
+    "check-manifest",
+    "coverage",
+    "mypy",
+    "pyroma",
+    "ruff",
+]
+
+[project.urls]
+Documentation = "https://sipmessage.readthedocs.io/"
+Repository = "https://github.com/spacinov/sipmessage"
+Issues = "https://github.com/spacinov/sipmessage/issues"
+
+[tool.coverage.run]
+include = ["src/*"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sipmessage"]
+namespaces = false
+
+[tool.mypy]
+ignore_missing_imports = false
+strict = true
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle
+    "F",  # Pyflakes
+    "W",  # pycodestyle
+    "I",  # isort
+    "T20",  # flake8-print
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/test_message.py" = ["E501"]
