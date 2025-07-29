@@ -1,0 +1,70 @@
+[project]
+name = "euma"
+version = "2.0.1"
+readme = "README.md"
+license = "MIT"
+authors = [
+   { name = "Leonhard Maier", email = "git@39z.de" }
+]
+maintainers = [
+   { name = "Leonhard Maier", email = "git@39z.de" }
+]
+description = "Euma, a color and design theme"
+keywords = [
+   "theme",
+   "colors",
+   "design-tokens",
+]
+urls = { homepage = "https://39zde.codeberg.page/euma/@main/.codeberg/webpage/dist/index.html", repository = "https://codeberg.org/39zde/euma.git", issues = "https://codeberg.org/39zde/euma/issues" }
+classifiers = [
+   "Programming Language :: Python :: 3",
+   "Operating System :: OS Independent",
+   "Topic :: Multimedia :: Graphics",
+   "Topic :: Software Development :: User Interfaces",
+   "Typing :: Typed",
+   "Topic :: Artistic Software",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = [
+   "build",
+   "dist",
+   "__init__.py",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+   "AIR",
+   "ANN",
+   "YTT",
+   "N",
+   "SLF",
+   "ICN",
+   "A",
+   "B",
+   "C4",
+   "E4",
+   "E7",
+   "E9",
+   "F",
+   "S",
+   "I",
+   "UP",
+]
+fixable = [
+   "ALL",
+]
+
+[build-system]
+requires = [
+   "flit_core >= 3.12.0, <4",
+   "twine >= 6.1.0",
+]
+build-backend = "flit_core.buildapi"
+
