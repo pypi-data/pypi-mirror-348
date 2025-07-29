@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pixiv_tag_downloader"
+dynamic = ["version"]
+description = "根据标签下载Pixiv用户作品的工具"
+readme = "README.md"
+authors = [
+    {name = "Mannix Sun", email = "root@teamcs.org"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Utilities",
+]
+keywords = ["pixiv", "download", "tag", "artwork", "manga", "novel"]
+dependencies = [
+    "requests>=2.28.0",
+    "beautifulsoup4>=4.11.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.64.0",
+    "jsonschema>=4.16.0",
+    "xmlrpc-aria2>=1.0.2",
+    "colorama>=0.4.6",
+    "python-dateutil>=2.8.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/example/pixiv_tag_downloader"
+Issues = "https://github.com/example/pixiv_tag_downloader/issues"
+Documentation = "https://github.com/example/pixiv_tag_downloader#readme"
+Source = "https://github.com/example/pixiv_tag_downloader"
+
+[project.scripts]
+pixiv-tag-downloader = "pixiv_tag_downloader.__main__:main"
+
+[tool.setuptools]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pixiv_tag_downloader*"]
+exclude = ["tests*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pixiv_tag_downloader.__version__"}

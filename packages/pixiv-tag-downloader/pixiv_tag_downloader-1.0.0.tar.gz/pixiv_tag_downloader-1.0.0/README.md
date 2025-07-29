@@ -1,0 +1,134 @@
+# Pixiv Tag Downloader
+
+根据标签下载Pixiv用户作品的工具，支持图片、插画、漫画和小说的下载，并提供标签过滤功能。
+
+## 功能特点
+
+- 🖼️ 支持下载Pixiv用户的所有类型作品（图片、插画、漫画、小说）
+- 🏷️ 支持按标签过滤作品，支持AND/OR逻辑
+- 🚀 多线程下载，提高下载效率
+- 📂 支持自定义输出目录结构和文件命名规则
+- 📝 为每个作品生成包含元数据的文件
+- 🌐 支持多种下载方式：直接下载、aria2c命令行和aria2 RPC（包括WSS协议）
+- 🖥️ 提供交互式命令行界面和命令行参数两种使用方式
+- 🧩 可作为Python模块导入使用
+- 🌍 支持配置代理
+- 🔄 内置随机延迟功能，降低被封风险
+
+## 安装方法
+
+### 从PyPI安装
+
+```bash
+pip install pixiv-tag-downloader
+```
+
+### 从源码安装
+
+```bash
+git clone https://github.com/example/pixiv_tag_downloader.git
+cd pixiv_tag_downloader
+pip install -e .
+```
+
+## 使用方法
+
+### 准备Cookie
+
+1. 在浏览器中登录Pixiv
+2. 使用浏览器开发者工具导出Cookie
+3. 将Cookie保存为程序运行目录下的`cookie.txt`文件，格式为：
+
+   ```bash
+   key1=value1; key2=value2; ...
+   ```
+
+### 交互式使用
+
+```bash
+pixiv-tag-downloader
+```
+
+程序将引导您完成下载流程：
+
+1. 输入Pixiv用户ID（UID）
+2. 选择是否查看所有可用标签
+3. 选择要下载的标签和过滤逻辑
+4. 确认下载信息
+
+### 命令行参数
+
+```bash
+pixiv-tag-downloader -u 用户ID -t 标签1,标签2 -l and --output-dir ./下载目录 --download-method direct --threads 4
+```
+
+主要参数：
+
+- `-u, --uid`: 指定Pixiv用户ID
+- `-t, --tags`: 指定要下载的标签，多个标签用逗号分隔
+- `-l, --logic`: 标签过滤逻辑，可选值为`and`或`or`
+- `--output-dir`: 指定输出目录，覆盖配置文件中的设置
+- `--threads`: 指定下载线程数
+- `--download-method`: 指定下载方式，可选值为`direct`、`aria2c`或`aria2-rpc`
+- `--aria2-rpc-url`: 指定Aria2 RPC服务地址
+- `--config`: 指定配置文件路径
+
+### 配置文件
+
+程序支持通过配置文件自定义设置，详见[配置文件示例](config.yaml.example)。
+
+配置文件可放置于以下位置：
+
+- 当前目录下的`config.yaml`或`config.yml`
+- 用户目录下的`~/.pixiv_tag_downloader/config.yaml`
+- 通过`--config`参数指定的路径
+
+## 作为模块使用
+
+```python
+from pixiv_tag_downloader.auth.cookie import get_cookie_manager
+from pixiv_tag_downloader.api.pixiv import get_pixiv_api
+from pixiv_tag_downloader.download.aria2 import create_downloader
+from pixiv_tag_downloader.utils.path_formatter import get_path_formatter
+from pixiv_tag_downloader.utils.file_utils import get_file_utils
+
+# 初始化Cookie
+cookie_manager = get_cookie_manager()
+success, message = cookie_manager.load_cookie()
+if not success:
+    print(f"Cookie加载失败: {message}")
+    exit(1)
+
+# 获取用户作品
+pixiv_api = get_pixiv_api()
+user_info = pixiv_api.get_user_info("12345678")
+artworks = pixiv_api.get_user_artworks_ids("12345678")
+
+# 下载作品
+downloader = create_downloader("direct")
+path_formatter = get_path_formatter()
+file_utils = get_file_utils()
+
+# 下载示例
+for pid in artworks['illustrations'][:5]:  # 只下载前5个作品
+    artwork = pixiv_api.get_artwork_details(pid)
+    img_url = artwork.get('urls', {}).get('original')
+    if img_url:
+        save_path = path_formatter.format_artwork_path(artwork)
+        downloader.download_file(img_url, save_path)
+        metadata_path = path_formatter.format_metadata_path(save_path)
+        file_utils.write_metadata_file(metadata_path, artwork)
+```
+
+## 系统要求
+
+- Python 3.8 或更高版本
+- 如需使用Aria2下载功能，请安装Aria2
+
+## 许可证
+
+本项目采用MIT许可证，详见[LICENSE](LICENSE)文件。
+
+## 免责声明
+
+本工具仅供学习和研究使用，请勿用于非法用途。使用本工具下载的作品仅可用于个人备份，禁止用于商业用途或公开分发。用户需遵守Pixiv的服务条款，并对自己的行为负全部责任。作者不对因使用本工具可能导致的任何问题承担责任。
