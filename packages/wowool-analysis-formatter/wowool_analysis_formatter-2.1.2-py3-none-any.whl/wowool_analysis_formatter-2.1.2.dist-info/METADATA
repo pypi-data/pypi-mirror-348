@@ -1,0 +1,128 @@
+Metadata-Version: 2.4
+Name: wowool-analysis-formatter
+Version: 2.1.2
+Summary: The Wowool Analysis Formatter
+Home-page: https://www.wowool.com/
+Author: Wowool
+Author-email: info@wowool.com
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# Customizing the API results format
+
+The analysis formatter app is used to define a custom format for the [results of a document analysis](docs/basics/analysis). This is useful if you only need a subset of the results, or would like to adapt the API results to conform to an existing format.
+
+## Options
+
+#### AnalysisFormatterOptions
+
+```typescript
+type AnalysisFormatterKeyword = 
+    'uri'
+  | 'canonical'
+  | 'literal'
+  | 'stem'
+  | 'attributes'
+  | 'begin_offset'
+  | 'end_offset'
+  | 'begin_byte_offset'
+  | 'end_byte_offset';
+type AnalysisFormatterOptions = Record<string, AnalysisFormatterKeyword>;
+```
+
+where the record's keys define the properties of the results object, thereby replacing the [default analysis results](docs/basics/analysis), and where the values are any of the supported keywords.
+
+#### AnalysisFormatterKeyword
+
+The following keywords are supported:
+
+| Keyword             | Description                                                           |
+|---------------------|-----------------------------------------------------------------------|
+| `uri`               | URI of the entity                                                    |
+| `canonical`         | Canonical of the entity if any, otherwise the literal representation |
+| `literal`           | Literal representation of the entity                                 |
+| `stem`              | Stem representation of the entity                                    |
+| `attributes`        | Attributes of the entity                                             |
+| `begin_offset`      | Begin offset in the document                                          |
+| `end_offset`        | End offset in the document                                            |
+| `begin_byte_offset` | Begin byte offset in the utf-8 input                                  |
+| `end_byte_offset`   | End byte offset in the utf-8 input                                    |
+
+## Examples
+
+<sample data-uuid="analysis_formatter"></sample>
+
+
+# Customizing the API results format
+
+The analysis formatter app is used to define a custom format for the [results of a document analysis](docs/basics/analysis). This is useful if you only need a subset of the results, or would like to adapt the API results to conform to an existing format.
+
+## Options
+
+#### AnalysisFormatterOptions
+
+```typescript
+type AnalysisFormatterKeyword = 
+    'uri'
+  | 'canonical'
+  | 'literal'
+  | 'stem'
+  | 'attributes'
+  | 'begin_offset'
+  | 'end_offset'
+  | 'begin_byte_offset'
+  | 'end_byte_offset';
+type AnalysisFormatterOptions = Record<string, AnalysisFormatterKeyword>;
+```
+
+where the record's keys define the properties of the results object, thereby replacing the [default analysis results](docs/basics/analysis), and where the values are any of the supported keywords.
+
+#### AnalysisFormatterKeyword
+
+The following keywords are supported:
+
+| Keyword             | Description                                                           |
+|---------------------|-----------------------------------------------------------------------|
+| `uri`               | URI of the entity                                                    |
+| `canonical`         | Canonical of the entity if any, otherwise the literal representation |
+| `literal`           | Literal representation of the entity                                 |
+| `stem`              | Stem representation of the entity                                    |
+| `attributes`        | Attributes of the entity                                             |
+| `begin_offset`      | Begin offset in the document                                          |
+| `end_offset`        | End offset in the document                                            |
+| `begin_byte_offset` | Begin byte offset in the utf-8 input                                  |
+| `end_byte_offset`   | End byte offset in the utf-8 input                                    |
+
+# API
+
+## Examples
+
+### Formatting results
+
+This code sets up and runs a text analysis pipeline that detects entities and formats the analysis results according to specified options.
+
+
+```python
+from wowool.sdk import Pipeline
+
+text = "John Smith works for Wowool."
+pipeline = Pipeline(
+    [
+        "english",
+        "entity",
+        {
+            "name": "analysis-formatter.app",
+            "options": {"uri": "uri", "begin_offset": "bo", "stem": "s"},
+        },
+    ]
+)
+document = pipeline(text)
+
+```
