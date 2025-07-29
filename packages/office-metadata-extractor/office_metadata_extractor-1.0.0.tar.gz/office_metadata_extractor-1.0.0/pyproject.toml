@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "office_metadata_extractor"
+version = "1.0.0"
+description = "Extract custom/core metadata from Office (.docx, .xlsx, .pptx) files"
+authors = [
+  { name="Sunil K Sundaram", email="sunilsmindspace@gmail.com" }
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12.3"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/sunilsmindspace/office_metadata_extractor"
+Repository = "https://github.com/sunilsmindspace/office_metadata_extractor"
+
+[tool.setuptools.packages.find]
+where = ["."]

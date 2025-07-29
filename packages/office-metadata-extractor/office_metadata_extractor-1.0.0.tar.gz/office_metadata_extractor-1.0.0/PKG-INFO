@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: office_metadata_extractor
+Version: 1.0.0
+Summary: Extract custom/core metadata from Office (.docx, .xlsx, .pptx) files
+Author-email: Sunil K Sundaram <sunilsmindspace@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/sunilsmindspace/office_metadata_extractor
+Project-URL: Repository, https://github.com/sunilsmindspace/office_metadata_extractor
+Requires-Python: >=3.12.3
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Office Metadata Extractor
+
+A Python library for extracting `custom.xml` and `core.xml` metadata from Microsoft Office files (.docx, .xlsx, .pptx). It also includes file-level metadata like file size and timestamps.
+
+## Installation
+
+```bash
+pip install office_metadata_extractor
+```
+
+## Usage
+```bash
+from office_metadata_extractor import OfficeMetadataExtractor
+```
+
+### Option 1: Use a folder path
+```bash
+extractor = OfficeMetadataExtractor('path/to/folder')
+metadata = extractor.get_metadata()
+```
+
+### Option 2: Use a list of files
+```bash
+files = ['doc1.docx', 'sheet1.xlsx']
+extractor = OfficeMetadataExtractor(files)
+metadata = extractor.get_metadata()
+```
+
+### Save to JSON
+```bash
+import json
+with open('output.json', 'w') as f:
+    json.dump(metadata, f, indent=4)
+```
+
+## Output
+```
+{
+  "file.docx": {
+    "custom": {
+      "Property1": "Value1"
+    },
+    "core": {
+      "title": "Document Title",
+      "creator": "John"
+    },
+    "file_info": {
+      "file_size": 10240,
+      "modified_time": "2025-05-15T14:45:21",
+      "created_time": "2025-05-10T10:12:03"
+    }
+  }
+}
+```
