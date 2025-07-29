@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: demonstrable-project
+Version: 1.0.1
+Summary: Tool for creating new Demonstrable projects
+Author-email: Sixty North AS <systems+demonstrable-project@sixty-north.com>
+License: This software is proprietary and not licensed for reuse.
+Project-URL: repository, https://bitbucket.org/sixty-north/demonstrable-project
+Classifier: Development Status :: 3 - Alpha
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.12
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: click>=8.1.8
+Requires-Dist: demonstrable-exception>=1.1.1
+Requires-Dist: exit-codes>=1.3.0
+Requires-Dist: tomli>=2.2.1
+Requires-Dist: tomli-w>=1.2.0
+Requires-Dist: yaspin>=3.1.0
+Dynamic: license-file
+
+====================
+Demonstrable Project
+====================
+
+`demonstrable-project` is a tool for creating new Demonstrable projects.
+
+Basic Usage
+===========
+
+To create a new Demonstrable project run the following command::
+
+    uvx demonstrable-project init [<project-directory>]
+
+Note that the project directory must not already exist.
