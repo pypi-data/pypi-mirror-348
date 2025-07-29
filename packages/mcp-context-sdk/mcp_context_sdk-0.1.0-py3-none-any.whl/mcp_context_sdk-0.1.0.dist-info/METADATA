@@ -1,0 +1,85 @@
+Metadata-Version: 2.3
+Name: mcp-context-sdk
+Version: 0.1.0
+Summary: Model Context Protocol SDK for building context-aware AI systems
+License: MIT
+Keywords: ai,context,sdk,machine-learning,nlp
+Author: Ankit Gautam
+Author-email: ankit.gautam@example.com
+Requires-Python: >=3.8.1,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: all
+Provides-Extra: fastapi
+Requires-Dist: fastapi (>=0.100.0,<0.101.0) ; extra == "fastapi" or extra == "all"
+Requires-Dist: pydantic (>=2.0.0,<3.0.0)
+Project-URL: Documentation, https://ankit-gautam23.github.io/mcp-context-sdk
+Project-URL: Repository, https://github.com/ankit-gautam23/mcp-context-sdk
+Description-Content-Type: text/markdown
+
+# MCP Context SDK
+
+![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
+![PyPI Version](https://img.shields.io/pypi/v/mcp-context-sdk.svg)
+![CI](https://github.com/opencontext-ai/mcp-context-sdk/actions/workflows/ci.yml/badge.svg)
+
+## Overview
+The MCP Context SDK is a modular, production-ready Python SDK that enables AI agents, models, and tools to work with structured context schemas. It supports dynamic context construction, prompt generation, and integration with modern AI frameworks.
+
+## Features
+- Dynamic context construction and validation
+- Schema-to-prompt conversion
+- Integration with LangChain, AutoGen, FastAPI, CrewAI, LangGraph, and OpenDevin
+- CLI and Streamlit UI demos
+- Type hints and schema validations
+
+## Quick Start
+
+### Installation
+```bash
+pip install mcp-context-sdk
+```
+
+### Usage
+
+#### CLI Tool
+List available schemas:
+```bash
+mcp list-schemas coding
+```
+
+Convert context to prompt:
+```bash
+mcp convert-context context.json coding --version v1
+```
+
+#### Streamlit UI
+Run the Streamlit app to interactively edit and preview context:
+```bash
+streamlit run examples/streamlit_ui.py
+```
+
+## How to Use with LangChain/AutoGen
+- Integrate MCP context into LangChain and AutoGen workflows for enhanced AI operations.
+
+## Creating Your Own Schema
+- Define domain-specific schemas and integrate them into the MCP SDK.
+
+## Running the Landing Page
+To view the landing page locally, open `docs/landing/index.html` in your browser. For deployment, consider using GitHub Pages or Vercel.
+
+## License
+This project is licensed under the MIT License.
+
+## Contribution
+Contributions are welcome! Please read the [contribution guidelines](docs/contributing.md) first. 
