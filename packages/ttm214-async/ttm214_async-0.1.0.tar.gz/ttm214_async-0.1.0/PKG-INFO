@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: ttm214_async
+Version: 0.1.0
+Summary: TTM214 device control library
+Home-page: https://github.com/mochi534/TTM214_async
+Author: mochi534
+Author-email: lib654852@gmail.com
+Maintainer: mochi534
+Maintainer-email: lib654852@gmail.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# TTM214 Async
+
+
+An asynchronous library for controlling TTM214 devices.
+<br />
+Communication uses the TOHO protocol
+
+
+## Example
+
+``` python
+import asyncio
+
+from ttm214_async import TTM214, ReadRequest, WriteRequest
+
+
+async def main() -> None:
+    comport = "COM3"
+    address = 1
+
+    # Initialize client
+    client = TTM214(address, use_bcc=True)
+    await client.open_port(comport)
+
+    # Write request
+    print(await client.query(WriteRequest("SV1", 100)))
+
+    # Read request
+    print(await client.query(ReadRequest("PV1")))
+    print(await client.query(ReadRequest("SV1")))
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
+```

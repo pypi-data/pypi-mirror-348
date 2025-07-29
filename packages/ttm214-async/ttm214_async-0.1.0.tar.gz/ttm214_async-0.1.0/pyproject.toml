@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ttm214_async"
+version = "0.1.0"
+description = "TTM214 device control library"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["pyserial>=3.5", "pyserial-asyncio>=0.6"]
+
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ttm214_async"]
+
+[dependency-groups]
+dev = ["twine>=6.1.0", "wheel>=0.45.1"]
