@@ -1,0 +1,126 @@
+Metadata-Version: 2.1
+Name: ysdb
+Version: 0.2.1
+Summary: YSDB Python Client SDK
+Home-page: https://www.k2data.com.cn
+Author: ysdb
+Author-email: ysdb@k2data.com.cn
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: distro
+
+# YSDB SDK
+
+> 目前支持 Windows、CentOS 和 Debian 环境（Debian为K2Assets的python运行环境）。
+
+此SDK为二次开发人员提供ysdb数据库的python客户端开发接口。
+
+ysdb提供标准C动态库，由python封装C动态库，对外提供标准python的接口SDK。用户只需要调用python的对象既可以访问ysdb数据库。
+
+## 一、安装和验证
+
+安装SDK最新版本：
+```
+pip install -U ysdb
+```
+
+在python代码里引用并建立到指定ysdb服务器的连接：
+```
+from ysdb.ysdbLib import RdbClient
+
+client = RdbClient()
+ret = client.connect("192.168.131.238", 30221)
+```
+以上代码若运行成功将返回下面的结果，表示连接成功：
+```
+rdbConnectOk, handle:1
+```
+
+## 二、直接使用SDK
+
+直接使用ysdb sdk的方法，例如读取ysdb中的散点或波形数据，请参考《ysdb数据库开发接口（Python）》文档。
+
+
+## 三、通过封装类使用SDK
+
+昆仑数据基于ysdb原有接口做了一层封装（`RdbWrapper`类），去掉了不常用的参数，使得调用更方便。
+
+目前`RdbWrapper`只提供个别接口的功能，未来视情况扩展。
+
+注意，确保在K2Assets的`docker-compose.yml`里配置了必要的ysdb信息，例如：
+```
+- K2BOX_YSDB_HOST=192.168.130.13
+- K2BOX_YSDB_PORT=30221
+- K2BOX_YSDB_USER=Administrator
+- K2BOX_YSDB_PASSWORD=123
+```
+
+### 1、实例化
+
+#### 接口定义
+根据指定的K2Assets，构造RDBWrapper类的实例。
+
+#### 输入参数
+| 参数名称        | 参数含义                             |
+|-------------|----------------------------------|
+| k2a_host        | K2Assets的域名或IP地址                 |
+| k2a_port    | K2Assets的端口号，例如443               |
+| k2a_user | K2Assets用户名                      |
+| k2a_basic_token | Basic认证用的token，可在K2Assets用户管理页查看 |
+| k2a_protocol | 可选参数，K2Assets的访问协议，默认为https      |
+| k2a_tenant | 可选参数，K2Assets的租户，默认为root         |
+
+
+#### 示例
+```
+from ysdb.wrapper import RdbWrapper
+rdbWrapper = RdbWrapper('dev.kstonedata.k2', 443, 'zhangsan', '...')
+```
+
+### 2、写入遥控命令
+基于原SDK中的`login`和`writeCtrlDataById`接口封装，用于向ysdb写入遥控命令。
+
+#### 接口定义
+- write_ctrl_data(mode, point_id, point_value)
+
+#### 输入参数
+| 参数名称        | 参数含义                                 |
+|-------------|--------------------------------------|
+| mode        | 写入模式，0表示写入状态量，1表示写入模拟量               |
+| point_id    | 要遥控的测点ID                             |
+| point_value | 要写入的遥控值。mode为0时，1代表打开，0代表关闭； |
+
+#### 返回值
+- 返回1表示写入成功，非1表示写入失败
+- 若connect或login失败将抛出异常
+
+#### 示例
+```
+from ysdb.wrapper import RdbWrapper
+
+rdbWrapper = RdbWrapper('dev.kstonedata.k2', 443, 'zhangsan', '...')
+ret = rdbWrapper.write_ctrl_data(0, 2, 1)  # 写入状态量到2号测点
+ret = rdbWrapper.write_ctrl_data(1, 4, 3.0)  # 写入模拟量到4号测点
+
+# 登录ysdb得到的token有效期为10分钟，若持续写入遥控命令，需要定期更新token
+rdbWrapper.refresh_token()
+```
+
+### 3、更新token
+登录ysdb得到的token有效期为10分钟，若持续调用需要token的接口，需要定期更新token。
+
+#### 接口定义
+- refresh_token()
+
+#### 返回值
+- 若更新成功返回token值
+- 若更新失败将抛出异常
