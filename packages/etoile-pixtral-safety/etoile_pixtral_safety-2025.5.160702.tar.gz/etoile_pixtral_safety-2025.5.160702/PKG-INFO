@@ -1,0 +1,99 @@
+Metadata-Version: 2.4
+Name: etoile_pixtral_safety
+Version: 2025.5.160702
+Home-page: 
+Author: Eugene Evstafev
+Author-email: chigwel@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: langchain==0.1.20
+Requires-Dist: langchain-core==0.1.52
+Requires-Dist: langchain-community==0.0.38
+Requires-Dist: langchain-huggingface==0.0.3
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+
+[![PyPI version](https://badge.fury.io/py/etoile_pixtral_safety.svg)](https://badge.fury.io/py/etoile_pixtral_safety)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://static.pepy.tech/badge/etoile_pixtral_safety)](https://pepy.tech/project/etoile_pixtral_safety)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/eugene-evstafev-716669181/)
+
+# etoile_pixtral_safety
+
+`etoile_pixtral_safety` is a Python package developed as part of the Mistral Étoile project during the London Hackathon. This package provides tools for detecting various types of potentially harmful content in images using advanced machine learning models, tailored specifically for online safety and content monitoring.
+
+## Installation
+
+To install `etoile_pixtral_safety`, use pip:
+
+```bash
+pip install etoile_pixtral_safety
+```
+
+## Usage
+
+This package contains functions to check for harmful content and locate specific sections within images that may contain undesirable elements. It utilizes LangChain and HuggingFace technologies for deep learning inference.
+
+### Setting Up the Model
+
+```python
+from langchain_mistralai import ChatMistralAI
+
+CVISION_MODEL = "pixtral-12b-2409"
+
+llm = ChatMistralAI(
+    model=CVISION_MODEL,
+    temperature=0,
+    max_retries=2,
+)
+```
+
+### Checking for Harmful Content
+
+```python
+from etoile_pixtral_safety import check_image
+
+# `display_url` should be a string containing the URL to the image you want to check.
+display_url = "https://example.com/path/to/image.jpg"
+result = check_image(llm, display_url, verbose=True)
+print(result)
+```
+
+### Finding Location of Harmful Content
+
+```python
+from etoile_pixtral_safety import find_location
+
+result = find_location(llm, display_url, verbose=True)
+print(result)
+```
+
+## Features
+
+- Detects a wide range of harmful content in images including explicit material, violence, and other undesirable elements.
+- Provides precise location data for identified content within images.
+- Integrates seamlessly with state-of-the-art machine learning platforms.
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/chigwell/Mistral-Etoile-London-Hackathon/issues).
+
+## License
+
+`etoile_pixtral_safety` is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+## Acknowledgements
+
+This package was developed by [Evgenii (Eugene) Evstafev](https://www.linkedin.com/in/eugene-evstafev-716669181/) as part of the comprehensive suite of tools for the Mistral Étoile project at the London Hackathon. More details about the project can be found on the [GitHub repository](https://github.com/chigwell/Mistral-Etoile-London-Hackathon).
