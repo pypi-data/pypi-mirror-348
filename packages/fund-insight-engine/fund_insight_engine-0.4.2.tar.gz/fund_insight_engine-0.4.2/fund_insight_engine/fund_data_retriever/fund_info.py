@@ -1,0 +1,33 @@
+from mongodb_controller import COLLECTION_8186
+from fund_insight_engine import get_latest_date_in_menu8186
+
+def get_fund_price(fund_code, date_ref=None):
+    date_ref = date_ref or get_latest_date_in_menu8186()
+    pipeline_price = [
+        {'$match': {'일자': date_ref, '펀드코드': fund_code}},
+        {'$project': {'_id': 0, '수정기준가': 1}},
+    ]
+    cursor = COLLECTION_8186.aggregate(pipeline_price)
+    data = list(cursor)[-1]
+    return data
+
+def get_fund_nav(fund_code, date_ref=None):
+    date_ref = date_ref or get_latest_date_in_menu8186()
+    pipeline_nav = [
+        {'$match': {'일자': date_ref, '펀드코드': fund_code}},
+        {'$project': {'_id': 0, '순자산': 1}},
+    ]
+    cursor = COLLECTION_8186.aggregate(pipeline_nav)
+    data = list(cursor)[-1]
+    return data
+
+def get_fund_capital(fund_code, date_ref=None):
+    date_ref = date_ref or get_latest_date_in_menu8186()
+    pipeline_capital = [
+        {'$match': {'일자': date_ref, '펀드코드': fund_code}},
+        {'$project': {'_id': 0, '설정액': 1}},
+    ]
+    cursor = COLLECTION_8186.aggregate(pipeline_capital)
+    data = list(cursor)[-1]
+    return data
+    
