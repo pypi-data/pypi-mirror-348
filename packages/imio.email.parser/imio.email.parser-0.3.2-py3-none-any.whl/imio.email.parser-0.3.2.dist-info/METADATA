@@ -1,0 +1,154 @@
+Metadata-Version: 2.1
+Name: imio.email.parser
+Version: 0.3.2
+Summary: This parser extracts forwarded attached email, embedded images and attachments. It also generates a PDF from the email.
+Home-page: https://pypi.org/project/imio.email.parser
+Author: Nicolas Demonté
+Author-email: support@imio.be
+License: GPL
+Keywords: email parser pdf attachment
+Classifier: Environment :: Console
+Classifier: Environment :: No Input/Output (Daemon)
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Requires-Python: >=3.10, <3.11
+Requires-Dist: mail-parser
+Requires-Dist: beautifulsoup4 >=4.6.3
+Requires-Dist: email2pdf2
+Requires-Dist: html5lib
+Requires-Dist: lxml
+Requires-Dist: pathvalidate
+Requires-Dist: pypdf2
+Requires-Dist: python-magic
+Requires-Dist: reportlab
+Requires-Dist: requests
+Requires-Dist: six
+
+=================
+imio.email.parser
+=================
+
+This package can parse emails and generate a PDF file of their content.
+
+It is mainly used by package `imio.email.dms`.
+
+
+Features
+--------
+
+1. select relevant email messages (e.g. email forwarded as an attachment)
+2. parse emails (headers, attachments, ...)
+3. generate a PDF email preview with email2pdf package
+
+
+Usage
+-----
+
+.. code-block:: python
+
+    mail = email.message_from_string(mail_body)
+    parser = Parser(mail)
+    print(parser.headers)
+    print(parser.attachments)
+    parser.generate_pdf(pdf_path)
+
+
+Requirements
+------------
+
+package wkhtmltopdf
+
+
+Contribute
+----------
+
+- Issue Tracker: https://github.com/IMIO/imio.email.parser/issues
+- Source Code: https://github.com/IMIO/imio.email.parser
+
+
+License
+-------
+
+The project is licensed under the GPLv2.
+
+
+Contributors
+============
+
+- Laurent Lasudry, info@affinitic.be
+- Nicolas Demonté, info@affinitic.be
+- Stéphan Geulette, stephan.geulette@imio.be
+
+
+Changelog
+=========
+
+
+0.3.2 (2025-05-16)
+------------------
+
+- Fixed base64-encoded rfc822 attachment not decoded.
+  [chris-adam]
+
+0.3.1 (2025-03-26)
+------------------
+
+- Improved `parser.correct_addresses`.
+  [sgeulette]
+- Increased test coverage.
+  [cadam]
+- Fixed attachment filename parsing.
+  [cadam]
+
+0.3.0 (2025-02-18)
+------------------
+
+- Used standard email parser in tests.
+  [sgeulette]
+- Handled correctly rfc822 attachment (attached eml)
+  [sgeulette]
+- Handled correctly owa transfer
+  [sgeulette]
+- Added message parameter to `parser.generate_pdf`
+  [sgeulette]
+- Handled quoted-printable filename
+  [sgeulette]
+
+0.2.0 (2024-10-04)
+------------------
+
+- Removed newline characters from attachement filename causing exception when creating file later in Plone.
+  [sgeulette]
+- Added attachments information
+  [sgeulette]
+- Corrected attachments disposition (check really embedded content ids)
+  [sgeulette]
+- Worked with EmailMessage
+  [sgeulette]
+- Added specific handling for Apple Mail forward
+  [sgeulette]
+- Added specific handling for IBM Notes forward
+  [sgeulette]
+- Added specific handling for automatic exchange forward
+  [sgeulette]
+- Get lowercased email addresses
+  [sgeulette]
+- Blacked and isorted files
+  [sgeulette]
+- Corrected body add when missing and worked on a copy of the message in that part
+  [sgeulette]
+
+0.1 (2022-02-17)
+----------------
+
+- Corrected badly addresses from email.utils.getAddresses
+- Managed email2pdf exception when email body is empty
+- Added tests
+- Added headers in pdf
+- Added emailtopdf script to test easily eml transformation in pdf
+- Initial release.
+  [laulaz, sgeulette]
