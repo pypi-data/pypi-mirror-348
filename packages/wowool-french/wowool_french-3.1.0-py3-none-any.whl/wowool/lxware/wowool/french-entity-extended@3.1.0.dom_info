@@ -1,0 +1,212 @@
+{
+  "dependencies": [
+    "wowool/french-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "Animal",
+    "Automobile",
+    "BaseballTeam",
+    "City",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "Date",
+    "District",
+    "Drink",
+    "Email",
+    "Event",
+    "Facility",
+    "Food",
+    "GivenName",
+    "Measure",
+    "MoneyAmount",
+    "Month",
+    "Organization",
+    "Percent",
+    "Person",
+    "PersonMention",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "SoccerTeam",
+    "Sports",
+    "Street",
+    "Time",
+    "Url",
+    "Vehicle",
+    "Weapon",
+    "WeekDay",
+    "WorldRegion"
+  ],
+  "short_description": "All annotations in the entity domain plus others, such as Automobile, BaseballTeam, InsuranceCompany or Measure",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "123 rue de la R\u00e9publique, 75001 Paris",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "Animal",
+      "sample": "singe, papillon, baleine",
+      "desc": "Names of common animals."
+    },
+    {
+      "concept": "Automobile",
+      "sample": "Jeep Renegade",
+      "desc": "A car brand or reference to a car."
+    },
+    {
+      "concept": "BaseballTeam",
+      "sample": "Houston Astros",
+      "desc": "US baseball team"
+    },
+    {
+      "concept": "City",
+      "sample": "Moscou, Grenoble",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "CNN, Deloitte",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "CurrencyUnit",
+      "sample": "rouble, euro",
+      "desc": "A currency unit"
+    },
+    {
+      "concept": "Country",
+      "sample": "France, Allemagne, Pologne, Etats - Unis, Pays - Bas",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "10 mars 1970",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Drink",
+      "sample": "martini, prosecco, vin, bi\u00e8re",
+      "desc": "Name of a drink"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "diaspora, bombardement, suicide",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "bureaux de vote, cath\u00e9drale",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "Food",
+      "sample": "l\u00e9gumes, hummus",
+      "desc": "Name of food, ingredients as well as dishes"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Willem",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Measure",
+      "sample": "350 tonnes, 5ft, 75ml",
+      "desc": "Unit of measure"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "230 millions d'euros, 1,0350 dollar",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "juin",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "OTAN, Parlement europ\u00e9en",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Percent",
+      "sample": "10%, 60 pour cent",
+      "desc": "A percentage"
+    },
+    {
+      "concept": "Person",
+      "sample": "Hercule Poirot",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "r\u00e9fugi\u00e9, \u00e9pouse, Premier ministre",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "1-800-273-5555, 0800 977 8880 ",
+      "desc": "Phone number"
+    },
+    {
+      "concept": "PlaceAdj",
+      "sample": "am\u00e9ricain, fran\u00e7ais",
+      "desc": "Adjective of geographical origin."
+    },
+    {
+      "concept": "Position",
+      "sample": "maire, m\u00e9decin, secr\u00e9taire d' \u00c9tat",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "SoccerTeam",
+      "sample": "Juventus, Ajax, Tottenham Hotspur",
+      "desc": "European soccer team"
+    },
+    {
+      "concept": "Sports",
+      "sample": "football, tennis, basket",
+      "desc": "Sports"
+    },
+    {
+      "concept": "Street",
+      "sample": "Place de l'Etoile",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "Vehicle",
+      "sample": "Porsche, voiture, Toyota Yaris",
+      "desc": "Name of a vehicle"
+    },
+    {
+      "concept": "Weapon",
+      "sample": "missile, projectile",
+      "desc": "Name of a weapon"
+    },
+    {
+      "concept": "WeekDay",
+      "sample": "dimanche",
+      "desc": "Day of the week"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Bretagne, Europe, Asie du Sud - Est, Maghreb",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

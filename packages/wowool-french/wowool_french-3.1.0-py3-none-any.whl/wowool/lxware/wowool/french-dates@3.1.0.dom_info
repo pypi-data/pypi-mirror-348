@@ -1,0 +1,23 @@
+{
+  "dependencies": [
+    "wowool/french-syntax@3.1.0",
+    "wowool/french-entity@3.1.0"
+  ],
+  "concepts": [
+    "Date",
+    "TimePhrase"
+  ],
+  "short_description": "Solving time adverbials into absolute dates.",
+  "examples": [
+    {
+      "concept": "Date",
+      "sample": "13/01/2021",
+      "desc": "An attribute will resolve the absolute date from the date that has been set"
+    },
+    {
+      "concept": "TimePhrase",
+      "sample": " 19 d\u00e9cembre 2016, quotidienne",
+      "desc": "A phrase expressing time, including dates"
+    }
+  ]
+}

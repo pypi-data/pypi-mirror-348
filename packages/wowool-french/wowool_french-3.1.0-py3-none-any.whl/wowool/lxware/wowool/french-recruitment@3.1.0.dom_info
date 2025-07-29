@@ -1,0 +1,65 @@
+{
+  "dependencies": [
+    "wowool/french-syntax@3.1.0",
+    "wowool/french-entity@3.1.0"
+  ],
+  "concepts": [
+    "City",
+    "Company",
+    "Country",
+    "HardSkill",
+    "Organization",
+    "Position",
+    "Person",
+    "SoftSkill",
+    "WorldRegion"
+  ],
+  "short_description": "Job postings and related annotations: place, position, job conditions, perks, etc.",
+  "examples": [
+    {
+      "concept": "City",
+      "sample": "Paris",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Renault, Engie",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Chine, France, Ukraine",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Union europ\u00e9enne, Institut national de la statistique",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Henri Matisse",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "SoftSkill",
+      "sample": "esprit d'analyse, disponibilit\u00e9",
+      "desc": "Traits related to the desired personality"
+    },
+    {
+      "concept": "HardSkill",
+      "sample": "blockchain, big data",
+      "desc": "The name of a skill"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Ile-de-France, Europe",
+      "desc": "Geopolitical location, not a city or a country"
+    },
+    {
+      "concept": "Position",
+      "sample": "Pr\u00e9sident de la R\u00e9publique, ing\u00e9nieur",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    }
+  ]
+}

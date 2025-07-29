@@ -1,0 +1,243 @@
+Metadata-Version: 2.4
+Name: wowool-french
+Version: 3.1.0
+Summary: Wowool NLP french Package
+Description-Content-Type: text/markdown
+
+# Wowool NLP french Package
+This package contains the language file and domains for french.
+To use this package, you need to install the wowool-sdk package and request a license file at info@wowool.com
+
+## Usage
+
+```python
+from wowool.sdk import Pipeline
+from pathlib import Path
+input_text = Path("input.txt").read_text()
+pipeline = Pipeline("french,entity")
+doc = pipeline(input_text)
+print(doc)
+```
+
+## Domains
+
+### french-healthcare.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| HealthIssue |A Healthissue is a symptom or a disease. | gangrène |
+
+
+### french-definition.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | Fadel Shanaa était un caméraman palestinien. |
+
+
+### french-topics.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| TopicCandidate |Possible topics | réforme de retraite, rhinocéros |
+
+
+### french-person-inversion.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| GivenName |First name of a Person | Jean |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Monsieur FOURNIRET Michel |
+| FamilyName |Surname, like Fourniret | Michel FOURNIRET |
+
+
+### french-unknown.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| UnknownThing |Unknown concept | Yttrium  |
+
+
+### french-entity.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | 999 Avenue Molière - 1050 Bruxelles |
+| City |Name of a City | Athènes |
+| Company |Name of a Company | Carrefour |
+| Country |Name of a Country | Belgique, Angleterre, Allemagne, Danemark, Suède |
+| Date |Date and Month | 15.10.2012 |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | élections |
+| Facility |A building or place that provides a particular service or is used for a particular industry | pavillon |
+| MoneyAmount |Amount of money | 350 euros |
+| Month |Name of a month | octobre |
+| Organization |Name of an Organization | Union européenne |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Michel Fourniret |
+| PersonMention |A mention of a person in a general way | chômeur, femme |
+| Position |Subclass of PersonMention. The professional occupation of a person. | ministre de la Justice |
+| Url |Url | https://www.wowool.com |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Pyrénées-Orientales |
+
+
+### french-world-regions.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Afghanistan |The country Afghanistan or a place in Afghanistan. | Afghanistan, Kabul |
+| Albania |The country Albania or a place in Albania. | Albanie, Tirana |
+| Algeria |The country Algeria or a place in Algeria. | Algerie, Algiers |
+| Angola |The country Angola or a place in Angola. | Angola, Luanda |
+| Argentina |The country Argentina or a place in Argentina. | Argentine, Buenos Aires |
+| Armenia |The country Armenia or a place in Armenia. | Arménie, Yerevan |
+| Australia |The country Australia or a place in Australia. | Australia, Canberra |
+| Austria |The country Austria or a place in Austria. | Autriche, Vienna |
+| Azerbaijan |The country Azerbaijan or a place in Azerbaijan. | Azerbaïdjan, Baku |
+
+
+### french-discovery.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | August Anselm Wesley est un journaliste |
+| Descriptor | descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'pianiste' is the descriptor | Paul Ji , né le à Chicago , est un pianiste |
+| DescriptorMarker |A DescriptorMarker is a descriptor no matter the context | palais, journaliste, chanson |
+
+
+### french-entity-extended.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | 123 rue de la République, 75001 Paris |
+| Animal |Names of common animals. | singe, papillon, baleine |
+| Automobile |A car brand or reference to a car. | Jeep Renegade |
+| BaseballTeam |US baseball team | Houston Astros |
+| City |Name of a City | Moscou, Grenoble |
+| Company |Name of a Company | CNN, Deloitte |
+| CurrencyUnit |A currency unit | rouble, euro |
+| Country |Name of a Country | France, Allemagne, Pologne, Etats - Unis, Pays - Bas |
+| Date |Date and Month | 10 mars 1970 |
+| Drink |Name of a drink | martini, prosecco, vin, bière |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | diaspora, bombardement, suicide |
+| Facility |A building or place that provides a particular service or is used for a particular industry | bureaux de vote, cathédrale |
+| Food |Name of food, ingredients as well as dishes | légumes, hummus |
+| GivenName |First name of a Person | Willem |
+| Measure |Unit of measure | 350 tonnes, 5ft, 75ml |
+| MoneyAmount |Amount of money | 230 millions d'euros, 1,0350 dollar |
+| Month |Name of a month | juin |
+| Organization |Name of an Organization | OTAN, Parlement européen |
+| Percent |A percentage | 10%, 60 pour cent |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Hercule Poirot |
+| PersonMention |A mention of a person in a general way | réfugié, épouse, Premier ministre |
+| PhoneNr |Phone number | 1-800-273-5555, 0800 977 8880  |
+| PlaceAdj |Adjective of geographical origin. | américain, français |
+| Position |Subclass of PersonMention. The professional occupation of a person. | maire, médecin, secrétaire d' État |
+| SoccerTeam |European soccer team | Juventus, Ajax, Tottenham Hotspur |
+| Sports |Sports | football, tennis, basket |
+| Street |The name of a street with or without number. | Place de l'Etoile |
+| Url |Url | https://www.wowool.com |
+| Vehicle |Name of a vehicle | Porsche, voiture, Toyota Yaris |
+| Weapon |Name of a weapon | missile, projectile |
+| WeekDay |Day of the week | dimanche |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Bretagne, Europe, Asie du Sud - Est, Maghreb |
+
+
+### french-sentiment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| PositiveSentiment |A positive opinion. | célèbre paléoanthropologue |
+| NegativeSentiment |A negative opinion. | m' est insupportable, locations illégales |
+| AdjPos |Positive adjective. | bienveillant, facile |
+| AdjNeg |Negative adjective. | lamentable, hostile, agressifs |
+| NounPos |Positive Noun. | décence, plaisir, tolérance |
+| NounNeg |Negative Noun. | souffrance, attentat |
+| ExprPos |Positive expression. | se serait bien passé |
+| ExprNeg |Negative expression. | avait marre |
+
+
+### french-contact-info.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | 501 Rue Jean-Pierre Timbaud, 75011 Paris |
+| City |Name of a City | Paris, Strasbourg, Rio de Janeiro |
+| Company |Name of a Company | Air France, Canard enchaîné |
+| Country |Name of a Country | France, États-Unis, Canada, Arabie saoudite |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Henri Matisse |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Hidalgo |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Xavier |
+| PhoneNr |A phone number | +33 1 23 45 67 89 |
+| PhoneNrCandidate |A possible phone number, but we do not have enough evidence | 0143 386 679 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | secrétaire général, chef de l'État, gendarme |
+| Street |The name of a street with or without number. | 501 Rue Jean-Pierre Timbaud |
+| Url |Url | https://www.wowool.com |
+
+
+### french-syntax.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| NP |Noun phrase. | une opération très délicate |
+| PronPhrase |Pronoun phrase. | on, nous |
+| VP |Verb phrase. | parlent, avait emprunté |
+
+
+### french-anonymizer.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | 123 rue de la République, 75001 Paris |
+| City |Name of a City | Lyon |
+| Company |Name of a Company | Renault |
+| Country |Name of a Country | France |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Jean Dupont |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Dupont |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Jean |
+| PhoneNr |A phone number | +33 1 23 45 67 89 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | ministre de l'intérieur |
+| Street |The name of a street with or without number. | 123 rue de la République |
+| Url |Url | https://www.wowool.com |
+
+
+### french-semantic-theme.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Theme |Theme is animal | chien |
+
+
+### french-recruitment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| City |Name of a City | Paris |
+| Company |Name of a Company | Renault, Engie |
+| Country |Name of a Country | Chine, France, Ukraine |
+| Organization |Name of an Organization | Union européenne, Institut national de la statistique |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Henri Matisse |
+| SoftSkill |Traits related to the desired personality | esprit d'analyse, disponibilité |
+| HardSkill |The name of a skill | blockchain, big data |
+| WorldRegion |Geopolitical location, not a city or a country | Ile-de-France, Europe |
+| Position |Subclass of PersonMention. The professional occupation of a person. | Président de la République, ingénieur |
+
+
+### french-event.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Event |An event, in very general terms. | vol |
+
+
+### french-dates.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Date |An attribute will resolve the absolute date from the date that has been set | 13/01/2021 |
+| TimePhrase |A phrase expressing time, including dates |  19 décembre 2016, quotidienne |
+
+
+

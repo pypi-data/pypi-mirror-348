@@ -1,0 +1,32 @@
+{
+  "concepts": [
+    "GivenName",
+    "FamilyName",
+    "Person",
+    "PersonGiv",
+    "PersonFam"
+  ],
+  "dependencies": [
+    "wowool/french-entity@3.1.0"
+  ],
+  "short_description": "Named entity annotations, such as: Person, PersonGiv and PersonFam.",
+  "examples": [
+    {
+      "concept": "GivenName",
+      "sample": "Jean",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Person",
+      "sample": "Monsieur FOURNIRET Michel",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "FamilyName",
+      "sample": "Michel FOURNIRET",
+      "desc": "Surname, like Fourniret"
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

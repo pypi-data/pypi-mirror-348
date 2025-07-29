@@ -1,0 +1,62 @@
+{
+  "dependencies": [
+    "wowool/french-entity@3.1.0"
+  ],
+  "concepts": [
+    "PositiveSentiment",
+    "NegativeSentiment",
+    "SentimentObject",
+    "Gratitude",
+    "AdjPos",
+    "AdjNeg",
+    "NounNeg",
+    "NounPos",
+    "VerbNeg",
+    "VerbPos",
+    "ExprNeg",
+    "ExprPos"
+  ],
+  "short_description": "Sentiment annotations, such as: PositiveSentiment, NegativeSentiment, as well as smaller pieces like AdjPos, AdjNeg, etc.",
+  "examples": [
+    {
+      "concept": "PositiveSentiment",
+      "sample": "c\u00e9l\u00e8bre pal\u00e9oanthropologue",
+      "desc": "A positive opinion."
+    },
+    {
+      "concept": "NegativeSentiment",
+      "sample": "m' est insupportable, locations ill\u00e9gales",
+      "desc": "A negative opinion."
+    },
+    {
+      "concept": "AdjPos",
+      "sample": "bienveillant, facile",
+      "desc": "Positive adjective."
+    },
+    {
+      "concept": "AdjNeg",
+      "sample": "lamentable, hostile, agressifs",
+      "desc": "Negative adjective."
+    },
+    {
+      "concept": "NounPos",
+      "sample": "d\u00e9cence, plaisir, tol\u00e9rance",
+      "desc": "Positive Noun."
+    },
+    {
+      "concept": "NounNeg",
+      "sample": "souffrance, attentat",
+      "desc": "Negative Noun."
+    },
+    {
+      "concept": "ExprPos",
+      "sample": "se serait bien pass\u00e9",
+      "desc": "Positive expression."
+    },
+    {
+      "concept": "ExprNeg",
+      "sample": "avait marre",
+      "desc": "Negative expression."
+    }
+  ]
+}

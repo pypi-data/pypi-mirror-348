@@ -1,0 +1,117 @@
+{
+  "dependencies": [
+    "wowool/french-syntax@3.1.0"
+  ],
+  "concepts": [
+    "City",
+    "Continent",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "WorldRegion",
+    "Address",
+    "Date",
+    "Email",
+    "Event",
+    "Facility",
+    "MoneyAmount",
+    "Nationality",
+    "Product",
+    "Measure",
+    "Month",
+    "Organization",
+    "Person",
+    "PersonMention",
+    "PhoneNr",
+    "Position",
+    "Street",
+    "Url",
+    "WeekDay",
+    "Weapon"
+  ],
+  "short_description": "Named entity annotations, such as: Person, City, Country, Company, Organization, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "999 Avenue Moli\u00e8re - 1050 Bruxelles",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Ath\u00e8nes",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Carrefour",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Belgique, Angleterre, Allemagne, Danemark, Su\u00e8de",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "15.10.2012",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "\u00e9lections",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "pavillon",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "350 euros",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "octobre",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Union europ\u00e9enne",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Michel Fourniret",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "ch\u00f4meur, femme",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "Position",
+      "sample": "ministre de la Justice",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Pyr\u00e9n\u00e9es-Orientales",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

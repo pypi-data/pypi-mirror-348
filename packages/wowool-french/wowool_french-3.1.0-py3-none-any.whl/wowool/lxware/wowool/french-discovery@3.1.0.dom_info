@@ -1,0 +1,28 @@
+{
+  "dependencies": [
+    "wowool/french-entity@3.1.0"
+  ],
+  "concepts": [
+    "Definition",
+    "Descriptor",
+    "DescriptorMarker"
+  ],
+  "short_description": "Descriptors for knowledge discovery. A descriptor is something like 'painter' to classify an item as a Person. ",
+  "examples": [
+    {
+      "concept": "Definition",
+      "sample": "August Anselm Wesley est un journaliste",
+      "desc": "A definition. A sentence that explains what something or someone is."
+    },
+    {
+      "concept": "Descriptor",
+      "sample": "Paul Ji , n\u00e9 le \u00e0 Chicago , est un pianiste",
+      "desc": " descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'pianiste' is the descriptor"
+    },
+    {
+      "concept": "DescriptorMarker",
+      "sample": "palais, journaliste, chanson",
+      "desc": "A DescriptorMarker is a descriptor no matter the context"
+    }
+  ]
+}

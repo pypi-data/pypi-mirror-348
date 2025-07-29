@@ -1,0 +1,31 @@
+{
+  "tokenizer": "wowool/french@3.1.0.tkz",
+  "abbreviations": "wowool/french@3.1.0.abbrev",
+  "apostrophe": "wowool/french@3.1.0.apostrophe",
+  "measure": "wowool/french@3.1.0.measure",
+  "hmm": "wowool/french@3.1.0.hmm",
+  "postagger": "wowool/french@3.1.0.postagger",
+  "morph_chain": [
+    {
+      "file": "wowool/french@3.1.0.morph",
+      "lookup": "plain"
+    }
+  ],
+  "property_chain": {
+    "tag": [
+      {
+        "file": "wowool/french@3.1.0.morph",
+        "lookup": "tag",
+        "transform": "tolower"
+      }
+    ]
+  },
+  "not_found": [
+    {
+      "file": "wowool/french@3.1.0.morph",
+      "lookup": "cleaner",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for french"
+}
