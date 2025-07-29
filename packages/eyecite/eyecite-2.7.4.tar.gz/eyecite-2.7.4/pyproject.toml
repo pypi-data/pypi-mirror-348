@@ -1,0 +1,90 @@
+[tool.poetry]
+version = "2.7.4"
+authors = ["Free Law Project <info@free.law>"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+description = "Tool for extracting legal citations from text strings."
+keywords = ["legal", "courts", "citations", "extraction", "cites"]
+license = "BSD-2-Clause"
+maintainers = ["Free Law Project <info@free.law>"]
+name = "eyecite"
+readme = "README.rst"
+repository = "https://github.com/freelawproject/eyecite"
+include = ["eyecite/py.typed"]
+
+[tool.poetry.urls]
+"Organisation Homepage" = "https://free.law/"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+reporters-db = ">=3.2.53"
+lxml = ">=4.6.3"
+pyahocorasick = ">= 1.2"
+fast-diff-match-patch = ">=2.0.0"
+regex = ">=2020.1.8"
+courts-db = ">=0.10.9"
+
+[tool.poetry.dev-dependencies]
+mypy = "^1.3.0"
+wheel = "^0.42.0"
+exrex = "^0.11.0"
+roman = "^4.0"
+pdoc3 = "^0.10.0"
+hyperscan = ">= 0.1.5"
+
+[tool.poetry.group.benchmark.dependencies]
+matplotlib = "^3.5.3"
+
+[tool.ruff]
+line-length = 79
+lint.extend-safe-fixes = [
+  # non-pep585-annotation
+  "UP006",
+]
+lint.select = [
+  # flake8-bugbear
+  "B",
+  # flake8-comprehensions
+  "C4",
+  # pycodestyle
+  "E",
+  # Pyflakes errors
+  "F",
+  # isort
+  "I",
+  # flake8-simplify
+  "SIM",
+  # flake8-tidy-imports
+  "TID",
+  # pyupgrade
+  "UP",
+  # Pyflakes warnings
+  "W",
+]
+lint.ignore = [
+  # flake8-bugbear opinionated rules
+  "B9",
+  # line-too-long
+  "E501",
+  # suppressible-exception
+  "SIM105",
+  # if-else-block-instead-of-if-exp
+  "SIM108",
+]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+# including "setuptools" allows for "pip install -e /path/to/eyecite"
+requires = ["poetry-core>=1.0.0", "setuptools"]
