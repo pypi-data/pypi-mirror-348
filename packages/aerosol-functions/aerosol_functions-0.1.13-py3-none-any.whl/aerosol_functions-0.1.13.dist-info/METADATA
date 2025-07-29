@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: aerosol-functions
+Version: 0.1.13
+Summary: Functions to analyze atmospheric aerosol data
+Home-page: https://github.com/jlpl/aerosol-functions
+Author: Janne Lampilahti
+Author-email: janne.lampilahti@helsinki.fi
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: pandas>=1.1.0
+Requires-Dist: numpy>=1.19.0
+Requires-Dist: matplotlib>=3.3.4
+Requires-Dist: scipy>=1.5.3
+Requires-Dist: bokeh>=3.6.3
+Requires-Dist: astral>=3.2
+Requires-Dist: kneed>=0.8.5
+Requires-Dist: scikit-learn>=1.3.0
+
+# `aerosol-functions` package
+
+This package is a collection of tools to analyze and visualize atmospheric aerosol and ion data.
+
+Latest version: 0.1.13
+
+## Installation
+
+Install directly from GitHub using `pip`
+
+```bash
+pip install git+https://github.com/jlpl/aerosol-functions.git
+```
+
+Install from PYPI:
+
+```bash
+pip install aerosol-functions
+```
+
+## Documentation
+
+The package's documentation page can be found [here](https://jlpl.github.io/aerosol-functions/)
+
+## Example 
+
+Calculate the coagulation coefficient in cubic meters per second for 10 nm and 100 nm aerosol particles under standard conditions.
+
+```python
+import aerosol.functions as af
+
+K = af.coagulation_coef(10e-9,100e-9)
+
+print(K) # output: 2.4e-14
+```
