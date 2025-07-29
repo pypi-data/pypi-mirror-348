@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grass_gis_helpers"
+version = "2.3.1"
+authors = [
+  { name="Anika Weinmann", email="weinmann@mundialis.de" },
+  { name="Carmen Tawalika", email="tawalika@mundialis.de" },
+  { name="Guido Riembauer", email="riembauer@mundialis.de" },
+  { name="Johannes Halbauer", email="halbauer@mundialis.de" },
+  { name="Julia Haas", email="haas@mundialis.de" },
+  { name="Lina Krisztian", email="krisztian@mundialis.de" },
+  { name="Markus Neteler", email="neteler@mundialis.de" },
+  { name="Victoria-Leandra Brunn", email="brunn@mundialis.de" },
+]
+maintainers = [{name="mundialis GmbH & Co. KG", email="info@mundialis.de"}]
+description = "This library provides functions which can be used for developing GRASS GIS addons."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "psutil",
+  "requests",
+  "zipfile_deflate64",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mundialis/grass-gis-helpers"
+"Bug Tracker" = "https://github.com/mundialis/grass-gis-helpers/issues"
