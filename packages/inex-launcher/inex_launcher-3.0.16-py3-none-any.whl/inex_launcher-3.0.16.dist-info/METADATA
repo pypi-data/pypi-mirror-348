@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: inex-launcher
+Version: 3.0.16
+Summary: InEx is a lightweight highly configurable Python launcher based on microkernel architecture
+Home-page: https://github.com/speechpro/inex-launcher
+Author: Yuri Khokhlov
+Author-email: khokhlov@speechpro.com
+License: MIT
+Project-URL: Bug Tracker, https://github.com/speechpro/inex-launcher/issues
+Keywords: speechpro inex launcher inex-launcher command-line configuration yaml
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: omegaconf
+Requires-Dist: networkx
+
+
+![GitHub License](https://img.shields.io/github/license/speechpro/inex-launcher)
+![PyPI - Version](https://img.shields.io/pypi/v/inex-launcher)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/inex-launcher.svg)
+
+<a href="https://github.com/speechpro/inex-launcher/stargazers"><img src="https://img.shields.io/github/stars/speechpro/inex-launcher" alt="Stars Badge"/></a>
+<a href="https://github.com/speechpro/inex-launcher/network/members"><img src="https://img.shields.io/github/forks/speechpro/inex-launcher" alt="Forks Badge"/></a>
+<a href="https://github.com/speechpro/inex-launcher/pulls"><img src="https://img.shields.io/github/issues-pr/speechpro/inex-launcher" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/speechpro/inex-launcher/issues"><img src="https://img.shields.io/github/issues/speechpro/inex-launcher" alt="Issues Badge"/></a>
+<a href="https://github.com/speechpro/inex-launcher/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/speechpro/inex-launcher?color=2b9348"></a>
+
+# InEx Launcher
+
+## Lightweight highly configurable Python launcher based on microkernel architecture
+
+### Installation
+
+```bash
+pip install -U inex-launcher
+```
