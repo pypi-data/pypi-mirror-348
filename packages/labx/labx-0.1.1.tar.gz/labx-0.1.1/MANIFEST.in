@@ -1,0 +1,27 @@
+# Include all Python source files
+include *.py
+recursive-include labx *.py
+
+# Include documentation
+recursive-include docs *.rst *.txt *.py *.png *.jpg *.gif
+
+# Include test files
+recursive-include tests *.py
+
+# Include package data
+recursive-include labx/data *
+
+# Include important project files
+include LICENSE
+include README.md
+include requirements.txt
+include setup.py
+include setup.cfg
+
+# Exclude build artifacts and temporary files
+global-exclude *.py[cod] __pycache__/* *.so *.dylib .DS_Store
+prune .git
+prune .github
+prune dist
+prune build
+prune *.egg-info
