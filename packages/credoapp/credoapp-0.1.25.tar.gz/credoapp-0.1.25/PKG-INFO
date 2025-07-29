@@ -1,0 +1,64 @@
+Metadata-Version: 2.3
+Name: credoapp
+Version: 0.1.25
+Summary: ai powered chatapp for browsing and search
+License: MIT
+Author: Kammari Santhosh
+Requires-Python: >=3.10,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: fastapi (>=0.115.6,<0.116.0)
+Requires-Dist: openai (>=1.58.1,<2.0.0)
+Project-URL: Repository, https://github.com/santhosh/
+Description-Content-Type: text/markdown
+
+# CredoApp(Server) 🤖
+
+
+A lightweight, extensible chat application framework for building AI-powered chat interfaces. ChatLite provides an easy-to-use platform for integrating various language models with web-based chat applications.
+
+## ✨ Features
+
+- 🔄 Real-time WebSocket communication
+- 🎯 Multi-model support (Llama, Qwen, etc.)
+- 🌐 Web search integration
+- 🎨 Customizable UI with modern design
+- 🔌 Plugin architecture for easy extensions
+- 💬 Chat history management
+- 🎭 Multiple agent types support
+- 📱 Responsive design
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+pip install credoapp
+```
+
+```bash
+credo-serve
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+## 🙏 Acknowledgments
+
+- Built with FastAPI and Flutter
+- Inspired by modern chat applications
+- Uses various open-source language models
+
+
