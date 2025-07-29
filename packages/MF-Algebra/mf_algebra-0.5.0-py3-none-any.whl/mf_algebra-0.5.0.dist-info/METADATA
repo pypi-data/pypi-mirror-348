@@ -1,0 +1,70 @@
+Metadata-Version: 2.3
+Name: MF-Algebra
+Version: 0.5.0
+Summary: Manim plugin which aims to make it much easier to meaningfully transform algebra expressions.
+License: None
+Author: John Connell
+Author-email: johnconnelltutor@gmail.com
+Requires-Python: >=3.8
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: manimce
+Provides-Extra: manimgl
+Requires-Dist: MF_Tools (>=1.3.3)
+Requires-Dist: manim (>=0.17.0) ; extra == "manimce"
+Requires-Dist: manimgl (>=1.7.0) ; extra == "manimgl"
+Project-URL: Repository, https://github.com/TheMathematicFanatic/MF_Algebra
+Description-Content-Type: text/markdown
+
+## Introduction
+
+This is a ManimGL / ManimCE plugin (**still under construction**) for the automated animation of algebra. It consists of a few key components: 
+- Expression: These objects contain a tree structure representing algebra expressions/equations, such as `3x^2`, `5+9`, and `sin(y)=14e^x`, as well as a method for producing a corresponding Tex/MathTex mobject.
+- Action: These objects contain methods to convert between expressions/equations, such as adding something to both sides, or substituting a variable for a value. This conversion can be static or animated.
+- Timeline: These objects contain an alternating sequence of expressions and actions, and methods for automatically determining these sequences, and animating them.
+
+
+## Expression
+
+There are many subclasses of Expression:
+```
+Expression
+├── Variable
+├── Number
+│   ├── Integer
+│   └── Real
+├── Combiner
+│   ├── Operation
+│   │   ├── Add
+│   │   ├── Sub
+│   │   ├── Mul
+│   │   ├── Div
+│   │   └── Pow
+│   ├── Relation
+│   │   ├── Equation
+│   │   ├── LessThan
+│   │   ├── ...
+│   └── Sequence
+├── Function
+└── Negative
+```
+Every Expression contains an attribute called children, which is a list. Sometimes this list is empty, such as for variables and numbers. But often this list contains other Expressions, such as for operations and functions.
+
+
+
+
+
+
+
+
+
+
+
+
+
