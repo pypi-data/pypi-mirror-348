@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swapnil-mcp-server"
+version = "4.1.3"
+description = "MCP server to expose some tools for LLMs"
+readme = "README.md"
+authors = [
+    {name = "swapnil dagade", email = "swapnildagade@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp>=1.2.0",
+    "requests",
+    "python-dotenv",
+    "httpx>0.28.0",
+    "twilio"
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+swapnil-mcp-server = "mcp_tools.__main__:main"
+
+[project.entry-points."mcp.tools"]
+get_Activities = "mcp_tools.server:get_Activities"
+get_SMS_Logs = "mcp_tools.server:get_SMS_Logs"
+send_SMS = "mcp_tools.server:send_SMS"
+
+[tool.mcp.tools.get_Activities]
+description = "Get Latest Activities for a specified unit"
+
+[tool.mcp.tools.get_SMS_Logs]
+description = "Get today's SMS logs filtered by status and limit"
+
+[tool.mcp.tools.send_SMS]
+description = "Send an SMS to a given number with a specified message"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
