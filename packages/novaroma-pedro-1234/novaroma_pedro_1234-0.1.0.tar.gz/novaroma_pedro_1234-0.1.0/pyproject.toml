@@ -1,0 +1,19 @@
+[project]
+name = "novaroma-pedro-1234"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Pedro Augusto", email = "111787739+pepeusilva@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2.3",
+]
+
+[project.scripts]
+novaroma-pedro-1234 = "novaroma_pedro_1234:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
