@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: fastsyftbox
+Version: 0.1.2
+Summary: FastAPI + SyftBox
+License-File: LICENSE
+Requires-Python: >=3.9
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: syft-core>=0.2.3
+Requires-Dist: syft-event>=0.2.1
+Requires-Dist: typer>=0.4.0
+Requires-Dist: uvicorn>=0.34.2
+Description-Content-Type: text/markdown
+
+# fastsyftbox
+
+You can run the cli tool from uv
+```
+$ uvx fastsyftbox create app test
+```
