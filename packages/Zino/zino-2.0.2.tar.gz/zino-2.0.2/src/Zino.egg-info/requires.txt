@@ -1,0 +1,14 @@
+apscheduler
+pydantic>=2.7.0
+pysnmplib
+aiodns
+netsnmp-cffi>=0.1.2
+
+[:python_version < "3.11"]
+tomli
+
+[:python_version >= "3.12"]
+pyasyncore
+
+[docs]
+sphinx>=2.2.0
