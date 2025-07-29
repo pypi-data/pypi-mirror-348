@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyGemAi"  # 
+version = "1.2.0" # Debe coincidir con la versión en setup.py
+description="Chatbot CLI para Google Gemini con gestión de API Keys, historial y selección de modelos."
+readme = "README.md"
+authors = [{ name = "Julio César Martínez", email = "julioglez@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Topic :: Communications :: Chat",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "google-generativeai>=0.5.0",
+    "cryptography>=3.0.0",
+]
+# Esto es NUEVO y esencial:
+[project.scripts]
+pygemai = "pygemai_cli.main:run_chatbot"
+
+[project.urls]
+Homepage = "https://github.com/julesklord/PyGemAi" # Reemplaza con tu URL
+# Documentation = "https://..."
+
