@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: excel2flapjack
+Version: 1.0.11
+Summary: upload excel resources to flapjack
+Home-page: https://github.com/SynBioDex/Experimental-Data-Converter/
+License: BSD 3-clause
+Requires-Dist: pyflapjack>=1.0.12
+Requires-Dist: numpy==1.26.1
+Requires-Dist: scipy>=1.8.0
+Requires-Dist: pandas==1.3.3
+Requires-Dist: requests>=2.25.1
+Requires-Dist: tqdm>=4.62.3
+Requires-Dist: plotly>=5.3.1
+Requires-Dist: asyncio>=3.4.3
+Requires-Dist: nest_asyncio>=1.5.1
+Requires-Dist: requests_jwt>=0.5.3
+Requires-Dist: websockets>=10.0
+Requires-Dist: matplotlib>=3.4.3
+Requires-Dist: kaleido>=0.2.1
+Requires-Dist: openpyxl==3.0.7
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+# Experimental Data Converter
+
+The Experimental Data Converter (XDC) is a software tool for experimental data standardization using Excel, Flapjack and SynBioHub. The XDC provides researchers with an Excel standard to capture both experimental results and contextual metadata, which are then converted to a uniform data representation for the SBOL standard and Flapjack’s data model. Through SBOL, users of XDC can store experimental results with all initial sequence, part and metadata information, as well as retrieve and share with others, improving reproducibility and collaboration.
+
+## Installation 
+
+## Documentation
+
+## Tutorials
+
