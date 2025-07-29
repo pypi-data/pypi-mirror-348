@@ -1,0 +1,176 @@
+Metadata-Version: 2.4
+Name: livn
+Version: 0.1.0
+Summary: A testbed for learning to interact with in vitro neural networks
+Author-email: Frithjof Gressmann <fg14@illinois.edu>, Ivan Raikov <ivan.g.raikov@gmail.com>
+License-File: LICENSE.txt
+Requires-Python: >=3.11
+Requires-Dist: cleosim>=0.16.0
+Requires-Dist: gymnasium>=1.1.1
+Requires-Dist: huggingface-hub[cli]>=0.3.1
+Requires-Dist: jaxtyping>=0.2.34
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: pyarrow>=19.0.1
+Requires-Dist: pydantic>=2.11.3
+Description-Content-Type: text/markdown
+
+# livn
+
+A testbed for learning to interact with in vitro neural networks
+
+## Quickstart
+
+### Using the dataset
+
+```python
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "livn",
+#   "datasets",
+# ]
+# ///
+from livn.system import make
+from livn.io import MEA
+from datasets import load_dataset
+
+system_name = "S1"
+
+dataset = load_dataset("livn-org/livn", name=system_name)
+
+sample = dataset["train_with_noise"][0]
+it = sample["trial_it"][0]
+t = sample["trial_t"][0]
+
+# use a multi-electrode array to 'observe' the data
+system = make(system_name)
+mea = MEA.from_directory(system.uri)
+
+cit, ct = mea.channel_recording(system.neuron_coordinates, it, t)
+
+print("Spikes in channel 0:")
+print(ct[0])
+```
+
+### Using the livn environment interactively
+
+```python
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "livn",
+# ]
+# ///
+from livn.env import Env
+from livn.system import predefined
+
+env = Env(predefined("S1")).init()
+
+env.apply_model_defaults()
+env.record_spikes()
+env.record_voltage()
+
+it, t, iv, v = env.run(100)
+
+print("Initial voltages: ", v[:, 0])
+```
+
+See [full example here](./examples/getting_started.py).
+
+Note that livn supports three backends that can be chosen before running the script:
+```sh
+export LIVN_BACKEND=brian2     # default
+export LIVN_BACKEND=diffrax    # requires livn[diffrax] dependencies
+export LIVN_BACKEND=neuron     # requires livn[neuron] dependencies and MPI (see below)
+```
+
+Checkout the [reinforcement learning example](benchmarks/rl.py) and [differenting through the simulation](./benchmarks/supervised.py).
+
+## Advanced usage for research and development
+
+Clone this repo and get [uv](https://docs.astral.sh/uv/) to `uv sync`.
+
+Note that this repository has different `--package` dependencies. In particular, the project's code for the hippocampal C5 and C6 systems is hosted [here](https://github.com/GazzolaLab/MiV-Simulator).
+
+### Prerequisites
+
+If you use the NEURON backend for large-scale simulation, an MPI and HDF5 installation is required.
+
+Linux (Debian) 🐧 | Windows (WSL2) 🪟
+```sh
+$ apt install -y cmake mpich libmpich-dev libhdf5-mpich-dev hdf5-tools
+```
+
+Mac 🍎
+```sh
+$ brew install hdf5-mpi
+```
+
+Additionally, if you are interested in generating your own systems, you will  have to compile `neuroh5`. Note that this is **not required** if you download livn's default systems.
+```sh
+git clone https://github.com/iraikov/neuroh5.git
+cd neuroh5
+cmake .
+make
+
+# add the neuroh5 binaries to your PATH
+export PATH="/path/to/neuroh5/bin:$PATH"
+```
+
+- [The paper describing the H5 file format](https://www.biorxiv.org/content/10.1101/2021.11.02.466940v1.full)
+- [h5py](https://docs.h5py.org/en/stable/) and [neuroh5](https://github.com/iraikov/neuroh5) to write and read the H5 coordinate files used by the simulator
+- vscode extension for opening H5 files: `h5web.vscode-h5web`
+
+### Systems
+
+Requires `uv sync --package systems` (see [systems](./systems) directory).
+
+#### Generate a system
+
+System generation reads a YAML configuration to create the HDF5 files containing the neuron locations and connectivity of the network. The following launches a parallel job using 8 cores to generate the S1 system:
+
+```bash
+$ export MPI_RANKS=8
+$ livn systems mpi generate config=./systems/config/S1.yml --launch
+```
+
+> Tip: To use MPI within SLURM, replace `mpi` with `slurm`. [Learn more](https://machinable.org/examples/slurm-execution/)
+
+Once completed, you can manage the files using:
+
+```bash
+... --inspect  # list generated files
+... --mea      # generate a multi-electrode configuration (mea.json)
+... --export   # export generated files to the systems/data directory
+```
+
+#### Tuning
+
+To find appropriate parameters, you can leverage black-box optimization:
+```sh
+export DISTWQ_CONTROLLER_RANK=-1
+livn systems mpi tune system=./systems/data/S1 nprocs_per_worker=1 weights=1 stimulate=1 --launch
+```
+
+Use `... --inspect` to display the pareto-front of solutions. This will output a command to continue tuning of synaptic noise using the found synaptic weights.
+
+#### Sampling
+
+To sample from the system (i.e. run many parallel simulations for different input features), you can use the sampling operation:
+```sh
+livn systems mpi sample output_directory=./my-dataset nprocs_per_worker=1 samples=10000 noise=0 --launch
+```
+Once completed, the samples can be merged using `... --merge`.
+
+### Benchmarks
+
+Requires `uv sync --package benchmarks` (see [benchmarks](./benchmarks) directory).
+
+
+
+### Full installation
+
+To install all dependencies and package, you may use:
+```sh
+uv sync --all-packages --group diffrax
+```
