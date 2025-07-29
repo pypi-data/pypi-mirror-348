@@ -1,0 +1,5 @@
+[console_scripts]
+watch-mcp = mcp_server_watch:main
+
+[mcp.server]
+watch = mcp_server_watch:main

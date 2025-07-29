@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: watch-mcp-core
+Version: 2.0.1
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.9
+Requires-Dist: fastapi>=0.95.0
+Requires-Dist: pydantic<3.0,>=2.0
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: uvicorn>=0.22.0
+Dynamic: classifier
+Dynamic: requires-dist
+Dynamic: requires-python

@@ -1,0 +1,35 @@
+{
+    "api_version": "2.1",
+    "protocols": ["http", "mcp"],
+    "endpoints": {
+        "watch_query": {
+            "http": "/api/v1/watch/query",
+            "mcp": "watch_query.search",
+            "input_schema": {
+                "$ref": "#/definitions/WatchQuery"
+            },
+            "output_schema": {
+                "$ref": "#/definitions/WatchResponse"
+            }
+        }
+    },
+    "definitions": {
+        "WatchQuery": {
+            "type": "object",
+            "properties": {
+                "brand": {"type": "string"},
+                "model": {"type": "string"}
+            },
+            "required": ["brand"]
+        },
+        "WatchResponse": {
+            "type": "object",
+            "properties": {
+                "brand": {"type": "string"},
+                "model": {"type": "string"},
+                "price": {"type": "number"},
+                "stock": {"type": "integer"}
+            }
+        }
+    }
+}
