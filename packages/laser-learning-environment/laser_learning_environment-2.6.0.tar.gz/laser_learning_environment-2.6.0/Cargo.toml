@@ -1,0 +1,33 @@
+[package]
+name = "lle"
+version = "2.6.0"
+edition = "2024"
+readme = "readme.md"
+license-file = "licence"
+repository = "https://github.com/yamoling/lle"
+homepage = "https://github.com/yamoling/lle"
+description = "Cooperative MARL environment based on laser-blocking."
+keywords = ["marl", "rl", "lle", "laser", "environment"]
+categories = ["science"]
+
+exclude = ["python/*", "uv.lock", "stubcheck.sh", "pyproject.toml", "docs"]
+
+[lib]
+name = "lle"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "stub-gen"
+path = "src/stub_gen.rs"
+
+[dependencies]
+image = "0.25.5"
+itertools = "0.14.0"
+lazy_static = "1.5.0"
+numpy = "0.24.0"
+pyo3 = "0.24.2"
+pyo3-stub-gen = "0.8.2"
+rand = "0.9.1"
+serde = "1.0.217"
+toml = "0.8.20"
