@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: diao
+Version: 0.0.4
+Summary: text-to-speech synthesis
+Author-email: calcuis <info@calcu.io>
+Description-Content-Type: text/markdown
+Classifier: License :: OSI Approved :: MIT License
+Requires-Dist: torchaudio
+Requires-Dist: julius
+Requires-Dist: soundfile
+Requires-Dist: flatten_dict
+Requires-Dist: argbind
+Project-URL: GitHub, https://github.com/calcuis/text-to-speech-synthesis
+Project-URL: Issues, https://github.com/calcuis/text-to-speech-synthesis/issues
+
+## text-to-speech synthesis
+install it via pip
+```
+pip install diao
+```
+
+### tts pack include
+- audiotools
+- dac
+- dia
+
+### wrap up
+- work for dia-1.6b model
+- diao (dia open) engine
