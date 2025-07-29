@@ -1,0 +1,90 @@
+#!/bin/bash
+
+
+tags=""
+
+tmp_list=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13)
+tmp_list="tmp_${tmp_list}.list"
+rm $tmp_list > /dev/null 2>&1
+
+#https://stackoverflow.com/questions/19408649/pipe-input-into-a-script
+if [ -p /dev/stdin ]; then
+    while read tag; do
+        echo $tag
+        # tags+="$tag\n"
+        # tags+="$tag\n"
+    done > $tmp_list
+
+fi
+
+silent_dir="$(dirname $(type -p "$0"))"
+source "$silent_dir"/_extract_flags.sh
+
+
+for tag in "$@"; do
+    echo $tag
+done >> $tmp_list
+
+
+if [ ! -f $tmp_list ]; then
+    echo >&2 ""
+    echo >&2 "silentfrompdbs by bcov - a tool to make a silent file from pdbs"
+    echo >&2 "Usage:"
+    echo >&2 "        cat list_of_tags.list | silentfrompdbs > silent.silent"
+    echo >&2 "                             or"
+    echo >&2 "        silentfrompdbs tag1 tag2 tag3 > silent.silent"
+    echo >&2 "Flags:"
+    echo >&2 "        -j cpus"
+    echo >&2 "        -p param_file"
+    echo >&2 "        @flags_file"
+    exit 1
+fi
+
+# bakerlab stuff. Appologies to others but this fixes so many problems for us
+PATH="$PATH:/software/rosetta/latest/bin"
+
+jd2_program=score_jd2
+
+#https://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script/677212#677212
+command -v score_jd2 >/dev/null 2>&1 || { 
+    #echo >&2 "You must have extract_pdbs on your path!"; 
+    #echo >&2 "Try doing cd silent_tools; ln -s /software/rosetta/latest/bin/extract_pdbs ."
+    #exit 1; 
+    jd2_program="$silent_dir"/pyjd2
+}
+
+
+if [ -z "${SILENT_J}" ]; then
+# Do single-thread generation
+
+    tmp_file=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13)
+    tmp_file="tmp_${tmp_file}.silent"
+
+    $jd2_program -l $tmp_list -out:file:silent $tmp_file -out:file:silent_struct_type binary $SILENT_PARAMS $SILENT_AT 1>&2
+
+    "$silent_dir"/silentls $tmp_file | sed 's/_0001$//g' | "$silent_dir"/silentrename $tmp_file
+
+    rm $tmp_list
+    rm $tmp_file
+    rm $tmp_file.idx
+
+else
+# Do multi-thread extraction
+    tmp_fol=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13)
+    tmp_fol="tmp_${tmp_fol}"
+
+    cpus=${SILENT_J} #$(parallel --number-of-cores)
+
+    splitno=$((( $(wc -l $tmp_list | awk '{print $1}') / $cpus + 1)))
+
+    mkdir $tmp_fol
+
+    split -l $splitno $tmp_list $tmp_fol/x
+
+    ls $tmp_fol/x* | parallel -j$cpus "cat {} | $silent_dir/silentfrompdbs $SILENT_FLAGS_NO_J"
+
+    rm $tmp_list
+    rm -r $tmp_fol
+fi
+
+

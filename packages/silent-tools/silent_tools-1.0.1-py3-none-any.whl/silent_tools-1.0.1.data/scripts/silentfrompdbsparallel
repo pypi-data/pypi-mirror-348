@@ -1,0 +1,48 @@
+#!/bin/bash
+
+tags=""
+
+tmp_list=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13)
+tmp_list="tmp_${tmp_list}.list"
+rm $tmp_list > /dev/null 2>&1
+
+if [ -p /dev/stdin ]; then
+    while read tag; do
+        echo $tag
+    done > $tmp_list
+
+fi
+
+silent_dir="$(dirname $(type -p "$0"))"
+source "$silent_dir"/_extract_flags.sh
+
+
+for tag in "$@"; do
+    echo $tag
+done >> $tmp_list
+
+
+if [ ! -f $tmp_list ]; then
+    echo >&2 ""
+    echo >&2 "OBSOLETE: Just use silentfrompdbs -j16"
+    echo >&2 ""
+    echo >&2 "silentfrompdbsparallel by bcov - a tool to make a silent file from pdbs in parallel"
+    echo >&2 "Usage:"
+    echo >&2 "        cat list_of_tags.list | silentfrompdbs > silent.silent"
+    echo >&2 "                             or"
+    echo >&2 "        silentfrompdbs tag1 tag2 tag3 > silent.silent"
+    echo >&2 "Flags:"
+    echo >&2 "        -j cpus"
+    echo >&2 "        -p param_file"
+    echo >&2 "        @flags_file"
+    exit 1
+fi
+
+
+if [ -z "${SILENT_J}" ]; then
+    cat $tmp_list | "$silent_dir"/silentfrompdbs -j16 $SILENT_FLAGS
+else
+    cat $tmp_list | "$silent_dir"/silentfrompdbs $SILENT_FLAGS
+fi
+
+rm $tmp_list
