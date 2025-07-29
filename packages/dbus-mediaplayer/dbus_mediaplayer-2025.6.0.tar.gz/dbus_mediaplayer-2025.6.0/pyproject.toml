@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools~=69.2.0", "wheel~=0.43.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name              = "dbus_mediaplayer"
+version           = "2025.6.0"
+description       = "Currently playng media using DBus"
+readme            = "README.md"
+keywords          = ["lnxlink"]
+requires-python   = ">=3.7.0"
+authors     = [
+    {name="bkbilly", email="bkbilly@hotmail.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Unix",
+]
+dependencies = [
+    "jeepney>=0.9.0"
+]
+
+
+[project.urls]
+"Source Code" = "https://github.com/bkbilly/dbus_mediaplayer"
+
+[tool.setuptools.packages.find]
+include = ["dbus_mediaplayer*"]
+
+[project.scripts]
+dbus-mediaplayer = "dbus_mediaplayer.__main__:main"
