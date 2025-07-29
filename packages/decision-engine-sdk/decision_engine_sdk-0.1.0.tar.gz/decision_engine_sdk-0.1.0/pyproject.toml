@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decision-engine-sdk"
+version = "0.1.0"
+description = "Python SDK client for the Decision Engine APIs"
+authors = [{ name="Your Name", email="your@email.com" }]
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+    "requests"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["decision_engine_sdk*"]
