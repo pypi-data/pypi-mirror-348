@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ChatSelfbot"
+version = "1.1.2"
+authors = [
+    { name = "Bjarnos", email = "contact@bjarnos.dev" },
+]
+description = "A fast and light selfbot made by Bjarnos for Chat (a program by Jona Zwetsloot)!"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = { file = "LICENSE" }
+
+dependencies = [
+    "requests",
+    "beautifulsoup4"
+]
