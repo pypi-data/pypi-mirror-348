@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# Information on the package
+[project]
+name = "topdesign"
+description = "A general tool chain integration framework for multidisciplinary analysis and optimization"
+version = "0.0.3.1"
+authors = [
+    { name = "Ju Feng", email = "jufen@dtu.dk" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "matplotlib",
+  "numpy",
+  "scipy",
+]

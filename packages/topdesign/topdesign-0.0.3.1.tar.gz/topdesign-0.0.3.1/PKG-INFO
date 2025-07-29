@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: topdesign
+Version: 0.0.3.1
+Summary: A general tool chain integration framework for multidisciplinary analysis and optimization
+Author-email: Ju Feng <jufen@dtu.dk>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: scipy
+Description-Content-Type: text/markdown
+
+# TopDesign
+
+TopDesign is a general tool chain integration platform for multidisciplinary 
+analysis and optimization, developed in DTU Wind as an open source tool.
+
+The concept of the platform and the usage example on wind farm design can be 
+found in:
+
+> Feng, Ju, and Jens Nørkær Sørensen. "Towards a general tool chain integration 
+platform for multi-disciplinary analysis and optimization in wind energy." In 
+*Journal of Physics: Conference Series*, vol. 2767, no. 8, p. 082014. IOP 
+Publishing, 2024.  [[link](https://iopscience.iop.org/article/10.1088/1742-6596/2767/8/082014/meta)]
+
+Source code of the platform is hosted in DTU Wind's GitLab site: 
+> https://gitlab.windenergy.dtu.dk/TOPFARM/basic-plugins/topdesign
+
+Development of this platform has been partially supported by the [MERIDIONAL](
+https://meridional.eu/) project, which receives funding from the European
+Union’s Horizon Europe Programme under the grant agreement No. 101084216.
+
+## Installation
+
+You can install the TopDesign package from PyPI using the following command:
+
+>```
+> pip install topdesign
+>```
+
+You can also install TopDesign from GitLab (includes any recent updates):
+>```
+> pip install git+https://gitlab.windenergy.dtu.dk/TOPFARM/basic-plugins/topdesign.git
+>```
+
+We highly recommend developers to install TopDesign into a dedicated 
+environment. The commands to clone and install TopDesign with developer options
+including dependencies required to run the tests into the current active 
+environment in an Anaconda Prompt are as follows:
+>```
+> git clone https://gitlab.windenergy.dtu.dk/TOPFARM/basic-plugins/topdesign.git
+> cd topdesign
+> pip install -e .
+>```
+
+
+## Usage
+The standard topdesign platform relies only on [numpy](https://numpy.org/), 
+[matplotlib](https://matplotlib.org/) and [scipy](https://scipy.org/). 
+
+To run the example on wind farm design, you need to have 
+[py_wake](
+https://topfarm.pages.windenergy.dtu.dk/PyWake/) and [floris](
+https://nrel.github.io/floris/installation.html) (>=4.0) installed.
+
+To run the example on multi-language model integration, you need to have
+[matlabengine](https://www.mathworks.com/help/matlab/matlab-engine-for-python.html) 
+and [juliacall](https://juliapy.github.io/PythonCall.jl/stable/juliacall/) 
+installed.
