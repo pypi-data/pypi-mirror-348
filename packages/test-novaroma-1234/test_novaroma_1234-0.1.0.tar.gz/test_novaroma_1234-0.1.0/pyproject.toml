@@ -1,0 +1,19 @@
+[project]
+name = "test-novaroma-1234"
+version = "0.1.0"
+description = "objeto de teste"
+readme = "README.md"
+authors = [
+    { name = "Gutto", email = "guttolaudie@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.2.5",
+]
+
+[project.scripts]
+test-novaroma-1234 = "test_novaroma_1234:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
