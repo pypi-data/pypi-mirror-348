@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: fourinsight-engineroom-utils
+Version: 0.7.6
+Summary: Python boilerplate and utilites for 4Insight EngineRoom app development.
+Home-page: https://4insight.io/
+Author: 4Subsea
+Author-email: support@4subsea.com
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: azure-storage-blob>=12.4.0
+Requires-Dist: pyarrow
+Requires-Dist: numpy
+Dynamic: license-file
+
+# fourinsight-engineroom-utils-python
+Python boilerplate and utilities for EngineRoom app development
