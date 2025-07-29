@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: pinaxai-aws
+Version: 0.0.1
+Summary: AWS resources for Pinaxai
+Author-email: Greg Fitzgerald <Greg.Fitzgerald@pinax.tech>
+Project-URL: homepage, https://pinax.tech
+Project-URL: documentation, https://docs.pinax.tech
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: boto3
+Provides-Extra: dev
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+
+# Pinaxai AWS
+
+A Python package for managing AWS resources in Pinaxai applications.
+
+## Description
+
+This package provides a comprehensive set of tools and utilities for managing AWS resources within Pinaxai applications. It includes support for various AWS services including:
+
+- EC2 (Security Groups, Subnets, Volumes)
+- ECS (Clusters, Containers, Services, Task Definitions)
+- RDS (DB Clusters, Instances, Subnet Groups)
+- S3 (Buckets, Objects)
+- IAM (Policies, Roles)
+- And many more AWS services
+
+## Installation
+
+```bash
+pip install pinaxai-aws
+```
+
+## Requirements
+
+- Python >= 3.7
+- boto3
+
+## Development
+
+For development, install the package with development dependencies:
+
+```bash
+pip install "pinaxai-aws[dev]"
+```
+
+## License
+
+Proprietary - All rights reserved
+
+## Author
+
+Greg Fitzgerald (Greg.Fitzgerald@pinax.tech) 

@@ -1,0 +1,58 @@
+[project]
+name = "pinaxai-aws"
+version = "0.0.1"
+description = "AWS resources for Pinaxai"
+requires-python = ">=3.7"
+readme = "README.md"
+authors = [
+  {name = "Greg Fitzgerald", email = "Greg.Fitzgerald@pinax.tech"}
+]
+
+dependencies = [
+  "boto3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy",
+  "pytest",
+  "ruff",
+]
+
+[project.urls]
+homepage = "https://pinax.tech"
+documentation = "https://docs.pinax.tech"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pinaxai*"]
+
+[tool.setuptools.package-data]
+pinaxai = ["py.typed"]
+
+[tool.pytest.ini_options]
+log_cli = true
+testpaths = "tests"
+
+[tool.ruff]
+line-length = 120
+# Ignore `F401` (import violations) in all `__init__.py` files
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.mypy]
+check_untyped_defs = true
+no_implicit_optional = true
+warn_unused_configs = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+  "pinaxai.*",
+  "boto3.*",
+  "botocore.*",
+]
+ignore_missing_imports = true
