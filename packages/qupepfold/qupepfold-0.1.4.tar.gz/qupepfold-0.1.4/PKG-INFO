@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: qupepfold
+Version: 0.1.4
+Summary: QuPepFold: Quantum peptide folding simulations with Qiskit
+Home-page: https://github.com/yourusername/qupepfold
+Author: Akshay Uttarkar
+Author-email: Akshay Uttarkar <akshayuttarkar@gmail.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Quantum Computing
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: qiskit>=0.39
+Requires-Dist: qiskit-aer
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: scipy
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
+# QuPepFold
+
+Quantum peptide‐folding simulations built on Qiskit.
+
+## Installation
+
+```bash
+pip install qupepfold
+
+ OR
+
+ git clone https://github.com/yourusername/qupepfold.git
+cd qupepfold
+pip install
+
+
+from qupepfold import generate_turn2qubit, protein_vqe_objective
+
+seq = "HHPHPH"
+fixed, fb, vb = generate_turn2qubit(seq)
+result = protein_vqe_objective(
+    protein_sequence=seq,
+    hyperParams={…}
+)
+print(result)
+
+
+
