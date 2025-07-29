@@ -1,0 +1,22 @@
+Metadata-Version: 2.3
+Name: umnetdb-utils
+Version: 0.1.0
+Summary: Helper classes for querying UMnet databases
+License: MIT
+Author: Amy Liebowitz
+Author-email: amylieb@umich.edu
+Requires-Python: >=3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: oracledb (>=3.1.0,<4.0.0)
+Requires-Dist: psycopg[binary] (>=3.2.9,<4.0.0)
+Requires-Dist: sqlalchemy (>=2.0.41,<3.0.0)
+Description-Content-Type: text/markdown
+
+# umnetdb-utils
+Helper classes for gathering data from umnet databases
+
