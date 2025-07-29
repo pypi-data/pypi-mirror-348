@@ -1,0 +1,200 @@
+Table of Contents
+   - Envs (testbeds)
+   - Organize your envs into folders
+   - How to use envs in Playbooks for testing
+   - Env Load Balancer
+   - How to use Env param/values in Python scripts
+   - Auto-Setup and Auto-Teardown
+   - Lab Inventory
+   - How to select Envs to use for testing
+
+
+- Envs stands for environments
+
+- Also known as testbeds, silos, setup
+
+- Env are Yaml files that represents a group of devices for testing
+
+- Env Yaml files are stored in /opt/KeystackTests/Envs/DOMAIN=<domain>
+  The env file name is the env name used in Playbooks
+
+- Create new DOMAINs to organize your Envs.
+  Example: /opt/KeystackTests/Envs/DOMAIN=QA
+
+  Note: Look at env sample Yaml files: demoEnv1.yml and demoEnv2.yml
+
+- Envs are isolated in DOMAINS.
+  By default, the domain Communal is already created.  
+  Any env Yaml file that you create in the Communal domain is shared across
+  all domains.  
+  All envs in domains except for Communal are isolated.  They're not shareable with other domains.
+  This means if you run a playbook in a QA domain, you could use envs in
+  the QA and Communal domain.  Cannot use envs in other domains.
+  If you run a playbook in a Communal domain, you could only use envs in
+  the Communal domain.
+
+- If running Keystack on Linux host CLI and the Keystack container is not running, 
+  envs are SHARED!  NO env management!!
+
+  With Keystack container running, newly created/added Envs defaults to NOT shareable.
+  Keystack will manage env usage.
+  For example: If a test is using the env, all other tests will go into the wait-list queue 
+  until the env is released.  The wait-list priority goes by the active-user's sessionId 
+  which is the timestamp.
+
+- Make env shareable and ENV COLLISION AVOIDANCE:
+    To avoid Env colliding with other users or automated test, go on the 
+    Keystack UI, under Envs, verify Shareable is "No".
+
+    When creating a new Env in Keystack, shareable defaults to No. 
+
+    Otherwise, if the Keystack container is not running, Envs are shared.
+    This means if you run playbooks that use the same envs, Keystack will not prevent
+    env collisions.  Playbooks that use the same envs will overlap and collide 
+    with each other. So it is important to run Keystack docker container to have env
+    collision avoidance or you have to make sure in each playbook that you don't define
+    using the same env if collision avoidance is important.... all envs must be unique.
+
+- IMPORTANT NOTE:
+    - Envs are managed automatically by running the keystack docker container (KeystackUI).
+    - If you are not running the Keystack docker container, stating which 
+      env's load-balance group to use in the playbook doesn't work AND envs are shareable!
+    - If the Keystack container is not running, you must statically define unique envs to use in 
+      playbooks and making sure within each Stage, the Tasks use unique envs across all 
+      playbooks to avoid env usage collisions!
+
+- Optional: To organize your Envs, create subfolders in the Envs directory to group your envs.
+            If you create a subfolder called regression in the /opt/KeystackTests/Envs 
+            directory, and add an env Ymal file called rack1.yml ...
+                /opt/KeystackTests/Envs/DOMAIN=Communal/regression/rack1.yml
+
+            The env name on the Keystack UI will be shown as: rack1 under DOMAIN=<domain>
+
+- The key/value pairs in env yaml files are passed into scripts for consumption
+
+- Keystack keywords in env Ymal files:
+   - location: <str>
+   - notes: <str>
+   - dataConfigs: <object>
+   - portGroups: <list|str>
+
+   - devices: <list|object>
+      <device_name>
+        ipAddress: 
+        ipPort: 
+        connectionProtocol:
+        loginName: 
+        password: 
+
+   - autoSetup and autoTeardown
+        - execCliCmdsOnKeystackServer
+        - execCliCmdsOnEnvDevices
+        - get_device_details_from_inventory
+
+  Env Yaml file parameter definitions:
+   - location: The location of the env
+
+   - dataConfigs: key/value pairs for test case scripts to consume
+                   
+            How to use the parameter dataConfigs inside python scripts:
+
+                from keystackEnv import keystack
+                print(keystack.taskProperties["envParams"]['dataConfigs'])
+    
+   - portGroups: A list of port-group names to reserve when using the env
+        Example:
+
+          portGroups:
+            - portGroup1
+
+            How to get port-groups and port details to consume inside python scripts:
+
+                from keystackEnv import keystack
+                keystack.portsData
+                keystack.portsData["device_1"]["1/2"]
+                keystack.portGroupsData["device_1"]["ports"]
+
+                {'device_1': 
+                     {'1/1': 
+                         {'port': '1/1', 'connectedToDevice': 'device-2', 'connectedToPort': '2/1', 
+                          'portGroups': ['portGroup1'], 'multiTenant': False, 'opticMode': 'single-mode', 
+                          'portType': None, 'vlanIDs': [], 'autoNeg': True, 'speed': '1G', 'reserved': 'available', 
+                          'additionalKeyValues': {}},
+                      '1/2': 
+                         {'port': '1/2', 'connectedToDevice': 'device-2', 'connectedToPort': '2/2', 
+                         'portGroups': ['portGroup1'], 'multiTenant': False, 'opticMode': None, 'portType': None, 
+                         'vlanIDs': [], 'autoNeg': True, 'speed': '1G', 'reserved': 'available', 'additionalKeyValues': {}}}
+                }
+
+   - devices: A list of device names to use for testing.
+             - If the device is in Lab Inventory, all device details will be
+               retrieved from the database for scripts to use by stating "get_device_details_from_inventory" as shown below.
+             - If the device is not in lab inventory, users must use Keystack-keyword key/value pairs for scripts to use.
+
+             Example:
+
+                devices:
+                  device_1:
+                      ipAddress: 192.168.28.11
+                      ipPort: 23
+                      connectionProtocol: telnet|ssh
+                      loginName: jdoe
+                      password: "!password"
+
+                  # Using the value get_device_details_from_inventory will get device details 
+                  # from Lab Inventory and overwrite the above device_1 details
+                  device_1: get_device_details_from_inventory
+
+    - autoSetup and autoTeardown: Automatically setup and teardown the env by running some 
+                                  commands on the Keystack server and/or run some commands 
+                                  on remote devices before running test.
+
+      Example:
+
+        autoSetup:
+          execCliCmdsOnKeystackServer:
+                - ls -l /home/jdoe
+                - python3 myScript.py
+
+          # Only SSH and Telnet connections are supported
+          # Keystack will get the device's connection-protocol from either the lab 
+          # Inventory or from the env devices
+          execCliCmdsOnEnvDevices:
+                # device_1 is the device name
+                # Followed by a list of commands to enter if logged into the device
+                device_1:
+                    - cat /etc/os-release
+                    - ls -l /home/jdoe/Downloads
+                    
+        autoTeardown:
+           <Same as autoSetup>
+
+Env Load Balancer
+-----------------
+  - Env load-balancing automatically provides an available Env (testbed) instead of statically
+    defining an Env to use by stating the load-balancing group name
+  - Env load-balancing is only supported by running the Keystack docker container (KeystackUI)
+  - To create a load-balance group:
+       - Go on the KeystackUI, on the side panel, Envs, select Load-Balance-Mgmt
+       - In playbooks, set loadBalanceGroup: <load-balance-group-name>
+       - You could set loadBalanceGroup at the globaSettings, under Stages and Stage Task.
+
+  - If you set loadBalanceGroup in globalSettings, all stage tasks will get available envs to use.
+  - If a stage or a task don't require an Env, then set ->  env: not-required
+    Keystack will not assign an env for the stage or the stage task
+
+  NOTES:
+    - For env load balancing, the env must be added to the DB inside the keystack docker container. 
+      Keystack Load-balancer looks for some keywords.
+    - If you manually created new env Yaml files, Keystack will automatically add the env to
+      the KeystackUI Env table when user clicks on:
+          - Envs UI page
+          - Env Load Balance UI page
+
+How to select Envs to use for testing:
+--------------------------------------
+    - Look at Playbook Overview and Playbook sample Yaml files
+
+
+
+        
