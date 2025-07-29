@@ -1,0 +1,120 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ master, release ]
+  pull_request:
+    branches: [ release ]
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install poetry
+        poetry install --all-extras
+        
+    - name: Run tests
+      run: |
+        poetry run pytest tests/ -v
+        
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    # Only run on release branch when push (merge)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/release'
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install poetry tomlkit
+    
+    - name: Extract version from pyproject.toml
+      id: get-version
+      run: |
+        # Python script to extract current version
+        python - << 'EOF'
+        import tomlkit
+        import os
+        
+        # Read current version from pyproject.toml
+        with open('pyproject.toml', 'r') as f:
+            pyproject = tomlkit.parse(f.read())
+        
+        version = pyproject['project']['version']
+        print(f"Current version: {version}")
+        
+        # Save the version to environment variables for later steps
+        with open(os.environ['GITHUB_ENV'], 'a') as f:
+            f.write(f"PACKAGE_VERSION={version}\n")
+        
+        # Set output for the workflow
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f"version={version}\n")
+        EOF
+    
+    - name: Check if tag exists
+      id: check-tag
+      run: |
+        TAG="v${PACKAGE_VERSION}"
+        if git rev-parse $TAG >/dev/null 2>&1; then
+          echo "Tag $TAG already exists"
+          echo "tag_exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "Tag $TAG does not exist"
+          echo "tag_exists=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Configure Git
+      if: steps.check-tag.outputs.tag_exists == 'false'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    
+    - name: Create and push tag
+      if: steps.check-tag.outputs.tag_exists == 'false'
+      run: |
+        # Create a new tag with the version from pyproject.toml
+        git tag -a "v${PACKAGE_VERSION}" -m "Release version ${PACKAGE_VERSION}"
+        # Push the tag to the remote repository
+        git push origin "v${PACKAGE_VERSION}"
+        
+    - name: Build and publish
+      env:
+        PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        # Build the package using poetry
+        poetry build
+        
+        # Publish to PyPI using poetry
+        poetry config pypi-token.pypi $PYPI_API_TOKEN
+        poetry publish

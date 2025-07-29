@@ -1,0 +1,79 @@
+graph TB
+    subgraph "MCPHub Components"
+        PH[Params Hub]
+        MS[MCP Servers]
+        MC[MCP Clients]
+        FA[Framework Adapters]
+    end
+
+    subgraph "Configuration"
+        CF[".mcphub.json"]
+        PS["Predefined Servers<br/>mcphub_preconfigured_servers.json"]
+    end
+
+    subgraph "Server Sources"
+        NPM["TypeScript-based<br/>NPM Packages<br/>(via npx)"]
+        GH["Python-based<br/>GitHub Repos<br/>(via uv)"]
+    end
+
+    subgraph "Framework Integration"
+        OA["OpenAI Agents"]
+        LC["LangChain"]
+        AG["Autogen"]
+    end
+
+    subgraph "MCP Server Runtime"
+        direction LR
+        ST["Server Tools"]
+        SE["Server Environment"]
+        
+        subgraph "Client-Server Communication"
+            direction TB
+            REQ["Request<br/>(list_tools/call_tool)"]
+            RES["Response<br/>(tools/results)"]
+            REQ --> |"stdio"| RES
+        end
+    end
+
+    %% Flow for configuration and setup
+    CF --> PH
+    PS --> PH
+    PH --> |"Load Config"| MS
+    MS --> |"Install/Setup"| NPM
+    MS --> |"Clone & Install"| GH
+
+    %% Flow for client and tools
+    MS --> |"Start Server Process"| ST
+    MC --> |"Send Request"| REQ
+    RES --> |"Return Tools/Results"| MC
+    SE --> ST
+
+    %% Flow for framework integration
+    MC --> FA
+    FA --> |"Adapt"| OA
+    FA --> |"Adapt"| LC
+    FA --> |"Adapt"| AG
+
+    %% Application usage
+    APP["AI Application"] --> |"Use"| OA
+    APP --> |"Use"| LC
+    APP --> |"Use"| AG
+    
+    %% Tool execution flow
+    OA --> |"Execute Tools"| MC
+    LC --> |"Execute Tools"| MC
+    AG --> |"Execute Tools"| MC
+
+    classDef config fill:#f9f,stroke:#333,stroke-width:2px
+    classDef source fill:#bbf,stroke:#333,stroke-width:2px
+    classDef framework fill:#bfb,stroke:#333,stroke-width:2px
+    classDef runtime fill:#fbb,stroke:#333,stroke-width:2px
+    classDef component fill:#fff,stroke:#333,stroke-width:4px
+    classDef communication fill:#ff9,stroke:#333,stroke-width:2px
+
+    class CF,PS config
+    class NPM,GH source
+    class OA,LC,AG framework
+    class ST,SE runtime
+    class PH,MS,MC,FA component
+    class REQ,RES communication

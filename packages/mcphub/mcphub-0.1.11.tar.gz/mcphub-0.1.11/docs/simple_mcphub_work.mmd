@@ -1,0 +1,45 @@
+graph TB
+    subgraph "MCPHub"
+        PH["Params Hub<br/>.mcphub.json"]
+        MS["MCP Servers<br/>Manager"]
+        MC["MCP Client"]
+        FA["Framework<br/>Adapters"]
+    end
+
+    subgraph "Server Sources"
+        NPM["TypeScript NPM<br/>(npx)"]
+        GH["Python GitHub<br/>(uv)"]
+    end
+
+    subgraph "MCP Server"
+        ST["Server Tools"]
+        COM["stdio Transport<br/>list_tools/call_tool"]
+    end
+
+    subgraph "AI Application"
+        APP["Agent Application"]
+        FW["OpenAI/LangChain/<br/>Autogen"]
+    end
+
+    %% Main flows
+    PH --> |"Configure"| MS
+    MS --> |"Setup"| NPM
+    MS --> |"Setup"| GH
+    NPM & GH --> |"Start"| ST
+    
+    MC <--> |"Request/Response"| COM
+    COM <--> ST
+    
+    MC --> FA
+    FA --> FW
+    APP --> FW
+
+    classDef mcphub fill:#bbf,stroke:#333,stroke-width:4px
+    classDef server fill:#bfb,stroke:#333,stroke-width:2px
+    classDef app fill:#fbb,stroke:#333,stroke-width:2px
+    classDef source fill:#fff,stroke:#333,stroke-width:2px
+
+    class PH,MS,MC,FA mcphub
+    class ST,COM server
+    class APP,FW app
+    class NPM,GH source
