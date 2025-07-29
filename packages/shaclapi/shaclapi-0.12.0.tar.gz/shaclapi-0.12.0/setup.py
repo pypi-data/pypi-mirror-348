@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+from distutils.core import setup
+from setuptools import find_packages
+
+VERSION = '0.12.0'
+
+with open('README.md', 'r', encoding='utf-8') as fh:
+    long_description = fh.read()
+
+setup(
+    name='shaclapi',
+    version=VERSION,
+    description='An API implementing optimizations over SHACL validators.',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    license='GNU/GPLv3',
+    author='Julian Gercke, Philipp D. Rohde, Fabian Johannsen',
+    author_email='philipp.rohde@tib.eu',
+    url='https://github.com/SDM-TIB/shaclAPI',
+    download_url='https://github.com/SDM-TIB/shaclAPI/archive/refs/tags/v' + VERSION + '.tar.gz',
+    packages=find_packages(exclude='tests'),
+    install_requires=[
+        'SPARQLWrapper>=2.0.0',
+        'requests>=2.32.0',
+        'SHACL2SPARQLpy>=1.3.0',
+        'TravSHACL>=1.9.0',
+        'multiprocessing_logging>=0.3.1',
+        'regex>=2022.3.15'
+    ],
+    include_package_data=True,
+    python_requires='>=3.9',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Operating System :: OS Independent',
+        'Intended Audience :: Science/Research'
+    ]
+)
