@@ -1,0 +1,85 @@
+<mujoco model="{name} smooth scene">
+  <include file="{path}" />
+
+  <statistic center="0.15 0.1 0.38" extent=".8" meansize="0.05" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0.5 0.5 0.5" />
+    <rgba haze="0.1 0.1 0.1 0.1" />
+    <global azimuth="220" elevation="-10" />
+    <quality shadowsize="8192" />
+  </visual>
+
+  <asset>
+    <texture
+      type="skybox"
+      builtin="gradient"
+      rgb1="0.0 0.0 0.0"
+      rgb2="0.0 0.0 0.0"
+      width="512"
+      height="3072"
+    />
+
+    <texture
+      name="groundplane"
+      type="2d"
+      builtin="checker"
+      mark="edge"
+      rgb1="0.1 0.1 0.1"
+      rgb2="0.1 0.1 0.1"
+      markrgb="0.6 0.6 0.6"
+      width="512"
+      height="512"
+    />
+
+    <material
+      name="groundplane"
+      texture="groundplane"
+      texrepeat="3 3"
+      specular="0.9"
+      shininess="0.5"
+      reflectance="0.1"
+      rgba="1 1 1 1"
+    />
+  </asset>
+
+  <worldbody>
+    <light
+      name="sun"
+      pos="3 3 5"
+      dir="-0.6 -0.6 -1"
+      directional="true"
+      castshadow="true"
+      diffuse="0.3 0.3 0.3"
+    />
+
+    <light
+      name="spotlight1"
+      mode="targetbodycom"
+      target="base"
+      diffuse="0.5 0.5 0.5"
+      specular="0.3 0.3 0.3"
+      pos="0 -10 4"
+      cutoff="10"
+    />
+
+    <light
+      name="spotlight2"
+      mode="targetbodycom"
+      target="base"
+      diffuse="0.5 0.5 0.5"
+      specular="0.3 0.3 0.3"
+      pos="10 0 4"
+      cutoff="10"
+    />
+
+    <geom
+      name="floor"
+      size="0 0 0.05"
+      type="plane"
+      contype="1"
+      conaffinity="1"
+      material="groundplane"
+    />
+  </worldbody>
+</mujoco>
