@@ -1,0 +1,17 @@
+# Include metadata files
+include LICENSE
+include README.md
+include changelog.md
+include pyproject.toml
+
+# Include asset images (optional: for README rendering, etc.)
+recursive-include assets *.jpg *.png *.gif
+
+# Include all template files
+recursive-include wagtailmenupage/templates *.html
+
+# Include migrations
+recursive-include wagtailmenupage/migrations *.py
+
+# Include templatetags
+recursive-include wagtailmenupage/templatetags *.py

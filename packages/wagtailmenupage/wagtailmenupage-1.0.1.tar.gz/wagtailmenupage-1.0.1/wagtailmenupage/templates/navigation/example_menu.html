@@ -1,0 +1,23 @@
+{% load wagtailcore_tags menupage_tags  %}
+{% get_site_root as site_root %}
+
+<nav role="navigation" aria-label="Main navigation">
+    <ul>
+        <li>
+            <a
+                href="{% pageurl site_root %}"
+                {% if request.path == site_root.url %}aria-current="page"{% endif %}
+            >Home</a>
+        </li>
+        {% for menuitem in site_root.get_children.live.in_menu.specific %}
+        
+            <li>
+                <a
+                    href="{% pageurl menuitem %}"
+                    {% if request.path == menuitem.url %}aria-current="page"{% endif %}
+                    {% if menuitem.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >{{ menuitem.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
