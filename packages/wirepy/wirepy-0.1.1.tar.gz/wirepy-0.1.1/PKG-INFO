@@ -1,0 +1,44 @@
+Metadata-Version: 2.4
+Name: wirepy
+Version: 0.1.1
+Summary: Laravel-style project structure for FastAPI
+Author-email: Pradipta Bhuin <bhuinjohn@gmail.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: sqlalchemy
+Requires-Dist: pymysql
+Requires-Dist: python-dotenv
+Requires-Dist: alembic
+Requires-Dist: click
+Dynamic: license-file
+
+wirepy/
+├── wirepy/
+│   ├── __init__.py
+│   ├── cli.py
+│   ├── scaffold.py
+│   └── templates/
+│        ├── app/
+│        │   ├── controllers/
+│        │   ├── models/
+│        │   ├── routes/
+│        │   ├── schemas/
+│        │   ├── services/
+│        │   └── core/
+│        │       ├── config.py
+│        │       └── database.py
+│        ├── alembic/
+│        ├── alembic.ini
+│        ├── main.py
+│        ├── .env
+│        ├── requirements.txt
+│        └── README.md
+│
+├── pyproject.toml
+├── venv(this my local virtual env)
+├── README.md
+├── LICENSE

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wirepy"
+version = "0.1.1"
+description = "Laravel-style project structure for FastAPI"
+authors = [{ name = "Pradipta Bhuin", email = "bhuinjohn@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.7"
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "sqlalchemy",
+    "pymysql",
+    "python-dotenv",
+    "alembic",
+    "click"
+]
+
+[project.scripts]
+wirepy = "wirepy.cli:cli"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+wirepy = ["templates/**"]
+
+[tool.setuptools.packages.find]
+where = ["wirepy"]
+
+
+
