@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: funcnodes-react-flow
+Version: 0.4.10
+Summary: funcnodes frontend for react flow
+Author-email: Julian Kimmig <julian.kimmig@linkdlab.de>
+License: AGPL-3.0
+Project-URL: homepage, https://github.com/Linkdlab/funcnodes_react_flow
+Project-URL: source, https://github.com/Linkdlab/funcnodes_react_flow
+Project-URL: tracker, https://github.com/Linkdlab/funcnodes_react_flow/issues
+Project-URL: download, https://pypi.org/project/funcnodes-react-flow/#files
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: funcnodes-core>=0.3.51
+Requires-Dist: funcnodes-worker>=0.3.0
+Requires-Dist: funcnodes>=0.5.36; sys_platform != "emscripten"
+Requires-Dist: funcnodes>=0.5.35
+Dynamic: license-file
+
+# funcnodes_react_flow
