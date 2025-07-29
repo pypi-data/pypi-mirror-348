@@ -1,0 +1,16 @@
+[project]
+name = "data-augmentation-app"
+version = "0.1.4"
+description = "GUI & CLI for image data augmentation with TensorFlow/Keras"
+authors = [{name = "Javier García Viadero", email = "javiergarciaviadero13@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "tensorflow>=2.15",
+  "pyqt5",
+  "numpy",
+  "pillow",
+]
+
+[project.scripts]
+data-augmentation = "data_augmentation_app.data_augmentation_main:main"
