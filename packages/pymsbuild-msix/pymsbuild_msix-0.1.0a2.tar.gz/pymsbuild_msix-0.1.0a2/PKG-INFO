@@ -1,0 +1,67 @@
+Metadata-Version: 2.2
+Name: pymsbuild-msix
+Version: 0.1.0a2
+Author: Steve Dower
+Author-email: steve.dower@python.org
+Project-url: Homepage, https://github.com/zooba/pymsbuild-msix
+Project-url: Report bug, https://github.com/zooba/pymsbuild-msix/issues
+Summary: A pymsbuild extension for producing MSIX packages.
+Description-Content-Type: text/markdown
+Keywords: build,pep-517,msbuild,packaging,msix,Windows
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Compilers
+Classifier: Topic :: Utilities
+Requires-Dist: pymsbuild>=1.2.2a1
+Requires-Dist: entrypoints
+
+# pymsbuild-msix
+
+This is a [pymsbuild](https://pypi.org/project/pymsbuild) extension for
+compiling packages to MSIX.
+
+# Quick Start
+
+In your `_msbuild.py`, import `AppxManifest` from `pymsbuild_msix` (using
+`import *` is okay, and there are more names you may need).
+
+
+```python
+from pymsbuild import *
+from pymsbuild_msix import *
+
+METADATA = {...}
+
+PACKAGE = Package(
+    'package',
+    PyFile("__init__.py"),
+    AppxManifest("appxmanifest.xml"),
+)
+```
+
+The extension adds a new `msix` command to build the MSIX. It behaves like the
+`wheel` and `sdist` commands, including with the `--layout-dir` option followed
+by the `pack` command.
+
+```powershell
+$> python -m pymsbuild msix
+
+# Or
+
+$> python -m pymsbuild msix --layout-dir $DIR
+# Modify (e.g. sign) the files in $DIR
+$> python -m pymsbuild pack --layout-dir $DIR --add @additional_files.txt
+```
+
+Additional types that can be used in the package definition include
+`ResourcesXml`, to identify a file to run with `makepri.exe` as part of build,
+and `AppInstaller`. The latter currently does nothing special.
+
