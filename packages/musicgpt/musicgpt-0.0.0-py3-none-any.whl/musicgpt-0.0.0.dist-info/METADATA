@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: musicgpt
+Version: 0.0.0
+Summary: Python package for musicgpt
+Author-email: Sakar <sakar@lalals.com>
+License: Proprietary - Only for users of https://musicgpt.com
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: requests>=2.0.0
+Requires-Dist: pydantic>=2.0.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: setuptools; extra == "dev"
+Requires-Dist: wheel; extra == "dev"
+Requires-Dist: requests; extra == "dev"
+Requires-Dist: pydantic; extra == "dev"
+Dynamic: license-file
+
+# musicgpt
+
+A Python wrapper for the musicgpt public api endpoints.
+
+## Installation
+
+```sh
+pip install musicgpt
+```
+
+## Usage
+
+```python
+from musicgpt import MusicGPTClient
+
+client = MusicGPTClient("api_key_here")
+conv= client.music_ai(prompt = "create song about generating music using ai")
+result = client.wait_for_completion(task_id = conv.task_id, conversion_type = conv.conversion_type)
+print(result)
+```
+
+## Development
+
+- Install dev dependencies:
+  ```sh
+  pip install -r dev-requirements.txt
+  ```
+- Run tests:
+  ```sh
+  pytest
+  ```
