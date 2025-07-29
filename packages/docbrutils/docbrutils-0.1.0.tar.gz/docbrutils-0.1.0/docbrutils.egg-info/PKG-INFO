@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: docbrutils
+Version: 0.1.0
+Summary: Validação e geração de CPF e CNPJ
+Home-page: https://github.com/mauriciocampos1234/docbrutils
+Author: Maurício Campos
+Author-email: mauriciocamposdev@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+
+# docbrutils
+
+Pacote Python para validaÃ§Ã£o e geraÃ§Ã£o de CPF e CNPJ vÃ¡lidos.
+
+## InstalaÃ§Ã£o
+
+```bash
+pip install docbrutils
+```
+
+## Uso
+
+```python
+from docbrutils import cpf, cnpj
+
+cpf.validate_cpf('123.456.789-09')
+cpf.generate_cpf()
+
+cnpj.validate_cnpj('12.345.678/0001-95')
+cnpj.generate_cnpj()
+```
+
+## Testes
+
+```bash
+python -m unittest discover
+```
