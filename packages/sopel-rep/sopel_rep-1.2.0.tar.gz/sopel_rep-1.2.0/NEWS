@@ -1,0 +1,28 @@
+## Changelog
+
+### 1.2.0
+
+Changed:
+* Require Sopel 8+ and Python 3.8+ (#42)
+
+Internal:
+* Refactor the code to unify helpers into a "manager" class (#42, #44)
+* Use newer Sopel decorator features to simplify searching for inline `++`/`--` commands (#43)
+
+
+### 1.1.0
+
+Added:
+* Cooldown configuration settings
+  * `cooldown` controls how often (in seconds) each user can use the plugin (by
+    default, 3600)
+  * `admin_cooldown` controls whether bot admins are subject to the `cooldown`
+    (by default, yes)
+
+
+### 1.0.0
+
+First release of `sopel-rep`.
+
+This plugin existed for about 9 years as a standalone `rep.py` file. Now,
+finally, it's available as an installable package.

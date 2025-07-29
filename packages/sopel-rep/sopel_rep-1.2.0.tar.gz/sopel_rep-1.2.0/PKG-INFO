@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: sopel-rep
+Version: 1.2.0
+Summary: Karma plugin for Sopel IRC bots
+Author-email: dgw <dgw@technobabbl.es>
+License: EFL-2.0
+Project-URL: Homepage, https://github.com/dgw/sopel-rep
+Project-URL: Bug Tracker, https://github.com/dgw/sopel-rep/issues
+Keywords: sopel,plugin,bot,irc
+Platform: Linux x86, x86-64
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: Eiffel Forum License (EFL)
+Classifier: License :: OSI Approved :: Eiffel Forum License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Communications :: Chat :: Internet Relay Chat
+Requires-Python: <4,>=3.8
+Description-Content-Type: text/markdown
+License-File: COPYING
+Requires-Dist: sopel>=8.0
+Dynamic: license-file
+
+# sopel-rep
+
+Karma plugin for Sopel IRC bots.
+
+Lets users "luv" and "h8" other users on IRC. Functional clone of a mIRC script
+someone used in a channel I was in. (Never saw their code, not that I'd want to
+do a *port* of anything written for mIRC...)
+
+## Requirements
+
+This plugin is compatible with Sopel 7.1 or higher. However, even though Sopel 7
+supports many legacy Python versions back to 2.7, the plugin is only tested
+against current versions of Python (3.8+).
+
+## Installing
+
+Releases are hosted on PyPI, so after installing Sopel, all you need is `pip`:
+
+```shell
+$ pip install sopel-rep
+```
+
+## Configuring
+
+The easiest way to configure `sopel-rep` is via Sopel's configuration
+wizard—simply run `sopel-plugins configure rep` and enter the values for which
+it prompts you. Settings are described below:
+
+* `cooldown`: How long in seconds each user must wait after changing anyone's
+  rep before they are permitted to do so again.\
+  _Default: 3600_
+* `admin_cooldown`: Whether the bot's owner & admins must obey the cooldown.\
+  _Default: true_
+
+## Usage
+### Commands
+* `.luv nick`: Adds +1 to the user's reputation score
+* `.h8 nick`: Adds -1 to the user's reputation score
+
+### Actions
+* `/me <3 nick`: Adds +1 to the user's reputation score
+* `/me </3 nick`: Adds -1 to the user's reputation score
+
+### Inline karma
+* `nick++` anywhere in a message adds +1 to the user's reputation score
+* `nick--` anywhere in a message adds -1 to the user's reputation score
+
+## Changelog
+
+### 1.2.0
+
+Changed:
+* Require Sopel 8+ and Python 3.8+ (#42)
+
+Internal:
+* Refactor the code to unify helpers into a "manager" class (#42, #44)
+* Use newer Sopel decorator features to simplify searching for inline `++`/`--` commands (#43)
+
+
+### 1.1.0
+
+Added:
+* Cooldown configuration settings
+  * `cooldown` controls how often (in seconds) each user can use the plugin (by
+    default, 3600)
+  * `admin_cooldown` controls whether bot admins are subject to the `cooldown`
+    (by default, yes)
+
+
+### 1.0.0
+
+First release of `sopel-rep`.
+
+This plugin existed for about 9 years as a standalone `rep.py` file. Now,
+finally, it's available as an installable package.
