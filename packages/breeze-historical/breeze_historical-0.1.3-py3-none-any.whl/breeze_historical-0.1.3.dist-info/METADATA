@@ -1,0 +1,174 @@
+Metadata-Version: 2.4
+Name: breeze-historical
+Version: 0.1.3
+Summary: A library for fetching and caching historical market data from Breeze API using DynamoDB
+Home-page: https://github.com/yourusername/breeze-historical
+Author: Your Name
+Author-email: Kunal Agarwal <kunal.95a@gmail.com>
+Project-URL: Homepage, https://github.com/yourusername/breeze-historical
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
+# Breeze Historical
+
+A Python library for fetching and caching historical market data from ICICI Direct's Breeze API using DynamoDB.
+
+## Features
+
+- Fetch historical option chain data from Breeze API
+- Cache data in DynamoDB for faster subsequent access
+- Support for multiple timeframes (1min, 5min, 30min, daily)
+- Automatic symbol mapping between NSE and ICICI Direct
+- Data interpolation for missing timestamps
+- Market hours aware timestamp generation
+- Verbose mode for detailed operation logging
+- Handles missing data through interpolation
+- Supports multiple expiry dates
+
+## Installation
+
+```bash
+pip install breeze-historical
+```
+
+## Prerequisites
+
+1. ICICI Direct Breeze API credentials
+2. AWS credentials with DynamoDB access
+3. DynamoDB table with the following schema:
+   - Partition Key: `contract_id` (String)
+   - Sort Key: `ts` (String)
+
+## Configuration
+
+The library requires both Breeze API and AWS credentials:
+
+### Breeze Credentials
+- `api_key`: Your Breeze API key
+- `api_secret`: Your Breeze API secret
+- `user_id`: Your Breeze user ID
+- `password`: Your Breeze password
+- `totp_key`: Your TOTP secret key
+
+### AWS Credentials
+- `access_key_id`: AWS access key ID
+- `secret_access_key`: AWS secret access key
+- `region`: AWS region (default: "ap-south-1")
+- `table_name`: DynamoDB table name (default: "breeze_historical")
+
+## Usage
+
+```python
+from breeze_historical import BreezeHistorical
+
+# Initialize credentials
+breeze_creds = {
+    "api_key": "your_api_key",
+    "api_secret": "your_api_secret",
+    "user_id": "your_user_id",
+    "password": "your_password",
+    "totp_key": "your_totp_key"
+}
+
+aws_creds = {
+    "access_key_id": "your_aws_access_key",
+    "secret_access_key": "your_aws_secret_key",
+    "region": "ap-south-1",
+    "table_name": "breeze_historical"
+}
+
+# Initialize client
+client = BreezeHistorical(
+    breeze_creds=breeze_creds,
+    aws_creds=aws_creds,
+    verbose=False  # Set to True for detailed operation logging
+)
+
+# Fetch option chain data
+data = client.option_chain(
+    symbol="BANKNIFTY",
+    expiry="2024-03-28",
+    start_date="2024-03-20",
+    end_date="2024-03-21",
+    granularity="5minute"
+)
+
+# Data format:
+{
+    "2024-01-01T09:15:00.000Z": {
+        45000: {
+            "CE": {
+                "open": 100.5,
+                "high": 102.0,
+                "low": 99.5,
+                "close": 101.0,
+                "volume": 1000,
+                "oi": 5000
+            },
+            "PE": {
+                ...
+            }
+        },
+        45500: {
+            ...
+        }
+    },
+    "2024-01-01T09:16:00.000Z": {
+        ...
+    }
+}
+```
+
+## Verbose Mode
+
+The library includes a verbose mode that provides detailed logging of operations:
+
+- Set `verbose=True` when initializing the client to enable detailed logging
+- Logs include:
+  - Client initialization status
+  - Data fetching progress
+  - Cache hit/miss information
+  - Symbol mapping details
+  - Strike price discovery
+  - Data processing steps
+  - Interpolation of missing data
+
+Example with verbose mode:
+
+```python
+client = BreezeHistorical(
+    breeze_creds=breeze_creds,
+    aws_creds=aws_creds,
+    verbose=True  # Enable verbose mode
+)
+```
+
+## Symbol Mapping
+
+Create a JSON file with NSE to ICICI Direct symbol mapping:
+
+```json
+{
+    "BANKNIFTY": "CNXBAN",
+    "NIFTY": "CNX",
+    ...
+}
+```
+
+## Error Handling
+
+The library raises `BreezeHistoricalError` for various error conditions:
+- Invalid date ranges
+- API failures
+- Authentication issues
+- Data validation errors
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. 
