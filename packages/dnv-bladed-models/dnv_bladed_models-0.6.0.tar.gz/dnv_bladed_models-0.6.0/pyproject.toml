@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dnv_bladed_models"
+version = "0.6.0"
+authors = [
+  { name="DNV", email="bladednextgen@dnv.com" },
+]
+description = "An API for working with Bladed Next Gen models."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = [
+  "pydantic==1.10.*"
+]
+keywords = [ "bladed", "models" ] 
+classifiers = [
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9"
+]
+
+[project.urls]
+homepage = "https://bladednextgen.dnv.com/"
+
+[tool.black]
+line-length = 88
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+skip = [
+    '.eggs', '.git', '.hg', '.mypy_cache', '.nox', '.pants.d', '.tox',
+    '.venv', '_build', 'buck-out', 'build', 'dist', 'node_modules', 'venv',
+]
+skip_gitignore = true
