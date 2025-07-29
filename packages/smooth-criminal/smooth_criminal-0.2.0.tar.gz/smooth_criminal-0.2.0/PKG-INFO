@@ -1,0 +1,113 @@
+Metadata-Version: 2.4
+Name: smooth-criminal
+Version: 0.2.0
+Summary: ⚡ Acelerador inteligente de scripts Python con estilo Michael Jackson.
+Home-page: https://github.com/Alphonsus411/smooth-criminal
+Author: Adolfo
+Author-email: tucorreo@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: numpy
+Requires-Dist: numba
+Requires-Dist: rich
+Requires-Dist: matplotlib
+Requires-Dist: flet
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# 🎩 Smooth Criminal
+
+**A Python performance acceleration toolkit with the soul of Michael Jackson.**
+
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+---
+
+## 🚀 ¿Qué es esto?
+
+**Smooth Criminal** es una librería de Python para acelerar funciones y scripts automáticamente usando:
+- 🧠 [Numba](https://numba.pydata.org/)
+- ⚡ Asyncio y threading
+- 🧪 Benchmarks y profiling
+- 🎶 Estilo, carisma y mensajes inspirados en MJ
+
+---
+
+## 💡 Características principales
+
+| Decorador / Función     | Descripción                                           |
+|-------------------------|--------------------------------------------------------|
+| `@smooth`               | Aceleración con Numba (modo sigiloso y rápido)        |
+| `@moonwalk`             | Convierte funciones en corutinas `async` sin esfuerzo |
+| `@thriller`             | Benchmark antes y después (con ritmo)                 |
+| `@jam(workers=n)`       | Paralelismo automático con ThreadPoolExecutor         |
+| `@black_or_white(mode)` | Optimiza tipos numéricos (`float32` vs `float64`)     |
+| `@bad`                  | Modo de optimización agresiva (`fastmath`)            |
+| `@beat_it`              | Fallback automático si algo falla                     |
+| `dangerous(func)`       | Mezcla poderosa de decoradores (`@bad + @thriller`)   |
+| `profile_it(func)`      | Estadísticas detalladas de rendimiento                |
+| `analyze_ast(func)`     | Análisis estático para detectar código optimizable    |
+
+---
+
+## ⚙️ Instalación
+
+```bash
+pip install smooth-criminal
+```
+
+O si estás desarrollando localmente:
+
+```bash
+pip install -e .
+```
+
+## 💃 Ejemplo rápido
+
+```python
+from smooth_criminal import smooth, thriller
+
+@thriller
+@smooth
+def square(n):
+    return [i * i for i in range(n)]
+
+print(square(10))
+
+```
+
+## 🧪 CLI interactiva
+
+```bash
+smooth-criminal analyze my_script.py
+```
+Esto analizará tu código buscando funciones lentas, bucles, range(), y más.
+
+## 📚 Documentación
+
+Próximamente en ReadTheDocs…
+
+## 📝 Licencia
+
+MIT © Adolfo González
+
+## 🎤 Créditos
+
+- Michael Jackson por la inspiración musical 🕺
+
+- Numba, NumPy, asyncio por la base técnica
+
+
