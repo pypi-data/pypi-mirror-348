@@ -1,0 +1,61 @@
+Metadata-Version: 2.2
+Name: maude-se
+Version: 0.0.2.dev1
+Summary: Maude SMT Extension
+Author-Email: Geunyeol Yu <maude-se@postech.ac.kr>
+License: GPLv3
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: OS Independent
+Project-URL: Homepage, https://maude-se.github.io
+Project-URL: Bug Tracker, https://github.com/postechsv/maude-se/issues
+Project-URL: Documentation, https://maude-se.github.io
+Project-URL: Source Code, https://github.com/postechsv/maude-se
+Requires-Dist: pyyaml
+Description-Content-Type: text/markdown
+
+MaudeSE is an SMT extension of [Maude](https://github.com/SRI-CSL/Maude) that supports various SMT features, including symbolic SMT search and satisfiability checking for SMT formulas.
+
+It provides a *generic interface* that enables Maude to connect with SMT solvers. Users can implement their own connectors to integrate Maude with their preferred SMT solvers. Currently, MaudeSE includes built-in interfaces for Z3, Yices2, and CVC5.
+
+For details on implementing a custom connector or using MaudeSE, please refer to our [webpage](https://maude-se.github.io).
+
+
+## Prerequisite
+
+* MaudeSE requires `Python >= 3.8`.
+* Python supported SMT solvers that you want to use. 
+  * E.g., `z3`, `yices`, `cvc5`.
+
+## Installation
+
+Use `pip` to install `maude-se`
+
+```
+pip install maude-se
+```
+
+Use the following command to test successful installation.
+
+```
+$ maude-se -h
+```
+
+If the installation was successful, you can see the following message.
+
+```
+usage: maude-se [-h] [-cfg CONFIG] [-s SOLVER] [-no-meta] [file]
+
+positional arguments:
+  file                  input Maude file
+
+options:
+  -h, --help            show this help message and exit
+  -cfg CONFIG, -config CONFIG
+                        a directory to a configuration file (default: "config.yml")
+  -s SOLVER, -solver SOLVER
+                        solver name
+  -no-meta              no metaInterpreter
+```
