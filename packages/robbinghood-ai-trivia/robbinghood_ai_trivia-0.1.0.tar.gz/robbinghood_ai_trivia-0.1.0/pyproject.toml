@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robbinghood-ai-trivia"
+version = "0.1.0"
+authors = [
+  { name="Sathvik", email="vikvang01@gmail.com" }, # Update with your real info before publishing
+]
+description = "An AI trivia assistant that uses your camera and multiple AI models."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Multimedia :: Video :: Capture",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "opencv-python>=4.5.0",
+    "requests>=2.25.0",
+    "python-dotenv>=0.15.0",
+    "pynput",
+    "google-cloud-vision>=2.0.0",
+    "numpy>=1.19.0"
+]
+
+[project.scripts]
+robbinhood-cam = "main:main"
+
+[project.urls]
+"Homepage" = "https://github.com/vikvang/robbinghood"
+"Bug Tracker" = "https://github.com/vikvang/robbinghood/issues"
+
+[tool.setuptools.packages.find]
+include = ["ai*", "camera*", "core*", "ocr*", "ui*"]
+
+[tool.setuptools]
+py-modules = ["main", "config"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.env", "*.json", "venv/*", ".venv/*", "__pycache__/*"]
