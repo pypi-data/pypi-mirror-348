@@ -1,0 +1,20 @@
+[project]
+name = "pisurveillance"
+version = "0.1.3"
+description = ""
+authors = [
+    {name = "pshrestha",email = "pranaya.shrestha2@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp (>=3.11.18,<4.0.0)",
+    "dotenv (>=0.9.9,<0.10.0)"
+]
+
+[project.scripts]
+start-surveillance = "pisurveillance.main:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
