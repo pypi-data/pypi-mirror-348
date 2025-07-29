@@ -1,0 +1,44 @@
+[project]
+name = "mlpype-xgboost"
+authors = [
+    {name = "Jeroen van den Hoven"},
+]
+description = "Xgboost extension for MLpype"
+
+requires-python = ">=3.9"
+dynamic = ["version"]
+license = {"text" = "MIT"}
+
+dependencies = [
+    "mlpype-base",
+    "mlpype-sklearn",
+    "xgboost>=1.6.2",
+]
+
+[project.optional-dependencies]
+strict = [
+    "xgboost==1.6.2",
+]
+
+[tool.uv.sources]
+mlpype-base = { workspace = true }
+mlpype-sklearn = { workspace = true }
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mlpype"]
+
+[tool.black]
+line-length = 120
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+latest-tag = true
+pattern = '(?P<base>\d+\.\d+\.\d+)'
+format = "{base}"
