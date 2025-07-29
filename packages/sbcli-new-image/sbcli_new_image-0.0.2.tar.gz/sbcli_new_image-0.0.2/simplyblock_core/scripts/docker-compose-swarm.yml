@@ -1,0 +1,193 @@
+version: '3.8'
+
+x-service-base: &service-base
+  logging:
+    driver: gelf
+    options:
+      gelf-address: "tcp://${CLUSTER_IP}:12202"
+
+
+x-cluster-service: &cluster-service
+    <<: *service-base
+    image: "simplyblock/simplyblock:new-image"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - "/etc/foundationdb:/etc/foundationdb"
+    networks:
+      - hostnet
+    environment:
+      SIMPLYBLOCK_LOG_LEVEL: "$LOG_LEVEL"
+
+
+services:
+
+  fdb-server:
+    <<: *service-base
+    image: foundationdb/foundationdb:7.3.42
+    networks:
+      - hostnet
+    environment:
+      SIMPLYBLOCK_LOG_LEVEL: '$LOG_LEVEL'
+      FDB_CLUSTER_FILE_CONTENTS: '$FDB_CLUSTER_FILE_CONTENTS'
+      FDB_NETWORKING_MODE: 'container'
+      FDB_CLUSTER_FILE: '/etc/foundationdb/fdb.cluster'
+    volumes:
+      - "/etc/foundationdb:/etc/foundationdb"
+      - "/etc/foundationdb/data:/var/fdb/data"
+      - "/etc/foundationdb/logs:/var/fdb/logs"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [ node.role == manager ]
+      resources:
+        limits:
+          memory: 4g
+
+  fdb-backup-agent:
+    <<: *service-base
+    image: foundationdb/foundationdb:7.3.42
+    entrypoint: "/usr/bin/backup_agent -C  /etc/foundationdb/fdb.cluster"
+    networks:
+      - hostnet
+    environment:
+      FDB_CLUSTER_FILE: '/etc/foundationdb/fdb.cluster'
+    volumes:
+      - "/etc/foundationdb:/etc/foundationdb"
+    deploy:
+      placement:
+        constraints: [ node.role == manager ]
+
+  WebAppAPI:
+    <<: *service-base
+    image: $SIMPLYBLOCK_DOCKER_IMAGE
+    command: "python simplyblock_web/app.py"
+    networks:
+      - localnet
+    deploy:
+      endpoint_mode: dnsrr
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - "/etc/foundationdb:/etc/foundationdb"
+    environment:
+      SIMPLYBLOCK_LOG_LEVEL: "$LOG_LEVEL"
+      FLASK_DEBUG: "False"
+      FLASK_ENV: "production"
+
+  CleanupFDB:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.workers.cleanup_foundationdb"
+    environment:
+      SIMPLYBLOCK_LOG_LEVEL: "$LOG_LEVEL"
+      LOG_DELETION_INTERVAL: "${LOG_DELETION_INTERVAL}"
+
+  SpdkStatsCollector:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.spdk_stats_collector"
+    networks:
+      - monitoring-net
+
+  StorageNodeMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.storage_node_monitor"
+
+  MgmtNodeMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.mgmt_node_monitor"
+
+  CachingNodeMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.caching_node_monitor"
+
+  LVolStatsCollector:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.lvol_stat_collector"
+
+  CachedLVolStatsCollector:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.cached_lvol_stat_collector"
+
+  MainDistrEventCollector:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.main_distr_event_collector"
+
+  CapacityAndStatsCollector:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.capacity_and_stats_collector"
+
+  CapacityMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.cap_monitor"
+
+  HealthCheck:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.health_check_service"
+
+  DeviceMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.device_monitor"
+
+  LVolMonitor:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.lvol_monitor"
+
+  TasksRunnerRestart:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_runner_restart"
+
+  TasksNodeAddRunner:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_runner_node_add"
+
+  TasksRunnerMigration:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_runner_migration"
+
+  TasksRunnerFailedMigration:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_runner_failed_migration"
+
+  TasksRunnerNewDeviceMigration:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_runner_new_dev_migration"
+
+  TasksRunnerClusterStatus:
+    <<: *cluster-service
+    command: "python -m simplyblock_core.services.tasks_cluster_status"
+
+  HAProxy:
+    image: haproxytech/haproxy-debian:latest
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - 80:80
+      - 12202:12202
+      - 9200:9200
+    networks:
+      - localnet
+      - monitoring-net
+    volumes:
+      - "$DIR/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    environment:
+      SIMPLYBLOCK_LOG_LEVEL: "$LOG_LEVEL"
+
+
+networks:
+  monitoring-net:
+    external: true
+
+  hostnet:
+    external: true
+    name: host
+
+  localnet:
+    driver: overlay
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
