@@ -1,0 +1,77 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "capibara"
+version = "2.1.8"
+description = "Modelo de lenguaje avanzado basado en Mamba SSM"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+keywords = ["AI", "NLP", "LLM", "Mamba", "SSM"]
+authors = [
+    {name = "Anachroni s.coop", email = "info@anachroni.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "numpy>=1.24.0",
+    "tqdm>=4.65.0",
+    "datasets>=2.12.0",
+    "accelerate>=0.20.0",
+    "safetensors>=0.3.1",
+    "einops>=0.6.1",
+    "mamba-ssm>=1.0.0",
+]
+
+[project.optional-dependencies]
+training = [
+    "wandb>=0.15.0",
+    "tensorboard>=2.13.0",
+    "pytorch-lightning>=2.0.0",
+]
+quantization = [
+    "bitsandbytes>=0.41.0",
+    "optimum>=1.12.0",
+]
+monitoring = [
+    "psutil>=5.9.0",
+    "prometheus-client>=0.17.0",
+]
+all = [
+    "capibara-gpt[training]",
+    "capibara-gpt[quantization]",
+    "capibara-gpt[monitoring]",
+]
+
+[project.urls]
+Homepage = "https://www.anachroni.co"
+Documentation = "https://capibara.readthedocs.io/en/latest/"
+Repository = "https://github.com/anachroni-io/capibara-gpt.git"
+"Bug Tracker" = "https://github.com/anachroni-io/capibara-gpt/issues"
+Discord = "https://discord.gg/capibara-gpt"
+
+[project.scripts]
+capibara = "capibara.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["capibara"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.hooks.custom]
+path = "build.py" 
