@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+if [ ! -z ${MY_LAUNCHERS+x} ]
+then
+   source $MY_LAUNCHERS/costo
+   set_env
+fi
+COSTO_MPI_OPTS="-output-filename out --oversubscribe -byslot"
+export COSTO_MPI_OPTS
