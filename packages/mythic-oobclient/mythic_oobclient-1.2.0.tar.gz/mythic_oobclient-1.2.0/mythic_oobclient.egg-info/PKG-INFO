@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: mythic-oobclient
+Version: 1.2.0
+Summary: Mythic Beasts OOB client
+Home-page: https://www.mythic-beasts.com/
+Author: Mythic Beasts
+Author-email: support@mythic-beasts.com
+License: GPL-3.0-or-later
+Keywords: Mythic Beasts,serial,VNC,OOB,power control
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: Console :: Curses
+Classifier: Intended Audience :: System Administrators
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: System :: Systems Administration
+Requires-Dist: websocket-client<2.0.0,>=0.53.0
+Requires-Dist: urwid<3.0.0,>=2.0.1
+Requires-Dist: requests<3.0.0,>=2.21.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+Provides out-of-band access to servers running on Mythic Beasts
+infrastructure, namely to:
+
+ - VPS graphical (VNC) consoles
+ - VPS virtual serial consoles
+ - dedicated and colo server serial consoles
+ - dedicated and colo server and VPS power control
