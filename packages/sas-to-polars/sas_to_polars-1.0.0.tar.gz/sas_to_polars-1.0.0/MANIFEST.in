@@ -1,0 +1,9 @@
+include src/sas_to_polars/__init__.py
+include src/sas_to_polars/sas_to_polars.py
+include README.md
+include LICENSE  # If you have one
+include pyproject.toml
+recursive-include tests/test_data *.sas7bdat
+recursive-include tests/test_data *.csv
+include tests/test_sas_to_polars.py
+include tests/generate_test_data.sas # Include if needed for users to reproduce tests

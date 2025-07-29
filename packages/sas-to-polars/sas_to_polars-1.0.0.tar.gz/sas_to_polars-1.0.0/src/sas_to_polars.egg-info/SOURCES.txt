@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+src/sas_to_polars/__init__.py
+src/sas_to_polars/sas_to_polars.py
+src/sas_to_polars.egg-info/PKG-INFO
+src/sas_to_polars.egg-info/SOURCES.txt
+src/sas_to_polars.egg-info/dependency_links.txt
+src/sas_to_polars.egg-info/requires.txt
+src/sas_to_polars.egg-info/top_level.txt
+tests/generate_test_data.sas
+tests/test_sas_to_polars.py
+tests/test_data/bad_file.csv
+tests/test_data/empty_data.sas7bdat
+tests/test_data/valid_data.sas7bdat
