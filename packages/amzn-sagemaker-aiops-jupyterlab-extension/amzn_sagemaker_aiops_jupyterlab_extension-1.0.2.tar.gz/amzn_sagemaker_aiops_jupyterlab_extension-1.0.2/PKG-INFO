@@ -1,0 +1,84 @@
+Metadata-Version: 2.4
+Name: amzn_sagemaker_aiops_jupyterlab_extension
+Version: 1.0.2
+Dynamic: Keywords
+Summary: SageMaker AI Ops JupyterLab workspace primary extension module
+Project-URL: Homepage, https://aws.amazon.com/sagemaker/
+Author: Amazon
+License-Expression: Apache-2.0
+License-File: LICENSE
+Classifier: Framework :: Jupyter
+Classifier: Framework :: Jupyter :: JupyterLab
+Classifier: Framework :: Jupyter :: JupyterLab :: 4
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Requires-Dist: aiobotocore>=2.7.0
+Requires-Dist: async-lru
+Requires-Dist: aws-embedded-metrics
+Requires-Dist: jupyter-events>=0.6.0
+Requires-Dist: jupyterlab>=4
+Requires-Dist: nbformat>=5.9.2
+Requires-Dist: pydantic<3,>=1.10.17
+Requires-Dist: y-py<0.7.0,>=0.6.0
+Requires-Dist: ypy-websocket>=0.12.0
+Provides-Extra: all
+Requires-Dist: black; extra == 'all'
+Requires-Dist: build; extra == 'all'
+Requires-Dist: pytest-cov; extra == 'all'
+Requires-Dist: pytest-jupyter; extra == 'all'
+Requires-Dist: pytest>=6; extra == 'all'
+Requires-Dist: twine; extra == 'all'
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: build; extra == 'dev'
+Requires-Dist: twine; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest-cov; extra == 'test'
+Requires-Dist: pytest-jupyter; extra == 'test'
+Requires-Dist: pytest>=6; extra == 'test'
+Description-Content-Type: text/markdown
+
+# amzn_sagemaker_aiops_jupyterlab_extension:
+
+This package includes the JupyterLab extension built by SageMaker AIOps team that includes Sagemaker Pipelines Output feature.
+
+## Requirements
+* JupyterLab >= 4
+* async-lru
+* aws_embedded_metrics
+
+## Installing the extension
+To install the extension within local Jupyter environment, a Docker image/container or in SageMaker Studio, run:
+```
+pip install amzn_sagemaker_aiops_jupyterlab_extension-<version>-py3-none-any.whl`
+```
+
+## Uninstalling the extension
+To uninstall this extension, run:
+```
+pip uninstall amzn_sagemaker_aiops_jupyterlab_extension`
+```
+
+## Troubleshooting
+If you are seeing the frontend extension, but it is not working, check that the server extension is enabled:
+
+```
+jupyter serverextension list
+```
+
+If the server extension is installed and enabled, but you are not seeing the frontend extension, check the frontend extension is installed:
+```
+jupyter labextension list
+```
+
+If the frontend extension is installed and enabled, open Browser console and see if there are any JavaScript error that is related to the extension in Browser console.
+
+## See DEVELOPING.md for more instructions on dev setup and contributing guidelines

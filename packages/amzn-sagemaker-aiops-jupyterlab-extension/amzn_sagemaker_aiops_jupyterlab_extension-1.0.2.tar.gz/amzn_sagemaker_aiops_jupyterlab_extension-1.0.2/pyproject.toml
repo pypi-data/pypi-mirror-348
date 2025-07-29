@@ -1,0 +1,133 @@
+[build-system]
+requires = ["hatchling>=1.5.0", "jupyterlab~=4.0", "hatch-nodejs-version>=0.3.2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "amzn_sagemaker_aiops_jupyterlab_extension"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.8"
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 4",
+    "Framework :: Jupyter :: JupyterLab :: Extensions",
+    "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "jupyterlab>=4",
+    "jupyter-events>=0.6.0",
+    "async-lru",
+    "aws_embedded_metrics",
+    "aiobotocore>=2.7.0",
+    "y-py>=0.6.0,<0.7.0",
+    "ypy-websocket>=0.12.0",
+    "nbformat>=5.9.2",
+    "pydantic>=1.10.17,<3",
+]
+dynamic = ["version", "description", "authors", "keywords", "urls"]
+
+[project.optional-dependencies]
+all = [
+    "amzn_sagemaker_aiops_jupyterlab_extension[dev, test]"
+]
+dev = [
+    "black",
+    "build",
+    "twine"
+]
+test = [
+    "pytest >= 6",
+    "pytest-cov",
+    "pytest_jupyter",
+]
+
+[tool.hatch.version]
+source = "nodejs"
+
+[tool.hatch.metadata.hooks.nodejs]
+fields = ["description", "authors", "urls"]
+
+[tool.hatch.build.targets.sdist]
+artifacts = ["amzn_sagemaker_aiops_jupyterlab_extension/labextension"]
+include = [
+    "pyproject.toml",
+    "jupyter-config/**/*",
+    "package.json",
+    "install.json",
+    "amzn_sagemaker_aiops_jupyterlab_extension/**/*",
+    "style/**/*",
+    "LICENSE",
+    "NOTICE",
+]
+exclude = [
+    ".github",
+    "binder",
+    "**/node_modules/**/*",
+    "*~",
+    "*.pyc",
+    "*.pyo",
+    ".git/**/*",
+    ".ipynb_checkpoints/**/*",
+    "**/tests/",
+    "**/__tests__/",
+    "ui-tests/**/*"
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"amzn_sagemaker_aiops_jupyterlab_extension/labextension" = "share/jupyter/labextensions/@amzn/amzn_sagemaker_aiops_jupyterlab_extension"
+"install.json" = "share/jupyter/labextensions/@amzn/amzn_sagemaker_aiops_jupyterlab_extension/install.json"
+"jupyter-config/jupyter_server_config.d/amzn_sagemaker_aiops_jupyterlab_extension.json" = "etc/jupyter/jupyter_server_config.d/amzn_sagemaker_aiops_jupyterlab_extension.json"
+
+[tool.hatch.build.hooks.version]
+path = "amzn_sagemaker_aiops_jupyterlab_extension/_version.py"
+
+[tool.hatch.build.hooks.jupyter-builder]
+dependencies = ["hatch-jupyter-builder>=0.5"]
+build-function = "hatch_jupyter_builder.npm_builder"
+ensured-targets = [
+    "amzn_sagemaker_aiops_jupyterlab_extension/labextension/static/style.js",
+    "amzn_sagemaker_aiops_jupyterlab_extension/labextension/package.json",
+]
+skip-if-exists = ["amzn_sagemaker_aiops_jupyterlab_extension/labextension/static/style.js"]
+
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
+build_cmd = "build:prod"
+npm = ["npm"]
+
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "install:extension"
+npm = ["npm"]
+source_dir = "src"
+build_dir = "amzn_sagemaker_aiops_jupyterlab_extension/labextension"
+
+[tool.jupyter-releaser.options]
+version_cmd = "hatch version"
+
+[tool.jupyter-releaser.hooks]
+before-build-npm = [
+    "python -m pip install jupyterlab~=4.0",
+    "npm install",
+    "npm run build:prod"
+]
+before-build-python = ["npm run clean:all"]
+
+[tool.check-wheel-contents]
+ignore = ["W002"]
+
+[tool.ruff]
+line-length = 100
+src = ["amzn_sagemaker_aiops_jupyterlab_extension"] # Add other source directories
+exclude = ["_version.py", ".venv", "node_modules"]
+
+[tool.ruff.lint]
+extend-select = [
+  "I001" # isort
+]
