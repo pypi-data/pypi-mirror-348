@@ -1,0 +1,59 @@
+[project]
+name = "pyldplayer2"
+version = "0.1.0"
+description = "pyldplayer2 is a revamped version of the pyldplayer project"
+authors = [
+    { name = "ZackaryW", email = "36378555+ZackaryW@users.noreply.github.com" }
+]
+dependencies = [
+    
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.optional-dependencies]
+shell = [
+    "click>=8.2.0",
+    "tabulate>=0.9.0",
+]
+discover = [
+    "psutil>=7.0.0",
+    "pygetwindow>=0.0.9",
+]
+auto = [
+    "pygetwindow>=0.0.9",
+    "pyautogui>=0.9.54",
+]
+wnd = [
+    "screeninfo>=0.8.1",
+    "pygetwindow>=0.0.9",
+    "pyautogui>=0.9.54",
+]
+all=[
+    "tabulate>=0.9.0",
+    "pygetwindow>=0.0.9",
+    "pyautogui>=0.9.54",
+    "screeninfo>=0.8.1",    
+    "psutil>=7.0.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.3.5",
+    "python-dotenv>=1.1.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyldplayer2"]
+
+[project.scripts]
+ldplay = "pyldplayer2.coms.cli.__init__:cli"
+reldplay = "pyldplayer2.coms.cliCompat:cli_compat"
