@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: tracecolor
+Version: 0.5.0
+Summary: A lightweight, colorized Python logger with TRACE and PROGRESS level support.
+Home-page: https://github.com/marcodelpin/tracecolor
+Author: Marco Del Pin
+Author-email: Marco Del Pin <marco.delpin@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 Marco Del Pin
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+Project-URL: Homepage, https://github.com/marcodelpin/tracecolor
+Project-URL: Issues, https://github.com/marcodelpin/tracecolor/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: colorlog>=6.0.0
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# tracecolor
+
+A lightweight, colorized Python logger with TRACE and PROGRESS level support.
+
+## Features
+
+- Custom TRACE logging level (lower than DEBUG)
+- Custom PROGRESS logging level (between DEBUG and INFO)
+- Colorized output for different log levels
+- Rate-limiting for PROGRESS messages (once per second)
+- Simple and clean API
+
+## Installation
+
+```bash
+pip install tracecolor
+```
+
+## Usage
+
+```python
+from tracecolor import tracecolor
+
+# Create a logger
+logger = tracecolor(__name__)
+
+# Log at different levels
+logger.trace("Detailed tracing information")
+logger.debug("Debugging information")
+logger.progress("Progress update information (rate-limited)")
+logger.info("General information")
+logger.warning("Warning message")
+logger.error("Error message")
+logger.critical("Critical error")
+```
+
+## Color Scheme
+
+- TRACE: Gray (bold black)
+- DEBUG: Cyan
+- PROGRESS: Blue
+- INFO: Green
+- WARNING: Yellow
+- ERROR: Red
+- CRITICAL: Bold Red
+
+## License
+
+MIT
