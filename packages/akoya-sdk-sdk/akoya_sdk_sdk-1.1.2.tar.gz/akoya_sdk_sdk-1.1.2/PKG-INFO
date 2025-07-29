@@ -1,0 +1,142 @@
+Metadata-Version: 2.4
+Name: akoya-sdk-sdk
+Version: 1.1.2
+Summary: Testing
+Author-email: QA <taha.ali@apimatic.io>
+Project-URL: Documentation, https://app.dev.apimatic.io/api-docs-preview/dashboard/68259b1d875bd97b51255af7/v/1_0_0#/http/step-by-step-tutorial
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: apimatic-core>=0.2.17,~=0.2.0
+Requires-Dist: apimatic-core-interfaces>=0.1.5,~=0.1.0
+Requires-Dist: apimatic-requests-client-adapter>=0.1.6,~=0.1.0
+Provides-Extra: testutils
+Requires-Dist: pytest>=7.2.2; extra == "testutils"
+Dynamic: license-file
+
+
+# Getting Started with Akoya APIs v2.4.0
+
+## Introduction
+
+Akoya product APIs for data access. Default servers are set for the Akoya sandbox environment.
+
+Akoya APIs include the following updates:
+
+- v2.4.0
+  - Added Tax product
+- v2.3.0
+  - Removed erroneous `accountId` query param from Taxlots endpoint
+  - Added TaxLots endpoint
+- v2.2.2
+  - Added mode query parameter to Account Information, Balances, Investments, and Transactions to support standard mode.
+  - Edited callouts for Account Holder endpoint
+- v2.2.1
+  - Fixed typo in `accountIds` query parameter for `/accounts-info`, `/balances`, `/accounts`
+  - Added security method for `Account holder information` to bear token. Missing method defaulted to basic auth.
+  - Added examples and descriptions to some schemas
+  - Added HTTP status `429` FDX error `1207`.
+- v2.2 Additions
+  - Added optional `x-akoya-interaction-type` header to all endpoints to specify if a request is part of a batch process
+  - Update of tags to organize endpoints by Akoya product
+  - `206` response added to `/accounts-info`, `/balances`, `/accounts`
+- v2.1 New Statements product and Customers product updated with additional endpoint, `Account holder information`.
+- v2.0 Launch of Akoya products: Account Info, Balances, Investments, Transactions, Payments, Customers.
+
+## Install the Package
+
+The package is compatible with Python versions `3.7+`.
+Install the package from PyPi using the following pip command:
+
+```bash
+pip install akoya-sdk-sdk==1.1.2
+```
+
+You can also view the package at:
+https://pypi.python.org/pypi/akoya-sdk-sdk/1.1.2
+
+## Test the SDK
+
+You can test the generated SDK and the server with test cases. `unittest` is used as the testing framework and `pytest` is used as the test runner. You can run the tests as follows:
+
+Navigate to the root directory of the SDK and run the following commands
+
+```
+pip install -r test-requirements.txt
+pytest
+```
+
+## Initialize the API Client
+
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/client.md)
+
+The following parameters are configurable for the API Client:
+
+| Parameter | Type | Description |
+|  --- | --- | --- |
+| environment | `Environment` | The API environment. <br> **Default: `Environment.SANDBOX`** |
+| http_client_instance | `HttpClient` | The Http Client passed from the sdk user for making requests |
+| override_http_client_configuration | `bool` | The value which determines to override properties of the passed Http Client from the sdk user |
+| http_call_back | `HttpCallBack` | The callback value that is invoked before and after an HTTP call is made to an endpoint |
+| timeout | `float` | The value to use for connection timeout. <br> **Default: 60** |
+| max_retries | `int` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
+| backoff_factor | `float` | A backoff factor to apply between attempts after the second try. <br> **Default: 2** |
+| retry_statuses | `Array of int` | The http statuses on which retry is to be done. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
+| retry_methods | `Array of string` | The http methods on which retry is to be done. <br> **Default: ['GET', 'PUT']** |
+| authorization_code_auth_credentials | [`AuthorizationCodeAuthCredentials`](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/auth/oauth-2-authorization-code-grant.md) | The credential object for OAuth 2 Authorization Code Grant |
+
+The API client can be initialized as follows:
+
+```python
+client = Akoyaapisv240Client(
+    authorization_code_auth_credentials=AuthorizationCodeAuthCredentials(
+        o_auth_client_id='OAuthClientId',
+        o_auth_client_secret='OAuthClientSecret',
+        o_auth_redirect_uri='OAuthRedirectUri'
+    ),
+    environment=Environment.SANDBOX
+)
+```
+
+## Environments
+
+The SDK can be configured to use a different environment for making API calls. Available environments are:
+
+### Fields
+
+| Name | Description |
+|  --- | --- |
+| Sandbox | **Default** |
+| Production | - |
+
+## Authorization
+
+This API uses the following authentication schemes.
+
+* [`acgAuth (OAuth 2 Authorization Code Grant)`](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/auth/oauth-2-authorization-code-grant.md)
+
+## List of APIs
+
+* [Accountinformation](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/accountinformation.md)
+* [Balances](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/balances.md)
+* [Customers](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/customers.md)
+* [Investments](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/investments.md)
+* [Payments](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/payments.md)
+* [Statements](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/statements.md)
+* [Tax](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/tax.md)
+* [Transactions](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/controllers/transactions.md)
+
+## SDK Infrastructure
+
+### HTTP
+
+* [HttpResponse](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/http-response.md)
+* [HttpRequest](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/http-request.md)
+
+### Utilities
+
+* [ApiHelper](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/api-helper.md)
+* [HttpDateTime](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/http-date-time.md)
+* [RFC3339DateTime](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/rfc3339-date-time.md)
+* [UnixDateTime](https://www.github.com/tahaali2000/akoya-sdk-python-sdk/tree/1.1.2/doc/unix-date-time.md)
+
