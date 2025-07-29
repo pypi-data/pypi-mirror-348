@@ -1,0 +1,43 @@
+[project]
+name = "dm-ollamalib"
+dynamic = ["version"]
+description = "Functions to parse Ollama options from string and get info on Ollama options."
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "ollama>=0.4.8",
+]
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.uv-dynamic-versioning]
+fallback-version = "0.0.0"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+
+[dependency-groups]
+dev = [
+    "pylint>=3.3.3",
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.4",
+    "rich>=13.9.4",
+    "pre-commit>=4.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/DrMicrobit/dm-ollamalib"
+GitHub = "https://github.com/DrMicrobit/dm-ollamalib"
+Issues = "https://github.com/DrMicrobit/dm-ollamalib/issues"
