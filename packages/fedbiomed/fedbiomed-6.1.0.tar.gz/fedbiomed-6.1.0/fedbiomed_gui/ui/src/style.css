@@ -1,0 +1,894 @@
+:root{
+  --error-color : #f44949;
+  --primary-color: #003366;
+  --secondary-color:#0099cc;
+
+}
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+body .App {
+  height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.row {
+  display: block;
+  max-width: 100%;
+  display: flex;
+}
+
+hr {
+  border-bottom: 1px solid #eee;
+  background: transparent;
+  height: 0px;
+  border-top: 0px;
+}
+
+
+.header h1 {
+  margin: 0px 20px;
+  font-size: 20px;
+  padding: 15px 0px;
+}
+
+/* Main Layout START----------------------------------------------------------------------------------------*/
+
+.App .layout-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.App .main-frame {
+  width: calc(100vw - 250px);
+  background-color: transparent;
+  height: calc(100vh - 75px);
+  margin-top: 65px;
+  margin-left: 240px;
+ 
+}
+
+.App .main-side-bar {
+  width: 240px;
+  position: fixed;
+  /* background-color: #003366; */
+  background-color: #fff;
+  height: 100vh;
+  max-height: calc(100vh - 60px);
+  margin-top: 60px;
+  box-shadow: 0px -14px 11px -7px  rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px -14px 11px -7px  rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px -14px 11px -7px  rgba(0,0,0,0.75);
+}
+
+.App .main-frame .router-frame {
+  width: 100%;
+  height: calc(100vh - 10px);
+  max-height: calc(100vh - 75px);
+  padding-top: 10px;
+}
+
+.App .main-frame .router-frame .inner {
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  min-height: calc(100vh - 75px);
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+  max-width: 1240px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px -12px rgba(0,0,0,0.63);
+  -webkit-box-shadow: 0px 0px 20px -12px rgba(0,0,0,0.63);
+  -moz-box-shadow: 0px 0px 20px -12px rgba(0,0,0,0.63);
+}
+
+.file-repository {
+  max-height: calc(100vh - 125px);
+  display: flex;
+  flex-flow: column;
+}
+
+.router-frame .inner .frame-header {
+    flex: 0 1 auto;
+    padding:10px;
+    /* The above is shorthand for:
+    flex-grow: 0,
+    flex-shrink: 1,
+    flex-basis: auto
+    */
+}
+
+.router-frame .inner .frame-content {
+  flex: 1 1 auto;
+  padding: 10px;
+}
+
+.router-frame .inner .frame-footer {
+  flex: 0 1 40px;
+}
+
+/* Spesific to File Browser*/
+.frame-content-file {
+    flex: 1 1 auto;
+    padding: 10px;
+    overflow: scroll;
+}
+
+.frame-footer-file {
+  flex: 0 1 40px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Main Layout END----------------------------------------------------------------------------------------*/
+
+
+/* BOXES ------------------------------------------------------------------------------------------*/
+.error-box {
+    padding: 10px;
+    background: var(--error-color);
+    color: #fff;
+}
+
+/* Header CSS START ------------------------------------------------------------------------------------*/
+
+.header {
+  display: block;
+  height: 60px;
+  background-color: #fff;
+  z-index: 12;
+  box-shadow: 1px 3px 6px -1px rgba(0,0,0,0.52);
+-webkit-box-shadow: 1px 3px 6px -1px rgba(0,0,0,0.52);
+-moz-box-shadow: 1px 3px 6px -1px rgba(0,0,0,0.52);
+}
+
+
+
+/* Header CSS END ------------------------------------------------------------------------------------*/
+
+
+/* ----- Button */
+
+.select-sm-button {
+  padding: 5px 5px 5px 5px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  font-size:10px;
+  text-align: center;
+  }
+
+
+
+
+/* Side Bar Navigation -------------------------------------------------------------------------------*/
+
+.side-nav {
+  width: 100%;
+  height: fit-content;
+}
+
+.side-nav .brand {
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: var(--button-color);
+}
+
+.side-nav .brand img {
+  width: 40px;
+  margin: 10px;
+}
+
+.side-nav .brand h1 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.side-nav  .nav-items {
+  overflow: hidden;
+}
+
+.side-nav  .nav-items .nav-item {
+  width: 100%;
+  text-align: left;
+  color: #333;
+  padding: 10px 0px 10px 0px;
+  margin-bottom:1px;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+
+.side-nav  .nav-items .nav-item a{
+
+  height: fit-content;
+  text-decoration: none;
+  color: #333;
+  height: fit-content;
+  display: block;
+  padding: 0px 5px 0px 15px;
+}
+
+.side-nav  .nav-items .nav-item .nav-item-inner{
+  display: table;
+  width: 100%
+}
+
+.side-nav  .nav-items .nav-item .nav-icon{
+  display: table-cell;
+  height: fit-content;
+  width:20px;
+  vertical-align: middle;
+}
+
+.side-nav  .nav-items .nav-item .nav-icon svg{
+  color: #fff;
+  fill : #333;
+}
+
+.side-nav  .nav-items .nav-item .nav-label{
+  display: table-cell;
+  height: inherit;
+  max-width: calc(100% - 20px);
+  vertical-align: middle;
+  padding: 10px 0px 10px 10px;
+  color: #333;
+}
+
+.side-nav  .nav-items .nav-item:hover, .side-nav  .nav-items .nav-item.active {
+  transform: translateX(15px);
+  border-bottom: 1px solid #333;
+  width: calc(100% - 15px);
+}
+
+
+
+/* Repository CSS Start ---------------------------------------------------------------------------------*/
+
+.main-repository {
+  width: fit-content;
+  border-left: 1px solid #ddd;
+  border-top:1px solid #ddd;
+  position: relative;
+  display: block;
+  height: 98%;
+  text-align: left;
+  display: flex;
+  background: #fff;
+}
+
+
+.main-repository .repository-bar{
+  width: 350px;
+  min-width: 350px;
+  background: #f9f9f9;
+  height: 100%;
+  border-right: 1px solid #ddd;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
+
+.views {
+  display:flex;
+  border-bottom: 1px solid #888;
+}
+
+.views .back {
+  width: 5%;
+}
+
+.views .back .icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor:pointer;
+}
+
+.views .back .icon svg{
+  width: 30px;
+}
+
+
+.views .breadcrumb {
+  width: 80%;
+}
+
+.views .view-options {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.views .view-options .icon {
+  width: 20px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  cursor:pointer;
+}
+
+.views .view-options .icon.active,  .views .view-options .icon:hover{
+  background-color: #eee;
+}
+
+.views .view-options .icon svg {
+  width: 100%;
+}
+
+.repository-bar .end {
+  padding: 20px;
+  background: #c15c5c;
+  color: #fff;
+}
+
+.repository-bar .repository-item {
+  height: 50px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+  position: relative;
+}
+
+.repository-bar .repository-item.active {
+  background-color: #ddd;
+}
+
+.repository-bar .repository-item .icon{
+  width: 20px;
+  margin: 0px 8px;
+} 
+.repository-bar .repository-item .icon.action-add, .repository-bar .repository-item .icon.action-display {
+  opacity: 0;
+  cursor:pointer;
+  z-index: 12;
+} 
+
+.repository-bar .repository-item .icon.action-display {
+  opacity: 1;
+}
+
+.repository-bar .repository-item .icon.right {
+  margin-left:auto;
+}
+.dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color:green
+
+}
+
+.dot.empty{
+
+  background: transparent;
+  border: 2px solid green;
+  border-radius: 10px;
+  width:8px;
+  height: 8px;
+
+}
+
+
+.repository-bar .repository-item .icon.width-auto {
+  width:40px;
+}
+
+.repository-bar .repository-item .name{
+  width: 75%;
+  font-size:14px
+} 
+
+
+.repository-bar .repository-item:hover {
+  background-color: #ddd;
+}
+
+.repository-bar .repository-item:hover > .icon.action-add {
+  opacity: 1;
+}
+
+.repository-item .repo-item-info {
+  position: absolute;
+  opacity: 0;
+  width: 200px;
+  height: 100px;
+}
+
+.repository-item .repo-item-info.active {
+  opacity: 1;
+}
+
+
+table.repository-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.repository-table tr{
+  padding: 10px 0px;
+  cursor:pointer;
+}
+
+table.repository-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table.repository-table tr:hover, table.repository-table tr.active{
+  background-color: #8fcdf2;
+  color:#fff;
+}
+
+table.repository-table tr td{
+  padding:10px 5px;
+}
+table.repository-table tr th:first-child,
+table.repository-table tr td:first-child {
+  width: 50%;
+  min-width: 50%;
+  max-width: 50%;
+  word-break: break-all;
+}
+table.repository-table tr td .name, table.repository-table tr td.state, td.state div{
+  display: flex;
+  align-items: center;
+}
+
+table.repository-table tr td.action .button{
+  margin:0px;
+  font-size:12px;
+  width: 70px;
+}
+
+table.repository-table tr td.state div{
+  margin: 0px 5px;
+}
+
+table.repository-table tr td.size, table.repository-table tr td.date{
+  font-size:12px;
+}
+table.repository-table tr td .name .icon{
+  width: 20px;
+  margin:0px 10px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+
+.repository-list .end {
+  padding: 20px;
+  background: #c15c5c;
+  color: #fff;
+}
+
+.breadcrumb .item{
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
+.breadcrumb .item svg{
+  width: 25px;
+}
+
+/* Datasets CSS Ends =-----------------------------------------------------------------------------------*/
+
+
+/* MODAL CSS ------------------------------------------------ */
+
+.modal-overlay {
+  position: fixed;
+  display:flex;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(255,255,255,0.8);
+}
+
+.modal-overlay .modal-inner{
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  background-color: #fff;
+  border:1px solid #eee;
+  width: 50%;
+  min-width: 300px;
+  height: auto;
+  padding: 10px;
+  text-align: left;
+  max-height: calc(100vh - 40px);
+  overflow : hidden;
+}
+
+.modal-overlay .modal-inner.info-box{
+  max-width: 400px;
+  min-width: 300px;
+}
+
+
+.modal-overlay .modal-inner.shadow {
+  box-shadow: 10px 14px 18px -12px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 14px 18px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 14px 18px -12px rgba(0,0,0,0.75);
+}
+
+.modal-inner .close {
+  right: 5px;
+  top: 4px;
+  position: absolute;
+  padding: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background: var(--button-color);
+  color: #fff;
+  border-radius: 20px;
+  width: 35px;
+  text-align: center;
+  font-weight: bold;
+  height: 35px;
+}
+
+.modal-overlay .modal-inner .modal-header{
+flex: 1 0 auto;
+overflow-y: scroll;
+}
+
+.modal-overlay .modal-inner .modal-content{
+  flex: 1 1 auto;
+  overflow-y: scroll;
+  display: flex;
+  flex-flow: column;
+}
+
+.modal-overlay .modal-inner .modal-footer{
+flex: 0 1 40px;
+display: inherit;
+flex-wrap: wrap;
+justify-content: flex-end;
+}
+
+.modal-overlay .modal-inner .modal-footer.float-left{
+justify-content: flex-start;
+}
+
+
+/* MODAL CSS Ends------------------------------------------------ */
+
+
+/* Inputs CSS Starts --------------- Inputs ----------------*/
+
+.form-control {
+  width: calc(100% - 40px);
+  margin: 20px 0px;
+}
+
+.form-control.with-button {
+  position: relative;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+
+
+.input-clear {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  background: #888;
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input.input {
+  width: 100%;
+  height: 45px;
+  outline: none;
+  border: 1px solid #d0d0d0;
+  color : #333;
+  padding:0px 10px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+select.select {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: 1px solid #d0d0d0;
+  color : #333
+}
+
+input.input:focus {
+  border: 1px solid #2427df;
+}
+
+
+.tags-input{
+  width: auto;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d0d0d0;
+  height: auto;
+  flex-wrap: wrap;
+  min-width: 40px;
+}
+
+.tags-input:focus-within {
+  border: 1px solid #2427df;
+
+}
+
+.tags-input input[type="text"] {
+  border: none;
+  background-color: transparent;
+  color: #333;
+  float: right;
+  margin-left: 5px;
+  border: 0px !important;
+  height: 40px;
+  font-size:16px;
+  outline: none;
+  width: 120px;
+  font-family: inherit;
+}
+
+.tag {
+  background-color: #0061f1;
+  color: white;
+  height: 20px;
+  width: auto;
+  border-radius: 10px;
+  font-size: 0.7em;
+  padding: 0px;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: auto;
+}
+.tags .close {
+  border: none;
+  border-radius: 13px;
+  padding: 3px;
+  background: #fff;
+  font-size: 8px;
+  margin: 0px 5px;
+  width: 15px;
+}
+
+.tags .close:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+label.input-label {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+textarea.input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+}
+.repository-select {
+  display: flex;
+  align-items: center;
+}
+.repository-select .button {
+  width: 30%;
+  height: 50px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.repository-select .path {
+  display: flex;
+  width: 70%;
+  height: 50px;
+  border: 1px solid #eee;
+  border-left:0px;
+  align-items: center;
+  padding-left: 20px;
+}
+
+
+/* Inputs CSS Ends --------------- Inputs ----------------*/
+
+
+/* Note View ----------------------------------------------*/
+
+.note {
+  background: #d4eef7;
+  position: relative;
+  color: #666;
+  padding: 20px;
+      padding-left: 20px;
+  border-radius: 10px;
+  padding-left: 45px;
+  margin: 10px 0px 10px 0px;
+}
+
+.note div{
+    margin-bottom: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 10px !important;
+}
+
+.note::before {
+    content: "!";
+    position: absolute;
+    left: 10px;
+    background: #fff;
+    border-radius: 10px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-hover);
+}
+
+/* --- Notes ENDS --------------------------------------------------*/
+
+/* Information Boxes --------------------------------------------------------------*/
+
+.fed-box {
+  max-width: 250px;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--secondary-color);
+  margin: 20px 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.fed-box:hover {
+  transform: scale(1.1);
+}
+
+a.fed-box-link{
+  text-decoration: none;
+}
+
+.fed-box .title {
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  margin: 16px 0px 10px 0px;
+  margin: 0px;
+  padding: 20px 0px;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.fed-box .icon svg {
+  width: 50px;
+  margin: 0 auto;
+  display: block;
+}
+
+.fed-box div {
+  margin: 10px 0px 10px 0px;
+}
+
+.fed-box .text {
+  color:#888;
+  text-align:center;
+  border-top: 1px solid #fff;
+  padding: 10px;
+  min-height: 70px ;
+}
+
+
+
+/* --- CSS LOADER ------------------------------------------------*/
+
+.loader-frame {
+  display: none;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.7);
+  z-index: 15;
+}
+
+.loader-frame.active {
+    display: flex;
+}
+
+.lds-ring {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--primary-color) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
