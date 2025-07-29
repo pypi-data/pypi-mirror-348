@@ -1,0 +1,1 @@
+::: mlpype.sklearn.pipeline.numpy_type_checker

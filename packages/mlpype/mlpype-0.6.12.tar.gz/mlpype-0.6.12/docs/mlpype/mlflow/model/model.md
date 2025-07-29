@@ -1,0 +1,1 @@
+::: mlpype.mlflow.model.model
