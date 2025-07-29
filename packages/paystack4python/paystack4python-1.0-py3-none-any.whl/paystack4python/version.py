@@ -1,0 +1,5 @@
+__title__ = 'paystack4python'
+__version__ = '1.00'
+__author__ = 'Gift Mwaiseghe'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2024. Gift Mwaiseghe'
