@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: dxplorer
+Version: 0.1.0
+Summary: A Python package for quick data quality profiling with visualization and imputation suggestions
+Home-page: https://github.com/talha-11-11/dxplorer
+Author: Talha Sarfraz
+Author-email: talhasarfraz29@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: seaborn
+Requires-Dist: matplotlib
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# DataQualityChecker
+
+[![PyPI version](https://badge.fury.io/py/dqxplorer.svg)](https://pypi.org/project/dxplorer/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+A Python package to perform quick, insightful data quality profiling with visualizations and imputation suggestions â€” perfect for data scientists and analysts.
+
+---
+
+## Features
+
+- Summarize missing values and data types  
+- Generate a detailed Markdown data quality report  
+- Visualize missing data and distributions using Seaborn  
+- Suggest imputation methods for missing data  
+- Easy-to-use API with a clean, modular design
+
+---
+
+## Installation
+
+```bash
+pip install dxplorer
