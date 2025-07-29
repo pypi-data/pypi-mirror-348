@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "torch_bench_gpu"
+version = "0.1.2"
+description = "Tiny PyTorch GPU-benchmark CLI"
+authors = [{ name = "Arnaud Pannatier", email = "arn.pannatier@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.8" 
+dependencies = [
+    "torch>=2.8.0.dev20250515",
+]
+
+[project.scripts]
+torch_bench_gpu = "torch_bench_gpu:main"
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+default = true
+
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/nightly/cu126"
+
