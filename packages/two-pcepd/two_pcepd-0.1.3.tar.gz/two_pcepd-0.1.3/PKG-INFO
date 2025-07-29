@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: two_pcepd
+Version: 0.1.3
+Summary: The official implementation of the 2pCePd-Net model. pBPf Fusion block coming soon...
+Author: Supratim Ghosh, Sourav Pramanik, Anoop Kumar Tiwari, Kottakkaran Sooppy Nisar, Mahantapas Kundu, Mita Nasipuri
+Author-email: supratimghosh2772@gmail.com
+License: GNU General Public License v3.0
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+
+# This is the official Pytorch implementation of 2pCePd-Net model published in IEEE Transactions on Instrumentation and Measurement
+
+# DOI: 10.1109/TIM.2025.3569005
+
+# Model Sample Usage Code
+
+from two_pcepd import model
+
+network, optimizer = model.create_net(in_ch, out_ch, dim, n)
+
+# in_ch -> the number of channels in input
+# out_ch -> the number of channels in output
+# dim -> a dimensional parameter to modulate the number of parameters in the model. Default value is 64. Reducing or increasing the parameters would modulate the model accordingly.
+# n -> number of paths. Default value is 2. Can be modulated to increase or decrease the complexity of the model.
+
+# network -> the returned model
+# optimizer -> the optimizer associated with network is returned. Default value is Adam Optimizer with learning rate set to 1e^-4
+
