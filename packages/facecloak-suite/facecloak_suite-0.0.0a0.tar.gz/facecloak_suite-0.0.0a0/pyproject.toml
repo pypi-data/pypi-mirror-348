@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "facecloak-suite"
+version = "0.0.0a0"                 # pre-alpha placeholder
+description = "Placeholder release — full code coming soon."
+readme = "README.md"
+authors = [{ name = "Muntaser Syed", email = "jemsbhai@gmail.com" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+]
