@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="870a8193-ce21-4ede-a016-3871da24fe0d" name="ampersand.it.csiro.au">
+        <fileTransfer rootFolder="/scratch3/jac249" accessType="SFTP" host="virga.hpc.csiro.au" port="22" sshConfigId="5c08670f-6ce5-4756-893e-69e356c459f0" sshConfig="jac249@virga.hpc.csiro.au:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
