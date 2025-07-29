@@ -1,0 +1,33 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "tatb06-fft"
+description = "Library containing DFT/FFT implementations and helper functions made for the bachelor thesis project course TATB06 at LIU"
+version = "0.2"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Marc Andrén",     email = "maran394@student.liu.se" },
+  { name = "Ruben Angelov",   email = "ruban431@student.liu.se" },
+  { name = "Axel Dannetud",   email = "axeda719@student.liu.se" },
+  { name = "Gustav Lannhard", email = "gusla326@student.liu.se" },
+  { name = "William Olsson",  email = "wilol978@student.liu.se" },
+]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+requires-python = ">=3.8"
+dependencies = [
+  "numpy",
+  "matplotlib",
+]
+
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+module-name = "tatb06_fft._tatb06_fft"
