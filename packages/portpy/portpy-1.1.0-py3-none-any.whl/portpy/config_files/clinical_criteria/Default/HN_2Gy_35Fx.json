@@ -1,0 +1,166 @@
+{
+  "disease_site": "HN",
+  "protocol_name": "HN_Default_2Gy_35Fr",
+  "pres_per_fraction_gy": 2,
+  "num_of_fractions": 35,
+  "criteria": [
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "GTV"
+      },
+      "constraints": {
+        "limit_dose_gy": 77
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "PTV"
+      },
+      "constraints": {
+        "limit_dose_gy": 77,
+        "goal_dose_gy": 70
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "BRAINSTEM"
+      },
+      "constraints": {
+        "limit_dose_gy": 60
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "EYE_L"
+      },
+      "constraints": {
+        "limit_dose_gy": 20
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "EYE_R"
+      },
+      "constraints": {
+        "limit_dose_gy": 20
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "LARYNX"
+      },
+      "constraints": {
+        "limit_dose_gy": 66
+      }
+    },
+    {
+      "type": "mean_dose",
+      "parameters": {
+        "structure_name": "LARYNX"
+      },
+      "constraints": {
+        "limit_dose_gy": 44,
+        "goal_dose_gy": 40
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "LENS_L"
+      },
+      "constraints": {
+        "limit_dose_gy": 3
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "LENS_R"
+      },
+      "constraints": {
+        "limit_dose_gy": 3
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "MANDIBLE"
+      },
+      "constraints": {
+        "limit_dose_gy": 75
+      }
+    },
+    {
+      "type": "dose_volume_V",
+      "parameters": {
+        "structure_name": "OPTIC_NERVE_L",
+        "dose_gy": 54
+      },
+      "constraints": {
+        "limit_volume_perc": 3
+      }
+    },
+    {
+      "type": "dose_volume_V",
+      "parameters": {
+        "structure_name": "OPTIC_NERVE_R",
+        "dose_gy": 54
+      },
+      "constraints": {
+        "limit_volume_perc": 5
+      }
+    },
+    {
+      "type": "dose_volume_V",
+      "parameters": {
+        "structure_name": "CHIASM",
+        "dose_gy": 54
+      },
+      "constraints": {
+        "limit_volume_perc": 7
+      }
+    },
+    {
+      "type": "mean_dose",
+      "parameters": {
+        "structure_name": "PAROTID_L"
+      },
+      "constraints": {
+        "limit_dose_gy": 26
+      }
+    },
+    {
+      "type": "mean_dose",
+      "parameters": {
+        "structure_name": "PAROTID_R"
+      },
+      "constraints": {
+        "limit_dose_gy": 26
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "SPINAL_CANAL"
+      },
+      "constraints": {
+        "limit_dose_gy": 45
+      }
+    },
+    {
+      "type": "max_dose",
+      "parameters": {
+        "structure_name": "SKIN"
+      },
+      "constraints": {
+        "limit_dose_gy": 70
+      }
+    }
+  ]
+}
