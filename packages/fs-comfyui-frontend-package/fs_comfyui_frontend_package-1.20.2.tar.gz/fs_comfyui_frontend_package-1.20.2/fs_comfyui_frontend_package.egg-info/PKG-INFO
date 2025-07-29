@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: fs_comfyui_frontend_package
+Version: 1.20.2
+Summary: ComfyUI Frontend Package for web interface
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-python
+Dynamic: summary
+
+# comfyui_frontend pypi package
+
+This is the pypi package structure for the comfyui frontend.
+
+During build process, the compiled assets are copied into the `${PROJECT_ROOT}/comfyui_frontend_package/comfyui_frontend_package/static` directory.
+
+The package can be installed with the following command:
+
+```bash
+pip install comfyui-frontend-package
+```
+
+Ref: <https://pypi.org/project/comfyui-frontend-package/>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ComfyUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="user.css" />
+    <link rel="stylesheet" type="text/css" href="materialdesignicons.min.css" />
+    <script>
+      // Read the localstorage for "workflow" field
+			let storedApiJson = null;
+			// Function to check if any change has been made to the stored workflow
+			function checkForChanges() {
+				app.graphToPrompt().then(p=>{
+					if(storedApiJson === null) {
+						storedApiJson = JSON.stringify(p.output, null, 2);
+					}
+					const apiJson = JSON.stringify(p.output, null, 2);
+					if (apiJson !== storedApiJson) {
+						// Send a message to the parent window if change is detected
+						window.parent.postMessage({ type: 'workflowChanged', data: {currentApiJson: apiJson, storedApiJson: storedApiJson} }, '*');
+						storedApiJson = apiJson; // Update the stored workflow
+					}
+				});
+			}
+			// Call the checkForChanges function every second
+			setInterval(checkForChanges, 1000);
+
+			window.addEventListener('message', (event) => {
+				if (event.data.type === 'promptWorkflow') {
+					const button = document.getElementById('queue-button');
+					if (button) {
+						button.click();
+					}
+				}
+				if (event.data.type === 'loadGraphData') {
+					app.loadGraphData(event.data.data);
+          window.parent.postMessage({ type: 'newWorkflowLoaded', data: event.data.data }, '*');
+				}
+				if (event.data.type === 'saveWorkflow') {
+					app.graphToPrompt().then(p=>{
+						const json = JSON.stringify(p.workflow, null, 2);
+						const apiJson = JSON.stringify(p.output, null, 2);
+						window.parent.postMessage({ type: 'workflowSaved', data: {normal: json, api: apiJson} }, '*');
+					});
+				}
+			});
+		</script>
+    <script type="importmap">{
+  "imports": {
+    "primevue": "./assets/vendor-primevue-BDARBsLi.js",
+    "vue": "./assets/vendor-vue-CuEuSIfS.js",
+    "vue-i18n": "./assets/vendor-vue-i18n-BWfyMPL8.js"
+  }
+}</script>
+    <script type="module" crossorigin src="./assets/index-CvlhVcN6.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vendor-vue-CuEuSIfS.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-primevue-BDARBsLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-vue-i18n-BWfyMPL8.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-B5qntU8q.css">
+
+  </head>
+  <body class="litegraph grid">
+    <div id="vue-app"></div>
+  </body>
+</html>
