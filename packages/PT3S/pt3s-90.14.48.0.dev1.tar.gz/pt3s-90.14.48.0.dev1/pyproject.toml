@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PT3S"
+version = "90.14.48.0.dev1"
+description = "Python Tools 3S"
+readme = "README.rst"
+license = "MIT"
+authors = [
+  { name = "3S Consult GmbH", email = "jablonski@3sconsult.de" }
+]
+requires-python = ">=3"
+keywords = ["Python", "3S", "SIR 3S", "SIR Graf", "SIR Calc", "3S Consult"]
+dependencies = [
+  "tables",
+  "pandas",
+  "numpy",
+  "h5py",
+  "pyodbc",
+  "geopandas",
+  "networkx",
+  "shapely",
+  "contextily",
+  "py7zr",
+  "folium",
+  "mapclassify",
+  "sqlalchemy",
+  "matplotlib"
+]
+
+[project.urls]
+Documentation = "https://3sconsult.github.io/PT3S"
+Source = "https://github.com/3SConsult/PT3S"
+
+[tool.setuptools.packages.find]
+exclude = ["nb", "testdata", "testresults"]
+
+[tool.setuptools.package-data]
+"PT3S" = [
+  "Examples/Example1.db3",
+  "Examples/WDExample1/B1/V0/BZ1/M-1-0-1.1.MX1",
+  "Examples/WDExample1/B1/V0/BZ1/M-1-0-1.XML",
+  "Examples/Example2.db3",
+  "Examples/WDExample2/B1/V0/BZ1/M-1-0-1.5.MX1",
+  "Examples/WDExample2/B1/V0/BZ1/M-1-0-1.XML",
+  "Examples/Example3.db3",
+  "Examples/WDExample3/B1/V0/BZ1/M-1-0-1.1.MX1",
+  "Examples/WDExample3/B1/V0/BZ1/M-1-0-1.XML",
+  "Examples/Example5.db3",
+  "Examples/WDExample5/B1/V0/BZ1/M-1-0-1.1.MX1",
+  "Examples/WDExample5/B1/V0/BZ1/M-1-0-1.XML",
+  "Examples/Example6.db3",
+  "Examples/WDExample6/B1/V0/BZ1/M-1-0-1.1.MX1",
+  "Examples/WDExample6/B1/V0/BZ1/M-1-0-1.XML",
+  "Examples/Example8.db3",
+  "Examples/WDExample8/B1/V0/BZ1/M-1-0-1.1.MX1",
+  "Examples/WDExample8/B1/V0/BZ1/M-1-0-1.XML",
+  "sphinx_docs/Example0.ipynb",
+  "sphinx_docs/Example1.ipynb",
+  "sphinx_docs/Example2.ipynb",
+  "sphinx_docs/Example3.ipynb",
+  "sphinx_docs/Example4.ipynb",
+  "sphinx_docs/Example5.ipynb",
+  "sphinx_docs/Example6.ipynb",
+  "sphinx_docs/Example7.ipynb",
+  "sphinx_docs/Example8.ipynb"
+]
