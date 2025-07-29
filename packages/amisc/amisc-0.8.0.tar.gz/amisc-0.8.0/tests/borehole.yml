@@ -1,0 +1,26 @@
+!System
+name: Borehole system
+components: !Component
+- name: Borehole
+  model: !!python/name:amisc.examples.models.borehole_func
+  vectorized: True
+  data_fidelity: (2, 2, 2, 2, 2, 2, 2, 2)
+  inputs: !VariableList
+  - name: rw
+    distribution: U(0.05, 0.15)
+  - name: r
+    distribution: U(100, 50000)
+  - name: Tu
+    distribution: U(63070, 115600)
+  - name: Hu
+    distribution: U(990, 1110)
+  - name: Tl
+    distribution: U(63.1, 116)
+  - name: Hl
+    distribution: U(700, 820)
+  - name: L
+    distribution: U(1120, 1680)
+  - name: Kw
+    distribution: U(9855, 12045)
+  outputs: !VariableList
+  - name: vdot

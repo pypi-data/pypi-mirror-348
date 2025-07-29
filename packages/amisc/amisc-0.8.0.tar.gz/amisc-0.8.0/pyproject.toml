@@ -1,0 +1,128 @@
+[project]
+name = "amisc"
+version = "0.8.0"
+description = "Efficient framework for building surrogates of multidisciplinary systems using the adaptive multi-index stochastic collocation (AMISC) technique."
+authors = [
+    { name = "Joshua Eckels", email = "eckelsjd@umich.edu" },
+]
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "networkx>=3.2",
+    "pyyaml>=6.0.2",
+    "pydantic>=2.9.1",
+    "dill>=0.3.9",
+    "scikit-learn>=1.6.1",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+keywords = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Intended Audience :: Science/Research",
+]
+
+[project.license]
+text = "GPL-3.0"
+
+[project.urls]
+Repository = "https://github.com/eckelsjd/amisc.git"
+Documentation = "https://eckelsjd.github.io/amisc/"
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.install]
+cache = true
+
+[tool.pdm.scripts]
+bump = "cz bump {args}"
+test = "pytest --cov=amisc --cov-report html:htmlcov tests"
+docs = "mkdocs serve"
+lint = "ruff check src tests {args}"
+
+[tool.pdm.scripts.setup_dev]
+composite = [
+    "pdm sync -G dev",
+    "pre-commit install --allow-missing-config",
+    "nbstripout --install",
+]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = [
+    "*.ipynb",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+]
+ignore = [
+    "E731",
+]
+
+[tool.coverage.run]
+omit = [
+    "src/amisc/examples/tutorial.py",
+]
+
+[tool.commitizen]
+version_scheme = "pep440"
+version_provider = "pep621"
+version_files = [
+    "src/amisc/__init__.py:__version__",
+]
+update_changelog_on_bump = true
+tag_format = "v$version"
+changelog_file = "CHANGELOG.md"
+major_version_zero = true
+annotated_tag = true
+post_bump_hooks = [
+    "git push --follow-tags",
+]
+changelog_start_rev = "v0.3.0"
+
+[dependency-groups]
+dev = [
+    "copier>=9.3",
+    "copier-templates-extensions>=0.3",
+    "ruff>=0.6",
+    "pre-commit>=3.8",
+    "commitizen>=4.1",
+    "nbstripout>=0.7.1",
+]
+test = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "uqtils>=0.4.2",
+]
+doc = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.24",
+    "markdown-exec[ansi]>=1.9",
+    "mkdocs-gen-files>=0.5",
+    "mkdocs-literate-nav>=0.6",
+    "mkdocs-redirects>=1.2",
+    "mkdocs-git-committers-plugin-2>=2.3",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+    "mkdocs-coverage>=1.0",
+    "mkdocs-jupyter>=0.25.1",
+]
+jupyter = [
+    "jupyterlab>=4.2.5",
+]

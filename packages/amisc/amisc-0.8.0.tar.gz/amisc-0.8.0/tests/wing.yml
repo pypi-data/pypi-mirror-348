@@ -1,0 +1,30 @@
+!System
+name: Wing weight system
+components: !Component
+- name: Wing
+  model: !!python/name:amisc.examples.models.wing_weight_func
+  vectorized: True
+  data_fidelity: (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+  inputs: !VariableList
+  - name: Sw
+    distribution: U(150, 250)
+  - name: Wfw
+    distribution: U(220, 300)
+  - name: A
+    distribution: U(6, 10)
+  - name: Lambda
+    distribution: U(-10, 10)
+  - name: q
+    distribution: U(16, 45)
+  - name: lambda
+    distribution: U(0.5, 1)
+  - name: tc
+    distribution: U(0.08, 0.18)
+  - name: Nz
+    distribution: U(2.5, 6)
+  - name: Wdg
+    distribution: U(1700, 2500)
+  - name: Wp
+    distribution: U(0.025, 0.08)
+  outputs: !VariableList
+  - name: Wwing
