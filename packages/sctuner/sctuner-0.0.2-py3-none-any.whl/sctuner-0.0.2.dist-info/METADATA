@@ -1,0 +1,17 @@
+Metadata-Version: 2.3
+Name: sctuner
+Version: 0.0.2
+Author-email: Julian Arts <mail@julianarts.nl>
+Requires-Python: >=3.9
+Provides-Extra: cpu
+Requires-Dist: fastparquet; extra == 'cpu'
+Requires-Dist: polars; extra == 'cpu'
+Requires-Dist: pyarrow; extra == 'cpu'
+Requires-Dist: scanpy; extra == 'cpu'
+Requires-Dist: torch; extra == 'cpu'
+Requires-Dist: tqdm; extra == 'cpu'
+Provides-Extra: gpu
+Requires-Dist: polars[gpu]; extra == 'gpu'
+Requires-Dist: scanpy; extra == 'gpu'
+Requires-Dist: torch; extra == 'gpu'
+Requires-Dist: tqdm; extra == 'gpu'
