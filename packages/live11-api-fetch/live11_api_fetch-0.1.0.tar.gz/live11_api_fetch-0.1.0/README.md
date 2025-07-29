@@ -1,0 +1,175 @@
+# Live 11 API Fetch MCP Server
+
+A Model Context Protocol server designed to query an API, specifically tailored for (or defaulting to) the Live 11 API documentation. This server enables LLMs to retrieve structured information from a designated API endpoint using a query text and a parameter for the number of results (top_k).
+
+### Available Tools
+
+- `query_service` - Queries a specific API with the given text and top_k parameter.
+    - `query_text` (string, required): The query text to send to the API.
+    - `top_k` (integer, optional): The number of top results to return (default: 3).
+    - `api_url` (string, optional): Optional custom API URL to use for this specific request. This overrides any server-level default API URL.
+
+## Installation
+
+### Using uv (recommended)
+
+When using [`uv`](https://docs.astral.sh/uv/), you can use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run `live11-api-fetch` without explicit installation in your project's virtual environment:
+
+```bash
+# Example: Run with a custom API URL
+uvx live11-api-fetch --custom-api-url https://your-api.example.com/query
+```
+
+### Using PIP
+
+Alternatively, you can install `live11-api-fetch` via pip:
+
+```bash
+pip install live11-api-fetch
+```
+
+After installation, you can run it as a script using:
+
+```bash
+# Example: Run with default API URL (if configured in server.py)
+python -m live11_api_fetch
+
+# Example: Run with a custom API URL and proxy
+python -m live11_api_fetch --custom-api-url https://your-api.example.com/query --proxy-url http://your-proxy.example.com:8080
+```
+Or simply by its installed script name:
+```bash
+live11-api-fetch --custom-api-url https://your-api.example.com/query
+```
+
+## Configuration
+
+### API URL Configuration
+
+The API endpoint queried by this server can be configured in three ways, in order of precedence:
+
+1.  **Tool Parameter (`api_url`):** Provide the `api_url` directly in the parameters when calling the `query_service` tool. This offers per-request flexibility.
+2.  **Command-Line Argument (`--custom-api-url`):** Specify a default API URL for the server instance when starting it:
+    ```bash
+    live11-api-fetch --custom-api-url https://your-api.example.com/query
+    ```
+3.  **Hardcoded Default (in `server.py`):** Modify the `DEFAULT_CLOUD_RUN_SERVICE_URL` variable within the `src/live11_api_fetch/server.py` file of the package. This is generally for developers of the package or if you have a fixed deployment.
+    ```python
+    # In src/live11_api_fetch/server.py
+    DEFAULT_CLOUD_RUN_SERVICE_URL = "YOUR_ACTUAL_LIVE_11_API_OR_SIMILAR_URL_HERE"
+    ```
+    **Important:** If you are using the default, ensure `YOUR_CLOUD_RUN_SERVICE_URL_HERE` is replaced with the actual, valid URL.
+
+### Proxy Configuration
+
+The server can be configured to use a proxy for its outgoing API requests by using the `--proxy-url` command-line argument:
+
+```bash
+live11-api-fetch --proxy-url http://your-proxy.example.com:8080
+```
+
+### Configure for Claude.app
+
+Add to your Claude settings. Replace `live11-api-fetch-service` with your desired service name in Claude.
+
+<details>
+<summary>Using uvx</summary>
+
+```json
+{
+  "mcpServers": {
+    "live11-api-fetch-service": {
+      "command": "uvx",
+      "args": ["live11-api-fetch", "--custom-api-url", "https://your-default-api.example.com/query"]
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary>Using pip installation</summary>
+
+```json
+{
+  "mcpServers": {
+    "live11-api-fetch-service": {
+      "command": "live11-api-fetch", // or "python" with args ["-m", "live11_api_fetch"]
+      "args": ["--custom-api-url", "https://your-default-api.example.com/query"]
+    }
+  }
+}
+```
+</details>
+
+### Configure for VS Code
+
+For quick installation, you can generate a configuration using the MCP extension's capabilities or manually add the following JSON block to your User Settings (JSON) or `.vscode/mcp.json`.
+
+Replace `live11-api-fetch-service` with your desired service name.
+
+<details>
+<summary>Using uvx</summary>
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "live11-api-fetch-service": {
+        "command": "uvx",
+        "args": ["live11-api-fetch", "--custom-api-url", "https://your-default-api.example.com/query"]
+      }
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary>Using pip installation</summary>
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "live11-api-fetch-service": {
+        "command": "live11-api-fetch", // or "python" with args ["-m", "live11_api_fetch"]
+        "args": ["--custom-api-url", "https://your-default-api.example.com/query"]
+      }
+    }
+  }
+}
+```
+</details>
+
+## Debugging
+
+You can use the MCP inspector to debug the server. For uvx installations:
+
+```bash
+npx @modelcontextprotocol/inspector uvx live11-api-fetch
+```
+
+Or if you've installed the package using pip:
+
+```bash
+npx @modelcontextprotocol/inspector live11-api-fetch
+```
+
+If you are developing locally:
+
+```bash
+# Assuming you are in the root of the project directory
+npx @modelcontextprotocol/inspector python src/live11_api_fetch # or python -m live11_api_fetch
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit pull requests for bug fixes, new features, or improvements to documentation.
+
+For examples of other MCP servers and implementation patterns, see:
+https://github.com/modelcontextprotocol/servers
+
+## License
+
+`live11-api-fetch` is licensed under the MIT License. See the `LICENSE` file in the project repository for more details.
