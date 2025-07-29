@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "VarTracer"
+version = "0.1.5"
+description = "A Python-based tool for dynamic code execution tracing and dependency analysis."
+readme = "readme.md"
+requires-python = ">=3.7"
+authors = [
+    { name = "Mengqi Zhang", email = "jiujiuchangshou@gmail.com" }
+]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+urls = { "Homepage" = "https://github.com/jiujiucs17/VarTracer" }
+
+[tool.setuptools.packages.find]
+include = ["VarTracer", "VarTracer.*"]
