@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: jumpstarter-driver-composite
+Version: 0.6.0
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Miguel Angel Ajo Pelayo <majopela@redhat.com>, Nick Cao <ncao@redhat.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: asyncclick>=8.1.7.2
+Requires-Dist: jumpstarter==0.6.0
+Description-Content-Type: text/markdown
+
+# Composite Driver
+
+`jumpstarter-driver-composite` provides functionality for interacting with composite devices.
+
+## Installation
+
+```bash
+pip3 install --extra-index-url https://pkg.jumpstarter.dev/simple/ jumpstarter-driver-composite
+```
+
+## Configuration
+
+Example configuration:
+
+```yaml
+export:
+  composite:
+    type: jumpstarter_driver_composite.driver.Composite
+    config:
+      # Add required config parameters here
+```
+
+## API Reference
+
+Add API documentation here.
