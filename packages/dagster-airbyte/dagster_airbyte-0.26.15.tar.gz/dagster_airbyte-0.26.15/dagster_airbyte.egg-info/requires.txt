@@ -1,0 +1,9 @@
+dagster==1.10.15
+requests
+
+[managed]
+dagster-managed-elements==0.26.15
+
+[test]
+requests-mock
+flaky
