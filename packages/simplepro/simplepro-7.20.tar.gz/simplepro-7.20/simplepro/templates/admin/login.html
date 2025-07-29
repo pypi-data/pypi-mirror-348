@@ -1,0 +1,80 @@
+{% extends "admin/login.html" %}
+{% load static i18n simpletags sptags %}
+{% block left %}
+    <div class="login-left">
+        <img src="{% static '/admin/simplepro/images/login_banner.png' %}" alt="login banner">
+    </div>
+{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '/admin/simplepro/css/login.css' %}">
+{% endblock %}
+
+{% block bg %}
+    <style>
+       .bg {
+           background-image: url('{% static '/admin/simplepro/images/img_bg.png' %}');
+       }
+    </style>
+{% endblock %}
+{% block particles %}{% endblock %}
+{% block logo %}
+    <div class="banner">
+        {% if "SIMPLEUI_LOGO"|get_config %}
+            <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
+        {% else %}
+            <img src="{% static 'admin/simplepro/images/banner.png' %}?_=20231113">
+        {% endif %}
+    </div>
+{% endblock %}
+{% block icon %}
+    {#    <link rel="icon" href="{% static '/admin/simplepro/images/favicon.ico' %}">#}
+{% endblock %}
+{% block form %}
+    <captcha-msg></captcha-msg>
+    <form class="simpleui-form" action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="el-icon-user" v-model="username" name="username"
+                      placeholder="{% trans 'username' %}"></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="el-icon-lock" type="password" v-model="password" name="password"
+                      @keyup.enter.native="login()"
+                      placeholder="{% trans 'password' %}" show-password></el-input>
+        </div>
+        {% has_captcha_enabled as has_captcha %}
+        {% if has_captcha %}
+        <div class="simple-form-inline">
+            <captcha src="{% url 'sp:captcha' %}" placeholder="{% trans 'captcha' %}" msg="{% trans 'Please enter the verification code' %}"/>
+        </div>
+        <remember-me></remember-me>
+        <div class="simpleui-input-inline login-btn">
+            <el-button :icon="loading?'el-icon-loading':''" @click="validate()"
+                       type="primary">{% trans 'Log in' %}</el-button>
+        </div>
+        {% else %}
+            <remember-me></remember-me>
+            <div class="simpleui-input-inline login-btn">
+            <el-button :icon="loading?'el-icon-loading':''" @click="login()"
+                       type="primary">{% trans 'Log in' %}</el-button>
+        </div>
+        {% endif %}
+
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+{% endblock %}
+
+{% block login_js %}
+
+    {% load_message as msg %}
+    {{ msg|safe }}
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/captcha.js' %}?_={% get_version %}"></script>
+    <script id="remember_me_template" type="text/html">
+        <div>
+            <el-checkbox v-model="checked">{% trans 'Remember Me' %}</el-checkbox>
+        </div>
+    </script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/remember_me.js' %}?_={% get_version %}"></script>
+    {{ block.super }}
+{% endblock %}

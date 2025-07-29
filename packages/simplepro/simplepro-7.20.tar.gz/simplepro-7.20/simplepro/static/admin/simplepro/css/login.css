@@ -1,0 +1,70 @@
+body,
+.bg {
+  background-color: #f7fafe !important;
+}
+.el-button--primary {
+  background-color: #5e7ce0;
+}
+.banner img {
+  width: 300px;
+}
+.header {
+  font-size: 16px;
+  color: #71757f;
+  font-weight: 400;
+}
+.design,
+.design a {
+  color: #808695;
+  font-size: 14px;
+  text-align: center;
+}
+.simpleui-input-inline {
+  margin: 25px auto;
+}
+html,
+body {
+  height: 100%;
+}
+.bg {
+  background: #f0f2f5;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.bg .login-left {
+  width: 55%;
+  height: 100%;
+  background: #f1f5fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg .login-left img {
+  max-width: 450px;
+  max-height: 540px;
+}
+.bg .login-decorator {
+  width: 45%;
+  height: 100%;
+  background: #fff;
+}
+@media screen and (max-width: 800px) {
+  .login-left {
+    display: none !important;
+  }
+  .login-decorator {
+    height: inherit!important;
+    background: inherit!important;
+  }
+}
+/*# sourceMappingURL=login.css.map */

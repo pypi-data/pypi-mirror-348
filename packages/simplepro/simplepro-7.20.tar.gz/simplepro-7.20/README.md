@@ -1,0 +1,85 @@
+# Simple Pro[README.rst](README.rst)
+Simple Pro是基于simpleui的升级版，需要依赖simpleui
+
+Simple Pro是收费项目，如果不想付费请继续使用[Simpleui](https://github.com/newpanjing/simpleui)我们也会将开源免费的项目维护到底。收费的目的是为了让simpleui和simplepro能够更好的维护下去。
+
+## Simple Pro Demo
+--预留
+
+## 定价
+
+[https://www.noondot.com/product/simplepro#buy](https://www.noondot.com/product/simplepro#buy)
+
+## 主要功能：
+以下列出的功能，均是在simpleui的基础上进行的
+
+### 页面
+- 首页改版
+- 登录页改版
+- 列表页改版
+- 权限页改版
+- 导入页和导出页改版
+- 增加网页全局进度条
+- 替换全局部分图标
+- Pro版独有标识
+- 专业版主题
+- 优化最近动作和主题，改为侧栏显示
+- 优化返回按钮，改为绝对路径 通过reverse('admin:demo_employe_add')
+- 全新默认LOGO
+- 首页增加图表
+
+### 功能
+- 自定义按钮ajax实现
+- 筛选、删除、搜索、表格ajax加载数据
+- 导入导出优化
+- 权限模块重写
+- 表格功能增加详见table.md文档
+- 自定义主题
+
+### 权限
+- 可添加自定义权限
+- 自定义按钮权限控制
+- 自定义菜单权限控制
+- 自定义字段权限
+
+### 集成到项目中
+
+1. 安装simplepro
+
+```shell
+pip install simplepro
+```
+
+2. INSTALL_APPS中配置
+
+> 按以下顺序加入到INSTALL_APPS数组的顶部
+```python
+INSTALLED_APPS = [
+    'simplepro',
+    'simpleui',
+    'import_export',
+    ......
+]    
+```
+3. 配置中间件
+
+```python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 加入simplepro的中间件
+    'simplepro.middlewares.SimpleMiddleware'
+]
+```
+
++ 如果在开启DEBUG模式后，启动即可运行。
++ 如果关闭后，需要克隆静态文件，步骤与simpleui一致。
+
+## 文档
+
+[https://www.noondot.com/docs/simplepro/](https://www.noondot.com/docs/simplepro/)
