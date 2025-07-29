@@ -1,0 +1,21 @@
+requires = ["setuptools>=68.0.0", "setuptools_scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lib_version_team17"
+dynamic = ["version"]
+description = "A version-aware library"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+packages = ["lib_version"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+
+[tool.setuptools.dynamic]
+version = {attr = "lib_version.version.__version__"}
+
+[tool.setuptools.package-dir]
+"" = "."
