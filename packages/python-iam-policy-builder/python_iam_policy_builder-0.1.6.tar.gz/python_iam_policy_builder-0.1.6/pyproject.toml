@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-iam-policy-builder"
+version = "0.1.6"
+description = "A fluent Python IAM Policy builder"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+  { name="Omer Menashe", email="unspecified@mail.com" }
+]
+keywords = ["python-iam-policy-builder", "iam-policy", "iam"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+"Source" = "https://github.com/iamomerm/python-iam-policy-builder"
