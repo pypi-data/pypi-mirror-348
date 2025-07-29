@@ -1,0 +1,17 @@
+[project]
+name = "fizzysearch"
+version = "0.29"
+description = "A SPARQL rewriter that performs enhanced searches"
+license = "MIT"
+readme = "README.md"
+author = "Etienne Posthumus <ep@epoz.org>"
+homepage = "https://ise-fizkarlsruhe.github.io/fizzysearch/"
+repository = "https://github.com/ISE-FIZKarlsruhe/fizzysearch"
+keywords = ["SPARQL", "search", "RDF", "Linked Data"]
+
+
+requires-python = ">=3.10"
+dependencies = [
+    "rbloom==1.5.2",
+    "tree-sitter==0.20.1",
+]
