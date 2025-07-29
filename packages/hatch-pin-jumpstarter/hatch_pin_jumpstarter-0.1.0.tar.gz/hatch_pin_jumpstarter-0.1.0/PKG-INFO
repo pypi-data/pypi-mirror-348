@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: hatch-pin-jumpstarter
+Version: 0.1.0
+Summary: Hatch plugin that pins jumpstarter packages in the monorepo
+Author-email: Nick Cao <nickcao@nichi.co>
+Requires-Python: >=3.11
+Requires-Dist: hatchling>=1.27.0
+Requires-Dist: packaging>=24.2
+Requires-Dist: tomli-w>=1.2.0
+Requires-Dist: tomli>=2.2.1
