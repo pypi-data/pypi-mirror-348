@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: cluster365
+Version: 0.1.0
+Summary: Send file content to Gemini AI and get reply in terminal
+Home-page: https://github.com/yourusername/cluster365
+Author: Your Name
+Author-email: you@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: google-generativeai
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# cluster365
+
+Send text file content to Google Gemini AI and get replies in your terminal.
+
+## Usage
+
+```bash
+cluster365 problem.txt
+```
