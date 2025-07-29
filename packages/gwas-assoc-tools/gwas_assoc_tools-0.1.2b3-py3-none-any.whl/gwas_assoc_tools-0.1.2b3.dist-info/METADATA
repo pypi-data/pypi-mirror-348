@@ -1,0 +1,140 @@
+Metadata-Version: 2.3
+Name: gwas-assoc-tools
+Version: 0.1.2b3
+Summary: GWAS Association Tools
+Author: Karatug Ozan Bircan
+Author-email: karatugo@ebi.ac.uk
+Requires-Python: >=3.10,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: click (>=8.0.0)
+Requires-Dist: griffe (==1.6.2)
+Requires-Dist: iniconfig (==2.0.0)
+Requires-Dist: numpy (==2.2.3)
+Requires-Dist: openpyxl (>=3.1.0,<4.0.0)
+Requires-Dist: pandas (==2.2.3)
+Requires-Dist: pydantic (>=2.0.0)
+Requires-Dist: pytz (==2025.1)
+Requires-Dist: requests (>=2.28.0,<3.0.0)
+Requires-Dist: rich (>=13.0.0)
+Requires-Dist: typing-extensions (==4.13.0)
+Requires-Dist: tzdata (==2025.1)
+Description-Content-Type: text/markdown
+
+# GWAS Association Tools
+
+A command-line tool for genomic-wide association studies (GWAS) data validation and analysis.
+
+## Features
+
+- Validate:
+  - Input: File path of GWAS Submission template that contains top associations
+  - Output: Validation report of top associations
+
+## Installation
+
+Install from PyPI:
+
+```bash
+pip install gwas-assoc-tools
+```
+
+## Usage
+
+```bash
+# Basic validation command
+gwas-assoc validate <template excel file path>
+
+# For help
+gwas-assoc --help
+gwas-assoc validate --help
+```
+
+## Development
+
+### Setup
+
+```bash
+# Install Poetry (if not already installed)
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Install dependencies
+poetry install
+
+# Activate virtual environment
+poetry shell
+```
+
+### Building and Installation
+
+```bash
+# Build the package (creates .whl and .tar.gz in dist/)
+poetry build
+
+# Install your new package in development mode
+poetry install
+```
+
+### Testing
+
+TODO
+
+### Running with Real Files
+
+```bash
+# Run the CLI command through Poetry
+# For failed test file
+poetry run gwas-assoc validate ./tests/test_fail.xlsx   
+# For successful test file
+poetry run gwas-assoc validate ./tests/test_success.xlsx   
+
+
+# Or after activating the shell
+poetry shell
+# For failed test file
+gwas-assoc validate ./tests/test_fail.xlsx   
+# For successful test file
+gwas-assoc validate ./tests/test_success.xlsx   
+
+```
+
+### Dependency Management
+
+```bash
+# Add a new dependency
+poetry add new-package
+
+# Add a development dependency
+poetry add --group dev pytest-mock
+
+# Check for dependency updates
+poetry update --dry-run
+
+# Update dependencies
+poetry update
+```
+
+### Code Quality
+
+```bash
+# Run formatting
+poetry run black .
+poetry run isort .
+
+# Run linting
+poetry run ruff check .
+
+# Run type checking
+poetry run mypy src
+
+# Run all formatting checks
+poetry run pre-commit run --all-files
+```
+
+## License
+
+[License](LICENSE)
+
