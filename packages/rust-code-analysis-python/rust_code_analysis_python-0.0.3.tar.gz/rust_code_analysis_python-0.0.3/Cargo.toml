@@ -1,0 +1,15 @@
+[package]
+name = "rust-code-analysis-python"
+version = "0.0.3"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rust_code_analysis_python"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.24.0"
+pythonize = "0.24.0"
+rust-code-analysis = { git = "https://github.com/mozilla/rust-code-analysis", branch = "master" }
+serde = "1.0"

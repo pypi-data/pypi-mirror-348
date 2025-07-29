@@ -1,0 +1,30 @@
+[build-system]
+requires = ["maturin>=1.8.4", "patchelf>=0.17.2.2"]
+build-backend = "maturin"
+
+[project]
+name = "rust-code-analysis-python"
+authors = [
+    { name="Luigi Finetti", email="luigi@finetti.com.ar" }
+]
+license = "MPL-2.0"
+dynamic = ["version"]
+description = "Python bindings for rust-code-analysis"
+readme = "README.md"
+keywords = ["rust", "python", "code", "analysis", "complexity", "metrics", "refactoring"]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Rust",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Compilers",
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/luigig44/rust-code-analysis-python/issues"
+"Source Code" = "https://github.com/luigig44/rust-code-analysis-python"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+exclude = [".github/**/*"]
