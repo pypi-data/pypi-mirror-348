@@ -1,0 +1,59 @@
+name: Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  run-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system '.[dev]'
+
+      - name: Run tests
+        run: make test
+
+      - name: Run linting
+        if: always()
+        run: make lint
+
+      - name: Generate coverage report
+        if: always()
+        run: make test-coverage | tee coverage.txt
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.txt
+
+      - name: Output full coverage report to GitHub summary
+        run: |
+          {
+            echo "## Code Coverage Report";
+            echo "";
+            echo '```';
+            cat coverage.txt;
+            echo '```';
+          } >> $GITHUB_STEP_SUMMARY
