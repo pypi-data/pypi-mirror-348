@@ -1,0 +1,61 @@
+/**
+ * @file hal_sd.h
+ * @brief Hardware Abstraction Layer para tarjeta SD en ESP32 con FreeRTOS.
+ * 
+ * @details
+ * Este HAL maneja la inicialización, lectura y escritura en tarjeta SD usando
+ * la biblioteca SD de Arduino y protecciones con FreeRTOS para evitar conflictos
+ * cuando varios tasks intentan acceder simultáneamente.
+ * 
+ * @note
+ * - Es necesario llamar a hal_sd_init() antes de usar cualquier función.
+ * - Uso de mutex para exclusión mutua.
+ * 
+ * @author
+ * @date
+ */
+
+#ifndef HAL_SD_H
+#define HAL_SD_H
+
+#include <Arduino.h>
+#include <FS.h>
+#include <SD.h>
+#include <SPI.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/semphr.h>
+
+/**
+ * @brief Inicializa la tarjeta SD y crea el mutex de acceso.
+ * 
+ * @param csPin Pin Chip Select para la SD (por defecto 5 para ESP32)
+ * @return true si la inicialización fue exitosa, false si falló.
+ */
+bool hal_sd_init(uint8_t csPin = 5);
+
+/**
+ * @brief Lee un archivo de la tarjeta SD.
+ * 
+ * @param path Ruta del archivo.
+ * @param buffer Buffer para almacenar los datos leídos.
+ * @param length Número máximo de bytes a leer.
+ * @return true si la lectura fue exitosa, false en caso contrario.
+ */
+bool hal_sd_readFile(const char* path, uint8_t* buffer, size_t length);
+
+/**
+ * @brief Escribe datos en un archivo en la tarjeta SD.
+ * 
+ * @param path Ruta del archivo.
+ * @param data Datos a escribir.
+ * @param length Número de bytes a escribir.
+ * @return true si la escritura fue exitosa, false en caso contrario.
+ */
+bool hal_sd_writeFile(const char* path, const uint8_t* data, size_t length);
+
+/**
+ * @brief Libera los recursos usados por el HAL SD (mutex).
+ */
+void hal_sd_deinit();
+
+#endif // HAL_SD_H

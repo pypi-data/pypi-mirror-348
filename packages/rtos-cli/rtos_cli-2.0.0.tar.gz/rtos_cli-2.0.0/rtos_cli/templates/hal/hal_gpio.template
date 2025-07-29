@@ -1,0 +1,126 @@
+// ==== FILE: src/{{HAL_NAME}}.cpp ====
+/**
+ * @file {{HAL_NAME}}.cpp
+ * @brief Hardware Abstraction Layer (HAL) para control de pines GPIO con sincronización FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Implementa funciones para configurar, leer y escribir en pines GPIO
+ * con protección mediante un mutex para acceso seguro desde múltiples tareas.
+ */
+
+#include <Arduino.h>
+#include "{{HAL_NAME}}.h"
+
+static SemaphoreHandle_t gpio_mutex = NULL;
+static bool gpio_initialized = false;
+
+/**
+ * @brief Inicializa el HAL GPIO y crea mutex para sincronización.
+ * 
+ * @return true si la inicialización fue exitosa
+ * @return false si no se pudo crear el mutex
+ */
+bool {{HAL_NAME}}_init() {
+    if (!gpio_initialized) {
+        gpio_mutex = xSemaphoreCreateMutex();
+        if (gpio_mutex == NULL) {
+            return false; // No se pudo crear el mutex
+        }
+        gpio_initialized = true;
+    }
+    return true;
+}
+
+/**
+ * @brief Configura un pin GPIO como entrada o salida.
+ * 
+ * @param pin Número de pin GPIO
+ * @param mode Modo de pin (INPUT, OUTPUT, INPUT_PULLUP)
+ */
+void {{HAL_NAME}}_pinMode(uint8_t pin, uint8_t mode) {
+    if (!gpio_mutex) return;
+    if (xSemaphoreTake(gpio_mutex, pdMS_TO_TICKS(100))) {
+        pinMode(pin, mode);
+        xSemaphoreGive(gpio_mutex);
+    }
+}
+
+/**
+ * @brief Escribe un valor digital en un pin GPIO.
+ * 
+ * @param pin Número de pin GPIO
+ * @param value HIGH o LOW
+ */
+void {{HAL_NAME}}_digitalWrite(uint8_t pin, uint8_t value) {
+    if (!gpio_mutex) return;
+    if (xSemaphoreTake(gpio_mutex, pdMS_TO_TICKS(100))) {
+        digitalWrite(pin, value);
+        xSemaphoreGive(gpio_mutex);
+    }
+}
+
+/**
+ * @brief Lee el valor digital de un pin GPIO.
+ * 
+ * @param pin Número de pin GPIO
+ * @return uint8_t Valor leído (HIGH o LOW)
+ */
+uint8_t {{HAL_NAME}}_digitalRead(uint8_t pin) {
+    uint8_t val = LOW;
+    if (!gpio_mutex) return val;
+    if (xSemaphoreTake(gpio_mutex, pdMS_TO_TICKS(100))) {
+        val = digitalRead(pin);
+        xSemaphoreGive(gpio_mutex);
+    }
+    return val;
+}
+
+/**
+ * @brief Libera recursos usados por el HAL GPIO.
+ */
+void {{HAL_NAME}}_deinit() {
+    if (gpio_mutex != NULL) {
+        vSemaphoreDelete(gpio_mutex);
+        gpio_mutex = NULL;
+        gpio_initialized = false;
+    }
+}
+
+
+// ==== FILE: include/{{HAL_NAME}}.h ====
+/**
+ * @file {{HAL_NAME}}.h
+ * @brief Interfaz pública para HAL GPIO con protección FreeRTOS.
+ * @version 1.0.0
+ * @date 2025-05-15
+ * @author Efrain Reyes Araujo
+ * @license MIT
+ *
+ * Provee funciones para controlar pines GPIO de forma segura y sincronizada.
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include "freertos/semphr.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+bool {{HAL_NAME}}_init();
+
+void {{HAL_NAME}}_pinMode(uint8_t pin, uint8_t mode);
+
+void {{HAL_NAME}}_digitalWrite(uint8_t pin, uint8_t value);
+
+uint8_t {{HAL_NAME}}_digitalRead(uint8_t pin);
+
+void {{HAL_NAME}}_deinit();
+
+#ifdef __cplusplus
+}
+#endif
