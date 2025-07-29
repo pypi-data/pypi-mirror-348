@@ -1,0 +1,60 @@
+# AI-Zap
+
+Библиотека для работы с ИИ и практическими заданиями.
+
+## Установка
+
+```bash
+pip install ai-zap
+```
+
+## Использование
+
+### Функция zap()
+
+```python
+from ai_zap import zap
+
+# Простой запрос к ИИ
+response = zap("Привет, как дела?")
+print(response)
+```
+
+### Функция otv()
+
+```python
+from ai_zap import otv
+
+# Получить все ответы
+all_answers = otv()
+
+# Получить ответ по номеру
+answer = otv(1)
+
+# Поиск по тексту
+search_result = otv("ООП")
+
+# Получить список вопросов
+questions = otv('?')
+```
+
+### Функция zad()
+
+```python
+from ai_zap import zad
+
+# Получить список заданий
+tasks = zad()
+
+# Создать файл с решением
+result = zad(1)  # Создаст solution_1.py
+```
+
+## Требования
+
+- Python 3.6+
+- openai>=1.0.0
+
+## Лицензия
+
+MIT 
