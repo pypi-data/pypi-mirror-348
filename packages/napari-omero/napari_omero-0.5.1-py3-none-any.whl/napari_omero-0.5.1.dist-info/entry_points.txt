@@ -1,0 +1,5 @@
+[console_scripts]
+napari-omero = napari_omero.__main__:main
+
+[napari.manifest]
+napari-omero = napari_omero:napari.yaml
