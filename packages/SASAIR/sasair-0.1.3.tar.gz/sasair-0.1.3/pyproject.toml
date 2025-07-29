@@ -1,0 +1,33 @@
+
+[tool.poetry]
+name = "SASAIR"
+version = "0.1.3"
+description = "SAS Atmosphere Interface & Retrieval"
+authors = ["Roeland Maes <roeland.maes@vito.be>"]
+packages = [
+    { include = "vito",  from = "src" }
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31"
+pydantic = "^2.0"
+cachetools = "^5.3"
+cdsapi = { version = "^0.7", optional = true }
+loguru = { version = "^0.7", optional = true }
+
+sphinx =  { version = ">=8.1", optional = true }
+sphinx_rtd_theme = { version = ">=1.0", optional = true }
+sphinx-autodoc-typehints = { version = ">=3.0", optional = true }
+tomli = { version = ">=2.1", optional = true }
+myst_parser = { version = ">=3.0", optional = true }
+
+[tool.poetry.extras]
+cds = ["cdsapi"]
+loguru = ["loguru"]
+sphinx = ["sphinx", "sphinx_rtd_theme", "sphinx-autodoc-typehints", "tomli", "myst_parser"]
+full = ["cdsapi", "loguru", "sphinx", "sphinx_rtd_theme", "sphinx-autodoc-typehints", "tomli", "myst_parser"]
+
+[tool.poetry-git-version-plugin]
+make_alpha_version = false
