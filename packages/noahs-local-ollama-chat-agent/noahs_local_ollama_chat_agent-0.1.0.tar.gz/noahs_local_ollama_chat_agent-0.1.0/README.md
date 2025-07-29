@@ -1,0 +1,68 @@
+# local\_ollama_chat\_agent
+
+A local LLM agent powered by the Ollama API. This tool lets you semantically analyze documents without sending the full text to the LLM context window. It splits documents into manageable chunks, embeds them into a local vector database, and allows semantic querying with meaningful context provided to your local model.
+
+## Features
+
+* Upload and embed documents chunked by sentence.
+* Purge and reset local semantic database.
+* Search for semantically relevant chunks from documents.
+* Run local LLM agent powered by Ollama API.
+
+## Requirements
+
+Ensure you have Python 3.9+ and [Ollama](https://ollama.com/) installed with a model like `llama3.2` available.
+
+Install Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Make sure the Ollama API is running in the background with a model available:
+
+```bash
+ollama run llama3.2
+```
+
+## Running the Agent
+
+Use the provided `main.py` script to:
+
+1. Instantiate an LLM agent with a model.
+2. Purge the semantic DB if desired.
+3. Upload and chunk a `.txt` file.
+4. Query the document semantically.
+5. Ask the LLM contextual questions about it.
+
+### Example Usage
+
+```bash
+python main.py
+```
+
+This script will:
+
+* Load `docs/AliceInWonderland.txt`.
+* Split it into chunks (5 sentences each).
+* Store the chunks in ChromaDB.
+* Search semantically for passages related to `"Interactions between Alice and the Mad Hatter"`.
+* Add the most relevant passages to context.
+* Send a message to the agent.
+
+## File Structure
+
+```
+local_ollama_agent/
+├── local_agent/               # Core logic for agent and vector DB
+├── docs/                      # Example text documents
+├── main.py                    # Demo script
+├── requirements.txt           # Python dependencies
+├── README.md                  # This file
+├── LICENSE
+└── setup.py
+```
+
+## License
+
+MIT License
