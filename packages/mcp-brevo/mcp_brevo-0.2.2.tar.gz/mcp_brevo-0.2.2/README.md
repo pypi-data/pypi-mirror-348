@@ -1,0 +1,225 @@
+# Brevo MCP for Claude
+
+This MCP (Model Control Panel) provides Claude with the ability to interact with the [Brevo](https://www.brevo.com/) marketing platform API. Brevo (formerly Sendinblue) is an all-in-one digital marketing platform that offers email marketing, SMS marketing, chat, CRM, and automation tools.
+
+With this MCP, Claude can:
+- Manage contacts and contact lists
+- Create and manage email campaigns
+- Send transactional emails
+- Manage email templates
+- Track email engagement
+- Send SMS messages
+- Access analytics data
+
+## Installation
+
+You can install the Brevo MCP using uv:
+
+```bash
+uv pip install mcp-brevo
+```
+
+To run the MCP, you need a Brevo API key. Get this from your Brevo account settings.
+
+Set the API key as an environment variable:
+
+```bash
+export BREVO_API_KEY="your-brevo-api-key-here"
+```
+
+## Claude Configuration
+
+To configure Claude to use this MCP, add it to your project settings:
+
+```json
+{
+  "tools": [
+    {
+      "name": "brevo",
+      "command": "mcp-brevo",
+      "description": "Provides access to Brevo marketing platform API for contact management, email campaigns, and transactional emails"
+    }
+  ]
+}
+```
+
+## Available Tools
+
+### Contact Management
+
+```
+Tool: manage_contact
+Description: Perform CRUD operations on contacts
+Parameters:
+  - operation: One of "list", "get", "create", "update", "delete"
+  - email: Required for get, create, update, delete operations
+  - attributes: Optional for create and update operations (JSON object with contact attributes)
+  - list_ids: Optional for create and update operations (array of list IDs)
+  - limit: Used only for list operation
+  - offset: Used only for list operation
+```
+
+### Contact List Management
+
+```
+Tool: manage_list
+Description: Perform operations on contact lists
+Parameters:
+  - operation: One of "list", "get", "create", "update", "delete", "add_contacts", "remove_contacts"
+  - list_id: Required for all operations except list and create
+  - name: Required for create, optional for update
+  - folder_id: Optional for create and update
+  - emails: Required for add_contacts and remove_contacts (array of email addresses)
+  - limit: Used only for list operation
+  - offset: Used only for list operation
+```
+
+### Email Campaign Management
+
+```
+Tool: manage_campaign
+Description: Perform operations on email campaigns
+Parameters:
+  - operation: One of "list", "get", "create", "update", "schedule", "test", "status"
+  - campaign_id: Required for all operations except list and create
+  - name: Required for create
+  - subject: Required for create, optional for update
+  - sender: Required for create (object with 'name' and 'email' keys)
+  - html_content: Required for create, optional for update
+  - recipients: Required for create (object with 'list_ids' key)
+  - scheduled_at: Required for schedule, optional for create/update
+  - status: Required for status operation
+  - test_emails: Required for test operation
+  - limit: Used only for list operation
+  - offset: Used only for list operation
+```
+
+### Email Template Management
+
+```
+Tool: manage_template
+Description: Perform operations on email templates
+Parameters:
+  - operation: One of "list", "get", "create", "update", "delete"
+  - template_id: Required for get, update, delete operations
+  - name: Required for create, optional for update
+  - html_content: Required for create, optional for update
+  - subject: Optional for create and update
+  - is_active: Optional for create and update
+  - limit: Used only for list operation
+  - offset: Used only for list operation
+```
+
+### Transactional Email
+
+```
+Tool: send_email
+Description: Send a transactional email
+Parameters:
+  - to_email: Recipient email address
+  - subject: Email subject line
+  - html_content: HTML content of the email
+  - from_email: Sender email address (optional, uses default if not provided)
+  - from_name: Sender name (optional)
+  - reply_to: Reply-to email address (optional)
+  - to_name: Recipient name (optional)
+  - cc: List of CC recipients (optional)
+  - bcc: List of BCC recipients (optional)
+  - attachment_urls: List of URLs to files to attach (optional)
+  - track_opens: Enable open tracking (default: True)
+  - track_clicks: Enable click tracking (default: True)
+  - tags: List of tags for categorizing and filtering emails (optional)
+```
+
+### Email Tracking
+
+```
+Tool: track_email
+Description: Track delivery and engagement status of sent emails
+Parameters:
+  - message_id: The message ID of a specific email to track (optional)
+  - email: Email address to track events for (optional)
+  - days: Number of days in the past to check (default: 7)
+  - event_types: List of event types to filter by (e.g., "delivered", "opened", "clicked") (optional)
+```
+
+### SMS Messaging
+
+```
+Tool: manage_sms
+Description: Perform operations related to SMS messaging and campaigns
+Parameters:
+  - operation: One of "send", "list_campaigns", "get_campaign", "create_campaign"
+  - campaign_id: Required for get_campaign
+  - to_number: Required for send operation
+  - content: Required for send and create_campaign operations
+  - sender: Required for send and create_campaign operations
+  - name: Required for create_campaign operation
+  - recipients: Required for create_campaign operation
+  - scheduled_at: Optional for send and create_campaign operations
+  - limit: Used only for list_campaigns operation
+  - offset: Used only for list_campaigns operation
+```
+
+### Analytics
+
+```
+Tool: get_analytics
+Description: Retrieve various analytics reports
+Parameters:
+  - report_type: One of "campaign_stats", "aggregate", "events"
+  - campaign_id: Required for campaign_stats
+  - start_date: Required for aggregate and events reports (YYYY-MM-DD format)
+  - end_date: Required for aggregate and events reports (YYYY-MM-DD format)
+  - email: Optional filter for events report
+  - channel: Optional channel type for aggregate report ("email" or "sms")
+  - limit: Used for pagination in events report
+  - offset: Used for pagination in events report
+```
+
+### Account Information
+
+```
+Tool: get_account_info
+Description: Get account information and details from Brevo
+Parameters: None
+```
+
+## Example Usage
+
+```
+# List contacts (first page)
+Tool: manage_contact
+Parameters: 
+  operation: list
+  limit: 10
+  offset: 0
+
+# Create a new contact
+Tool: manage_contact
+Parameters:
+  operation: create
+  email: "example@example.com"
+  attributes: {"FIRSTNAME": "John", "LASTNAME": "Doe"}
+  list_ids: [3, 4]
+
+# Send a transactional email
+Tool: send_email
+Parameters:
+  to_email: "recipient@example.com"
+  to_name: "Recipient Name"
+  subject: "Welcome to our service"
+  html_content: "<html><body><h1>Welcome!</h1><p>Thank you for joining our service.</p></body></html>"
+  from_email: "sender@yourdomain.com"
+  from_name: "Your Company"
+```
+
+## Troubleshooting
+
+- **Authentication Errors**: Check that your Brevo API key is valid and properly set in the environment variable
+- **Rate Limiting**: Brevo API has rate limits. If you encounter rate limit errors, reduce the frequency of requests
+- **Permission Errors**: Ensure your API key has the necessary permissions for the operations you're trying to perform
+
+## License
+
+This project is available under the MIT License.
