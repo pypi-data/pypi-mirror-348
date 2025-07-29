@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mlpype-sklearn
+Version: 0.6.12
+Summary: Sklearn extension for MLpype
+Author: Jeroen van den Hoven
+License: MIT
+Requires-Python: >=3.9
+Requires-Dist: dill>=0.3.8
+Requires-Dist: mlpype-base
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: pandas>=1.5.3
+Requires-Dist: scikit-learn>=1.2.2
+Provides-Extra: strict
+Requires-Dist: dill==0.3.8; extra == 'strict'
+Requires-Dist: numpy==1.26.4; extra == 'strict'
+Requires-Dist: pandas==1.5.3; extra == 'strict'
+Requires-Dist: scikit-learn==1.2.2; extra == 'strict'
