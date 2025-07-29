@@ -1,0 +1,106 @@
+Metadata-Version: 2.1
+Name: fastlink
+Version: 0.1.3
+Summary: Asynchronous OAuth 2.0 client for such platforms as Google, GitHub, Yandex, etc.
+License: MIT
+Author: everysoftware
+Author-email: pravitel2015ify@gmail.com
+Requires-Python: >=3.12,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: AsyncIO
+Classifier: Framework :: FastAPI
+Classifier: Framework :: Pydantic
+Classifier: Framework :: Pydantic :: 1
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Internet
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Typing :: Typed
+Requires-Dist: fastapi[standart] (>=0.115.7,<0.116.0)
+Requires-Dist: httpx (>=0.28.1,<0.29.0)
+Requires-Dist: pydantic (>=2.10.6,<3.0.0)
+Requires-Dist: pyjwt (>=2.10.1,<3.0.0)
+Description-Content-Type: text/markdown
+
+# FastLink
+
+**Effortless asynchronous OAuth 2.0 client for popular platforms**
+
+---
+
+[![Test](https://github.com/everysoftware/fastid/actions/workflows/test.yml/badge.svg)](https://github.com/everysoftware/fastid/actions/workflows/test.yml)
+[![CodeQL Advanced](https://github.com/everysoftware/fastid/actions/workflows/codeql.yml/badge.svg)](https://github.com/everysoftware/fastid/actions/workflows/codeql.yml)
+
+---
+
+## Features
+
+- **Asynchronous**: Built on top of `httpx` is fully asynchronous.
+- **Built-in support**: For popular OAuth 2.0 providers like **Google**, **Yandex**, **Telegram**, etc.
+- **Extensible**: Easily add support for new OAuth 2.0 providers.
+- **Easy to use**: Simple and intuitive API.
+
+## Installation
+
+```bash
+pip install fastlink
+```
+
+## Get Started
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Depends
+from starlette.responses import RedirectResponse
+
+from fastlink.google.client import GoogleOAuth
+from fastlink.schemas import OAuth2Callback, OpenID
+from examples.config import settings
+
+app = FastAPI()
+
+oauth = GoogleOAuth(
+    settings.google_client_id,
+    settings.google_client_secret,
+    "http://localhost:8000/callback",
+)
+
+
+@app.get("/login")
+async def login() -> RedirectResponse:
+    async with oauth:
+        url = await oauth.get_authorization_url()
+        return RedirectResponse(url=url)
+
+
+@app.get("/callback")
+async def oauth_callback(callback: Annotated[OAuth2Callback, Depends()]) -> OpenID:
+    async with oauth:
+        await oauth.authorize(callback)
+        return await oauth.userinfo()
+
+```
+
+Now you can run the server and visit `http://localhost:8000/login` to start the OAuth 2.0 flow.
+
+![screenshot-1738081195921.png](assets/screenshot-1738081195921.png)
+
+After logging into Google, you will be redirected to the callback URL. The server will then fetch the user's OpenID
+information and return it as a response.
+![screenshot-1738081352079.png](assets/screenshot-1738081352079.png)
+
