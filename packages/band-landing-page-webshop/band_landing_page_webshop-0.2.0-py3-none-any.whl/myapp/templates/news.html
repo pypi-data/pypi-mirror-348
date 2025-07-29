@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %} Newsletter {% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5 border rounded shadow-lg p-4" style="max-width: 520px;">
+  <h2 class="mb-4 display-6">Subscribe to Our Newsletter</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.email_address.label_tag }} {{ form.email_address }}
+      {% if form.email_address.errors %}
+      <div class="invalid-feedback d-block">
+          {{ form.email_address.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      {{ form.first_name.label_tag }} {{ form.first_name }}
+      {% if form.first_name.errors %}
+      <div class="invalid-feedback d-block">
+          {{ form.first_name.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+</div>
+
+<!-- Toast Notification -->
+{% if toast_message %}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast show text-bg-{{ toast_type }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toast_message }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
