@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: poffertjes
+Version: 0.0.1
+Summary: Friendly interface to run probabilistic queries on dataframes
+Author-email: Silvio Lugaro <silvio.lugaro@gmail.com>
+Requires-Python: >=3.13
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: marimo>=0.13.10
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: pyarrow>=20.0.0
+Requires-Dist: ruff>=0.11.10
+Description-Content-Type: text/markdown
+
+# Poffertjes
+
+Friendly interface to run probabilistic queries on dataframes.
+
+## Why "Poffertjes"?
+
+Since I basically stole the "friendly interface idea" from [Vincent Warmerdam's `peegeem`](https://github.com/koaning/peegeem), I wanted to pay him tribute.
+When I was a kid I visited Netherlands and I fell in love with [poffertjes](https://en.wikipedia.org/wiki/Poffertjes): this project is filled with _syntactic sugar_, so these sweets seemed a good fit!
