@@ -1,0 +1,40 @@
+# s3async
+
+Helper functions for interacting with s3. Provides synchronous and asynchronous functions and CLI-entrypoints.
+
+Public asynchronous functions are differentiated from synchronous ones with the suffix `_async`.
+Typically one can find a non-suffixed version of the same function which wraps the async call in a sync function (e.g. for CLI usage).
+
+Batch operations such as sync, listing keys, and recursive copy/delete operations will always do the bulk of their work asynchronously.
+
+
+## Command line interface
+
+```
+Commands:
+  cp    Copy S3 object
+  hash  Computes a MD5 digest of a file
+  ls    List s3 object paths
+  meta  Get object metadata information
+  rm    Delete S3 object
+  sync  Sync objects between local and S3 path or two S3 paths
+  tag   Set and get object tags
+```
+
+## Notes on syncing
+
+Default sync is non-recursive, i.e. it only copies the current folder to the provided prefix or vice-versa.
+For recursive behaviour one needs to use option `--recursive` which will then compare paths relative to working directory/prefix and sync to matching relative path.
+
+There are three options for comparing whether a file should be synced or not:
+
+- `etag` - Automatically computed ETag which is "usually" a MD5 hash of the content will be compared against local file content MD5 hash
+- `hash` - Comparison will be made against a custom tag called `hash`, which should contain the MD5 hash of the content. Use this if you can't trust ETag to be correct for your files. If selected, the tag will be set automatically by sync.
+- `timestamp` - Last modified timestamp; will sync if `target_timestamp < source_timestamp` with the resolution of one second. Local timestamps will be set to match the S3 timestamps but the opposite is not possible.
+
+## Testing
+
+Tests are ran against [minio](https://github.com/minio/minio) which implements the S3 specification.
+
+Minio is automatically ran in a docker container by pytest-docker.
+The docker-compose file that sets up the minio is located in `./tests/docker-compose.yml`.
