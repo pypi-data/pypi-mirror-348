@@ -1,0 +1,18 @@
+{% extends "generic/generic_content.html" %}
+{% load generic %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+
+{% if object %}
+
+  {% block title %}
+    {{ object }}
+  {% endblock title %}
+
+  {% block col %}
+    {% include "generic/partials/object_card.html" %}
+  {% endblock col %}
+
+{% endif %}
