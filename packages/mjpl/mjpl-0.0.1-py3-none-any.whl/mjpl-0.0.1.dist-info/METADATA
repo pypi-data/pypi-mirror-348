@@ -1,0 +1,129 @@
+Metadata-Version: 2.4
+Name: mjpl
+Version: 0.0.1
+Summary: MuJoCo motion planning library.
+Project-URL: Homepage, https://github.com/adlarkin/mjpl
+Author: Ashton Larkin
+Maintainer: Ashton Larkin
+License: MIT License
+        
+        Copyright (c) 2024 Ashton Larkin
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: manipulation,motion,mujoco,planning,robotics
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Framework :: Robot Framework :: Library
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.10
+Requires-Dist: mink>=0.0.8
+Requires-Dist: mujoco>=3
+Requires-Dist: numpy
+Requires-Dist: ruckig
+Requires-Dist: toppra>=0.6.3
+Provides-Extra: dev
+Requires-Dist: coveralls; extra == 'dev'
+Requires-Dist: pre-commit; extra == 'dev'
+Requires-Dist: robot-descriptions; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Requires-Dist: scipy; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coveralls; extra == 'test'
+Requires-Dist: robot-descriptions; extra == 'test'
+Requires-Dist: scipy; extra == 'test'
+Description-Content-Type: text/markdown
+
+# mjpl
+
+[![Build](https://img.shields.io/github/actions/workflow/status/adlarkin/mjpl/ci.yml)](https://github.com/adlarkin/mjpl/actions)
+[![Coverage Status](https://coveralls.io/repos/github/adlarkin/mjpl/badge.svg)](https://coveralls.io/github/adlarkin/mjpl?branch=main)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/adlarkin/mjpl/main.svg)](https://results.pre-commit.ci/latest/github/adlarkin/mjpl/main)
+[![PyPI - Version](https://img.shields.io/pypi/v/mjpl)](https://pypi.org/project/mjpl/)
+
+MuJoCo motion planning library.
+
+> [!Note]
+> This project is under active development.
+> APIs may change, and features are still a work in progress.
+
+Features:
+- Joint-space planning via bi-directional RRT, with support for constraints
+- Cartesian-space planning
+- Interfaces for constraints, inverse kinematics, and trajectory generation
+
+Limitations:
+- This library is designed for manipulator models that are composed of hinge/slide joints, and will not work with models that have ball/free joints.
+
+## Installation
+
+```
+pip install mjpl
+```
+
+## Development
+
+For local development, clone the repository and install the developer dependencies:
+```
+pip install -e ".[dev]"
+```
+
+This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and formatting.
+Unit tests are written via the [unittest](https://docs.python.org/3/library/unittest.html) framework.
+
+To run the linter, formatter, and tests locally:
+```bash
+# Check for linter errors
+ruff check .
+# Apply lint fixes
+ruff check --fix .
+
+# Check for format errors
+ruff format --diff .
+# Apply format fixes
+ruff format .
+
+# Run unit tests
+python3 -m unittest -v
+```
+
+[Pre-commit](https://pre-commit.com/) hooks are also available which run the linter, formatter, and unit tests.
+To trigger the hooks automatically on commit, install the pre-commit hooks:
+```
+pre-commit install
+```
+
+To trigger the hooks manually:
+```
+pre-commit run --all-files
+```
+
+To bypass installed pre-commit hooks on commit:
+```
+git commit --no-verify -m "your message"
+```
+
+## Acknowledgements:
+
+Thank you Sebastian Castro for the guidance and support that has been offered throughout the early stages of this project.
+If you find this library useful or interesting, consider checking out Sebastian's [pyroboplan](https://github.com/sea-bass/pyroboplan), which offers similar features via [Pinocchio](https://github.com/stack-of-tasks/pinocchio)!
