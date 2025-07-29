@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: quantum-anomaly-detection
+Version: 0.2.3
+Summary: A Python package for quantum-based anomaly detection.
+Home-page: https://github.com/MalekAlFakih/SciPy
+Author: Mohamed Malek Al Fakih & Abdellah Bichlifen
+Author-email: your.email@example.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: qiskit
+Requires-Dist: matplotlib
+Requires-Dist: jupyter
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+
+
+Quantum Anomaly Detection is a Python package that leverages quantum computing (via Qiskit) to detect anomalies in datasets.
+
+
+```bash
+git clone https://github.com/MalekAlFakih/quantum-anomaly-detection.git
+cd quantum-anomaly-detection
+pip install -e .
+```
+
+
+```python
+from quantum_anomaly_detection import QuantumAnomalyDetector
+import numpy as np
+data = np.random.rand(10, 2)
+detector = QuantumAnomalyDetector()
+detector.fit(data)
+scores = detector.predict(data)
+print("Scores:", scores)
+```
