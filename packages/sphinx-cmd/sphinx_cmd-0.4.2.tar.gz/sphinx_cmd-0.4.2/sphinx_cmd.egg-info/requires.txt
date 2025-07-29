@@ -1,0 +1,14 @@
+
+[:python_version < "3.11"]
+tomli>=2.0.0
+
+[dev]
+pytest>=7.0.0
+black
+flake8
+mypy
+isort
+pre-commit
+
+[test]
+pytest>=7.0.0
