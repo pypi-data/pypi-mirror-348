@@ -1,0 +1,28 @@
+include LICENSE
+include README.md
+include requirements.txt
+include .env.example
+
+# Include all Python files
+recursive-include newsapi2 *.py
+
+# Include database
+recursive-include newsapi2 *.db
+
+# Include specific directories
+recursive-include newsapi2/templates *
+recursive-include newsapi2/routers *
+recursive-include newsapi2/middleware *
+recursive-include newsapi2/services *
+recursive-include newsapi2/utils *
+recursive-include newsapi2/logs *
+
+# Include package data
+recursive-include newsapi2/static *
+
+# Exclude file patterns that shouldn't be included
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude *.so
+global-exclude .DS_Store 
