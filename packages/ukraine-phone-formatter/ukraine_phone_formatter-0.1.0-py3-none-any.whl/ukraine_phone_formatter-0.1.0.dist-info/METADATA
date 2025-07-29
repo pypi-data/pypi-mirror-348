@@ -1,0 +1,68 @@
+Metadata-Version: 2.4
+Name: ukraine-phone-formatter
+Version: 0.1.0
+Summary: Ukraine Phone Formatter is a simple Python library that formats Ukrainian phone numbers into a readable and standardized format.
+Home-page: https://github.com/stkossman/ukraine_phone_formatter_py
+Author: Andrii Stavskyi
+Author-email: Andrii Stavskyi <an.stawski@outlook.com>
+License: MIT License
+        
+        Copyright (c) 2025 Andrii Stavskyi
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# Ukraine Phone Formatter (python)
+
+Ukraine Phone Formatter is a simple Python library that formats Ukrainian phone numbers into a readable and standardized format
+
+## Installation
+```bash
+pip install ukraine-phone-formatter
+```
+
+## Usage
+```python
+from ukraine_phone_formatter import format_ukrainian_phone
+
+phone_number = "0501234567"
+formatted_number = format_ukrainian_phone(phone_number)
+print(formatted_number)  # Output: +38 (050) 123-45-67
+
+phone_number_with_code = "380679876543"
+formatted_number_with_code = format_ukrainian_phone(phone_number_with_code)
+print(formatted_number_with_code)  # Output: +38 (067) 987-65-43
+```
+
+## License
+This project is licensed under the [MIT License](LICENSE)
+
+## Author
+- [PyPi](https://pypi.org/user/stkossman/)
+- [Github](https://github.com/stkossman)
+- [Library as Ruby Gem](https://github.com/stkossman/ukraine_phone_formatter)
