@@ -1,0 +1,118 @@
+Metadata-Version: 2.4
+Name: pytedit
+Version: 0.1.1
+Summary: A lightweight terminal-based text editor library for Python
+Home-page: https://github.com/rachits999003/pytedit
+Author: Rachit Sharma, Lavkesh Dongre
+Author-email: rachits999003@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Console
+Classifier: Topic :: Text Editors
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENCE
+Requires-Dist: prompt_toolkit>=3.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# PyTEdit
+
+A lightweight, fast, terminal-based text editor library for Python. PyTEdit provides a modular and extensible framework for building terminal text editors, similar to `nano` or `micro`, but with modern Python features.
+
+## Features
+
+- File loading and saving
+- Arrow key navigation
+- Basic editing (insert, delete, backspace)
+- Save & quit shortcuts (`Ctrl+S`, `Ctrl+Q`)
+- Responsive interface with smooth cursor movement
+- Clean, modular code structure
+- Can be used as a library or standalone application
+
+## Installation
+
+```bash
+pip install pytedit
+```
+
+## Quick Start
+
+### Using as a standalone editor
+
+```bash
+# Launch editor
+pytedit
+
+# Open a file
+pytedit myfile.txt
+```
+
+### Using as a library in your project
+
+```python
+from pytedit import Editor, TextBuffer
+
+# Create a custom editor
+class MyCustomEditor(Editor):
+    def __init__(self):
+        super().__init__()
+        # Add custom initialization
+        self.status_message = "My Custom Editor"
+    
+    def create_key_bindings(self):
+        kb = super().create_key_bindings()
+        
+        # Add custom key bindings
+        @kb.add('c-f')
+        def _(event):
+            self.status_message = "Find functionality (custom)"
+            self.refresh_screen()
+            
+        return kb
+
+# Run your custom editor
+if __name__ == "__main__":
+    editor = MyCustomEditor()
+    editor.run()
+```
+
+## Architecture
+
+PyTEdit is built around these core components:
+
+1. **TextBuffer**: Manages text content and cursor position
+2. **Editor**: Handles input, rendering, and coordinates components
+3. **Key Bindings**: Configurable keyboard shortcuts for editor functions
+
+## Development Roadmap
+
+- Undo/redo stack
+- Syntax highlighting with Pygments
+- Line numbers
+- Search & replace functionality
+- Configurable themes and keybindings
+- Multiple file buffers
+- Split-screen editing
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
