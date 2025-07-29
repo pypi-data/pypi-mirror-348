@@ -1,0 +1,146 @@
+# 📦 industrial-model
+
+`industrial-model` is a Python ORM-style abstraction for querying views and data models in Cognite Data Fusion (CDF). It provides a declarative and type-safe way to model CDF views using `pydantic`, build queries, and interact with the CDF API in a Pythonic fashion.
+
+---
+
+## ✨ Features
+
+- Define CDF views using Pydantic-style classes.
+- Build complex queries using fluent and composable filters.
+- Easily fetch data using standard or paginated query execution.
+- Automatic alias and field transformation support.
+- Extensible and test-friendly design.
+
+---
+
+## 📦 Installation
+
+```bash
+pip install industrial-model
+```
+
+---
+
+## 🛠️ Usage Example
+
+```python
+import datetime
+from cognite.client import CogniteClient
+from pydantic import Field
+
+from industrial_model import (
+    AsyncEngine,
+    DataModelId,
+    Engine,
+    ViewInstance,
+    select,
+    col,
+    and_,
+    or_,
+)
+
+# Define entities (view instances)
+
+
+class Car(ViewInstance):
+    name: str
+
+
+class Region(ViewInstance):
+    name: str
+
+
+class Country(ViewInstance):
+    name: str
+    region: Region = Field(
+        alias="regionRef"
+    )  # Maps property to field if names differ
+
+
+class Person(ViewInstance):
+    name: str
+    birthday: datetime.date
+    livesIn: Country
+    cars: list[Car]
+
+
+# Initialize Cognite client and data model engine
+
+cognite_client = CogniteClient()
+
+data_model_id = DataModelId(
+    external_id="IndustrialData",
+    space="IndustralSpaceType",
+    version="v1"
+)
+
+engine = Engine(cognite_client, data_model_id)
+async_engine = AsyncEngine(cognite_client, data_model_id)  # Optional async engine
+
+
+# -----------------------------------
+# Example Queries
+# -----------------------------------
+
+# 1. Basic query: Find person named "Lucas"
+statement = select(Person).where(Person.name == "Lucas").limit(1)
+result = engine.query(statement)
+
+
+# 2. Combined filter with AND/OR
+statement = select(Person).where(
+    (Person.name == "Lucas") & (Person.birthday > datetime.date(2023, 1, 2)) |
+    (Person.name == "Another")
+)
+result = engine.query(statement)
+
+
+# 3. Same logic using `col()` expressions
+statement = select(Person).where(
+    (col("name").equals_("Lucas")) &
+    (col(Person.birthday).gt_("2023-01-02")) |
+    (Person.name == "Another")
+)
+result = engine.query(statement)
+
+
+# 4. Nested filtering using relationships
+statement = select(Person).where(
+    or_(
+        col(Person.livesIn).nested_(Country.name == "usa"),
+        and_(
+            col(Person.livesIn).nested_(col(Country.name).equals_("bra")),
+            col(Person.birthday).equals_("2023-01-01")
+        )
+    )
+)
+result = engine.query(statement)
+
+
+# 5. Paginated query with sorting and cursor
+statement = (
+    select(Person)
+    .where(
+        (Person.name == "Lucas") &
+        (Person.birthday > datetime.date(2023, 1, 2)) |
+        (Person.name == "Another")
+    )
+    .limit(10)
+    .cursor("NEXT CURSOR")
+    .asc(Person.name)
+)
+result = engine.query(statement)
+
+
+# 6. Fetch all pages of a query
+statement = select(Person).where(
+    (Person.name == "Lucas") &
+    (Person.birthday > datetime.date(2023, 1, 2)) |
+    (Person.name == "Another")
+)
+all_results = engine.query_all_pages(statement)
+
+```
+
+---
