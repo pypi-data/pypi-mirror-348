@@ -1,0 +1,29 @@
+graft docs
+graft examples
+graft src
+graft ci
+graft tests
+
+include .coveragerc
+include .cookiecutterrc
+include .editorconfig
+exclude Dockerfile
+exclude .dockerignore
+
+include AUTHORS.rst
+include CHANGELOG.rst
+include CONTRIBUTING.rst
+include LICENSE
+include README.rst
+
+include *.txt
+include *.cfg
+include *.ini
+include *.yml
+include *.yaml
+
+include src/asn1/core.pyi
+include src/asn1/py.typed
+
+global-exclude *.py[cod] __pycache__ *.so *.dylib .DS_Store .mypy_cache
+exclude .python-version
