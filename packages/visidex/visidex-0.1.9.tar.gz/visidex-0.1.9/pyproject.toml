@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "visidex"
+version = "0.1.9"
+description = "Keypoint detection and visual retrieval library for image identification."
+authors = ["Wagner Santos <wlsantos@cmb.gov.br>"]
+readme = "README.md"
+packages = [
+    { include = "visidex" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9.21"
+# Principais
+tqdm = "^4.67.1"
+torch = {version = "^2.1.0", source = "torch"}#2.7.0+cu118
+#torchvision = {version = "^0.20.1+cu118", source = "torch"}#2.7.0+cu118
+#torchaudio = {version = "^2.5.1+cu118", source = "torch"}
+kornia="^0.8.0"
+e2cnn="^0.2.3"
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
