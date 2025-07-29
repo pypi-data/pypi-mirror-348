@@ -1,0 +1,83 @@
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "musica"
+dynamic = ["version"]
+readme = "README.md"
+description = "MUSICA is a Python library for performing computational simulations in atmospheric chemistry."
+authors = [
+    { name = "Matthew Dawsom", email = "mattdawson@ucar.edu" },
+    { name = "Jiwon Gim", email = "jiwongim@ucar.edu" },
+    { name = "David Fillmore", email = "fillmore@ucar.edu" },
+    { name = "Kyle Shores", email = "kshores@ucar.edu" },
+    { name = "Montek Thind", email = "mthind@ucar.edu" }
+]
+maintainers = [{ name = "ACOM MUSICA Developers", email = "musica-support@ucar.edu" }]
+license = { file = "LICENSE" }
+
+dependencies = [
+]
+
+[project.optional-dependencies]
+test = [
+  "numpy",
+  "pytest",
+]
+
+[tool.scikit-build]
+cmake.build-type = "Release"
+cmake.args = [
+  "-DMUSICA_ENABLE_PYTHON_LIBRARY=ON",
+  "-DMUSICA_ENABLE_TUVX=OFF",
+  "-DMUSICA_BUILD_FORTRAN_INTERFACE=OFF",
+  "-DMUSICA_ENABLE_TESTS=OFF",
+  "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+]
+
+[[tool.scikit-build.overrides]]
+if.any.env.BUILD_GPU = true
+cmake.args = [
+  "-DMUSICA_ENABLE_PYTHON_LIBRARY=ON",
+  "-DMUSICA_ENABLE_TUVX=OFF",
+  "-DMUSICA_BUILD_FORTRAN_INTERFACE=OFF",
+  "-DMUSICA_ENABLE_TESTS=OFF",
+  "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+  "-DMUSICA_GPU_TYPE=all_major",
+  "-DMUSICA_SET_MICM_DEFAULT_VECTOR_SIZE=1"
+]
+
+[[tool.scikit-build.overrides]]
+if.platform-system ="linux"
+if.platform-machine = "i686"
+cmake.args = [
+  "-DMUSICA_ENABLE_PYTHON_LIBRARY=ON",
+  "-DMUSICA_ENABLE_TUVX=OFF",
+  "-DMUSICA_BUILD_FORTRAN_INTERFACE=OFF",
+  "-DMUSICA_ENABLE_TESTS=OFF",
+  "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+]
+
+
+[project.urls]
+homepage = "https://wiki.ucar.edu/display/MUSICA/MUSICA+Home"
+
+# dynamically read the version: https://scikit-build-core.readthedocs.io/en/latest/configuration.html#dynamic-metadata
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "CMakeLists.txt"
+regex = 'musica-distribution VERSION\s+(?P<value>[0-9.]+)'
+
+[[tool.scikit-build.generate]]
+path = "musica/_version.py"
+template = '''
+version = "${version}"
+'''
+
+[tool.cibuildwheel]
+# Increase pip debugging output
+build-verbosity = 3
+
+[tool.cibuildwheel.macos.environment]
+MACOSX_DEPLOYMENT_TARGET = "10.15"
