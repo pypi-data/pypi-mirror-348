@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: moniplot
+Version: 1.4.0
+Summary: a Python data visualization library for (satellite) instrument monitoring
+Project-URL: homepage, https://github.com/rmvanhees/moniplot
+Project-URL: documentation, https://moniplot.readthedocs.io/en/latest/
+Project-URL: Issue tracker, https://github.com/rmvanhees/moniplot/issues
+Author-email: Richard van Hees <R.M.van.Hees@sron.nl>, Paul Tol <P.J.J.Tol@sron.nl>
+License-Expression: Apache-2.0
+License-File: LICENSE
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Atmospheric Science
+Classifier: Topic :: Scientific/Engineering :: Image Processing
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.10
+Requires-Dist: cartopy>0.21
+Requires-Dist: h5py>=3.9
+Requires-Dist: matplotlib>=3.7
+Requires-Dist: numpy>=1.25
+Requires-Dist: tomli>=1; python_version < '3.11'
+Requires-Dist: typing-extensions; python_version < '3.11'
+Requires-Dist: xarray>=2023.3
+Description-Content-Type: text/markdown
+
+# moniplot
+[![Package Release](https://img.shields.io/pypi/v/moniplot.svg?label=version)](https://pypi.org/project/moniplot/)
+[![Package Status](https://img.shields.io/pypi/status/moniplot.svg?label=status)](https://pypi.org/project/moniplot/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/moniplot.svg?label=PyPI%20downloads)](https://github.com/rmvanhees/moniplot/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7024743.svg)](https://doi.org/10.5281/zenodo.7024743)
+
+Moniplot is a Python data visualization library based on
+[matplotlib](https://matplotlib.org) and [xarray](https://xarray.pydata.org).
+It provides a high-level interface for drawing attractive and informative
+graphics for onground calibration data analysis or inflight instrument
+monitoring.
+
+## Documentation
+Online documentation is available from [Read the Docs](https://moniplot.readthedocs.io).
+
+## Installation
+The module moniplot requires Python3.8+ and Python modules: cartopy, h5py, matplotlib, numpy and xarray.
+
+Installation instructions are provided on [Read the Docs](https://moniplot.readthedocs.io/en/latest/build.html) or in the INSTALL file.
+
+## Origin
+Several modules from the package [pys5p](https://pypi.org/project/pys5p) have been moved to moniplot, because they are not specific for the data of Sentinel 5 precursor.
+* module biweight.py - contains a Python implementation of the Tukey's biweight algorithm.
+* module tol_colors.py - definition of colour schemes for lines and maps that also work for colour-blind
+people by [Paul Tol](https://personal.sron.nl/~pault/).
+* module s5p\_plot.py - the class S5Pplot is rewritten and now available as MONplot in the module mon_plot.py.
+
+
