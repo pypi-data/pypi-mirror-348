@@ -1,0 +1,32 @@
+[project]
+name = "my-mcp-casper"
+version = "0.0.12"
+description = "My MCP Server"
+authors = [
+    {name = "My", email = "support@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+    "setuptools>=45",
+]
+
+keywords = [
+    "mcp",
+    "text-to-speech",
+    "speech-to-text",
+    "voice-cloning",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["client*", "my_mcp_casper*"]
+
+[project.scripts]
+my-mcp-casper = "my_mcp_casper.server:main"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
