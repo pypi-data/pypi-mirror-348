@@ -1,0 +1,204 @@
+#!/usr/bin/env python
+# setup.py
+
+"""
+cardinal_pythonlib setup file
+
+To use:
+
+    python setup.py sdist
+
+    twine upload dist/*
+
+To install in development mode:
+
+    pip install -e .
+
+"""
+
+from setuptools import setup, find_packages
+from codecs import open  # noqa: A004
+from os import path
+
+from cardinal_pythonlib.version_string import VERSION_STRING
+
+PACKAGE_NAME = "cardinal_pythonlib"
+THIS_DIR = path.abspath(path.dirname(__file__))
+README_FILE = path.join(THIS_DIR, "README.rst")  # read
+
+
+# =============================================================================
+# Get the long description from the README file
+# =============================================================================
+
+with open(README_FILE, encoding="utf-8") as f:
+    long_description = f.read()
+
+
+# =============================================================================
+# Specify requirements
+# =============================================================================
+
+REQUIREMENTS = [
+    # - Include most things that are imported without "try / except
+    #   ImportError" handling.
+    # - Include as few version requirements as possible.
+    # - Keep it to pure-Python packages (for e.g. Windows installation with no
+    #   compiler).
+    # - Keep it to SMALL packages.
+    # - SEE ALSO external_dependencies.rst
+    "alembic",
+    "appdirs>=1.4.0",
+    "arrow>=0.15",
+    "beautifulsoup4",  # "import bs4" or "from bs4 import ..."
+    "chardet>=5.0.0",
+    "colorlog",
+    "extract_msg",
+    "isodate>=0.5.4",
+    "numba",  # just-in-time compilation
+    "numpy>=1.20.0,<2.0",  # 1.20.0 required for numpy.typing
+    "openpyxl",
+    "pandas",
+    "pendulum>=2.1.1",
+    "pdfminer.six>=20191010",  # "import pdfminer"
+    "prettytable",
+    "psutil",
+    "pygments",
+    "pyparsing",
+    "pypdf>=3.1.0",  # https://pypdf.readthedocs.io/en/stable/
+    "python-dateutil",  # "import dateutil"
+    "rich-argparse>=0.5.0",  # colourful help
+    "scipy",
+    "semantic-version",
+    "SQLAlchemy>=1.4,<3.0",
+    "sqlparse",
+    "xlrd>=2.0.0",
+]
+
+NOTES_RE_OTHER_REQUIREMENTS = """
+
+# -----------------------------------------------------------------------------
+# Use the PyPi index:
+# -----------------------------------------------------------------------------
+--index-url https://pypi.python.org/simple/
+
+
+# -----------------------------------------------------------------------------
+# FOR OTHER REQUIREMENTS, AND OPTIONAL EXTRAS: SEE external_dependencies.rst
+# -----------------------------------------------------------------------------
+
+"""
+
+
+# =============================================================================
+# setup args
+# =============================================================================
+
+setup(
+    name=PACKAGE_NAME,
+    version=VERSION_STRING,
+    description="Miscellaneous Python libraries",
+    long_description=long_description,
+    # The project's main homepage.
+    url="https://github.com/RudolfCardinal/pythonlib",
+    # Author details
+    author="Rudolf Cardinal",
+    author_email="rudolf@pobox.com",
+    # Choose your license
+    license="Apache License 2.0",
+    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        "Development Status :: 4 - Beta",
+        # Indicate who your project is intended for
+        "Intended Audience :: Developers",
+        # Pick your license as you wish (should match "license" above)
+        "License :: OSI Approved :: Apache Software License",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Topic :: Software Development :: Libraries",
+    ],
+    keywords="cardinal",
+    packages=find_packages(),  # finds all the .py files in subdirectories
+    install_requires=REQUIREMENTS,
+    entry_points={
+        "console_scripts": [
+            # Format is 'script=module:function".
+            # openxml
+            (
+                "cardinalpythonlib_find_bad_openxml="
+                "cardinal_pythonlib.openxml.find_bad_openxml:main",
+            ),
+            (
+                "cardinalpythonlib_find_recovered_openxml="
+                "cardinal_pythonlib.openxml.find_recovered_openxml:main"
+            ),
+            (
+                "cardinalpythonlib_grep_in_openxml="
+                "cardinal_pythonlib.openxml.grep_in_openxml:main"
+            ),
+            (
+                "cardinalpythonlib_pause_process_by_disk_space="
+                "cardinal_pythonlib.openxml.pause_process_by_disk_space:main"
+            ),
+            # tools
+            (
+                "cardinalpythonlib_backup_mysql_database="
+                "cardinal_pythonlib.tools.backup_mysql_database:main"
+            ),
+            (
+                "cardinalpythonlib_bulk_email="
+                "cardinal_pythonlib.bulk_email.main:main"
+            ),
+            (
+                "cardinalpythonlib_convert_athena_ohdsi_codes="
+                "cardinal_pythonlib.tools.convert_athena_ohdsi_codes:main"
+            ),
+            (
+                "cardinalpythonlib_convert_mdb_to_mysql="
+                "cardinal_pythonlib.tools.convert_mdb_to_mysql:main"
+            ),
+            (
+                "cardinalpythonlib_estimate_mysql_memory_usage="
+                "cardinal_pythonlib.tools.estimate_mysql_memory_usage:main"
+            ),
+            (
+                "cardinalpythonlib_list_all_file_extensions="
+                "cardinal_pythonlib.tools.list_all_file_extensions:main"
+            ),
+            (
+                "cardinalpythonlib_merge_csv="
+                "cardinal_pythonlib.tools.merge_csv:main"
+            ),
+            (
+                "cardinalpythonlib_pdf_to_booklet="
+                "cardinal_pythonlib.tools.pdf_to_booklet:main"
+            ),
+            (
+                "cardinalpythonlib_remove_duplicate_files="
+                "cardinal_pythonlib.tools.remove_duplicate_files:main"
+            ),
+            (
+                "cardinalpythonlib_explore_clang_format_config="
+                "cardinal_pythonlib.tools.explore_clang_format_config:main"
+            ),
+            # other
+            "cardinalpythonlib_chebi=cardinal_pythonlib.chebi:main",
+            (
+                "cardinalpythonlib_email="
+                "cardinal_pythonlib.email_utils.sendmail:main"
+            ),
+            (
+                "cardinalpythonlib_extract_text="
+                "cardinal_pythonlib.extract_text:main"
+            ),
+        ]
+    },
+)

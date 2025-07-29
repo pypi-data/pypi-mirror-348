@@ -1,0 +1,44 @@
+Metadata-Version: 2.1
+Name: cardinal-pythonlib
+Version: 2.1.1
+Summary: Miscellaneous Python libraries
+Home-page: https://github.com/RudolfCardinal/pythonlib
+Author: Rudolf Cardinal
+Author-email: rudolf@pobox.com
+License: Apache License 2.0
+Keywords: cardinal
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Software Development :: Libraries
+License-File: LICENSE
+
+cardinal_pythonlib
+==================
+
+.. Build status:
+
+.. image:: https://github.com/RudolfCardinal/pythonlib/actions/workflows/docs.yml/badge.svg
+    :target: https://github.com/RudolfCardinal/pythonlib/actions/workflows/docs.yml/
+
+.. image:: https://github.com/RudolfCardinal/pythonlib/actions/workflows/run_tests.yml/badge.svg
+    :target: https://github.com/RudolfCardinal/pythonlib/actions/workflows/run_tests.yml/
+
+.. Code style:
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
+
+Simple library functions used by other code, and some basic command-line tools.
+
+By Rudolf Cardinal (rudolf@pobox.com)
+
+Install with ``pip install cardinal_pythonlib``.
+
+Documentation is at https://cardinalpythonlib.readthedocs.io/.
