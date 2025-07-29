@@ -1,0 +1,346 @@
+Metadata-Version: 2.4
+Name: zeebee-ai-client
+Version: 0.1.6
+Summary: Python SDK for the ZeebeeAI Chat Platform
+Home-page: https://github.com/zeebeeai/zeebee-sdk-chat
+Author: ZeebeeAI Team
+Author-email: support@zeebee.ai
+Keywords: ai,chat,sdk,llm,gpt,claude,voice,zeebee
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.25.0
+Requires-Dist: websockets>=10.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.18.0; extra == "dev"
+Requires-Dist: mypy>=0.910; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: isort>=5.10.0; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Requires-Dist: twine>=4.0.0; extra == "dev"
+Requires-Dist: build>=0.8.0; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# ZeebeeAI Python SDK
+
+The ZeebeeAI Python client library provides a simple and powerful way to integrate AI functionality into your Python applications, including multi-model support, agent orchestration, and advanced routing capabilities.
+
+## Features
+
+- **AI Chat**: Access to various language models including GPT-4o through a unified API
+- **Voice Chat**: Real-time bidirectional voice chat with WebSocket support
+- **Dynamic Layout Engine**: Intelligently generate appropriate layouts for content based on message complexity
+- **Agent Orchestration**: Create, configure, and execute specialized AI agents for specific tasks
+- **Autonomous Routing**: Intelligent routing of user messages to appropriate agents, pipelines, or models
+- **Conversation Management**: Tools for handling conversation history and context
+
+## Installation
+
+```bash
+pip install zeebee-ai-client
+```
+
+## Basic Usage - AI Chat
+
+```python
+import os
+from zeebee_ai_client import ZeebeeClient
+
+# Initialize the client
+client = ZeebeeClient(
+    api_key=os.environ.get("ZEEBEE_API_KEY"),  # Replace with your API key
+)
+
+# Send a simple message
+response = client.chat("Hello, how can you help me today?")
+print(response["message"])
+
+# Or create a conversation for multi-turn interactions
+conversation = client.create_conversation()
+conversation_id = conversation["id"]
+response = client.chat("Tell me about quantum computing", conversation_id=conversation_id)
+print(response["message"])
+
+# Continue the conversation
+follow_up = client.chat("How is that related to cryptography?", conversation_id=conversation_id)
+print(follow_up["message"])
+```
+
+## Voice Chat
+
+```python
+import os
+import asyncio
+import soundfile as sf  # pip install soundfile
+import sounddevice as sd  # pip install sounddevice
+from zeebee_ai_client import WebSocketVoiceChat
+
+# Example callback functions
+def on_transcript(text):
+    """Called when your audio is transcribed to text"""
+    print(f"\n🎤 You said: {text}")
+
+def on_response(text):
+    """Called when AI responds with text"""
+    print(f"\n🤖 AI response: {text}")
+
+def on_audio(audio_data):
+    """Called when AI responds with audio"""
+    # Save the audio to a file
+    with open("ai_response.wav", "wb") as f:
+        f.write(audio_data)
+
+    # If you have soundfile/sounddevice installed, play the audio
+    try:
+        # Save temporarily and play
+        with open("temp_response.wav", "wb") as f:
+            f.write(audio_data)
+
+        # Load and play audio
+        data, samplerate = sf.read("temp_response.wav")
+        sd.play(data, samplerate)
+        sd.wait()  # Wait until audio is finished playing
+        print(f"🔊 Playing audio response ({len(audio_data)} bytes)")
+    except Exception as e:
+        print(f"Could not play audio: {e}")
+        print(f"Audio saved to ai_response.wav ({len(audio_data)} bytes)")
+
+def on_error(error_message):
+    """Called when an error occurs"""
+    print(f"\n❌ Error: {error_message}")
+
+def on_status(status):
+    """Called when connection status changes"""
+    status_symbols = {
+        "connecting": "🔄",
+        "connected": "🟢",
+        "ready": "✅",
+        "processing": "⏳",
+        "disconnected": "🔴",
+        "reconnecting": "🔁"
+    }
+    symbol = status_symbols.get(status, "ℹ️")
+    print(f"{symbol} Status: {status}")
+
+async def main():
+    # Initialize the WebSocket voice chat client
+    voice_chat = WebSocketVoiceChat(
+        api_key=os.environ.get("ZEEBEE_API_KEY")
+    )
+
+    # Create a voice chat session with our callback functions
+    session = voice_chat.create_session(
+        model="gpt-4o",  # AI model to use
+        on_transcript=on_transcript,
+        on_response=on_response,
+        on_audio=on_audio,
+        on_error=on_error,
+        on_status=on_status
+    )
+
+    # Connect to the WebSocket server
+    connected = await session.connect()
+    if not connected:
+        print("Failed to connect to voice chat server")
+        return
+
+    # Send an audio file to the server
+    audio_file_path = "recording.wav"  # Path to your WAV audio file
+
+    print(f"\nSending audio file: {audio_file_path}")
+    success = await session.send_audio(audio_file_path)
+
+    if success:
+        print("Audio sent successfully")
+    else:
+        print("Failed to send audio")
+
+    # Wait for the interaction to complete
+    print("Waiting for response...")
+    await asyncio.sleep(30)
+
+    # Disconnect when done
+    await session.disconnect()
+    await voice_chat.close_all_sessions()
+    print("\nSession ended")
+
+# Run the async main function
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Dynamic Layout Engine
+
+```python
+from zeebee_ai_client import ZeebeeClient, LayoutController, LayoutType
+import os
+
+# Initialize the SDK
+client = ZeebeeClient(api_key=os.environ.get("ZEEBEE_API_KEY"))
+
+# Initialize the layout controller for layout generation
+layout = LayoutController(client)
+
+# Generate a dynamic layout for tabular data
+table_layout = layout.generate_layout(
+    message="Create a table comparing Python, JavaScript, and Java programming languages",
+    routing_result={
+        "suggested_template": LayoutType.TABLE_LAYOUT,
+        "content_analysis": {
+            "contentTypes": ["table", "comparison"],
+            "complexity": "medium",
+            "formality": "formal"
+        }
+    }
+)
+
+print(f"Generated layout template: {table_layout['layout']['template']}")
+print(f"Layout type: {table_layout['layout']['type']}")
+print(f"Number of components: {len(table_layout['layout']['components'])}")
+print(f"Content analysis: {table_layout['layout']['content_analysis']}")
+```
+
+## Agent Orchestration
+
+```python
+from zeebee_ai_client import ZeebeeClient, AgentController, AgentTypes, PipelineController
+import os
+
+# Initialize the SDK
+client = ZeebeeClient(api_key=os.environ.get("ZEEBEE_API_KEY"))
+
+# Initialize the controllers
+agents = AgentController(client)
+pipelines = PipelineController(client)
+
+# Create a specialized research agent
+research_agent = agents.create_agent(
+    name="Research Agent",
+    agent_type=AgentTypes.RETRIEVAL,
+    configuration={
+        "description": "Retrieves and analyzes research information",
+        "system_prompt": "You are a specialized research assistant. Provide detailed, accurate information with sources."
+    },
+    description="A specialized assistant for research tasks",
+    model_id="gpt-4o"
+)
+
+# Create a summarization agent
+summarize_agent = agents.create_agent(
+    name="Summarize Agent",
+    agent_type=AgentTypes.SUMMARIZATION,
+    configuration={
+        "system_prompt": "You are a summarization expert. Create concise, accurate summaries of complex information."
+    },
+    description="An agent that summarizes complex information",
+    model_id="gpt-4o"
+)
+
+# Create a pipeline of multiple agents
+pipeline = pipelines.create_pipeline(
+    name="Research and Summarize",
+    stages=[
+        {
+            "agent_id": research_agent["agent_id"],
+            "name": "Research Stage",
+            "input_mapping": {"query": "$.input.research_topic"},
+            "output_mapping": {"research_results": "$.output.result"}
+        },
+        {
+            "agent_id": summarize_agent["agent_id"],
+            "name": "Summarize Stage",
+            "input_mapping": {"text": "$.stages.Research Stage.research_results"},
+            "output_mapping": {"summary": "$.output.result"}
+        }
+    ],
+    description="Pipeline that researches a topic and summarizes the findings"
+)
+
+# Execute the pipeline
+pipeline_result = pipelines.execute_pipeline(
+    pipeline_id=pipeline["pipeline_id"],
+    input_data={"research_topic": "Recent breakthroughs in quantum computing"}
+)
+
+print(f"Pipeline results: {pipeline_result}")
+```
+
+## Autonomous Routing
+
+```python
+from zeebee_ai_client import ZeebeeClient, RoutingController
+import os
+
+# Initialize the SDK
+client = ZeebeeClient(api_key=os.environ.get("ZEEBEE_API_KEY"))
+
+# Initialize the routing controller
+routing = RoutingController(client)
+
+# Route a message to the appropriate agent, pipeline, or model
+routing_result = routing.route_message(
+    message="Can you analyze this data and create a visualization?"
+)
+
+print(f"Routing to: {routing_result['route_to']} ({routing_result['route_type']})")
+print(f"Confidence: {routing_result['confidence']}")
+print(f"Intent information: {routing_result['intent']}")
+print(f"Reasoning: {routing_result['reasoning']}")
+```
+
+## Error Handling
+
+The SDK includes custom exceptions for different error types:
+
+```python
+from zeebee_ai_client import (
+    AuthenticationError,
+    RateLimitError,
+    AgentException,
+    PipelineException
+)
+
+try:
+    response = client.chat(message="Hello")
+except AuthenticationError as e:
+    print(f"Authentication error: {e}")
+except RateLimitError as e:
+    print(f"Rate limit exceeded: {e}")
+except AgentException as e:
+    print(f"Agent error: {e}")
+except PipelineException as e:
+    print(f"Pipeline error: {e}")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
+
+## Compatibility
+
+The ZeebeeAI Python SDK requires Python 3.8 or higher.
+
+## Documentation
+
+For more detailed information and examples, visit the [official ZeebeeAI documentation](https://zeebee.ai/docs).
+
+## License
+
+This SDK is licensed under the MIT License.
