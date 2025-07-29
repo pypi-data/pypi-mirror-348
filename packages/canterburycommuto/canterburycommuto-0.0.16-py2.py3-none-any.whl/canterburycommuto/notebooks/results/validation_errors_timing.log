@@ -1,0 +1,942 @@
+2025-05-15 18:25:01,246 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 18:25:01,247 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 18:25:01,247 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 18:25:01,248 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 18:25:02,000 - INFO - Time for before_a API call: 0.23 seconds
+2025-05-15 18:25:02,000 - INFO - Time for before_a API call: 0.22 seconds
+2025-05-15 18:25:02,048 - INFO - Time for before_a API call: 0.20 seconds
+2025-05-15 18:25:02,073 - INFO - Time for before_a API call: 0.20 seconds
+2025-05-15 18:25:02,126 - ERROR - Error in process_row_overlap for row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:25:02,142 - INFO - Time for before_a API call: 0.21 seconds
+2025-05-15 18:25:02,181 - INFO - Time for overlap_a API call: 0.18 seconds
+2025-05-15 18:25:02,197 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-15 18:25:02,216 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:25:02,225 - INFO - Time for overlap_a API call: 0.15 seconds
+2025-05-15 18:25:02,262 - INFO - Time for overlap_a API call: 0.21 seconds
+2025-05-15 18:25:02,279 - INFO - Time for before_a API call: 0.19 seconds
+2025-05-15 18:25:02,320 - INFO - Time for after_a API call: 0.14 seconds
+2025-05-15 18:25:02,345 - INFO - Time for after_a API call: 0.15 seconds
+2025-05-15 18:25:02,356 - INFO - Time for overlap_a API call: 0.21 seconds
+2025-05-15 18:25:02,369 - INFO - Time for after_a API call: 0.14 seconds
+2025-05-15 18:25:02,420 - INFO - Time for overlap_a API call: 0.14 seconds
+2025-05-15 18:25:02,436 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:25:02,451 - INFO - Time for after_a API call: 0.19 seconds
+2025-05-15 18:25:02,488 - INFO - Time for before_b API call: 0.14 seconds
+2025-05-15 18:25:02,500 - INFO - Time for before_b API call: 0.18 seconds
+2025-05-15 18:25:02,508 - INFO - Time for before_b API call: 0.14 seconds
+2025-05-15 18:25:02,549 - INFO - Time for after_a API call: 0.19 seconds
+2025-05-15 18:25:02,595 - INFO - Time for after_a API call: 0.18 seconds
+2025-05-15 18:25:02,642 - INFO - Time for before_b API call: 0.19 seconds
+2025-05-15 18:25:02,649 - INFO - Time for after_b API call: 0.15 seconds
+2025-05-15 18:25:02,656 - INFO - Time for after_b API call: 0.15 seconds
+2025-05-15 18:25:02,670 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-15 18:25:02,746 - INFO - Time for before_b API call: 0.20 seconds
+2025-05-15 18:25:02,769 - INFO - Time for before_b API call: 0.17 seconds
+2025-05-15 18:25:02,840 - INFO - Time for after_b API call: 0.20 seconds
+2025-05-15 18:25:02,843 - ERROR - Error in process_row_overlap for row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:25:02,919 - INFO - Time for after_b API call: 0.17 seconds
+2025-05-15 18:25:02,965 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-15 18:31:40,217 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 18:31:40,217 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 18:31:40,217 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 18:31:40,218 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 18:31:40,789 - INFO - API call for overlap_a took 0.17 seconds
+2025-05-15 18:31:40,817 - INFO - API call for overlap_a took 0.22 seconds
+2025-05-15 18:31:40,823 - INFO - API call for overlap_a took 0.21 seconds
+2025-05-15 18:31:40,851 - INFO - API call for overlap_a took 0.19 seconds
+2025-05-15 18:31:40,890 - INFO - API call for overlap_a took 0.22 seconds
+2025-05-15 18:31:41,019 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:31:41,026 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:31:41,122 - INFO - API call for overlap_a took 0.20 seconds
+2025-05-15 18:31:41,163 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 18:31:41,240 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:28:26,475 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:28:26,475 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:28:26,475 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:28:26,475 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:28:27,164 - INFO - Time for before_a API call: 0.10 seconds
+2025-05-15 20:28:27,227 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:28:27,253 - INFO - Time for before_a API call: 0.12 seconds
+2025-05-15 20:28:27,263 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:28:27,268 - INFO - Time for overlap_a API call: 0.10 seconds
+2025-05-15 20:28:27,319 - INFO - Time for before_a API call: 0.10 seconds
+2025-05-15 20:28:27,331 - INFO - Time for after_a API call: 0.06 seconds
+2025-05-15 20:28:27,358 - INFO - Time for before_a API call: 0.10 seconds
+2025-05-15 20:28:27,362 - INFO - Time for overlap_a API call: 0.11 seconds
+2025-05-15 20:28:27,372 - INFO - Time for overlap_a API call: 0.05 seconds
+2025-05-15 20:28:27,373 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:28:27,401 - INFO - Time for before_a API call: 0.13 seconds
+2025-05-15 20:28:27,413 - INFO - Time for before_b API call: 0.08 seconds
+2025-05-15 20:28:27,428 - INFO - Time for after_a API call: 0.06 seconds
+2025-05-15 20:28:27,431 - INFO - Time for after_a API call: 0.07 seconds
+2025-05-15 20:28:27,460 - INFO - Time for overlap_a API call: 0.10 seconds
+2025-05-15 20:28:27,472 - INFO - Time for before_b API call: 0.04 seconds
+2025-05-15 20:28:27,478 - INFO - Time for before_b API call: 0.05 seconds
+2025-05-15 20:28:27,523 - INFO - Time for overlap_b API call: 0.11 seconds
+2025-05-15 20:28:27,536 - INFO - Time for before_a API call: 0.12 seconds
+2025-05-15 20:28:27,543 - INFO - Time for overlap_a API call: 0.14 seconds
+2025-05-15 20:28:27,560 - INFO - Time for after_a API call: 0.10 seconds
+2025-05-15 20:28:27,563 - INFO - Time for overlap_b API call: 0.09 seconds
+2025-05-15 20:28:27,576 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:28:27,589 - INFO - Time for overlap_b API call: 0.11 seconds
+2025-05-15 20:28:27,612 - INFO - Time for after_b API call: 0.09 seconds
+2025-05-15 20:28:27,664 - INFO - Time for after_b API call: 0.07 seconds
+2025-05-15 20:28:27,666 - INFO - Time for overlap_a API call: 0.13 seconds
+2025-05-15 20:28:27,667 - INFO - Time for after_a API call: 0.12 seconds
+2025-05-15 20:28:27,670 - INFO - Time for after_b API call: 0.11 seconds
+2025-05-15 20:28:27,680 - INFO - Time for before_b API call: 0.12 seconds
+2025-05-15 20:28:27,734 - INFO - Time for after_a API call: 0.07 seconds
+2025-05-15 20:28:27,747 - INFO - Time for overlap_b API call: 0.07 seconds
+2025-05-15 20:28:27,810 - INFO - Time for before_b API call: 0.14 seconds
+2025-05-15 20:28:27,820 - INFO - Time for before_b API call: 0.09 seconds
+2025-05-15 20:28:27,833 - INFO - Time for after_b API call: 0.09 seconds
+2025-05-15 20:28:27,883 - INFO - Time for overlap_b API call: 0.07 seconds
+2025-05-15 20:28:27,925 - INFO - Time for overlap_b API call: 0.10 seconds
+2025-05-15 20:28:27,938 - INFO - Time for after_b API call: 0.06 seconds
+2025-05-15 20:28:28,025 - INFO - Time for after_b API call: 0.10 seconds
+2025-05-15 20:29:20,174 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:29:20,174 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:29:20,174 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:29:20,174 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:29:20,642 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:29:20,746 - INFO - Time for overlap_a API call: 0.09 seconds
+2025-05-15 20:29:20,749 - INFO - Time for overlap_a API call: 0.10 seconds
+2025-05-15 20:29:20,835 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:29:20,892 - INFO - Time for overlap_b API call: 0.14 seconds
+2025-05-15 20:29:20,903 - INFO - Time for overlap_b API call: 0.16 seconds
+2025-05-15 20:29:20,925 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-15 20:29:20,932 - INFO - Time for overlap_a API call: 0.35 seconds
+2025-05-15 20:29:20,962 - INFO - Time for overlap_a API call: 0.15 seconds
+2025-05-15 20:29:20,963 - INFO - Time for overlap_a API call: 0.24 seconds
+2025-05-15 20:29:21,047 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:29:21,053 - INFO - Time for overlap_b API call: 0.12 seconds
+2025-05-15 20:29:21,060 - INFO - Time for overlap_b API call: 0.13 seconds
+2025-05-15 20:29:21,062 - INFO - Time for overlap_b API call: 0.10 seconds
+2025-05-15 20:29:21,065 - INFO - Time for overlap_b API call: 0.10 seconds
+2025-05-15 20:29:21,162 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:30:58,230 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:30:58,230 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:30:58,230 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:30:58,231 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:30:58,619 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,619 - INFO - Time to create LineString: 0.000966 seconds
+2025-05-15 20:30:58,694 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,694 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,711 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,712 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:30:58,748 - INFO - Time to create LineString: 0.015656 seconds
+2025-05-15 20:30:58,767 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,786 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:30:58,786 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-15 20:30:58,835 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:30:58,836 - INFO - Time to create LineString: 0.001996 seconds
+2025-05-15 20:30:58,852 - INFO - Time to compute buffer intersection of A and B: 0.010033 seconds
+2025-05-15 20:30:58,863 - INFO - Time to create LineString: 0.000283 seconds
+2025-05-15 20:30:58,864 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:58,874 - INFO - Time to compute buffer intersection of A and B: 0.000997 seconds
+2025-05-15 20:30:58,875 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:30:58,879 - INFO - Time to compute buffer intersection of A and B: 0.001994 seconds
+2025-05-15 20:30:58,890 - INFO - Time to compute buffer intersection of A and B: 0.000804 seconds
+2025-05-15 20:30:58,902 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-15 20:30:58,902 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-15 20:30:58,924 - INFO - Time to create LineString: 0.002019 seconds
+2025-05-15 20:30:58,928 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-15 20:30:58,934 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:30:58,935 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-15 20:30:58,961 - INFO - Time to convert buffer A to GeoJSON: 0.012966 seconds
+2025-05-15 20:30:58,962 - INFO - Time to convert buffer B to GeoJSON: 0.001009 seconds
+2025-05-15 20:30:58,965 - INFO - Time to convert buffer A to GeoJSON: 0.015074 seconds
+2025-05-15 20:30:58,966 - INFO - Time to convert buffer B to GeoJSON: 0.000907 seconds
+2025-05-15 20:30:58,966 - INFO - Time to compute buffer intersection of A and B: 0.002021 seconds
+2025-05-15 20:30:59,026 - INFO - Time to compute buffer intersection of A and B: 0.001995 seconds
+2025-05-15 20:30:59,027 - INFO - Time to convert buffer A to GeoJSON: 0.001037 seconds
+2025-05-15 20:30:59,028 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-15 20:30:59,074 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:30:59,075 - INFO - Time to convert buffer B to GeoJSON: 0.001000 seconds
+2025-05-15 20:30:59,137 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:30:59,141 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-15 20:30:59,241 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:30:59,241 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:30:59,247 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-15 20:30:59,248 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-15 20:32:10,648 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:32:10,648 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:32:10,648 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:32:10,648 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:32:10,717 - INFO - Time to fetch route A from API: 0.063217 seconds
+2025-05-15 20:32:10,725 - INFO - Time to fetch route A from API: 0.070377 seconds
+2025-05-15 20:32:10,726 - INFO - Time to fetch route A from API: 0.071374 seconds
+2025-05-15 20:32:10,760 - INFO - Time to fetch route A from API: 0.106125 seconds
+2025-05-15 20:32:10,790 - INFO - Time to fetch route A from API: 0.135448 seconds
+2025-05-15 20:32:10,793 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:10,794 - INFO - Time to fetch route A from API: 0.137440 seconds
+2025-05-15 20:32:10,800 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:10,801 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-15 20:32:10,858 - INFO - Time to fetch route B from API: 0.140759 seconds
+2025-05-15 20:32:10,879 - INFO - Time to fetch route A from API: 0.051684 seconds
+2025-05-15 20:32:10,879 - INFO - Time to fetch route A from API: 0.115421 seconds
+2025-05-15 20:32:10,882 - INFO - Time to fetch route B from API: 0.157902 seconds
+2025-05-15 20:32:10,896 - INFO - Time to fetch route B from API: 0.135193 seconds
+2025-05-15 20:32:10,923 - INFO - Time to fetch route B from API: 0.196587 seconds
+2025-05-15 20:32:10,942 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:10,943 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:10,944 - INFO - Time to fetch route B from API: 0.149918 seconds
+2025-05-15 20:32:10,964 - INFO - Time to fetch route B from API: 0.173958 seconds
+2025-05-15 20:32:10,983 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:32:10,983 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:10,984 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,004 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,026 - INFO - Time to fetch route B from API: 0.146786 seconds
+2025-05-15 20:32:11,046 - INFO - Time to fetch route B from API: 0.167167 seconds
+2025-05-15 20:32:11,063 - INFO - Time to create LineString: 0.016643 seconds
+2025-05-15 20:32:11,065 - INFO - Time to create LineString: 0.001008 seconds
+2025-05-15 20:32:11,119 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,120 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,122 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,125 - INFO - Time to create LineString: 0.000754 seconds
+2025-05-15 20:32:11,126 - INFO - Time to compute buffer intersection: 0.002994 seconds
+2025-05-15 20:32:11,127 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-15 20:32:11,129 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,149 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-15 20:32:11,152 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:11,155 - INFO - Time to convert buffer B to GeoJSON: 0.001563 seconds
+2025-05-15 20:32:11,155 - INFO - Time to compute buffer intersection: 0.000991 seconds
+2025-05-15 20:32:11,156 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:32:11,157 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:11,225 - INFO - Time to convert buffer B to GeoJSON: 0.005246 seconds
+2025-05-15 20:32:11,271 - INFO - Time to compute buffer intersection: 0.000719 seconds
+2025-05-15 20:32:11,276 - INFO - Time to convert buffer A to GeoJSON: 0.001411 seconds
+2025-05-15 20:32:11,279 - INFO - Time to convert buffer B to GeoJSON: 0.001982 seconds
+2025-05-15 20:32:11,357 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:11,360 - INFO - Time to convert buffer B to GeoJSON: 0.001994 seconds
+2025-05-15 20:32:11,400 - INFO - Time to check route A points inside intersection: 0.135399 seconds
+2025-05-15 20:32:11,402 - INFO - Time to check route A points inside intersection: 0.138388 seconds
+2025-05-15 20:32:11,406 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:11,407 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-15 20:32:11,411 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:11,412 - INFO - Time to compute buffer intersection: 0.002006 seconds
+2025-05-15 20:32:11,443 - INFO - Time to check route A points inside intersection: 0.047299 seconds
+2025-05-15 20:32:11,451 - INFO - Time to check route A points inside intersection: 0.088079 seconds
+2025-05-15 20:32:11,457 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:11,464 - INFO - Time to check route A points inside intersection: 0.008971 seconds
+2025-05-15 20:32:11,468 - INFO - Time to check route B points inside intersection: 0.025035 seconds
+2025-05-15 20:32:11,473 - INFO - Time to check route B points inside intersection: 0.071337 seconds
+2025-05-15 20:32:11,474 - INFO - Time to check route B points inside intersection: 0.073307 seconds
+2025-05-15 20:32:11,475 - INFO - Time to check route B points inside intersection: 0.010972 seconds
+2025-05-15 20:32:11,480 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:32:11,482 - INFO - Time to convert buffer B to GeoJSON: 0.001169 seconds
+2025-05-15 20:32:11,516 - INFO - Time to check route B points inside intersection: 0.062215 seconds
+2025-05-15 20:32:11,525 - INFO - Time to check route A points inside intersection: 0.008190 seconds
+2025-05-15 20:32:11,533 - INFO - Time to check route B points inside intersection: 0.007981 seconds
+2025-05-15 20:32:11,536 - INFO - Time to fetch route A from API: 0.124825 seconds
+2025-05-15 20:32:11,559 - INFO - Time to fetch route A from API: 0.101624 seconds
+2025-05-15 20:32:11,692 - INFO - Time to fetch route B from API: 0.154819 seconds
+2025-05-15 20:32:11,727 - INFO - Time to fetch route B from API: 0.167154 seconds
+2025-05-15 20:32:11,771 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:11,772 - INFO - Time to create LineString: 0.000989 seconds
+2025-05-15 20:32:11,782 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:11,783 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:47,156 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:32:47,156 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:32:47,156 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:32:47,156 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:32:47,553 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:32:47,553 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,554 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:32:47,554 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:32:47,555 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,558 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,596 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,684 - INFO - Time to create LineString: 0.010803 seconds
+2025-05-15 20:32:47,691 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,693 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,694 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,695 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,703 - INFO - Time to convert buffer A to GeoJSON: 0.001844 seconds
+2025-05-15 20:32:47,704 - INFO - Time to compute buffer intersection: 0.001668 seconds
+2025-05-15 20:32:47,705 - INFO - Time to convert buffer B to GeoJSON: 0.002142 seconds
+2025-05-15 20:32:47,705 - INFO - Time to compute buffer intersection: 0.000000 seconds
+2025-05-15 20:32:47,728 - INFO - Time to create LineString: 0.001044 seconds
+2025-05-15 20:32:47,734 - INFO - Time to compute buffer intersection: 0.001992 seconds
+2025-05-15 20:32:47,760 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:47,764 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:32:47,765 - INFO - Time to convert buffer B to GeoJSON: 0.001007 seconds
+2025-05-15 20:32:47,770 - INFO - Time to convert buffer A to GeoJSON: 0.002084 seconds
+2025-05-15 20:32:47,790 - INFO - Time to compute buffer intersection: 0.018640 seconds
+2025-05-15 20:32:47,794 - INFO - Time to convert buffer B to GeoJSON: 0.023478 seconds
+2025-05-15 20:32:47,794 - INFO - Time to compute buffer intersection: 0.022572 seconds
+2025-05-15 20:32:47,824 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-15 20:32:47,829 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:47,830 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-15 20:32:47,881 - INFO - Time to convert buffer A to GeoJSON: 0.001995 seconds
+2025-05-15 20:32:47,883 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-15 20:32:47,884 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:32:47,886 - INFO - Time to convert buffer B to GeoJSON: 0.000851 seconds
+2025-05-15 20:32:47,912 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:47,918 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-15 20:32:47,919 - INFO - Time to convert buffer B to GeoJSON: 0.001001 seconds
+2025-05-15 20:32:48,057 - INFO - Time to create LineString: 0.000049 seconds
+2025-05-15 20:32:48,090 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:48,336 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:32:48,344 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:32:48,527 - INFO - Time to create LineString: 0.001989 seconds
+2025-05-15 20:32:48,557 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:10,560 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:33:10,561 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:33:10,561 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:33:10,561 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:33:10,632 - INFO - Time to fetch route A from API: 0.065651 seconds
+2025-05-15 20:33:10,635 - INFO - Time to fetch route A from API: 0.069615 seconds
+2025-05-15 20:33:10,636 - INFO - Time to fetch route A from API: 0.070325 seconds
+2025-05-15 20:33:10,636 - INFO - Time to fetch route A from API: 0.070325 seconds
+2025-05-15 20:33:10,649 - INFO - Time to fetch route A from API: 0.083578 seconds
+2025-05-15 20:33:10,651 - INFO - Time to fetch route A from API: 0.084507 seconds
+2025-05-15 20:33:10,744 - INFO - Time to fetch route B from API: 0.107919 seconds
+2025-05-15 20:33:10,769 - INFO - Time to fetch route A from API: 0.202564 seconds
+2025-05-15 20:33:10,770 - INFO - Time to fetch route B from API: 0.133235 seconds
+2025-05-15 20:33:10,790 - INFO - Time to fetch route B from API: 0.157068 seconds
+2025-05-15 20:33:10,820 - INFO - Time to fetch route B from API: 0.182557 seconds
+2025-05-15 20:33:10,837 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,837 - INFO - Time to fetch route B from API: 0.187532 seconds
+2025-05-15 20:33:10,847 - INFO - Time to fetch route B from API: 0.195417 seconds
+2025-05-15 20:33:10,871 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,875 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,876 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,878 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,900 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,937 - INFO - Time to fetch route A from API: 0.119831 seconds
+2025-05-15 20:33:10,937 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,938 - INFO - Time to fetch route B from API: 0.169236 seconds
+2025-05-15 20:33:10,976 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,993 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,994 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:10,995 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,016 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,019 - INFO - Time to compute buffer intersection: 0.001000 seconds
+2025-05-15 20:33:11,020 - INFO - Time to compute buffer intersection: 0.000995 seconds
+2025-05-15 20:33:11,023 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,023 - INFO - Time to compute buffer intersection: 0.001994 seconds
+2025-05-15 20:33:11,039 - INFO - Time to compute buffer intersection: 0.017232 seconds
+2025-05-15 20:33:11,042 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,049 - INFO - Time to compute buffer intersection: 0.000000 seconds
+2025-05-15 20:33:11,050 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:11,051 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:11,052 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-15 20:33:11,063 - INFO - Time to convert buffer A to GeoJSON: 0.011084 seconds
+2025-05-15 20:33:11,072 - INFO - Time to convert buffer B to GeoJSON: 0.019420 seconds
+2025-05-15 20:33:11,073 - INFO - Time to convert buffer B to GeoJSON: 0.001013 seconds
+2025-05-15 20:33:11,113 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,122 - INFO - Time to fetch route B from API: 0.185671 seconds
+2025-05-15 20:33:11,138 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,140 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,143 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:11,144 - INFO - Time to create LineString: 0.002990 seconds
+2025-05-15 20:33:11,147 - INFO - Time to convert buffer B to GeoJSON: 0.001993 seconds
+2025-05-15 20:33:11,150 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,154 - INFO - Time to create LineString: 0.002991 seconds
+2025-05-15 20:33:11,161 - INFO - Time to compute buffer intersection: 0.005996 seconds
+2025-05-15 20:33:11,192 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:33:11,192 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,197 - INFO - Time to create LineString: 0.000875 seconds
+2025-05-15 20:33:11,197 - INFO - Time to compute buffer intersection: 0.001997 seconds
+2025-05-15 20:33:11,200 - INFO - Time to convert buffer A to GeoJSON: 0.000977 seconds
+2025-05-15 20:33:11,201 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:11,234 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,235 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,237 - INFO - Time to convert buffer A to GeoJSON: 0.001161 seconds
+2025-05-15 20:33:11,239 - INFO - Time to convert buffer B to GeoJSON: 0.001988 seconds
+2025-05-15 20:33:11,277 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,279 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,284 - INFO - Time to convert buffer A to GeoJSON: 0.005984 seconds
+2025-05-15 20:33:11,285 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-15 20:33:11,342 - INFO - Time to fetch route A from API: 0.106500 seconds
+2025-05-15 20:33:11,348 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:11,352 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,362 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,445 - INFO - Time to fetch route B from API: 0.102764 seconds
+2025-05-15 20:33:11,463 - INFO - Time to fetch route A from API: 0.115142 seconds
+2025-05-15 20:33:11,476 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,486 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:11,525 - INFO - Time to fetch route B from API: 0.061979 seconds
+2025-05-15 20:33:11,552 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,561 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:11,569 - INFO - Time to fetch route A from API: 0.082813 seconds
+2025-05-15 20:33:11,645 - INFO - Time to fetch route B from API: 0.075485 seconds
+2025-05-15 20:33:11,680 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:11,690 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:25,301 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-15 20:33:25,301 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-15 20:33:25,301 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-15 20:33:25,301 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-15 20:33:25,412 - INFO - Fetched route B only (A is a point)
+2025-05-15 20:33:25,571 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,589 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,597 - INFO - Time to compute buffer intersection: 0.003227 seconds
+2025-05-15 20:33:25,618 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,657 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,658 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,696 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,697 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-15 20:33:25,698 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-15 20:33:25,699 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,725 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,727 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:33:25,747 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:33:25,748 - INFO - Time to compute buffer intersection: 0.002534 seconds
+2025-05-15 20:33:25,750 - INFO - Time to compute buffer intersection: 0.001202 seconds
+2025-05-15 20:33:25,755 - INFO - Time to compute buffer intersection: 0.001997 seconds
+2025-05-15 20:33:25,760 - INFO - Time to convert buffer A to GeoJSON: 0.002078 seconds
+2025-05-15 20:33:25,762 - INFO - Time to convert buffer A to GeoJSON: 0.004748 seconds
+2025-05-15 20:33:25,778 - INFO - Time to convert buffer B to GeoJSON: 0.016248 seconds
+2025-05-15 20:33:25,812 - INFO - Time to convert buffer B to GeoJSON: 0.048775 seconds
+2025-05-15 20:33:25,891 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,891 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,894 - INFO - Time to create LineString: 0.001451 seconds
+2025-05-15 20:33:25,895 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,898 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,899 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,900 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:25,905 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:25,906 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-15 20:33:26,018 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-15 20:33:26,026 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,033 - INFO - Time to compute buffer intersection: 0.000438 seconds
+2025-05-15 20:33:26,037 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:26,039 - INFO - Time to convert buffer A to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:26,041 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-15 20:33:26,074 - INFO - Time to create LineString: 0.003264 seconds
+2025-05-15 20:33:26,076 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,079 - INFO - Time to convert buffer A to GeoJSON: 0.001961 seconds
+2025-05-15 20:33:26,081 - INFO - Time to convert buffer B to GeoJSON: 0.001995 seconds
+2025-05-15 20:33:26,083 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,141 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,143 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,146 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,147 - INFO - Time to compute buffer intersection: 0.001987 seconds
+2025-05-15 20:33:26,153 - INFO - Time to convert buffer A to GeoJSON: 0.000564 seconds
+2025-05-15 20:33:26,153 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-15 20:33:26,178 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:26,183 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,184 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,327 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-15 20:33:26,328 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-15 20:33:26,341 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-15 20:33:26,342 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 11:29:14,027 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 11:29:14,027 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 11:29:14,027 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 11:29:14,027 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 11:29:14,950 - INFO - Time for before_a API call: 0.44 seconds
+2025-05-16 11:29:14,959 - INFO - Time for before_a API call: 0.39 seconds
+2025-05-16 11:29:14,959 - INFO - Time for before_a API call: 0.36 seconds
+2025-05-16 11:29:14,959 - INFO - Time for before_a API call: 0.36 seconds
+2025-05-16 11:29:14,968 - INFO - Time for before_a API call: 0.37 seconds
+2025-05-16 11:29:15,098 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 11:29:15,134 - ERROR - Error in process_row_overlap for row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 11:29:15,178 - INFO - Time for overlap_a API call: 0.23 seconds
+2025-05-16 11:29:15,181 - INFO - Time for overlap_a API call: 0.21 seconds
+2025-05-16 11:29:15,186 - INFO - Time for overlap_a API call: 0.23 seconds
+2025-05-16 11:29:15,187 - INFO - Time for overlap_a API call: 0.23 seconds
+2025-05-16 11:29:15,200 - INFO - Time for overlap_a API call: 0.24 seconds
+2025-05-16 11:29:15,340 - INFO - Time for before_a API call: 0.21 seconds
+2025-05-16 11:29:15,347 - INFO - Time for after_a API call: 0.17 seconds
+2025-05-16 11:29:15,369 - INFO - Time for after_a API call: 0.19 seconds
+2025-05-16 11:29:15,378 - INFO - Time for after_a API call: 0.19 seconds
+2025-05-16 11:29:15,408 - INFO - Time for after_a API call: 0.21 seconds
+2025-05-16 11:29:15,410 - INFO - Time for after_a API call: 0.22 seconds
+2025-05-16 11:29:15,446 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 11:29:15,527 - INFO - Time for before_b API call: 0.18 seconds
+2025-05-16 11:29:15,535 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-16 11:29:15,566 - INFO - Time for before_b API call: 0.19 seconds
+2025-05-16 11:29:15,569 - INFO - Time for before_b API call: 0.16 seconds
+2025-05-16 11:29:15,573 - INFO - Time for before_b API call: 0.16 seconds
+2025-05-16 11:29:15,590 - INFO - Time for before_b API call: 0.22 seconds
+2025-05-16 11:29:15,651 - ERROR - Error in process_row_overlap for row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 11:29:15,695 - INFO - Time for after_a API call: 0.16 seconds
+2025-05-16 11:29:15,705 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 11:29:15,733 - INFO - Time for after_b API call: 0.16 seconds
+2025-05-16 11:29:15,736 - INFO - Time for after_b API call: 0.17 seconds
+2025-05-16 11:29:15,791 - INFO - Time for after_b API call: 0.22 seconds
+2025-05-16 11:29:15,797 - INFO - Time for after_b API call: 0.21 seconds
+2025-05-16 11:29:15,877 - INFO - Time for before_b API call: 0.18 seconds
+2025-05-16 11:29:16,057 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 14:46:35,289 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:46:35,289 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:46:35,290 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:46:35,290 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:46:48,278 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:46:48,278 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:46:48,278 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:46:48,278 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:46:48,843 - INFO - Time for before_a API call: 0.18 seconds
+2025-05-16 14:46:48,898 - INFO - Time for before_a API call: 0.19 seconds
+2025-05-16 14:46:48,905 - INFO - Time for before_a API call: 0.17 seconds
+2025-05-16 14:46:48,911 - INFO - Time for before_a API call: 0.18 seconds
+2025-05-16 14:46:49,015 - INFO - Time for before_a API call: 0.20 seconds
+2025-05-16 14:46:49,021 - INFO - Time for overlap_a API call: 0.18 seconds
+2025-05-16 14:46:49,040 - ERROR - Error in process_row_overlap for row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:46:49,077 - INFO - Time for overlap_a API call: 0.18 seconds
+2025-05-16 14:46:49,085 - INFO - Time for overlap_a API call: 0.17 seconds
+2025-05-16 14:46:49,105 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-16 14:46:49,169 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:46:49,184 - INFO - Time for overlap_a API call: 0.17 seconds
+2025-05-16 14:46:49,210 - INFO - Time for after_a API call: 0.19 seconds
+2025-05-16 14:46:49,260 - INFO - Time for after_a API call: 0.18 seconds
+2025-05-16 14:46:49,269 - INFO - Time for before_a API call: 0.21 seconds
+2025-05-16 14:46:49,270 - INFO - Time for after_a API call: 0.16 seconds
+2025-05-16 14:46:49,282 - INFO - Time for after_a API call: 0.20 seconds
+2025-05-16 14:46:49,404 - INFO - Time for after_a API call: 0.22 seconds
+2025-05-16 14:46:49,409 - INFO - Time for before_b API call: 0.20 seconds
+2025-05-16 14:46:49,423 - ERROR - Error in process_row_overlap for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:46:49,456 - INFO - Time for before_b API call: 0.17 seconds
+2025-05-16 14:46:49,458 - INFO - Time for before_b API call: 0.19 seconds
+2025-05-16 14:46:49,465 - INFO - Time for before_b API call: 0.20 seconds
+2025-05-16 14:46:49,470 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-16 14:46:49,593 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 14:46:49,601 - INFO - Time for before_b API call: 0.20 seconds
+2025-05-16 14:46:49,636 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 14:46:49,638 - INFO - Time for after_b API call: 0.17 seconds
+2025-05-16 14:46:49,702 - INFO - Time for after_a API call: 0.23 seconds
+2025-05-16 14:46:49,703 - INFO - Time for after_b API call: 0.25 seconds
+2025-05-16 14:46:49,789 - ERROR - Error in process_row_overlap for row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:46:49,831 - INFO - Time for after_b API call: 0.23 seconds
+2025-05-16 14:46:49,913 - INFO - Time for before_b API call: 0.21 seconds
+2025-05-16 14:46:50,086 - INFO - Time for after_b API call: 0.17 seconds
+2025-05-16 14:49:12,787 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:49:12,787 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:49:12,787 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:49:12,787 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:49:20,724 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:49:20,724 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:49:20,724 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:49:20,724 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:49:21,444 - INFO - API call for overlap_a took 0.24 seconds
+2025-05-16 14:49:21,515 - INFO - API call for overlap_a took 0.25 seconds
+2025-05-16 14:49:21,540 - INFO - API call for overlap_a took 0.25 seconds
+2025-05-16 14:49:21,545 - INFO - API call for overlap_a took 0.24 seconds
+2025-05-16 14:49:21,614 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:49:21,683 - INFO - API call for overlap_a took 0.21 seconds
+2025-05-16 14:49:21,791 - INFO - API call for overlap_a took 0.19 seconds
+2025-05-16 14:49:21,796 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:49:21,872 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:49:22,060 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:00,847 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:00,848 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:00,848 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:00,848 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:50:08,292 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:08,293 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:08,293 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:08,293 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:50:11,568 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:11,568 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:11,569 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:11,569 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:50:12,306 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:12,389 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:12,391 - INFO - Time for before_a API call: 0.20 seconds
+2025-05-16 14:50:12,451 - INFO - Time for before_a API call: 0.16 seconds
+2025-05-16 14:50:12,461 - INFO - Time for before_a API call: 0.22 seconds
+2025-05-16 14:50:12,485 - INFO - Time for before_a API call: 0.31 seconds
+2025-05-16 14:50:12,507 - INFO - Time for before_a API call: 0.20 seconds
+2025-05-16 14:50:12,604 - INFO - Time for overlap_a API call: 0.21 seconds
+2025-05-16 14:50:12,628 - INFO - Time for overlap_a API call: 0.18 seconds
+2025-05-16 14:50:12,636 - INFO - Time for before_a API call: 0.25 seconds
+2025-05-16 14:50:12,690 - INFO - Time for overlap_a API call: 0.23 seconds
+2025-05-16 14:50:12,695 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:12,710 - INFO - Time for overlap_a API call: 0.20 seconds
+2025-05-16 14:50:12,727 - INFO - Time for overlap_a API call: 0.24 seconds
+2025-05-16 14:50:12,806 - INFO - Time for after_a API call: 0.20 seconds
+2025-05-16 14:50:12,813 - INFO - Time for after_a API call: 0.18 seconds
+2025-05-16 14:50:12,855 - INFO - Time for overlap_a API call: 0.22 seconds
+2025-05-16 14:50:12,858 - INFO - Time for after_a API call: 0.17 seconds
+2025-05-16 14:50:12,894 - INFO - Time for after_a API call: 0.17 seconds
+2025-05-16 14:50:12,911 - INFO - Time for after_a API call: 0.20 seconds
+2025-05-16 14:50:12,966 - ERROR - Error in process_row_overlap_rec_multiproc for row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:12,970 - INFO - Time for before_b API call: 0.16 seconds
+2025-05-16 14:50:12,974 - INFO - Time for before_b API call: 0.16 seconds
+2025-05-16 14:50:13,016 - INFO - Time for after_a API call: 0.16 seconds
+2025-05-16 14:50:13,052 - INFO - Time for before_b API call: 0.16 seconds
+2025-05-16 14:50:13,080 - INFO - Time for before_b API call: 0.22 seconds
+2025-05-16 14:50:13,110 - INFO - Time for before_b API call: 0.20 seconds
+2025-05-16 14:50:13,168 - INFO - Time for overlap_b API call: 0.19 seconds
+2025-05-16 14:50:13,194 - INFO - Time for overlap_b API call: 0.22 seconds
+2025-05-16 14:50:13,208 - INFO - Time for overlap_b API call: 0.15 seconds
+2025-05-16 14:50:13,235 - INFO - Time for before_b API call: 0.22 seconds
+2025-05-16 14:50:13,265 - INFO - Time for overlap_b API call: 0.16 seconds
+2025-05-16 14:50:13,285 - INFO - Time for overlap_b API call: 0.20 seconds
+2025-05-16 14:50:13,345 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 14:50:13,375 - INFO - Time for after_b API call: 0.18 seconds
+2025-05-16 14:50:13,415 - INFO - Time for after_b API call: 0.21 seconds
+2025-05-16 14:50:13,416 - INFO - Time for overlap_b API call: 0.18 seconds
+2025-05-16 14:50:13,454 - INFO - Time for after_b API call: 0.19 seconds
+2025-05-16 14:50:13,490 - INFO - Time for after_b API call: 0.20 seconds
+2025-05-16 14:50:13,613 - INFO - Time for after_b API call: 0.20 seconds
+2025-05-16 14:50:36,719 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:36,719 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:36,719 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:36,720 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:50:42,042 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:42,042 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:42,042 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:42,042 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:50:42,674 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:42,714 - INFO - Time for overlap_a API call: 0.17 seconds
+2025-05-16 14:50:42,792 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:42,808 - INFO - Time for overlap_a API call: 0.18 seconds
+2025-05-16 14:50:42,832 - INFO - Time for overlap_a API call: 0.17 seconds
+2025-05-16 14:50:42,871 - INFO - Time for overlap_b API call: 0.16 seconds
+2025-05-16 14:50:42,879 - INFO - Time for overlap_a API call: 0.19 seconds
+2025-05-16 14:50:42,925 - INFO - Time for overlap_a API call: 0.23 seconds
+2025-05-16 14:50:42,976 - INFO - Time for overlap_b API call: 0.17 seconds
+2025-05-16 14:50:42,990 - INFO - Time for overlap_b API call: 0.16 seconds
+2025-05-16 14:50:43,032 - INFO - Time for overlap_a API call: 0.22 seconds
+2025-05-16 14:50:43,040 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:43,092 - INFO - Time for overlap_b API call: 0.21 seconds
+2025-05-16 14:50:43,097 - INFO - Time for overlap_b API call: 0.17 seconds
+2025-05-16 14:50:43,191 - INFO - Time for overlap_b API call: 0.16 seconds
+2025-05-16 14:50:43,279 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:50:57,834 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:50:57,835 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:50:57,835 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:50:57,835 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:19,119 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:19,119 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:19,119 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:19,119 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:28,482 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:28,482 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:28,483 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:28,483 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:32,620 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:32,620 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:32,621 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:32,621 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:39,142 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:39,143 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:39,143 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:39,143 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:39,341 - INFO - Time to fetch route A from API: 0.183180 seconds
+2025-05-16 14:52:39,342 - INFO - Time to fetch route A from API: 0.184177 seconds
+2025-05-16 14:52:39,398 - INFO - Time to fetch route A from API: 0.239963 seconds
+2025-05-16 14:52:39,402 - INFO - Time to fetch route A from API: 0.243915 seconds
+2025-05-16 14:52:39,403 - INFO - Time to fetch route A from API: 0.244883 seconds
+2025-05-16 14:52:39,409 - INFO - Time to fetch route A from API: 0.249908 seconds
+2025-05-16 14:52:39,417 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:52:39,433 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-16 14:52:39,434 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-16 14:52:39,559 - INFO - Time to fetch route B from API: 0.217760 seconds
+2025-05-16 14:52:39,585 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,609 - INFO - Time to create LineString: 0.000051 seconds
+2025-05-16 14:52:39,610 - INFO - Time to fetch route B from API: 0.268072 seconds
+2025-05-16 14:52:39,629 - INFO - Time to fetch route A from API: 0.217068 seconds
+2025-05-16 14:52:39,639 - INFO - Time to fetch route B from API: 0.237226 seconds
+2025-05-16 14:52:39,663 - INFO - Time to fetch route A from API: 0.180880 seconds
+2025-05-16 14:52:39,668 - INFO - Time to fetch route B from API: 0.265039 seconds
+2025-05-16 14:52:39,691 - INFO - Time to fetch route B from API: 0.290041 seconds
+2025-05-16 14:52:39,714 - INFO - Time to fetch route B from API: 0.305171 seconds
+2025-05-16 14:52:39,732 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,732 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,733 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,734 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,735 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,742 - INFO - Time to compute buffer intersection: 0.001107 seconds
+2025-05-16 14:52:39,827 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,829 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,830 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,831 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,834 - INFO - Time to create LineString: 0.000996 seconds
+2025-05-16 14:52:39,838 - INFO - Time to compute buffer intersection: 0.000893 seconds
+2025-05-16 14:52:39,840 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 14:52:39,841 - INFO - Time to convert buffer B to GeoJSON: 0.000986 seconds
+2025-05-16 14:52:39,843 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-16 14:52:39,852 - INFO - Time to compute buffer intersection: 0.007020 seconds
+2025-05-16 14:52:39,873 - INFO - Time to fetch route B from API: 0.209777 seconds
+2025-05-16 14:52:39,891 - INFO - Time to fetch route B from API: 0.260975 seconds
+2025-05-16 14:52:39,916 - INFO - Time to compute buffer intersection: 0.000995 seconds
+2025-05-16 14:52:39,918 - INFO - Time to compute buffer intersection: 0.001996 seconds
+2025-05-16 14:52:39,921 - INFO - Time to convert buffer A to GeoJSON: 0.000999 seconds
+2025-05-16 14:52:39,922 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-16 14:52:39,923 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,946 - INFO - Time to convert buffer A to GeoJSON: 0.001003 seconds
+2025-05-16 14:52:39,947 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-16 14:52:39,948 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:39,964 - INFO - Time to convert buffer A to GeoJSON: 0.000996 seconds
+2025-05-16 14:52:39,976 - INFO - Time to convert buffer B to GeoJSON: 0.005958 seconds
+2025-05-16 14:52:40,025 - INFO - Time to check route A points inside intersection: 0.116125 seconds
+2025-05-16 14:52:40,037 - INFO - Time to convert buffer A to GeoJSON: 0.003970 seconds
+2025-05-16 14:52:40,038 - INFO - Time to convert buffer A to GeoJSON: 0.002068 seconds
+2025-05-16 14:52:40,042 - INFO - Time to convert buffer B to GeoJSON: 0.002993 seconds
+2025-05-16 14:52:40,044 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-16 14:52:40,045 - INFO - Time to check route A points inside intersection: 0.096003 seconds
+2025-05-16 14:52:40,175 - INFO - Time to check route A points inside intersection: 0.199017 seconds
+2025-05-16 14:52:40,176 - INFO - Time to check route A points inside intersection: 0.009974 seconds
+2025-05-16 14:52:40,181 - INFO - Time to check route B points inside intersection: 0.129778 seconds
+2025-05-16 14:52:40,185 - INFO - Time to check route A points inside intersection: 0.152716 seconds
+2025-05-16 14:52:40,190 - INFO - Time to check route B points inside intersection: 0.012965 seconds
+2025-05-16 14:52:40,194 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:40,197 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:40,199 - INFO - Time to check route B points inside intersection: 0.173661 seconds
+2025-05-16 14:52:40,200 - INFO - Time to check route B points inside intersection: 0.024931 seconds
+2025-05-16 14:52:40,205 - INFO - Time to check route A points inside intersection: 0.044461 seconds
+2025-05-16 14:52:40,208 - INFO - Time to check route B points inside intersection: 0.023026 seconds
+2025-05-16 14:52:40,214 - INFO - Time to check route B points inside intersection: 0.008972 seconds
+2025-05-16 14:52:40,343 - INFO - Time to fetch route A from API: 0.149489 seconds
+2025-05-16 14:52:40,350 - INFO - Time to fetch route A from API: 0.153468 seconds
+2025-05-16 14:52:40,505 - INFO - Time to fetch route B from API: 0.161576 seconds
+2025-05-16 14:52:40,530 - INFO - Time to fetch route B from API: 0.178991 seconds
+2025-05-16 14:52:40,551 - INFO - Time to create LineString: 0.000996 seconds
+2025-05-16 14:52:40,551 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:40,564 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:40,565 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:51,476 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:51,476 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:51,477 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:51,477 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:55,653 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:52:55,653 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:52:55,654 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:52:55,654 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:52:56,352 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,352 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,353 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,353 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,354 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:52:56,354 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,406 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,441 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-16 14:52:56,442 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,442 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,444 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,447 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-16 14:52:56,448 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-16 14:52:56,448 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-16 14:52:56,496 - INFO - Time to compute buffer intersection: 0.001994 seconds
+2025-05-16 14:52:56,500 - INFO - Time to compute buffer intersection: 0.002387 seconds
+2025-05-16 14:52:56,501 - INFO - Time to compute buffer intersection: 0.000999 seconds
+2025-05-16 14:52:56,503 - INFO - Time to create LineString: 0.003611 seconds
+2025-05-16 14:52:56,551 - INFO - Time to convert buffer A to GeoJSON: 0.000136 seconds
+2025-05-16 14:52:56,568 - INFO - Time to compute buffer intersection: 0.000581 seconds
+2025-05-16 14:52:56,568 - INFO - Time to convert buffer B to GeoJSON: 0.016955 seconds
+2025-05-16 14:52:56,570 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:56,632 - INFO - Time to convert buffer A to GeoJSON: 0.001994 seconds
+2025-05-16 14:52:56,633 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-16 14:52:56,638 - INFO - Time to convert buffer A to GeoJSON: 0.002992 seconds
+2025-05-16 14:52:56,639 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-16 14:52:56,669 - INFO - Time to convert buffer A to GeoJSON: 0.029183 seconds
+2025-05-16 14:52:56,669 - INFO - Time to convert buffer B to GeoJSON: 0.000756 seconds
+2025-05-16 14:52:56,670 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 14:52:56,670 - INFO - Time to create LineString: 0.005013 seconds
+2025-05-16 14:52:56,714 - INFO - Time to convert buffer B to GeoJSON: 0.043081 seconds
+2025-05-16 14:52:56,761 - INFO - Time to compute buffer intersection: 0.002993 seconds
+2025-05-16 14:52:56,824 - INFO - Time to convert buffer A to GeoJSON: 0.004057 seconds
+2025-05-16 14:52:56,838 - INFO - Time to convert buffer B to GeoJSON: 0.013988 seconds
+2025-05-16 14:52:56,876 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:57,158 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:57,171 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:57,584 - INFO - Time to create LineString: 0.000996 seconds
+2025-05-16 14:52:57,615 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:52:57,687 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:52:57,704 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:09,536 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:53:09,537 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:53:09,537 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:53:09,537 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:53:14,312 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:53:14,312 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:53:14,312 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:53:14,313 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:53:17,575 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:53:17,575 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:53:17,575 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:53:17,575 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:53:17,846 - INFO - Time to fetch route A from API: 0.265811 seconds
+2025-05-16 14:53:17,851 - INFO - Time to fetch route A from API: 0.212939 seconds
+2025-05-16 14:53:17,852 - INFO - Time to fetch route A from API: 0.271750 seconds
+2025-05-16 14:53:17,855 - INFO - Time to fetch route A from API: 0.214074 seconds
+2025-05-16 14:53:17,855 - INFO - Time to fetch route A from API: 0.274713 seconds
+2025-05-16 14:53:17,872 - INFO - Time to fetch route A from API: 0.291878 seconds
+2025-05-16 14:53:17,883 - INFO - Time to fetch route A from API: 0.302855 seconds
+2025-05-16 14:53:18,010 - INFO - Time to fetch route B from API: 0.163641 seconds
+2025-05-16 14:53:18,042 - INFO - Time to fetch route A from API: 0.172592 seconds
+2025-05-16 14:53:18,044 - INFO - Time to fetch route B from API: 0.188776 seconds
+2025-05-16 14:53:18,065 - INFO - Time to fetch route B from API: 0.212621 seconds
+2025-05-16 14:53:18,083 - INFO - Time to fetch route B from API: 0.210530 seconds
+2025-05-16 14:53:18,101 - INFO - Time to fetch route B from API: 0.243829 seconds
+2025-05-16 14:53:18,120 - INFO - Time to fetch route B from API: 0.236630 seconds
+2025-05-16 14:53:18,120 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,137 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,138 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,139 - INFO - Time to fetch route B from API: 0.281826 seconds
+2025-05-16 14:53:18,159 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,160 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,164 - INFO - Time to create LineString: 0.000926 seconds
+2025-05-16 14:53:18,164 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,258 - INFO - Time to create LineString: 0.000995 seconds
+2025-05-16 14:53:18,260 - INFO - Time to fetch route B from API: 0.218143 seconds
+2025-05-16 14:53:18,277 - INFO - Time to create LineString: 0.000993 seconds
+2025-05-16 14:53:18,277 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,279 - INFO - Time to create LineString: 0.000996 seconds
+2025-05-16 14:53:18,280 - INFO - Time to create LineString: 0.000999 seconds
+2025-05-16 14:53:18,323 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-16 14:53:18,324 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-16 14:53:18,324 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,325 - INFO - Time to compute buffer intersection: 0.000998 seconds
+2025-05-16 14:53:18,328 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,332 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,334 - INFO - Time to compute buffer intersection: 0.000998 seconds
+2025-05-16 14:53:18,337 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-16 14:53:18,340 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-16 14:53:18,344 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-16 14:53:18,345 - INFO - Time to convert buffer A to GeoJSON: 0.002993 seconds
+2025-05-16 14:53:18,346 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-16 14:53:18,347 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-16 14:53:18,394 - INFO - Time to convert buffer A to GeoJSON: 0.003062 seconds
+2025-05-16 14:53:18,395 - INFO - Time to convert buffer B to GeoJSON: 0.000513 seconds
+2025-05-16 14:53:18,399 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,406 - INFO - Time to create LineString: 0.008365 seconds
+2025-05-16 14:53:18,420 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,421 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,427 - INFO - Time to compute buffer intersection: 0.002991 seconds
+2025-05-16 14:53:18,433 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,434 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,460 - INFO - Time to convert buffer A to GeoJSON: 0.005499 seconds
+2025-05-16 14:53:18,460 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-16 14:53:18,461 - INFO - Time to convert buffer A to GeoJSON: 0.002993 seconds
+2025-05-16 14:53:18,464 - INFO - Time to convert buffer A to GeoJSON: 0.000204 seconds
+2025-05-16 14:53:18,464 - INFO - Time to convert buffer B to GeoJSON: 0.003016 seconds
+2025-05-16 14:53:18,487 - INFO - Time to convert buffer B to GeoJSON: 0.023309 seconds
+2025-05-16 14:53:18,554 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,556 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,559 - INFO - Time to convert buffer A to GeoJSON: 0.002992 seconds
+2025-05-16 14:53:18,560 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:18,561 - INFO - Time to create LineString: 0.002027 seconds
+2025-05-16 14:53:18,562 - INFO - Time to convert buffer B to GeoJSON: 0.002537 seconds
+2025-05-16 14:53:18,565 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:18,566 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,567 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,606 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,609 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:18,756 - INFO - Time to fetch route A from API: 0.194405 seconds
+2025-05-16 14:53:18,771 - INFO - Time to fetch route A from API: 0.171012 seconds
+2025-05-16 14:53:18,983 - INFO - Time to fetch route B from API: 0.225043 seconds
+2025-05-16 14:53:19,062 - INFO - Time to fetch route B from API: 0.290857 seconds
+2025-05-16 14:53:19,102 - INFO - Time to create LineString: 0.000977 seconds
+2025-05-16 14:53:19,102 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:19,122 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:19,122 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:19,276 - INFO - Time to fetch route A from API: 0.153120 seconds
+2025-05-16 14:53:19,463 - INFO - Time to fetch route B from API: 0.187541 seconds
+2025-05-16 14:53:19,500 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:19,527 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:25,121 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:53:25,121 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:53:25,121 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:53:25,121 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:53:28,298 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 14:53:28,298 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 14:53:28,299 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 14:53:28,299 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 14:53:28,540 - INFO - Fetched route B only (A is a point)
+2025-05-16 14:53:28,817 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,817 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,817 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,819 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,820 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,821 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-16 14:53:28,821 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,915 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:28,931 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,931 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,932 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,933 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:28,935 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 14:53:28,936 - INFO - Time to convert buffer B to GeoJSON: 0.000998 seconds
+2025-05-16 14:53:28,950 - INFO - Time to create LineString: 0.011853 seconds
+2025-05-16 14:53:28,961 - INFO - Time to compute buffer intersection: 0.001995 seconds
+2025-05-16 14:53:28,967 - INFO - Time to compute buffer intersection: 0.001000 seconds
+2025-05-16 14:53:28,968 - INFO - Time to compute buffer intersection: 0.001876 seconds
+2025-05-16 14:53:28,971 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-16 14:53:28,975 - INFO - Time to compute buffer intersection: 0.000997 seconds
+2025-05-16 14:53:28,997 - INFO - Time to create LineString: 0.000739 seconds
+2025-05-16 14:53:29,003 - INFO - Time to convert buffer A to GeoJSON: 0.000973 seconds
+2025-05-16 14:53:29,004 - INFO - Time to convert buffer B to GeoJSON: 0.000077 seconds
+2025-05-16 14:53:29,005 - INFO - Time to compute buffer intersection: 0.003683 seconds
+2025-05-16 14:53:29,027 - INFO - Time to convert buffer A to GeoJSON: 0.000998 seconds
+2025-05-16 14:53:29,028 - INFO - Time to convert buffer B to GeoJSON: 0.000996 seconds
+2025-05-16 14:53:29,055 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-16 14:53:29,058 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,058 - INFO - Time to convert buffer A to GeoJSON: 0.002991 seconds
+2025-05-16 14:53:29,059 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:29,060 - INFO - Time to create LineString: 0.001010 seconds
+2025-05-16 14:53:29,060 - INFO - Time to convert buffer B to GeoJSON: 0.001010 seconds
+2025-05-16 14:53:29,062 - INFO - Time to convert buffer A to GeoJSON: 0.001985 seconds
+2025-05-16 14:53:29,065 - INFO - Time to convert buffer B to GeoJSON: 0.001916 seconds
+2025-05-16 14:53:29,102 - INFO - Time to convert buffer A to GeoJSON: 0.029348 seconds
+2025-05-16 14:53:29,106 - INFO - Time to convert buffer B to GeoJSON: 0.002996 seconds
+2025-05-16 14:53:29,117 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,118 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,163 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,166 - INFO - Time to create LineString: 0.001995 seconds
+2025-05-16 14:53:29,168 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:29,169 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 14:53:29,170 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 14:53:29,171 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-16 14:53:29,211 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,212 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,217 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:29,400 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-16 14:53:29,411 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:29,659 - INFO - Time to create LineString: 0.000997 seconds
+2025-05-16 14:53:29,660 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 14:53:29,671 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 14:53:29,671 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: Locations is empty.
+2025-05-16 15:06:22,200 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 15:06:22,200 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 15:06:22,200 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 15:06:22,200 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 15:06:26,801 - WARNING - Row 10 - Invalid coordinates: ['letter']
+2025-05-16 15:06:26,801 - WARNING - Row 11 - Invalid coordinates: ['']
+2025-05-16 15:06:26,801 - WARNING - Row 12 - Invalid coordinates: ['5.3532536']
+2025-05-16 15:06:26,802 - WARNING - Row 14 - Invalid coordinates: ['999,-4.0263832']
+2025-05-16 15:06:27,479 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,480 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,480 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,481 - INFO - Time to create LineString: 0.000944 seconds
+2025-05-16 15:06:27,481 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,483 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,484 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,524 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 15:06:27,541 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:27,612 - INFO - Time to create LineString: 0.015962 seconds
+2025-05-16 15:06:27,613 - INFO - Time to compute buffer intersection of A and B: 0.018617 seconds
+2025-05-16 15:06:27,616 - INFO - Time to create LineString: 0.003198 seconds
+2025-05-16 15:06:27,617 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 15:06:27,617 - INFO - Time to compute buffer intersection of A and B: 0.000998 seconds
+2025-05-16 15:06:27,618 - INFO - Time to create LineString: 0.000802 seconds
+2025-05-16 15:06:27,620 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 15:06:27,622 - INFO - Time to convert buffer B to GeoJSON: 0.001006 seconds
+2025-05-16 15:06:27,626 - INFO - Time to compute buffer intersection of A and B: 0.000888 seconds
+2025-05-16 15:06:27,654 - INFO - Time to create LineString: 0.000998 seconds
+2025-05-16 15:06:27,658 - INFO - Time to compute buffer intersection of A and B: 0.001992 seconds
+2025-05-16 15:06:27,659 - INFO - Time to compute buffer intersection of A and B: 0.001995 seconds
+2025-05-16 15:06:27,661 - INFO - Time to convert buffer A to GeoJSON: 0.000000 seconds
+2025-05-16 15:06:27,663 - INFO - Time to convert buffer B to GeoJSON: 0.002072 seconds
+2025-05-16 15:06:27,695 - ERROR - Error processing row {'OriginA': 'letter', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-16 15:06:27,709 - INFO - Time to convert buffer A to GeoJSON: 0.045869 seconds
+2025-05-16 15:06:27,725 - INFO - Time to convert buffer B to GeoJSON: 0.015958 seconds
+2025-05-16 15:06:27,728 - INFO - Time to convert buffer A to GeoJSON: 0.002994 seconds
+2025-05-16 15:06:27,729 - INFO - Time to convert buffer B to GeoJSON: 0.001034 seconds
+2025-05-16 15:06:27,739 - INFO - Time to convert buffer A to GeoJSON: 0.010617 seconds
+2025-05-16 15:06:27,770 - INFO - Time to convert buffer B to GeoJSON: 0.000000 seconds
+2025-05-16 15:06:27,807 - INFO - Time to convert buffer A to GeoJSON: 0.025120 seconds
+2025-05-16 15:06:27,811 - INFO - Time to convert buffer B to GeoJSON: 0.002991 seconds
+2025-05-16 15:06:27,850 - INFO - Time to compute buffer intersection of A and B: 0.002991 seconds
+2025-05-16 15:06:27,862 - INFO - Time to convert buffer A to GeoJSON: 0.001996 seconds
+2025-05-16 15:06:27,863 - INFO - Time to convert buffer B to GeoJSON: 0.000997 seconds
+2025-05-16 15:06:28,028 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:28,033 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-16 15:06:28,088 - INFO - Time to create LineString: 0.000000 seconds
+2025-05-16 15:06:28,093 - ERROR - Error processing row {'OriginA': '5.3532536,-4.0263832', 'DestinationA': '5.3532536', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
+2025-05-16 15:06:28,144 - INFO - Time to create LineString: 0.000677 seconds
+2025-05-16 15:06:28,147 - ERROR - Error processing row {'OriginA': '999,-4.0263832', 'DestinationA': '5.3532536,-4.0263832', 'OriginB': '5.3532536,-4.0263832', 'DestinationB': '5.2881775,-3.9706876'}: 'NoneType' object has no attribute 'intersection'
