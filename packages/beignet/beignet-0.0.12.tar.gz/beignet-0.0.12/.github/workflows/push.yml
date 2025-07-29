@@ -1,0 +1,94 @@
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+      - uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.x"
+      - run: "python -m pip install --upgrade build"
+      - run: "python -m build ."
+      - uses: "actions/upload-artifact@v4"
+        with:
+          name: "python-package-distributions"
+          path: "dist/"
+  pytest:
+    strategy:
+      matrix:
+        platform:
+          - "macos-latest"
+          - "ubuntu-latest"
+          - "windows-latest"
+        python:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "actions/setup-python@v5"
+        with:
+          python-version: ${{ matrix.python }}
+      - run: "python -m pip install --editable '.[all]'"
+      - run: "python -m pytest"
+      - uses: "codecov/codecov-action@v4"
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+  pypi:
+    environment:
+      name: "pypi.org"
+      url: "https://pypi.org/project/beignet"
+    if: "startsWith(github.ref, 'refs/tags/')"
+    needs:
+      - "build"
+    permissions:
+      id-token: "write"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/download-artifact@v4"
+        with:
+          name: "python-package-distributions"
+          path: "dist/"
+      - uses: "pypa/gh-action-pypi-publish@release/v1"
+  release:
+    needs:
+      - "pypi"
+    permissions:
+      contents: "write"
+      id-token: "write"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/download-artifact@v4"
+        with:
+          name: "python-package-distributions"
+          path: "dist/"
+      - uses: "sigstore/gh-action-sigstore-python@v2.1.1"
+        with:
+          inputs: "./dist/*.tar.gz ./dist/*.whl"
+      - env:
+          GITHUB_TOKEN: "${{ github.token }}"
+        run: "gh release create '${{ github.ref_name }}' --notes '' --repo '${{ github.repository }}'"
+      - env:
+          GITHUB_TOKEN: "${{ github.token }}"
+        run: "gh release upload '${{ github.ref_name }}' dist/** --repo '${{ github.repository }}'"
+  testpypi:
+    environment:
+      name: "test.pypi.org"
+      url: "https://test.pypi.org/project/beignet"
+    needs:
+      - "build"
+    permissions:
+      id-token: "write"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/download-artifact@v4"
+        with:
+          name: "python-package-distributions"
+          path: "dist/"
+      - uses: "pypa/gh-action-pypi-publish@release/v1"
+        with:
+          repository-url: "https://test.pypi.org/legacy/"
+          skip-existing: true
+on: "push"
