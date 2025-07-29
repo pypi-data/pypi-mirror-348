@@ -1,0 +1,8 @@
+[console_scripts]
+proton = triton_metal.profiler.proton:main
+proton-viewer = triton_metal.profiler.viewer:main
+
+[triton_metal.backends]
+amd = triton_metal.backends.amd
+metal = triton_metal.backends.metal
+nvidia = triton_metal.backends.nvidia
