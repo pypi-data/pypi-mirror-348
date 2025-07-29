@@ -1,0 +1,10 @@
+models:
+  - name: df
+    columns:
+      - name: ID
+        checks:
+          - null_check
+          - unique_check
+      - name: Age
+        checks:
+          - null_check
