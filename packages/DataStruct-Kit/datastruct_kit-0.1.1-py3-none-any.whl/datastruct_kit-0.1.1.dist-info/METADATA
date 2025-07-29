@@ -1,0 +1,145 @@
+Metadata-Version: 2.4
+Name: DataStruct_Kit
+Version: 0.1.1
+Summary: Python package implementing essential data structures and algorithms
+Author-email: RANGDAL PAVANSAI <pavansai.20066@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Pavansai20054/DataStruct_Kit
+Project-URL: Documentation, https://github.com/Pavansai20054/DataStruct_Kit#readme
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+PyDataStruct 🚀
+Show Image
+Show Image
+Show Image
+Show Image
+Show Image
+A Python package implementing essential data structures and algorithms with a focus on performance and usability.
+✨ Features
+
+Sorting Algorithms 📊
+
+Bubble Sort
+Merge Sort
+Quick Sort
+
+
+Searching Algorithms 🔍
+
+Linear Search
+Binary Search
+
+
+Data Structures 🏗️
+
+HashTable
+Binary Tree
+AVL Tree
+Graph
+
+
+Performance Utilities ⏱️
+
+Benchmarking tools
+Complexity analysis
+
+
+
+📦 Installation
+bashpip install PyDataStruct
+🚀 Quick Start
+pythonfrom PyDataStruct import (
+    bubble_sort, 
+    merge_sort,
+    quick_sort,
+    binary_search,
+    HashTable,
+    BinaryTree,
+    dfs, bfs
+)
+
+# Sorting algorithms
+data = [3, 1, 4, 1, 5, 9, 2, 6]
+sorted_data = bubble_sort(data)
+print(f"Sorted data: {sorted_data}")
+
+# Using a hash table
+ht = HashTable()
+ht.put("name", "PyDataStruct")
+ht.put("version", "0.1.0")
+print(f"Value: {ht.get('name')}")  # Output: PyDataStruct
+
+# Working with trees
+tree = BinaryTree()
+for value in [5, 3, 7, 2, 4, 6, 8]:
+    tree.insert(value)
+print(f"In-order traversal: {tree.inorder()}")
+
+# Graph algorithms
+graph = {'A': ['B', 'C'], 'B': ['D'], 'C': ['E'], 'D': [], 'E': []}
+print(f"DFS: {dfs(graph, 'A')}")  # ['A', 'B', 'D', 'C', 'E']
+print(f"BFS: {bfs(graph, 'A')}")  # ['A', 'B', 'C', 'D', 'E']
+📊 Performance Benchmarks
+pythonfrom PyDataStruct.performance import measure_time
+from PyDataStruct import bubble_sort, quick_sort
+
+data = list(range(1000, 0, -1))
+print(f"Bubble Sort: {measure_time(bubble_sort, data.copy()):.6f} seconds")
+print(f"Quick Sort:  {measure_time(quick_sort, data.copy()):.6f} seconds")
+📚 Documentation
+Full documentation is available at https://pydatastruct.readthedocs.io
+🛠️ Development
+bash# Clone the repository
+git clone https://github.com/Pavansai20054/PyDataStruct.git
+cd PyDataStruct
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Run tests
+pytest
+📋 Roadmap
+
+ Add more sorting algorithms (Heap Sort, Radix Sort)
+ Implement priority queues
+ Add B-Tree and Red-Black Tree implementations
+ Provide visualization utilities
+ Support for parallel algorithm execution
+
+🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+Fork the repository
+Create your feature branch (git checkout -b feature/amazing-feature)
+Commit your changes (git commit -m 'Add some amazing feature')
+Push to the branch (git push origin feature/amazing-feature)
+Open a Pull Request
+
+📄 License
+Distributed under the MIT License. See LICENSE for more information.
+📬 Contact
+Rangdal Pavansai - @pavansai - pavansai@example.com
+Project Link: https://github.com/Pavansai20054/PyDataStruct
+
+
+### To run the project test locally
+
+1. pip install mypy
+
+2. pip install -e .
+
+3. pytest tests/
+
+twine upload --repository testpypi dist/* → for testing
+
+twine upload --repository pypi dist/* or twine upload dist/* → for real PyPI
