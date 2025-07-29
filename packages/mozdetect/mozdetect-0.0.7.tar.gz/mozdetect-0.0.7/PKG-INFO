@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: mozdetect
+Version: 0.0.7
+Summary: A python package used for change point detection at Mozilla.
+Author-email: Gregory Mierzwinski <sparky@mozilla.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: db-dtypes>=1.3.0
+Requires-Dist: google-cloud-bigquery>=3.26.0
+Requires-Dist: pandas>=2.0.3
+Requires-Dist: pre-commit>=3.5.0
+Requires-Dist: prettytable>=3.11.0
+Requires-Dist: scipy>=1.10.1
+Dynamic: license-file
+
+# mozdetect
+A python package containing change point detection techniques for use at Mozilla.
+
+# Setup, and Development
+
+## Setup
+
+Install `uv` first using the following:
+
+```
+python -m pip install uv
+```
+
+Install `poetry` using the following:
+
+```
+python -m pip install poetry
+```
+
+## Running
+
+Next, run the following to build the package, and install dependencies. This step can be skipped though since `uv run` will implicitly build the package:
+
+```
+uv sync
+```
+
+Run a script that uses the built module with the following:
+
+```
+uv run my_script.py
+```
+
+## Pre-commit checks
+
+Pre-commit linting checks must be setup like this (run within the top-level of this repo directory):
+
+```
+uv sync
+uv run pre-commit install
+```
+
+## Running tests
+
+Tests all reside in the `tests/` folder and can be run using:
+
+```
+uv run pytest
+```
