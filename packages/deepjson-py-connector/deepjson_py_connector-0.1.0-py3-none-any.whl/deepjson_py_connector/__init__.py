@@ -1,0 +1,2 @@
+from .client import DeepJSONConnector
+from deepjson_py_connector import DeepJSONConnector
