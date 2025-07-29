@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: synth-env
+Version: 0.0.0.dev1
+Author-email: Synth AI <josh@usesynth.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/synth-laboratories/Environments
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pydantic
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: pypi
+Requires-Dist: twine>=4.0.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: pytest>=8.3.3
+Requires-Dist: pydantic-openapi-schema>=1.5.1
+Requires-Dist: pytest-asyncio>=0.24.0
+
+# Environments
+Synthetic Environments / Long Horizon Tasks / Digital Control Agents
+
+
+# Development
+
+uv sync
+uvx ty check
