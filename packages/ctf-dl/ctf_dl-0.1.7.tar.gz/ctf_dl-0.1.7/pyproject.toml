@@ -1,0 +1,37 @@
+[project]
+name = "ctf-dl"
+version = "0.1.7"
+description = "Command-line tool to download CTF challenges"
+authors = [
+  { name="bjornmorten", email="bjornmdev@proton.me" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["ctf", "ctfd"]
+
+dependencies = [
+  "ctfbridge>=0.2.0",
+  "requests>=2.32.3",
+  "typer>=0.15.3",
+  "rich>=14.0.0",
+  "Jinja2>=3.1.6"
+]
+
+[project.urls]
+Homepage = "https://github.com/bjornmorten/ctf-dl/"
+Repository = "https://github.com/bjornmorten/ctf-dl/"
+Issues = "https://github.com/bjornmorten/ctf-dl/issues"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"ctfdl" = ["templates/**"]
+
+[project.scripts]
+ctf-dl = "ctfdl.cli:main"

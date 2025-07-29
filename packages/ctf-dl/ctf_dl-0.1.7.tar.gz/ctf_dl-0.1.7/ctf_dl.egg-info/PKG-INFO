@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: ctf-dl
+Version: 0.1.7
+Summary: Command-line tool to download CTF challenges
+Author-email: bjornmorten <bjornmdev@proton.me>
+License: MIT
+Project-URL: Homepage, https://github.com/bjornmorten/ctf-dl/
+Project-URL: Repository, https://github.com/bjornmorten/ctf-dl/
+Project-URL: Issues, https://github.com/bjornmorten/ctf-dl/issues
+Keywords: ctf,ctfd
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: ctfbridge>=0.2.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: typer>=0.15.3
+Requires-Dist: rich>=14.0.0
+Requires-Dist: Jinja2>=3.1.6
+Dynamic: license-file
+
+# ctf-dl
+
+ctf-dl is a fast and simple command-line tool for downloading CTF challenges, with support for multiple platforms.
+
+> [!WARNING]
+> This project is still in development
+
+## Features
+
+- Download **all challenges** (descriptions, attachments, points, categories) from a CTF platform
+- Works with multiple CTF platforms (via [ctfbridge](https://github.com/bjornmorten/ctfbridge/))
+- Supports **dry-run** mode to preview downloads without saving
+- **Update mode** to only pull new challenges without redownloading everything
+- **Filters**:
+  - By category (e.g., Web, Crypto)
+  - By minimum/maximum points
+- Customizable **Jinja2 templates** for easy formatting
+- Save challenge data into **custom templates** (Markdown, JSON, plain text, etc.)
+- Organize challenges into **custom folder structures**
+
+## Installation
+
+```bash
+pip install ctf-dl
+```
+
+## Usage
+
+To get a list of all options and switches use:
+
+```bash
+ctf-dl -h
+```
+
+## Examples
+
+Download all challenges:
+
+```bash
+ctf-dl --url https://demo.ctfd.io --username admin --password password
+```
+
+Download all challenges to `/tmp/ctf`:
+
+```bash
+ctf-dl --url https://demo.ctfd.io --token YOUR_TOKEN --output /tmp/ctf
+```
+
+Download only Web and Crypto challenges:
+
+```bash
+ctf-dl --url https://ctf.example.com --token YOUR_TOKEN --categories Web Crypto
+```
+
+Dry-run (simulate without writing files):
+
+```bash
+ctf-dl --url https://ctf.example.com --token YOUR_TOKEN --dry-run
+```
+
+Update only new challenges:
+
+```bash
+ctf-dl --url https://ctf.example.com --token YOUR_TOKEN --update
+```
+
+## Default Output Structure
+
+```
+challenges/
+├── crypto/
+│   ├── rsa-beginner/
+│   │   ├── README.md
+│   │   └── files/
+│   │       ├── chal.py
+│   │       └── output.txt
+├── web/
+│   ├── sql-injection/
+│   │   ├── README.md
+│   │   └── files/
+│   │       └── app.py
+```
+
+## License
+
+MIT License © 2025 bjornmorten
