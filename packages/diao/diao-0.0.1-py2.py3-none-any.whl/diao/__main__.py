@@ -1,0 +1,2 @@
+
+from diao import app
