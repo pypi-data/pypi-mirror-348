@@ -1,0 +1,105 @@
+# windmill-sdk
+[![pipeline status](https://gitlab.com/opencity-labs/windmill-sdk/badges/master/pipeline.svg)](https://gitlab.com/opencity-labs/windmill-sdk/commits/master)
+[![coverage report](https://gitlab.com/opencity-labs/windmill-sdk/badges/master/coverage.svg)](https://gitlab.comopencity-labs/windmill-sdk/commits/master>)
+
+
+[![pre-commit enabled](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://pre-commit.com/)
+[![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?logo=python&labelColor=gray)](https://github.com/psf/black)
+
+Libreria Python asincrona per interagire con sistemi PocketBase e SDC, pensata per l'uso all'interno di [Windmill](https://windmill.dev).
+
+## ✨ Funzionalità
+
+- Recupero asincrono dei tenant da PocketBase (filtrabile)
+- Interrogazione dei servizi da API SDC con autenticazione automatica
+- Compatibilità futura con Directus tramite interfaccia unificata
+- Supporto alla validazione con [Pydantic](https://docs.pydantic.dev/)
+- Invio opzionale di notifiche su Slack in caso di errore
+
+## 📦 Installazione
+
+```bash
+pip install windmill-sdk
+# oppure
+poetry add windmill-sdk
+```
+
+## ⚙️ Requisiti
+
+- Python 3.10+
+- httpx, pydantic, pytest, respx, pytest-asyncio
+
+## 🚀 Esempio d’uso
+
+```python
+import asyncio
+from windmill_sdk.clients.pocketbase import PocketBaseClient
+from windmill_sdk.clients.sdc import SDCClient
+
+async def main():
+    pb = PocketBaseClient("https://pb.example.com", "admin", "password")
+    await pb.authenticate()
+    tenants = await pb.list_tenants(filters={"identifier": "oc-pnrr-1"})
+    await pb.close()
+
+    for tenant in tenants:
+        sdc = SDCClient(str(tenant.production_url), "sdc_user", "sdc_pass")
+        services = await sdc.list_services()
+        await sdc.close()
+        for service in services:
+            print(service.name)
+
+asyncio.run(main())
+```
+
+## ✅ Test
+
+```bash
+pytest
+```
+
+## 📁 Struttura del progetto
+
+```
+windmill_sdk/
+├── clients/
+│   ├── pocketbase.py
+│   ├── sdc.py
+│   ├── directus.py
+│   └── base_client.py
+├── models.py
+├── notifiers/
+│   └── slack.py
+```
+
+## 🧪 Esecuzione dei test
+
+Per eseguire la suite di test e controllare che tutto funzioni correttamente:
+
+```bash
+pytest
+ ```
+
+Assicurati di avere le dipendenze installate:
+
+```bash
+pip install -r requirements-dev.txt
+ ```
+
+## ✅ Verifica della copertura
+
+Per eseguire i test e generare un report di copertura del codice:
+```bash
+pytest --cov=windmill_sdk --cov-report=term-missing
+```
+
+Questo comando:
+- Esegue tutti i test
+- Mostra a terminale le righe di codice non coperte
+- Usa il modulo `windmill_sdk` come riferimento per il calcolo della copertura
+
+Puoi anche generare un report HTML navigabile:
+```bash
+pytest --cov=windmill_sdk --cov-report=html
+```
+Il report sarà disponibile nella cartella `htmlcov/index.html`.
