@@ -1,0 +1,80 @@
+[project]
+name = "telegram-sdk"
+version = "1.2.2"
+description = "Telegram SDK for public or private Telegram API"
+authors = [
+  {name = "Golden M, Inc.", email = "software@goldenm.com"}
+]
+requires-python = ">=3.10"
+maintainers = [
+  {name = "Kenny Mochizuki", email = "kenny@goldenm.com"}
+]
+readme = "README.md"
+license = {text = "MIT License"}
+keywords = [
+  "telegram",
+  "api",
+  "bot",
+  "sdk",
+  "layrz",
+  "goldenm",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "requests>=2.32.3",
+  "tzdata>=2025.2",
+]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "boto3>=1.37.3",
+    "build>=1.2.2.post1",
+    "mypy>=1.15.0",
+    "python-dotenv>=1.1.0",
+    "ruff>=0.9.8",
+    "twine>=6.1.0",
+    "types-requests>=2.32.0.20250515",
+]
+
+[tool.ruff]
+indent-width = 2
+line-length = 120
+
+exclude = [
+  ".venv",
+]
+
+[tool.ruff.lint]
+ignore = [
+  "F401",
+  "E701",
+  "TD003",
+  "ANN401",
+]
+
+select = [
+  "I", # isort
+  "E", "W", # pycodestyle
+  "F", # pyflakes
+  "B", # flakes8-bugbear
+  "TD", # flake8-todo
+  "DJ", # flake8-django
+  "DTZ", # flake8-datetimez
+  "T20", # flake8-print # En un futuro
+  "PYI", # flake8-pyi
+  "ANN", # flake8-annotations
+]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true
