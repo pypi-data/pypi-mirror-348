@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: preprocess_trr
+Version: 0.1
+Summary: This is a text preprocessing package
+Author: Vladyslav Borsh
+Author-email: test@udemy.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+# Text Preprocessing Python Package
+This python package is created by [troya](troya.com). It provides various text preprcoessing utilities for natural language processing (NLP) tasks
+
+## Installation
+### Installation from Pypi
+You can install this package using pip as follows:
+```console
+pip install preprocess_trr
+```
+
+### Installation from GitHub
+If you want to install via github:
+```console
+git clone https://github.com/troyhunterz/preprocess_trr
+```
+
+## Requirements
+You need to install this python packages:
+```console
+pip install spacy==3.8.5
+pip install -m spacy download en_core_web_md==3.8.0
+pip install nltk==3.9.1
+pip install beautifulsoup4==3.2.2
+pip install textlob==0.19.0
+```
+
+### Download NLTK Data
+If you are using this package first time, then you need to download NLTK data as follows:
+```python
+import preprocess_trr as ps
+ps.download_nltk_pkgs
+```
+
+## Uninstall the Package
+To uninstall the package, use the following command:
+```console
+pip uninstall preprocess_trr
+```
+
+## How to Use the Package
+### Full Example: Cleaning Text
+Here's an example of how you might use several functions together to clean text data:
+```python
+import preprocess_trr as ps
+def clean_text(text):
+    text = ps.to_lower_case(text)
+    text = ps.contraction_to_expansion(text)
+    text = ps.remove_emails(text)
+    text = ps.remove_urls(text)
+    text = ps.rm_html(text)
+    text = ps.rm_special_chars(text)
+    text = ps.lemmatize(text)
+    return text
+
+text = "I'm loving this NLP tutorial! Contact me at example@example.com. Visit https://example.com."
+cleaned_text = clean_text(text)
+print(cleaned_text)
+# Output: i am loving this nlp tutorial contact me at visit
+```
+
+### One Short Feature Extraction
+```python
+import preprocess_trr as ps
+ps.extract_features('i love NLP')
+```
+
+## Notes
+* Be cautious when using heavy operations like lemmatize and spelling_correction on very large datasets, as they can be time-consuming
+* The package supports custom cleaning and preprocessing pipeline bby using these modular functions together
