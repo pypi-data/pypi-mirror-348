@@ -1,0 +1,514 @@
+# Text2MCP
+
+使用自然语言描述生成MCP (Modular Communication Protocol) 服务的工具包。
+
+## 功能特点
+
+- 通过自然语言描述生成完整的MCP服务代码
+- 支持OpenAI和兼容OpenAI接口的LLM服务
+- 提供一键部署和启动生成的MCP服务
+- 包含辅助工具如依赖安装、服务运行等
+- 支持代码模板的自定义和复用
+- 通过命令行工具或Python API使用所有功能
+- 集成uv依赖管理，高效安装项目依赖
+- 提供完整的MCP服务生命周期管理
+
+## 安装
+
+```bash
+pip install text2mcp
+```
+
+## 快速入门
+
+### 配置
+
+首先，设置环境变量：
+
+```bash
+# 设置环境变量
+export OPENAI_API_KEY="your_api_key_here"
+export OPENAI_MODEL="gpt-3.5-turbo"  # 可选
+export OPENAI_BASE_URL="https://api.example.com/v1"  # 可选，用于兼容接口
+```
+
+或者在代码中直接传递参数：
+
+```python
+from text2mcp import CodeGenerator
+
+# 直接传递配置参数
+generator = CodeGenerator(
+    api_key="your_api_key_here",
+    model="gpt-3.5-turbo",
+    base_url="https://api.example.com/v1"  # 可选，用于兼容接口
+)
+```
+
+或者使用命令行工具进行配置：
+
+```bash
+text2mcp config --api-key "your_api_key" --model "gpt-4" --base-url "https://api.example.com/v1"
+```
+
+> **提示**: Text2MCP支持任何兼容OpenAI接口的LLM服务，如DeepSeek、智谱等。详见[使用第三方OpenAI兼容API](#使用第三方openai兼容api)部分。
+
+### 生成MCP服务
+
+#### 使用Python API
+
+```python
+from text2mcp import CodeGenerator
+
+# 初始化代码生成器
+generator = CodeGenerator()
+
+# 生成服务
+code = generator.generate("创建一个计算器服务，支持加减乘除四则运算")
+
+# 保存到文件
+generator.save_to_file(code, "calculator_service.py")
+```
+
+#### 使用自定义模板
+
+```python
+from text2mcp import CodeGenerator
+
+# 初始化代码生成器
+generator = CodeGenerator()
+
+# 使用自定义模板生成服务
+code = generator.generate(
+    "创建一个数据库查询服务，支持增删改查操作",
+    template_file="my_template.py"
+)
+
+# 保存到指定目录
+generator.save_to_file(code, "db_service.py", directory="./services")
+```
+
+### 运行MCP服务
+
+```python
+from text2mcp import ServiceRunner
+
+# 初始化服务运行器
+runner = ServiceRunner()
+
+# 启动服务
+runner.start_service("calculator_service.py")
+```
+
+### 安装依赖
+
+```python
+import asyncio
+from text2mcp import PackageInstaller
+
+async def install_deps():
+    # 安装单个包
+    await PackageInstaller.install(package="requests")
+    
+    # 安装多个包
+    await PackageInstaller.install(packages=["numpy", "pandas"])
+    
+    # 从requirements文件安装
+    await PackageInstaller.install(requirements="requirements.txt")
+
+# 运行安装
+asyncio.run(install_deps())
+```
+
+### 命令行使用
+
+#### 生成服务
+
+```bash
+# 基本用法
+text2mcp generate "创建一个计算器服务，支持加减乘除四则运算" --output calculator_service.py
+
+# 指定输出目录
+text2mcp generate "创建一个天气查询服务" --output weather_service.py --directory ./services
+
+# 使用自定义模板
+text2mcp generate "创建一个数据处理服务" --template my_template.py --output data_service.py
+
+# 使用自定义配置文件
+text2mcp generate "创建一个文件转换服务" --config my_config.toml --output converter_service.py
+```
+
+#### 运行服务
+
+```bash
+# 运行服务
+text2mcp run calculator_service.py
+
+# 指定主机和端口
+text2mcp run calculator_service.py --host 0.0.0.0 --port 8080
+
+# 使用uv运行（更高效）
+text2mcp run calculator_service.py --use-uv
+
+# 后台运行服务
+text2mcp run calculator_service.py --daemon
+```
+
+#### 依赖管理
+
+```bash
+# 安装单个包
+text2mcp install requests
+
+# 安装多个包
+text2mcp install numpy pandas matplotlib
+
+# 从requirements文件安装
+text2mcp install --requirements requirements.txt
+
+# 创建requirements文件
+text2mcp install --create-requirements --packages numpy,pandas,matplotlib
+```
+
+#### 配置管理
+
+```bash
+# 设置API密钥
+text2mcp config --api-key "your_api_key"
+
+# 设置模型
+text2mcp config --model "gpt-4"
+
+# 设置自定义API地址
+text2mcp config --base-url "https://api.example.com/v1"
+
+# 显示当前配置
+text2mcp config --show
+
+# 重置配置
+text2mcp config --reset
+```
+
+#### 其他命令
+
+```bash
+# 查看版本
+text2mcp --version
+
+# 查看帮助
+text2mcp --help
+text2mcp generate --help
+```
+
+## 高级用法
+
+### 自定义模板
+
+你可以创建自己的MCP服务模板，这样生成的代码会遵循你的项目结构和要求。模板文件可以是Python文件或Markdown文件。
+
+#### Python模板
+
+Python模板应该包含标准的MCP服务结构，以及你想要保留的任何特定功能或注释。
+
+```python
+"""
+自定义MCP服务模板
+"""
+import argparse
+import logging
+from mcp.server import FastMCP
+
+# 创建MCP服务
+mcp = FastMCP("custom_service")
+
+# 自定义日志配置
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# 这里可以添加自定义的函数和设置
+# ...
+
+# MCP工具函数将被LLM生成在这里
+# ...
+
+def main(host="127.0.0.1", port=8000):
+    """启动MCP服务"""
+    # 你的自定义启动代码
+    # ...
+    
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", default="127.0.0.1", help="服务主机地址")
+    parser.add_argument("--port", type=int, default=8000, help="服务端口")
+    args = parser.parse_args()
+    main(args.host, args.port)
+```
+
+#### Markdown模板 (推荐)
+
+你也可以使用更友好的Markdown格式来创建模板。这种方式让你可以在同一文件中包含代码、文档和配置信息，更易于理解和维护。
+
+```markdown
+---
+service_name: my_service
+description: 我的自定义服务
+author: 你的名字
+version: 1.0.0
+---
+
+# 我的MCP服务模板
+
+## 导入部分
+
+```python
+import argparse
+import logging
+from mcp.server import FastMCP
+
+# 其他导入...
+```
+
+## 服务初始化
+
+```python
+# 创建MCP服务
+mcp = FastMCP("custom_service")
+
+# 日志配置
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+```
+
+## MCP工具定义
+
+```python
+@mcp.tool()
+async def example_tool(param: str):
+    """
+    示例工具函数
+    :param param: 参数描述
+    :return: 返回值描述
+    """
+    # 实现代码...
+    return result
+```
+
+## 主函数
+
+```python
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8000)
+    args = parser.parse_args()
+    # 启动服务...
+```
+```
+
+使用Markdown模板时，系统会自动：
+1. 提取YAML前置元数据（如果有）
+2. 识别所有Python代码块并按照它们的顺序组合
+3. 保留标题结构作为代码注释
+4. 优先处理"导入"相关部分
+
+### 使用模板
+
+无论是Python模板还是Markdown模板，使用方式都一样：
+
+```bash
+# 使用Python模板
+text2mcp generate "创建一个数据处理服务" --template my_template.py --output data_service.py
+
+# 使用Markdown模板
+text2mcp generate "创建一个数据处理服务" --template my_template.md --output data_service.py
+```
+
+你也可以省略扩展名，系统会自动查找对应的文件：
+
+```bash
+text2mcp generate "创建一个数据处理服务" --template my_template --output data_service.py
+```
+
+### 使用第三方OpenAI兼容API
+
+Text2MCP支持任何兼容OpenAI接口规范的大语言模型服务，如DeepSeek、智谱等。下面是使用DeepSeek API的示例：
+
+#### 配置验证
+
+首先创建配置文件`config.toml`：
+
+```toml
+[tool.llm]
+api_key = "your-api-key-here"
+base_url = "https://api.deepseek.com"
+model = "deepseek-chat"
+```
+
+然后可以编写一个简单脚本验证配置加载是否正确：
+
+```python
+from text2mcp.utils.config import load_config
+
+# 从环境变量加载
+config1 = load_config()
+print("从环境变量加载配置:", config1)
+
+# 从配置文件加载
+config2 = load_config("config.toml")
+print("从配置文件加载配置:", config2)
+```
+
+#### 代码生成示例
+
+使用DeepSeek API生成MCP服务代码：
+
+```python
+from text2mcp import CodeGenerator
+import os
+
+# 创建代码生成器实例，使用DeepSeek配置
+generator = CodeGenerator(
+    api_key="your-api-key-here",
+    base_url="https://api.deepseek.com",
+    model="deepseek-chat"
+)
+
+# 生成一个简单的计算器服务
+service_description = """
+创建一个简单的计算器服务，支持加减乘除四种基本运算。
+每个运算应该是一个单独的API端点。
+"""
+
+# 定义输出目录
+output_dir = "generated/calculator_service"
+os.makedirs(output_dir, exist_ok=True)
+
+# 生成代码
+generated_code = generator.generate(service_description, template_file="example.md")
+
+if generated_code:
+    # 保存到文件
+    file_path = generator.save_to_file(generated_code, "calculator_service.py", directory=output_dir)
+    if file_path:
+        print(f"服务代码已生成并保存到: {file_path}")
+    else:
+        print("保存代码到文件时出错")
+else:
+    print("代码生成失败")
+```
+
+> **注意**: 使用第三方API时，确保传入的`model`参数与该API提供商支持的模型名称一致。DeepSeek使用`deepseek-chat`，其他提供商可能有不同的模型名称。
+
+### 集成到自定义应用
+
+你可以将Text2MCP集成到你的应用中，提供动态生成MCP服务的能力：
+
+```python
+from text2mcp import CodeGenerator, ServiceRunner
+import asyncio
+
+async def dynamic_service_creation(description, service_name):
+    """动态创建并运行MCP服务"""
+    # 生成代码
+    generator = CodeGenerator()
+    code = generator.generate(description)
+    
+    if code:
+        # 保存到文件
+        path = generator.save_to_file(code, f"{service_name}.py", "./services")
+        
+        # 启动服务
+        runner = ServiceRunner()
+        result = await runner.start_service(path)
+        
+        return {"status": "success", "service_path": path, "result": result}
+    else:
+        return {"status": "error", "message": "代码生成失败"}
+
+# 使用示例
+asyncio.run(dynamic_service_creation(
+    "创建一个文件处理服务，支持文本文件的读取、写入和修改。",
+    "file_processor"
+))
+```
+
+### MCP服务器模式
+
+启动完整的Text2MCP服务器，提供Web界面和API接口：
+
+```bash
+# 启动MCP服务器
+text2mcp server --host 0.0.0.0 --port 8080
+```
+
+然后可以通过HTTP API或Web界面使用所有功能。
+
+## 常见问题解答
+
+### 1. 为什么我的API密钥无法正常工作？
+
+请确保API密钥格式正确，并且有足够的权限和配额。OpenAI API密钥应以"sk-"开头。
+
+### 2. 如何使用自定义的LLM提供商？
+
+只要LLM提供商提供兼容OpenAI的接口，就可以通过设置`base_url`参数来使用：
+
+```bash
+text2mcp config --base-url "https://your-provider.com/v1"
+```
+
+对于常见的第三方提供商，这里有一些配置示例：
+
+#### DeepSeek
+
+```bash
+# 命令行配置
+text2mcp config --api-key "your-deepseek-key" --base-url "https://api.deepseek.com" --model "deepseek-chat"
+
+# 或使用环境变量
+export OPENAI_API_KEY="your-deepseek-key"
+export OPENAI_BASE_URL="https://api.deepseek.com"
+export OPENAI_MODEL="deepseek-chat"
+
+# 或在代码中直接传参
+generator = CodeGenerator(
+    api_key="your-deepseek-key",
+    base_url="https://api.deepseek.com",
+    model="deepseek-chat"
+)
+```
+
+#### 其他提供商
+
+请参考各提供商的API文档，确认:
+1. 他们提供兼容OpenAI格式的API端点
+2. 正确的base_url路径
+3. 支持的模型名称
+4. API密钥格式和获取方式
+
+### 3. 生成的代码质量不高怎么办？
+
+尝试提供更详细的描述，或使用更高级的模型如GPT-4。你也可以通过自定义模板来提高生成代码的质量。
+
+### 4. 为什么安装依赖失败？
+
+如果使用`uv`安装依赖失败，请确保已安装`uv`：
+
+```bash
+pip install uv
+```
+
+或者在安装时添加`--no-uv`参数使用标准pip：
+
+```bash
+text2mcp install requests --no-uv
+```
+
+## 贡献指南
+
+欢迎贡献！请查看[贡献指南](CONTRIBUTING.md)了解如何参与项目开发。
+
+## 许可证
+
+本项目采用MIT许可证。详见[LICENSE](LICENSE)文件。 
+11
