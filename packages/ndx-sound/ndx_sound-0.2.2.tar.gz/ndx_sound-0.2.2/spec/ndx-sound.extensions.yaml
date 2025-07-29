@@ -1,0 +1,33 @@
+groups:
+- neurodata_type_def: AcousticWaveformSeries
+  neurodata_type_inc: TimeSeries
+  doc: single or multi-channel acoustic series
+  datasets:
+  - name: data
+    dtype: numeric
+    dims:
+    - - time
+    - - time
+      - channel
+    - - time
+      - channels
+    shape:
+    - - null
+    - - null
+      - 1
+    - - null
+      - 2
+    doc: acoustic waveform
+    attributes:
+    - name: unit
+      dtype: text
+      value: n.a.
+      doc: SI unit of data
+  - name: starting_time
+    dtype: float
+    default_value: 0.0
+    doc: starting time of acoustic waveform.
+    attributes:
+    - name: rate
+      dtype: float
+      doc: sampling frequency of acoustic waveform.
