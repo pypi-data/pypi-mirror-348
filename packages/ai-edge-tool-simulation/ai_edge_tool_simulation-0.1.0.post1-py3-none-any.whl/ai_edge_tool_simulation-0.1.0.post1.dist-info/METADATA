@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: ai-edge-tool-simulation
+Version: 0.1.0.post1
+Summary: Library for simulating tool use, function calling, and data generation/validation for language models.
+License-Expression: Apache-2.0
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: absl-py
+Requires-Dist: google-genai
+Requires-Dist: proto-plus
+Requires-Dist: tensorflow
+
+# Tool Simulation Library
+
+## Overview
+
+The `tool-simulation` library lets you evaluate and specialize LLMs on a
+specific set of tools. The library is designed to be modular, allowing users to
+plug in different model backends, prompt formats, and tool simulation logic.
+
+## Set Up
+
+The tool simulation library is available as a Python package. You can install
+the library using pip:
+
+```bash
+pip install ai-edge-tool-simulation
+```
+
+For more information please check out our [GitHub page](https://github.com/google-ai-edge/ai-edge-apis/tree/main/local_agents/function_calling/tool_simulation).
