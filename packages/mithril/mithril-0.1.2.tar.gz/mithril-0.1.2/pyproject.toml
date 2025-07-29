@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mithril"                  # your package name (lowercase, dashes ok)
+version = "0.1.2"                    # follow semantic versioning
+description = "A Composite ML Library"   # one-line summary
+readme = "README.md"                 # your README file
+license = { file = "LICENSE" }
+authors = [
+  { name = "Your Name", email = "you@example.com" }
+]
+dependencies = [
+  "requests>=2.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/you/my-package"
+"Repository" = "https://github.com/you/my-package.git"
