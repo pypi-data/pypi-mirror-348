@@ -1,0 +1,62 @@
+from typing import List
+import unittest
+from ragformance.eval.metrics.trec_eval import trec_eval_metrics
+from ragformance.models.answer import (
+    AnswerModel,
+    AnnotatedQueryModel,
+    ReferenceModel,
+)
+from ragformance.models.corpus import DocModel
+from ragformance.rag.naive_rag import NaiveRag
+from ragformance.rag.openwebui_rag import OpenwebuiRag
+
+class TestAskQueriesCorpus(unittest.TestCase):
+    def test_naive_rag_ask_queries(self):
+        corpus: List[DocModel] = [
+            DocModel(
+                _id="c_1",
+                title="France",
+                text="The capital of France is Paris",
+            )
+        ]
+
+        naive_rag = NaiveRag()
+        naive_rag.upload_corpus(corpus=corpus)
+
+        queries: List[AnnotatedQueryModel] = [
+            AnnotatedQueryModel(
+                _id="q_1",
+                query_text="What is the capital of France",
+                relevant_document_ids=[ReferenceModel(corpus_id="c_1", score=1)],
+                ref_anwser="Paris is the capital of France",
+            )
+        ]
+
+        answers: List[AnswerModel] = naive_rag.ask_queries(queries)
+        assert len(answers) == 1 and answers[0].retrieved_documents_ids == ["c_1"]
+
+    
+    def test_openwebui_rag_ask_queries(self):
+        corpus: List[DocModel] = [
+            DocModel(
+                _id="c_1",
+                title="France",
+                text="The capital of France is Paris",
+            )
+        ]
+        
+
+        openwebui_rag = OpenwebuiRag()
+        openwebui_rag.upload_corpus(corpus=corpus)
+
+        queries: List[AnnotatedQueryModel] = [
+            AnnotatedQueryModel(
+                _id="q_1",
+                query_text="What is the capital of France",
+                relevant_document_ids=[ReferenceModel(corpus_id="c_1", score=1)],
+                ref_anwser="Paris is the capital of France",
+            )
+        ]
+
+        answers: List[AnswerModel] = openwebui_rag.ask_queries(queries)
+        assert len(answers) == 1 and answers[0].retrieved_documents_ids == ["c_1"]
