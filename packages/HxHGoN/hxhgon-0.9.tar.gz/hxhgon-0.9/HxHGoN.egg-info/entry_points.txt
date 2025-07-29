@@ -1,0 +1,11 @@
+[console_scripts]
+Gon = Gon.__main__:main
+Gon-run = Gon.__main__:main
+
+[distutils.commands]
+bdist_Gon = Gon.distutils.DistutilCommands:bdist_Gon
+build_Gon = Gon.distutils.DistutilCommands:build
+install_Gon = Gon.distutils.DistutilCommands:install
+
+[distutils.setup_keywords]
+build_with_Gon = Gon.distutils.DistutilCommands:setupHxHGoNDistutilsCommands
