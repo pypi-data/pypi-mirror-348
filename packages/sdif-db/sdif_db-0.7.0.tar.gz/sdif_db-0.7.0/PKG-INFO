@@ -1,0 +1,32 @@
+Metadata-Version: 2.3
+Name: sdif-db
+Version: 0.7.0
+Summary: SDIF Database Manager
+License: MIT
+Author: Bryan Djafer
+Author-email: bryan.djafer@syncpulse.fr
+Requires-Python: >=3.9,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: pandas (>=2.0.3,<3.0.0)
+Project-URL: Repository, https://github.com/syncpulse-solutions/satif
+Description-Content-Type: text/markdown
+
+git add libs/sdif_db/pyproject.toml path/to/your/code/changes...
+    git commit -m "feat: Add new feature to sdif-db (v0.2.0)" # Example commit message
+    git push origin main # Or push your feature branch
+
+
+# Example for version 0.2.0
+
+    git tag sdif-db/v0.2.0
+
+
+git push origin sdif-db/v0.2.0
+    # Or push all tags: git push origin --tags
+
