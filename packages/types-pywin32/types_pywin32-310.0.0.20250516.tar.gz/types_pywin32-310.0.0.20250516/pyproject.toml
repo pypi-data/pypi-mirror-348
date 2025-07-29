@@ -1,0 +1,55 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=77.0.3"]
+
+[project]
+name = "types-pywin32"
+version = "310.0.0.20250516"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+description = "Typing stubs for pywin32"
+readme = { text = """\
+## Typing stubs for pywin32
+
+This is a [PEP 561](https://peps.python.org/pep-0561/)
+type stub package for the [`pywin32`](https://github.com/mhammond/pywin32) package.
+It can be used by type-checking tools like
+[mypy](https://github.com/python/mypy/),
+[pyright](https://github.com/microsoft/pyright),
+[pytype](https://github.com/google/pytype/),
+[Pyre](https://pyre-check.org/),
+PyCharm, etc. to check code that uses `pywin32`. This version of
+`types-pywin32` aims to provide accurate annotations for
+`pywin32==310.*`.
+
+This package is part of the [typeshed project](https://github.com/python/typeshed).
+All fixes for types and metadata should be contributed there.
+See [the README](https://github.com/python/typeshed/blob/main/README.md)
+for more details. The source for this package can be found in the
+[`stubs/pywin32`](https://github.com/python/typeshed/tree/main/stubs/pywin32)
+directory.
+
+This package was tested with
+mypy 1.15.0,
+pyright 1.1.400,
+and pytype 2024.10.11.
+It was generated from typeshed commit
+[`126768408a69b7a3a09b7d3992970b289f92937e`](https://github.com/python/typeshed/commit/126768408a69b7a3a09b7d3992970b289f92937e).
+""", content-type = "text/markdown" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Typing :: Stubs Only",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/python/typeshed"
+"GitHub" = "https://github.com/python/typeshed"
+"Changes" = "https://github.com/typeshed-internal/stub_uploader/blob/main/data/changelogs/pywin32.md"
+"Issue tracker" = "https://github.com/python/typeshed/issues"
+"Chat" = "https://gitter.im/python/typing"
+
+[tool.setuptools]
+packages = ['win32gui_struct-stubs', 'win32timezone-stubs', 'winioctlcon-stubs', 'win32security-stubs', 'win32crypt-stubs', 'win32uiole-stubs', 'win32evtlogutil-stubs', 'win32event-stubs', 'win2kras-stubs', 'commctrl-stubs', 'win32service-stubs', 'win32cred-stubs', 'win32netcon-stubs', 'win32evtlog-stubs', 'win32inet-stubs', 'win32console-stubs', 'pywintypes-stubs', 'ntsecuritycon-stubs', 'dde-stubs', 'win32ts-stubs', 'regutil-stubs', '_win32typing-stubs', 'perfmon-stubs', 'servicemanager-stubs', 'win32process-stubs', 'win32wnet-stubs', 'mmsystem-stubs', 'win32clipboard-stubs', 'win32profile-stubs', 'isapi-stubs', 'winxptheme-stubs', 'win32com-stubs', 'timer-stubs', 'win32con-stubs', 'win32api-stubs', 'win32pdhquery-stubs', 'win32verstamp-stubs', 'win32cryptcon-stubs', 'win32serviceutil-stubs', 'win32pipe-stubs', 'win32pdh-stubs', 'win32lz-stubs', 'winperf-stubs', 'win32help-stubs', 'win32-stubs', 'win32net-stubs', 'win32ras-stubs', 'odbc-stubs', 'winnt-stubs', 'winxpgui-stubs', 'win32ui-stubs', 'sspicon-stubs', 'win32gui-stubs', 'winerror-stubs', 'win32inetcon-stubs', 'win32comext-stubs', 'win32job-stubs', 'mmapfile-stubs', 'pythonwin-stubs', 'win32print-stubs', 'win32trace-stubs', 'win32transaction-stubs', 'win32file-stubs', 'pythoncom-stubs']
+include-package-data = false
