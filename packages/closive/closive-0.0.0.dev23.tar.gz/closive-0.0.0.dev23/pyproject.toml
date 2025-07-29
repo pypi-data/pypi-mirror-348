@@ -1,0 +1,23 @@
+[project]
+name = "closive"
+version = "0.0.0dev23"
+description = "Abstractions for callback-heavy control flows."
+readme = "README.md"
+authors = [
+    { name = "kosmolebryce", email = "k.lebryce@pm.me" }
+]
+requires-python = ">=3.11.0"
+dependencies = [
+    "returns>=0.25.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+optional = [
+    "ipython>=9.2.0",
+    "numpy>=2.2.5",
+    "pyyaml>=6.0.2",
+]
