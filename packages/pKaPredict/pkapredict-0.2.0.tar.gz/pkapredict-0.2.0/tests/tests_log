@@ -1,0 +1,100 @@
+test_data_preprocessing: 
+
+========================================================= test session starts ==========================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 5 items                                                                                                                      
+
+tests/test_data_preprocessing.py .....                                                                                           [100%]
+
+========================================================== 5 passed in 6.48s ===========================================================
+
+test_plot_data:
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 1 item                                                                                                      
+
+tests/test_plot_data.py .                                                                                       [100%]
+
+================================================= 1 passed in 23.97s ==================================================
+
+test_plot_best_models:
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 1 item                                                                                                      
+
+tests/test_plot_best_models.py .                                                                                [100%]
+
+================================================== warnings summary ===================================================
+tests/test_plot_best_models.py::test_plot_best_models
+  /Users/anastasiafloris/miniconda3/envs/pKaPredict/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================ 1 passed, 1 warning in 6.71s =============================================
+
+test_plot_k_vs_r2:
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 1 item                                                                                                      
+
+tests/test_plot_k_vs_r2.py .                                                                                    [100%]
+
+================================================== 1 passed in 5.94s ==================================================
+
+test_RDkit_descriptors:
+
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 2 items                                                                                                     
+
+../Desktop/pKaPredict/pKaPredict/tests/test_RDkit_descriptors.py ..                                             [100%]
+
+================================================== 2 passed in 2.92s ==================================================
+
+test_load_model:
+
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 1 item                                                                                                      
+
+../Desktop/pKaPredict/pKaPredict/tests/test_load_model.py .                                                     [100%]
+
+================================================== 1 passed in 0.04s ==================================================
+
+
+
+test_smiles_to_rdkit_descriptors:
+
+================================================= test session starts =================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 2 items                                                                                                     
+
+../Desktop/pKaPredict/pKaPredict/tests/test_smiles_to_rdkit_descriptors.py ..                                   [100%]
+
+================================================== 2 passed in 0.55s ==================================================
+
+test_predict_pKa:
+
+========================================================= test session starts ==========================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/anastasiafloris/Desktop/pKaPredict/pKaPredict
+configfile: pyproject.toml
+collected 1 item                                                                                                                       
+
+tests/test_predict_pKa.py .                                                                                                      [100%]
+
+========================================================== 1 passed in 11.14s ==========================================================
