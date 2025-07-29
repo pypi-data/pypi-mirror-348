@@ -1,0 +1,25 @@
+[NEAT-922] 👷 Fix missing unquote (#1164) (#1165)
+
+# Description
+
+Fix missing unquote. In addition, found another bug causing an
+unnecessary warning. Not this was not exposed to the user thus it is not
+part of the changelog
+
+This is cherry-picked - original PR:
+https://github.com/cognitedata/neat/pull/1164
+
+## Bump
+
+- [x] Patch
+- [ ] Minor
+- [ ] Skip
+
+## Changelog
+### Fixed
+
+- When reading assets, events, sequences, etc. using
+`neat.read.cdf.classic...`. The conversion of label to tags no longer
+changes non-alpha numeric characters. For example, if you had a label
+`工事` it would previous be changed by neat to `%E5%B7%A5%E4%BA%8B'. This
+is now fixed.
