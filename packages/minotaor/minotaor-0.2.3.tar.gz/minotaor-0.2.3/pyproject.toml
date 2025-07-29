@@ -1,0 +1,22 @@
+[project]
+name = "minotaor"
+version = "0.2.3"
+license = "MIT"
+authors = [{ name = "Peter Vegh" }]
+description = "Amino acid sequence annotator"
+readme = "pypi-readme.rst"
+keywords = ["biology"]
+dependencies = ["pandas", "biopython"]
+
+[project.urls]
+Homepage = "https://github.com/Edinburgh-Genome-Foundry/Minotaor"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["docs*", "examples*", "tests*"]
+
+[tool.setuptools.package-data]
+minotaor = ["data/*"]
