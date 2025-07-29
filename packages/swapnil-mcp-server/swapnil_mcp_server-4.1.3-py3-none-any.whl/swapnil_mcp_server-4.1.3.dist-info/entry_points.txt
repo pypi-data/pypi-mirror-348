@@ -1,0 +1,7 @@
+[console_scripts]
+swapnil-mcp-server = mcp_tools.__main__:main
+
+[mcp.tools]
+get_Activities = mcp_tools.server:get_Activities
+get_SMS_Logs = mcp_tools.server:get_SMS_Logs
+send_SMS = mcp_tools.server:send_SMS
