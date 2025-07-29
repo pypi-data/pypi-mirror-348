@@ -1,0 +1,114 @@
+Metadata-Version: 2.4
+Name: cz-benchmarks
+Version: 0.9.0
+Summary: A framework for benchmarking single-cell machine learning models
+Project-URL: Homepage, https://github.com/chanzuckerberg/cz-benchmarks
+Project-URL: Repository, https://github.com/chanzuckerberg/cz-benchmarks
+Author-email: Chan Zuckerberg Initiative <pypi@chanzuckerberg.com>
+License: MIT
+License-File: LICENSE.md
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: anndata>=0.9.0
+Requires-Dist: boto3-stubs-lite[s3]>=1.38.0
+Requires-Dist: boto3>=1.28.0
+Requires-Dist: dill>=0.3.6
+Requires-Dist: docker>=6.1.0
+Requires-Dist: h5py>=3.8.0
+Requires-Dist: hnswlib>=0.8.0
+Requires-Dist: hydra-core>=1.3.2
+Requires-Dist: igraph>=0.11.8
+Requires-Dist: leidenalg>=0.10.2
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: scanpy
+Requires-Dist: scib-metrics>=0.5.1
+Requires-Dist: scikit-learn
+Requires-Dist: scikit-misc>=0.5.1
+Requires-Dist: tomli>=2.2.1
+Requires-Dist: typing-extensions>=4.13.0
+Provides-Extra: build
+Requires-Dist: build>=1.2.2.post1; extra == 'build'
+Requires-Dist: setuptools>=78.1.0; extra == 'build'
+Requires-Dist: twine>=6.1.0; extra == 'build'
+Requires-Dist: wheel>=0.45.1; extra == 'build'
+Provides-Extra: dev
+Requires-Dist: boto3-stubs>=1.37.26; extra == 'dev'
+Requires-Dist: botocore-stubs>=1.37.26; extra == 'dev'
+Requires-Dist: mypy>=1.15.0; extra == 'dev'
+Requires-Dist: pandas-stubs>=2.2.3.250308; extra == 'dev'
+Requires-Dist: pre-commit>=4.2.0; extra == 'dev'
+Requires-Dist: pytest-cov>=6.0.0; extra == 'dev'
+Requires-Dist: pytest-mock>=3.14.0; extra == 'dev'
+Requires-Dist: pytest>=8.3.5; extra == 'dev'
+Requires-Dist: ruff>=0.11.2; extra == 'dev'
+Requires-Dist: types-pyyaml>=6.0.12.20250402; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: linkify-it-py; extra == 'docs'
+Requires-Dist: myst-parser; extra == 'docs'
+Requires-Dist: nbsphinx; extra == 'docs'
+Requires-Dist: sphinx-autoapi; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints; extra == 'docs'
+Requires-Dist: sphinx-copybutton; extra == 'docs'
+Requires-Dist: sphinx-markdown-builder; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme; extra == 'docs'
+Requires-Dist: sphinx==8.1.3; extra == 'docs'
+Requires-Dist: sphinxcontrib-mermaid; extra == 'docs'
+Requires-Dist: toml; extra == 'docs'
+Provides-Extra: interactive
+Requires-Dist: jupyterlab>=4.0.0; extra == 'interactive'
+Description-Content-Type: text/markdown
+
+# CZ Benchmarks
+
+## PROJECT STATUS: UNSTABLE
+
+⚠️ **Warning:** Repository under active development and is in the alpha phase of development, subject to major refactors as outlined in the public-facing [roadmap](docs/source/roadmap.md).
+
+### What is cz-benchmarks?
+cz-benchmarks is a package for standardized evaluation and comparison of machine learning models for biological applications (first, in the single-cell transcriptomics domain, with future plans to expand to additional domains). The package provides a toolkit for running containerized models, executing biologically-relevant tasks, and computing performance metrics. We see this tool as a step towards ensuring that large-scale AI models can be harnessed to deliver genuine biological insights -- by building trust, accelerating development, and bridging the gap between ML and biology communities.
+
+### Why benchmarking? Why now?
+Last year, CZI hosted a workshop focused on benchmarking and evaluation of AI models in biology, and the [insights gained](https://virtualcellmodels.cziscience.com/micro-pub/benchmarking-workshop) have reinforced our commitment to supporting the development of a robust benchmarking infrastructure, which we see as critical to achieving our Virtual Cell vision.
+
+### 💬 Community Feedback & Contributions
+We're working to get the alpha version of cz-benchmarks stable to build with the community. In the meantime, for issues you may identify, feel free to open an issue on GitHub or reach out to us at [virtualcellmodels@chanzuckerberg.com](mailto:virtualcellmodels@chanzuckerberg.com).
+
+
+## Table of contents
+
+### Getting Started
+- [Quick Start Guide](docs/source/quick_start.md)
+
+### How-To Guides
+- [Add a Custom Dataset](docs/source/how_to_guides/add_custom_dataset.md)
+- [Add a Custom Model](docs/source/how_to_guides/add_custom_model.md)
+- [Add a New Metric](docs/source/how_to_guides/add_new_metric.md)
+- [Add a New Task](docs/source/how_to_guides/add_new_task.md)
+- [Interactive Mode](docs/source/how_to_guides/interactive_mode.md)
+- [Visualize Results](docs/source/how_to_guides/visualize_results.md)
+
+### Developer Guides
+- [Datasets](docs/source/developer_guides/datasets.md)
+- [Metrics](docs/source/developer_guides/metrics.md)
+- [Models](docs/source/developer_guides/models.md)
+- [Tasks](docs/source/developer_guides/tasks.md)
+- [Writing Test](tests/README.md)
+- [Writing Documentation](docs/README.md)
+
+### Policies
+- [Assets](docs/source/assets.md)
+- [Governance](docs/source/policy/definitions.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+
+### Additional Resources
+- [Changelog & Release Notes](CHANGELOG.md)
+- [Roadmap](docs/source/roadmap.md)
+- [Legal](LICENSE.md)
+- [Security](SECURITY.md)
