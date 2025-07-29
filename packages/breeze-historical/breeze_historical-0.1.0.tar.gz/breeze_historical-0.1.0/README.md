@@ -1,0 +1,117 @@
+# breeze-historical
+
+A Python library for fetching, caching, and analyzing historical market data from the Breeze API, with optional AWS DynamoDB integration for persistent storage.
+
+## Features
+- Fetch historical options and futures data from the Breeze API
+- Cache and retrieve data using AWS DynamoDB
+- Utilities for working with NSE symbols, expiries, and strikes
+- Modular, extensible, and production-ready
+
+## Installation
+
+### From PyPI (when published):
+```bash
+pip install breeze-historical
+```
+
+### From source (GitHub):
+```bash
+git clone https://github.com/kunalAgarwal35/building_breeze_wrapper.git
+cd building_breeze_wrapper
+pip install .
+```
+
+## Setup
+
+### 1. Environment Variables
+Create a `.env` file in your working directory (or wherever you run your scripts) with the following keys:
+
+```
+BREEZE_API_KEY=your_breeze_api_key
+BREEZE_API_SECRET=your_breeze_api_secret
+BREEZE_USER_ID=your_breeze_user_id
+BREEZE_PASSWORD=your_breeze_password
+BREEZE_TOTP_SECRET=your_breeze_totp_secret
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+AWS_REGION=ap-south-1
+DYNAMO_TABLE_NAME=historical_market_data
+```
+
+### 2. DynamoDB Table
+If you want to use DynamoDB caching, create a table with the name specified in `DYNAMO_TABLE_NAME` and primary key:
+- Partition key: `c_id` (String)
+- Sort key: `ts` (String)
+
+## Example Usage
+
+```python
+from breeze_historical import BreezeHistorical
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+breeze_creds = {
+    "api_key": os.getenv("BREEZE_API_KEY"),
+    "api_secret": os.getenv("BREEZE_API_SECRET"),
+    "user_id": os.getenv("BREEZE_USER_ID"),
+    "password": os.getenv("BREEZE_PASSWORD"),
+    "totp_key": os.getenv("BREEZE_TOTP_SECRET")
+}
+
+aws_creds = {
+    "access_key_id": os.getenv("AWS_ACCESS_KEY_ID"),
+    "secret_access_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+    "region": os.getenv("AWS_REGION", "ap-south-1"),
+    "table_name": os.getenv("DYNAMO_TABLE_NAME", "historical_market_data")
+}
+
+client = BreezeHistorical(breeze_creds=breeze_creds, aws_creds=aws_creds, verbose=True)
+
+# Fetch available indices
+indices = client.get_nse_indices()
+print("Available indices:", indices)
+
+# Fetch expiry dates for NIFTY
+expiries = client.get_nse_expiry_dates("NIFTY", 2024)
+print("NIFTY Expiries:", expiries)
+
+# Fetch option chain timeseries for NIFTY
+option_chain = client.fetch_option_chain_timeseries(
+    symbol="NIFTY",
+    start_date="2024-04-01",
+    end_date="2024-04-30",
+    expiry="2024-04-25",
+    granularity="5minute"
+)
+print(option_chain)
+```
+
+## API Overview
+
+### `BreezeHistorical`
+- `get_nse_indices()` — List all available indices
+- `get_nse_stocks()` — List all available stocks
+- `get_nse_expiry_dates(symbol, year, instrument)` — Get expiry dates for a symbol
+- `get_nse_option_chain(...)` — Get option chain data from NSE
+- `fetch_option_chain_timeseries(...)` — Fetch and cache option chain timeseries
+- `_fetch_option_data(...)` — (Advanced) Fetch option data for a specific strike/type
+- `_fetch_futures_data(...)` — (Advanced) Fetch futures data
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## License
+MIT License
+
+## Links
+- [GitHub Repository](https://github.com/kunalAgarwal35/building_breeze_wrapper) 
