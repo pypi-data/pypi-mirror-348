@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: aworld
+Version: 0.2.3
+Summary: Ant Agent Package
+Home-page: https://github.com/inclusionAI/AWorld
+Author: Ant AI
+Author-email: 
+License: MIT
+Keywords: multi-agent,agent,environment,tool,sandbox
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic~=2.9.2
+Requires-Dist: pyyaml~=6.0.2
+Requires-Dist: langchain~=0.3.20
+Requires-Dist: openai~=1.66.3
+Requires-Dist: langchain-openai~=0.3.8
+Requires-Dist: langchain-ollama~=0.2.3
+Requires-Dist: langchain-anthropic~=0.3.9
+Requires-Dist: langchain-mistralai~=0.2.7
+Requires-Dist: langchain-google-genai~=2.1.0
+Requires-Dist: numpy~=2.2.3
+Requires-Dist: pandas~=2.2.3
+Requires-Dist: pydantic_settings~=2.8.0
+Requires-Dist: mcp[cli]~=1.6.0
+Requires-Dist: python-dotenv~=1.0.1
+Requires-Dist: datasets<2.19.0,>=2.16.0
+Requires-Dist: tornado~=6.4.2
+Requires-Dist: terminal_controller
+Requires-Dist: mcp_server_calculator
+Dynamic: author
+Dynamic: classifier
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: platform
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
