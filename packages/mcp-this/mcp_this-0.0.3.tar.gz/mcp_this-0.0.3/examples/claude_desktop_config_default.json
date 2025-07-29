@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mcp-this": {
+      "command": "uvx",
+      "args": [
+        "mcp-this",
+        "--tools",
+        "{\"tools\": {\"find\": {\"description\": \"Find files using the find command\", \"execution\": {\"command\": \"find <<args>>\"}, \"parameters\": {\"args\": {\"description\": \"Full find command arguments\", \"required\": false}}}}}"
+      ]
+    }
+  }
+}
