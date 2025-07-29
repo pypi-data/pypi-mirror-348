@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "teer"
+dynamic = ["version"]
+description = "Teer Python SDK"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["llm", "tracking", "analytics"]
+authors = [
+  { name = "Shane Rogers", email = "shane@teer.ai" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Typing :: Typed",
+]
+dependencies = [
+  "requests>=2.25.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/teerai/teer-python#readme"
+Issues = "https://github.com/teerai/teer-python/issues"
+Source = "https://github.com/teerai/teer-python"
+
+[tool.hatch.version]
+path = "src/teer/__about__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/teer"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/teer" = "teer"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/teer",
+  "LICENSE.txt",
+  "README.md",
+  "pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"src/teer/py.typed" = "teer/py.typed"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/teer tests}"
+
+[tool.coverage.run]
+source_pkgs = ["teer", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/teer/__about__.py",
+]
+
+[tool.coverage.paths]
+teer = ["src/teer", "*/teer-python/src/teer"]
+tests = ["tests", "*/teer-python/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.envs.default.scripts]
+publish = "source .env && HATCH_INDEX_USER=__token__ HATCH_INDEX_AUTH=$PYPI_API_TOKEN hatch publish"
+publish-test = "source .env && HATCH_INDEX_USER=__token__ HATCH_INDEX_AUTH=$PYPI_API_TOKEN hatch publish -r test"
+publish-patch = "python scripts/publish.py patch"
+publish-minor = "python scripts/publish.py minor"
+publish-major = "python scripts/publish.py major"
+version-patch = "python scripts/version.py patch"
+version-minor = "python scripts/version.py minor"
+version-major = "python scripts/version.py major"
