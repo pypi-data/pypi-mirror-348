@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "costo"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+description="COSTO stands for COSimulation TOols"
+readme = "README.md"
+authors = [
+  {name = "teddy Chantrait", email = "teddy.chantrait@gmail.com"},
+]
+maintainers = [
+  {name = "teddy Chantrait", email = "teddy.chantrait@gmail.com"},
+]
+license =  {file = "LICENSE"}
+requires-python = ">=3.10"
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 4 - Beta",
+
+  # Pick your license as you wish (see also "license" above)
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+# [tool.setuptools]
+# py-modules = ["pipeline", "utils"]
+[tool.setuptools]
+script-files = ["bin/set_costo_env"]
+# include-package-data = true
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies.test = { file = ["requirements-test.txt"] }
+optional-dependencies.dev = { file = ["requirements-dev.txt"] }
+# [tool.setuptools.package-data]
+# "*" = ["*.slurm","*.dat", ".*/*.state", "laun*", "*.vtp", "*.vtu","*.test*/*"]
+[project.urls]
+Homepage = "https://gitlab.com/Te_ch/costo"
+Documentation = "https://te_ch.gitlab.io/costo"
+Repository = "https://gitlab.com/Te_ch/costo.git"
+# Issues = "https://github.com/me/spam/issues"
+# Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
