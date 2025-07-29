@@ -1,0 +1,11 @@
+include README.md
+include requirements.txt
+include scripts/templates/*
+include scripts/page_generator/*
+recursive-include scripts *.py
+recursive-include scripts/templates *.html *.css *.js
+recursive-include scripts/page_generator *.py *.html *.css *.js
+global-exclude __pycache__/*
+global-exclude *.py[cod]
+global-exclude *.so
+global-exclude .DS_Store
