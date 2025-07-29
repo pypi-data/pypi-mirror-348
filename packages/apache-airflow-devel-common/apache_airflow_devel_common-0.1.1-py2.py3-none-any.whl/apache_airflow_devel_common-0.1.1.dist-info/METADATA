@@ -1,0 +1,104 @@
+Metadata-Version: 2.4
+Name: apache-airflow-devel-common
+Version: 0.1.1
+Summary: Devel common package for Apache Airflow where shared test and development code is stored
+Requires-Dist: aioresponses>=0.7.6
+Requires-Dist: black>=23.12.0
+Requires-Dist: filelock>=3.13.0
+Requires-Dist: jmespath>=0.7.0
+Requires-Dist: kgb>=7.2.0
+Requires-Dist: requests_mock>=1.11.0
+Requires-Dist: rich>=13.6.0
+Requires-Dist: ruff==0.11.2
+Requires-Dist: semver>=3.0.2
+Requires-Dist: time-machine>=2.13.0
+Requires-Dist: wheel>=0.42.0
+Requires-Dist: yamllint>=1.33.0
+Requires-Dist: apache-airflow-devel-common[basic]
+Requires-Dist: apache-airflow-devel-common[coverage, duckdb, debuggers, devscripts, doc, docs-gen, mypy, pytest, sentry] ; extra == "all"
+Requires-Dist: apache-airflow-devel-common[coverage, debuggers, mypy, pytest] ; extra == "basic"
+Requires-Dist: coverage>=7.4.0 ; extra == "coverage"
+Requires-Dist: ipdb>=0.13.13 ; extra == "debuggers"
+Requires-Dist: pdbr>=0.8.9 ; extra == "debuggers"
+Requires-Dist: click>=8.1.8 ; extra == "devscripts"
+Requires-Dist: gitpython>=3.1.40 ; extra == "devscripts"
+Requires-Dist: incremental>=24.7.2 ; extra == "devscripts"
+Requires-Dist: pipdeptree>=2.13.1 ; extra == "devscripts"
+Requires-Dist: pygithub>=2.1.1 ; extra == "devscripts"
+Requires-Dist: restructuredtext-lint>=1.4.0 ; extra == "devscripts"
+Requires-Dist: rich-click>=1.7.1 ; extra == "devscripts"
+Requires-Dist: semver>=3.0.2 ; extra == "devscripts"
+Requires-Dist: towncrier>=23.11.0 ; extra == "devscripts"
+Requires-Dist: twine>=4.0.2 ; extra == "devscripts"
+Requires-Dist: astroid>=3 ; extra == "docs"
+Requires-Dist: checksumdir>=1.2.0 ; extra == "docs"
+Requires-Dist: rich-click>=1.7.1 ; extra == "docs"
+Requires-Dist: click>=8.1.8 ; extra == "docs"
+Requires-Dist: docutils>=0.21 ; extra == "docs"
+Requires-Dist: sphinx-argparse>=0.4.0 ; extra == "docs"
+Requires-Dist: sphinx-autoapi>=3 ; extra == "docs"
+Requires-Dist: sphinx-autobuild>=2024.10.2 ; extra == "docs"
+Requires-Dist: sphinx-copybutton>=0.5.2 ; extra == "docs"
+Requires-Dist: sphinx-design>=0.5.0 ; extra == "docs"
+Requires-Dist: sphinx-jinja>=2.0.2 ; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=2.0.0 ; extra == "docs"
+Requires-Dist: sphinx>=7 ; extra == "docs"
+Requires-Dist: sphinxcontrib-applehelp>=1.0.4 ; extra == "docs"
+Requires-Dist: sphinxcontrib-devhelp>=1.0.2 ; extra == "docs"
+Requires-Dist: sphinxcontrib-htmlhelp>=2.0.1 ; extra == "docs"
+Requires-Dist: sphinxcontrib-httpdomain>=1.8.1 ; extra == "docs"
+Requires-Dist: sphinxcontrib-jquery>=4.1 ; extra == "docs"
+Requires-Dist: sphinxcontrib-jsmath>=1.0.1 ; extra == "docs"
+Requires-Dist: sphinxcontrib-qthelp>=1.0.3 ; extra == "docs"
+Requires-Dist: sphinxcontrib-redoc>=1.6.0 ; extra == "docs"
+Requires-Dist: sphinxcontrib-serializinghtml>=1.1.5 ; extra == "docs"
+Requires-Dist: sphinxcontrib-spelling>=8.0.0 ; extra == "docs"
+Requires-Dist: diagrams>=0.23.4 ; extra == "docs-gen"
+Requires-Dist: eralchemy2>=1.3.8 ; extra == "docs-gen"
+Requires-Dist: duckdb>=0.10.0 ; extra == "duckdb" and ( python_version >= '3.12')
+Requires-Dist: duckdb>=0.9.0 ; extra == "duckdb" and ( python_version < '3.12')
+Requires-Dist: mypy==1.9.0 ; extra == "mypy"
+Requires-Dist: types-Deprecated>=1.2.9.20240311 ; extra == "mypy"
+Requires-Dist: types-Markdown>=3.6.0.20240316 ; extra == "mypy"
+Requires-Dist: types-PyMySQL>=1.1.0.20240425 ; extra == "mypy"
+Requires-Dist: types-PyYAML>=6.0.12.20240724 ; extra == "mypy"
+Requires-Dist: types-aiofiles>=23.2.0.20240403 ; extra == "mypy"
+Requires-Dist: types-certifi>=2021.10.8.3 ; extra == "mypy"
+Requires-Dist: types-croniter>=2.0.0.20240423 ; extra == "mypy"
+Requires-Dist: types-docutils>=0.21.0.20240704 ; extra == "mypy"
+Requires-Dist: types-paramiko>=3.4.0.20240423 ; extra == "mypy"
+Requires-Dist: types-protobuf>=5.26.0.20240422 ; extra == "mypy"
+Requires-Dist: types-python-dateutil>=2.9.0.20240316 ; extra == "mypy"
+Requires-Dist: types-python-slugify>=8.0.2.20240310 ; extra == "mypy"
+Requires-Dist: types-pytz>=2024.1.0.20240417 ; extra == "mypy"
+Requires-Dist: types-redis>=4.6.0.20240425 ; extra == "mypy"
+Requires-Dist: types-requests>=2.31.0.6 ; extra == "mypy"
+Requires-Dist: types-setuptools>=69.5.0.20240423 ; extra == "mypy"
+Requires-Dist: types-tabulate>=0.9.0.20240106 ; extra == "mypy"
+Requires-Dist: types-toml>=0.10.8.20240310 ; extra == "mypy"
+Requires-Dist: apache-airflow-devel-common[coverage, duckdb, debuggers, devscripts, mypy, pytest, sentry] ; extra == "no-doc"
+Requires-Dist: pytest-asyncio>=0.24.0,<0.25.1 ; extra == "pytest"
+Requires-Dist: pytest-cov>=4.1.0 ; extra == "pytest"
+Requires-Dist: pytest-custom-exit-code>=0.3.0 ; extra == "pytest"
+Requires-Dist: pytest-icdiff>=0.9 ; extra == "pytest"
+Requires-Dist: pytest-instafail>=0.5.0 ; extra == "pytest"
+Requires-Dist: pytest-mock>=3.14.0 ; extra == "pytest"
+Requires-Dist: pytest-rerunfailures>=13.0 ; extra == "pytest"
+Requires-Dist: pytest-timeouts>=1.2.1 ; extra == "pytest"
+Requires-Dist: pytest-unordered>=0.6.1 ; extra == "pytest"
+Requires-Dist: pytest-xdist>=3.5.0 ; extra == "pytest"
+Requires-Dist: pytest>=8.3.3,<9 ; extra == "pytest"
+Requires-Dist: blinker>=1.7.0 ; extra == "sentry"
+Requires-Dist: beautifulsoup4>=4.7.1 ; extra == "sentry"
+Provides-Extra: all
+Provides-Extra: basic
+Provides-Extra: coverage
+Provides-Extra: debuggers
+Provides-Extra: devscripts
+Provides-Extra: docs
+Provides-Extra: docs-gen
+Provides-Extra: duckdb
+Provides-Extra: mypy
+Provides-Extra: no-doc
+Provides-Extra: pytest
+Provides-Extra: sentry
