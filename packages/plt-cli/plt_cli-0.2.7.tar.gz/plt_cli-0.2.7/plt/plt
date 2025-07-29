@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+# END py
+import os
+import re
+from argparse import RawTextHelpFormatter
+import importlib_resources
+from io import StringIO, BytesIO
+import io
+from contextlib import redirect_stdout
+import subprocess
+from subprocess import Popen, PIPE
+
+# env variable to control plot size:
+# PLT_SIZE="w:h"
+SIZE = os.getenv('PLT_SIZE')
+SCATTER_SIZE = os.getenv('PLT_SCATTER_SIZE')
+BINS = os.getenv('PLT_BINS')
+USE_SIXEL = os.getenv('PLT_SIXEL')
+
+# default SEPARATOR is &&
+SEPARATOR = os.getenv('PLT_SEPARATOR')
+if SEPARATOR is None or len(SEPARATOR) == 0:
+    SEPARATOR = '&&'
+
+env_variables_help  = """
+
+environment variables:
+  PLT_SIZE              size of the plot with format w:h. w and h are interpreted as cm when using a graphical output and as the number of characters in text mode
+  PLT_SEPARATOR         separator for the input strem, default is &&
+  PLT_SCATTER_SIZE      size of the scatter dots (graphical output only)
+  PLT_SIXEL             use sixel by default, instead of plottext
+"""
+parser = argparse.ArgumentParser(description='read floating points from stdin and plot in stdout'+env_variables_help, formatter_class=RawTextHelpFormatter)
+
+parser.add_argument("--pdf", action='store_true', default=False, help="output pdf to stdout")
+parser.add_argument("--png", action='store_true', default=False, help="output png to stdout")
+parser.add_argument("-i", "--sixel", action='store_true', default=False, help="output using sixel (requires img2sixel)")
+parser.add_argument("--py", action='store_true', default=False, help="output py program to stdout")
+parser.add_argument("--labels", type=str, nargs='*',
+                    help='labels for the colors')
+parser.add_argument("-x","--xlim", type=float, nargs=2,
+                    help='x limits')
+parser.add_argument("-y","--ylim", type=float, nargs=2,
+                    help='y limits')
+
+parser.add_argument("--alpha", "-a", type=float,
+                    help='opacity for the templates that support it')
+group = parser.add_mutually_exclusive_group()
+group.add_argument('--line', '-l',      action='store_true', help='default plot type')
+group.add_argument('--line_2d', '-l2',      action='store_true', help='line plot with 2D coordinates')
+group.add_argument('--scatter', '-s',   action='store_true')
+group.add_argument('--histogram', '-t', action='store_true')
+group.add_argument('--normalized_histogram', '-nt', action='store_true')
+group.add_argument('--density', '-d', action='store_true')
+args = parser.parse_args()
+
+if not args.pdf and not args.png and USE_SIXEL:
+    args.sixel = True
+
+# set up variables
+str_stdin = "\n".join(sys.stdin)
+
+if SIZE is not None and len(SIZE) > 0:
+    size = SIZE.split(':')
+    w = float(size[0])
+    h = float(size[1])
+else:
+    w = None
+    h = None
+
+if SCATTER_SIZE is not None:
+    scatter_size=float(SCATTER_SIZE)
+else:
+    scatter_size=1
+
+separator = SEPARATOR
+labels = args.labels
+
+if BINS is not None:
+    bins = int(BINS)
+else:
+    bins = None
+
+# default plot is line
+if not (args.line or args.scatter or args.histogram or args.density):
+    args.line = True
+
+# vector of vectors
+vv = []
+
+# populate vv with vector of vectors of numbers
+for str_v in str_stdin.split(separator):
+    str_v = re.sub(R'[^0-9.\-eE+]', ' ', str_v)
+    x = []
+    for s in str_v.split():
+        try:
+            f = float(s)
+            x.append(f)
+        except ValueError:
+            pass
+    vv.append(x)
+
+templates = importlib_resources.files("plt") / "templates"
+template = ""
+
+plot_type ="line"
+if args.line:
+    plot_type = "line"
+if args.line_2d:
+    plot_type = "line_2d"
+if args.scatter:
+    plot_type = "scatter"
+if args.histogram:
+    plot_type = "histogram"
+if args.normalized_histogram:
+    plot_type = "normalized_histogram"
+if args.density:
+    plot_type = "density"
+
+# import dependencies only if necessary
+if args.pdf or args.png or args.py or args.sixel:
+    template = (templates / "python" / "matplotlib" / (plot_type+".py")  ).read_text()
+    if args.pdf:
+        template = re.sub('<<FORMAT:[^>]*>>', 'pdf', template)
+    if args.png:
+        template = re.sub('<<FORMAT:[^>]*>>', 'png', template)
+    if args.sixel:
+        template = re.sub('<<FORMAT:[^>]*>>', 'png', template)
+        template = re.sub('<<DARK_BACKGROUND:[^>]*>>', 'True', template)
+
+
+else:
+    template = (templates / "python" / "plotext" / (plot_type+".py")  ).read_text()
+
+template = re.sub('<<LABELS:[^>]*>>', str(labels), template)
+template = re.sub('<<HEIGHT:[^>]*>>', str(h), template)
+template = re.sub('<<WIDTH:[^>]*>>', str(w), template)
+template = re.sub('<<DATA:[^>]*>>', str(vv), template)
+if args.alpha:
+    template = re.sub('<<ALPHA:[^>]*>>', str(args.alpha), template)
+
+
+if plot_type == "histogram" or plot_type == "density" or plot_type == "normalized_histogram":
+    template = re.sub('<<BINS:[^>]*>>', str(bins), template)
+if plot_type == "scatter":
+    template = re.sub('<<SCATTER_SIZE:[^>]*>>', str(scatter_size), template)
+
+if args.xlim:
+    template = re.sub('<<XLIM:[^>]*>>', str(args.xlim), template)
+
+if args.ylim:
+    template = re.sub('<<YLIM:[^>]*>>', str(args.ylim), template)
+
+# substitute remaining by default values
+template = re.sub('<<[^:]*:', '', template)
+template = re.sub('>>', '', template)
+
+
+
+if args.py:
+    print(template)
+else:
+
+    if args.sixel:
+        f = BytesIO()
+        old_stdout = sys.stdout
+        sys.stdout = f
+        exec(template, {})
+        sys.stdout = old_stdout
+
+        process = Popen(['img2sixel'], stdin=PIPE, bufsize=-1)
+        process.communicate(input=f.getvalue())
+
+    else:
+        exec(template, {})
