@@ -1,0 +1,30 @@
+# GConvNet
+
+GConvNet is a PyTorch module for graph convolution using triplet-based edge structures and dynamic node filtering. It enables higher-order neighborhood modeling via (3×1) convolution over node triplets, and selectively retains important nodes based on degree centrality.
+
+## Features
+
+- Triplet generation from sequential edges
+- (3×1) convolution on node feature triplets
+- Node filtering by degree
+- Simple integration with PyTorch models
+
+## Installation
+
+Install with pip:
+
+```bash
+pip install GConvNet
+```
+
+## Usage
+
+```python
+import torch
+from GConvNet import GConvNet
+
+x = torch.rand(8, 4)
+edge_index = torch.tensor([[0, 1, 2, 3], [1, 2, 3, 4]])
+model = GConvNet(4, 8)
+x_out, edge_index_out = model(x, edge_index)
+```
