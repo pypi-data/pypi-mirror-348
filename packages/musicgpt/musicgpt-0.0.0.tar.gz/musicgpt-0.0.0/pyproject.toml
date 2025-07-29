@@ -1,0 +1,37 @@
+[project]
+name = "musicgpt"
+version = "0.0.0"
+description = "Python package for musicgpt"
+authors = [
+    {name="Sakar", email="sakar@lalals.com"}
+]
+readme = "README.md"
+license = {text = "Proprietary - Only for users of https://musicgpt.com"}
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.0.0", 
+    "pydantic>=2.0.0"
+]
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "setuptools",
+    "wheel",
+    "requests", 
+    "pydantic"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+
+
+
+
+
