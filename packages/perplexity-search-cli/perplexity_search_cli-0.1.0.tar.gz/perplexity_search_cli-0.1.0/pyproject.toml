@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "perplexity-search-cli"
+version = "0.1.0"
+description = "Command line interface for Perplexity AI API"
+authors = [
+    {name = "Yuting Zhang"},
+]
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.scripts]
+perplexity-search-cli = "perplexity_search_cli.cli:main"
