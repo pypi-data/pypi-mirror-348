@@ -1,0 +1,11 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="module" style="position:fixed; max-height:20px; bottom: 20px; ;">
+        <h2>Custom Tools</h2>
+        <ul>
+            <li><a href="{% url 'send_newsletter' %}">Send Newsletter to Subscribers</a></li>
+        </ul>
+    </div>
+{% endblock %}

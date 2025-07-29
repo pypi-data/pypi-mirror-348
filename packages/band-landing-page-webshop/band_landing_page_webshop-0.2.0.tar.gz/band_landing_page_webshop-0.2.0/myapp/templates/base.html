@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    {% block title %}
+    Band site
+    {% endblock %}
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+
+  <style>
+    #discount-timer {
+      position: absolute;
+      top: 64px;
+      right: 0px;
+      max-width: fit-content;
+    }
+
+    @media(max-width: 991.5px) {
+      #brandImage {
+        display: none;
+      }
+    
+      #discount-timer {
+        z-index: 999;
+        position: sticky;
+        top: 0px;
+        display: block;
+        margin-bottom: 12px;
+        width: 100vw;
+        max-width: 100vw;
+      }
+    }
+  </style>
+</head>
+</head>
+
+<body style="height: 100vh; display:flex; flex-direction: column;">
+  <div id="navContainerDiv"
+    style="width: 100vw; display: flex; flex-direction: row ; justify-content: space-between; align-items:flex-start; padding-right: 15px;">
+
+
+    <nav style="width: 96vw;" class="navbar navbar-expand-lg  p-3">
+      <a id="brandImage" class="navbar-brand" href="/">AsdBand Page</a>
+
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/shop">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/concerts">Concerts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news">News</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </nav>
+    <button style="margin-top: 18.3px;" id="theme-toggle" class="btn btn-outline-secondary">
+      <i id="theme-icon" class="bi bi-moon"></i>
+    </button>
+    <a href="/cart" style="margin-top: 18.3px; margin-left: 10px;" class="btn btn-outline-secondary">
+      <i class="bi bi-cart"></i>
+      {% if cart_count > 0 %}
+      <span style="top: 18px; right: 0px;" class="position-absolute translate-middle badge rounded-pill bg-danger">
+        {{ cart_count }}
+      </span>
+      {% endif %}
+    </a>
+
+  </div>
+  {% if promo_data %}
+  <div class="alert alert-warning text-center" id="discount-timer">
+    🔥Special offer: {{ promo_data.discount_percent }}% off❗Hurry, offer ends in <span id="timer-countdown"></span>
+  </div>
+
+  <script id="promo-data" type="application/json">
+    {{ promo_data|json_script:"promo-data" }}
+  </script>
+  <script>
+    const promoDataRuntime = JSON.parse(document.getElementById('promo-data').textContent.split('>')[1]);
+    sessionStorage.setItem('promo_data', JSON.stringify(promoDataRuntime));
+  </script>
+  {% endif %}
+
+
+  <div class="container">{% block content %} {% endblock %}</div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+  <!--This 4.3.1 script is needed for the drop-down nav button to work (only visible on smaller screens)-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const currentTheme = localStorage.getItem('theme') || 'light';
+
+      // Apply the current theme
+      document.documentElement.setAttribute('data-bs-theme', currentTheme);
+      themeIcon.className = currentTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+
+      themeToggle.addEventListener('click', function () {
+        const newTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-bs-theme', newTheme);
+        themeIcon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+        localStorage.setItem('theme', newTheme);
+      });
+    });
+
+    const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+    toastElList.map(function (toastEl) {
+      new bootstrap.Toast(toastEl, { delay: 4000 }).show();
+    });
+
+
+    const params = new URLSearchParams(window.location.search);
+    const promoCode = params.get('promo_code');
+
+    if (promoCode) {
+      sessionStorage.setItem('promo_code', promoCode);
+      // Send the promo_code to the server using AJAX
+      fetch('/save-promo-code/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value, // Add CSRF token if necessary
+        },
+        body: JSON.stringify({ promo_code: promoCode })
+      })
+        .then(response => response.json())
+        .then(() => location.reload())
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      // Optionally, you can remove it from the URL so it looks cleaner
+      const newUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+
+
+    const promoData = sessionStorage.getItem('promo_data');
+
+    if (promoData) {
+      const countdownElement = document.getElementById('timer-countdown');
+      const discountBanner = document.getElementById('discount-timer');
+      const promo = JSON.parse(promoData);
+      const expiresAtTimestamp = promo.expires_at * 1000; // seconds → milliseconds
+      const endDate = new Date(expiresAtTimestamp);
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = endDate - now;
+
+        if (diff <= 0 && countdownElement !== null && discountBanner !== null) {
+          countdownElement.innerText = "Expired";
+          discountBanner.classList.remove('alert-warning');
+          discountBanner.classList.add('alert-danger');
+          discountBanner.innerHTML = "This offer has expired!";
+          clearInterval(timerInterval);
+          fetch('/promo-expired-while-viewing/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value, // Add CSRF token if necessary
+            },
+            body: JSON.stringify({ promo_code: promoCode })
+          })
+            .then(() => {
+              if (sessionStorage.getItem('promo_code') !== null) {
+                sessionStorage.removeItem('promo_code');
+              }
+              if (sessionStorage.getItem('promo_data') !== null) {
+                sessionStorage.removeItem('promo_data');
+              }
+            })
+            .finally(() => {
+              location.reload();
+
+            })
+
+          return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        if (countdownElement !== null) {
+          countdownElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+        }
+      }
+
+      updateCountdown();
+      const timerInterval = setInterval(updateCountdown, 1000);
+    }
+
+  </script>
+
+</body>
+<div class="container" style="bottom: 0; margin-top: auto">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item">
+        <a href="/" class="nav-link px-2 text-body-secondary">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="/shop" class="nav-link px-2 text-body-secondary">Shop</a>
+      </li>
+      <li class="nav-item">
+        <a href="/contact" class="nav-link px-2 text-body-secondary">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a href="/concerts" class="nav-link px-2 text-body-secondary">Concerts</a>
+      </li>
+      <li class="nav-item">
+        <a href="/news" class="nav-link px-2 text-body-secondary">Newsletter</a>
+      </li>
+
+    </ul>
+    <p class="text-center text-body-secondary">© 2025 Website created by Robert Nagy</p>
+  </footer>
+</div>
+
+</html>

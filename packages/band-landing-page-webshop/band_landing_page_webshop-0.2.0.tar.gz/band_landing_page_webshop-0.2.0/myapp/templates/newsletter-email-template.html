@@ -1,0 +1,17 @@
+<div>
+    Hey {{name}}! <br><br>
+    {{message}}
+    {% if is_cta %}
+    <br><br>
+    <a href="{{ cta_link }}" style="background-color:#007bff;
+    color:white;padding:10px 20px;text-decoration:none;border-radius:5px;margin-bottom:20px;">
+        <b>Visit Our Website</b>
+    </a>
+    <br><br>
+    {% endif %}
+
+    <p style="font-size: 0.8em; color: gray;">
+        If you no longer wish to receive emails, <a href="{{ unsubscribe_link }}">click here to unsubscribe</a>.
+    </p>
+
+</div>
