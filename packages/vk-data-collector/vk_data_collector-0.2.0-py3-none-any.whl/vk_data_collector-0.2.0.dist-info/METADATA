@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: vk-data-collector
+Version: 0.2.0
+Summary: A Python library for collecting data from VK (VKontakte) social network
+Project-URL: Homepage, https://github.com/nymless/vk-data-collector
+Project-URL: Documentation, https://github.com/nymless/vk-data-collector#readme
+Project-URL: Repository, https://github.com/nymless/vk-data-collector.git
+Project-URL: Issues, https://github.com/nymless/vk-data-collector/issues
+Author-email: Ivan Baklanov <nymless.ib@gmail.com>
+License: MIT
+License-File: LICENSE
+Keywords: data-collection,social-media,vk,vkontakte
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Requires-Dist: requests>=2.32.3
+Description-Content-Type: text/markdown
+
+# VK Data Collector
+
+A Python library for collecting data from VK (VKontakte) social network. Allows you to gather posts, comments, and group information from public VK walls.
+
+## Features
+
+- Collect posts from public walls (groups and users)
+- Collect posts up to a specific date
+- Collect comments for posts
+- Collect group information
+- Simple and intuitive API
+- Data saved in JSON format
+
+## Installation
+
+```shell
+pip install vk-data-collector
+```
+
+## Quick Start
+
+```python
+from vk_data_collector import create_collector
+
+# Initialize with your VK API token
+collector = create_collector("your_vk_service_token_here")
+
+# List of VK walls to collect from
+# Can be found in URL: https://vk.com/wall_name
+walls = ["group_name", "public_wall_name"]
+
+# Collect all posts
+saved_files = collector.collect_all_posts(walls, "output/posts")
+
+# Collect posts up to a specific date (YYYY-MM-DD)
+saved_files_to_date = collector.collect_posts_to_date(walls, "2024-01-01", "output/posts_to_date")
+
+# Collect comments for the posts
+collector.collect_comments_for_posts(saved_files, "output/comments")
+
+# Collect group information
+collector.collect_groups(walls, "output/groups")
+```
+
+## Requirements
+
+- Python 3.9+
+- VK API Service Token ([How to get token](https://dev.vk.com/en/api/access-token/getting-started))
+
+## License
+
+MIT License
