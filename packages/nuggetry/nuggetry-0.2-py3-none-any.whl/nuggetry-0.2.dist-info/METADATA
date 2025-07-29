@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: nuggetry
+Version: 0.2
+Summary: Nuggetry: a Lua-like scripting language in Python for automation
+Author: Your Name
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: pyautogui
+Requires-Dist: pygetwindow
+Requires-Dist: pyttsx3
+Requires-Dist: requests
+Requires-Dist: pillow
+Requires-Dist: pyobjc-core; platform_system == "Darwin"
+Requires-Dist: pyobjc; platform_system == "Darwin"
+Requires-Dist: pywin32; platform_system == "Windows"
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Nuggetry is a scripting language that lets you automate your PC, speak, get websites, and more.
