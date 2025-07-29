@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# My mess :)
+*.xyz
+*.traj
+test.py
+test_*.py
+bmark.html
+
+# Virtual environments
+.venv
+
+# Actual timol stuff
+.initialized
+!src/timol/test_xyz.xyz
+!src/timol/R_hemo.xyz
+
