@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: jumpstarter-driver-power
+Version: 0.6.0
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Miguel Angel Ajo Pelayo <majopela@redhat.com>, Nick Cao <ncao@redhat.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: asyncclick>=8.1.7.2
+Requires-Dist: jumpstarter
+Requires-Dist: pyserial>=3.5
+Description-Content-Type: text/markdown
+
+# Power driver
+
+`jumpstarter-driver-power` provides functionality for interacting with power
+control devices.
+
+## Installation
+
+```shell
+pip3 install --extra-index-url https://pkg.jumpstarter.dev/simple/ jumpstarter-driver-power
+```
+
+## Configuration
+
+Example configuration:
+
+```yaml
+export:
+  power:
+    type: jumpstarter_driver_power.driver.MockPower
+    config:
+      # Add required config parameters here
+```
+
+## API Reference
+
+Add API documentation here.
