@@ -1,0 +1,5 @@
+- [ ] Tests
+- [ ] User-friendly
+    - [ ] Readme
+    - [ ] Docs
+- [ ] Publish
