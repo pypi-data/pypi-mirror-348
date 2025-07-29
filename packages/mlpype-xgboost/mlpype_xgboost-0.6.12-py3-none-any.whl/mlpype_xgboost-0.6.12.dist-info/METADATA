@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mlpype-xgboost
+Version: 0.6.12
+Summary: Xgboost extension for MLpype
+Author: Jeroen van den Hoven
+License: MIT
+Requires-Python: >=3.9
+Requires-Dist: mlpype-base
+Requires-Dist: mlpype-sklearn
+Requires-Dist: xgboost>=1.6.2
+Provides-Extra: strict
+Requires-Dist: xgboost==1.6.2; extra == 'strict'
