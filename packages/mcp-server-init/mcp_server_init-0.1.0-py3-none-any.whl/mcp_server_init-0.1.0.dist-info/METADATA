@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mcp-server-init
+Version: 0.1.0
+Summary: Helper to spin up and talk to MCP servers
+Author: Mohammed Abdullah
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: ipykernel>=6.29.5
+Requires-Dist: mcp[cli]>=1.8.1
+Requires-Dist: openai>=1.78.1
+Requires-Dist: openai-agents[litellm]>=0.0.14
+
+# MCP Server Initialization
+Quick way to start and connect your MCP server.
+
