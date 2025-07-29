@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools", "wheel", "cython", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "BeamMe"
+description = "BeamMe: A general purpose 3D beam finite element input generator"
+authors = [{name = "MeshPy Authors"}]
+maintainers = [
+  {name = "Ivo Steinbrecher", email = "ivo.steinbrecher@unibw.de"},
+  {name = "David Rudlstorfer", email = "david.rudlstorfer@tum.de"},
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+dependencies = [
+  "autograd",
+  "geomdl",
+  "ipykernel",
+  "notebook",
+  "numpy",
+  "numpy-quaternion",
+  "pyvista",
+  "scipy",
+  "splinepy",
+  "vedo==2024.5.2", # Needed as a fix for the splinepy visualization tool gustaf
+  "vtk"
+]
+version = "0.0.0"
+
+[project.optional-dependencies]
+dev = [
+  "coverage-badge",
+  "coverage",
+  "pdoc",
+  "pre-commit",
+  "pytest",
+  "pytest-cov",
+  "testbook"
+]
+
+[project.urls]
+Homepage = "https://imcs-compsim.github.io/meshpy/"
+Documentation = "https://imcs-compsim.github.io/meshpy/api-documentation/"
+Repository = "https://github.com/imcs-compsim/meshpy/"
+Issues = "https://github.com/imcs-compsim/meshpy/issues/"
+
+# Tools
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p pytest_cov --cov-report=term --cov-report=html --cov-fail-under=89 --cov=src/meshpy/"
+markers = [
+  "fourc: tests in combination with 4C",
+  "arborx: tests in combination with ArborX",
+  "cubitpy: tests in combination with CubitPy",
+  "performance: performance tests of MeshPy"
+]
