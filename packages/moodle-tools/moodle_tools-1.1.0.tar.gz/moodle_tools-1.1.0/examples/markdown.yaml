@@ -1,0 +1,55 @@
+---
+type: multiple_choice
+title: Multiple choice question with Markdown
+markdown: true
+question: |-
+  # Really important question!
+
+  Please take a look at the rectangle below:
+
+  ![Blue rectangle PNG](assets/blue-rectangle.png)
+
+       Code
+
+  **What is its color?**
+answers:
+  - answer: |-
+      The rectangle is *blue*, like the one below.
+
+      ![Blue rectangle SVG](assets/blue-rectangle.svg)
+  - answer: The rectangle is yellow.
+  - answer: |-
+      ```
+      This is some code.
+      ```
+  - answer: |-
+      <span style="text-decoration:underline;">Underlined text in HTML</span>
+  - answer: |-
+      > Block quote
+
+      This was a block quote
+  - answer: |-
+      ## Ordered list
+
+      1. One
+      2. Two
+      3. Three
+
+      ## Unordered list
+
+      - One
+      - Two
+      - Three
+  - answer: |- # Important to escape the backslash when using Markdown
+      This is a formula: \\( \mathbf{a}^2 + \mathbf{b}^2 = \mathbf{c}^2 \\).
+
+  - answer: |-
+      the following table would be rendered properly as an html table in the output.
+
+      <section markdown="1">
+
+      | Col3 | Col4 |
+      |------|------|
+      | a    | b    |
+
+      </section>

@@ -1,0 +1,73 @@
+{% extends "question.xml.j2" %}
+{% block content %}
+    {{ super() }}
+    <coderunnertype>{{ coderunner_type }}</coderunnertype>
+    <prototypetype>0</prototypetype>
+    <allornothing>{{ 1 if all_or_nothing else 0 }}</allornothing>
+    <penaltyregime>0</penaltyregime>
+    <precheck>0</precheck>
+    <hidecheck>0</hidecheck>
+    <showsource>0</showsource>
+    <answerboxlines>18</answerboxlines>
+    <answerboxcolumns>100</answerboxcolumns>
+    <answerpreload><![CDATA[{{ answer_preload }}]]></answerpreload>
+    <globalextra></globalextra>
+    <useace>1</useace>
+    <resultcolumns><![CDATA[{{ result_columns }}]]></resultcolumns>
+    <template><![CDATA[{{ test_logic }}]]></template>
+    <iscombinatortemplate>1</iscombinatortemplate>
+    <allowmultiplestdins>0</allowmultiplestdins>
+    <answer><![CDATA[{{ answer }}]]></answer>
+    <validateonsave>1</validateonsave>
+    <testsplitterre><![CDATA[|#<ab@17943918#@>#\n|ms]]></testsplitterre>
+    <language>python3</language>
+    <acelang>{{ ace_lang }}</acelang>
+    <sandbox></sandbox>
+    <grader>EqualityGrader</grader>
+    <cputimelimitsecs></cputimelimitsecs>
+    <memlimitmb>1000</memlimitmb>
+    <sandboxparams><![CDATA[{"numprocs": 100}]]></sandboxparams>
+    <templateparams></templateparams>
+    <hoisttemplateparams>0</hoisttemplateparams>
+    <extractcodefromjson>1</extractcodefromjson>
+    <templateparamslang>None</templateparamslang>
+    <templateparamsevalpertry>0</templateparamsevalpertry>
+    <templateparamsevald>{}</templateparamsevald>
+    <twigall>0</twigall>
+    <uiplugin>ace</uiplugin>
+    <uiparameters></uiparameters>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxfilesize>10240</maxfilesize>
+    <filenamesregex></filenamesregex>
+    <filenamesexplain></filenamesexplain>
+    <displayfeedback>0</displayfeedback>
+    <giveupallowed>0</giveupallowed>
+    <prototypeextra></prototypeextra>
+    <testcases>
+        {% for testcase in testcases %}
+        <testcase testtype="0" useasexample="0" hiderestiffail="{{ testcase.hiderestiffail | int }}" mark="{{ testcase.grade }}">
+            <testcode>
+                <text><![CDATA[{{ testcase.code }}]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[{{ testcase.result }}]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[{{ testcase.description }}]]></text>
+            </extra>
+            <display>
+                <text>{{ testcase.show }}</text>
+            </display>
+        </testcase>
+        {% endfor %}
+        {% for file in files %}
+        <file name="{{ file.name }}" path="/" encoding="base64">
+            {{ file.encoding }}
+        </file>
+        {% endfor %}
+    </testcases>
+{% endblock%}

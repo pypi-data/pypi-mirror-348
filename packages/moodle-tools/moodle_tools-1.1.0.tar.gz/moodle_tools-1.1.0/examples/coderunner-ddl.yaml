@@ -1,0 +1,71 @@
+---
+type: sql_ddl
+category: DDL-DML
+title: DDL-DB
+parser: sqlparse
+internal_copy: false
+question: |-
+  This is a DDL question
+grade: 8.0
+general_feedback: Die Beschreibungen der Tests geben Ihnen Hinweise auf die Korrektheit Ihrer Lösung.
+database_path: assets/emptydb.db
+answer: |-
+  CREATE TABLE thisisatest (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+testcases:
+  - description: Test auf Laufzeitfehler
+    code: |-
+      SELECT 1;
+    grade: 0.001
+    hiderestiffail: true
+  - description: Korrektheit Tabelle thisisatest
+    code: MT_testtablecorrectness thisisatest
+    grade: 0.5
+  - description: Korrektheit Attribute thisisatest
+    code: MT_testtablecorrectness thisisatest name
+    grade: 0.5
+check_results: false
+database_connection: true
+---
+type: sql_ddl
+category: DDL-DML
+title: DDL-DB inmemory
+parser: sqlparse
+internal_copy: false
+question: |
+  This is a DDL question with a inmemory db
+grade: 8.0
+general_feedback: Die Beschreibungen der Tests geben Ihnen Hinweise auf die Korrektheit Ihrer Lösung.
+database_path: ":memory:"
+answer: |-
+  CREATE TABLE thisisatest (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+testcases:
+  - description: Test auf Laufzeitfehler
+    code: |-
+      SELECT 1;
+    grade: 0.001
+    hiderestiffail: true
+  - description: Korrektheit Tabelle thisisatest
+    code: MT_testtablecorrectness thisisatest
+    grade: 0.5
+  - description: Korrektheit Attribute thisisatest
+    code: MT_testtablecorrectness thisisatest name
+    grade: 0.5
+  - description: Korrektheit thisisatest primarykeys foreignkeys
+    code: MT_testtablecorrectness thisisatest primarykeys foreignkeys
+    grade: 0.5
+  - code: MT_testtablecorrectness thisisatest types
+    grade: 1.0
+    description: Test with template and test types
+    extra:
+      flex_datatypes:
+        id:
+          - INTEGER
+          - UINTEGER
+check_results: false
+database_connection: true

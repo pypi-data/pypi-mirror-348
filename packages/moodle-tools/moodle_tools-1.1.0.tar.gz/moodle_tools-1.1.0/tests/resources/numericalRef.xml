@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="numerical">
+    <name>
+        <text>Numerical question</text>
+    </name>
+    <questiontext format="html">
+        <text><![CDATA[<p>What is 2 + 2?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+        <text><![CDATA[<p>General feedback</p>]]></text>
+    </generalfeedback>
+    <idnumber></idnumber>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="html">
+        <text><![CDATA[4]]></text>
+        <feedback format="html">
+            <text><![CDATA[Feedback for first answer]]></text>
+        </feedback>
+        <tolerance>0</tolerance>
+    </answer>
+    <answer fraction="50" format="html">
+        <text><![CDATA[5]]></text>
+        <feedback format="html">
+            <text><![CDATA[2 + 2 = 5 for some values of 2]]></text>
+        </feedback>
+        <tolerance><![CDATA[0.1]]></tolerance>
+    </answer>
+    <unitgradingtype>0</unitgradingtype>
+    <unitpenalty>1</unitpenalty>
+    <showunits>3</showunits>
+    <unitsleft>0</unitsleft>
+</question>
+<question type="numerical">
+    <name>
+        <text>Simple numerical</text>
+    </name>
+    <questiontext format="html">
+        <text><![CDATA[<p>What is 2 + 2?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+        <text></text>
+    </generalfeedback>
+    <idnumber></idnumber>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="html">
+        <text><![CDATA[4]]></text>
+        <feedback format="html">
+            <text></text>
+        </feedback>
+        <tolerance>0</tolerance>
+    </answer>
+    <answer fraction="0" format="html">
+        <text><![CDATA[5]]></text>
+        <feedback format="html">
+            <text></text>
+        </feedback>
+        <tolerance>0</tolerance>
+    </answer>
+    <unitgradingtype>0</unitgradingtype>
+    <unitpenalty>1</unitpenalty>
+    <showunits>3</showunits>
+    <unitsleft>0</unitsleft>
+</question>
+</quiz>

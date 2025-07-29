@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="category">
+    <category>
+        <text>$module$/DDL-DML</text>
+    </category>
+</question>
+<question type="coderunner">
+    <name>
+        <text>DDL-DB</text>
+    </name>
+    <questiontext format="html">
+        <text><![CDATA[<p>This is a DDL question</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+        <text><![CDATA[<p>Die Beschreibungen der Tests geben Ihnen Hinweise auf die Korrektheit Ihrer Lösung.</p>]]></text>
+    </generalfeedback>
+    <idnumber></idnumber>
+    <defaultgrade>8.0</defaultgrade>
+    <penalty>0</penalty>
+    <hidden>0</hidden>
+    <coderunnertype>python3</coderunnertype>
+    <prototypetype>0</prototypetype>
+    <allornothing>0</allornothing>
+    <penaltyregime>0</penaltyregime>
+    <precheck>0</precheck>
+    <hidecheck>0</hidecheck>
+    <showsource>0</showsource>
+    <answerboxlines>18</answerboxlines>
+    <answerboxcolumns>100</answerboxcolumns>
+    <answerpreload><![CDATA[]]></answerpreload>
+    <globalextra></globalextra>
+    <useace>1</useace>
+    <resultcolumns><![CDATA[[["Testfall", "extra"], ["Bewertung", "awarded"]]]]></resultcolumns>
+    <template><![CDATA[from __future__ import annotations
+
+import os
+import re
+import shutil
+
+import duckdb
+
+MAX_ROWS = 50
+MAX_WIDTH = 500
+
+# Use Twig to get students answer
+student_answer = """{{ STUDENT_ANSWER | e('py') }}""".rstrip()
+
+# Parsing the student answer
+if not student_answer.endswith(";"):
+    student_answer = student_answer + ";"
+if "pragma" in student_answer.lower():
+    raise ValueError("It is not allowed to use PRAGMA statements.")
+
+# Getting the database file
+db_files = [fname for fname in os.listdir() if fname.endswith(".db")]
+if len(db_files) == 0:
+    db_working = ":memory:"
+elif len(db_files) == 1:
+    db_working = db_files[0]  # Strip .db extension
+else:
+    raise Exception("Multiple DB files not implemented yet, sorry!")
+
+SEPARATOR = "#<ab@17943918#@>#"
+
+# Running each test in isolation
+{% for TEST in TESTCASES %}
+
+if db_working != ":memory:":
+    db_working = f"{db_working}.copy"
+    shutil.copyfile(db_files[0], db_working)  # Copy clean writeable db file
+
+testcode = """{{ TEST.testcode | e('py') }}"""
+extra = """{{ TEST.extra | e('py') }}"""
+con = duckdb.connect(db_working, config={"temp_directory": os.getcwd()})
+
+# Set DB parameters
+con.sql("SET memory_limit = '{{ QUESTION.memlimitmb - 50 }}MB'; SET threads = 1;")
+
+# Execute student answer
+con.sql(student_answer)
+
+# Execute test code
+statements = [s for s in testcode.split(";") if s.strip()]
+for statement in statements:
+    try:
+        res = con.sql(statement)
+        res.show(max_width=MAX_WIDTH, max_rows=MAX_ROWS) if res else print(res)
+    except duckdb.ConstraintException as e:
+        # DuckDB prints the individual constraint implementation in the error message
+        # so we have to filter it out.
+        match = re.search(
+            r"^Constraint Error: CHECK constraint failed on table (.+?) .*$", str(e)
+        )
+        if match:
+            print(f"CHECK constraint failed on table {match.group(1)}")
+        else:
+            print(e)
+    except duckdb.Error as e:
+        print(e)
+    except Exception as e:
+        raise (e)
+
+con.close()
+
+{% if not loop.last %}
+print(SEPARATOR)
+{% endif %}
+{% endfor %}
+]]></template>
+    <iscombinatortemplate>1</iscombinatortemplate>
+    <allowmultiplestdins>0</allowmultiplestdins>
+    <answer><![CDATA[CREATE TABLE thisisatest (id INTEGER PRIMARY KEY,
+                                     name TEXT NOT NULL);]]></answer>
+    <validateonsave>1</validateonsave>
+    <testsplitterre><![CDATA[|#<ab@17943918#@>#\n|ms]]></testsplitterre>
+    <language>python3</language>
+    <acelang>sql</acelang>
+    <sandbox></sandbox>
+    <grader>EqualityGrader</grader>
+    <cputimelimitsecs></cputimelimitsecs>
+    <memlimitmb>1000</memlimitmb>
+    <sandboxparams><![CDATA[{"numprocs": 100}]]></sandboxparams>
+    <templateparams></templateparams>
+    <hoisttemplateparams>0</hoisttemplateparams>
+    <extractcodefromjson>1</extractcodefromjson>
+    <templateparamslang>None</templateparamslang>
+    <templateparamsevalpertry>0</templateparamsevalpertry>
+    <templateparamsevald>{}</templateparamsevald>
+    <twigall>0</twigall>
+    <uiplugin>ace</uiplugin>
+    <uiparameters></uiparameters>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxfilesize>10240</maxfilesize>
+    <filenamesregex></filenamesregex>
+    <filenamesexplain></filenamesexplain>
+    <displayfeedback>0</displayfeedback>
+    <giveupallowed>0</giveupallowed>
+    <prototypeextra></prototypeextra>
+    <testcases>
+        <testcase testtype="0" useasexample="0" hiderestiffail="1" mark="0.001">
+            <testcode>
+                <text><![CDATA[SELECT 1;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌───────┐
+│   1   │
+│ int32 │
+├───────┤
+│     1 │
+└───────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Test auf Laufzeitfehler]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="0.5">
+            <testcode>
+                <text><![CDATA[-- Column names
+
+SELECT name AS name_columns
+FROM pragma_table_info("thisisatest")
+ORDER BY name;
+
+----------
+ -- Column types
+-- fixed types
+WITH flex_cols AS
+  (SELECT unnest(map_keys(MAP {})) AS name_type),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name)
+SELECT name_type,
+       datatype
+FROM student_datatype ANTI
+JOIN flex_cols ON student_datatype.name_type = flex_cols.name_type
+ORDER BY name_type;
+
+-- flexible types
+WITH flextype_table AS
+  (SELECT unnest(map_entries(MAP {}), RECURSIVE := TRUE)),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name),
+     flextype_flat AS
+  (SELECT "key" AS col,
+          unnest("value") AS datatype
+   FROM flextype_table),
+     correct_types AS
+  (SELECT flextype_flat.col AS flexible_column_name
+   FROM flextype_flat
+   JOIN student_datatype ON flextype_flat.col = student_datatype.name_type
+   AND flextype_flat.datatype = student_datatype.datatype)
+SELECT flexible_column_name,
+       '## viable_flex_type ##' AS flex_type
+FROM correct_types
+UNION ALL
+SELECT DISTINCT flextype_flat.col AS flexible_column_name,
+                '## non_viable_flex_type ##' AS flex_type
+FROM flextype_flat ANTI
+JOIN correct_types ON flextype_flat.col = correct_types.flexible_column_name;
+
+----------
+ -- Not null columns
+
+SELECT name AS name_notnull
+FROM pragma_table_info("thisisatest")
+WHERE "notnull"
+ORDER BY name;
+
+----------
+ -- Unique constraint
+
+SELECT unnest(constraint_column_names) AS name_unique
+FROM duckdb_constraints()
+WHERE SCHEMA_NAME='main'
+  AND constraint_type = 'UNIQUE'
+  AND TABLE_NAME='thisisatest'
+ORDER BY name_unique;
+
+----------
+ -- Primary key columns
+
+SELECT name AS name_primarykey
+FROM pragma_table_info("thisisatest")
+WHERE pk
+ORDER BY name;
+
+----------
+ -- Foreign key columns
+
+SELECT unnest(constraint_column_names) AS name_fk_from,
+       constraint_text AS fk_constraint_text
+FROM duckdb_constraints()
+WHERE SCHEMA_NAME='main'
+  AND constraint_type = 'FOREIGN KEY'
+  AND TABLE_NAME='thisisatest'
+ORDER BY name_fk_from;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌──────────────┐
+│ name_columns │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+┌───────────┬──────────┐
+│ name_type │ datatype │
+│  varchar  │ varchar  │
+├───────────┼──────────┤
+│ id        │ INTEGER  │
+│ name      │ VARCHAR  │
+└───────────┴──────────┘
+
+┌──────────────────────┬───────────┐
+│ flexible_column_name │ flex_type │
+│        int32         │  varchar  │
+├──────────────────────┴───────────┤
+│              0 rows              │
+└──────────────────────────────────┘
+
+┌──────────────┐
+│ name_notnull │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+┌─────────────┐
+│ name_unique │
+│   varchar   │
+├─────────────┤
+│   0 rows    │
+└─────────────┘
+
+┌─────────────────┐
+│ name_primarykey │
+│     varchar     │
+├─────────────────┤
+│ id              │
+└─────────────────┘
+
+┌──────────────┬────────────────────┐
+│ name_fk_from │ fk_constraint_text │
+│   varchar    │      varchar       │
+├──────────────┴────────────────────┤
+│              0 rows               │
+└───────────────────────────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Korrektheit Tabelle thisisatest]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="0.5">
+            <testcode>
+                <text><![CDATA[-- Column names
+
+SELECT name AS name_columns
+FROM pragma_table_info("thisisatest")
+ORDER BY name;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌──────────────┐
+│ name_columns │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Korrektheit Attribute thisisatest]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <file name="emptydb.db" path="/" encoding="base64">
+            BRZZyBR1XhREVUNLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHYwLjEwLjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjBiMTQ4NmQxMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXdybF0G4/fAAAAAAAAAAD/////////////////////AAAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF3cmxdBuP3wAAAAAAAAAA/////////////////////wAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        </file>
+    </testcases>
+</question>
+<question type="category">
+    <category>
+        <text>$module$/DDL-DML</text>
+    </category>
+</question>
+<question type="coderunner">
+    <name>
+        <text>DDL-DB inmemory</text>
+    </name>
+    <questiontext format="html">
+        <text><![CDATA[<p>This is a DDL question with a inmemory db</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+        <text><![CDATA[<p>Die Beschreibungen der Tests geben Ihnen Hinweise auf die Korrektheit Ihrer Lösung.</p>]]></text>
+    </generalfeedback>
+    <idnumber></idnumber>
+    <defaultgrade>8.0</defaultgrade>
+    <penalty>0</penalty>
+    <hidden>0</hidden>
+    <coderunnertype>python3</coderunnertype>
+    <prototypetype>0</prototypetype>
+    <allornothing>0</allornothing>
+    <penaltyregime>0</penaltyregime>
+    <precheck>0</precheck>
+    <hidecheck>0</hidecheck>
+    <showsource>0</showsource>
+    <answerboxlines>18</answerboxlines>
+    <answerboxcolumns>100</answerboxcolumns>
+    <answerpreload><![CDATA[]]></answerpreload>
+    <globalextra></globalextra>
+    <useace>1</useace>
+    <resultcolumns><![CDATA[[["Testfall", "extra"], ["Bewertung", "awarded"]]]]></resultcolumns>
+    <template><![CDATA[from __future__ import annotations
+
+import os
+import re
+import shutil
+
+import duckdb
+
+MAX_ROWS = 50
+MAX_WIDTH = 500
+
+# Use Twig to get students answer
+student_answer = """{{ STUDENT_ANSWER | e('py') }}""".rstrip()
+
+# Parsing the student answer
+if not student_answer.endswith(";"):
+    student_answer = student_answer + ";"
+if "pragma" in student_answer.lower():
+    raise ValueError("It is not allowed to use PRAGMA statements.")
+
+# Getting the database file
+db_files = [fname for fname in os.listdir() if fname.endswith(".db")]
+if len(db_files) == 0:
+    db_working = ":memory:"
+elif len(db_files) == 1:
+    db_working = db_files[0]  # Strip .db extension
+else:
+    raise Exception("Multiple DB files not implemented yet, sorry!")
+
+SEPARATOR = "#<ab@17943918#@>#"
+
+# Running each test in isolation
+{% for TEST in TESTCASES %}
+
+if db_working != ":memory:":
+    db_working = f"{db_working}.copy"
+    shutil.copyfile(db_files[0], db_working)  # Copy clean writeable db file
+
+testcode = """{{ TEST.testcode | e('py') }}"""
+extra = """{{ TEST.extra | e('py') }}"""
+con = duckdb.connect(db_working, config={"temp_directory": os.getcwd()})
+
+# Set DB parameters
+con.sql("SET memory_limit = '{{ QUESTION.memlimitmb - 50 }}MB'; SET threads = 1;")
+
+# Execute student answer
+con.sql(student_answer)
+
+# Execute test code
+statements = [s for s in testcode.split(";") if s.strip()]
+for statement in statements:
+    try:
+        res = con.sql(statement)
+        res.show(max_width=MAX_WIDTH, max_rows=MAX_ROWS) if res else print(res)
+    except duckdb.ConstraintException as e:
+        # DuckDB prints the individual constraint implementation in the error message
+        # so we have to filter it out.
+        match = re.search(
+            r"^Constraint Error: CHECK constraint failed on table (.+?) .*$", str(e)
+        )
+        if match:
+            print(f"CHECK constraint failed on table {match.group(1)}")
+        else:
+            print(e)
+    except duckdb.Error as e:
+        print(e)
+    except Exception as e:
+        raise (e)
+
+con.close()
+
+{% if not loop.last %}
+print(SEPARATOR)
+{% endif %}
+{% endfor %}
+]]></template>
+    <iscombinatortemplate>1</iscombinatortemplate>
+    <allowmultiplestdins>0</allowmultiplestdins>
+    <answer><![CDATA[CREATE TABLE thisisatest (id INTEGER PRIMARY KEY,
+                                     name TEXT NOT NULL);]]></answer>
+    <validateonsave>1</validateonsave>
+    <testsplitterre><![CDATA[|#<ab@17943918#@>#\n|ms]]></testsplitterre>
+    <language>python3</language>
+    <acelang>sql</acelang>
+    <sandbox></sandbox>
+    <grader>EqualityGrader</grader>
+    <cputimelimitsecs></cputimelimitsecs>
+    <memlimitmb>1000</memlimitmb>
+    <sandboxparams><![CDATA[{"numprocs": 100}]]></sandboxparams>
+    <templateparams></templateparams>
+    <hoisttemplateparams>0</hoisttemplateparams>
+    <extractcodefromjson>1</extractcodefromjson>
+    <templateparamslang>None</templateparamslang>
+    <templateparamsevalpertry>0</templateparamsevalpertry>
+    <templateparamsevald>{}</templateparamsevald>
+    <twigall>0</twigall>
+    <uiplugin>ace</uiplugin>
+    <uiparameters></uiparameters>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxfilesize>10240</maxfilesize>
+    <filenamesregex></filenamesregex>
+    <filenamesexplain></filenamesexplain>
+    <displayfeedback>0</displayfeedback>
+    <giveupallowed>0</giveupallowed>
+    <prototypeextra></prototypeextra>
+    <testcases>
+        <testcase testtype="0" useasexample="0" hiderestiffail="1" mark="0.001">
+            <testcode>
+                <text><![CDATA[SELECT 1;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌───────┐
+│   1   │
+│ int32 │
+├───────┤
+│     1 │
+└───────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Test auf Laufzeitfehler]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="0.5">
+            <testcode>
+                <text><![CDATA[-- Column names
+
+SELECT name AS name_columns
+FROM pragma_table_info("thisisatest")
+ORDER BY name;
+
+----------
+ -- Column types
+-- fixed types
+WITH flex_cols AS
+  (SELECT unnest(map_keys(MAP {})) AS name_type),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name)
+SELECT name_type,
+       datatype
+FROM student_datatype ANTI
+JOIN flex_cols ON student_datatype.name_type = flex_cols.name_type
+ORDER BY name_type;
+
+-- flexible types
+WITH flextype_table AS
+  (SELECT unnest(map_entries(MAP {}), RECURSIVE := TRUE)),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name),
+     flextype_flat AS
+  (SELECT "key" AS col,
+          unnest("value") AS datatype
+   FROM flextype_table),
+     correct_types AS
+  (SELECT flextype_flat.col AS flexible_column_name
+   FROM flextype_flat
+   JOIN student_datatype ON flextype_flat.col = student_datatype.name_type
+   AND flextype_flat.datatype = student_datatype.datatype)
+SELECT flexible_column_name,
+       '## viable_flex_type ##' AS flex_type
+FROM correct_types
+UNION ALL
+SELECT DISTINCT flextype_flat.col AS flexible_column_name,
+                '## non_viable_flex_type ##' AS flex_type
+FROM flextype_flat ANTI
+JOIN correct_types ON flextype_flat.col = correct_types.flexible_column_name;
+
+----------
+ -- Not null columns
+
+SELECT name AS name_notnull
+FROM pragma_table_info("thisisatest")
+WHERE "notnull"
+ORDER BY name;
+
+----------
+ -- Unique constraint
+
+SELECT unnest(constraint_column_names) AS name_unique
+FROM duckdb_constraints()
+WHERE SCHEMA_NAME='main'
+  AND constraint_type = 'UNIQUE'
+  AND TABLE_NAME='thisisatest'
+ORDER BY name_unique;
+
+----------
+ -- Primary key columns
+
+SELECT name AS name_primarykey
+FROM pragma_table_info("thisisatest")
+WHERE pk
+ORDER BY name;
+
+----------
+ -- Foreign key columns
+
+SELECT unnest(constraint_column_names) AS name_fk_from,
+       constraint_text AS fk_constraint_text
+FROM duckdb_constraints()
+WHERE SCHEMA_NAME='main'
+  AND constraint_type = 'FOREIGN KEY'
+  AND TABLE_NAME='thisisatest'
+ORDER BY name_fk_from;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌──────────────┐
+│ name_columns │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+┌───────────┬──────────┐
+│ name_type │ datatype │
+│  varchar  │ varchar  │
+├───────────┼──────────┤
+│ id        │ INTEGER  │
+│ name      │ VARCHAR  │
+└───────────┴──────────┘
+
+┌──────────────────────┬───────────┐
+│ flexible_column_name │ flex_type │
+│        int32         │  varchar  │
+├──────────────────────┴───────────┤
+│              0 rows              │
+└──────────────────────────────────┘
+
+┌──────────────┐
+│ name_notnull │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+┌─────────────┐
+│ name_unique │
+│   varchar   │
+├─────────────┤
+│   0 rows    │
+└─────────────┘
+
+┌─────────────────┐
+│ name_primarykey │
+│     varchar     │
+├─────────────────┤
+│ id              │
+└─────────────────┘
+
+┌──────────────┬────────────────────┐
+│ name_fk_from │ fk_constraint_text │
+│   varchar    │      varchar       │
+├──────────────┴────────────────────┤
+│              0 rows               │
+└───────────────────────────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Korrektheit Tabelle thisisatest]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="0.5">
+            <testcode>
+                <text><![CDATA[-- Column names
+
+SELECT name AS name_columns
+FROM pragma_table_info("thisisatest")
+ORDER BY name;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌──────────────┐
+│ name_columns │
+│   varchar    │
+├──────────────┤
+│ id           │
+│ name         │
+└──────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Korrektheit Attribute thisisatest]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="0.5">
+            <testcode>
+                <text><![CDATA[-- Primary key columns
+
+SELECT name AS name_primarykey
+FROM pragma_table_info("thisisatest")
+WHERE pk
+ORDER BY name;
+
+----------
+ -- Foreign key columns
+
+SELECT unnest(constraint_column_names) AS name_fk_from,
+       constraint_text AS fk_constraint_text
+FROM duckdb_constraints()
+WHERE SCHEMA_NAME='main'
+  AND constraint_type = 'FOREIGN KEY'
+  AND TABLE_NAME='thisisatest'
+ORDER BY name_fk_from;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌─────────────────┐
+│ name_primarykey │
+│     varchar     │
+├─────────────────┤
+│ id              │
+└─────────────────┘
+
+┌──────────────┬────────────────────┐
+│ name_fk_from │ fk_constraint_text │
+│   varchar    │      varchar       │
+├──────────────┴────────────────────┤
+│              0 rows               │
+└───────────────────────────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Korrektheit thisisatest primarykeys foreignkeys]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+        <testcase testtype="0" useasexample="0" hiderestiffail="0" mark="1.0">
+            <testcode>
+                <text><![CDATA[-- Column types
+-- fixed types
+WITH flex_cols AS
+  (SELECT unnest(map_keys(MAP {'id': ['INTEGER', 'UINTEGER']})) AS name_type),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name)
+SELECT name_type,
+       datatype
+FROM student_datatype ANTI
+JOIN flex_cols ON student_datatype.name_type = flex_cols.name_type
+ORDER BY name_type;
+
+-- flexible types
+WITH flextype_table AS
+  (SELECT unnest(map_entries(MAP {'id': ['INTEGER', 'UINTEGER']}), RECURSIVE := TRUE)),
+     student_datatype AS
+  (SELECT name AS name_type,
+          TYPE AS datatype
+   FROM pragma_table_info("thisisatest")
+   ORDER BY name),
+     flextype_flat AS
+  (SELECT "key" AS col,
+          unnest("value") AS datatype
+   FROM flextype_table),
+     correct_types AS
+  (SELECT flextype_flat.col AS flexible_column_name
+   FROM flextype_flat
+   JOIN student_datatype ON flextype_flat.col = student_datatype.name_type
+   AND flextype_flat.datatype = student_datatype.datatype)
+SELECT flexible_column_name,
+       '## viable_flex_type ##' AS flex_type
+FROM correct_types
+UNION ALL
+SELECT DISTINCT flextype_flat.col AS flexible_column_name,
+                '## non_viable_flex_type ##' AS flex_type
+FROM flextype_flat ANTI
+JOIN correct_types ON flextype_flat.col = correct_types.flexible_column_name;]]></text>
+            </testcode>
+            <stdin>
+                <text></text>
+            </stdin>
+            <expected>
+                <text><![CDATA[┌───────────┬──────────┐
+│ name_type │ datatype │
+│  varchar  │ varchar  │
+├───────────┼──────────┤
+│ name      │ VARCHAR  │
+└───────────┴──────────┘
+
+┌──────────────────────┬────────────────────────┐
+│ flexible_column_name │       flex_type        │
+│       varchar        │        varchar         │
+├──────────────────────┼────────────────────────┤
+│ id                   │ ## viable_flex_type ## │
+└──────────────────────┴────────────────────────┘
+
+]]></text>
+            </expected>
+            <extra>
+                <text><![CDATA[Test with template and test types]]></text>
+            </extra>
+            <display>
+                <text>SHOW</text>
+            </display>
+        </testcase>
+    </testcases>
+</question>
+</quiz>

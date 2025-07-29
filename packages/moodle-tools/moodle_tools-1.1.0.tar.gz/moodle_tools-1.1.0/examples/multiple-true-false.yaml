@@ -1,0 +1,37 @@
+---
+type: multiple_true_false
+title: Title
+question: Simple format
+answers:
+  - answer: Answer 1
+    choice: True
+  - answer: Answer 2
+    choice: False
+---
+type: multiple_true_false
+title: Title
+question: Extended format
+general_feedback: General feedback
+shuffle_answers: False
+choices: [!!str Yes, !!str No, Maybe]
+answers:
+  - answer: Answer 1
+    choice: !!str Yes
+    feedback: Feedback 1
+  - answer: Answer 2
+    choice: !!str No
+    feedback: Feedback 2
+  - answer: Answer 3
+    choice: Maybe
+    feedback: Feedback 3
+---
+type: multiple_true_false
+title: Memory hierarchy
+question: For each category, say descending or ascending
+shuffle_answers: True
+choices: [Ascending, Descending]
+answers:
+  - answer: Cost
+    choice: Ascending
+  - answer: Latency
+    choice: Descending
