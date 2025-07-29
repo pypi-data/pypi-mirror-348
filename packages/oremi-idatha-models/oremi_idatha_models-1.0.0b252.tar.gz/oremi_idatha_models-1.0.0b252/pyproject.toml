@@ -1,0 +1,37 @@
+##
+## https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+[project]
+name = "oremi-idatha-models"
+version = "1.0.0-beta.252"
+description = "Shared models for Oremi Idatha"
+keywords = ["oremi", "restfull", "api", "models"]
+authors = [{ name = "Sébastien Demanou", email = "demsking@gmail.com" }]
+maintainers = [{ name = "Sébastien Demanou", email = "demsking@gmail.com" }]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 4 - Beta",
+
+  # Indicate who your project is intended for
+  "Intended Audience :: Developers",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3.11",
+]
+
+[project.urls]
+"Say Thanks!" = "https://www.buymeacoffee.com/demsking"
+"Documentation" = "https://demsking.gitlab.io/oremi-idatha"
+"Source" = "https://gitlab.com/demsking/oremi-idatha"
+"Issues" = "https://gitlab.com/demsking/oremi-idatha/-/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
