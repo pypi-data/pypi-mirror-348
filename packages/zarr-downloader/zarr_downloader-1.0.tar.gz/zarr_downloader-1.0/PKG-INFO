@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: zarr-downloader
+Version: 1.0
+Requires-Dist: requests
+Requires-Dist: fsspec
+Requires-Dist: aiohttp
+Requires-Dist: zarr<3.0.0,>2.16.0
+Requires-Dist: numpy<2.0.0
+Requires-Dist: numcodecs<0.16.0
