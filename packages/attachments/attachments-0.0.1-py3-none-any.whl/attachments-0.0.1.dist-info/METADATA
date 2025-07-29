@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: attachments
+Version: 0.0.1
+Summary: A basic tool for handling attachments.
+Author-email: Maxime Rivest <mrive052@gmail.com>
+Project-URL: Homepage, https://github.com/yourusername/basic_attachments_tool
+Project-URL: Bug Tracker, https://github.com/yourusername/basic_attachments_tool/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Attachments
+
+A basic Python library for handling version file types and providing them to llms as a mixt of images and text.
+
+## Installation
+
+```bash
+pip install attachments
+```
+
+## Usage
+
+```python
+from attachments import Attachments
+
+attachments = Attachments("path/to/attachments.pptx", "path/to/attachments.pdf")
+
+attachments.render()
+
+``` 
