@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+{{ super() }}
+{% if h.check_access('package_update', {'id':pkg.id }) %}
+{{ h.build_nav_icon('fuseki.fuseki', _('Fuseki'), id=pkg.name, icon='diagram-project') }}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,8 @@
+[babel.extractors]
+ckan = ckan.lib.extract:extract_ckan
+
+[ckan.plugins]
+fuseki = ckanext.fuseki.plugin:JenaPlugin
+
+[paste.paster_command]
+fuseki = ckanext.fuseki.commands:JenaCommand
