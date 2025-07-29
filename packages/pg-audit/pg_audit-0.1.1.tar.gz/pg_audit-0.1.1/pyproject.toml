@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pg-audit"
+version = "0.1.1"
+description = "PostgreSQL audit system for tracking database changes with rich contextual information"
+readme = "README.md"
+authors = [
+    {name = "Andrei Karbanovich", email = "andrey.karbanovich@icloud.com"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.8"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: Django",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+keywords = ["postgresql", "audit", "django", "database", "triggers"]
+
+# Core dependencies (for CLI and audit logic)
+dependencies = [
+    "typer>=0.9",
+    "psycopg[binary]>=3.1",
+    "pydantic>=2.5",
+    "structlog>=23.0"
+]
+
+[project.optional-dependencies]
+django = ["Django>=4.2"]
+
+[project.urls]
+Homepage = "https://github.com/tauvin/pg_audit"
+BugTracker = "https://github.com/tauvin/pg_audit/issues"
+Documentation = "https://pg-audit.readthedocs.io/"
+
+[project.scripts]
+pg-audit = "pg_audit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pg_audit*"]
+
+[tool.setuptools.package-data]
+pg_audit = ["**/*.html", "**/*.txt"]
