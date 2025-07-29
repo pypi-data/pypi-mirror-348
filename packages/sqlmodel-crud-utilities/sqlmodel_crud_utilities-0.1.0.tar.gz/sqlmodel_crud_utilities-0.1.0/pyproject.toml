@@ -1,0 +1,107 @@
+[tool.ruff]
+lint.select = ["E", "F", "B"]
+#select = ["E", "F", "I", "PL", "I", "B"]
+lint.ignore = ["B008"]
+lint.ignore-init-module-imports = true
+lint.unfixable = []
+fix = true
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "migrations",
+]
+
+line-length = 80
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F403", "F405", "E501"]
+"consts.py" = ["E501"]
+
+[tool.black]
+line-length = 80
+target-version = ['py310', 'py311', 'py312', 'py313']
+extend-exclude = '''
+/(
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profilin0g
+)/
+'''
+[tool.isort]
+profile = "black"
+line_length = 80
+#multi_line_output = 3
+#include_trailing_comma = true
+#force_grid_wrap = 0
+
+[project]
+name = "sqlmodel_crud_utilities"
+version = "0.1.0"
+authors = [
+    { name="Francis Secada", email = "francis.secada@gmail.com" }
+]
+description = "A set of CRUD utilities to expedite operations with SQLModel"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT AND (Apache-2.0 OR BSD-2-Clause)"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "loguru>=0.7.3",
+    "python-dateutil>=2.9.0.post0",
+    "python-dotenv>=1.1.0",
+    "sqlmodel>=0.0.24",
+]
+[project.urls]
+"Homepage" = "https://fsecada01.github.io/SQLModel-CRUD-Utilities/sqlmodel_crud_utils.html"
+"Repository" = "https://github.com/fsecada01/sqlmodel_crud_utils"
+"Bug Tracker" = "https://github.com/fsecada01/sqlmodel_crud_utils/issues"
+
+
+[dependency-groups]
+dev = [
+    "aiosqlite>=0.21.0",
+    "black>=25.1.0",
+    "build>=1.2.2.post1",
+    "factory-boy>=3.3.3",
+    "isort>=6.0.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "pytest-cov>=6.1.1",
+    "pytest-html>=4.1.1",
+    "pytest-json-report>=1.5.0",
+    "ruff>=0.11.10",
+]
+
+
+doc = [
+    "pdoc>=15.0.1",
+]
+
+[tool.setuptools]
+packages = ['sqlmodel_crud_utils']
