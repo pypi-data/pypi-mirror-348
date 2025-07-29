@@ -1,0 +1,1 @@
+sub_wf_name = '[^']*'\s+if 'wf_name_prefix' not in kwargs:\s+kwargs\['wf_name_prefix'\] = sub_wf_name\s+else:\s+kwargs\['wf_name_prefix'\] = ':'\.join\(\(kwargs\['wf_name_prefix'\], sub_wf_name\)\)
