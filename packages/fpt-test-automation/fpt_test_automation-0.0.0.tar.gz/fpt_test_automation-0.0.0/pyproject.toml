@@ -1,0 +1,13 @@
+[project]
+name = "fpt_test_automation"
+version = "0.0.0"
+description = ""
+classifiers = [ "Programming Language :: Python", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Intended Audience :: Developers", "Framework :: Pytest", "Topic :: Software Development :: Libraries :: Python Modules",]
+requires-python = ">=3.10"
+[[project.authors]]
+name = "Fisher & Paykel Technologies"
+email = "fpt.digitalnz@fisherpaykel.com"
+
+[build-system]
+requires = [ "setuptools>=64", "setuptools-scm>=8",]
+build-backend = "setuptools.build_meta"
