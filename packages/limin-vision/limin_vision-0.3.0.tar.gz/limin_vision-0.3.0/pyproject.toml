@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "limin-vision"
+version = "0.3.0"
+description = "A Python library for working with vision models."
+authors = [
+    { name = "Titanom Solutions", email = "infrastructure@titanom.com" },
+]
+readme = "README.md"
+dependencies = [
+    "limin==0.8.0"
+]
+requires-python = ">=3.10"
+
+[tool.setuptools]
+packages = ["limin_vision"]
+
+[tool.setuptools.package-data]
+limin_vision = ["py.typed"]
+
+[tool.mypy]
+files = "limin_vision/"
