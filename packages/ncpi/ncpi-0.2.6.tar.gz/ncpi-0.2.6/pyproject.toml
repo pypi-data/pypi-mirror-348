@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ncpi"
+version = "0.2.6"
+description = "Neural circuit parameter inference using electrophysiological data"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "necolab", email = "pablomc@ugr.es"}]
+keywords = ["biomarkers", "parameter-inference", "neural-circuits", "electrophysiological-data", "brain-simulation"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "scikit-learn==1.3.2",
+    "sbi==0.24.0",
+    "torch",
+    "pycatch22",
+    "fooof",
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+simulation = [
+    "lfpykernels"
+#    "LFPy",
+#    "lfpykit",
+#    "neuron"
+    # Omit `nest`, handled by Conda or Docker, if installing a pre-built NEST package.
+    # ---- conda install -c conda-forge nest-simulator=3.8
+]
+
+utils = [
+    "h5py",
+    "pathos",
+    "tqdm",
+    "requests"]
+
+statistics = [
+    "rpy2",
+]
+
+visualization = [
+    "seaborn",
+    "mne",
+    "mpl_toolkits"
+]
+
+feats_hctsa = [
+    "matlab.engine",
+    "h5py"
+]
+
+feats_fEI_DFA = [
+    "PyAstronomy"
+]
+
+[project.urls]
+repository = "https://github.com/necolab-ugr/ncpi"
+documentation = "https://necolab-ugr.github.io/ncpi"
+
+# Package installation configuration
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["*"]  # list of packages to include (["*"] by default)
+exclude = ["tests", "tests.*"]  # list of packages to exclude (["tests"] by default)
