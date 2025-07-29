@@ -1,0 +1,9 @@
+pika>=1.2.0
+cbor2
+redis>=4.5.4
+
+[synchronous]
+kombu
+
+[test]
+tox
