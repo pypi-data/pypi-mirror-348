@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pylotable"
+version = "0.0.2"
+authors = [
+  { name="Samuel Andrés", email="samuel.andres@yahoo.fr" },
+]
+description = "A simple data processing library and toolbox."
+readme = "README.md"
+license = {file = "LICENSE.md"}
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: Public Domain",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+    "Topic :: Utilities"
+]
+keywords = ["statistics", "data", "processing"]
+dependencies= [
+    "pandas"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/SamuelAndresPascal/cosmoloj-py/tree/pylotable_0.0.2/pylotable"
+"Documentation" = "http://cosmoloj.com/mkdocs/pylotable/0.0.2"
