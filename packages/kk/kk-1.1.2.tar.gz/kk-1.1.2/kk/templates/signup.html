@@ -1,0 +1,77 @@
+{% extends base.html %}
+
+{% block content %}
+<form class="signup layui-form" action="/signup" method="POST" href="/admin">
+  <input type="hidden" name="ip" value="{{ handler.ip }}">
+
+  <div class="layui-form-item">
+    <div class="layui-row">
+      <div class="layui-col-xs7">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix">
+            <i class="layui-icon layui-icon-email"></i>
+          </div>
+          <input type="text" name="email" glay-verify="required|email" placeholder="邮箱" lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-col-xs5">
+        <div style="margin-left: 11px;">
+          <button type="button" class="layui-btn layui-btn-fluid layui-btn-success btn-email">获取验证码</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix">
+        <i class="layui-icon layui-icon-vercode"></i>
+      </div>
+      <input type="text" name="code" glay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix">
+        <i class="layui-icon layui-icon-username"></i>
+      </div>
+      <input type="text" name="username" glay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix">
+        <i class="layui-icon layui-icon-password"></i>
+      </div>
+      <input type="password" name="password" glay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" lay-affix="eye">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix">
+        <i class="layui-icon layui-icon-password"></i>
+      </div>
+      <input type="password" name="confirmPassword" glay-verify="required|confirmPassword" placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix">
+        <i class="layui-icon layui-icon-at"></i>
+      </div>
+      <input name="link" glay-verify="required" placeholder="邀请码，没有可留空" autocomplete="off" class="layui-input" lay-affix="clear" {% if handler.args.link or handler.args.from_id %}value="{{ handler.args.link if handler.args.link else handler.encode(int(handler.args.from_id)) if handler.args.from_id.isdigit() else ''  }}"{% end %}>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="default">注册</button>
+  </div>
+  <div class="layui-form-item">
+    {% if handler.opt.site_id %}
+    <label>社交账号登录</label>
+    <span style="padding: 0 20px 0 6px;">
+      <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat weixin-login" data-id="{{ handler.opt.site_id }}"></i></a>
+    </span>
+    {% end %}
+    <a href="/signin">登录已有帐号</a>
+  </div>
+</form>
+{% end %}

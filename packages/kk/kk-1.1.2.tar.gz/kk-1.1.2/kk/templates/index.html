@@ -1,0 +1,220 @@
+{% extends base.html %}
+
+{% block content %}
+{% import urllib.parse, re %}
+
+{% if handler.show_upload %}
+<div id="upload-box" class="layui-upload-drag">
+  <i class="layui-icon layui-icon-upload"></i>
+  <input type="file" name="file" accept="*" multiple webkitdirectory>
+  <p>点击上传或将文件拖拽到此处</p>
+</div>
+<table class="layui-table layui-hide"><tbody id="upload-list"></tbody></table>
+{% end %}
+
+<div class="layui-row">
+  {% set paths = handler.request.path.rstrip('/').split('/') %}
+  <div class="route layui-col-md9">
+    <div class="layui-breadcrumb">
+      {% for i, path in enumerate(paths) %}
+      {% if i >= (2 if handler.opt.auth else 1) %}
+      <a href="{{ '/'.join(paths[:(i+1)]) }}">{% if (i == 2 and handler.opt.auth) or i == 1 %}<i class="icon iconfont icon-home"></i> home{% else %}{{ urllib.parse.unquote(path) }}{% end %}</a>
+      {% end %}
+      {% end %}
+    </div>
+  </div>
+
+  <div class="crumbs layui-col-md3 pc">
+    {#
+    <a class="tree-toggle" href="javascript:;">
+      <i class="layui-icon {{ 'layui-icon-shrink-right' if handler.get_cookie('tree') else 'layui-icon-spread-left' }} layui-tips" tips="树形目录"></i>
+    </a>
+    #}
+
+    {% if handler.show_upload %}
+    <a class="batch-folder" href="javascript:;">
+      <i class="layui-icon layui-icon-add-1 layui-tips" tips="新建文件夹" style="font-size:16px"></i>
+    </a>
+    {% end %}
+
+    {#
+    <a class="batch-upload" href="javascript:;">
+      <i class="layui-icon layui-icon-upload-drag layui-tips" tips="上传文件夹" style="top:2px">
+        <input type="file" name="file" accept="*" webkitdirectory>
+      </i>
+    </a>
+    <a class="batch-unselect" href="javascript:;">
+      <i class="icon iconfont icon-Checkboxselect layui-tips" tips="批量反选" style="font-size:16px"></i>
+    </a>
+    <a class="batch-tools" href="javascript:;">
+      <i class="icon iconfont icon-shezhi layui-tips" tips="显示/隐藏工具栏"></i>
+    </a>
+    #}
+
+    {% if handler.show_delete %}
+    <a class="batch-action" action="delete" href="javascript:;">
+      <i class="icon iconfont icon-delete layui-tips" tips="批量删除" style="font-size:18px"></i>
+    </a>
+    {% end %}
+    <a class="batch-preview" href="javascript:;">
+      <i class="icon iconfont {{ 'icon-biyan' if handler.is_preview else 'icon-zhengyan' }} layui-tips" tips="切换预览" style="font-size:16px"></i>
+    </a>
+    <a class="batch-display" href="javascript:;">
+      <i class="icon iconfont {{ 'icon-liebiao' if handler.get_cookie('table') else 'icon-suolvetu' }} layui-tips" tips="切换布局"></i>
+    </a>
+    {% if handler.show_share %}
+    <a class="batch-action" action="share" href="javascript:;">
+      <i class="layui-icon layui-icon-share layui-tips" tips="批量分享" style="font-size:16px"></i>
+    </a>
+    <a class="batch-action" action="unshare" href="javascript:;">
+      <i class="layui-icon layui-icon-link layui-tips" tips="批量取消分享" style="font-size:14px"></i>
+    </a>
+    {% end %}
+  </div>
+</div>
+
+
+<div class="layui-row">
+  <div class="layui-col-md2">
+    <ul id="tree" {% if not handler.get_cookie('tree') %}class="layui-hide"{% end %}></ul>
+  </div>
+  <div class="tree-table layui-col-md{{ 10 if handler.get_cookie('tree') else 12 }}">
+    {% if handler.get_cookie('table') %}
+    <div id="masonry" class="layui-row layui-col-space15">
+			{% set col = 2 %}
+      {% for doc in entries %}
+      <div class="grid-item layui-col-md{{ col }}">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            {% set icon = 'folder.png' if doc.is_dir else handler.icon.get(doc.path.suffix.lower(), 'file.png') %}
+            {% set suffix = doc.path.suffix.lower()[1:] %}
+
+            <a class="btn-enter file-link {% if doc.is_dir %}dir-link{% end %}" href="/{{ handler.path }}/{{ doc.path }}" title="{{ doc.path }}">
+              {% if handler.is_preview and re.match('(jpeg|jpg|png|gif|bmp|webp|svg|tif|webp|ai|ico)$', suffix) %}
+              <img style="display:block" src="/{{ handler.path }}/{{ doc.path }}" {% if handler.args.w %}width="{{ int(handler.args.w) }}"{% end %} {% if handler.args.h %}height="{{ int(handler.args.h) }}"{% end %}>
+              {% else %}
+              {% set icon = 'folder.png' if doc.is_dir else handler.icon.get(doc.path.suffix.lower(), 'file.png') %}
+              <img style="margin-bottom:3px" src="{{ static_url(f'img/{icon}') }}">
+              {% end %}
+              <span class="table-name">{{ doc.path.name }}</span>
+            </a>
+            <div class="action-discard layui-hide">
+              <a class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs" href="/{{ handler.path }}/{{ doc.path }}?f=download">
+                <i class="icon iconfont icon-clouddownload layui-tips" tips="下载"></i>
+              </a>
+              <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-copy" add-host data-clipboard-text="/{{ handler.path }}/{{ doc.path }}">
+                <i class="icon iconfont icon-copy layui-tips" tips="复制"></i>
+              </button>
+              {% if handler.show_delete %}
+              <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-delete">
+                <i class="icon iconfont icon-delete layui-tips" tips="删除"></i>
+              </button>
+              {% end %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% end %}
+    </div>
+    {% else %}
+    <table class="filelist layui-table" lay-skin="nob">
+      <thead>
+        <tr class="table-tools" style="background:#fff">
+          <th class="pc" style="width:10px"><input type="checkbox" class="batch-select"></th>
+          <th style="text-align:left !important"><a href="{{ handler.add_args(sort='name', order=((0 - handler.args.order) if handler.args.sort == 'name' and handler.args.order else -1)) }}"><span>文件名</span>{% if handler.args.sort == 'name' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'name' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          {% if handler.request.path.startswith('/share') %}
+          <th class="pc" style="width:140px">过期时间</th>
+          {% else %}
+          <th class="pc" style="width:140px"><a href="{{ handler.add_args(sort='mtime', order=((0 - handler.args.order) if handler.args.sort == 'mtime' and handler.args.order else -1)) }}"><span>修改时间</span>{% if handler.args.sort == 'mtime' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'mtime' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          {% end %}
+          <th class="pc" style="width:100px"><a href="{{ handler.add_args(sort='size', order=((0 - handler.args.order) if handler.args.sort == 'size' and handler.args.order else -1)) }}"><span>文件大小</span>{% if handler.args.sort == 'size' and handler.args.order == 1 %}<span class="arrow-down arrow-up"></span>{% elif handler.args.sort == 'size' and handler.args.order == - 1 %}<span class="arrow-down"></span>{% end %}</a></th>
+          <th class="pc" style="width:100px">文件操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doc in entries %}
+        <tr>
+          {% set suffix = doc.path.suffix.lower()[1:] %}
+          <td class="pc btn-checkbox" style="width:10px"><input type="checkbox"></td>
+          <td class="btn-enter" style="text-align:left !important">
+            {% if handler.is_preview and re.match('(jpeg|jpg|png|gif|bmp|webp|svg|tif|webp|ai|ico)$', suffix) %}
+            <img style="display:block" src="/{{ handler.path }}/{{ doc.path }}" {% if handler.args.w %}width="{{ int(handler.args.w) }}"{% end %} {% if handler.args.h %}height="{{ int(handler.args.h) }}"{% end %}>
+            {% elif handler.is_preview and re.match('(mp3|ogg|amr|wav)$', suffix) %}
+            <audio style="display:block" controls="controls" ><source src="/{{ handler.path }}/{{ doc.path }}"></audio>
+            {% else %}
+            {% set icon = 'folder.png' if doc.is_dir else handler.icon.get(doc.path.suffix.lower(), 'file.png') %}
+            <img class="file-icon" src="{{ static_url(f'img/{icon}') }}">
+            {% end %}
+
+            <a class="file-link {% if doc.is_dir %}dir-link{% end %}" style="white-space:pre-wrap;word-wrap:break-word;" href="/{{ handler.path }}/{{ doc.path }}" title="{{ doc.path }}">{{ doc.path if handler.args.q else doc.path.name }}</a>
+          </td>
+          {% if handler.request.path.startswith('/share') %}
+          <td class="pc btn-enter"style="width:120px">
+            {{ doc.expired_at or '2099-12-31 00:00:00' }}
+          </td>
+          {% else %}
+          <td class="pc btn-enter" style="width:120px">{{ handler.convert_time(doc.mtime) }}</td>
+          {% end %}
+          <td class="pc btn-enter" style="width:100px">{{ handler.convert_size(doc.size) }}</td>
+          <td class="pc action" style="width:160px">
+            <a class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs" href="/{{ handler.path }}/{{ doc.path }}?f=download">
+              <i class="icon iconfont icon-clouddownload layui-tips" tips="下载"></i>
+            </a>
+            <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-copy" add-host data-clipboard-text="/{{ handler.path }}/{{ doc.path }}">
+              <i class="icon iconfont icon-copy layui-tips" tips="复制链接"></i>
+            </button>
+            {#
+            <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-copy" data-clipboard-text="{{ doc.path.name }}">
+              <i class="icon iconfont icon-copy layui-tips" tips="复制文件名"></i>
+            </button>
+            #}
+            {% if handler.show_delete %}
+            <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-delete">
+              <i class="icon iconfont icon-delete layui-tips" tips="删除" style="font-size:18px !important"></i>
+            </button>
+            {% end %}
+            {% if handler.show_share %}
+            <button class="layui-btn layui-btn-radius layui-btn-primary layui-btn-xs btn-share" {% if doc.share %}data-share="true"{% end %}>
+              {% if doc.share %}
+              <i class="layui-icon layui-icon-link layui-tips" tips="取消分享"></i>
+              {% else %}
+              <i class="layui-icon layui-icon-share layui-tips" tips="分享"></i>
+              {% end %}
+            </button>
+            {% end %}
+
+            {% if False %}
+            <ul class="layui-nav layui-btn-menu layui-btn-radius layui-btn-primary layui-btn-xs">
+              <li class="layui-nav-item">
+                <a class="btn-menu layui-btn layui-btn-radius layui-btn-primary layui-btn-xs" href="javascript:;" style="width: 30px;">
+                  <i class="layui-icon layui-icon-more"></i>
+                </a>
+                <dl class="layui-nav-child">
+                  <dd><a href="javascript:;" class="btn-rename">重命名</a></dd>
+                  <dd><a href="javascript:;" class="btn-move">移动至</a></dd>
+                  <dd><a href="javascript:;" class="btn-info" data-md5="{{ doc.md5 or '' }}">文件信息</a></dd>
+                  {% if current_user.kindle and re.match('.(pdf|txt|mobi|azw|doc|docx|html|htm|rtf|jpeg|jpg|png|gif|bmp|webp)$', doc.path.suffix.lower()) %}
+                  <dd><a href="javascript:;" text="正在推送" action="kindle" class="btn-action">推送至Kindle</a></dd>
+                  {% end %}
+                  {% if not doc.share %}
+                  <dd><a href="javascript:;" action="share" class="btn-share">分享文件</a></dd>
+                  {% else %}
+                  <dd><a href="javascript:;" action="unshare" class="btn-action">取消分享</a></dd>
+                  {% end %}
+                </dl>
+              </li>
+            </ul>
+            {% end %}
+          </td>
+        </tr>
+        {% end %}
+      </tbody>
+    </table>
+    {% end %}
+  </div>
+</div>
+
+<div id="pagination"></div>
+
+{% end %}
