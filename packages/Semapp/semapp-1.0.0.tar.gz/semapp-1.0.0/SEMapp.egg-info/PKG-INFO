@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: Semapp
+Version: 1.0.0
+Summary: Package for SEM visualization
+Author-email: Thibaut Meyer <thibaut.meyer3@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/pypa/sampleproject
+Project-URL: Issues, https://github.com/pypa/sampleproject/issues
+Keywords: SEM,GUI
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: matplotlib==3.8.3
+Requires-Dist: numpy<2.0,>=1.21
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: Pillow>=11.0.0
+Requires-Dist: PyQt5==5.15.11
+Requires-Dist: PyQt5_sip<13.0.0,>=12.15.0
+Dynamic: license-file
