@@ -1,0 +1,64 @@
+[project]
+name = "html2image"
+version = "2.0.7" # todo take a look at dynamic versionning (e.g., hatch-vcs)
+description = "Package acting as a wrapper around the headless mode of existing web browsers to generate images from URLs and from HTML+CSS strings or files."
+authors = [
+    { name = "vgalin" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+
+keywords = ["html", "css", "screenshot", "image", "chrome", "html to image", "css to image", "chromium-browser", "chromium"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Topic :: Utilities",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+]
+requires-python = ">=3.6"
+
+dependencies = [
+    "websocket-client~=1.0",
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://github.com/vgalin/html2image"
+Repository = "https://github.com/vgalin/html2image"
+Issues = "https://github.com/vgalin/html2image/issues"
+Changelog = "https://github.com/vgalin/html2image/releases"
+
+[project.optional-dependencies]
+test = [
+    "Pillow>=8.2.0",
+    "pytest",
+]
+lint = [
+    "flake8",
+]
+dev = [
+    "html2image[test,lint]",
+    "build",
+    "twine",
+]
+
+[project.scripts]
+hti = "html2image:main"
+html2image = "html2image:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
