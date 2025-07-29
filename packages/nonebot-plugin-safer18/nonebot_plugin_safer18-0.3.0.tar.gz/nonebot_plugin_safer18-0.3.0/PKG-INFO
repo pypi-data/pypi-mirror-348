@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: nonebot-plugin-safer18
+Version: 0.3.0
+Summary: 一个通过鉴黄API来判断图片是否为R18并保存的Nonebot插件
+Author-email: ChenXu233 <91937041+ChenXu233@users.noreply.github.com>
+License: MIT
+Requires-Python: <3.13,>=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: nonebot2>=2.3.3
+Requires-Dist: Torch>=2.4.1
+Requires-Dist: pillow>=10.4.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: torchvision>=0.19.1
+Requires-Dist: nonebot-plugin-uninfo>=0.3.0
+Requires-Dist: nonebot-plugin-alconna>=0.54.0
+Requires-Dist: ultralytics>=8.3.130
+Dynamic: license-file
