@@ -1,0 +1,1 @@
+from zapp.features.core.locators import get_locator as locator
