@@ -1,0 +1,15 @@
+version: "2.2"
+services:
+  mysql:
+    container_name: mysql
+    image: datajoint/mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=<enter-root-password-here>
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: always
+
+volumes:
+  mysql:

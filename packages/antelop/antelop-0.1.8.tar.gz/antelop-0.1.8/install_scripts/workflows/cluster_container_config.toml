@@ -1,0 +1,16 @@
+# Minimal config to get Antelop running for the cluster pipelines
+# Additional information will be needed to run as an interactive container
+[deployment]
+deployment = "apptainer" # DO NOT CHANGE
+
+[mysql]
+host = "trilab" # MySQL host
+
+[s3]
+host = "local" # S3 host
+
+[github] # Lab analysis repositories
+trilab_scripts = "https://github.com/marcotripodi/Trilab-Tools"
+
+[computation]
+antelop_data = "/cephfs/$USER/.antelop"
