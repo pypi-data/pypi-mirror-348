@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zrx"
+version = "0.0.2"
+description = "Zen Reactive Extensions"
+license = { text = "MIT" }
+
+[project.urls]
+Source = "https://github.com/zensical/zrx"
