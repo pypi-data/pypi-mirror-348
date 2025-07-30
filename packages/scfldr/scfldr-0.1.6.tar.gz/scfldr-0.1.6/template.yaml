@@ -1,0 +1,28 @@
+src:
+  main.py:
+    content: |
+      def main():
+          print("Hello, world!")
+
+      if __name__ == "__main__":
+          main()
+    mode: w
+  utils:
+    helpers.py: |
+      def add(a, b):
+          return a + b
+docs:
+  README.md: |
+    # My Project
+
+    This is a sample project.
+tests:
+  test_main.py: |
+    def test_sample():
+        assert True
+logs:
+  app.log:
+    content: |
+      # Log file initialized
+      # Append mode example
+    mode: a
