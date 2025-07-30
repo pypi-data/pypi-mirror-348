@@ -1,0 +1,638 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-27 02:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: admin/album.py:18
+msgid "Album item"
+msgstr "Élément d'album"
+
+#: admin/album.py:32 models/album.py:35
+msgid "Album"
+msgstr ""
+
+#: admin/article.py:74 admin/category.py:63
+msgid "Language"
+msgstr "Langue"
+
+#: admin/article.py:82
+msgid "Parameters"
+msgstr "Paramètres"
+
+#: admin/article.py:92
+msgid "Dates"
+msgstr "Dates"
+
+#: admin/article.py:100 admin/category.py:71
+msgid "Content"
+msgstr "Contenu"
+
+#: admin/article.py:110 admin/category.py:79
+msgid "SEO"
+msgstr "SEO"
+
+#: admin/article.py:118
+msgid "Relations"
+msgstr "Relations"
+
+#: admin/article.py:141 admin/category.py:95 admin_filters.py:11
+#: models/translated.py:12
+msgid "language"
+msgstr "langue"
+
+#: admin/article.py:149
+msgid "publish date"
+msgstr "date de publication"
+
+#: admin/article.py:157
+msgid "published"
+msgstr "publié"
+
+#: admin/article.py:165 admin/category.py:103
+msgid "original"
+msgstr "original"
+
+#: admin/category.py:108
+msgid "articles"
+msgstr "articles"
+
+#: admin/category.py:112
+msgid "parent"
+msgstr ""
+
+#: admin_filters.py:34
+msgid "translation state"
+msgstr "état de traduction"
+
+#: admin_filters.py:41
+msgid "Is an original"
+msgstr "Est un original"
+
+#: admin_filters.py:42
+msgid "Is a translation"
+msgstr "Est une traduction"
+
+#: admin_filters.py:57
+msgid "publication state"
+msgstr "état de publication"
+
+#: admin_filters.py:67
+msgid "Is published"
+msgstr "Publié"
+
+#: admin_filters.py:68
+msgid "Is not published"
+msgstr "Non publié"
+
+#: apps.py:7
+msgid "Lotus weblog"
+msgstr ""
+
+#: choices.py:16
+msgid "draft"
+msgstr "brouillon"
+
+#: choices.py:17
+msgid "available"
+msgstr "disponible"
+
+#: forms/article.py:100 forms/category.py:210
+msgid "You can't have a language identical to the original relation."
+msgstr "Vous ne pouvez avoir une langue identique à celle de l'original."
+
+#: forms/article.py:110 forms/category.py:220
+msgid "You can't have an original relation in the same language."
+msgstr "Vous ne pouvez avoir une relation vers un original de la même langue."
+
+#: forms/article.py:126
+msgid "You can't have related articles in different language."
+msgstr "Vous ne pouvez avoir des articles reliés avec une langue différente."
+
+#: forms/article.py:142
+msgid "You can't have categories in different language."
+msgstr "Vous ne pouvez avoir de catégories avec une langue différente."
+
+#: forms/article.py:156
+msgid ""
+"This article already have a translation so it can not be a translation "
+"itself."
+msgstr ""
+"Cet article a déjà une traduction donc il ne peut être une traduction lui-"
+"même."
+
+#: forms/category.py:39
+msgid "-- Root --"
+msgstr "-- Racine --"
+
+#: forms/category.py:125
+msgid "Parent"
+msgstr ""
+
+#: forms/category.py:187
+msgid "You can't have a parent category with a different language."
+msgstr ""
+"Vous ne pouvez pas avoir une catégorie parente dans une langue différente."
+
+#: forms/category.py:197
+msgid "You can't have a language different from the parent category one."
+msgstr "Vous ne pouvez avoir une langue différente de la catégorie parente."
+
+#: forms/category.py:235
+msgid ""
+"This category already have a translation so it can not be a translation "
+"itself."
+msgstr ""
+"Cette catégorie a déjà une traduction donc elle ne peut être une traduction "
+"elle-même."
+
+#: forms/category.py:249
+msgid ""
+"Some articles in different language relate to this category, you can't "
+"change language until those articles are not related anymore."
+msgstr ""
+"Certains articles dans une autre langue sont reliés à cette catégorie, vous "
+"ne pouvez changer la langue tant que ces articles n'y sont plus reliés."
+
+#: forms/category.py:264
+msgid ""
+"Some categories in different language are children of this category, you "
+"can't change language until those categories are not related anymore or "
+"adopted the same language."
+msgstr ""
+"Certaines catégories dans une autre langue sont des enfants de cette "
+"catégorie, vous ne pouvez changer la langue tant que ces catégories enfants "
+"ne sont plus reliés ici ou qu'ils n'ont pas adopté la même langue."
+
+#: forms/translated.py:10
+msgid "Available languages"
+msgstr "Langues disponibles"
+
+#: models/album.py:16
+msgid "Title"
+msgstr "TTitre"
+
+#: models/album.py:26 models/album.py:59 models/category.py:38
+msgid "modification date"
+msgstr "date de modification"
+
+#: models/album.py:36
+msgid "Albums"
+msgstr ""
+
+#: models/album.py:68 models/article.py:136 models/category.py:47
+msgid "title"
+msgstr "titre"
+
+#: models/album.py:78
+msgid "Order"
+msgstr "Ordre"
+
+#: models/album.py:87
+msgid "File"
+msgstr "Fichier"
+
+#: models/album.py:106
+msgid "Article album"
+msgstr "Album d'article"
+
+#: models/album.py:107
+msgid "Articles albums"
+msgstr "Albums d'articles"
+
+#: models/article.py:28
+msgid "original article"
+msgstr "article original"
+
+#: models/article.py:34
+msgid "Mark this article as a translation of an original article."
+msgstr "Marquez cette article comme une traduction d'un article original"
+
+#: models/article.py:42
+msgid "status"
+msgstr "état"
+
+#: models/article.py:47
+msgid "Publication status."
+msgstr "État de publication."
+
+#: models/article.py:55
+msgid "featured"
+msgstr "en une"
+
+#: models/article.py:59
+msgid "Mark this article as featured."
+msgstr "Marquez cet article comme en une."
+
+#: models/article.py:67
+msgid "pinned"
+msgstr "épinglé"
+
+#: models/article.py:71
+msgid "A pinned article is enforced at top of order results."
+msgstr "Un article épinglé est forcé vers le haut des résultats."
+
+#: models/article.py:79
+msgid "private"
+msgstr "privé"
+
+#: models/article.py:83
+msgid "Private article is only available for authenticated users."
+msgstr ""
+"Un articlé privé est seulement disponible aux utilisateurs authentifiés."
+
+#: models/article.py:91
+msgid "publication date"
+msgstr "date de publication"
+
+#: models/article.py:95
+msgid "Start date of publication."
+msgstr "Date de début de publication."
+
+#: models/article.py:103
+msgid "publication time"
+msgstr "heure de publication"
+
+#: models/article.py:106
+msgid "Start time of publication."
+msgstr "Heure de début de publication."
+
+#: models/article.py:114
+msgid "publication end"
+msgstr "fin de la publication"
+
+#: models/article.py:120
+msgid "End date of publication."
+msgstr "Date de fin de la publication."
+
+#: models/article.py:128
+msgid "last update"
+msgstr "dernière mise à jour"
+
+#: models/article.py:146 models/category.py:57
+msgid "slug"
+msgstr "slug"
+
+#: models/article.py:149
+msgid "Used to build the article URL."
+msgstr "Utilisé pour construire l'URL de l'article."
+
+#: models/article.py:157
+msgid "SEO title"
+msgstr "Titre SEO"
+
+#: models/article.py:162
+msgid ""
+"This value will be used as page meta title if not blank, else the article "
+"title is used."
+msgstr ""
+"Cette valeur sera utilisé comme le titre de méta information de la page s'il "
+"n'est pas vide, sinon le titre de l'article est utilisé."
+
+#: models/article.py:172 models/category.py:65
+msgid "lead"
+msgstr "accroche"
+
+#: models/article.py:175 models/category.py:68
+msgid "Lead paragraph, commonly used for SEO purposes in page meta tags."
+msgstr ""
+"Un paragraphe d'accroche, couramment utilisé à des fins de SEO dans les "
+"métas informations de la page."
+
+#: models/article.py:183
+msgid "introduction"
+msgstr "introduction"
+
+#: models/article.py:191
+msgid "content"
+msgstr "contenu"
+
+#: models/article.py:200 models/category.py:84
+msgid "cover image"
+msgstr "image de couverture"
+
+#: models/article.py:205
+msgid "Article cover image."
+msgstr "L'image de couverture de l'article."
+
+#: models/article.py:212 models/category.py:95
+msgid "cover alternative text"
+msgstr "texte alternatif de la couverture"
+
+#: models/article.py:222
+msgid "main image"
+msgstr "image principale"
+
+#: models/article.py:227
+msgid "Article large image."
+msgstr "Une image large pour l'article."
+
+#: models/article.py:234
+msgid "main alternative text"
+msgstr "texte alternatif de l'image principale"
+
+#: models/article.py:245
+msgid "categories"
+msgstr "catégories"
+
+#: models/article.py:255
+msgid "authors"
+msgstr "auteurs"
+
+#: models/article.py:265
+msgid "related articles"
+msgstr "articles reliés"
+
+#: models/article.py:303
+msgid "Article"
+msgstr "Article"
+
+#: models/article.py:304 settings.py:119 templates/lotus/article/list.html:4
+#: templates/lotus/article/list.html:8 templates/lotus/author/detail.html:11
+#: templates/lotus/category/detail.html:32 templates/lotus/tag/detail.html:11
+msgid "Articles"
+msgstr "Articles"
+
+#: models/category.py:30
+msgid "Mark this category as a translation of an original category."
+msgstr ""
+"Marquez cette catégorie comme une traduction d'une catégorie originale."
+
+#: models/category.py:76
+msgid "description"
+msgstr "description"
+
+#: models/category.py:128
+msgid "Category"
+msgstr "Catégorie"
+
+#: models/category.py:129 settings.py:121
+#: templates/lotus/article/detail.html:127 templates/lotus/category/list.html:4
+#: templates/lotus/category/list.html:8
+msgid "Categories"
+msgstr "Catégories"
+
+#: settings.py:120 templates/lotus/article/detail.html:162
+#: templates/lotus/author/list.html:4 templates/lotus/author/list.html:8
+msgid "Authors"
+msgstr "Auteurs"
+
+#: settings.py:122 templates/lotus/article/detail.html:144
+#: templates/lotus/tag/list.html:4 templates/lotus/tag/list.html:8
+msgid "Tags"
+msgstr "Étiquettes"
+
+#: templates/admin/lotus/article/change_form.html:20
+#: templates/admin/lotus/category/change_form.html:20
+#: templates/lotus/article/detail.html:49
+#: templates/lotus/category/detail.html:56
+msgid "Translate"
+msgstr "Traduire"
+
+#: templates/admin/lotus/article/change_form.html:26
+msgid "Preview"
+msgstr "Aperçu"
+
+#: templates/admin/lotus/article/change_form.html:34
+#, python-format
+msgid ""
+"<strong>Article language '%(object_lang)s' is not in available project "
+"languages: %(available_langs)s</strong>. In this state, this article won't "
+"reachable from your site.<br><br>You may be able to edit this article but it "
+"will change language to an available one and you may have to change some "
+"related fields."
+msgstr ""
+"<strong>La langue '%(object_lang)s' de l'article n'est pas une des langues "
+"disponibles pour ce projet: %(available_langs)s</strong>. Dans cet état cet "
+"article ne sera pas accessible sur le site.<br><br>Vous pouvez néanmoins continuer "
+"à l'éditer mais sa langue sera modifiée pour une des langues disponibles et vous "
+"aurez peut être certaines relations à corriger."
+
+#: templates/admin/lotus/article/change_form.html:40
+msgid "Existing language(s) for this article:"
+msgstr "Langue(s) existante(s) pour cet article:"
+
+#: templates/admin/lotus/article/translate_original.html:7
+#: templates/admin/lotus/category/translate_original.html:7
+#: templates/admin/lotus/category/tree.html:19
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/admin/lotus/article/translate_original.html:17
+msgid "No available languages for this article."
+msgstr "Aucune langue disponible pour cet article."
+
+#: templates/admin/lotus/article/translate_original.html:20
+msgid ""
+"You requested to translate an original article, this will send you to a "
+"create form to translate it."
+msgstr ""
+"Vous avez requis une traduction pour cet article original, vous allez être "
+"conduit vers un formulaire pour le traduire."
+
+#: templates/admin/lotus/article/translate_original.html:22
+#, python-format
+msgid ""
+"You requested to translate a translation article, this will send you to a "
+"create form to translate the original article '%(title)s' instead."
+msgstr ""
+"Vous avez requis une traduction pour cet article de traduction, vous allez "
+"être conduit vers un formulaire pour traduire l'article original '%(title)s' "
+"à la place."
+
+#: templates/admin/lotus/article/translate_original.html:31
+#: templates/admin/lotus/category/translate_original.html:31
+msgid "Confirm"
+msgstr "Confirmez"
+
+#: templates/admin/lotus/category/change_form.html:29
+#, python-format
+msgid ""
+"<strong>Category language '%(object_lang)s' is not in available project "
+"languages: %(available_langs)s</strong>. In this state, this category won't "
+"reachable from your site.<br><br>You may be able to edit this category but "
+"it will change language to an available one and you may have to change some "
+"related fields."
+msgstr ""
+"<strong>La langue '%(object_lang)s' de la catégorie n'est pas une des langues "
+"disponibles pour ce projet: %(available_langs)s</strong>. Dans cet état cet "
+"catégorie ne sera pas accessible sur le site.<br><br>Vous pouvez néanmoins continuer "
+"à l'éditer mais sa langue sera modifiée pour une des langues disponibles et vous "
+"aurez peut être certaines relations à corriger."
+
+#: templates/admin/lotus/category/change_form.html:35
+msgid "Existing language(s) for this category:"
+msgstr "Langue(s) existante(s) pour cette catégorie:"
+
+#: templates/admin/lotus/category/change_list.html:6
+msgid "Tree list"
+msgstr "Liste en arborescence"
+
+#: templates/admin/lotus/category/partials/_recursive_tree_children.html:19
+msgid "Original"
+msgstr "Original"
+
+#: templates/admin/lotus/category/partials/_recursive_tree_children.html:21
+msgid "Translation"
+msgstr "Traduction"
+
+#: templates/admin/lotus/category/translate_original.html:17
+msgid "No available languages for this category."
+msgstr "Aucune langue disponible pour cette catégorie."
+
+#: templates/admin/lotus/category/translate_original.html:20
+msgid ""
+"You requested to translate an original category, this will send you to a "
+"create form to translate it."
+msgstr ""
+"Vous avez requis une traduction pour cette catégorie originale, vous allez "
+"être conduit vers un formulaire pour le traduire."
+
+#: templates/admin/lotus/category/translate_original.html:22
+#, python-format
+msgid ""
+"You requested to translate a translation category, this will send you to a "
+"create form to translate the original category '%(title)s' instead."
+msgstr ""
+"Vous avez requis une traduction pour cette catégorie de traduction, vous "
+"allez être conduit vers un formulaire pour traduire la catégorie originale "
+"'%(title)s' à la place."
+
+#: templates/admin/lotus/category/tree.html:33
+msgid "Back to the flat list"
+msgstr "Retourner à la liste simple"
+
+#: templates/admin/lotus/category/tree.html:58
+msgid "Filter"
+msgstr "Filtre"
+
+#: templates/admin/lotus/category/tree.html:62
+msgid "By language"
+msgstr "Par langue"
+
+#: templates/admin/lotus/category/tree.html:66
+msgid "All"
+msgstr "Tous"
+
+#: templates/lotus/article/detail.html:43
+#: templates/lotus/category/detail.html:50
+msgid "Edit"
+msgstr "Éditer"
+
+#: templates/lotus/article/detail.html:57
+msgid "Cover"
+msgstr "Couverture"
+
+#: templates/lotus/article/detail.html:76
+msgid "States"
+msgstr "États"
+
+#: templates/lotus/article/detail.html:81
+#: templates/lotus/article/partials/item.html:32
+msgid "Featured"
+msgstr "En une"
+
+#: templates/lotus/article/detail.html:86
+#: templates/lotus/article/partials/item.html:35
+msgid "Pinned"
+msgstr "Épinglé"
+
+#: templates/lotus/article/detail.html:91
+#: templates/lotus/article/partials/item.html:38
+msgid "Draft"
+msgstr "Brouillon"
+
+#: templates/lotus/article/detail.html:96
+#: templates/lotus/article/partials/item.html:41
+msgid "Private"
+msgstr "Privé"
+
+#: templates/lotus/article/detail.html:101
+#: templates/lotus/article/partials/item.html:44
+msgid "Scheduled publication"
+msgstr "Publication programmée"
+
+#: templates/lotus/article/detail.html:106
+#: templates/lotus/article/partials/item.html:47
+msgid "Ended publication"
+msgstr "Publication finie"
+
+#: templates/lotus/article/detail.html:117
+#: templates/lotus/category/detail.html:65
+msgid "Available in languages"
+msgstr "Disponible dans les langues"
+
+#: templates/lotus/article/detail.html:177
+msgid "Related articles"
+msgstr "Articles reliés"
+
+#: templates/lotus/article/partials/siblings.html:9
+msgid "Published"
+msgstr "Publié"
+
+#: templates/lotus/article/partials/siblings.html:11
+msgid "Not published"
+msgstr "Non publié"
+
+#: templates/lotus/article/partials/siblings.html:16
+#: templates/lotus/category/partials/siblings.html:9
+msgid "Is original"
+msgstr "Est un original"
+
+#: templates/lotus/article/partials/siblings.html:18
+#: templates/lotus/category/partials/siblings.html:11
+msgid "Is not original"
+msgstr "N'est pas un original"
+
+#: templates/lotus/category/detail.html:75
+msgid "Subcategories"
+msgstr "Sous-catégories"
+
+#: templates/lotus/pagination.html:3
+msgid "Pagination"
+msgstr "Pagination"
+
+#: templates/lotus/preview_switch.html:6
+msgid "Disable preview"
+msgstr "Désactiver la prévisualisation"
+
+#: templates/lotus/preview_switch.html:8
+msgid "Enable preview"
+msgstr "Activer la prévisualisation"
+
+#: views/admin/category.py:51
+msgid "Language '{}' is unknown from 'settings.LANGUAGES'"
+msgstr "La langue '{}' n'est pas activé dans 'settings.LANGUAGES'"
+
+#: views/admin/category.py:71
+#, python-format
+msgid "Category tree for language '%(lang)s'"
+msgstr "Arborescence pour la langue '%(lang)s'"
+
+#: views/admin/category.py:75
+msgid "Category tree"
+msgstr "Arborescence de catégorie"
+
+#: views/admin/mixins.py:98
+#, python-format
+msgid "Translate '%(title)s'"
+msgstr "Traduire '%(title)s'"
+
+#: views/article.py:105
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Pas de %(verbose_name)s trouvés pour la requête"
