@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dovahdf"
+version = "0.1.28"
+description = "（个人测试版）修改的音频增强工具,0.1.9试图将config的版本恢复到0.1.5，并对train.py做了更新,0.1.10修复了上次对train.py修改后的错误,0.1.11修改train部分的代码，确保内容可用，0.1.12处理了train.py的新报错,0.1.13添加了自动写入config的功能用于调试，0.1.14在train.py中修改了一点config的载入逻辑，0.1.15在train.py中修改了一点config的载入逻辑，0.1.16在train.py中修改了一点config的载入逻辑,0.1.25已经确保了config能生成并修改参数，0.1.26修改的是评估的逻辑"
+authors = [
+    {name = "Dovahkiin", email = "your.email@example.com"}
+]
+readme = "README.md"
+license = {text = "MIT License"}
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.22,<2.0",
+    "loguru>=0.5",
+    "appdirs>=1.4",
+    "requests>=2.27",
+    "packaging>=23,<25",
+    "sympy>=1.6",
+    "soundfile>=0.10",
+]
+
+[project.scripts]
+dovahdf = "dovahdf.df.enhance:run"
