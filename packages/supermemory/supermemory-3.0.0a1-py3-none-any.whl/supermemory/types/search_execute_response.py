@@ -1,0 +1,52 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import Dict, List, Optional
+from datetime import datetime
+
+from pydantic import Field as FieldInfo
+
+from .._models import BaseModel
+
+__all__ = ["SearchExecuteResponse", "Result", "ResultChunk"]
+
+
+class ResultChunk(BaseModel):
+    content: str
+    """Content of the matching chunk"""
+
+    is_relevant: bool = FieldInfo(alias="isRelevant")
+    """Whether this chunk is relevant to the query"""
+
+    score: float
+    """Similarity score for this chunk"""
+
+
+class Result(BaseModel):
+    chunks: List[ResultChunk]
+    """Matching content chunks from the document"""
+
+    created_at: datetime = FieldInfo(alias="createdAt")
+    """Document creation date"""
+
+    document_id: str = FieldInfo(alias="documentId")
+    """ID of the matching document"""
+
+    metadata: Optional[Dict[str, object]] = None
+    """Document metadata"""
+
+    score: float
+    """Relevance score of the match"""
+
+    title: str
+    """Document title"""
+
+    updated_at: datetime = FieldInfo(alias="updatedAt")
+    """Document last update date"""
+
+
+class SearchExecuteResponse(BaseModel):
+    results: List[Result]
+
+    timing: float
+
+    total: float
