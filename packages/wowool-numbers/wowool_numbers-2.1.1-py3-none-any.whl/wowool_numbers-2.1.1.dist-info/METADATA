@@ -1,0 +1,120 @@
+Metadata-Version: 2.4
+Name: wowool-numbers
+Version: 2.1.1
+Summary: The Wowool Numbers Package
+Home-page: https://www.wowool.com/
+Author: Wowool
+Author-email: info@wowool.com
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: wowool-sdk
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# From written word to numerical value
+
+The numbers app enriches numerical annotations for written numbers, units and money amounts by extending the annotations with attributes representing the normalized values.
+
+## Options
+
+#### NumbersOptions
+
+```typescript
+interface NumbersOptions {
+    comma_separator?: string;
+    language?: string;
+    source?: string;
+}
+```
+
+with:
+
+| Property          | Description                                                                                                                                                               |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comma_separator` | Default character to use as a comma separator in case it cannot be determined                                                                                             |
+| `language`        | Language file to use                                                                                                                                                      |
+| `source`          | Wowool source code to annotate a `Number`. Optional and only used if the language has not been set and no domain has previously been run that already annotations numbers |
+
+## Results
+
+The entity `Number` is extended with:
+
+  * The attribute `canonical` representing the normalized value
+
+The entity `MoneyAmount` is extended with:
+
+  * The attribute `amount` representing the normalized value
+  * The attribute `currency` representing the currency, if present
+
+Examples of a domain that produce `Number` and `MoneyAmount` is `entity`.
+
+## Examples
+
+<sample data-uuid="numbers"></sample>
+
+# From written word to numerical value
+
+The numbers app enriches numerical annotations for written numbers, units and money amounts by extending the annotations with attributes representing the normalized values.
+
+## Options
+
+#### NumbersOptions
+
+```typescript
+interface NumbersOptions {
+    comma_separator?: string;
+    language?: string;
+    source?: string;
+}
+```
+
+with:
+
+| Property          | Description                                                                                                                                                               |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comma_separator` | Default character to use as a comma separator in case it cannot be determined                                                                                             |
+| `language`        | Language file to use                                                                                                                                                      |
+| `source`          | Wowool source code to annotate a `Number`. Optional and only used if the language has not been set and no domain has previously been run that already annotations numbers |
+
+## Results
+
+The entity `Number` is extended with:
+
+  * The attribute `canonical` representing the normalized value
+
+The entity `MoneyAmount` is extended with:
+
+  * The attribute `amount` representing the normalized value
+  * The attribute `currency` representing the currency, if present
+
+Examples of a domain that produce `Number` and `MoneyAmount` is `entity`.
+
+# API
+
+## Examples
+
+### Converting written numbers into values
+
+The file shows how to use the wowool pipeline to extract and normalize monetary amounts from English text. The pipeline processes the text and enrich the annotation with the Number and MoneyAmount annotations.
+
+* MoneyAmount@(amount='2000000.0' code='EUR' name='Euro' )
+* Number@(canonical='2000000.0' )
+* MoneyAmount@(amount='1189.0' code='USD' name='United States dollar' )
+* Number,@(canonical='1189.0' )
+
+
+```python
+from wowool.sdk import Pipeline
+
+text = "I have 2m euro's and Ten thousand one hundred eighty-nine dollars."
+pipeline = Pipeline(["english", "numbers.language", "entity", "numbers.app"])
+document = pipeline(text)
+print(document)
+
+```
