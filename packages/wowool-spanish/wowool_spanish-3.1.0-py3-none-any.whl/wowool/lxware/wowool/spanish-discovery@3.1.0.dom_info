@@ -1,0 +1,29 @@
+{
+  "dependencies": [
+    "wowool/spanish-syntax@3.1.0",
+    "wowool/spanish-definition@3.1.0"
+  ],
+  "concepts": [
+    "Definition",
+    "Descriptor",
+    "DescriptorMarker"
+  ],
+  "short_description": "Descriptors for knowledge discovery. A descriptor is something like 'painter' to classify an item as a Person. ",
+  "examples": [
+    {
+      "concept": "Definition",
+      "sample": "El \u00e1cido valproico es un medicamento usado en el tratamiento de la epilepsia",
+      "desc": "A definition. A sentence that explains what something or someone is."
+    },
+    {
+      "concept": "Descriptor",
+      "sample": "Julie Forsyth es una actriz",
+      "desc": " descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'actriz' is the descriptor"
+    },
+    {
+      "concept": "DescriptorMarker",
+      "sample": "templo, dibujante, pedan\u00eda",
+      "desc": "A DescriptorMarker is a descriptor no matter the context"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "concepts": [
+    "City",
+    "Continent",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "WorldRegion",
+    "Address",
+    "Date",
+    "Email",
+    "Event",
+    "Facility",
+    "GivenName",
+    "PersonFam",
+    "PersonGiv",
+    "MoneyAmount",
+    "Nationality",
+    "Product",
+    "Measure",
+    "Month",
+    "Organization",
+    "Person",
+    "PersonMention",
+    "PhoneNr",
+    "Position",
+    "Street",
+    "Url",
+    "WeekDay",
+    "Weapon",
+    "NP",
+    "VP"
+  ],
+  "short_description": "Named entity annotations, such as: Person, City, Country, Company, Organization, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Avenida Pio XII , 30-32 28016 Madrid",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "N\u00e1poles, Barcelona",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Iberdrola",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Espa\u00f1a, Inglaterra, Alemania, Dinamarca, Suecia",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "31 de diciembre de 1999",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "juicio",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "vivienda",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Ainhoa",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "447,30 euros",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "enero",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Fundaci\u00f3n Bill y Melinda Gates",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Mar\u00eda Fernanda Espinosa",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "abuelo, v\u00edctima",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "Position",
+      "sample": "ministra de Agricultura",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Oriente Pr\u00f3ximo",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

@@ -1,0 +1,66 @@
+{
+  "dependencies": [
+    "wowool/spanish-entity-extended@3.1.0",
+    "wowool/spanish-sentiment@3.1.0"
+  ],
+  "concepts": [
+    "City",
+    "Company",
+    "Publisher",
+    "Country",
+    "BankProduct",
+    "Bankruptcy",
+    "CompanyAcquisition",
+    "CompanyBailout",
+    "CompanyClosure",
+    "CompanyCyberAttack",
+    "CompanyDisruption",
+    "CompanyLawsuit",
+    "CompanyMerger",
+    "CompanyExpansion",
+    "CompanyOperation",
+    "CompanyPartnership",
+    "CompanyPerformance",
+    "CompanyPosition",
+    "CompanyPublicOpinion",
+    "CompanySupplyRelation",
+    "CompanyWarning",
+    "ChangeManagement",
+    "GoPublic",
+    "GoodFinancialSituation",
+    "BadFinancialSituation",
+    "Layoffs",
+    "MoneyAmount",
+    "Position",
+    "Product",
+    "Person",
+    "ProductLaunch",
+    "ProductRecall",
+    "Organization",
+    "RawMaterial",
+    "Shortages",
+    "StockIndex",
+    "StockExchange",
+    "SupplyIssues",
+    "TopicInnovation"
+  ],
+  "short_description": "Business news annotations such as: Acquisitions, Mergers, Performance, Lawsuits, Operations.",
+  "long_description": "The Spanish company domain offers annotations that can be of help for business analysis, such as: CompanyAcquisition, CompanyMerger, CompanyPerformance, CompanyLawsuit and CompanyOperation. It includes entities from the entity domain, such as Person, Company, Position and MoneyAmount.",
+  "examples": [
+    {
+      "concept": "City",
+      "sample": "Badalona, Madrid, Buenos Aires",
+      "desc": "Name of a city"
+    },
+    {
+      "concept": "StockExchange",
+      "sample": "Nasdaq stock exchange",
+      "desc": "A Stock exchange."
+    },
+    {
+      "concept": "StockIndex",
+      "sample": "Russell 2000",
+      "desc": "A Stock index."
+    }
+  ]
+}

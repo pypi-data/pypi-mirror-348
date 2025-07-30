@@ -1,0 +1,33 @@
+{
+  "concepts": [
+    "AdvP",
+    "AdjP",
+    "PronPhrase",
+    "NP",
+    "VP",
+    "TimePhrase"
+  ],
+  "short_description": "Syntax annotations: NP (un instituto p\u00fablico), VP (no consigue) and PronPhrase (nosotros). ",
+  "examples": [
+    {
+      "concept": "NP",
+      "sample": "varios espacios culturales, los mejores robots aspiradores",
+      "desc": "Noun phrase."
+    },
+    {
+      "concept": "PronPhrase",
+      "sample": "nosotros, quien, les",
+      "desc": "Pronoun phrase."
+    },
+    {
+      "concept": "VP",
+      "sample": "no consigue, ha reconocido, ten\u00eda que recibir",
+      "desc": "Verb phrase."
+    },
+    {
+      "concept": "TimePhrase",
+      "sample": "a las 19.30 horas",
+      "desc": "A phrase expressing time."
+    }
+  ]
+}

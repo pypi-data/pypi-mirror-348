@@ -1,0 +1,33 @@
+{
+  "concepts": [
+    "HealthIssue",
+    "Pathology",
+    "Drug",
+    "BodyPart",
+    "NaturalRemedy",
+    "MedicalProcedure"
+  ],
+  "short_description": "Analyzes popular literature on healthcare, such as news, forums and blogs.",
+  "examples": [
+    {
+      "concept": "BodyPart",
+      "sample": "cadera, vientre, garganta",
+      "desc": "Body parts and organs."
+    },
+    {
+      "concept": "Drug",
+      "sample": "ibuprofeno, cloroquina",
+      "desc": "Name of a drug."
+    },
+    {
+      "concept": "HealthIssue",
+      "sample": "dolor en el cuello, fiebre, lumbalgia    ",
+      "desc": "A Healthissue is a symptom."
+    },
+    {
+      "concept": "MedicalProcedure",
+      "sample": "cirug\u00eda, vacunaci\u00f3n, resonancia",
+      "desc": "Medical procedure"
+    }
+  ]
+}

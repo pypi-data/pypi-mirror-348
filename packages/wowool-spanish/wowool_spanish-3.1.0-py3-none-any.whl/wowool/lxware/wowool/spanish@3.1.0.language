@@ -1,0 +1,44 @@
+{
+  "tokenizer": "wowool/spanish@3.1.0.tkz",
+  "abbreviations": "wowool/spanish@3.1.0.abbrev",
+  "apostrophe": "wowool/spanish@3.1.0.apostrophe",
+  "measure": "wowool/spanish@3.1.0.measure",
+  "hmm": "wowool/spanish@3.1.0.hmm",
+  "postagger": "wowool/spanish@3.1.0.postagger",
+  "morph_chain": [
+    {
+      "file": "wowool/spanish@3.1.0.morph",
+      "lookup": "plain"
+    },
+    {
+      "file": "wowool/spanish-medical@3.1.0.morph",
+      "lookup": "plain"
+    },
+    {
+      "file": "wowool/spanish-compound@3.1.0.morph",
+      "lookup": "compound_v2",
+      "transform": "none"
+    },
+    {
+      "file": "wowool/spanish-spelling-mistakes@3.1.0.morph",
+      "lookup": "plain",
+      "transform": "none"
+    }
+  ],
+  "property_chain": {
+    "abbrev": [
+      {
+        "file": "wowool/spanish-abbreviation@3.1.0.morph",
+        "lookup": "plain"
+      }
+    ]
+  },
+  "not_found": [
+    {
+      "file": "wowool/spanish@3.1.0.morph",
+      "lookup": "cleaner",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for spanish"
+}

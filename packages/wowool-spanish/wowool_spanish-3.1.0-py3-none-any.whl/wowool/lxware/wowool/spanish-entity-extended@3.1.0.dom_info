@@ -1,0 +1,240 @@
+{
+  "dependencies": [
+    "wowool/spanish-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "Animal",
+    "Automobile",
+    "BaseballTeam",
+    "City",
+    "Clothes",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "Date",
+    "Drink",
+    "Email",
+    "Event",
+    "Facility",
+    "Food",
+    "GivenName",
+    "Language",
+    "Measure",
+    "MoneyAmount",
+    "Month",
+    "Organization",
+    "Percent",
+    "Person",
+    "PersonFam",
+    "PersonGiv",
+    "PersonMention",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "Product",
+    "SoccerTeam",
+    "Sports",
+    "Street",
+    "Url",
+    "Vehicle",
+    "Weapon",
+    "WeekDay",
+    "WorldRegion"
+  ],
+  "short_description": "All annotations in the entity domain plus others, such as Automobile, BaseballTeam or Measure",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Carrer del Pintor Fortuny, 28 Barcelona",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "Animal",
+      "sample": "camello, perro, cucaracha",
+      "desc": "Names of common animals."
+    },
+    {
+      "concept": "Automobile",
+      "sample": "BMW 1 - series",
+      "desc": "A car brand or reference to a car."
+    },
+    {
+      "concept": "BaseballTeam",
+      "sample": "Houston Astros",
+      "desc": "US baseball team"
+    },
+    {
+      "concept": "City",
+      "sample": "Badalona, Madrid, Buenos Aires",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Clothes",
+      "sample": "jeans, camiseta",
+      "desc": "Names of clothes"
+    },
+    {
+      "concept": "Company",
+      "sample": "Alfaguara, Mercadona, Endesa",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Espa\u00f1a, Colombia, Suecia",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "CurrencyUnit",
+      "sample": "dollars, yuan    ",
+      "desc": "Name of a currency"
+    },
+    {
+      "concept": "Date",
+      "sample": "29 Octubre 2017",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Drink",
+      "sample": "martini, cerveza",
+      "desc": "Name of a drink"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "World Cup",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "centro penitenciario de Zuera",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "Food",
+      "sample": "frutas, ensaladas y patatas fritas",
+      "desc": "Name of food, ingredients as well as dishes"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Ram\u00f3n",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Language",
+      "sample": "escribir en catal\u00e1n",
+      "desc": "Name of a language"
+    },
+    {
+      "concept": "Measure",
+      "sample": "0,13 \u00b0C, 75ml, 80 kilos",
+      "desc": "Unit of measure"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "100 millones de euros",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "abril",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Naciones Unidas",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Percent",
+      "sample": "52,1%",
+      "desc": "Percentage"
+    },
+    {
+      "concept": "Person",
+      "sample": "\u00c1ngel T\u00e9llez Catalanes",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Benavente",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Antonio",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "v\u00edctimas, presos, portavoz",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "PlaceAdj",
+      "sample": "italiano, madrile\u00f1o",
+      "desc": "Adjective of geographical origin."
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+34 915 811 818 ",
+      "desc": "Phone number"
+    },
+    {
+      "concept": "Position",
+      "sample": "secretario general",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Product",
+      "sample": "PlayStation 5, pantal\u00f3n, altavoces",
+      "desc": "Name of a product in general (just a few brands)"
+    },
+    {
+      "concept": "SoccerTeam",
+      "sample": "Real Madrid, PSG, Celta de Vigo",
+      "desc": "European soccer team"
+    },
+    {
+      "concept": "Sports",
+      "sample": "f\u00fatbol, motociclismo, tenis",
+      "desc": "Sports"
+    },
+    {
+      "concept": "Street",
+      "sample": "calle del Pez",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "Vehicle",
+      "sample": "tanques, autom\u00f3vil",
+      "desc": "Name of a vehicle"
+    },
+    {
+      "concept": "Weapon",
+      "sample": "misiles bal\u00edsticos, pistola, rifles de asalto",
+      "desc": "Name of a weapon"
+    },
+    {
+      "concept": "WeekDay",
+      "sample": "mi\u00e9rcoles, s\u00e1bado",
+      "desc": "Day of the week"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Galicia, Europa, Pen\u00ednsula Ib\u00e9rica",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

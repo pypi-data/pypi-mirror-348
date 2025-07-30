@@ -1,0 +1,381 @@
+Metadata-Version: 2.4
+Name: wowool-spanish
+Version: 3.1.0
+Summary: Wowool NLP spanish Package
+Description-Content-Type: text/markdown
+
+# Wowool NLP spanish Package
+This package contains the language file and domains for spanish.
+To use this package, you need to install the wowool-sdk package and request a license file at info@wowool.com
+
+## Usage
+
+```python
+from wowool.sdk import Pipeline
+from pathlib import Path
+input_text = Path("input.txt").read_text()
+pipeline = Pipeline("spanish,entity")
+doc = pipeline(input_text)
+print(doc)
+```
+
+## Domains
+
+### spanish-contact-info.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Carrer del Pintor Fortuny, 28 Barcelona |
+| City |Name of a City | Badalona, Madrid, Buenos Aires |
+| Company |Name of a Company | Alfaguara, Mercadona, Endesa |
+| Country |Name of a Country | España, Colombia, Suecia |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Ángel Téllez Catalanes |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Benavente |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Antonio |
+| PhoneNr |A phone number | +34 915 811 818  |
+| PhoneNrCandidate |A possible phone number, but we do not have enough evidence | 0330 333 1212 |
+| Position |Subclass of PersonMention. The professional ocupation of a person. | secretario general |
+| Street |The name of a street with or without number. | calle del Pez |
+| Url |Url | https://www.wowool.com |
+
+
+### spanish-world-regions.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Afghanistan |The country Afghanistan or a place in Afghanistan. | Afghanistan, Kabul |
+| Albania |The country Albania or a place in Albania. | Albania, Tirana |
+| Algeria |The country Algeria or a place in Algeria. | Algeria, Algiers |
+| Angola |The country Angola or a place in Angola. | Angola, Luanda |
+| Argentina |The country Argentina or a place in Argentina. | Argentina, Buenos Aires |
+| Armenia |The country Armenia or a place in Armenia. | Armenia, Yerevan |
+| Australia |The country Australia or a place in Australia. | Australia, Canberra |
+| Austria |The country Austria or a place in Austria. | Austria, Vienna |
+| Azerbaijan |The country Azerbaijan or a place in Azerbaijan. | Azerbaijan, Baku |
+| Bangladesh |The country Bangladesh or a place in Bangladesh. | Bangladesh, Dhaka |
+| Belarus |The country Belarus or a place in Belarus. | Belarus, Minsk |
+| Belgium |The country Belgium or a place in Belgium. | Belgium, Brussels, Liege |
+| Benin |The country Benin or a place in Benin. | Benin, Porto Novo |
+| Bhutan |The country Bhutan or a place in Bhutan. | Bután |
+| Bolivia |The country Bolivia or a place in Bolivia. | Bolivia, La Paz |
+| Bosnia |The country Bosnia or a place in Bosnia. | Bosnia, Sarajevo |
+| Botswana |The country Botswana or a place in Botswana. | Botswana, Gaborone |
+| Brazil |The country Brazil or a place in Brazil. | Brazil, Brasilia |
+| Bulgaria |The country Bulgaria or a place in Bulgaria. | Bulgaria |
+| BurkinaFaso |The country Burkina Faso or a place in Burkina Faso. | Burkina Faso, Ouagadougou |
+| Burundi |The country Burundi or a place in Burundi. | Burundi, Gitega |
+| Cambodia |The country Cambodia or a place in Cambodia. | Cambodia, Phnom Penh |
+| Cameroon |The country Cameroon or a place in Cameroon. | Cameroon, Yaounde |
+| Canada |The country Canada or a place in Canada. | Canada, Ottawa |
+| CentralAsia |A place in Central Asia. | Afganistán |
+| Chile |The country Chile or a place in Chile. | Chile |
+| China |The country China or a place in China. | China, Wuhan |
+| Colombia |The country Colombia or a place in Colombia. | Colombia, Bogota |
+| DemocraticRepublicCongo |The country Democratic Republic of Congo or a place in Democratic Republic of Congo. | República Democrática del Congo |
+| RepublicCongo |The country Republic of Congo or a place in Republic of Congo. | República del Congo |
+| CostaRica |The country Costa Rica or a place in Costa Rica. | Costa Rica |
+| Croatia |The country Croatia or a place in Croatia. | Croacia |
+| Cuba |The country Cuba or a place in Cuba. | Cuba |
+| Cyprus |The country Cyprus or a place in Cyprus. | Chipre |
+| CzechRepublic |The country Czech Republic or a place in Czech Republic. | República Checa |
+| Denmark |The country Denmark or a place in Denmark. | Dinamarca |
+| DominicanRepublic |The country Dominican Republic or a place in Dominica Republic. | República Dominicana |
+| EU |A place in the EU. | Irlanda, Bruselas |
+| Ecuador |The country Ecuador or a place in Ecuador. | Ecuador |
+| Egypt |The country Egypt or a place in Egypt. | Egipto |
+| Estonia |The country Estonia or a place in Estonia. | Estonia |
+| Ethiopia |The country Ethiopia or a place in Ethiopia. | Etiopía |
+| Finland |The country Finland or a place in Finland. | Finlandia |
+| France |The country France or a place in France. | Francia |
+| Gabon |The country Gabon or a place in Gabon. | Gabón |
+| Gambia |The country Gambia or a place in Gambia. | Gambia |
+| Germany |The country Germany or a place in Germany. | Alemania |
+| Ghana |The country Ghana or a place in Ghana. | Ghana |
+| Greece |The country Greece or a place in Greece. | Grecia |
+| Greenland |The country Greenland or a place in Greenland. | Groenlandia |
+| Guatemala |The country Guatemala or a place in Guatemala. | Guatemala |
+| Guinea |The country Guinea or a place in Guinea. | Guinea |
+| GuineaBissau |The country Guinea Bissau or a place in Guinea Bissau. | Guinea Bissau |
+| Honduras |The country Honduras or a place in Honduras. | Honduras |
+| Hungary |The country Hungary or a place in Hungary. | Hungría |
+| Iceland |The country Iceland or a place in Iceland. | Islandia |
+| India |The country India or a place in India. | India |
+| Indonesia |The country Indonesia or a place in Indonesia. | Indonesia |
+| Iran |The country Iran or a place in Iran. | Irán |
+| Iraq |The country Iraq or a place in Iraq. | Irak |
+| Ireland |The country Ireland or a place in Ireland. | Irlanda |
+| Israel |The country Israel or a place in Israel. | Israel |
+| Italy |The country Italy or a place in Italy. | Italia |
+| IvoryCoast |The country Ivory Coast or a place in Ivory Coast. | Costa de Marfil |
+| Jamaica |The country Jamaica or a place in Jamaica. | Jamaica |
+| Japan |The country Japan or a place in Japan. | Tokio, Osaka, Japón |
+| Jordan |The country Jordan or a place in Jordan. | Jordania |
+| Kazakhstan |The country Kazakhstan or a place in Kazakhstan. | Kazajistán |
+| Kenya |The country Kenya or a place in Kenya. | Kenia |
+| Kosovo |The country Kosovo or a place in Kosovo. | Kosovo |
+| Kyrgyzstan |The country Kyrgyzstan or a place in Kyrgyzstan. | Kirguistán |
+| Laos |The country Laos or a place in Laos. | Laos |
+| Latvia |The country Latvia or a place in Latvia. | Letonia |
+| Lebanon |The country Lebanon or a place in Lebanon. | Líbano |
+| Liberia |The country Liberia or a place in Liberia. | Liberia |
+| Libya |The country Libya or a place in Libya. | Libia |
+| Liechtenstein |The country Liechtenstein or a place in Liechtenstein. | Liechtenstein |
+| Lithuania |The country Lithuania or a place in Lithuania. | Lituania |
+| Luxembourg |The country Luxembourg or a place in Luxembourg. | Luxemburgo |
+| Madagascar |The country Madagascar or a place in Madagascar. | Madagascar |
+| Malaysia |The country Malaysia or a place in Malaysia. | Malasia |
+| Mali |The country Mali or a place in Mali. | Mali |
+| Malta |The country Malta or a place in Malta. | Malta |
+| Mauritania |The country Mauritania or a place in Mauritania. | Mauritania |
+| Mexico |The country Mexico or a place in Mexico. | Méjico |
+| MiddleEast |A place in the Middle East | Líbanos, Gaza |
+| Moldova |The country Moldavia or a place in Moldavia. | Moldavia |
+| Monaco |The country Monaco or a place in Monaco. | Mónaco |
+| Mongolia |The country Mongolia or a place in Mongolia. | Mongolia |
+| Montenegro |The country Montenegro or a place in Montenegro. | Montenegro |
+| Morocco |The country Morocco or a place in Morocco. | Marruecos |
+| Mozambique |The country Mozambique or a place in Mozambique. | Mozambique |
+| Myanmar |The country Myanmar or a place in Myanmar. | Myanmar |
+| Namibia |The country Namibia or a place in Namibia. | Namibia |
+| Nepal |The country Nepal or a place in Nepal. | Nepal |
+| Netherlands |The country Netherlands or a place in Netherlands. | Países Bajos |
+| NewZealand |The country New Zealand or a place in New Zealand. | Nueva Zelanda |
+| Nicaragua |The country Nicaragua or a place in Nicaragua. | Nicaragua |
+| Nigeria |The country Nigeria or a place in Nigeria. | Nigeria |
+| NorthKorea |The country North Korea or a place in North Korea. | Corea del Norte |
+| Norway |The country Norway or a place in Norway. | Noruega |
+| Oman |The country Oman or a place in Oman. | Omán |
+| Pakistan |The country Pakistan or a place in Pakistan. | Pakistán |
+| Palestine |The country Palestine or a place in Palestine. | Palestina |
+| Panama |The country Panama or a place in Panama. | Panamá |
+| PapuaNewGuinea |The country Papua New Guinea or a place in Papua New Guinea. | Nueva Guinea Papúa |
+| Paraguay |The country Paraguay or a place in Paraguay. | Paraguay |
+| Peru |The country Peru or a place in Peru. | Perú |
+| Philippines |The country Philippines or a place in Philippines. | Filipinas |
+| Poland |The country Poland or a place in Poland. | Polonia |
+| Portugal |The country Portugal or a place in Portugal. | Portugal |
+| PuertoRico |The country Puerto Rico or a place in Puerto Rico. | Puerto Rico |
+| Qatar |The country Qatar or a place in Qatar. | Qatar |
+| Romania |The country Romania or a place in Romania. | Rumanía |
+| Russia |The country Russia or a place in Russia. | Rusia |
+| Rwanda |The country Rwanda or a place in Rwanda. | Ruanda |
+| SaudiArabia |The country Saudi Arabia or a place in Saudi Arabia. | Arabia Saudita |
+| Serbia |The country Serbia or a place in Serbia. | Serbia |
+| SierraLeone |The country Sierra Leone or a place in Sierra Leone. | Sierra Leona |
+| Singapore |The country Singapore or a place in Singapore. | Singapur |
+| Slovakia |The country Slovakia or a place in Slovakia. | Eslovaquia |
+| Slovenia |The country Slovenia or a place in Slovenia. | Eslovenia |
+| Somalia |The country Somalia or a place in Somalia. | Somalia |
+| SouthKorea |The country South Korea or a place in South Korea. | Corea del Sur |
+| SoutheastAsia |A place in Southeast Asia. | Tailandia |
+| Spain |The country Spain or a place in Spain. | España, Madrid |
+| SriLanka |The country Sri Lanka or a place in Sri Lanka. | Sri Lanka |
+| Sudan |The country Sudan or a place in Sudan. | Sudán |
+| Suriname |The country Suriname or a place in Suriname. | Surinam |
+| Sweden |The country Sweden or a place in Sweden. | Suecia |
+| Switzerland |The country Switzerland or a place in Switzerland. | Suiza |
+| Syria |The country Syria or a place in Syria. | Siria |
+| Taiwan |The country Taiwan or a place in Taiwan. | Taiwan |
+| Tajikistan |The country Tajikistan or a place in Tajikistan. | Tajikistan |
+| Tanzania |The country Tanzania or a place in Tanzania. | Tanzania |
+| Thailand |The country Thailand or a place in Thailand. | Tailandia |
+| Togo |The country Togo or a place in Togo. | Togo |
+| Tunisia |The country Tunisia or a place in Tunisia. | Túnez |
+| Turkey |The country Turkey or a place in Turkey. | Turquía |
+| Turkmenistan |The country Turkmenistan or a place in Turkmenistan. | Turkmenistán |
+| USA |The country USA or a place in USA. | EEUU |
+| Uganda |The country Uganda or a place in Uganda. | Uganda |
+| Ukraine |The country Ukraine or a place in Ukraine. | Ucrania |
+| UnitedArabEmirates |A place in the UAE. | Dubái |
+| Uruguay |The country Uruguay or a place in Uruguay. | Uruguay |
+| Uzbekistan |The country Uzbekistan or a place in Uzbekistan. | Uzbekistán |
+| Vatican |The country Vatican or a place in Vatican. | Vaticano |
+| Venezuela |The country Venezuela or a place in Venezuela. | Venezuela |
+| Vietnam |The country Vietnam or a place in Vietnam. | Vietnám |
+| Zambia |The country Zambia or a place in Zambia. | Zambia |
+| Zanzibar |The country Zanzibar or a place in Zanzibar. | Zanzibar |
+| UK |A place in the United Kingdom. | Londres, Inglaterra |
+
+
+### spanish-anonymizer.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Carrer del Pintor Fortuny, 28 Barcelona |
+| City |Name of a City | Badalona, Madrid, Buenos Aires |
+| Company |Name of a Company | Alfaguara, Mercadona, Endesa |
+| Country |Name of a Country | España, Japón, México |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Oriol Cardona |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Benavente |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Antonio |
+| PhoneNr |A phone number | +34 612 345 678 |
+| Position |Subclass of PersonMention. The professional ocupation of a person. | presidente |
+| Street |The name of a street with or without number. | Avenida de la Cruz Roja |
+| Url |Url | https://www.wowool.com |
+
+
+### spanish-semantic-theme.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Theme |Theme: in this case Animal | caballo, pantera |
+
+
+### spanish-syntax.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| NP |Noun phrase. | varios espacios culturales, los mejores robots aspiradores |
+| PronPhrase |Pronoun phrase. | nosotros, quien, les |
+| VP |Verb phrase. | no consigue, ha reconocido, tenía que recibir |
+| TimePhrase |A phrase expressing time. | a las 19.30 horas |
+
+
+### spanish-entity.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Avenida Pio XII , 30-32 28016 Madrid |
+| City |Name of a City | Nápoles, Barcelona |
+| Company |Name of a Company | Iberdrola |
+| Country |Name of a Country | España, Inglaterra, Alemania, Dinamarca, Suecia |
+| Date |Date and Month | 31 de diciembre de 1999 |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | juicio |
+| Facility |A building or place that provides a particular service or is used for a particular industry | vivienda |
+| GivenName |First name of a Person | Ainhoa |
+| MoneyAmount |Amount of money | 447,30 euros |
+| Month |Name of a month | enero |
+| Organization |Name of an Organization | Fundación Bill y Melinda Gates |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | María Fernanda Espinosa |
+| PersonMention |A mention of a person in a general way | abuelo, víctima |
+| Position |Subclass of PersonMention. The professional occupation of a person. | ministra de Agricultura |
+| Url |Url | https://www.wowool.com |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Oriente Próximo |
+
+
+### spanish-topics.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| TopicCandidate |Possible topics | inteligencia artificial, Cristiano Ronaldo |
+
+
+### spanish-unknown.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| UnknownThing |Unknown concept | Yttrium  |
+
+
+### spanish-discovery.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | El ácido valproico es un medicamento usado en el tratamiento de la epilepsia |
+| Descriptor | descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'actriz' is the descriptor | Julie Forsyth es una actriz |
+| DescriptorMarker |A DescriptorMarker is a descriptor no matter the context | templo, dibujante, pedanía |
+
+
+### spanish-business-news.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| City |Name of a city | Badalona, Madrid, Buenos Aires |
+| StockExchange |A Stock exchange. | Nasdaq stock exchange |
+| StockIndex |A Stock index. | Russell 2000 |
+
+
+### spanish-sentiment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| PositiveSentiment |A positive opinion. | casas acogedoras para escapar este otoño, tecnologías innovadoras |
+| NegativeSentiment |A negative opinion. | software malicioso, los productos estaban contaminados |
+| AdjPos |Positive adjective. | idónea, maravilloso |
+| AdjNeg |Negative adjective. | moroso, agónico, macabro |
+| NounPos |Positive Noun. | amistad, prestigio |
+| NounNeg |Negative Noun. | conflicto, corrupción, acoso  |
+| ExprPos |Positive expression. | cerrar filas, llegar a un acuerdo |
+| ExprNeg |Negative expression. | está en peligro, no podían con su alman |
+
+
+### spanish-healthcare.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| BodyPart |Body parts and organs. | cadera, vientre, garganta |
+| Drug |Name of a drug. | ibuprofeno, cloroquina |
+| HealthIssue |A Healthissue is a symptom. | dolor en el cuello, fiebre, lumbalgia     |
+| MedicalProcedure |Medical procedure | cirugía, vacunación, resonancia |
+
+
+### spanish-entity-extended.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Carrer del Pintor Fortuny, 28 Barcelona |
+| Animal |Names of common animals. | camello, perro, cucaracha |
+| Automobile |A car brand or reference to a car. | BMW 1 - series |
+| BaseballTeam |US baseball team | Houston Astros |
+| City |Name of a City | Badalona, Madrid, Buenos Aires |
+| Clothes |Names of clothes | jeans, camiseta |
+| Company |Name of a Company | Alfaguara, Mercadona, Endesa |
+| Country |Name of a Country | España, Colombia, Suecia |
+| CurrencyUnit |Name of a currency | dollars, yuan     |
+| Date |Date and Month | 29 Octubre 2017 |
+| Drink |Name of a drink | martini, cerveza |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | World Cup |
+| Facility |A building or place that provides a particular service or is used for a particular industry | centro penitenciario de Zuera |
+| Food |Name of food, ingredients as well as dishes | frutas, ensaladas y patatas fritas |
+| GivenName |First name of a Person | Ramón |
+| Language |Name of a language | escribir en catalán |
+| Measure |Unit of measure | 0,13 °C, 75ml, 80 kilos |
+| MoneyAmount |Amount of money | 100 millones de euros |
+| Month |Name of a month | abril |
+| Organization |Name of an Organization | Naciones Unidas |
+| Percent |Percentage | 52,1% |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Ángel Téllez Catalanes |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Benavente |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Antonio |
+| PersonMention |A mention of a person in a general way | víctimas, presos, portavoz |
+| PlaceAdj |Adjective of geographical origin. | italiano, madrileño |
+| PhoneNr |Phone number | +34 915 811 818  |
+| Position |Subclass of PersonMention. The professional occupation of a person. | secretario general |
+| Product |Name of a product in general (just a few brands) | PlayStation 5, pantalón, altavoces |
+| SoccerTeam |European soccer team | Real Madrid, PSG, Celta de Vigo |
+| Sports |Sports | fútbol, motociclismo, tenis |
+| Street |The name of a street with or without number. | calle del Pez |
+| Url |Url | https://www.wowool.com |
+| Vehicle |Name of a vehicle | tanques, automóvil |
+| Weapon |Name of a weapon | misiles balísticos, pistola, rifles de asalto |
+| WeekDay |Day of the week | miércoles, sábado |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Galicia, Europa, Península Ibérica |
+
+
+### spanish-definition.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | El ácido valproico es un medicamento usado en el tratamiento de la epilepsia |
+
+
+### spanish-dates.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Date |An attribute will resolve the absolute date from the date that has been set | 16 de abril de 1973 |
+| TimePhrase |A phrase expressing time, including dates | a las 7 de la mañana, hoy, hace dos años |
+
+
+### spanish-event.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Event |An event, in very general terms. | secuestro |
+
+
+

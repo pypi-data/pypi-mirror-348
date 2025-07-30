@@ -1,0 +1,93 @@
+{
+  "dependencies": [
+    "wowool/spanish-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "BankAccount",
+    "City",
+    "Company",
+    "Country",
+    "Day",
+    "Date",
+    "Email",
+    "IPAddress",
+    "Month",
+    "MoneyAmount",
+    "Organization",
+    "PersonFam",
+    "PersonGiv",
+    "Person",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "Publisher",
+    "Street",
+    "Url",
+    "Year"
+  ],
+  "short_description": "Contact information annotations, such as: Person name, City, Country, Address, PhoneNr, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Carrer del Pintor Fortuny, 28 Barcelona",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Badalona, Madrid, Buenos Aires",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Alfaguara, Mercadona, Endesa",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Espa\u00f1a, Jap\u00f3n, M\u00e9xico",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Person",
+      "sample": "Oriol Cardona",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Benavente",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Antonio",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+34 612 345 678",
+      "desc": "A phone number"
+    },
+    {
+      "concept": "Position",
+      "sample": "presidente",
+      "desc": "Subclass of PersonMention. The professional ocupation of a person."
+    },
+    {
+      "concept": "Street",
+      "sample": "Avenida de la Cruz Roja",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    }
+  ],
+  "instances": true
+}

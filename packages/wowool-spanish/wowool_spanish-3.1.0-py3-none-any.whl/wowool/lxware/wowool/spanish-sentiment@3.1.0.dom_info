@@ -1,0 +1,62 @@
+{
+  "dependencies": [
+    "wowool/spanish-syntax@3.1.0"
+  ],
+  "concepts": [
+    "PositiveSentiment",
+    "NegativeSentiment",
+    "SentimentObject",
+    "Gratitude",
+    "AdjPos",
+    "AdjNeg",
+    "NounNeg",
+    "NounPos",
+    "VerbNeg",
+    "VerbPos",
+    "ExprNeg",
+    "ExprPos"
+  ],
+  "short_description": "Sentiment annotations, such as: PositiveSentiment, NegativeSentiment, as well as smaller pieces like AdjPos, AdjNeg, etc.",
+  "examples": [
+    {
+      "concept": "PositiveSentiment",
+      "sample": "casas acogedoras para escapar este oto\u00f1o, tecnolog\u00edas innovadoras",
+      "desc": "A positive opinion."
+    },
+    {
+      "concept": "NegativeSentiment",
+      "sample": "software malicioso, los productos estaban contaminados",
+      "desc": "A negative opinion."
+    },
+    {
+      "concept": "AdjPos",
+      "sample": "id\u00f3nea, maravilloso",
+      "desc": "Positive adjective."
+    },
+    {
+      "concept": "AdjNeg",
+      "sample": "moroso, ag\u00f3nico, macabro",
+      "desc": "Negative adjective."
+    },
+    {
+      "concept": "NounPos",
+      "sample": "amistad, prestigio",
+      "desc": "Positive Noun."
+    },
+    {
+      "concept": "NounNeg",
+      "sample": "conflicto, corrupci\u00f3n, acoso ",
+      "desc": "Negative Noun."
+    },
+    {
+      "concept": "ExprPos",
+      "sample": "cerrar filas, llegar a un acuerdo",
+      "desc": "Positive expression."
+    },
+    {
+      "concept": "ExprNeg",
+      "sample": "est\u00e1 en peligro, no pod\u00edan con su alman",
+      "desc": "Negative expression."
+    }
+  ]
+}
