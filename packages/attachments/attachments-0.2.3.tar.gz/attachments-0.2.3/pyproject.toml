@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "attachments"
+version = "0.2.3"
+authors = [
+  { name="Maxim Rivest", email="mrive052@gmail.com" },
+]
+description = "A Python library to handle various file types for LLMs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"  # Using simple string for SPDX identifier
+classifiers = [
+    "Programming Language :: Python :: 3",
+    # "License :: OSI Approved :: MIT License", # Replaced by SPDX
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "Pillow",
+    "python-dotenv",
+    "pytest",
+    "beautifulsoup4",
+    "html2text",
+    "markdownify",
+    "lxml",
+    "python-magic",
+    "mammoth",
+    "PyMuPDF",
+    "python-pptx",
+    "python-docx",
+    "odfpy",
+    "pillow-heif",
+    "pydub",
+    "SpeechRecognition",
+    "markitdown[all]>=0.1.1",
+    "pypdfium2", # For office_contact_sheet.py PDF rasterisation
+    # "pywin32", # Optional: Only needed for MS Office automation on Windows
+    # System dependencies (not installable via pip):
+    #   - LibreOffice/soffice (for CLI conversion)
+    #   - unoconv (for CLI conversion)
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/attachments" # Placeholder, user should update
+"Bug Tracker" = "https://github.com/yourusername/attachments/issues" # Placeholder, user should update
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "flake8",
+    "mypy",
+    "black",
+    "filelock",
+]
+
+[tool.setuptools]
+# packages = ["attachments"] # We'll let find discover it
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+norecursedirs = ["mrplay", ".venv", "dist", "build", "attachments.egg-info"]
