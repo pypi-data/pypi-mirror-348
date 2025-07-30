@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: function_debugger
+Version: 2.0
+Summary: debugger
+Author-email: howShouldIChosseMyUsername <trademark2179@gmail.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Introducing function debugger!
+
+## form
+```
+logger(text(optional))
+```
+If you use this function in your function,<br>
+It will print({your function name} + text(optional))<br>
+And It will return {your function name}!<br>
+Example :
+```
+def test() :
+    logger()
+
+test()
+>>>>>>>>>>>>>
+print -> test
+return -> test
+```
+And the other example is...
+```
+def test2() :
+    logger("is used logger function")
+
+test2()
+>>>>>>>>>>>>>
+print -> test2 is used logger function
+return -> test2
+```
