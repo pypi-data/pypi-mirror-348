@@ -1,0 +1,12 @@
+include MANIFEST.in
+include LICENCE.txt
+include README.rst
+
+recursive-include djangocms_lotus/templates *
+recursive-include djangocms_lotus/static *
+recursive-include djangocms_lotus/locale *
+
+recursive-exclude tests *
+recursive-exclude sandbox *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

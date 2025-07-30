@@ -1,0 +1,36 @@
+.djangocms-admin-style.model-articleflux #content > h2 {
+  display: none;
+}
+.djangocms-admin-style #articleflux_form .field-template,
+.djangocms-admin-style #articleflux_form .field-length {
+  float: none;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container {
+  display: flex;
+  flex-direction: column;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container label,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container label {
+  order: 1;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container .selector,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container .selector {
+  order: 2;
+  width: 100%;
+  max-width: 1024px;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container .selector h2,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container .selector h2 {
+  text-transform: none;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container .selector .selector-chooser,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container .selector .selector-chooser {
+  border-bottom: 0;
+}
+.djangocms-admin-style #articleflux_form .field-from_categories .flex-container .selector select[multiple] option,
+.djangocms-admin-style #articleflux_form .field-from_tags .flex-container .selector select[multiple] option {
+  width: auto;
+}
+
+/*# sourceMappingURL=article-flux.css.map */

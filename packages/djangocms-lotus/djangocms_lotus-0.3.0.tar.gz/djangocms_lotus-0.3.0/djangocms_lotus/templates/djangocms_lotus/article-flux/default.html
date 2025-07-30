@@ -1,0 +1,39 @@
+{% load i18n %}{% spaceless %}
+<div class="article-flux-plugin mb-4">
+    <h3 class="article-flux-plugin__title">{{ instance.title }}</h3>
+
+    {% with categories=from_categories %}
+        {% if categories %}
+            <div class="article-flux-plugin__categories hstack gap-2 bg-primary-subtle text-primary-emphasis py-1 px-2 rounded mb-2">
+                <small><b>{% translate "Categories" %}</b></small>
+                {% for category in categories %}
+                    <a href="{{ category.get_absolute_url }}" class="article-flux-plugin__category">
+                        <span class="badge text-bg-info">{{ category.title }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with tags=from_tags %}
+        {% if tags %}
+            <div class="article-flux-plugin__tags hstack gap-2 bg-secondary-subtle text-secondary-emphasis py-1 px-2 rounded mb-2">
+                <small><b>{% translate "Tags" %}</b></small>
+                {% for tag in tags %}
+                    <a href="{% url "lotus:tag-detail" tag.slug %}" class="article-flux-plugin__tag">
+                        <span class="badge text-bg-secondary">{{ tag.name }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="article-flux-plugin__articles row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for article in articles %}
+            <div class="article-flux-plugin__article col">
+                {% include "lotus/article/partials/item.html" with article_object=article from="article-list" %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endspaceless %}
