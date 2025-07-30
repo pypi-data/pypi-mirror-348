@@ -1,0 +1,51 @@
+"""
+此模块负责加载配置文件、定义全局路径常量，以及提供对配置参数的访问。
+
+PROJECT_ROOT: 项目根目录路径。
+CONFIG_DIR: 配置文件目录路径。
+RESOURCES_DIR: 资源文件目录路径。
+DATA_DIR: 数据文件目录路径。
+ENABLE_CPU_MONITOR: 是否启用CPU监控。
+ENABLE_GPU_MONITOR: 是否启用GPU监控。
+USE_ACTUAL_CPU_POWER: 是否使用实际CPU功率。
+USE_ACTUAL_GPU_POWER: 是否使用实际GPU功率。
+MEASUREMENT_INTERVAL: 测量间隔时间。
+CPU_POWER_BIAS: CPU功率偏移量。
+CPU_POWER_COEFFICIENT: CPU功率系数。
+GPU_POWER_BIAS: GPU功率偏移量。
+GPU_POWER_COEFFICIENT: GPU功率系数。
+"""
+
+from .globals import (
+    # 路径
+    PACKAGE_ROOT, 
+    DATA_DIR,
+    CONFIG_DIR,
+    # 能源追踪配置
+    ENABLE_CPU_MONITOR,
+    ENABLE_GPU_MONITOR,
+    USE_ACTUAL_CPU_POWER,
+    USE_ACTUAL_GPU_POWER,
+    MEASUREMENT_INTERVAL,
+    CPU_POWER_BIAS,
+    CPU_POWER_COEFFICIENT,
+    GPU_POWER_BIAS,
+    GPU_POWER_COEFFICIENT
+)
+
+__all__ = [
+    # 路径
+    'PACKAGE_ROOT', 
+    'CONFIG_DIR', 
+    'DATA_DIR',
+    # 能源追踪配置
+    'ENABLE_CPU_MONITOR',
+    'ENABLE_GPU_MONITOR',
+    'USE_ACTUAL_CPU_POWER',
+    'USE_ACTUAL_GPU_POWER',
+    'MEASUREMENT_INTERVAL',
+    'CPU_POWER_BIAS',
+    'CPU_POWER_COEFFICIENT',
+    'GPU_POWER_BIAS',
+    'GPU_POWER_COEFFICIENT'
+]
