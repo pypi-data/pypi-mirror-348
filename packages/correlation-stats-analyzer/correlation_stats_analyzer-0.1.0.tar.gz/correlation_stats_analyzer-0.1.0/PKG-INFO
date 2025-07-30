@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: correlation_stats_analyzer
+Version: 0.1.0
+Summary: A simple tool to compute and interpret Pearson correlation coefficients.
+Author: Md. Ismiel Hossen Abir
+Author-email: ismielabir1971@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: License
+
+# ðŸ“Š correlation_stats_analyzer
+
+A lightweight Python package to compute and interpret the strength and direction of correlation between two numerical datasets using the Pearson Correlation Coefficient.
+
+---
+
+## ðŸš€ Features
+
+- âœ… Compute the Pearson correlation coefficient between two numeric lists.
+- âœ… Interpret the result in terms of strength and direction (e.g., "Strong Positive").
+- âœ… Zero dependencies â€“ works with standard Python only.
+- âœ… Designed for data science beginners, educators, and small-scale analysis scripts.
+
+---
+
+## ðŸ“¦ Installation
+
+```bash
+pip install correlation_stats_analyzer
+```
+
+## ðŸ§ª Usage Example
+
+```bash
+import correlation_stats_analyzer as csa
+
+x = [10, 20, 30, 40, 50]
+y = [12, 22, 29, 41, 52]
+
+r = csa.correlation_r(x, y)
+
+strength, direction = csa.interpret_r(r)
+
+print(f"Pearson r: {r:.4f}")
+print(f"Strength: {strength}, Direction: {direction}")
+```
