@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project.scripts]
+xctools = "xctools_kamaalio:cli.cli"
+
+
+[project]
+name = "xctools_kamaalio"
+version = "0.5.0"
+authors = [{ name = "Kamaal Farah", email = "kamaal.f1@gmail.com" }]
+description = "A package to help deal with Xcode projects."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["click >= 8.1.6", "kamaalpy >= 0.1.0"]
+license = { file = "LICENSE" }
+
+
+[project.urls]
+"Homepage" = "https://github.com/Kamaalio/XcTools"
+"Bug Tracker" = "https://github.com/Kamaalio/XcTools/issues"
