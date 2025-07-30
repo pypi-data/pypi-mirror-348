@@ -1,0 +1,27 @@
+[project]
+name = "pagepilotft"
+version = "0.1.0"
+description = "Dynamic path library for Flet apps"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+    { name = "Héctor", email = "danielramirezr27@gmail.com" }
+]
+license = { text = "MIT" }
+keywords = ["testing", "logging", "example"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "flet>=0.27.6",
+    "repath>=0.1.2",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
