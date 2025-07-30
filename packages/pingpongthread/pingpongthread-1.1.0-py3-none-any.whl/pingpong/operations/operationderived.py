@@ -1,0 +1,18 @@
+from pingpong.protocols.generateprotocol import GenerateProtocol
+from pingpong.operations.stepper.stepperoperation import StepperOperation
+from pingpong.operations.servo.servooperation import ServoOperation
+from pingpong.operations.ledmatrix.ledmatrixoperation import LEDMatrixOperation
+from pingpong.operations.cube.cubeoperation import CubeOperation
+from pingpong.operations.music.musicoperation import MusicOperation
+
+class OperationDerived(StepperOperation, ServoOperation, LEDMatrixOperation, CubeOperation, MusicOperation):
+    def __init__(self, number, group_id, robot_status, start_check, write):
+        self._GenerateProtocolInstance = GenerateProtocol(number, group_id)
+        self._robot_status = robot_status
+        self._start_check_copy = start_check
+        self._write_copy = write
+        StepperOperation.__init__(self, number, group_id, robot_status, start_check, write)
+        ServoOperation.__init__(self, number, group_id, robot_status, start_check, write)
+        LEDMatrixOperation.__init__(self, number, group_id, robot_status, start_check, write)
+        CubeOperation.__init__(self, number, group_id, robot_status, start_check, write)
+        MusicOperation.__init__(self, number, group_id, robot_status, start_check, write)
