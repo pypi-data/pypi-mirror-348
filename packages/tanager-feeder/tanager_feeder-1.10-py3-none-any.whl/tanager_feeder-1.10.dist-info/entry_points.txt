@@ -1,0 +1,5 @@
+[console_scripts]
+asd-feeder = asd_feeder.__main__:main
+asd-watchdog = asd_feeder.asd_watchdog:main
+pi-feeder = pi_feeder.pi_controller:main
+tanager-feeder = tanager_feeder.__main__:main
