@@ -1,0 +1,167 @@
+# rpsa-sdk
+
+A minimal, easy-to-use SDK for building Rock-Paper-Scissors strategies in Python. It provides:
+
+- A base `Strategy` interface you can subclass to ensure correct method signatures.
+- Utility helper functions for common patterns (random play, countering, frequency analysis).
+- Optional ML-model integration so you can plug in your own predictive model.
+
+<hr />
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Getting Started](#getting-started)
+3. [Core Interface: `Strategy`](#core-interface-strategy)
+4. [Utility Helpers](#utility-helpers)
+5. [Writing Your Own Strategy](#writing-your-own-strategy)
+6. [Example: `FrequencyStrategy`](#example-frequencystrategy)
+7. [Running in a Contest](#running-in-a-contest)
+
+---
+
+## Installation
+
+Install directly from [PyPI](https://pypi.org/project/rpsa-sdk/):
+
+```bash
+pip install rpsa-sdk
+```
+
+## Getting Started
+
+Import the SDK components you need:
+
+```python
+from rpsa_sdk.strategy import Strategy
+from rpsa_sdk.helpers import random_move, counter_move, most_common
+```
+
+- **`Strategy`**  
+  An abstract base class. Subclass this and implement two methods:
+
+  - **`play()`**: Decide and return your next move (`"rock"`, `"paper"`, or `"scissors"`).
+  - **`handle_moves()`**: Update your internal state after each round, given your own move and the opponent’s move.
+
+- **Helpers**  
+  Utility functions to speed up development:
+  - **`random_move()`** — returns a uniformly random choice of rock, paper, or scissors.
+  - **`counter_move(x)`** — returns the move that defeats the given move `x`.
+  - **`most_common(history, idx)`** — from a list of `(own_move, opponent_move)` tuples, finds the most frequent move at position `idx` (use 0 or 1).
+
+## Core Interface: `Strategy`
+
+All custom strategies must subclass `Strategy`:
+
+```python
+class Strategy(ABC):
+    """
+    Base class for RPS strategies.
+
+    Attributes:
+        name: ClassVar[str]  # Unique strategy identifier
+        model: Any           # Optional ML artifact
+    """
+
+    name: ClassVar[str]
+    model: Any
+
+    def __init__(self, model: Any = None):
+        self.model = model
+
+    @abstractmethod
+    def play(self) -> Literal["rock", "paper", "scissors"]:
+        """Return the next move."""
+        ...
+
+    @abstractmethod
+    def handle_moves(self, own_move: OPTIONS, opponent_move: OPTIONS) -> None:
+        """Update internal state after each round."""
+        ...
+```
+
+**Why?**
+
+- Enforces a consistent API for contest runners.
+- Guarantees your strategy will be called in the expected way.
+
+## Utility Helpers
+
+Located in `rpsa_sdk/helpers.py`, these functions speed up development:
+
+| Function                    | Description                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------- |
+| `random_move()`             | Returns a uniformly random choice of `"rock"`, `"paper"`, or `"scissors"`.                         |
+| `counter_move(x)`           | Returns the move that defeats the given move `x`.                                                  |
+| `most_common(history, idx)` | From a list of `(own_move, opponent_move)` tuples, finds the most frequent move at position `idx`. |
+
+```python
+from rpsa_sdk.helpers import random_move, counter_move, most_common
+```
+
+Use these helpers to quickly prototype or augment your own strategy logic.
+
+## Writing Your Own Strategy
+
+- **Subclass** `Strategy` and give your class a unique `name` to identify it.
+
+```python
+class MyStrategy(Strategy):
+    name = "MyUniqueStrategy_v1"
+    ...
+```
+
+- **Implement** the required methods:
+  - **`play()`**: decide and return your next move.
+  - **`handle_moves()`**: update internal state after each round based on your and the opponent’s moves.
+- **Add optional parameters** in your constructor (for example, history size or custom settings).
+- **Expose** your strategy by assigning your class to a top-level `strategy` variable so the contest harness can import and instantiate it.
+
+```python
+strategy = MyStrategy
+```
+
+## Full Example: FrequencyStrategy
+
+A ready-to-use strategy that counters the opponent’s most frequent recent move:
+
+```python
+from rpsa_sdk.strategy import Strategy
+from rpsa_sdk.helpers import counter_move, most_common
+
+class FrequencyStrategy(Strategy):
+    name = "FrequencyStrategy_v1"
+
+    def __init__(self, model=None, max_history=50):
+        super().__init__(model)
+        self.history = []
+        self.max_history = max_history
+
+    def play(self):
+        if not self.history:
+            return "rock"
+        mc = most_common(self.history, idx=1)
+        return counter_move(mc)
+
+    def handle_moves(self, own_move, opponent_move):
+        self.history.append((own_move, opponent_move))
+        if len(self.history) > self.max_history:
+            self.history.pop(0)
+
+# The contest runner will import this:
+strategy = FrequencyStrategy
+```
+
+## Running in a Contest
+
+1. Place your strategy file into the [code mirror](https://rockpapercode.onespire.hu/portal/upload).
+
+2. Ensure it exposes a top-level `strategy` variable pointing to your class.
+
+3. Upload you ML model (if there are any), and use it in your `model` variable
+
+4. The contest harness will:
+
+   - Instantiate with `model=None` (or load your uploaded model).
+
+   - Call `play()` each round and then `handle_moves(...)`.
