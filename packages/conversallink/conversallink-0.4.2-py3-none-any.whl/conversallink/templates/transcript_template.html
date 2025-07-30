@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        :root {
+            --primary-color: #F57200;
+            --primary-light: #FF8C24;
+            --primary-dark: #D65D00;
+            --accent-color: #ec4899;
+            --bg-color: #f5f5f5;
+            --bg-alt: #ebebeb;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --highlight: #fff3e0;
+            --highlight-strong: #ffe0b2;
+            --note-color: #FF8C24;
+            --note-bg: #fff8f0;
+            --radius-sm: 0.25rem;
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --transition: all 0.2s ease;
+            --max-width: 1000px;
+            --header-height: 64px;
+            --player-height: 80px;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #F57200;
+            --primary-light: #FF8C24;
+            --primary-dark: #D65D00;
+            --accent-color: #ec4899;
+            --bg-color: #181818;
+            --bg-alt: #222222;
+            --card-bg: #242424;
+            --text-color: #f9fafb;
+            --text-light: #9ca3af;
+            --border-color: #333333;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+            --highlight: #4d2800;
+            --highlight-strong: #663300;
+            --note-color: #FF8C24;
+            --note-bg: #2c1600;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            padding-top: 1rem;
+            padding-bottom: calc(var(--player-height) + 2rem);
+        }
+
+        header {
+            position: sticky;
+            top: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 50px;
+            height: var(--header-height);
+            width: 90%;
+            max-width: calc(var(--max-width) - 2rem);
+            margin: 0 auto;
+            z-index: 100;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            color: white;
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-alt);
+            color: var(--primary-color);
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem 1.5rem 2rem 1.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            color: var(--text-light);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text-color);
+            border-bottom-color: var(--border-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .note-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--note-color);
+            transition: var(--transition);
+        }
+
+        .note-card:hover {
+            background-color: var(--note-bg);
+            transform: translateY(-2px);
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .note-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .timestamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-family: monospace;
+            color: var(--primary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            background-color: rgba(99, 102, 241, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .timestamp:hover {
+            background-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .note-context {
+            color: var(--text-light);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .transcript-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .transcript-segment {
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            background-color: var(--card-bg);
+        }
+
+        .transcript-segment:hover {
+            background-color: var(--bg-alt);
+            border-color: var(--border-color);
+        }
+
+        .transcript-segment.active {
+            background-color: var(--highlight);
+            border-color: var(--highlight-strong);
+        }
+
+        .segment-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .segment-time {
+            font-family: monospace;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .segment-text {
+            line-height: 1.7;
+        }
+
+        .player-container {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: calc(var(--max-width) - 2rem);
+            background-color: var(--card-bg);
+            border-radius: 50px;
+            padding: 1rem 0;
+            z-index: 100;
+            transition: var(--transition);
+            height: var(--player-height);
+            border: 1px solid var(--border-color);
+        }
+
+        .player-wrapper {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .player-time {
+            font-family: monospace;
+            min-width: 80px;
+            color: var(--text-light);
+        }
+
+        .player-controls {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .play-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .play-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .play-button.pulse {
+            animation: pulse-animation 1s ease-in-out;
+        }
+        
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: var(--bg-alt);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        [data-theme="dark"] .progress-container {
+            background-color: #333333;
+        }
+        
+        [data-theme="dark"] .transcript-segment {
+            border-color: var(--border-color);
+        }
+        
+        [data-theme="dark"] .transcript-segment:hover {
+            background-color: #2a2a2a;
+        }
+        
+        [data-theme="dark"] .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+        }
+
+        .playback-rate {
+            padding: 0.35rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--bg-alt);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .playback-rate:hover {
+            border-color: var(--primary-light);
+        }
+
+
+
+        .footer {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 3rem;
+            padding-bottom: calc(var(--player-height) + 2rem);
+        }
+
+        @media (max-width: 768px) {
+            .search-input {
+                width: 160px;
+            }
+
+            .player-wrapper {
+                flex-wrap: wrap;
+            }
+
+            .player-time {
+                order: 1;
+                min-width: 60px;
+            }
+
+            .player-controls {
+                order: 3;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .playback-rate {
+                order: 2;
+            }
+
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 644 644" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M490.551 0C583.629 0 644.004 60.375 644.004 153.453V490.547C644.004 583.625 583.629 644 490.551 644H153.457C60.3789 644 0.00390625 583.625 0.00390625 490.547V153.453C0.00390625 60.375 60.3789 0 153.457 0H490.551Z" fill="url(#paint0_linear_59_20)"/>
+                        <path d="M174.922 428.835C161.003 428.835 147.935 426.278 135.72 421.165C123.505 415.91 112.782 408.737 103.549 399.647C94.317 390.556 87.0732 379.975 81.8179 367.902C76.7046 355.829 74.1479 342.904 74.1479 329.126C74.1479 315.349 76.7046 302.423 81.8179 290.35C87.0732 278.277 94.317 267.696 103.549 258.605C112.782 249.515 123.505 242.413 135.72 237.3C147.935 232.045 161.003 229.417 174.922 229.417C187.989 229.417 200.275 231.69 211.78 236.235C223.427 240.78 233.725 247.172 242.673 255.41L233.725 292.481C227.901 282.823 219.876 274.94 209.65 268.832C199.565 262.582 188.202 259.458 175.561 259.458C162.778 259.458 151.202 262.582 140.834 268.832C130.607 275.082 122.44 283.462 116.332 293.972C110.367 304.483 107.384 316.201 107.384 329.126C107.384 341.909 110.367 353.627 116.332 364.28C122.44 374.79 130.607 383.171 140.834 389.42C151.202 395.67 162.778 398.794 175.561 398.794C188.202 398.794 199.565 395.67 209.65 389.42C219.876 383.171 227.901 375.288 233.725 365.771L242.673 402.842C233.725 410.938 223.427 417.33 211.78 422.017C200.275 426.562 187.989 428.835 174.922 428.835ZM274.105 425V233.252H306.063V396.877H368.061V425H274.105ZM395.858 425V297.168H425.899V425H395.858ZM410.985 276.502C406.014 276.502 401.824 274.798 398.415 271.389C395.006 267.838 393.302 263.648 393.302 258.819C393.302 253.705 395.006 249.515 398.415 246.248C401.966 242.84 406.156 241.135 410.985 241.135C416.098 241.135 420.288 242.84 423.555 246.248C426.964 249.657 428.668 253.847 428.668 258.819C428.668 263.79 426.964 267.98 423.555 271.389C420.146 274.798 415.956 276.502 410.985 276.502ZM544.816 425L490.487 354.692L535.228 297.168H568.465L524.576 352.136L581.248 425H544.816ZM460.66 425V220.469H490.7V425H460.66Z" fill="url(#paint1_linear_59_20)"/>
+                        <circle cx="411.024" cy="258.582" r="17.9945" fill="#F57300"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_59_20" x1="322.004" y1="0" x2="322.004" y2="644" gradientUnits="userSpaceOnUse">
+                                <stop/>
+                                <stop offset="1" stop-color="#0F0F0F"/>
+                            </linearGradient>
+                            <linearGradient id="paint1_linear_59_20" x1="322.062" y1="234.777" x2="321.454" y2="526.999" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="white"/>
+                                <stop offset="1" stop-color="#999999"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span>ConversalLink</span>
+            </div>
+            <div class="header-actions">
+
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon" id="theme-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <div class="tab active" data-tab="notes">Notes with Context</div>
+            <div class="tab" data-tab="transcript">Full Transcript</div>
+        </div>
+
+        <div class="tab-content active" id="notes-content">
+            <div class="section-title">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                Notes with Context
+            </div>
+            
+            
+            {{notes_content}}
+        </div>
+
+        <div class="tab-content" id="transcript-content">
+            <div class="section-title">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Full Transcript
+            </div>
+            
+            
+            {{transcript_content}}
+        </div>
+    </main>
+
+    <div class="player-container" id="player-container">
+        <div class="player-wrapper">
+            <div class="player-time" id="current-time">00:00:00</div>
+            <div class="player-controls">
+                <div class="audio-controls">
+                    <button class="play-button" id="play-button" aria-label="Play/Pause">
+                        <svg class="icon" id="play-icon" viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <svg class="icon hidden" id="pause-icon" viewBox="0 0 24 24">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </button>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <select class="playback-rate" id="playback-rate">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="footer">
+        Generated by ConversalLink v{{version}} | {{filename}}
+    </div>
+
+    <audio id="audio-player" src="{{audio_path}}" style="display: none;"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const player = document.getElementById('audio-player');
+            const playButton = document.getElementById('play-button');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-container');
+            const currentTimeDisplay = document.getElementById('current-time');
+            const playbackRateSelect = document.getElementById('playback-rate');
+
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const timestamps = document.querySelectorAll('.timestamp');
+            const segments = document.querySelectorAll('.transcript-segment');
+
+            
+            function setTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                setTheme(true);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                setTheme(!isDark);
+            });
+
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const tabId = tab.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+
+            
+            function formatTime(seconds) {
+                const h = Math.floor(seconds / 3600);
+                const m = Math.floor((seconds % 3600) / 60);
+                const s = Math.floor(seconds % 60);
+                return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+
+            
+            playButton.addEventListener('click', () => {
+                if (player.paused) {
+                    player.play();
+                } else {
+                    player.pause();
+                }
+            });
+
+            player.addEventListener('play', () => {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                playButton.setAttribute('aria-label', 'Pause');
+            });
+
+            player.addEventListener('pause', () => {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                playButton.setAttribute('aria-label', 'Play');
+            });
+
+            player.addEventListener('timeupdate', () => {
+                const percent = (player.currentTime / player.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+                currentTimeDisplay.textContent = formatTime(player.currentTime);
+                
+                
+                segments.forEach(segment => {
+                    const start = parseFloat(segment.dataset.start);
+                    const end = parseFloat(segment.dataset.end);
+                    
+                    if (player.currentTime >= start && player.currentTime < end) {
+                        segment.classList.add('active');
+                        
+                        
+                        if (!isElementInViewport(segment) && document.getElementById('transcript-content').classList.contains('active')) {
+                            segment.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    } else {
+                        segment.classList.remove('active');
+                    }
+                });
+            });
+
+            
+            let isDragging = false;
+            
+            progressContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateProgressPosition(e);
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    updateProgressPosition(e);
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            progressContainer.addEventListener('click', (e) => {
+                updateProgressPosition(e);
+            });
+            
+            function updateProgressPosition(e) {
+                const rect = progressContainer.getBoundingClientRect();
+                let pos = (e.clientX - rect.left) / rect.width;
+                pos = Math.max(0, Math.min(1, pos)); 
+                player.currentTime = pos * player.duration;
+            }
+
+            
+            playbackRateSelect.addEventListener('change', () => {
+                player.playbackRate = parseFloat(playbackRateSelect.value);
+            });
+
+            
+            timestamps.forEach(timestamp => {
+                timestamp.addEventListener('click', () => {
+                    const time = parseFloat(timestamp.dataset.time);
+                    player.currentTime = time;
+                    player.play().catch(e => {
+                        console.log('Autoplay prevented:', e);
+                        
+                        playButton.classList.add('pulse');
+                        setTimeout(() => playButton.classList.remove('pulse'), 1000);
+                    });
+                });
+            });
+
+
+
+            
+            function handleHashChange() {
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#t=')) {
+                    const time = parseFloat(hash.substring(3));
+                    if (!isNaN(time)) {
+                        setTimeout(() => {
+                            player.currentTime = time;
+                            player.play().catch(e => console.log('Autoplay prevented:', e));
+                        }, 100);
+                    }
+                }
+            }
+
+            
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                const headerHeight = 80; 
+                const playerHeight = 100; 
+                return (
+                    rect.top >= headerHeight &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight - playerHeight || document.documentElement.clientHeight - playerHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            
+            window.addEventListener('hashchange', handleHashChange);
+            
+            
+            if (window.location.hash) {
+                handleHashChange();
+            }
+
+            
+            document.addEventListener('keydown', (e) => {
+                
+                if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    if (player.paused) {
+                        player.play();
+                    } else {
+                        player.pause();
+                    }
+                }
+                
+                
+                if (e.code === 'ArrowLeft' && e.target.tagName !== 'INPUT') {
+                    player.currentTime = Math.max(0, player.currentTime - 5);
+                }
+                
+                
+                if (e.code === 'ArrowRight' && e.target.tagName !== 'INPUT') {
+                    player.currentTime = Math.min(player.duration, player.currentTime + 5);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
