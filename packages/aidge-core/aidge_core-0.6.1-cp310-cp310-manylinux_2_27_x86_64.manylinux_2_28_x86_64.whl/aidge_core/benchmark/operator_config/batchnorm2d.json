@@ -1,0 +1,80 @@
+{
+	"operator": "BatchNormalization",
+	"opset_version": 21,
+	"initializer_rank": 5,
+    "test_meta_data": {
+        "multiple_batchs": false
+    },
+	"base_configuration": {
+		"input_shapes": [
+			["input_0", [1, 10, 200, 200]],
+			["scale_1", [10]],
+			["bias_2", [10]],
+            ["mean_3", [10]],
+            ["var_4", [10]]
+		],
+		"attributes": {
+			"epsilon": 1e-05,
+			"momentum": 0.9,
+			"training_mode": 0
+		}
+	},
+	"test_configuration": {
+		"main_parameters": {
+			"feature_map_size": [
+				10,100,500
+			],
+            "channel_size": [
+                1,10,100
+            ]
+		},
+		"other_parameters": {
+			"feature_map_size": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 10, 10]]
+					]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 100, 100]]
+					]
+				},
+				"500": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 500, 500]]
+					]
+				}
+			},
+            "channel_size": {
+                "1": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 1, 200, 200]],
+                        ["scale_1", [1]],
+                        ["bias_2", [1]],
+                        ["mean_3", [1]],
+                        ["var_4", [1]]
+					]
+				},
+                "10": {
+					"attributes": {},
+					"input_shapes": []
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 100, 200, 200]],
+                        ["scale_1", [100]],
+                        ["bias_2", [100]],
+                        ["mean_3", [100]],
+                        ["var_4", [100]]
+					]
+				}
+            }
+		}
+	}
+}
