@@ -1,0 +1,16 @@
+# streamlit-math-keyboard/MANIFEST.in
+
+# Include the entire frontend build directory
+graft streamlit_math_keyboard/frontend/build
+
+# Exclude frontend source files and node_modules from the package
+prune streamlit_math_keyboard/frontend/src
+prune streamlit_math_keyboard/frontend/public
+prune streamlit_math_keyboard/frontend/node_modules
+exclude streamlit_math_keyboard/frontend/package.json
+exclude streamlit_math_keyboard/frontend/package-lock.json
+exclude streamlit_math_keyboard/frontend/vite.config.js
+# Add any other frontend dev files you want to exclude
+
+# Include your license file if you have one       # remove or keep if you add a LICENSE.txt file
+include README.md         # ensure your README gets into the sdist
