@@ -1,0 +1,25 @@
+[project]
+name = "cargo-aidoc"
+version = "0.1.3"
+description = "`cargo-aidoc` is a Python script that leverages Large Language Models (LLMs) to automatically generate documentation comments for Rust code items like functions, structs, enums, etc."
+readme = "README.md"
+requires-python = "==3.11.12"
+dependencies = [
+    "click>=8.1.8",
+    "mirascope[openai]>=1.22.3",
+    "mirascope[anthropic]>=1.22.3",
+    "mirascope[google]>=1.22.3",
+    "mirascope[groq]>=1.22.3",
+    "mirascope[xai]>=1.22.3",
+    "mirascope[cohere]>=1.22.3",
+    "mirascope[litellm]>=1.22.3",
+    "mirascope[azure]>=1.22.3",
+    "mirascope[bedrock]>=1.22.3",
+    "termcolor>=3.0.1",
+    "toml>=0.10.2",
+    "tree-sitter==0.24.0",
+    "tree-sitter-rust==0.23.0",
+]
+
+[project.scripts]
+cargo-aidoc = "main:cargo_main"
