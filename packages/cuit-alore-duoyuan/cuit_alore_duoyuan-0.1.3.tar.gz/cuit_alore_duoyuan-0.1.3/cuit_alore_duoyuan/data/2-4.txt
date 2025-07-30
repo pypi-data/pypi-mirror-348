@@ -1,0 +1,22 @@
+import numpy as np
+from sklearn.cluster import AgglomerativeClustering
+
+temp = np.array([float(i) for i in input().split(' ')])
+n_samples, n_features = np.array([int(i) for i in input().split(' ')])
+n_clusters = int(input())
+X =[]
+for i in range(n_samples):
+    y = []
+    for j in range(n_features):
+        y.append(temp[n_features*i+j])
+    X.append(y)
+X1 =  np.array(X)
+
+hc=AgglomerativeClustering(n_clusters=n_clusters, affinity='correlation', \
+                           linkage='complete')
+hc.fit(X1.T)
+hcl=hc.labels_
+if hcl[0]==hcl[2]:
+    print("香气和酸质属于一类。")
+else:
+    print("香气和酸质不属于一类。")
