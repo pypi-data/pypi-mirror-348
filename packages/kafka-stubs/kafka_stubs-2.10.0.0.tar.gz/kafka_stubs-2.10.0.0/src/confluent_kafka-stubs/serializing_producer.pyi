@@ -1,0 +1,3 @@
+from confluent_kafka.cimpl import Producer
+
+class SerializingProducer(Producer): ...
