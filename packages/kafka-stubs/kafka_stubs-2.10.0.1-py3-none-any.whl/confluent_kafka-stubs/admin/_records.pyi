@@ -1,0 +1,3 @@
+class DeletedRecords:
+    low_watermark: int
+    def __init__(self, low_watermark: int) -> None: ...
