@@ -1,0 +1,215 @@
+name: CI
+
+on:
+  merge_group:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-24.04, macos-13, windows-2022]
+        python-version: ["3.13"]
+        include:
+          - os: ubuntu-24.04
+            name: Linux
+          - os: macos-13
+            name: macOS
+          - os: windows-2022
+            name: Windows
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry==2.1.2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
+
+      - name: Install dependencies
+        run: |
+          # poetry default git client `dulwich` doesn't work properly with git urls
+          # to dependencies, which we use
+          poetry config system-git-client true
+
+          FINECODE_SH_TEMPLATE="poetry run python"
+
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+
+          pushd tests/list_ws/backend
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+          popd
+
+          pushd tests/list_ws/cli_tool
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+          popd
+
+          pushd tests/list_ws/ui_app
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+          popd
+
+          pushd tests/nested_package/pyback
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+          popd
+
+          pushd finecode_extension_api
+          poetry install
+          echo $FINECODE_SH_TEMPLATE > finecode.sh
+          popd
+        shell: bash
+
+      # - name: Lint
+      #   run: |
+      #     poetry run python -m finecode run lint
+      #   shell: bash
+
+      - name: Build finecode_extension_api
+        if: runner.os == 'Linux'
+        run: |
+          pushd finecode_extension_api
+          poetry build
+          popd
+        shell: bash
+      
+      - name: Build fine_python_ast
+        if: runner.os == 'Linux'
+        run: |
+          pushd extensions/fine_python_ast
+          poetry build
+          popd
+        shell: bash
+
+      - name: Build fine_python_black
+        if: runner.os == 'Linux'
+        run: |
+          pushd extensions/fine_python_black
+          poetry build
+          popd
+        shell: bash
+
+      - name: Build fine_python_isort
+        if: runner.os == 'Linux'
+        run: |
+          pushd extensions/fine_python_isort
+          poetry build
+          popd
+        shell: bash
+
+      - name: Build fine_python_mypy
+        if: runner.os == 'Linux'
+        run: |
+          pushd extensions/fine_python_mypy
+          poetry build
+          popd
+        shell: bash
+
+      - name: Build fine_python_format
+        if: runner.os == 'Linux'
+        run: |
+          pushd presets/fine_python_format
+          poetry build
+          popd
+        shell: bash
+
+      - name: Build finecode
+        if: runner.os == 'Linux'
+        run: |
+          python -m venv .dev_workspace_venv
+          source .dev_workspace_venv/bin/activate
+          python -m pip install --upgrade pip==25.1.1
+          python -m pip install --group="dev_workspace"
+          python -m build
+        shell: bash
+
+      - name: Collect all distribution packages
+        if: runner.os == 'Linux'
+        run: |
+          mkdir -p dist
+          cp finecode_extension_api/dist/* dist/
+          cp extensions/fine_python_ast/dist/* dist/
+          cp extensions/fine_python_black/dist/* dist/
+          cp extensions/fine_python_isort/dist/* dist/
+          cp extensions/fine_python_mypy/dist/* dist/
+          # cp presets/fine_python_format/dist/* dist/
+        shell: bash
+
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux'
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      # - name: Run unit tests
+      #   if: ${{ !cancelled() }}
+      #   run: |
+      #     poetry run python -m pytest tests/
+      #   shell: bash
+
+  publish-to-pypi:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+    - build
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/finecode
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+    - build
+    runs-on: ubuntu-24.04
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/finecode
+
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+        verbose: true
+        # temporary skip existing packages, because not always all packages at once
+        # are updated.
+        # TODO: implement publishing only of changed in finecode
+        skip-existing: true
