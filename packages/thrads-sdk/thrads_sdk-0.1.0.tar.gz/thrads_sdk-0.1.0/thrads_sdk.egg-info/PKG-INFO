@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: thrads_sdk
+Version: 0.1.0
+Summary: Python SDK for the Thrads Ad Platform API
+Home-page: https://github.com/yourusername/thrads-sdk
+Author: Your Name
+Author-email: your.email@example.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.25.0
+Requires-Dist: Pillow>=8.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Adgent SDK
+
+Python SDK for integrating with the Thrads ad platform.
+
+## Installation
+
+```bash
+pip install thrads-sdk
+```
+
+## Usage
+
+```python
+from adgent import ThradsClient
+
+# Initialize client
+client = ThradsClient(api_key="your_api_key")
+
+# Get an ad recommendation
+ad = client.get_ad(
+    user_id="user123",
+    chat_id="chat456",
+    content="I need a new pair of running shoes",
+    user_region="US"
+)
+
+if ad:
+    print(f"Recommended product: {ad.prod_name}")
+    print(f"Creative message: {ad.creative}")
+    print(f"URL: {ad.prod_url}")
+else:
+    print("No ad recommendation available")
+```
+
+## Features
+
+- Simple, intuitive API
+- Automatic error handling
+- Typed responses with Pydantic models
