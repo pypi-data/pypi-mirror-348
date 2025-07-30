@@ -1,0 +1,50 @@
+[build-system]
+requires = ["wheel", "setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "preqs"
+description = "A simple (and fast) requirements.txt file generator."
+authors = [{name = "The Developers", email = "development@s3dev.uk"}]
+classifiers = [
+               "Development Status :: 5 - Production/Stable",
+               "Intended Audience :: Developers",
+               "Operating System :: POSIX :: Linux",
+               "Operating System :: Microsoft :: Windows",
+               "Programming Language :: Python :: 3.8",
+               "Programming Language :: Python :: 3.9",
+               "Programming Language :: Python :: 3.10",
+               "Programming Language :: Python :: 3.11",
+               "Programming Language :: Python :: 3.12",
+               "Programming Language :: Python :: 3.13",
+               "Topic :: Software Development",
+               "Topic :: Utilities",
+              ]
+dependencies = ["packaging"]
+dynamic = ["version"]
+keywords = [
+            "build",
+            "development",
+            "requirements",
+            "setup",
+            "utilities",
+           ]
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/s3dev/preqs"
+Repository = "https://github.com/s3dev/preqs"
+
+[tool.setuptools.dynamic]
+version = {attr = "preqs.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["preqs"]
+exclude = []
+
+[project.scripts]
+preqs = "preqs.preqs:main"

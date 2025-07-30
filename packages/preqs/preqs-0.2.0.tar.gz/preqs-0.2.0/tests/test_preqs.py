@@ -1,0 +1,305 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+:Purpose:   Testing module for the ``preqs`` module.
+
+:Platform:  Linux/Windows | Python 3.6+
+:Developer: J Berendt
+:Email:     development@s3dev.uk
+
+:Comments:  n/a
+
+"""
+# pylint: disable=arguments-differ
+# pylint: disable=protected-access
+# pylint: disable=wrong-import-order
+
+import contextlib
+import hashlib
+import io
+import os
+try:  # pragma: nocover
+    from .base import TestBase
+    from .testlibs import msgs
+except ImportError:
+    from base import TestBase
+    from testlibs import msgs
+# TestBase must be imported before preqs.
+from preqs import preqs
+
+
+class TestPreqs(TestBase):
+    """Testing class used to test the ``preqs`` module."""
+
+    _FN = 'requirements.txt'
+    _MSG1 = msgs.templates.not_as_expected.general
+
+    @classmethod
+    def setUpClass(cls):
+        """Run this method at the start of all tests in this module.
+
+        :Tasks:
+
+            - Print the start of test message.
+
+        """
+        msgs.startoftest.message(module_name='preqs')
+
+    @classmethod
+    def setUp(cls):
+        """Tasks to perform at the start of each test."""
+        cls.redirect_stderr_to_devnull()
+
+    @classmethod
+    def tearDown(cls):
+        """Tasks to perform at the end of each test."""
+        cls.restore_stderr()
+
+    def test00a__argp__invalid_path(self):
+        """Test the arg parser with an invalid path.
+
+        :Test:
+            - Verify the arg parser correctly flags an invalid path
+              containing '..'.
+            - Verify the exit code is as expected.
+
+        """
+        buf = io.StringIO()
+        # Inject an invalid path and re-check.
+        ap = preqs.ArgParser()
+        ap.parse()
+        ap._args.PATH = '/some/path/containing/../'
+        # Capture stdout.
+        with contextlib.redirect_stdout(buf):
+            # Test for sys.exit and capture the exit code.
+            with self.assertRaises(SystemExit) as cm:
+                ap._sanitise_path(ap._args.PATH)
+                tst1 = buf.getvalue()
+                tst2 = cm.exception.code
+                # Must be indented for tst1 and tst2 to be referenced.
+                with self.subTest('Error message'):
+                    self.assertIn('Invalid path detected.', tst1)
+                with self.subTest('Exit code'):
+                    self.assertEqual(100, tst2)
+
+    def test01a__run__no_imports(self):
+        """Test the ``run`` method for a project with no imports.
+
+        :Test:
+            - Verify the exit code is as expected.
+            - Verify the requirements file does not exist.
+
+        """
+        pkg = 'pkg0'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 30
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+        with self.subTest('File not exist'):
+            tst = os.path.exists(os.path.join(self._DIR_RESC, pkg, self._FN))
+            exp = False
+            self.assertEqual(tst, exp, msg=self._MSG1.format(exp, tst))
+
+    def test01b__run__no_args(self):
+        """Test the ``run`` method with no arguments.
+
+        Note: This test will fail if different versions of the libraries
+              are installed in the environment.
+
+              If this is the case, check the content of the target
+              requirements file and re-generage the MD5 checksum.
+
+        :Test:
+            - Verify the exit code is as expected.
+            - Verify the hash of the requirements file is as expected.
+
+        """
+        pkg = 'pkg1'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 0
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+        with self.subTest('File hash'):
+            tst = self.calc_file_hash(pkg=pkg)
+            exp = 'ca7450abf29469281851a206e63a18df'
+            self.assertEqual(tst, exp, msg=self._MSG1.format(tst, exp))
+        self.remove_requirements_file(pkg=pkg)
+
+    def test01c__run__file_exists(self):
+        """Test the ``run`` method where a requirements file exists.
+
+        :Test:
+            - Verify the exit code is as expected.
+
+        """
+        pkg = 'pkg2'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 10
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+
+    def test01d__run__no_py_modules(self):
+        """Test the ``run`` method for a project without Python modules.
+
+        :Test:
+            - Verify the exit code is as expected.
+
+        """
+        pkg = 'pkg3'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 20
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+
+    def test01e__run__ignore_dirs(self):
+        """Test the ``run`` method with the --ignore_dirs flag.
+
+        Note: This test will fail if different versions of the libraries
+              are installed in the environment.
+
+              If this is the case, check the content of the target
+              requirements file and re-generage the MD5 checksum.
+
+        :Test:
+            - Verify the exit code is as expected.
+            - Verify the hash of the requirements file is as expected.
+
+        """
+        pkg = 'pkg4'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r._IGNORE_DIRS += [os.path.join(self._DIR_RESC, pkg, 'build'),
+                               os.path.join(self._DIR_RESC, pkg, 'docs')]
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 0
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+        with self.subTest('File hash'):
+            tst = self.calc_file_hash(pkg=pkg)
+            exp = 'd69d47481a4e4709743abbb55ac99cd4'
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+        self.remove_requirements_file(pkg=pkg)
+
+    def test02a__debug(self):
+        """Test the ``run`` method with the --debug flag.
+
+        :Test:
+            - Verify the exit code is as expected.
+
+        """
+        pkg = 'pkg3'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r._args.debug = True
+            r.run()
+        with self.subTest('Exit code'):
+            tst = cm.exception.code
+            exp = 20
+            self.assertEqual(exp, tst, msg=self._MSG1.format(exp, tst))
+
+    def test03a__write__print(self):
+        """Test the ``_write`` method with the --print flag.
+
+        :Test:
+            - Verify the expected output is included in the print.
+
+        """
+        reqs = [('thing1', '1.0.0'), ('thing2', '2.0.0'), ('thing3', '3.0.0')]
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            r = preqs.Requirements()
+            r._args.print = True
+            r._reqs = reqs
+            r._write()
+        stdout = buf.getvalue().split('\n')
+        for idx, req in enumerate(reqs):
+            with self.subTest(f'{idx}: {req}'):
+                self.assertIn(str(req), stdout[idx+3])
+
+    def test04a__check(self):
+        """Test the ``check`` method via a black box test.
+
+        Note: This test does *not* test the entire module. That is done
+              by the ``test_check.py`` test module.
+
+        Note: This test will fail if different versions of the libraries
+              are installed in the environment.
+
+              If this is the case, check the content of the target
+              requirements file and re-generage the MD5 checksum.
+
+        :Test:
+            - Verify the exit code is as expected.
+            - Verify the display output is as expected.
+
+        """
+        buff = io.StringIO()
+        pkg = 'pkg1'
+        with self.assertRaises(SystemExit) as cm:
+            r = preqs.Requirements()
+            r._args.PATH = os.path.join(self._DIR_RESC, pkg)
+            r.run()  # Generate the requirements file to be checked.
+        tst1 = cm.exception.code
+        exp1 = 0
+        with self.assertRaises(SystemExit):
+            with contextlib.redirect_stdout(buff):
+                r.check()
+        self.remove_requirements_file(pkg=pkg)
+        text = buff.getvalue()
+        tst2 = hashlib.md5(text.encode()).hexdigest()
+        exp2 = '7c5fc8de8cafd79ae84b7b17276fa4c0'
+        with self.subTest('Exit code'):
+            self.assertEqual(exp1, tst1)
+        with self.subTest('Report output'):
+            self.assertEqual(exp2, tst2)
+
+#%% Helpers
+
+    def calc_file_hash(self, pkg: str) -> str:
+        """Calculate an MD5 hash against a requirements file.
+
+        As each file has a timestamp at the end, the last line of the
+        file is excluded from the hash.
+
+        Args:
+            pkg (str): Name of the package used for the test.
+
+        Returns:
+            str: An MD5 hash of the requirements file, except the final
+            line containing the timestamp.
+
+        """
+        with open(os.path.join(self._DIR_RESC, pkg, self._FN), encoding='utf-8') as f:
+            text = f.readlines()
+        return hashlib.md5(''.join(text[:-1]).encode()).hexdigest()
+
+    def remove_requirements_file(self, pkg: str):
+        """Remove the requirements file from the given package.
+
+        Args:
+            pkg (str): Name of the package from which the file is to be
+                removed.
+
+        """
+        path = os.path.join(self._DIR_RESC, pkg, 'requirements.txt')
+        if os.path.exists(path):
+            os.remove(path)
