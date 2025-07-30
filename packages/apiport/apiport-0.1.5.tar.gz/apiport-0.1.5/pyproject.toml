@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apiport"
+version = "0.1.5"
+description = "CLI tool for managing API secrets"
+readme = "README.md"
+authors = [
+    {name = "Samuel Michnik", email = "michniksamuel@gmail.com"},
+    {name = "Vikas Rawat", email = "vikasrawcoder@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.6"
+dependencies = [
+    "cryptography>=45.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+ai = ["google-generativeai>=0.3.0"]
+
+[project.scripts]
+apiport = "apiport.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/michniks2001/code-coffee-hack"
+"Bug Tracker" = "https://github.com/michniks2001/code-coffee-hack/issues"
+
+[tool.setuptools]
+packages = ["apiport"]
+
+[tool.black]
+line-length = 88
+target-version = ["py36"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.6"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
