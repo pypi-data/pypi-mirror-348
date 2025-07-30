@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: mypv
+Version: 0.2.0
+Summary: my-PV device communication library
+Project-URL: Documentation, https://mypv.readthedocs.io
+Project-URL: Repository, https://github.com/siku2/home-automation-libraries.git
+Project-URL: Issues, https://github.com/siku2/home-automation-libraries/issues
+Author-email: Simon Berger <simon@siku2.io>
+Maintainer-email: Simon Berger <simon@siku2.io>
+License-Expression: MIT
+Keywords: acthor,mypv
+Requires-Python: >=3.13
+Requires-Dist: pymodbus>=3.9.2
+Provides-Extra: http
+Requires-Dist: httpx>=0.28.1; extra == 'http'
+Description-Content-Type: text/markdown
+
+# my-PV device communication library
+
+## Installation
+
+```bash
+pip install mypv
+
+# If you want to use the HTTP interface
+pip install mypv[http]
+```
+
+## Supported devices
+
+I have only tested the AC-THOR device and specifically the CH edition.
+If you own any my-PV device, please contact me. It should be easy to add support for it if you have
+the device and can provide me with the necessary information.
