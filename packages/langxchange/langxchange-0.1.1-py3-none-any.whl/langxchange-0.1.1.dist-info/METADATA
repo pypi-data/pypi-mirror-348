@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: langxchange
+Version: 0.1.1
+Summary: API management and vectorization library for LLM integrations
+Author: Timothy Owusu
+Author-email: ikolilu.tim.owusu@gmail.com
+Requires-Python: >=3.8
+Requires-Dist: pandas
+Requires-Dist: sentence-transformers
+Requires-Dist: chromadb
+Requires-Dist: pinecone-client
+Requires-Dist: sqlalchemy
+Requires-Dist: pymongo
+Requires-Dist: pymysql
+Requires-Dist: numpy
+Requires-Dist: google-generativeai
+Requires-Dist: openai
+Requires-Dist: anthropic
+Requires-Dist: weaviate-client
+Requires-Dist: qdrant-client
+Requires-Dist: elasticsearch
+Requires-Dist: elasticsearch-dsl
+Requires-Dist: opensearch-py
+Requires-Dist: faiss-cpu
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
