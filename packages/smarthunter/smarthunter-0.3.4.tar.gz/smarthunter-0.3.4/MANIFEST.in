@@ -1,0 +1,9 @@
+include LICENSE
+include README.md
+include demo_hunter.bin
+include create_demo.py
+include pypi_instructions.md
+
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[cod] 
