@@ -1,0 +1,143 @@
+Metadata-Version: 2.4
+Name: ros2em
+Version: 0.1.3
+Summary: ROS2 Environment Manager using Virtualbox and Vagrant
+Author-email: Kodo Robotics <kodorobotics@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 Kodo Robotics
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: typer[all]
+Requires-Dist: rich
+Requires-Dist: gdown
+Requires-Dist: tqdm
+Requires-Dist: click==8.1.7
+Dynamic: license-file
+
+# ros2em - ROS2 Environment Manager
+
+[![PyPI version](https://img.shields.io/pypi/v/ros2em.svg)](https://pypi.org/project/ros2em/)
+[![License](https://img.shields.io/github/license/Kodo-Robotics/ros2em.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-blue)](#)
+
+**ros2em** is a CLI tool to create and manage isolated ROS2 environments using VirtualBox and Vagrant.
+
+Whether you're a robotics developer, student, or researcher, `ros2em` makes it easy to:
+
+* 🧠 Launch ROS2 in clean, isolated virtual machines
+* 🖥 Access GUIs like Rviz or Gazebo via browser
+* ✅ Support both `amd64` and `arm64` architectures
+* 🧰 Handle setup: VirtualBox, Vagrant, and box file download
+
+---
+
+## 🚀 Features
+
+* ⚡ One-line setup for fully functional ROS 2 VMs
+* 📦 Architecture-specific box handling (`amd64`, `arm64`)
+* 🖥 GUI access using browser
+* 🔐 No system pollution – nothing touches your host machine
+* 💡 Powered by Typer (CLI) and Rich (colored output)
+
+---
+
+## 📦 Installation
+
+### Recommended (via pipx)
+
+```bash
+pipx install ros2em
+```
+
+### Or using pip
+
+```bash
+pip install ros2em
+```
+
+---
+
+## 🛠 Commands
+
+### 🔧 Setup dependencies
+
+```bash
+ros2em init
+```
+
+Installs VirtualBox and Vagrant (if not found).
+
+### ⬇️ Download the correct ROS2 box
+
+```bash
+ros2em download-box
+```
+
+Auto-detects your architecture and downloads the appropriate `.box` file.
+
+### 🐢 Create an environment
+
+```bash
+ros2em create myenv
+```
+
+Creates `~/.ros2em/myenv` and spins up a VM.
+
+### 📋 Manage environments
+
+```bash
+ros2em list        # List all environments
+ros2em start myenv # Start a VM
+ros2em stop myenv  # Stop a VM
+ros2em delete myenv # Delete an environment
+```
+
+---
+
+## 📁 Environment Structure
+
+```
+~/.ros2em/
+├── boxes/
+│   └── arm64/ or amd64/
+│       └── ros2-humble.box
+├── myenv/
+│   └── Vagrantfile
+```
+
+---
+
+## 🧩 Contributing
+
+We welcome contributions, ideas, and feedback.
+
+* [ ] Open issues for bugs and enhancements
+* [ ] Fork and submit a pull request
+* [ ] Share your use case via Discussions
+
+---
+
+## 📄 License
+
+[MIT License](LICENSE) — © 2025 Kodo Robotics
