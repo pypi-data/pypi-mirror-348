@@ -1,0 +1,27 @@
+[project]
+name = "video-to-audio-converter"
+version = "0.1.1"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24.0,<2.0.0",
+    "decorator>=4.4.2,<5.0.0",
+    "imageio-ffmpeg (>=0.6.0,<0.7.0)",
+    "moviepy (==1.0.3)"
+]
+
+[tool.poetry]
+packages = [{include = "video_to_audio_converter", from = "src"}]
+
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
