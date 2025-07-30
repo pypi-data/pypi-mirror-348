@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyMyweblog"
+version = "0.5.4"
+description = "A Python library for interacting with the MyWebLog API"
+readme = "README.md"
+authors = [{ name = "Marcus Karlsson", email = "marcus.karlsson@usa.net" }]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+dependencies = [
+    "aiohttp>=3.8.0"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[project.urls]
+Homepage = "https://github.com/faanskit/pyMyweblog"
+Repository = "https://github.com/faanskit/pyMyweblog"
+Issues = "https://github.com/faanskit/pyMyweblog/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "flake8",
+    "black"
+]
+
+[tool.setuptools.packages.find]
+include = ["pyMyweblog*"]
