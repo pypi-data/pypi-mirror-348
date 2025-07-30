@@ -1,0 +1,38 @@
+[project]
+name = "typically"
+version = "0.1.2"
+description = "(UNSTABLE) Collection of common types"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Hart Traveller", email = "ruling_fiction.0b@icloud.com" }]
+requires-python = ">=3.11"
+dependencies = [
+    "orjson>=3.10.18",
+    "pydantic>=2.11.4",
+    "regex-pattern-index==0.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "pympler>=1.1",
+    "cryptography>=44.0.3",
+    # "numpy>=2.2.5",
+    # "pygments>=2.19.1",
+    # "rich>=14.0.0",
+    # "scikit-learn>=1.6.1",
+    # "scipy>=1.15.3",
+    # "sympy>=1.14.0",
+    "psutil>=7.0.0",
+]
+script = ["cyclopts>=3.16.1", "rich>=14.0.0"]
+test = [
+    "hypothesis>=6.131.16",
+    "pyinstrument>=5.0.1",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
