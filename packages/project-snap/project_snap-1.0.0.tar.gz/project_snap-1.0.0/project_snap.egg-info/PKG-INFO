@@ -1,0 +1,114 @@
+Metadata-Version: 2.1
+Name: project-snap
+Version: 1.0.0
+Summary: A utility to create Markdown snapshots of project structures for LLMs
+Home-page: https://github.com/still_standing88/project-snap/
+Author: still-standing88
+License: MIT
+Keywords: project snapshot markdown llm documentation
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Project Snapshot Utility (project-snap)
+
+A command-line utility to create comprehensive Markdown snapshots of your project structure for sharing with LLMs like Claude or Gemini.
+
+## Features
+
+- Create detailed markdown snapshots of your project structure
+- Configurable inclusion/exclusion of files, folders, and extensions
+- Automatic syntax highlighting for common file types
+- Table of contents generation for easy navigation
+- Size limits to avoid including large files
+- Configurable via JSON file or command-line arguments
+- Installable via pip
+
+## Installation
+
+```bash
+pip install project-snap
+```
+
+## Usage
+
+### Basic Usage
+
+Generate a project snapshot with default settings:
+
+```bash
+project-snap
+```
+
+This will create a `project_snapshot.md` file in the current directory.
+
+### Command-line Options
+
+```bash
+project-snap --help
+project-snap --init                     # Create a sample configuration file
+project-snap --config path/to/config.json  # Use a custom configuration file
+project-snap --output custom_name.md    # Specify a custom output filename
+project-snap --target /path/to/project  # Snapshot a different directory
+```
+
+### Configuration
+
+The tool looks for a configuration file in the following locations:
+- `project-snapshot-config.json`
+- `.project-snapshot.json`
+- `project_snapshot_config.json`
+
+You can generate a sample configuration file using:
+
+```bash
+project-snap --init
+```
+
+Sample configuration:
+
+```json
+{
+  "folders": {
+    "include": [],
+    "exclude": ["node_modules", "venv", ".git", "__pycache__", "dist", "build"]
+  },
+  "files": {
+    "include": [],
+    "exclude": [".DS_Store", "*.pyc", "*.jpg", "*.png", "package-lock.json"]
+  },
+  "ext": {
+    "include": [".py", ".js", ".ts", ".html", ".css", ".json", ".md"],
+    "exclude": []
+  },
+  "target_folder": ".",
+  "output_folder": ".",
+  "snapshot_name": "project_snapshot.md",
+  "max_file_size_kb": 500
+}
+```
+
+## Use with LLMs
+
+The generated markdown file is optimized for sharing with Large Language Models like Claude or Gemini. The snapshot includes:
+
+1. Table of contents for easy navigation
+2. Directory and file structure
+3. Full file contents with syntax highlighting
+4. Manageable file sizes for context windows
+
+## License
+
+MIT
