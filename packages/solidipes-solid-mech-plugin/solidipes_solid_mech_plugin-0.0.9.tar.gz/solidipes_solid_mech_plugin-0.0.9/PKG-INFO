@@ -1,0 +1,64 @@
+Metadata-Version: 2.4
+Name: solidipes-solid-mech-plugin
+Version: 0.0.9
+Summary: Plugin for Solidipes with solid mechanics components
+Author-email: Son Pham-Ba <son.phamba@epfl.ch>, Guillaume Anciaux <guillaume.anciaux@epfl.ch>
+License: GPL-3.0-or-later
+Requires-Python: <3.13,>=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: solidipes-core-plugin>=0.0.5
+Requires-Dist: ipython~=8.18.1
+Requires-Dist: mergedeep~=1.3.4
+Requires-Dist: meshio[all]~=5.3.5
+Requires-Dist: streamlit~=1.45.0
+Requires-Dist: trame~=3.5.2
+Requires-Dist: streamlit-pyvista==0.0.20rc0
+Provides-Extra: dev
+Requires-Dist: pillow~=10.4.0; extra == "dev"
+Requires-Dist: pixelmatch~=0.3.0; extra == "dev"
+Requires-Dist: pre-commit~=4.1.0; extra == "dev"
+Requires-Dist: pytest~=8.3.4; extra == "dev"
+Requires-Dist: pytest-cov~=5.0.0; extra == "dev"
+Requires-Dist: seleniumbase==4.33.12; extra == "dev"
+Requires-Dist: urllib3<2; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pillow~=10.4.0; extra == "test"
+Requires-Dist: pixelmatch~=0.3.0; extra == "test"
+Requires-Dist: pytest~=8.3.4; extra == "test"
+Requires-Dist: pytest-cov~=5.0.0; extra == "test"
+Requires-Dist: seleniumbase==4.33.12; extra == "test"
+Requires-Dist: urllib3<2; extra == "test"
+Dynamic: license-file
+
+# Solidipes solid mechanics plugin
+
+_Plugin for Solidipes with solid mechanics components_
+
+[![PyPI version](https://badge.fury.io/py/solidipes-solid-mech-plugin.svg)](https://badge.fury.io/py/solidipes-solid-mech-plugin)
+
+Meant to be used with [Solidipes](https://gitlab.com/solidipes/solidipes).
+
+
+## Dependencies
+
+```bash
+sudo apt install libgl1-mesa-glx xvfb
+```
+
+
+# Installation for development
+
+```bash
+git clone https://gitlab.com/solidipes/solidipes-solid-mech-plugin.git
+cd solidipes-solid-mech-plugin
+pip install -e .[dev]
+pre-commit install
+```
+
+
+# Running tests
+
+```bash
+pytest
+```

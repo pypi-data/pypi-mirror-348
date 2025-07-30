@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Xdmf xmlns:xi="http://www.w3.org/2001/XInclude" Version="2.0">
+   <Domain Name="xdmf_mesh">
+      <Grid CollectionType="Temporal" GridType="Collection" Name="SpaceTime">
+         <Time TimeType="List">
+            <DataItem Dimensions="21" Format="XML" NumberType="Float" Precision="8">0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 </DataItem>
+         </Time>
+         <Grid Name="Grid Time 1">
+            <Topology NumberOfElements="1" TopologyType="Triangle">
+               <DataItem Dimensions="1 3" Format="HDF" NumberType="UInt" Precision="4">xdmf_mesh.h5:/mesh/Topology</DataItem>
+            </Topology>
+            <Geometry GeometryType="XYZ">
+               <DataItem Dimensions="3 3" Format="HDF" NumberType="Float" Precision="8">xdmf_mesh.h5:/mesh/Geometry</DataItem>
+            </Geometry>
+         </Grid>
+         <Grid Name="Grid Time 2">
+            <Topology NumberOfElements="1" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 3">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 4">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 5">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 6">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 7">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 8">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 9">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 10">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 11">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 12">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 13">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 14">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 15">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 16">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 17">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 18">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 19">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 20">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+         <Grid Name="Grid Time 21">
+            <Topology NumberOfElements="6346" Reference="XML" TopologyType="Triangle">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Topology</Topology>
+            <Geometry GeometryType="XYZ" Reference="XML">/Xdmf/Domain[@Name="xdmf_mesh"]/Grid[@Name="SpaceTime"]/Grid[@Name="Grid Time 1"]/Geometry</Geometry>
+         </Grid>
+      </Grid>
+   </Domain>
+</Xdmf>
+<!--File Created using writeXdmfTri by Adrien Leygue-->
