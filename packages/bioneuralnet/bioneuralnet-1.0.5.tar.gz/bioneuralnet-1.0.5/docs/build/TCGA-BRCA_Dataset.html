@@ -1,0 +1,3660 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TCGA-BRCA Demo &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TOPMed Demo" href="TOPMED.html" />
+    <link rel="prev" title="Quick Start Guide" href="Quick_Start.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TCGA-BRCA Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Dataset-Source">Dataset Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Dataset-Overview">Dataset Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PAM50-Subtype-Counts-(Original)">PAM50 Subtype Counts (Original)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Patients-in-Every-Dataset">Patients in Every Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Final-Shapes-(Per-Patient)">Final Shapes (Per-Patient)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Data-Summary-Table">Data Summary Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Reference-Links">Reference Links</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Lets-take-a-look-at-the-data-from-FireHose-directly-after-download">Lets take a look at the data from FireHose directly after download</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#TCGAbiolinks">TCGAbiolinks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Handling-Multiple-Aliquots-per-Sample">Handling Multiple Aliquots per Sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Review-the-first-few-rows-of-each-file">Review the first few rows of each file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TCGA-BRCA Demo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/TCGA-BRCA_Dataset.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="TCGA-BRCA-Demo">
+<h1>TCGA-BRCA Demo<a class="headerlink" href="#TCGA-BRCA-Demo" title="Link to this heading"></a></h1>
+<section id="Dataset-Source">
+<h2>Dataset Source<a class="headerlink" href="#Dataset-Source" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Omics Data</strong>: <a class="reference external" href="http://firebrowse.org/?cohort=BRCA">FireHose BRCA</a></p></li>
+<li><p><strong>Clinical and PAM50 Data</strong>: <a class="reference external" href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGAbiolinks</a></p></li>
+</ul>
+</section>
+<section id="Dataset-Overview">
+<h2>Dataset Overview<a class="headerlink" href="#Dataset-Overview" title="Link to this heading"></a></h2>
+<p><strong>Original Data</strong>:</p>
+<ul class="simple">
+<li><p><strong>Methylation</strong>: 20,107 × 885</p></li>
+<li><p><strong>mRNA</strong>: 18,321 × 1,212</p></li>
+<li><p><strong>miRNA</strong>: 503 × 1,189</p></li>
+<li><p><strong>PAM50</strong>: 1,087 × 1</p></li>
+<li><p><strong>Clinical</strong>: 1,098 × 101</p></li>
+<li><p><strong>Note: Omics matrices are features × samples; clinical matrices are samples × fields.</strong></p></li>
+</ul>
+<section id="PAM50-Subtype-Counts-(Original)">
+<h3>PAM50 Subtype Counts (Original)<a class="headerlink" href="#PAM50-Subtype-Counts-(Original)" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>LumA</strong>: 419</p></li>
+<li><p><strong>LumB</strong>: 140</p></li>
+<li><p><strong>Basal</strong>: 130</p></li>
+<li><p><strong>Her2</strong>: 46</p></li>
+<li><p><strong>Normal</strong>: 34</p></li>
+</ul>
+</section>
+</section>
+<section id="Patients-in-Every-Dataset">
+<h2>Patients in Every Dataset<a class="headerlink" href="#Patients-in-Every-Dataset" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Total patients present in methylation, mRNA, miRNA, PAM50, and clinical: <strong>769</strong></p></li>
+</ul>
+</section>
+<section id="Final-Shapes-(Per-Patient)">
+<h2>Final Shapes (Per-Patient)<a class="headerlink" href="#Final-Shapes-(Per-Patient)" title="Link to this heading"></a></h2>
+<p>After aggregating multiple aliquots by mean, all modalities align on 769 patients:</p>
+<ul class="simple">
+<li><p><strong>Methylation</strong>: 769 × 20,107</p></li>
+<li><p><strong>mRNA</strong>: 769 × 20,531</p></li>
+<li><p><strong>miRNA</strong>: 769 × 503</p></li>
+<li><p><strong>PAM50</strong>: 769 × 1</p></li>
+<li><p><strong>Clinical</strong>: 769 × 119</p></li>
+</ul>
+</section>
+<section id="Data-Summary-Table">
+<h2>Data Summary Table<a class="headerlink" href="#Data-Summary-Table" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Clinical</p></th>
+<th class="head"><p>Methylation</p></th>
+<th class="head"><p>miRNA</p></th>
+<th class="head"><p>mRNA</p></th>
+<th class="head"><p>PAM50 (Subtype Counts)</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Original Raw Data</strong></p></td>
+<td><p>1,098 × 101</p></td>
+<td><p>20,107 × 885</p></td>
+<td><p>503 × 1,189</p></td>
+<td><p>18,321 × 1,212</p></td>
+<td><p>LumA: 509LumB: 209Basal: 192Her2: 82Normal: 40</p></td>
+<td><p>Raw FireHose &amp; TCGAbiolinks files</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Patient-Level Intersection</strong></p></td>
+<td><p>769 × 101</p></td>
+<td><p>769 × 20,107</p></td>
+<td><p>769 × 1,046</p></td>
+<td><p>769 × 20,531</p></td>
+<td><p>LumA: 419LumB: 140Basal: 130Her2: 46Normal: 34</p></td>
+<td><p>Patients with complete data in all sets</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="Reference-Links">
+<h2>Reference Links<a class="headerlink" href="#Reference-Links" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://firebrowse.org/?cohort=BRCA">FireHose BRCA</a></p></li>
+<li><p><a class="reference external" href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGAbiolinks</a></p></li>
+<li><p><a class="reference external" href="http://firebrowse.org/?cohort=BRCA&amp;download_dialog=true">Direct Download BRCA</a></p></li>
+</ul>
+<section id="Lets-take-a-look-at-the-data-from-FireHose-directly-after-download">
+<h3>Lets take a look at the data from FireHose directly after download<a class="headerlink" href="#Lets-take-a-look-at-the-data-from-FireHose-directly-after-download" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/home/vicente/Github/BioNeuralNet/TCGA_BRCA_DATA&quot;</span><span class="p">)</span>
+
+<span class="n">mirna_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span><span class="o">/</span><span class="s2">&quot;BRCA.miRseq_RPKM_log2.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rna_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;BRCA.uncv2.mRNAseq_RSEM_normalized_log2.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">meth_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span><span class="o">/</span><span class="s2">&quot;BRCA.meth.by_mean.data.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">clinical_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;BRCA.clin.merged.picked.txt&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna shape: </span><span class="si">{</span><span class="n">mirna_raw</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, rna shape: </span><span class="si">{</span><span class="n">rna_raw</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, meth shape: </span><span class="si">{</span><span class="n">meth_raw</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, clinical shape: </span><span class="si">{</span><span class="n">clinical_raw</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mirna_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rna_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">meth_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clinical_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mirna shape: (503, 1189), rna shape: (18321, 1212), meth shape: (20107, 885), clinical shape: (18, 1097)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TCGA-3C-AAAU-01</th>
+      <th>TCGA-3C-AALI-01</th>
+      <th>TCGA-3C-AALJ-01</th>
+      <th>TCGA-3C-AALK-01</th>
+      <th>TCGA-4H-AAAK-01</th>
+      <th>TCGA-5L-AAT0-01</th>
+      <th>TCGA-5L-AAT1-01</th>
+      <th>TCGA-5T-A9QA-01</th>
+      <th>TCGA-A1-A0SB-01</th>
+      <th>TCGA-A1-A0SD-01</th>
+      <th>...</th>
+      <th>TCGA-BH-A0WA-01</th>
+      <th>TCGA-E2-A105-01</th>
+      <th>TCGA-E2-A106-01</th>
+      <th>TCGA-E2-A107-01</th>
+      <th>TCGA-E2-A108-01</th>
+      <th>TCGA-E2-A109-01</th>
+      <th>TCGA-E2-A10B-01</th>
+      <th>TCGA-E2-A10C-01</th>
+      <th>TCGA-E2-A10E-01</th>
+      <th>TCGA-E2-A10F-01</th>
+    </tr>
+    <tr>
+      <th>gene</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>hsa-let-7a-1</th>
+      <td>13.129765</td>
+      <td>12.918069</td>
+      <td>13.012033</td>
+      <td>13.144697</td>
+      <td>13.411684</td>
+      <td>13.316301</td>
+      <td>13.445230</td>
+      <td>13.727850</td>
+      <td>13.601504</td>
+      <td>13.598739</td>
+      <td>...</td>
+      <td>12.225132</td>
+      <td>13.938134</td>
+      <td>13.609853</td>
+      <td>13.508290</td>
+      <td>13.406359</td>
+      <td>13.730647</td>
+      <td>13.198426</td>
+      <td>12.793350</td>
+      <td>14.060268</td>
+      <td>12.990403</td>
+    </tr>
+    <tr>
+      <th>hsa-let-7a-2</th>
+      <td>14.117933</td>
+      <td>13.922300</td>
+      <td>14.010002</td>
+      <td>14.141721</td>
+      <td>14.413518</td>
+      <td>14.310917</td>
+      <td>14.448556</td>
+      <td>14.714551</td>
+      <td>14.608693</td>
+      <td>14.606942</td>
+      <td>...</td>
+      <td>13.235065</td>
+      <td>14.930021</td>
+      <td>14.603389</td>
+      <td>14.525026</td>
+      <td>14.402735</td>
+      <td>14.719166</td>
+      <td>14.200523</td>
+      <td>13.796623</td>
+      <td>15.047592</td>
+      <td>14.006035</td>
+    </tr>
+    <tr>
+      <th>hsa-let-7a-3</th>
+      <td>13.147714</td>
+      <td>12.913194</td>
+      <td>13.028483</td>
+      <td>13.151281</td>
+      <td>13.420481</td>
+      <td>13.327144</td>
+      <td>13.446806</td>
+      <td>13.736891</td>
+      <td>13.613105</td>
+      <td>13.606224</td>
+      <td>...</td>
+      <td>12.261971</td>
+      <td>13.972011</td>
+      <td>13.643274</td>
+      <td>13.549981</td>
+      <td>13.438737</td>
+      <td>13.732070</td>
+      <td>13.212367</td>
+      <td>12.793350</td>
+      <td>14.074978</td>
+      <td>13.018659</td>
+    </tr>
+    <tr>
+      <th>hsa-let-7b</th>
+      <td>14.595135</td>
+      <td>14.512657</td>
+      <td>13.419612</td>
+      <td>14.667196</td>
+      <td>14.438548</td>
+      <td>14.576493</td>
+      <td>14.611137</td>
+      <td>15.098805</td>
+      <td>16.505758</td>
+      <td>15.638855</td>
+      <td>...</td>
+      <td>14.684912</td>
+      <td>15.230457</td>
+      <td>15.357655</td>
+      <td>15.112011</td>
+      <td>15.040315</td>
+      <td>15.806771</td>
+      <td>15.645910</td>
+      <td>14.724106</td>
+      <td>16.370741</td>
+      <td>15.439239</td>
+    </tr>
+    <tr>
+      <th>hsa-let-7c</th>
+      <td>8.414890</td>
+      <td>9.646536</td>
+      <td>9.312455</td>
+      <td>11.511431</td>
+      <td>11.693927</td>
+      <td>11.138419</td>
+      <td>11.284446</td>
+      <td>9.197514</td>
+      <td>13.392164</td>
+      <td>11.419823</td>
+      <td>...</td>
+      <td>10.565698</td>
+      <td>10.483745</td>
+      <td>11.159056</td>
+      <td>12.473340</td>
+      <td>12.405828</td>
+      <td>10.613712</td>
+      <td>11.395452</td>
+      <td>9.087202</td>
+      <td>10.885520</td>
+      <td>11.385638</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 1189 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TCGA-3C-AAAU-01</th>
+      <th>TCGA-3C-AALI-01</th>
+      <th>TCGA-3C-AALJ-01</th>
+      <th>TCGA-3C-AALK-01</th>
+      <th>TCGA-4H-AAAK-01</th>
+      <th>TCGA-5L-AAT0-01</th>
+      <th>TCGA-5L-AAT1-01</th>
+      <th>TCGA-5T-A9QA-01</th>
+      <th>TCGA-A1-A0SB-01</th>
+      <th>TCGA-A1-A0SD-01</th>
+      <th>...</th>
+      <th>TCGA-UL-AAZ6-01</th>
+      <th>TCGA-UU-A93S-01</th>
+      <th>TCGA-V7-A7HQ-01</th>
+      <th>TCGA-W8-A86G-01</th>
+      <th>TCGA-WT-AB41-01</th>
+      <th>TCGA-WT-AB44-01</th>
+      <th>TCGA-XX-A899-01</th>
+      <th>TCGA-XX-A89A-01</th>
+      <th>TCGA-Z7-A8R5-01</th>
+      <th>TCGA-Z7-A8R6-01</th>
+    </tr>
+    <tr>
+      <th>gene</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>?|100133144</th>
+      <td>4.032489</td>
+      <td>3.211931</td>
+      <td>3.538886</td>
+      <td>3.595671</td>
+      <td>2.775430</td>
+      <td>1.995991</td>
+      <td>NaN</td>
+      <td>0.550310</td>
+      <td>3.939189</td>
+      <td>3.250628</td>
+      <td>...</td>
+      <td>-1.324816</td>
+      <td>2.108558</td>
+      <td>NaN</td>
+      <td>2.475707</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.846574</td>
+      <td>4.480524</td>
+      <td>1.178747</td>
+      <td>2.783771</td>
+    </tr>
+    <tr>
+      <th>?|100134869</th>
+      <td>3.692829</td>
+      <td>4.119273</td>
+      <td>3.206237</td>
+      <td>3.469873</td>
+      <td>3.850979</td>
+      <td>3.766489</td>
+      <td>3.405298</td>
+      <td>3.169252</td>
+      <td>3.847346</td>
+      <td>3.501324</td>
+      <td>...</td>
+      <td>3.845189</td>
+      <td>3.443978</td>
+      <td>1.622556</td>
+      <td>3.845099</td>
+      <td>2.657434</td>
+      <td>1.703987</td>
+      <td>4.422294</td>
+      <td>4.769476</td>
+      <td>2.866572</td>
+      <td>4.631075</td>
+    </tr>
+    <tr>
+      <th>?|10357</th>
+      <td>5.704604</td>
+      <td>6.124231</td>
+      <td>7.269570</td>
+      <td>7.168565</td>
+      <td>6.395968</td>
+      <td>6.836141</td>
+      <td>6.857961</td>
+      <td>6.749035</td>
+      <td>6.862786</td>
+      <td>5.913201</td>
+      <td>...</td>
+      <td>7.083470</td>
+      <td>7.088829</td>
+      <td>4.906766</td>
+      <td>7.003547</td>
+      <td>5.744909</td>
+      <td>5.401368</td>
+      <td>7.106177</td>
+      <td>6.003213</td>
+      <td>6.410173</td>
+      <td>7.388457</td>
+    </tr>
+    <tr>
+      <th>?|10431</th>
+      <td>8.672694</td>
+      <td>9.139279</td>
+      <td>10.410275</td>
+      <td>9.757450</td>
+      <td>9.581922</td>
+      <td>9.657753</td>
+      <td>10.114256</td>
+      <td>10.472185</td>
+      <td>9.360367</td>
+      <td>9.933569</td>
+      <td>...</td>
+      <td>10.616682</td>
+      <td>11.495054</td>
+      <td>10.749770</td>
+      <td>9.446410</td>
+      <td>10.282241</td>
+      <td>10.874534</td>
+      <td>9.350400</td>
+      <td>9.497295</td>
+      <td>10.155173</td>
+      <td>9.970921</td>
+    </tr>
+    <tr>
+      <th>?|155060</th>
+      <td>10.213110</td>
+      <td>9.011343</td>
+      <td>9.209506</td>
+      <td>9.110487</td>
+      <td>8.027083</td>
+      <td>8.110023</td>
+      <td>7.704865</td>
+      <td>6.254741</td>
+      <td>8.128052</td>
+      <td>6.387132</td>
+      <td>...</td>
+      <td>8.052478</td>
+      <td>7.516236</td>
+      <td>9.280761</td>
+      <td>9.631306</td>
+      <td>8.137225</td>
+      <td>9.460539</td>
+      <td>8.738651</td>
+      <td>8.556414</td>
+      <td>7.977670</td>
+      <td>7.894918</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 1212 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TCGA-3C-AAAU-01</th>
+      <th>TCGA-3C-AALI-01</th>
+      <th>TCGA-3C-AALJ-01</th>
+      <th>TCGA-3C-AALK-01</th>
+      <th>TCGA-4H-AAAK-01</th>
+      <th>TCGA-5L-AAT0-01</th>
+      <th>TCGA-5L-AAT1-01</th>
+      <th>TCGA-5T-A9QA-01</th>
+      <th>TCGA-A1-A0SB-01</th>
+      <th>TCGA-A1-A0SE-01</th>
+      <th>...</th>
+      <th>TCGA-UL-AAZ6-01</th>
+      <th>TCGA-UU-A93S-01</th>
+      <th>TCGA-V7-A7HQ-01</th>
+      <th>TCGA-W8-A86G-01</th>
+      <th>TCGA-WT-AB41-01</th>
+      <th>TCGA-WT-AB44-01</th>
+      <th>TCGA-XX-A899-01</th>
+      <th>TCGA-XX-A89A-01</th>
+      <th>TCGA-Z7-A8R5-01</th>
+      <th>TCGA-Z7-A8R6-01</th>
+    </tr>
+    <tr>
+      <th>Hybridization REF</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Composite Element REF</th>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>...</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+      <td>Beta_Value</td>
+    </tr>
+    <tr>
+      <th>A1BG</th>
+      <td>0.483716119676</td>
+      <td>0.637191226131</td>
+      <td>0.656092398242</td>
+      <td>0.615194471357</td>
+      <td>0.612080370511</td>
+      <td>0.469600740678</td>
+      <td>0.582188239422</td>
+      <td>0.66617073097</td>
+      <td>0.659965611959</td>
+      <td>0.641701155202</td>
+      <td>...</td>
+      <td>0.631413241724</td>
+      <td>0.64952294395</td>
+      <td>0.596585169597</td>
+      <td>0.615558357651</td>
+      <td>0.580837880262</td>
+      <td>0.615814023324</td>
+      <td>0.589897794957</td>
+      <td>0.572606636128</td>
+      <td>0.617859586161</td>
+      <td>0.568150149265</td>
+    </tr>
+    <tr>
+      <th>A1CF</th>
+      <td>0.295827203492</td>
+      <td>0.458972998571</td>
+      <td>0.489725289638</td>
+      <td>0.625765223243</td>
+      <td>0.507736509665</td>
+      <td>0.514770866326</td>
+      <td>0.549850958729</td>
+      <td>0.381038654448</td>
+      <td>0.826312156393</td>
+      <td>0.606699429409</td>
+      <td>...</td>
+      <td>0.383469192855</td>
+      <td>0.183354853938</td>
+      <td>0.403909161312</td>
+      <td>0.716980255014</td>
+      <td>0.613131295074</td>
+      <td>0.665043713213</td>
+      <td>0.705153725375</td>
+      <td>0.494848686021</td>
+      <td>0.691835387189</td>
+      <td>0.224696596211</td>
+    </tr>
+    <tr>
+      <th>A2BP1</th>
+      <td>0.187699869591</td>
+      <td>0.240515847704</td>
+      <td>0.279087851226</td>
+      <td>0.488888510474</td>
+      <td>0.463845494635</td>
+      <td>0.504450855353</td>
+      <td>0.480885816745</td>
+      <td>0.622832399216</td>
+      <td>0.474678831563</td>
+      <td>0.339829506578</td>
+      <td>...</td>
+      <td>0.130529915536</td>
+      <td>0.319855310743</td>
+      <td>0.335517456053</td>
+      <td>0.512185396638</td>
+      <td>0.563519806811</td>
+      <td>0.507364324635</td>
+      <td>0.520542747167</td>
+      <td>0.412562068574</td>
+      <td>0.522169978143</td>
+      <td>0.33955834608</td>
+    </tr>
+    <tr>
+      <th>A2LD1</th>
+      <td>0.62958551322</td>
+      <td>0.666272288675</td>
+      <td>0.755630499986</td>
+      <td>0.74575121287</td>
+      <td>0.698515739124</td>
+      <td>0.706812706661</td>
+      <td>0.759017355996</td>
+      <td>0.694010939885</td>
+      <td>0.847837522256</td>
+      <td>0.786662091353</td>
+      <td>...</td>
+      <td>0.587475995313</td>
+      <td>0.667969642321</td>
+      <td>0.689140211036</td>
+      <td>0.791381283524</td>
+      <td>0.680499323148</td>
+      <td>0.660476360054</td>
+      <td>0.745725420412</td>
+      <td>0.74390049875</td>
+      <td>0.791229999577</td>
+      <td>0.637764188841</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 885 columns</p>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tcga-5l-aat0</th>
+      <th>tcga-5l-aat1</th>
+      <th>tcga-a1-a0sp</th>
+      <th>tcga-a2-a04v</th>
+      <th>tcga-a2-a04y</th>
+      <th>tcga-a2-a0cq</th>
+      <th>tcga-a2-a1g4</th>
+      <th>tcga-a2-a25a</th>
+      <th>tcga-a7-a0cd</th>
+      <th>tcga-a7-a13g</th>
+      <th>...</th>
+      <th>tcga-s3-aa11</th>
+      <th>tcga-s3-aa14</th>
+      <th>tcga-s3-aa15</th>
+      <th>tcga-ul-aaz6</th>
+      <th>tcga-uu-a93s</th>
+      <th>tcga-v7-a7hq</th>
+      <th>tcga-wt-ab44</th>
+      <th>tcga-xx-a899</th>
+      <th>tcga-xx-a89a</th>
+      <th>tcga-z7-a8r6</th>
+    </tr>
+    <tr>
+      <th>Hybridization REF</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Composite Element REF</th>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>...</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+      <td>value</td>
+    </tr>
+    <tr>
+      <th>years_to_birth</th>
+      <td>42</td>
+      <td>63</td>
+      <td>40</td>
+      <td>39</td>
+      <td>53</td>
+      <td>62</td>
+      <td>71</td>
+      <td>44</td>
+      <td>66</td>
+      <td>79</td>
+      <td>...</td>
+      <td>67</td>
+      <td>47</td>
+      <td>51</td>
+      <td>73</td>
+      <td>63</td>
+      <td>75</td>
+      <td>NaN</td>
+      <td>46</td>
+      <td>68</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>vital_status</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>days_to_death</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1920</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>116</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>days_to_last_followup</th>
+      <td>1477</td>
+      <td>1471</td>
+      <td>584</td>
+      <td>NaN</td>
+      <td>1099</td>
+      <td>2695</td>
+      <td>595</td>
+      <td>3276</td>
+      <td>1165</td>
+      <td>718</td>
+      <td>...</td>
+      <td>421</td>
+      <td>529</td>
+      <td>525</td>
+      <td>518</td>
+      <td>NaN</td>
+      <td>2033</td>
+      <td>883</td>
+      <td>467</td>
+      <td>488</td>
+      <td>3256</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 1097 columns</p>
+</div></div>
+</div>
+</section>
+</section>
+<section id="TCGAbiolinks">
+<h2>TCGAbiolinks<a class="headerlink" href="#TCGAbiolinks" title="Link to this heading"></a></h2>
+<p>This section demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">TCGAbiolinks</span></code> R package to access and download clinical and molecular subtype data. It begins by ensuring <code class="docutils literal notranslate"><span class="pre">TCGAbiolinks</span></code> is installed, then loads the package. It retrieves PAM50 molecular subtype labels using <code class="docutils literal notranslate"><span class="pre">TCGAquery_subtype()</span></code> and writes them to a CSV file. Additionally, it downloads clinical data using <code class="docutils literal notranslate"><span class="pre">GDCquery_clinic()</span></code> and formats it with <code class="docutils literal notranslate"><span class="pre">GDCprepare_clinic()</span></code>, saving the result as another CSV file.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install TCGAbiolinks</span>
+<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">requireNamespace</span><span class="p">(</span><span class="s">&quot;TCGAbiolinks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">quietly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">requireNamespace</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">quietly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;TCGAbiolinks&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Load the library</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">TCGAbiolinks</span><span class="p">)</span>
+
+<span class="c1"># Download PAM50 subtype labels</span>
+<span class="n">pam50_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">TCGAquery_subtype</span><span class="p">(</span><span class="n">tumor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRCA&quot;</span><span class="p">)[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;patient&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BRCA_Subtype_PAM50&quot;</span><span class="p">)]</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">pam50_df</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRCA_PAM50_labels.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="c1"># Download clinical data</span>
+<span class="n">clin_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">GDCquery_clinic</span><span class="p">(</span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TCGA-BRCA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;clinical&quot;</span><span class="p">)</span>
+<span class="n">clin_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">GDCprepare_clinic</span><span class="p">(</span><span class="n">clin_raw</span><span class="p">,</span><span class="w"> </span><span class="n">clinical.info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;patient&quot;</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">clin_df</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRCA_clinical_data.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># from Firehose</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span><span class="o">/</span><span class="s2">&quot;BRCA.miRseq_RPKM_log2.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">meth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span><span class="o">/</span><span class="s2">&quot;BRCA.meth.by_mean.data.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;BRCA.uncv2.mRNAseq_RSEM_normalized_log2.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">clinical_firehose</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;BRCA.clin.merged.picked.txt&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># from TCGABiolinks</span>
+<span class="n">pam50</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span><span class="s2">&quot;BRCA_PAM50_labels.csv&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">clinical_biolinks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span><span class="s2">&quot;BRCA_clinical_data.csv&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial shapes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;meth: </span><span class="si">{</span><span class="n">meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rna: </span><span class="si">{</span><span class="n">rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna: </span><span class="si">{</span><span class="n">mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pam50: </span><span class="si">{</span><span class="n">pam50</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clinical TCGABioLinks: </span><span class="si">{</span><span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clinical FireHose: </span><span class="si">{</span><span class="n">clinical_firehose</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">T</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">T</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">T</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">After tranpose&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;meth: </span><span class="si">{</span><span class="n">meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rna: </span><span class="si">{</span><span class="n">rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna: </span><span class="si">{</span><span class="n">mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">trim</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">idx</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(^TCGA-\w\w-\w\w\w\w)&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">meth</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="n">meth</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">rna</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">mirna</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="n">mirna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">pam50</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">clinical_firehose</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">clinical_firehose</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="n">idx1</span> <span class="o">=</span> <span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">index</span>
+<span class="n">idx2</span> <span class="o">=</span> <span class="n">clinical_firehose</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># intersection and unique counts</span>
+<span class="n">common</span> <span class="o">=</span> <span class="n">idx1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">idx2</span><span class="p">)</span>
+<span class="n">only_in_1</span> <span class="o">=</span> <span class="n">idx1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">idx2</span><span class="p">)</span>
+<span class="n">only_in_2</span> <span class="o">=</span> <span class="n">idx2</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">idx1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Patients in both clinical datasets: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">common</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">common</span> <span class="o">=</span> <span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">clinical_firehose</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">clinical_biolinks</span> <span class="o">=</span> <span class="n">clinical_biolinks</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">clinical_firehose</span> <span class="o">=</span> <span class="n">clinical_firehose</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">clinical_biolinks</span><span class="p">,</span> <span class="n">clinical_firehose</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Combined Clinical shape </span><span class="si">{</span><span class="n">clinical</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">common</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">meth</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">mirna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Patients in every dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">common</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">pam50</span> <span class="o">=</span> <span class="n">pam50</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">clinical</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final shapes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;meth: </span><span class="si">{</span><span class="n">meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rna: </span><span class="si">{</span><span class="n">rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna: </span><span class="si">{</span><span class="n">mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pam50: </span><span class="si">{</span><span class="n">pam50</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clinical: </span><span class="si">{</span><span class="n">clinical</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial shapes
+meth: (20107, 885)
+rna: (18321, 1212)
+mirna: (503, 1189)
+pam50: (1087, 1)
+clinical TCGABioLinks: (1098, 101)
+clinical FireHose: (1097, 18)
+
+After tranpose
+meth: (885, 20107)
+rna: (1212, 18321)
+mirna: (1189, 503)
+Patients in both clinical datasets: 1097
+Combined Clinical shape (1097, 119)
+Patients in every dataset: 769
+
+Final shapes:
+meth: (863, 20107)
+rna: (865, 18321)
+mirna: (855, 503)
+pam50: (769, 1)
+clinical: (769, 119)
+
+</pre></div></div>
+</div>
+<section id="Handling-Multiple-Aliquots-per-Sample">
+<h3>Handling Multiple Aliquots per Sample<a class="headerlink" href="#Handling-Multiple-Aliquots-per-Sample" title="Link to this heading"></a></h3>
+<p>This section addresses cases where some patients have multiple aliquots per sample in the <code class="docutils literal notranslate"><span class="pre">meth</span></code>, <code class="docutils literal notranslate"><span class="pre">rna</span></code>, and <code class="docutils literal notranslate"><span class="pre">mirna</span></code> datasets. It first identifies and counts patients with duplicate entries. Then, it coerces all data to numeric types and aggregates the duplicates by computing the mean across aliquots for each patient, ensuring only one row per patient. After aggregation, the datasets are aligned by keeping only the patients that are common across all five datasets (<code class="docutils literal notranslate"><span class="pre">meth</span></code>, <code class="docutils literal notranslate"><span class="pre">rna</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mirna</span></code>, <code class="docutils literal notranslate"><span class="pre">pam50</span></code>, and <code class="docutils literal notranslate"><span class="pre">clinical</span></code>). The result is s set of matched samples ready for integrated analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;meth&quot;</span><span class="p">,</span> <span class="n">meth</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;rna&quot;</span><span class="p">,</span> <span class="n">rna</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;mirna&quot;</span><span class="p">,</span> <span class="n">mirna</span><span class="p">)]:</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+    <span class="n">n_multiple</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">total_duplicates</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">counts</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">n_multiple</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;patients with &gt;1 aliquot: </span><span class="si">{</span><span class="n">n_multiple</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;total duplicate rows: </span><span class="si">{</span><span class="n">total_duplicates</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna</span> <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+
+<span class="n">meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Now each has one row per patient</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-aggregation shapes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;meth: </span><span class="si">{</span><span class="n">meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rna: </span><span class="si">{</span><span class="n">rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna: </span><span class="si">{</span><span class="n">mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">common</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span> <span class="nb">set</span><span class="p">(</span><span class="n">meth</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">mirna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Patients in every dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">common</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">pam50</span> <span class="o">=</span> <span class="n">pam50</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">clinical</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final shapes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;meth: </span><span class="si">{</span><span class="n">meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rna: </span><span class="si">{</span><span class="n">rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mirna: </span><span class="si">{</span><span class="n">mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pam50: </span><span class="si">{</span><span class="n">pam50</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clinical:</span><span class="si">{</span><span class="n">clinical</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+meth:
+patients with &gt;1 aliquot: 91
+total duplicate rows: 94
+
+rna:
+patients with &gt;1 aliquot: 93
+total duplicate rows: 96
+
+mirna:
+patients with &gt;1 aliquot: 84
+total duplicate rows: 86
+
+Post-aggregation shapes:
+meth: (769, 20107)
+rna: (769, 18321)
+mirna: (769, 503)
+Patients in every dataset: 769
+
+Final shapes
+meth: (769, 20107)
+rna: (769, 18321)
+mirna: (769, 503)
+pam50: (769, 1)
+clinical:(769, 119)
+</pre></div></div>
+</div>
+</section>
+<section id="Review-the-first-few-rows-of-each-file">
+<h3>Review the first few rows of each file<a class="headerlink" href="#Review-the-first-few-rows-of-each-file" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">meth</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mirna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Hybridization REF</th>
+      <th>Composite Element REF</th>
+      <th>A1BG</th>
+      <th>A1CF</th>
+      <th>A2BP1</th>
+      <th>A2LD1</th>
+      <th>A2M</th>
+      <th>A2ML1</th>
+      <th>A4GALT</th>
+      <th>A4GNT</th>
+      <th>AAA1</th>
+      <th>...</th>
+      <th>ZWILCH</th>
+      <th>ZWINT</th>
+      <th>ZXDC</th>
+      <th>ZYG11A</th>
+      <th>ZYG11B</th>
+      <th>ZYX</th>
+      <th>ZZEF1</th>
+      <th>ZZZ3</th>
+      <th>psiTPTE22</th>
+      <th>tAKR</th>
+    </tr>
+    <tr>
+      <th>0</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>NaN</td>
+      <td>0.483716</td>
+      <td>0.295827</td>
+      <td>0.187700</td>
+      <td>0.629586</td>
+      <td>0.559654</td>
+      <td>0.835412</td>
+      <td>0.484800</td>
+      <td>0.690217</td>
+      <td>0.807805</td>
+      <td>...</td>
+      <td>0.112978</td>
+      <td>0.053939</td>
+      <td>0.287665</td>
+      <td>0.328087</td>
+      <td>0.502935</td>
+      <td>0.220683</td>
+      <td>0.482044</td>
+      <td>0.107396</td>
+      <td>0.247304</td>
+      <td>0.506404</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>NaN</td>
+      <td>0.637191</td>
+      <td>0.458973</td>
+      <td>0.240516</td>
+      <td>0.666272</td>
+      <td>0.607505</td>
+      <td>0.842391</td>
+      <td>0.550047</td>
+      <td>0.749890</td>
+      <td>0.395290</td>
+      <td>...</td>
+      <td>0.111834</td>
+      <td>0.046160</td>
+      <td>0.265322</td>
+      <td>0.405851</td>
+      <td>0.434024</td>
+      <td>0.236362</td>
+      <td>0.458847</td>
+      <td>0.119652</td>
+      <td>0.163022</td>
+      <td>0.623865</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>NaN</td>
+      <td>0.656092</td>
+      <td>0.489725</td>
+      <td>0.279088</td>
+      <td>0.755630</td>
+      <td>0.662360</td>
+      <td>0.829020</td>
+      <td>0.476107</td>
+      <td>0.653756</td>
+      <td>0.795102</td>
+      <td>...</td>
+      <td>0.113218</td>
+      <td>0.042657</td>
+      <td>0.272103</td>
+      <td>0.391326</td>
+      <td>0.449525</td>
+      <td>0.210976</td>
+      <td>0.482641</td>
+      <td>0.102385</td>
+      <td>0.252328</td>
+      <td>0.504451</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>NaN</td>
+      <td>0.615194</td>
+      <td>0.625765</td>
+      <td>0.488889</td>
+      <td>0.745751</td>
+      <td>0.727982</td>
+      <td>0.835365</td>
+      <td>0.556016</td>
+      <td>0.652005</td>
+      <td>0.816423</td>
+      <td>...</td>
+      <td>0.145133</td>
+      <td>0.047022</td>
+      <td>0.301284</td>
+      <td>0.410348</td>
+      <td>0.446571</td>
+      <td>0.220185</td>
+      <td>0.485944</td>
+      <td>0.112941</td>
+      <td>0.471956</td>
+      <td>0.682468</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>NaN</td>
+      <td>0.612080</td>
+      <td>0.507737</td>
+      <td>0.463845</td>
+      <td>0.698516</td>
+      <td>0.692364</td>
+      <td>0.802388</td>
+      <td>0.504870</td>
+      <td>0.531183</td>
+      <td>0.851114</td>
+      <td>...</td>
+      <td>0.118928</td>
+      <td>0.045057</td>
+      <td>0.300647</td>
+      <td>0.379998</td>
+      <td>0.487929</td>
+      <td>0.233324</td>
+      <td>0.490736</td>
+      <td>0.115646</td>
+      <td>0.314877</td>
+      <td>0.744877</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 20107 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>gene</th>
+      <th>?|100133144</th>
+      <th>?|100134869</th>
+      <th>?|10357</th>
+      <th>?|10431</th>
+      <th>?|155060</th>
+      <th>?|26823</th>
+      <th>?|340602</th>
+      <th>?|388795</th>
+      <th>?|390284</th>
+      <th>?|391343</th>
+      <th>...</th>
+      <th>ZWINT|11130</th>
+      <th>ZXDA|7789</th>
+      <th>ZXDB|158586</th>
+      <th>ZXDC|79364</th>
+      <th>ZYG11A|440590</th>
+      <th>ZYG11B|79699</th>
+      <th>ZYX|7791</th>
+      <th>ZZEF1|23140</th>
+      <th>ZZZ3|26009</th>
+      <th>psiTPTE22|387590</th>
+    </tr>
+    <tr>
+      <th>0</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>4.032489</td>
+      <td>3.692829</td>
+      <td>5.704604</td>
+      <td>8.672694</td>
+      <td>10.213110</td>
+      <td>NaN</td>
+      <td>0.785174</td>
+      <td>-1.536587</td>
+      <td>2.048201</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>9.864120</td>
+      <td>7.017830</td>
+      <td>9.976968</td>
+      <td>10.695662</td>
+      <td>8.013988</td>
+      <td>10.238851</td>
+      <td>11.776124</td>
+      <td>10.887932</td>
+      <td>10.205129</td>
+      <td>0.785174</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>3.211931</td>
+      <td>4.119273</td>
+      <td>6.124231</td>
+      <td>9.139279</td>
+      <td>9.011343</td>
+      <td>0.121015</td>
+      <td>7.170928</td>
+      <td>2.291014</td>
+      <td>0.706022</td>
+      <td>3.027968</td>
+      <td>...</td>
+      <td>9.914682</td>
+      <td>5.902438</td>
+      <td>8.809329</td>
+      <td>10.391374</td>
+      <td>7.632831</td>
+      <td>9.237422</td>
+      <td>12.426428</td>
+      <td>10.364848</td>
+      <td>8.667973</td>
+      <td>9.855788</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>3.538886</td>
+      <td>3.206237</td>
+      <td>7.269570</td>
+      <td>10.410275</td>
+      <td>9.209506</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.443554</td>
+      <td>1.443554</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>11.305650</td>
+      <td>5.143969</td>
+      <td>9.060691</td>
+      <td>9.586488</td>
+      <td>8.374267</td>
+      <td>9.055784</td>
+      <td>12.414355</td>
+      <td>9.880935</td>
+      <td>8.992994</td>
+      <td>5.143969</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>3.595671</td>
+      <td>3.469873</td>
+      <td>7.168565</td>
+      <td>9.757450</td>
+      <td>9.110487</td>
+      <td>-1.273343</td>
+      <td>NaN</td>
+      <td>1.048724</td>
+      <td>2.186215</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>9.384994</td>
+      <td>5.782065</td>
+      <td>8.773906</td>
+      <td>9.754688</td>
+      <td>7.454703</td>
+      <td>9.246419</td>
+      <td>12.474556</td>
+      <td>9.609426</td>
+      <td>9.453001</td>
+      <td>6.057699</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>2.775430</td>
+      <td>3.850979</td>
+      <td>6.395968</td>
+      <td>9.581922</td>
+      <td>8.027083</td>
+      <td>-1.232769</td>
+      <td>-1.232769</td>
+      <td>1.574683</td>
+      <td>1.574683</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>9.397606</td>
+      <td>5.612830</td>
+      <td>8.728789</td>
+      <td>10.035881</td>
+      <td>3.811738</td>
+      <td>9.599438</td>
+      <td>11.980747</td>
+      <td>9.700292</td>
+      <td>9.784147</td>
+      <td>7.548699</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 18321 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>gene</th>
+      <th>hsa-let-7a-1</th>
+      <th>hsa-let-7a-2</th>
+      <th>hsa-let-7a-3</th>
+      <th>hsa-let-7b</th>
+      <th>hsa-let-7c</th>
+      <th>hsa-let-7d</th>
+      <th>hsa-let-7e</th>
+      <th>hsa-let-7f-1</th>
+      <th>hsa-let-7f-2</th>
+      <th>hsa-let-7g</th>
+      <th>...</th>
+      <th>hsa-mir-937</th>
+      <th>hsa-mir-939</th>
+      <th>hsa-mir-940</th>
+      <th>hsa-mir-942</th>
+      <th>hsa-mir-944</th>
+      <th>hsa-mir-95</th>
+      <th>hsa-mir-96</th>
+      <th>hsa-mir-98</th>
+      <th>hsa-mir-99a</th>
+      <th>hsa-mir-99b</th>
+    </tr>
+    <tr>
+      <th>0</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>13.129765</td>
+      <td>14.117933</td>
+      <td>13.147714</td>
+      <td>14.595135</td>
+      <td>8.414890</td>
+      <td>8.665921</td>
+      <td>10.521777</td>
+      <td>3.879392</td>
+      <td>11.824817</td>
+      <td>8.597744</td>
+      <td>...</td>
+      <td>0.906699</td>
+      <td>-0.093302</td>
+      <td>2.672234</td>
+      <td>2.467414</td>
+      <td>1.044202</td>
+      <td>2.044202</td>
+      <td>6.906699</td>
+      <td>5.754696</td>
+      <td>7.024602</td>
+      <td>15.506461</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>12.918069</td>
+      <td>13.922300</td>
+      <td>12.913194</td>
+      <td>14.512657</td>
+      <td>9.646536</td>
+      <td>9.003653</td>
+      <td>9.131760</td>
+      <td>4.386952</td>
+      <td>12.678841</td>
+      <td>8.455144</td>
+      <td>...</td>
+      <td>1.579597</td>
+      <td>-0.083367</td>
+      <td>0.139024</td>
+      <td>3.032109</td>
+      <td>-0.668331</td>
+      <td>0.331670</td>
+      <td>5.912870</td>
+      <td>6.427066</td>
+      <td>7.885299</td>
+      <td>13.626182</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>13.012033</td>
+      <td>14.010002</td>
+      <td>13.028483</td>
+      <td>13.419612</td>
+      <td>9.312455</td>
+      <td>9.276943</td>
+      <td>11.395711</td>
+      <td>5.314692</td>
+      <td>13.530255</td>
+      <td>9.230563</td>
+      <td>...</td>
+      <td>3.270298</td>
+      <td>-2.189134</td>
+      <td>0.395828</td>
+      <td>1.855261</td>
+      <td>-0.381778</td>
+      <td>0.717757</td>
+      <td>6.603657</td>
+      <td>6.878301</td>
+      <td>7.580704</td>
+      <td>15.013822</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>13.144697</td>
+      <td>14.141721</td>
+      <td>13.151281</td>
+      <td>14.667196</td>
+      <td>11.511431</td>
+      <td>8.384763</td>
+      <td>10.368981</td>
+      <td>4.159182</td>
+      <td>12.652559</td>
+      <td>8.471503</td>
+      <td>...</td>
+      <td>0.923965</td>
+      <td>-0.660997</td>
+      <td>-0.076034</td>
+      <td>1.798435</td>
+      <td>1.798435</td>
+      <td>0.798435</td>
+      <td>6.181354</td>
+      <td>5.377922</td>
+      <td>10.031619</td>
+      <td>14.554783</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>13.411684</td>
+      <td>14.413518</td>
+      <td>13.420481</td>
+      <td>14.438548</td>
+      <td>11.693927</td>
+      <td>8.453747</td>
+      <td>10.741371</td>
+      <td>4.494537</td>
+      <td>13.009499</td>
+      <td>8.381220</td>
+      <td>...</td>
+      <td>0.182950</td>
+      <td>-0.624403</td>
+      <td>-1.624403</td>
+      <td>1.076036</td>
+      <td>0.182950</td>
+      <td>-0.302475</td>
+      <td>4.318110</td>
+      <td>5.103516</td>
+      <td>10.078201</td>
+      <td>14.650338</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 503 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>project</th>
+      <th>synchronous_malignancy</th>
+      <th>ajcc_pathologic_stage</th>
+      <th>days_to_diagnosis</th>
+      <th>laterality</th>
+      <th>created_datetime</th>
+      <th>last_known_disease_status</th>
+      <th>tissue_or_organ_of_origin</th>
+      <th>days_to_last_follow_up</th>
+      <th>age_at_diagnosis</th>
+      <th>...</th>
+      <th>pathology_N_stage</th>
+      <th>pathology_M_stage</th>
+      <th>gender</th>
+      <th>date_of_initial_pathologic_diagnosis</th>
+      <th>days_to_last_known_alive</th>
+      <th>radiation_therapy</th>
+      <th>histological_type</th>
+      <th>number_of_lymph_nodes</th>
+      <th>race</th>
+      <th>ethnicity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>TCGA-BRCA</td>
+      <td>No</td>
+      <td>Stage X</td>
+      <td>0.0</td>
+      <td>Left</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>20211.0</td>
+      <td>...</td>
+      <td>nx</td>
+      <td>mx</td>
+      <td>female</td>
+      <td>2004</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating lobular carcinoma</td>
+      <td>4</td>
+      <td>white</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>TCGA-BRCA</td>
+      <td>No</td>
+      <td>Stage IIB</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>18538.0</td>
+      <td>...</td>
+      <td>n1a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2003</td>
+      <td>NaN</td>
+      <td>yes</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>1</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>TCGA-BRCA</td>
+      <td>No</td>
+      <td>Stage IIB</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>22848.0</td>
+      <td>...</td>
+      <td>n1a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2011</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>1</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>TCGA-BRCA</td>
+      <td>No</td>
+      <td>Stage IA</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>19074.0</td>
+      <td>...</td>
+      <td>n0 (i+)</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2011</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>0</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>TCGA-BRCA</td>
+      <td>No</td>
+      <td>Stage IIIA</td>
+      <td>0.0</td>
+      <td>Left</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>18371.0</td>
+      <td>...</td>
+      <td>n2a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2013</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating lobular carcinoma</td>
+      <td>4</td>
+      <td>white</td>
+      <td>not hispanic or latino</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 119 columns</p>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+BRCA_Subtype_PAM50
+LumA                  419
+LumB                  140
+Basal                 130
+Her2                   46
+Normal                 34
+Name: count, dtype: int64
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="Preprocessing">
+<h1>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading"></a></h1>
+<p>After reviewing the data above, we applied the following steps to the data before further analysis.</p>
+<ol class="arabic simple">
+<li><p>Methylation (B -&gt; M-value)</p>
+<ul class="simple">
+<li><p>Clip B-values to [E, 1-E] and apply logit transform: M = log_2(B / (1-B)).</p></li>
+<li><p>Drop the original <code class="docutils literal notranslate"><span class="pre">Composite</span> <span class="pre">Element</span> <span class="pre">REF</span></code> column.</p></li>
+</ul>
+</li>
+<li><p>mRNA &amp; miRNA:</p>
+<ul class="simple">
+<li><p>Already in log_2 scale (RSEM normalized and RPKM).</p></li>
+</ul>
+</li>
+<li><p>Quality Control:</p>
+<ul class="simple">
+<li><p>Count samples with all-zero rows in each modality.</p></li>
+<li><p>Compute NaN counts post-transformation, then replace all NaNs with 0.</p></li>
+</ul>
+</li>
+<li><p>Column Name Cleaning:</p>
+<ul class="simple">
+<li><p>Replace all <code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> characters with <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">?</span></code> with <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Label Encoding:</p>
+<ul class="simple">
+<li><p>Map PAM50 subtypes to integers: Normal=0, Basal=1, Her2=2, LumA=3, LumB=4</p></li>
+</ul>
+</li>
+<li><p>Alignment &amp; Aggregation:</p>
+<ul class="simple">
+<li><p>Trim barcodes to patient level.</p></li>
+<li><p>Aggregate duplicate aliquots by mean per patient.</p></li>
+<li><p>Drop the <code class="docutils literal notranslate"><span class="pre">project</span></code> column from clinical.</p></li>
+<li><p>Subset all tables to the common patient set (no missing or all-zero samples).</p></li>
+</ul>
+</li>
+<li><p>Final Output Shapes:</p>
+<ul class="simple">
+<li><p>Methylation M-value: 769 × 20,107</p></li>
+<li><p>mRNA (log_2): 769 × 20,531</p></li>
+<li><p>miRNA (log_2): 769 × 503</p></li>
+<li><p>PAM50 labels: 769 × 1</p></li>
+<li><p>Clinical covariates: 769 × 101</p></li>
+</ul>
+</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">beta_to_m</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">B</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">B</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># find rows that are all 0s</span>
+<span class="n">zeros_meth</span> <span class="o">=</span> <span class="p">(</span><span class="n">meth</span>  <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">zeros_rna</span> <span class="o">=</span> <span class="p">(</span><span class="n">rna</span>   <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">zeros_mirna</span> <span class="o">=</span> <span class="p">(</span><span class="n">mirna</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All zeros: meth: </span><span class="si">{</span><span class="n">zeros_meth</span><span class="si">}</span><span class="s2">, rna: </span><span class="si">{</span><span class="n">zeros_rna</span><span class="si">}</span><span class="s2">, mirna: </span><span class="si">{</span><span class="n">zeros_mirna</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># find rows with all nans</span>
+<span class="n">nan_meth</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">nan_rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">nan_mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">nan_clinical</span> <span class="o">=</span> <span class="n">clinical</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">nan_pam50</span> <span class="o">=</span> <span class="n">pam50</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nan_meth: </span><span class="si">{</span><span class="n">nan_meth</span><span class="si">}</span><span class="s2">, nan_rna: </span><span class="si">{</span><span class="n">nan_rna</span><span class="si">}</span><span class="s2">, nan_mirna: </span><span class="si">{</span><span class="n">nan_mirna</span><span class="si">}</span><span class="s2">, nan_clinical: </span><span class="si">{</span><span class="n">nan_clinical</span><span class="si">}</span><span class="s2">, nan_pam50: </span><span class="si">{</span><span class="n">nan_pam50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># map PAM50 subtypes to integers</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Normal&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Basal&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Her2&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;LumA&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;LumB&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">pam50</span> <span class="o">=</span> <span class="n">pam50</span><span class="p">[</span><span class="s2">&quot;BRCA_Subtype_PAM50&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pam50&quot;</span><span class="p">)</span>
+
+<span class="c1"># drop and transform methylation</span>
+<span class="n">meth_clean</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Composite Element REF&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">meth_m</span> <span class="o">=</span> <span class="n">beta_to_m</span><span class="p">(</span><span class="n">meth_clean</span><span class="p">)</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">clinical</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># clean column names and fill nans</span>
+<span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">meth_m</span><span class="p">,</span> <span class="n">rna</span><span class="p">,</span> <span class="n">mirna</span><span class="p">]:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\?\|&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown_&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[?|]&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown_&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_+&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># check for nans after filling</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NaN counts after filling:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meth_m</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">rna</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">mirna</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">clinical</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">pam50</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># align index to PAM50</span>
+<span class="n">X_meth</span> <span class="o">=</span> <span class="n">meth_m</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">X_rna</span> <span class="o">=</span> <span class="n">rna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">X_mirna</span> <span class="o">=</span> <span class="n">mirna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">clinical</span><span class="o">=</span> <span class="n">clinical</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;new shapes: meth: </span><span class="si">{</span><span class="n">X_meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, rna: </span><span class="si">{</span><span class="n">X_rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, mirna: </span><span class="si">{</span><span class="n">X_mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, pam50: </span><span class="si">{</span><span class="n">pam50</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, clinical: </span><span class="si">{</span><span class="n">clinical</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_meth</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_rna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_mirna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+All zeros: meth: 0, rna: 0, mirna: 0
+nan_meth: 0, nan_rna: 0, nan_mirna: 0, nan_clinical: 0, nan_pam50: 0
+NaN counts after filling:
+0 0 0 46476 0
+new shapes: meth: (769, 20106), rna: (769, 18321), mirna: (769, 503), pam50: (769, 1), clinical: (769, 118)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Hybridization REF</th>
+      <th>A1BG</th>
+      <th>A1CF</th>
+      <th>A2BP1</th>
+      <th>A2LD1</th>
+      <th>A2M</th>
+      <th>A2ML1</th>
+      <th>A4GALT</th>
+      <th>A4GNT</th>
+      <th>AAA1</th>
+      <th>AAAS</th>
+      <th>...</th>
+      <th>ZWILCH</th>
+      <th>ZWINT</th>
+      <th>ZXDC</th>
+      <th>ZYG11A</th>
+      <th>ZYG11B</th>
+      <th>ZYX</th>
+      <th>ZZEF1</th>
+      <th>ZZZ3</th>
+      <th>psiTPTE22</th>
+      <th>tAKR</th>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>-0.094004</td>
+      <td>-1.251175</td>
+      <td>-2.113585</td>
+      <td>0.765262</td>
+      <td>0.345896</td>
+      <td>2.343631</td>
+      <td>-0.087741</td>
+      <td>1.155791</td>
+      <td>2.071436</td>
+      <td>-2.650851</td>
+      <td>...</td>
+      <td>-2.972923</td>
+      <td>-4.132523</td>
+      <td>-1.308165</td>
+      <td>-1.034199</td>
+      <td>0.016935</td>
+      <td>-1.820233</td>
+      <td>-0.103662</td>
+      <td>-3.055084</td>
+      <td>-1.605783</td>
+      <td>0.036955</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>0.812517</td>
+      <td>-0.237291</td>
+      <td>-1.658888</td>
+      <td>0.997440</td>
+      <td>0.630221</td>
+      <td>2.418135</td>
+      <td>0.289780</td>
+      <td>1.584114</td>
+      <td>-0.613329</td>
+      <td>-4.072465</td>
+      <td>...</td>
+      <td>-2.989465</td>
+      <td>-4.369032</td>
+      <td>-1.469365</td>
+      <td>-0.549876</td>
+      <td>-0.382967</td>
+      <td>-1.691887</td>
+      <td>-0.238022</td>
+      <td>-2.879231</td>
+      <td>-2.360128</td>
+      <td>0.729981</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>0.931878</td>
+      <td>-0.059301</td>
+      <td>-1.369104</td>
+      <td>1.628617</td>
+      <td>0.972130</td>
+      <td>2.277584</td>
+      <td>-0.137988</td>
+      <td>0.916964</td>
+      <td>1.956230</td>
+      <td>-3.781647</td>
+      <td>...</td>
+      <td>-2.969472</td>
+      <td>-4.488190</td>
+      <td>-1.419578</td>
+      <td>-0.637297</td>
+      <td>-0.292273</td>
+      <td>-1.902991</td>
+      <td>-0.100215</td>
+      <td>-3.132087</td>
+      <td>-1.567104</td>
+      <td>0.025686</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>0.676913</td>
+      <td>0.741678</td>
+      <td>-0.064133</td>
+      <td>1.552454</td>
+      <td>1.420200</td>
+      <td>2.343133</td>
+      <td>0.324621</td>
+      <td>0.905816</td>
+      <td>2.152928</td>
+      <td>-3.894574</td>
+      <td>...</td>
+      <td>-2.558319</td>
+      <td>-4.341028</td>
+      <td>-1.213585</td>
+      <td>-0.523013</td>
+      <td>-0.309506</td>
+      <td>-1.824419</td>
+      <td>-0.081137</td>
+      <td>-2.973455</td>
+      <td>-0.162004</td>
+      <td>1.103860</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>0.657963</td>
+      <td>0.044649</td>
+      <td>-0.209004</td>
+      <td>1.212210</td>
+      <td>1.170304</td>
+      <td>2.021628</td>
+      <td>0.028103</td>
+      <td>0.180184</td>
+      <td>2.515149</td>
+      <td>-3.885526</td>
+      <td>...</td>
+      <td>-2.889175</td>
+      <td>-4.405580</td>
+      <td>-1.217950</td>
+      <td>-0.706284</td>
+      <td>-0.069670</td>
+      <td>-1.716283</td>
+      <td>-0.053464</td>
+      <td>-2.934908</td>
+      <td>-1.121575</td>
+      <td>1.545812</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 20106 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>gene</th>
+      <th>unknown_100133144</th>
+      <th>unknown_100134869</th>
+      <th>unknown_10357</th>
+      <th>unknown_10431</th>
+      <th>unknown_155060</th>
+      <th>unknown_26823</th>
+      <th>unknown_340602</th>
+      <th>unknown_388795</th>
+      <th>unknown_390284</th>
+      <th>unknown_391343</th>
+      <th>...</th>
+      <th>ZWINTunknown_11130</th>
+      <th>ZXDAunknown_7789</th>
+      <th>ZXDBunknown_158586</th>
+      <th>ZXDCunknown_79364</th>
+      <th>ZYG11Aunknown_440590</th>
+      <th>ZYG11Bunknown_79699</th>
+      <th>ZYXunknown_7791</th>
+      <th>ZZEF1unknown_23140</th>
+      <th>ZZZ3unknown_26009</th>
+      <th>psiTPTE22unknown_387590</th>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>4.032489</td>
+      <td>3.692829</td>
+      <td>5.704604</td>
+      <td>8.672694</td>
+      <td>10.213110</td>
+      <td>0.000000</td>
+      <td>0.785174</td>
+      <td>-1.536587</td>
+      <td>2.048201</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>9.864120</td>
+      <td>7.017830</td>
+      <td>9.976968</td>
+      <td>10.695662</td>
+      <td>8.013988</td>
+      <td>10.238851</td>
+      <td>11.776124</td>
+      <td>10.887932</td>
+      <td>10.205129</td>
+      <td>0.785174</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>3.211931</td>
+      <td>4.119273</td>
+      <td>6.124231</td>
+      <td>9.139279</td>
+      <td>9.011343</td>
+      <td>0.121015</td>
+      <td>7.170928</td>
+      <td>2.291014</td>
+      <td>0.706022</td>
+      <td>3.027968</td>
+      <td>...</td>
+      <td>9.914682</td>
+      <td>5.902438</td>
+      <td>8.809329</td>
+      <td>10.391374</td>
+      <td>7.632831</td>
+      <td>9.237422</td>
+      <td>12.426428</td>
+      <td>10.364848</td>
+      <td>8.667973</td>
+      <td>9.855788</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>3.538886</td>
+      <td>3.206237</td>
+      <td>7.269570</td>
+      <td>10.410275</td>
+      <td>9.209506</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.443554</td>
+      <td>1.443554</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>11.305650</td>
+      <td>5.143969</td>
+      <td>9.060691</td>
+      <td>9.586488</td>
+      <td>8.374267</td>
+      <td>9.055784</td>
+      <td>12.414355</td>
+      <td>9.880935</td>
+      <td>8.992994</td>
+      <td>5.143969</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>3.595671</td>
+      <td>3.469873</td>
+      <td>7.168565</td>
+      <td>9.757450</td>
+      <td>9.110487</td>
+      <td>-1.273343</td>
+      <td>0.000000</td>
+      <td>1.048724</td>
+      <td>2.186215</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>9.384994</td>
+      <td>5.782065</td>
+      <td>8.773906</td>
+      <td>9.754688</td>
+      <td>7.454703</td>
+      <td>9.246419</td>
+      <td>12.474556</td>
+      <td>9.609426</td>
+      <td>9.453001</td>
+      <td>6.057699</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>2.775430</td>
+      <td>3.850979</td>
+      <td>6.395968</td>
+      <td>9.581922</td>
+      <td>8.027083</td>
+      <td>-1.232769</td>
+      <td>-1.232769</td>
+      <td>1.574683</td>
+      <td>1.574683</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>9.397606</td>
+      <td>5.612830</td>
+      <td>8.728789</td>
+      <td>10.035881</td>
+      <td>3.811738</td>
+      <td>9.599438</td>
+      <td>11.980747</td>
+      <td>9.700292</td>
+      <td>9.784147</td>
+      <td>7.548699</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 18321 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>gene</th>
+      <th>hsa_let_7a_1</th>
+      <th>hsa_let_7a_2</th>
+      <th>hsa_let_7a_3</th>
+      <th>hsa_let_7b</th>
+      <th>hsa_let_7c</th>
+      <th>hsa_let_7d</th>
+      <th>hsa_let_7e</th>
+      <th>hsa_let_7f_1</th>
+      <th>hsa_let_7f_2</th>
+      <th>hsa_let_7g</th>
+      <th>...</th>
+      <th>hsa_mir_937</th>
+      <th>hsa_mir_939</th>
+      <th>hsa_mir_940</th>
+      <th>hsa_mir_942</th>
+      <th>hsa_mir_944</th>
+      <th>hsa_mir_95</th>
+      <th>hsa_mir_96</th>
+      <th>hsa_mir_98</th>
+      <th>hsa_mir_99a</th>
+      <th>hsa_mir_99b</th>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>13.129765</td>
+      <td>14.117933</td>
+      <td>13.147714</td>
+      <td>14.595135</td>
+      <td>8.414890</td>
+      <td>8.665921</td>
+      <td>10.521777</td>
+      <td>3.879392</td>
+      <td>11.824817</td>
+      <td>8.597744</td>
+      <td>...</td>
+      <td>0.906699</td>
+      <td>-0.093302</td>
+      <td>2.672234</td>
+      <td>2.467414</td>
+      <td>1.044202</td>
+      <td>2.044202</td>
+      <td>6.906699</td>
+      <td>5.754696</td>
+      <td>7.024602</td>
+      <td>15.506461</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>12.918069</td>
+      <td>13.922300</td>
+      <td>12.913194</td>
+      <td>14.512657</td>
+      <td>9.646536</td>
+      <td>9.003653</td>
+      <td>9.131760</td>
+      <td>4.386952</td>
+      <td>12.678841</td>
+      <td>8.455144</td>
+      <td>...</td>
+      <td>1.579597</td>
+      <td>-0.083367</td>
+      <td>0.139024</td>
+      <td>3.032109</td>
+      <td>-0.668331</td>
+      <td>0.331670</td>
+      <td>5.912870</td>
+      <td>6.427066</td>
+      <td>7.885299</td>
+      <td>13.626182</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>13.012033</td>
+      <td>14.010002</td>
+      <td>13.028483</td>
+      <td>13.419612</td>
+      <td>9.312455</td>
+      <td>9.276943</td>
+      <td>11.395711</td>
+      <td>5.314692</td>
+      <td>13.530255</td>
+      <td>9.230563</td>
+      <td>...</td>
+      <td>3.270298</td>
+      <td>-2.189134</td>
+      <td>0.395828</td>
+      <td>1.855261</td>
+      <td>-0.381778</td>
+      <td>0.717757</td>
+      <td>6.603657</td>
+      <td>6.878301</td>
+      <td>7.580704</td>
+      <td>15.013822</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>13.144697</td>
+      <td>14.141721</td>
+      <td>13.151281</td>
+      <td>14.667196</td>
+      <td>11.511431</td>
+      <td>8.384763</td>
+      <td>10.368981</td>
+      <td>4.159182</td>
+      <td>12.652559</td>
+      <td>8.471503</td>
+      <td>...</td>
+      <td>0.923965</td>
+      <td>-0.660997</td>
+      <td>-0.076034</td>
+      <td>1.798435</td>
+      <td>1.798435</td>
+      <td>0.798435</td>
+      <td>6.181354</td>
+      <td>5.377922</td>
+      <td>10.031619</td>
+      <td>14.554783</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>13.411684</td>
+      <td>14.413518</td>
+      <td>13.420481</td>
+      <td>14.438548</td>
+      <td>11.693927</td>
+      <td>8.453747</td>
+      <td>10.741371</td>
+      <td>4.494537</td>
+      <td>13.009499</td>
+      <td>8.381220</td>
+      <td>...</td>
+      <td>0.182950</td>
+      <td>-0.624403</td>
+      <td>-1.624403</td>
+      <td>1.076036</td>
+      <td>0.182950</td>
+      <td>-0.302475</td>
+      <td>4.318110</td>
+      <td>5.103516</td>
+      <td>10.078201</td>
+      <td>14.650338</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 503 columns</p>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synchronous_malignancy</th>
+      <th>ajcc_pathologic_stage</th>
+      <th>days_to_diagnosis</th>
+      <th>laterality</th>
+      <th>created_datetime</th>
+      <th>last_known_disease_status</th>
+      <th>tissue_or_organ_of_origin</th>
+      <th>days_to_last_follow_up</th>
+      <th>age_at_diagnosis</th>
+      <th>primary_diagnosis</th>
+      <th>...</th>
+      <th>pathology_N_stage</th>
+      <th>pathology_M_stage</th>
+      <th>gender</th>
+      <th>date_of_initial_pathologic_diagnosis</th>
+      <th>days_to_last_known_alive</th>
+      <th>radiation_therapy</th>
+      <th>histological_type</th>
+      <th>number_of_lymph_nodes</th>
+      <th>race</th>
+      <th>ethnicity</th>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>No</td>
+      <td>Stage X</td>
+      <td>0.0</td>
+      <td>Left</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>20211.0</td>
+      <td>Lobular carcinoma, NOS</td>
+      <td>...</td>
+      <td>nx</td>
+      <td>mx</td>
+      <td>female</td>
+      <td>2004</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating lobular carcinoma</td>
+      <td>4</td>
+      <td>white</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>No</td>
+      <td>Stage IIB</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>18538.0</td>
+      <td>Infiltrating duct carcinoma, NOS</td>
+      <td>...</td>
+      <td>n1a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2003</td>
+      <td>NaN</td>
+      <td>yes</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>1</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>No</td>
+      <td>Stage IIB</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>22848.0</td>
+      <td>Infiltrating duct carcinoma, NOS</td>
+      <td>...</td>
+      <td>n1a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2011</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>1</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>No</td>
+      <td>Stage IA</td>
+      <td>0.0</td>
+      <td>Right</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>19074.0</td>
+      <td>Infiltrating duct carcinoma, NOS</td>
+      <td>...</td>
+      <td>n0 (i+)</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2011</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating ductal carcinoma</td>
+      <td>0</td>
+      <td>black or african american</td>
+      <td>not hispanic or latino</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>No</td>
+      <td>Stage IIIA</td>
+      <td>0.0</td>
+      <td>Left</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Breast, NOS</td>
+      <td>NaN</td>
+      <td>18371.0</td>
+      <td>Lobular carcinoma, NOS</td>
+      <td>...</td>
+      <td>n2a</td>
+      <td>m0</td>
+      <td>female</td>
+      <td>2013</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>infiltrating lobular carcinoma</td>
+      <td>4</td>
+      <td>white</td>
+      <td>not hispanic or latino</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 118 columns</p>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pam50
+3        419
+4        140
+1        130
+2         46
+0         34
+Name: count, dtype: int64
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lets set up a commong index for all the files and then save them to csv</span>
+<span class="n">X_meth</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;patient&quot;</span>
+<span class="n">X_rna</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;patient&quot;</span>
+<span class="n">X_mirna</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;patient&quot;</span>
+<span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;patient&quot;</span>
+<span class="n">clinical</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;patient&quot;</span>
+
+<span class="n">X_meth</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;meth.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_rna</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;rna.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_mirna</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;mirna.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pam50</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;pam50.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clinical</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;clinical.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">
+<h1>Optional: Load the data we just saved to make sure it looks okay.<a class="headerlink" href="#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay." title="Link to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;meth.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;rna.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mirna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;mirna.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pam50</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;pam50.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;clinical.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">meth</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mirna</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Easy-Access-via-DatasetLoader">
+<h1>Easy Access via DatasetLoader<a class="headerlink" href="#Easy-Access-via-DatasetLoader" title="Link to this heading"></a></h1>
+<p>To facilitate working with this data, we have made it available through our DatasetLoader component. If you have additional pre-processed or raw datasets you would like to include, feel free to reach out and we are happy to support adding new datasets to the platform.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatasetLoader</span>
+
+<span class="n">tgca_brca</span> <span class="o">=</span> <span class="n">DatasetLoader</span><span class="p">(</span><span class="s2">&quot;brca&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TGCA BRCA dataset shape: </span><span class="si">{</span><span class="n">tgca_brca</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">brca_meth</span> <span class="o">=</span> <span class="n">tgca_brca</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;meth&quot;</span><span class="p">]</span>
+<span class="n">brca_rna</span> <span class="o">=</span> <span class="n">tgca_brca</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span>
+<span class="n">brca_mirna</span> <span class="o">=</span> <span class="n">tgca_brca</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mirna&quot;</span><span class="p">]</span>
+<span class="n">brca_clinical</span> <span class="o">=</span> <span class="n">tgca_brca</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;clinical&quot;</span><span class="p">]</span>
+<span class="n">brca_pam50</span> <span class="o">=</span> <span class="n">tgca_brca</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;pam50&quot;</span><span class="p">]</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TGCA BRCA dataset shape: {&#39;mirna&#39;: (769, 503), &#39;pam50&#39;: (769, 1), &#39;clinical&#39;: (769, 118), &#39;meth&#39;: (769, 20106), &#39;rna&#39;: (769, 18321)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_clinical</span>
+
+<span class="c1">#shapes</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RNA shape: </span><span class="si">{</span><span class="n">brca_rna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;METH shape: </span><span class="si">{</span><span class="n">brca_meth</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;miRNA shape: </span><span class="si">{</span><span class="n">brca_mirna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clinical shape: </span><span class="si">{</span><span class="n">brca_clinical</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phenotype shape: </span><span class="si">{</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phenotype counts:</span><span class="se">\n</span><span class="si">{</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># review min and max values from the datasets</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;rna&quot;</span><span class="p">:</span> <span class="n">brca_rna</span><span class="p">,</span> <span class="s2">&quot;meth&quot;</span><span class="p">:</span> <span class="n">brca_meth</span><span class="p">,</span> <span class="s2">&quot;mirna&quot;</span><span class="p">:</span> <span class="n">brca_mirna</span><span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">min_val</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min: </span><span class="si">{</span><span class="n">min_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max: </span><span class="si">{</span><span class="n">max_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#check nans in pam50</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nan values in pam50 </span><span class="si">{</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">brca_pam50</span> <span class="o">=</span> <span class="n">brca_pam50</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">X_rna</span> <span class="o">=</span> <span class="n">brca_rna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">X_meth</span> <span class="o">=</span> <span class="n">brca_meth</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">X_mirna</span> <span class="o">=</span> <span class="n">brca_mirna</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">brca_clinical</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">brca_pam50</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+<span class="c1"># for more details on the preprocessing function, see bioneuralnet.utils.preprocess</span>
+<span class="n">clinical</span> <span class="o">=</span> <span class="n">preprocess_clinical</span><span class="p">(</span><span class="n">clinical</span><span class="p">,</span> <span class="n">brca_pam50</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ignore_columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;days_to_birth&quot;</span><span class="p">,</span> <span class="s2">&quot;age_at_diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;days_to_last_followup&quot;</span><span class="p">,</span> <span class="s2">&quot;age_at_index&quot;</span><span class="p">,</span> <span class="s2">&quot;years_to_birth&quot;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-05-16 10:31:09,364 - bioneuralnet.utils.preprocess - INFO - [Inf]: Replaced 0 infinite values
+2025-05-16 10:31:09,365 - bioneuralnet.utils.preprocess - INFO - [NaN]: Replaced 31384 NaNs after median imputation
+2025-05-16 10:31:09,365 - bioneuralnet.utils.preprocess - INFO - [Zero-Var]: 39 columns dropped due to zero variance
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+RNA shape: (769, 18321)
+METH shape: (769, 20106)
+miRNA shape: (769, 503)
+Clinical shape: (769, 118)
+Phenotype shape: (769, 1)
+Phenotype counts:
+pam50
+3        419
+4        140
+1        130
+2         46
+0         34
+Name: count, dtype: int64
+
+RNA:
+Min: -8.5873
+Max: 20.9784
+
+METH:
+Min: -7.1642
+Max: 6.9710
+
+MIRNA:
+Min: -4.4631
+Max: 19.3838
+Nan values in pam50 0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-05-16 10:31:09,752 - bioneuralnet.utils.preprocess - INFO - Selected top 15 features by RandomForest importance
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>days_to_birth</th>
+      <th>age_at_diagnosis</th>
+      <th>days_to_last_followup</th>
+      <th>age_at_index</th>
+      <th>years_to_birth</th>
+      <th>year_of_diagnosis</th>
+      <th>number_of_lymph_nodes</th>
+      <th>date_of_initial_pathologic_diagnosis</th>
+      <th>histological_type_infiltrating lobular carcinoma</th>
+      <th>primary_diagnosis_Lobular carcinoma, NOS</th>
+      <th>morphology_8520/3</th>
+      <th>race.1_white</th>
+      <th>days_to_death.1</th>
+      <th>laterality_Right</th>
+      <th>primary_diagnosis_Infiltrating duct carcinoma, NOS</th>
+      <th>country_of_residence_at_enrollment_United States</th>
+      <th>sites_of_involvement_Breast, NOS</th>
+      <th>days_to_death</th>
+      <th>race_white</th>
+      <th>ajcc_staging_system_edition_6th</th>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-3C-AAAU</th>
+      <td>-20211.0</td>
+      <td>20211.0</td>
+      <td>4047.0</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>-1.50</td>
+      <td>1.5</td>
+      <td>-1.50</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALI</th>
+      <td>-18538.0</td>
+      <td>18538.0</td>
+      <td>4005.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>-1.75</td>
+      <td>0.0</td>
+      <td>-1.75</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALJ</th>
+      <td>-22848.0</td>
+      <td>22848.0</td>
+      <td>1474.0</td>
+      <td>62.0</td>
+      <td>62.0</td>
+      <td>0.25</td>
+      <td>0.0</td>
+      <td>0.25</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>TCGA-3C-AALK</th>
+      <td>-19074.0</td>
+      <td>19074.0</td>
+      <td>1448.0</td>
+      <td>52.0</td>
+      <td>52.0</td>
+      <td>0.25</td>
+      <td>-0.5</td>
+      <td>0.25</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>TCGA-4H-AAAK</th>
+      <td>-18371.0</td>
+      <td>18371.0</td>
+      <td>348.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>0.75</td>
+      <td>1.5</td>
+      <td>0.75</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Preparing-Multi-Omics-Data-for-downstream-tasks">
+<h1>Preparing Multi-Omics Data for downstream tasks<a class="headerlink" href="#Preparing-Multi-Omics-Data-for-downstream-tasks" title="Link to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p>Check sample overlap.</p></li>
+<li><p>Select top features.</p>
+<ul class="simple">
+<li><p>Uses ANOVA F-test to select the most relevant features for classification from each omics dataset.</p></li>
+</ul>
+</li>
+<li><p>Combine datasets.</p>
+<ul class="simple">
+<li><p>Selected features from RNA, methylation, and miRNA are combined into a single dataset.</p></li>
+</ul>
+</li>
+<li><p>Clean missing values.</p>
+<ul class="simple">
+<li><p>Counts and removes any missing (nan) values from the combined dataset.</p></li>
+</ul>
+</li>
+<li><p>Build similarity graph.</p>
+<ul class="simple">
+<li><p>Creates a k-nearest neighbors graph from the transposed feature matrix.</p></li>
+</ul>
+</li>
+</ol>
+<p>Note: For more details on preprocessing functions and graph generation algorithms, see the <a class="reference external" href="https://bioneuralnet.readthedocs.io/en/latest/utils.html">Utils documentation</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">top_anova_f_features</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_similarity_graph</span>
+
+<span class="c1">#count intersection of samples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection of samples:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RNA: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">X_rna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;METH: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">X_meth</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;miRNA: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">X_mirna</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clinical: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clinical</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">pam50</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">meth_sel</span> <span class="o">=</span> <span class="n">top_anova_f_features</span><span class="p">(</span><span class="n">X_meth</span><span class="p">,</span> <span class="n">brca_pam50</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span>
+<span class="n">rna_sel</span> <span class="o">=</span> <span class="n">top_anova_f_features</span><span class="p">(</span><span class="n">X_rna</span><span class="p">,</span> <span class="n">brca_pam50</span> <span class="p">,</span><span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span>
+<span class="n">mirna_sel</span> <span class="o">=</span> <span class="n">top_anova_f_features</span><span class="p">(</span><span class="n">X_mirna</span><span class="p">,</span> <span class="n">brca_pam50</span><span class="p">,</span><span class="n">max_features</span><span class="o">=</span><span class="mi">503</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span>
+<span class="n">X_train_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">meth_sel</span><span class="p">,</span> <span class="n">rna_sel</span><span class="p">,</span> <span class="n">mirna_sel</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#count nan values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nan values in X_train_full: </span><span class="si">{</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#drop nan values</span>
+<span class="n">X_train_full</span> <span class="o">=</span> <span class="n">X_train_full</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1">#check if there are any nan values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nan value in X_train_full after dropping: </span><span class="si">{</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train_full shape: </span><span class="si">{</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">A_train</span> <span class="o">=</span> <span class="n">gen_similarity_graph</span><span class="p">(</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Network shape: </span><span class="si">{</span><span class="n">A_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Intersection of samples:
+RNA: 769
+METH: 769
+miRNA: 769
+Clinical: 769
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-05-16 10:31:12,677 - bioneuralnet.utils.preprocess - INFO - [Inf]: Replaced 0 infinite values
+2025-05-16 10:31:12,678 - bioneuralnet.utils.preprocess - INFO - [NaN]: Replaced 0 NaNs after median imputation
+2025-05-16 10:31:12,678 - bioneuralnet.utils.preprocess - INFO - [Zero-Var]: 0 columns dropped due to zero variance
+2025-05-16 10:31:12,835 - bioneuralnet.utils.preprocess - INFO - Selected 1000 features by ANOVA (task=classification), 17514 significant, 0 padded
+2025-05-16 10:31:15,470 - bioneuralnet.utils.preprocess - INFO - [Inf]: Replaced 0 infinite values
+2025-05-16 10:31:15,471 - bioneuralnet.utils.preprocess - INFO - [NaN]: Replaced 0 NaNs after median imputation
+2025-05-16 10:31:15,471 - bioneuralnet.utils.preprocess - INFO - [Zero-Var]: 0 columns dropped due to zero variance
+2025-05-16 10:31:15,635 - bioneuralnet.utils.preprocess - INFO - Selected 1000 features by ANOVA (task=classification), 16864 significant, 0 padded
+2025-05-16 10:31:15,714 - bioneuralnet.utils.preprocess - INFO - [Inf]: Replaced 0 infinite values
+2025-05-16 10:31:15,715 - bioneuralnet.utils.preprocess - INFO - [NaN]: Replaced 0 NaNs after median imputation
+2025-05-16 10:31:15,715 - bioneuralnet.utils.preprocess - INFO - [Zero-Var]: 0 columns dropped due to zero variance
+2025-05-16 10:31:15,718 - bioneuralnet.utils.preprocess - INFO - Selected 503 features by ANOVA (task=classification), 465 significant, 38 padded
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Nan values in X_train_full: 0
+Nan value in X_train_full after dropping: 0
+X_train_full shape: (769, 2503)
+Network shape: (2503, 2503)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.downstream_task</span><span class="w"> </span><span class="kn">import</span> <span class="n">DPMON</span>
+
+<span class="n">save</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/home/vicente/Github/BioNeuralNet/TCGA_BRCA/results&quot;</span><span class="p">)</span>
+<span class="n">brca_pam50</span> <span class="o">=</span> <span class="n">brca_pam50</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pam50&quot;</span><span class="p">:</span> <span class="s2">&quot;phenotype&quot;</span><span class="p">})</span>
+
+<span class="n">dpmon</span> <span class="o">=</span> <span class="n">DPMON</span><span class="p">(</span>
+    <span class="n">adjacency_matrix</span><span class="o">=</span><span class="n">A_train</span><span class="p">,</span>
+    <span class="n">omics_list</span><span class="o">=</span><span class="p">[</span><span class="n">meth_sel</span><span class="p">,</span> <span class="n">rna_sel</span><span class="p">,</span> <span class="n">mirna_sel</span><span class="p">],</span>
+    <span class="n">phenotype_data</span><span class="o">=</span><span class="n">brca_pam50</span><span class="p">,</span>
+    <span class="n">clinical_data</span><span class="o">=</span><span class="n">clinical</span><span class="p">,</span>
+    <span class="n">repeat_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">tune</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cuda</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">save</span><span class="o">/</span><span class="s2">&quot;results1&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">predictions_df</span><span class="p">,</span> <span class="n">avg_accuracy</span> <span class="o">=</span> <span class="n">dpmon</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">actual</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s2">&quot;Actual&quot;</span><span class="p">]</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s2">&quot;Predicted&quot;</span><span class="p">]</span>
+<span class="n">dp_acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">dp_f1w</span> <span class="o">=</span> <span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">dp_f1m</span> <span class="o">=</span> <span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DPMON results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">dp_acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 weighted: </span><span class="si">{</span><span class="n">dp_f1w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 macro: </span><span class="si">{</span><span class="n">dp_f1m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2025-05-16 15:22:49,397 - bioneuralnet.downstream_task.dpmon - INFO - Output directory set to: /home/vicente/Github/BioNeuralNet/TCGA_BRCA/results/results1
+2025-05-16 15:22:49,397 - bioneuralnet.downstream_task.dpmon - INFO - Initialized DPMON with the provided parameters.
+2025-05-16 15:22:49,397 - bioneuralnet.downstream_task.dpmon - INFO - Starting DPMON run.
+2025-05-16 15:22:49,411 - bioneuralnet.downstream_task.dpmon - INFO - Running hyperparameter tuning for DPMON.
+2025-05-16 15:22:49,412 - bioneuralnet.downstream_task.dpmon - INFO - Using GPU 0
+2025-05-16 15:22:49,412 - bioneuralnet.downstream_task.dpmon - INFO - Slicing omics dataset based on network nodes.
+2025-05-16 15:22:49,415 - bioneuralnet.downstream_task.dpmon - INFO - Building PyTorch Geometric Data object from adjacency matrix.
+2025-05-16 15:22:49,487 - bioneuralnet.downstream_task.dpmon - INFO - Number of nodes in network: 2503
+2025-05-16 15:22:49,487 - bioneuralnet.downstream_task.dpmon - INFO - Using clinical vars for node features: [&#39;days_to_birth&#39;, &#39;age_at_diagnosis&#39;, &#39;days_to_last_followup&#39;, &#39;age_at_index&#39;, &#39;years_to_birth&#39;, &#39;year_of_diagnosis&#39;, &#39;number_of_lymph_nodes&#39;, &#39;date_of_initial_pathologic_diagnosis&#39;, &#39;histological_type_infiltrating lobular carcinoma&#39;, &#39;primary_diagnosis_Lobular carcinoma, NOS&#39;, &#39;morphology_8520/3&#39;, &#39;race.1_white&#39;, &#39;days_to_death.1&#39;, &#39;laterality_Right&#39;, &#39;primary_diagnosis_Infiltrating duct carcinoma, NOS&#39;, &#39;country_of_residence_at_enrollment_United States&#39;, &#39;sites_of_involvement_Breast, NOS&#39;, &#39;days_to_death&#39;, &#39;race_white&#39;, &#39;ajcc_staging_system_edition_6th&#39;]
+2025-05-16 15:22:53,816 - bioneuralnet.downstream_task.dpmon - INFO - Starting hyperparameter tuning for dataset shape: (769, 2504)
+2025-05-16 15:22:53,817 INFO tune.py:616 -- [output] This uses the legacy output and progress reporter, as Jupyter notebooks are not supported by the new engine, yet. For more information, please see https://github.com/ray-project/ray/issues/36949
+2025-05-16 15:23:37,056 INFO tune.py:1009 -- Wrote the latest version of all result files and experiment state to &#39;/home/vicente/ray_results/tune_dp&#39; in 0.0110s.
+2025-05-16 15:23:37,074 - bioneuralnet.downstream_task.dpmon - INFO - Best trial config: {&#39;gnn_layer_num&#39;: 2, &#39;gnn_hidden_dim&#39;: 128, &#39;lr&#39;: 0.005072810911305633, &#39;weight_decay&#39;: 0.00396813275339707, &#39;nn_hidden_dim1&#39;: 4, &#39;nn_hidden_dim2&#39;: 4, &#39;num_epochs&#39;: 512}
+2025-05-16 15:23:37,075 - bioneuralnet.downstream_task.dpmon - INFO - Best trial final loss: 1.1080904006958008
+2025-05-16 15:23:37,075 - bioneuralnet.downstream_task.dpmon - INFO - Best trial final accuracy: 0.8179453836150845
+2025-05-16 15:23:37,077 - bioneuralnet.downstream_task.dpmon - INFO -    gnn_layer_num  gnn_hidden_dim        lr  weight_decay  nn_hidden_dim1  \
+0              2             128  0.005073      0.003968               4
+
+   nn_hidden_dim2  num_epochs
+0               4         512
+2025-05-16 15:23:37,079 - bioneuralnet.downstream_task.dpmon - INFO - Best tuned parameters: {&#39;gnn_layer_num&#39;: 2, &#39;gnn_hidden_dim&#39;: 128, &#39;lr&#39;: 0.005072810911305633, &#39;weight_decay&#39;: 0.00396813275339707, &#39;nn_hidden_dim1&#39;: 4, &#39;nn_hidden_dim2&#39;: 4, &#39;num_epochs&#39;: 512}
+2025-05-16 15:23:37,079 - bioneuralnet.downstream_task.dpmon - INFO - Best tuned parameters: {&#39;gnn_layer_num&#39;: 2, &#39;gnn_hidden_dim&#39;: 128, &#39;lr&#39;: 0.005072810911305633, &#39;weight_decay&#39;: 0.00396813275339707, &#39;nn_hidden_dim1&#39;: 4, &#39;nn_hidden_dim2&#39;: 4, &#39;num_epochs&#39;: 512}
+2025-05-16 15:23:37,079 - bioneuralnet.downstream_task.dpmon - INFO - Running standard training with tuned parameters.
+2025-05-16 15:23:37,079 - bioneuralnet.downstream_task.dpmon - INFO - Using GPU 0
+2025-05-16 15:23:37,080 - bioneuralnet.downstream_task.dpmon - INFO - Slicing omics dataset based on network nodes.
+2025-05-16 15:23:37,083 - bioneuralnet.downstream_task.dpmon - INFO - Building PyTorch Geometric Data object from adjacency matrix.
+2025-05-16 15:23:37,159 - bioneuralnet.downstream_task.dpmon - INFO - Number of nodes in network: 2503
+2025-05-16 15:23:37,159 - bioneuralnet.downstream_task.dpmon - INFO - Using clinical vars for node features: [&#39;days_to_birth&#39;, &#39;age_at_diagnosis&#39;, &#39;days_to_last_followup&#39;, &#39;age_at_index&#39;, &#39;years_to_birth&#39;, &#39;year_of_diagnosis&#39;, &#39;number_of_lymph_nodes&#39;, &#39;date_of_initial_pathologic_diagnosis&#39;, &#39;histological_type_infiltrating lobular carcinoma&#39;, &#39;primary_diagnosis_Lobular carcinoma, NOS&#39;, &#39;morphology_8520/3&#39;, &#39;race.1_white&#39;, &#39;days_to_death.1&#39;, &#39;laterality_Right&#39;, &#39;primary_diagnosis_Infiltrating duct carcinoma, NOS&#39;, &#39;country_of_residence_at_enrollment_United States&#39;, &#39;sites_of_involvement_Breast, NOS&#39;, &#39;days_to_death&#39;, &#39;race_white&#39;, &#39;ajcc_staging_system_edition_6th&#39;]
+2025-05-16 15:23:41,530 - bioneuralnet.downstream_task.dpmon - INFO - Training iteration 1/3
+2025-05-16 15:23:41,563 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [1/512], Loss: 1.6182
+2025-05-16 15:23:41,650 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [10/512], Loss: 1.5531
+2025-05-16 15:23:41,745 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [20/512], Loss: 1.5067
+2025-05-16 15:23:41,840 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [30/512], Loss: 1.4441
+2025-05-16 15:23:41,939 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [40/512], Loss: 1.3666
+2025-05-16 15:23:42,033 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [50/512], Loss: 1.2763
+2025-05-16 15:23:42,128 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [60/512], Loss: 1.2001
+2025-05-16 15:23:42,224 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [70/512], Loss: 1.1394
+2025-05-16 15:23:42,317 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [80/512], Loss: 1.0970
+2025-05-16 15:23:42,412 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [90/512], Loss: 1.0614
+2025-05-16 15:23:42,505 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [100/512], Loss: 1.0399
+2025-05-16 15:23:42,599 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [110/512], Loss: 1.0265
+2025-05-16 15:23:42,693 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [120/512], Loss: 1.1995
+2025-05-16 15:23:42,787 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [130/512], Loss: 1.0792
+2025-05-16 15:23:42,881 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [140/512], Loss: 1.0485
+2025-05-16 15:23:42,976 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [150/512], Loss: 1.0294
+2025-05-16 15:23:43,077 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [160/512], Loss: 1.0155
+2025-05-16 15:23:43,171 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [170/512], Loss: 1.0073
+2025-05-16 15:23:43,266 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [180/512], Loss: 1.0014
+2025-05-16 15:23:43,361 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [190/512], Loss: 0.9978
+2025-05-16 15:23:43,455 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [200/512], Loss: 0.9956
+2025-05-16 15:23:43,549 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [210/512], Loss: 0.9942
+2025-05-16 15:23:43,643 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [220/512], Loss: 0.9932
+2025-05-16 15:23:43,737 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [230/512], Loss: 1.0023
+2025-05-16 15:23:43,831 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [240/512], Loss: 0.9951
+2025-05-16 15:23:43,925 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [250/512], Loss: 0.9916
+2025-05-16 15:23:44,019 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [260/512], Loss: 0.9900
+2025-05-16 15:23:44,113 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [270/512], Loss: 0.9888
+2025-05-16 15:23:44,207 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [280/512], Loss: 0.9878
+2025-05-16 15:23:44,302 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [290/512], Loss: 0.9872
+2025-05-16 15:23:44,396 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [300/512], Loss: 1.0332
+2025-05-16 15:23:44,490 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [310/512], Loss: 1.0558
+2025-05-16 15:23:44,584 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [320/512], Loss: 1.0264
+2025-05-16 15:23:44,678 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [330/512], Loss: 1.0068
+2025-05-16 15:23:44,772 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [340/512], Loss: 0.9968
+2025-05-16 15:23:44,866 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [350/512], Loss: 0.9917
+2025-05-16 15:23:44,963 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [360/512], Loss: 0.9890
+2025-05-16 15:23:45,059 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [370/512], Loss: 1.0214
+2025-05-16 15:23:45,153 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [380/512], Loss: 1.0091
+2025-05-16 15:23:45,247 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [390/512], Loss: 0.9997
+2025-05-16 15:23:45,341 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [400/512], Loss: 0.9948
+2025-05-16 15:23:45,436 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [410/512], Loss: 0.9907
+2025-05-16 15:23:45,530 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [420/512], Loss: 0.9878
+2025-05-16 15:23:45,624 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [430/512], Loss: 0.9851
+2025-05-16 15:23:45,717 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [440/512], Loss: 0.9828
+2025-05-16 15:23:45,815 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [450/512], Loss: 0.9802
+2025-05-16 15:23:45,909 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [460/512], Loss: 0.9773
+2025-05-16 15:23:46,003 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [470/512], Loss: 0.9736
+2025-05-16 15:23:46,097 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [480/512], Loss: 0.9691
+2025-05-16 15:23:46,192 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [490/512], Loss: 0.9645
+2025-05-16 15:23:46,287 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [500/512], Loss: 0.9643
+2025-05-16 15:23:46,384 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [510/512], Loss: 1.0325
+2025-05-16 15:23:46,407 - bioneuralnet.downstream_task.dpmon - INFO - Training Accuracy: 0.6658
+2025-05-16 15:23:46,409 - bioneuralnet.downstream_task.dpmon - INFO - Model saved to /home/vicente/Github/BioNeuralNet/TCGA_BRCA/results/results1/dpm_model_iter_1.pth
+2025-05-16 15:23:46,413 - bioneuralnet.downstream_task.dpmon - INFO - Training iteration 2/3
+2025-05-16 15:23:46,435 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [1/512], Loss: 1.6234
+2025-05-16 15:23:46,531 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [10/512], Loss: 1.5598
+2025-05-16 15:23:46,626 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [20/512], Loss: 1.5203
+2025-05-16 15:23:46,720 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [30/512], Loss: 1.4727
+2025-05-16 15:23:46,814 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [40/512], Loss: 1.4078
+2025-05-16 15:23:46,908 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [50/512], Loss: 1.3256
+2025-05-16 15:23:47,002 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [60/512], Loss: 1.2342
+2025-05-16 15:23:47,096 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [70/512], Loss: 1.1537
+2025-05-16 15:23:47,190 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [80/512], Loss: 1.1014
+2025-05-16 15:23:47,284 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [90/512], Loss: 1.0631
+2025-05-16 15:23:47,378 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [100/512], Loss: 1.0422
+2025-05-16 15:23:47,472 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [110/512], Loss: 1.0257
+2025-05-16 15:23:47,565 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [120/512], Loss: 1.0252
+2025-05-16 15:23:47,659 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [130/512], Loss: 1.0136
+2025-05-16 15:23:47,757 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [140/512], Loss: 1.0068
+2025-05-16 15:23:47,852 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [150/512], Loss: 1.0016
+2025-05-16 15:23:47,946 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [160/512], Loss: 0.9965
+2025-05-16 15:23:48,040 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [170/512], Loss: 1.0520
+2025-05-16 15:23:48,134 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [180/512], Loss: 1.0251
+2025-05-16 15:23:48,229 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [190/512], Loss: 1.0158
+2025-05-16 15:23:48,322 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [200/512], Loss: 1.0110
+2025-05-16 15:23:48,416 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [210/512], Loss: 1.0074
+2025-05-16 15:23:48,523 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [220/512], Loss: 1.0034
+2025-05-16 15:23:48,618 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [230/512], Loss: 1.0010
+2025-05-16 15:23:48,712 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [240/512], Loss: 0.9988
+2025-05-16 15:23:48,806 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [250/512], Loss: 0.9974
+2025-05-16 15:23:48,900 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [260/512], Loss: 0.9960
+2025-05-16 15:23:48,994 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [270/512], Loss: 0.9946
+2025-05-16 15:23:49,089 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [280/512], Loss: 0.9932
+2025-05-16 15:23:49,183 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [290/512], Loss: 0.9924
+2025-05-16 15:23:49,277 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [300/512], Loss: 0.9905
+2025-05-16 15:23:49,373 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [310/512], Loss: 0.9880
+2025-05-16 15:23:49,467 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [320/512], Loss: 0.9850
+2025-05-16 15:23:49,561 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [330/512], Loss: 0.9789
+2025-05-16 15:23:49,656 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [340/512], Loss: 0.9995
+2025-05-16 15:23:49,750 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [350/512], Loss: 0.9807
+2025-05-16 15:23:49,844 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [360/512], Loss: 0.9594
+2025-05-16 15:23:49,938 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [370/512], Loss: 0.9547
+2025-05-16 15:23:50,031 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [380/512], Loss: 0.9526
+2025-05-16 15:23:50,126 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [390/512], Loss: 0.9514
+2025-05-16 15:23:50,220 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [400/512], Loss: 0.9506
+2025-05-16 15:23:50,314 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [410/512], Loss: 0.9505
+2025-05-16 15:23:50,417 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [420/512], Loss: 0.9510
+2025-05-16 15:23:50,511 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [430/512], Loss: 0.9494
+2025-05-16 15:23:50,605 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [440/512], Loss: 0.9485
+2025-05-16 15:23:50,699 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [450/512], Loss: 0.9477
+2025-05-16 15:23:50,793 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [460/512], Loss: 0.9473
+2025-05-16 15:23:50,887 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [470/512], Loss: 0.9470
+2025-05-16 15:23:50,981 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [480/512], Loss: 0.9455
+2025-05-16 15:23:51,074 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [490/512], Loss: 0.9464
+2025-05-16 15:23:51,168 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [500/512], Loss: 0.9468
+2025-05-16 15:23:51,262 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [510/512], Loss: 0.9451
+2025-05-16 15:23:51,285 - bioneuralnet.downstream_task.dpmon - INFO - Training Accuracy: 0.9545
+2025-05-16 15:23:51,287 - bioneuralnet.downstream_task.dpmon - INFO - Model saved to /home/vicente/Github/BioNeuralNet/TCGA_BRCA/results/results1/dpm_model_iter_2.pth
+2025-05-16 15:23:51,291 - bioneuralnet.downstream_task.dpmon - INFO - Training iteration 3/3
+2025-05-16 15:23:51,309 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [1/512], Loss: 1.6141
+2025-05-16 15:23:51,394 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [10/512], Loss: 1.5460
+2025-05-16 15:23:51,488 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [20/512], Loss: 1.5051
+2025-05-16 15:23:51,582 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [30/512], Loss: 1.4469
+2025-05-16 15:23:51,676 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [40/512], Loss: 1.3636
+2025-05-16 15:23:51,771 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [50/512], Loss: 1.2702
+2025-05-16 15:23:51,865 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [60/512], Loss: 1.1908
+2025-05-16 15:23:51,963 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [70/512], Loss: 1.1343
+2025-05-16 15:23:52,057 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [80/512], Loss: 1.1024
+2025-05-16 15:23:52,152 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [90/512], Loss: 1.0812
+2025-05-16 15:23:52,247 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [100/512], Loss: 1.1784
+2025-05-16 15:23:52,343 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [110/512], Loss: 1.1234
+2025-05-16 15:23:52,437 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [120/512], Loss: 1.1016
+2025-05-16 15:23:52,531 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [130/512], Loss: 1.0903
+2025-05-16 15:23:52,625 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [140/512], Loss: 1.0835
+2025-05-16 15:23:52,724 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [150/512], Loss: 1.0627
+2025-05-16 15:23:52,818 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [160/512], Loss: 1.0492
+2025-05-16 15:23:52,911 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [170/512], Loss: 1.0344
+2025-05-16 15:23:53,005 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [180/512], Loss: 1.0256
+2025-05-16 15:23:53,099 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [190/512], Loss: 1.0206
+2025-05-16 15:23:53,193 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [200/512], Loss: 1.0164
+2025-05-16 15:23:53,287 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [210/512], Loss: 1.0128
+2025-05-16 15:23:53,383 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [220/512], Loss: 1.0165
+2025-05-16 15:23:53,480 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [230/512], Loss: 1.0111
+2025-05-16 15:23:53,574 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [240/512], Loss: 1.0075
+2025-05-16 15:23:53,670 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [250/512], Loss: 1.0027
+2025-05-16 15:23:53,764 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [260/512], Loss: 0.9996
+2025-05-16 15:23:53,868 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [270/512], Loss: 0.9979
+2025-05-16 15:23:53,962 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [280/512], Loss: 1.0081
+2025-05-16 15:23:54,056 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [290/512], Loss: 1.0096
+2025-05-16 15:23:54,150 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [300/512], Loss: 1.0006
+2025-05-16 15:23:54,243 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [310/512], Loss: 0.9946
+2025-05-16 15:23:54,337 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [320/512], Loss: 0.9909
+2025-05-16 15:23:54,431 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [330/512], Loss: 0.9882
+2025-05-16 15:23:54,525 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [340/512], Loss: 0.9877
+2025-05-16 15:23:54,619 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [350/512], Loss: 0.9849
+2025-05-16 15:23:54,712 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [360/512], Loss: 0.9833
+2025-05-16 15:23:54,806 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [370/512], Loss: 0.9818
+2025-05-16 15:23:54,900 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [380/512], Loss: 0.9807
+2025-05-16 15:23:54,993 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [390/512], Loss: 1.0491
+2025-05-16 15:23:55,087 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [400/512], Loss: 0.9906
+2025-05-16 15:23:55,181 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [410/512], Loss: 0.9831
+2025-05-16 15:23:55,275 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [420/512], Loss: 0.9797
+2025-05-16 15:23:55,370 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [430/512], Loss: 0.9777
+2025-05-16 15:23:55,464 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [440/512], Loss: 0.9759
+2025-05-16 15:23:55,558 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [450/512], Loss: 0.9749
+2025-05-16 15:23:55,652 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [460/512], Loss: 0.9742
+2025-05-16 15:23:55,747 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [470/512], Loss: 0.9737
+2025-05-16 15:23:55,851 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [480/512], Loss: 0.9738
+2025-05-16 15:23:55,944 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [490/512], Loss: 0.9735
+2025-05-16 15:23:56,038 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [500/512], Loss: 0.9727
+2025-05-16 15:23:56,132 - bioneuralnet.downstream_task.dpmon - INFO - Epoch [510/512], Loss: 0.9720
+2025-05-16 15:23:56,155 - bioneuralnet.downstream_task.dpmon - INFO - Training Accuracy: 0.9558
+2025-05-16 15:23:56,157 - bioneuralnet.downstream_task.dpmon - INFO - Model saved to /home/vicente/Github/BioNeuralNet/TCGA_BRCA/results/results1/dpm_model_iter_3.pth
+2025-05-16 15:23:56,161 - bioneuralnet.downstream_task.dpmon - INFO - Best Accuracy: 0.9558
+2025-05-16 15:23:56,162 - bioneuralnet.downstream_task.dpmon - INFO - Average Accuracy: 0.8587
+2025-05-16 15:23:56,162 - bioneuralnet.downstream_task.dpmon - INFO - Standard Deviation of Accuracy: 0.1670
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+DPMON results:
+Accuracy: 0.9557867360208062
+F1 weighted: 0.9360974742812752
+F1 macro: 0.7772360237077294
+</pre></div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Quick_Start.html" class="btn btn-neutral float-left" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TOPMED.html" class="btn btn-neutral float-right" title="TOPMed Demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

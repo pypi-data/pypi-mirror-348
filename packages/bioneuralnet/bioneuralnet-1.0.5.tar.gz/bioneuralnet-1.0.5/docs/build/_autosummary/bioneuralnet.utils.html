@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.utils &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="bioneuralnet.utils.data" href="bioneuralnet.utils.data.html" />
+    <link rel="prev" title="bioneuralnet.downstream_task.subject_representation" href="bioneuralnet.downstream_task.subject_representation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user_api.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.network_embedding.html">bioneuralnet.network_embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.clustering.html">bioneuralnet.clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.downstream_task.html">bioneuralnet.downstream_task</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bioneuralnet.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.clean_inf_nan"><code class="docutils literal notranslate"><span class="pre">clean_inf_nan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.correlation_summary"><code class="docutils literal notranslate"><span class="pre">correlation_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.explore_data_stats"><code class="docutils literal notranslate"><span class="pre">explore_data_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.expression_summary"><code class="docutils literal notranslate"><span class="pre">expression_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_correlation_graph"><code class="docutils literal notranslate"><span class="pre">gen_correlation_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_gaussian_knn_graph"><code class="docutils literal notranslate"><span class="pre">gen_gaussian_knn_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_lasso_graph"><code class="docutils literal notranslate"><span class="pre">gen_lasso_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_mst_graph"><code class="docutils literal notranslate"><span class="pre">gen_mst_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_similarity_graph"><code class="docutils literal notranslate"><span class="pre">gen_similarity_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_snn_graph"><code class="docutils literal notranslate"><span class="pre">gen_snn_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.gen_threshold_graph"><code class="docutils literal notranslate"><span class="pre">gen_threshold_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.network_remove_high_zero_fraction"><code class="docutils literal notranslate"><span class="pre">network_remove_high_zero_fraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.network_remove_low_variance"><code class="docutils literal notranslate"><span class="pre">network_remove_low_variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.preprocess_clinical"><code class="docutils literal notranslate"><span class="pre">preprocess_clinical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.prune_network"><code class="docutils literal notranslate"><span class="pre">prune_network()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.prune_network_by_quantile"><code class="docutils literal notranslate"><span class="pre">prune_network_by_quantile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.rdata_to_df"><code class="docutils literal notranslate"><span class="pre">rdata_to_df()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.select_top_k_correlation"><code class="docutils literal notranslate"><span class="pre">select_top_k_correlation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.select_top_k_variance"><code class="docutils literal notranslate"><span class="pre">select_top_k_variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.select_top_randomforest"><code class="docutils literal notranslate"><span class="pre">select_top_randomforest()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.top_anova_f_features"><code class="docutils literal notranslate"><span class="pre">top_anova_f_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.variance_summary"><code class="docutils literal notranslate"><span class="pre">variance_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.utils.zero_fraction_summary"><code class="docutils literal notranslate"><span class="pre">zero_fraction_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.utils.data.html">bioneuralnet.utils.data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.utils.graph.html">bioneuralnet.utils.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.utils.logger.html">bioneuralnet.utils.logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.utils.preprocess.html">bioneuralnet.utils.preprocess</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.utils.rdata_convert.html">bioneuralnet.utils.rdata_convert</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.datasets.html">bioneuralnet.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.metrics.html">bioneuralnet.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.external_tools.html">bioneuralnet.external_tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_api.html#executables">Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_api.html">User API</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/bioneuralnet.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bioneuralnet.utils">
+<span id="bioneuralnet-utils"></span><h1>bioneuralnet.utils<a class="headerlink" href="#module-bioneuralnet.utils" title="Link to this heading"></a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.clean_inf_nan" title="bioneuralnet.utils.clean_inf_nan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean_inf_nan</span></code></a>(df)</p></td>
+<td><p>Replace infinite values with NaN, impute NaNs with the column median, and drop zero-variance columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.correlation_summary" title="bioneuralnet.utils.correlation_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation_summary</span></code></a>(df)</p></td>
+<td><p>Compute summary statistics of the maximum pairwise correlation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.explore_data_stats" title="bioneuralnet.utils.explore_data_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">explore_data_stats</span></code></a>(omics_df[, name])</p></td>
+<td><p>Print key statistics for an omics DataFrame including variance, zero fraction,</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.expression_summary" title="bioneuralnet.utils.expression_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expression_summary</span></code></a>(df)</p></td>
+<td><p>Compute summary statistics for the mean expression of features</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_correlation_graph" title="bioneuralnet.utils.gen_correlation_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_correlation_graph</span></code></a>(X[, k, method, ...])</p></td>
+<td><p>Build a graph based on pairwise Pearson or Spearman correlations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_gaussian_knn_graph" title="bioneuralnet.utils.gen_gaussian_knn_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_gaussian_knn_graph</span></code></a>(X[, k, sigma, ...])</p></td>
+<td><p>Build a normalized knn similarity graph from feature vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_lasso_graph" title="bioneuralnet.utils.gen_lasso_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_lasso_graph</span></code></a>(X[, alpha, self_loops])</p></td>
+<td><p>Infer a sparse network via Graphical Lasso.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_mst_graph" title="bioneuralnet.utils.gen_mst_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_mst_graph</span></code></a>(X[, self_loops])</p></td>
+<td><p>Compute the minimum spanning tree (MST) on Euclidean distances.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_similarity_graph" title="bioneuralnet.utils.gen_similarity_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_similarity_graph</span></code></a>(X[, k, metric, mutual, ...])</p></td>
+<td><p>Build a normalized knn similarity graph from feature vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_snn_graph" title="bioneuralnet.utils.gen_snn_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_snn_graph</span></code></a>(X[, k, mutual, self_loops])</p></td>
+<td><p>Build a shared nearest neighbor (SNN) graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.gen_threshold_graph" title="bioneuralnet.utils.gen_threshold_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_threshold_graph</span></code></a>(X[, b, k, mutual, ...])</p></td>
+<td><p>Generate a soft threshold co-xpression network this is very similar to how WGCNA works</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.get_logger" title="bioneuralnet.utils.get_logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_logger</span></code></a>(name)</p></td>
+<td><p>Retrieves a global logger configured to write to 'bioneuralnet.log' at the project root.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.network_remove_high_zero_fraction" title="bioneuralnet.utils.network_remove_high_zero_fraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">network_remove_high_zero_fraction</span></code></a>(network[, ...])</p></td>
+<td><p>Remove rows and columns from adjacency matrix where the fraction of zero entries is higher than the threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.network_remove_low_variance" title="bioneuralnet.utils.network_remove_low_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">network_remove_low_variance</span></code></a>(network[, threshold])</p></td>
+<td><p>Remove rows and columns from adjacency matrix where the variance is below a threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.preprocess_clinical" title="bioneuralnet.utils.preprocess_clinical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_clinical</span></code></a>(X, y[, top_k, scale, ...])</p></td>
+<td><p>Preprocess clinical data, handling numeric and categorical features, cleaning, optional scaling, and selecting top features by RandomForest importance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.prune_network" title="bioneuralnet.utils.prune_network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune_network</span></code></a>(adjacency_matrix[, ...])</p></td>
+<td><p>Prune a network based on a weight threshold, removing nodes with weak connections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.prune_network_by_quantile" title="bioneuralnet.utils.prune_network_by_quantile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune_network_by_quantile</span></code></a>(adjacency_matrix)</p></td>
+<td><p>Prune a network by removing edges below a quantile-based weight threshold and dropping isolated nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.rdata_to_df" title="bioneuralnet.utils.rdata_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rdata_to_df</span></code></a>(rdata_file, csv_file[, Object])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.select_top_k_correlation" title="bioneuralnet.utils.select_top_k_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_top_k_correlation</span></code></a>(X[, y, top_k])</p></td>
+<td><p>Select the top k features by correlation, either supervised (with respect to y) or unsupervised (redundancy minimization).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.select_top_k_variance" title="bioneuralnet.utils.select_top_k_variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_top_k_variance</span></code></a>(df[, k, ddof])</p></td>
+<td><p>Select the top k features with the highest variance.,</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.select_top_randomforest" title="bioneuralnet.utils.select_top_randomforest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_top_randomforest</span></code></a>(X, y[, top_k, seed])</p></td>
+<td><p>Select the top k features using RandomForest feature importances.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.top_anova_f_features" title="bioneuralnet.utils.top_anova_f_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_anova_f_features</span></code></a>(X, y, max_features[, ...])</p></td>
+<td><p>Select top features based on ANOVA F-test (with false recovery rate correction).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.utils.variance_summary" title="bioneuralnet.utils.variance_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variance_summary</span></code></a>(df[, low_var_threshold])</p></td>
+<td><p>Compute summary statistics for column variances in the DataFrame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.utils.zero_fraction_summary" title="bioneuralnet.utils.zero_fraction_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_fraction_summary</span></code></a>(df[, high_zero_threshold])</p></td>
+<td><p>Compute summary statistics for the fraction of zeros in each column</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.clean_inf_nan">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">clean_inf_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#clean_inf_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.clean_inf_nan" title="Link to this definition"></a></dt>
+<dd><p>Replace infinite values with NaN, impute NaNs with the column median, and drop zero-variance columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>-</em>) – Input DataFrame containing numeric columns.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cleaned DataFrame with no infinite or NaN values and no zero-variance columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.correlation_summary">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">correlation_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/data.html#correlation_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.correlation_summary" title="Link to this definition"></a></dt>
+<dd><p>Compute summary statistics of the maximum pairwise correlation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.explore_data_stats">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">explore_data_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omics_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Data'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/data.html#explore_data_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.explore_data_stats" title="Link to this definition"></a></dt>
+<dd><p>Print key statistics for an omics DataFrame including variance, zero fraction,</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.expression_summary">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">expression_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/data.html#expression_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.expression_summary" title="Link to this definition"></a></dt>
+<dd><p>Compute summary statistics for the mean expression of features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_correlation_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_correlation_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pearson'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_correlation_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_correlation_graph" title="Link to this definition"></a></dt>
+<dd><p>Build a graph based on pairwise Pearson or Spearman correlations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pd.dataframe</strong> (<em>- X</em>)</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of neighbors to keep per node if per_node is True.</p></li>
+<li><p><strong>method</strong> (<em>-</em>) – ‘pearson’ or ‘spearman’.</p></li>
+<li><p><strong>mutual</strong> (<em>-</em>) – If True, only mutual knn edges.</p></li>
+<li><p><strong>per_node</strong> (<em>-</em>) – If True, use per node topk selection, else global threshold.</p></li>
+<li><p><strong>threshold</strong> (<em>-</em>) – Correlation cutoff when per_node is False.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>pandas.DataFrame. Normalized adjacency matrix (N x N) of the sparse correlation graph.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Correlation is very expensive to compute, so this function is not recommended for large datasets.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_gaussian_knn_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_gaussian_knn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_gaussian_knn_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_gaussian_knn_graph" title="Link to this definition"></a></dt>
+<dd><p>Build a normalized knn similarity graph from feature vectors. Computes pairwise cosine or Euclidean similarities, sparsifies via k-nearest neighbors or
+a global threshold. Optionally prunes to mutual neighbors and/or adds self-loops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Feature matrix where rows are nodes and columns are features.</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of neighbors to keep per node.</p></li>
+<li><p><strong>metric</strong> (<em>-</em>) – ‘cosine’ or ‘euclidean’, uses Gaussian kernel for distances.</p></li>
+<li><p><strong>mutual</strong> (<em>-</em>) – If True, only mutual knn edges.</p></li>
+<li><p><strong>per_node</strong> (<em>-</em>) – If True, use per-node topk selection; else global threshold.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized adjacency matrix (N x N) of the sparse similarity graph.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pandas.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_lasso_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_lasso_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_lasso_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_lasso_graph" title="Link to this definition"></a></dt>
+<dd><p>Infer a sparse network via Graphical Lasso.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Data matrix where rows are nodes and columns are features.</p></li>
+<li><p><strong>alpha</strong> (<em>-</em>) – Regularization parameter for Graphical Lasso.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized adjacency matrix (N x N) of the inferred network.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pandas.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_mst_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_mst_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_mst_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_mst_graph" title="Link to this definition"></a></dt>
+<dd><p>Compute the minimum spanning tree (MST) on Euclidean distances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Feature matrix where rows are nodes and columns are features.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized adjacency matrix (N x N) of the MST graph.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pandas.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_similarity_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_similarity_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cosine'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_similarity_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_similarity_graph" title="Link to this definition"></a></dt>
+<dd><p>Build a normalized knn similarity graph from feature vectors. Computes pairwise cosine or ecledian disntace,then sparsifies via knn or global a threshold.
+Optionally prunes to mutual neighbors and/or adds self-loops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – pandas.DataFrame of shape (N, D) (rows = nodes, cols = features)</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of neighbors to keep per node.</p></li>
+<li><p><strong>metric</strong> (<em>-</em>) – “cosine” or “euclidean” (uses gaussian kernel on distances).</p></li>
+<li><p><strong>mutual</strong> (<em>-</em>) – If True, retain only mutual edges (i-&gt;j and j-&gt;i).</p></li>
+<li><p><strong>per_node</strong> (<em>-</em>) – If True, use per-node top_k; else global cutoff.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, add self-loop weight of 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>DataFrame of shape (N, N) the normalized adjacency matrix</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_snn_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_snn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_snn_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_snn_graph" title="Link to this definition"></a></dt>
+<dd><p>Build a shared nearest neighbor (SNN) graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Feature matrix where rows are nodes and columns are features.</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of neighbors to keep per node.</p></li>
+<li><p><strong>mutual</strong> (<em>-</em>) – If True, only mutual knn edges.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized adjacency matrix (N x N) of the SNN graph.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pandas.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.gen_threshold_graph">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">gen_threshold_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/graph.html#gen_threshold_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.gen_threshold_graph" title="Link to this definition"></a></dt>
+<dd><p>Generate a soft threshold co-xpression network this is very similar to how WGCNA works</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Data matrix where rows are nodes and columns are features.</p></li>
+<li><p><strong>b</strong> (<em>-</em>) – Thresholding exponent applied to absolute correlations.</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of neighbors to keep per node.</p></li>
+<li><p><strong>mutual</strong> (<em>-</em>) – If True, only mutual knn edges.</p></li>
+<li><p><strong>self_loops</strong> (<em>-</em>) – If True, adds weight 1 to diagonal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized adjacency matrix (N x N) of the soft-thresholded graph.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pandas.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.get_logger">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.13)"><span class="pre">Logger</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/logger.html#get_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.get_logger" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a global logger configured to write to ‘bioneuralnet.log’ at the project root.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the logger.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured logger instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.13)">logging.Logger</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.network_remove_high_zero_fraction">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">network_remove_high_zero_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.95</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#network_remove_high_zero_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.network_remove_high_zero_fraction" title="Link to this definition"></a></dt>
+<dd><p>Remove rows and columns from adjacency matrix where the fraction of zero entries is higher than the threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>pd.DataFrame</em>) – Adjacency matrix.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Zero-fraction threshold.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered adjacency matrix.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.network_remove_low_variance">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">network_remove_low_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#network_remove_low_variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.network_remove_low_variance" title="Link to this definition"></a></dt>
+<dd><p>Remove rows and columns from adjacency matrix where the variance is below a threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>pd.DataFrame</em>) – Adjacency matrix.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Variance threshold.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered adjacency matrix.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.preprocess_clinical">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">preprocess_clinical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.3)"><span class="pre">Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#preprocess_clinical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.preprocess_clinical" title="Link to this definition"></a></dt>
+<dd><p>Preprocess clinical data, handling numeric and categorical features, cleaning, optional scaling, and selecting top features by RandomForest importance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Clinical feature matrix (samples x features) including numeric and categorical columns.</p></li>
+<li><p><strong>y</strong> (<em>-</em>) – Target values; single-column DataFrame or Series of length n_samples.</p></li>
+<li><p><strong>top_k</strong> (<em>-</em>) – Number of features to select based on importance.</p></li>
+<li><p><strong>scale</strong> (<em>-</em>) – If True, scale numeric features using RobustScaler; default is False.</p></li>
+<li><p><strong>ignore_columns</strong> (<em>-</em>) – List of columns to ignore during preprocessing; default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Subset of the original features with the selected top_k features plus ignored columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.prune_network">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">prune_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#prune_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.prune_network" title="Link to this definition"></a></dt>
+<dd><p>Prune a network based on a weight threshold, removing nodes with weak connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adjacency_matrix</strong> (<em>-</em>) – The adjacency matrix of the network.</p></li>
+<li><p><strong>weight_threshold</strong> (<em>-</em>) – Minimum weight to keep an edge (default: 0.0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.prune_network_by_quantile">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">prune_network_by_quantile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#prune_network_by_quantile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.prune_network_by_quantile" title="Link to this definition"></a></dt>
+<dd><p>Prune a network by removing edges below a quantile-based weight threshold and dropping isolated nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adjacency_matrix</strong> (<em>-</em>) – Weighted adjacency matrix (nodes x nodes).</p></li>
+<li><p><strong>quantile</strong> (<em>-</em>) – Quantile in [0,1] to compute weight threshold; default is 0.5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pruned adjacency matrix with edges below the quantile threshold removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.rdata_to_df">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">rdata_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdata_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.13)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.13)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/rdata_convert.html#rdata_to_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.rdata_to_df" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.select_top_k_correlation">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">select_top_k_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.3)"><span class="pre">Series</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#select_top_k_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.select_top_k_correlation" title="Link to this definition"></a></dt>
+<dd><p>Select the top k features by correlation, either supervised (with respect to y) or unsupervised (redundancy minimization).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Numeric feature matrix (samples x features).</p></li>
+<li><p><strong>y</strong> (<em>-</em>) – Target values for supervised selection; if None, performs unsupervised selection.</p></li>
+<li><p><strong>top_k</strong> (<em>-</em>) – Number of features to select.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Subset of X containing the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Correlation computation can be expensive for large datasets.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.select_top_k_variance">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">select_top_k_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#select_top_k_variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.select_top_k_variance" title="Link to this definition"></a></dt>
+<dd><p>Select the top k features with the highest variance.,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>-</em>) – Input DataFrame; non-numeric columns will be ignored.</p></li>
+<li><p><strong>k</strong> (<em>-</em>) – Number of top-variance features to select.</p></li>
+<li><p><strong>ddof</strong> (<em>-</em>) – Delta degrees of freedom for varianceg calculation; default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing only the top k features by variance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.select_top_randomforest">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">select_top_randomforest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.3)"><span class="pre">Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#select_top_randomforest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.select_top_randomforest" title="Link to this definition"></a></dt>
+<dd><p>Select the top k features using RandomForest feature importances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Numeric feature matrix (samples x features); must contain only numeric columns.</p></li>
+<li><p><strong>y</strong> (<em>-</em>) – Target values; single-column DataFrame or Series.</p></li>
+<li><p><strong>top_k</strong> (<em>-</em>) – Number of features to select.</p></li>
+<li><p><strong>seed</strong> (<em>-</em>) – Random seed for the RandomForest model; default is 119.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Subset of X containing the selected top_k features by importance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.top_anova_f_features">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">top_anova_f_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.3)"><span class="pre">Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/preprocess.html#top_anova_f_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.top_anova_f_features" title="Link to this definition"></a></dt>
+<dd><p>Select top features based on ANOVA F-test (with false recovery rate correction).
+This function is suitable for both classification and regression tasks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>-</em>) – Numeric feature matrix (samples x features).</p></li>
+<li><p><strong>y</strong> (<em>-</em>) – Target vector; categorical for classification or continuous for regression.</p></li>
+<li><p><strong>max_features</strong> (<em>-</em>) – Maximum number of features to return.</p></li>
+<li><p><strong>alpha</strong> (<em>-</em>) – Significance threshold for false recovery rate correction; default is 0.05.</p></li>
+<li><p><strong>task</strong> (<em>-</em>) – ‘classification’ to use f_classif or ‘regression’ to use f_regression.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Subset of X with the selected features, padded if necessary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>pd.DataFrame</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.variance_summary">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">variance_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_var_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/data.html#variance_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.variance_summary" title="Link to this definition"></a></dt>
+<dd><p>Compute summary statistics for column variances in the DataFrame</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.utils.zero_fraction_summary">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.utils.</span></span><span class="sig-name descname"><span class="pre">zero_fraction_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_zero_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/utils/data.html#zero_fraction_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.utils.zero_fraction_summary" title="Link to this definition"></a></dt>
+<dd><p>Compute summary statistics for the fraction of zeros in each column</p>
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.utils.data.html#module-bioneuralnet.utils.data" title="bioneuralnet.utils.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bioneuralnet.utils.graph.html#module-bioneuralnet.utils.graph" title="bioneuralnet.utils.graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.utils.logger.html#module-bioneuralnet.utils.logger" title="bioneuralnet.utils.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bioneuralnet.utils.preprocess.html#module-bioneuralnet.utils.preprocess" title="bioneuralnet.utils.preprocess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.utils.rdata_convert.html#module-bioneuralnet.utils.rdata_convert" title="bioneuralnet.utils.rdata_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rdata_convert</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bioneuralnet.downstream_task.subject_representation.html" class="btn btn-neutral float-left" title="bioneuralnet.downstream_task.subject_representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bioneuralnet.utils.data.html" class="btn btn-neutral float-right" title="bioneuralnet.utils.data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

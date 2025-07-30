@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.network_embedding &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="bioneuralnet.network_embedding.gnn_embedding" href="bioneuralnet.network_embedding.gnn_embedding.html" />
+    <link rel="prev" title="User API" href="../user_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user_api.html">User API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bioneuralnet.network_embedding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.network_embedding.GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GAT.forward"><code class="docutils literal notranslate"><span class="pre">GAT.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GAT.get_embeddings"><code class="docutils literal notranslate"><span class="pre">GAT.get_embeddings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.network_embedding.GCN"><code class="docutils literal notranslate"><span class="pre">GCN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GCN.forward"><code class="docutils literal notranslate"><span class="pre">GCN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GCN.get_embeddings"><code class="docutils literal notranslate"><span class="pre">GCN.get_embeddings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.network_embedding.GIN"><code class="docutils literal notranslate"><span class="pre">GIN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GIN.forward"><code class="docutils literal notranslate"><span class="pre">GIN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GIN.get_embeddings"><code class="docutils literal notranslate"><span class="pre">GIN.get_embeddings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.adjacency_matrix"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.adjacency_matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.omics_data"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.omics_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.phenotype_data"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.phenotype_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.clinical_data"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.clinical_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.phenotype_col"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.phenotype_col</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.model_type"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.model_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.hidden_dim"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.layer_num"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.layer_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.dropout"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.dropout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.num_epochs"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.num_epochs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.lr"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.lr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.weight_decay"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.weight_decay</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.gpu"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.gpu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.seed"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.seed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.tune"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.tune</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.embed"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.embed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.fit"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding.run_gnn_embedding_tuning"><code class="docutils literal notranslate"><span class="pre">GNNEmbedding.run_gnn_embedding_tuning()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.network_embedding.SAGE"><code class="docutils literal notranslate"><span class="pre">SAGE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.SAGE.forward"><code class="docutils literal notranslate"><span class="pre">SAGE.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.network_embedding.SAGE.get_embeddings"><code class="docutils literal notranslate"><span class="pre">SAGE.get_embeddings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.network_embedding.gnn_embedding.html">bioneuralnet.network_embedding.gnn_embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.network_embedding.gnn_models.html">bioneuralnet.network_embedding.gnn_models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.clustering.html">bioneuralnet.clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.downstream_task.html">bioneuralnet.downstream_task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.utils.html">bioneuralnet.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.datasets.html">bioneuralnet.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.metrics.html">bioneuralnet.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.external_tools.html">bioneuralnet.external_tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_api.html#executables">Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_api.html">User API</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.network_embedding</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/bioneuralnet.network_embedding.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bioneuralnet.network_embedding">
+<span id="bioneuralnet-network-embedding"></span><h1>bioneuralnet.network_embedding<a class="headerlink" href="#module-bioneuralnet.network_embedding" title="Link to this heading"></a></h1>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.network_embedding.GAT" title="bioneuralnet.network_embedding.GAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAT</span></code></a>(*args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.network_embedding.GCN" title="bioneuralnet.network_embedding.GCN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GCN</span></code></a>(*args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.network_embedding.GIN" title="bioneuralnet.network_embedding.GIN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GIN</span></code></a>(*args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.network_embedding.GNNEmbedding" title="bioneuralnet.network_embedding.GNNEmbedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GNNEmbedding</span></code></a>(adjacency_matrix, omics_data, ...)</p></td>
+<td><p>GNNEmbedding Class for Generating Graph Neural Network (GNN) Based Embeddings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.network_embedding.SAGE" title="bioneuralnet.network_embedding.SAGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SAGE</span></code></a>(*args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GAT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.network_embedding.</span></span><span class="sig-name descname"><span class="pre">GAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GAT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GAT" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GAT.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GAT.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GAT.forward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GAT.get_embeddings">
+<span class="sig-name descname"><span class="pre">get_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GAT.get_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GAT.get_embeddings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.network_embedding.</span></span><span class="sig-name descname"><span class="pre">GCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GCN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GCN" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GCN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GCN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GCN.forward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GCN.get_embeddings">
+<span class="sig-name descname"><span class="pre">get_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GCN.get_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GCN.get_embeddings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GIN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.network_embedding.</span></span><span class="sig-name descname"><span class="pre">GIN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GIN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GIN" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GIN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GIN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GIN.forward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GIN.get_embeddings">
+<span class="sig-name descname"><span class="pre">get_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#GIN.get_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GIN.get_embeddings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.network_embedding.</span></span><span class="sig-name descname"><span class="pre">GNNEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">omics_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">phenotype_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.3)"><span class="pre">Series</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">clinical_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phenotype_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phenotype'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GAT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tune</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_embedding.html#GNNEmbedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>GNNEmbedding Class for Generating Graph Neural Network (GNN) Based Embeddings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.adjacency_matrix">
+<span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.adjacency_matrix" title="Link to this definition"></a></dt>
+<dd><p>pd.DataFrame</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.omics_data">
+<span class="sig-name descname"><span class="pre">omics_data</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.omics_data" title="Link to this definition"></a></dt>
+<dd><p>pd.DataFrame</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.phenotype_data">
+<span class="sig-name descname"><span class="pre">phenotype_data</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.phenotype_data" title="Link to this definition"></a></dt>
+<dd><p>pd.DataFrame</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.clinical_data">
+<span class="sig-name descname"><span class="pre">clinical_data</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.clinical_data" title="Link to this definition"></a></dt>
+<dd><p>Optional[pd.DataFrame]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.phenotype_col">
+<span class="sig-name descname"><span class="pre">phenotype_col</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.phenotype_col" title="Link to this definition"></a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.model_type">
+<span class="sig-name descname"><span class="pre">model_type</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.model_type" title="Link to this definition"></a></dt>
+<dd><p>str</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.hidden_dim">
+<span class="sig-name descname"><span class="pre">hidden_dim</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.hidden_dim" title="Link to this definition"></a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.layer_num">
+<span class="sig-name descname"><span class="pre">layer_num</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.layer_num" title="Link to this definition"></a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.dropout">
+<span class="sig-name descname"><span class="pre">dropout</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.dropout" title="Link to this definition"></a></dt>
+<dd><p>Union[bool, float] (if bool, True maps to 0.5, False to 0.0)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.num_epochs">
+<span class="sig-name descname"><span class="pre">num_epochs</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.num_epochs" title="Link to this definition"></a></dt>
+<dd><p>int</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.lr" title="Link to this definition"></a></dt>
+<dd><p>float</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.weight_decay">
+<span class="sig-name descname"><span class="pre">weight_decay</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.weight_decay" title="Link to this definition"></a></dt>
+<dd><p>float</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.gpu">
+<span class="sig-name descname"><span class="pre">gpu</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.gpu" title="Link to this definition"></a></dt>
+<dd><p>bool</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.seed" title="Link to this definition"></a></dt>
+<dd><p>Optional[int]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.tune">
+<span class="sig-name descname"><span class="pre">tune</span></span><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.tune" title="Link to this definition"></a></dt>
+<dd><p>Optional[bool]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.embed">
+<span class="sig-name descname"><span class="pre">embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">as_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.7)"><span class="pre">torch.Tensor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_embedding.html#GNNEmbedding.embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.embed" title="Link to this definition"></a></dt>
+<dd><p>Generates node embeddings.
+If tuning is enabled, runs hyperparameter tuning and uses the best configuration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_embedding.html#GNNEmbedding.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the GNN model using the provided data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.GNNEmbedding.run_gnn_embedding_tuning">
+<span class="sig-name descname"><span class="pre">run_gnn_embedding_tuning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_embedding.html#GNNEmbedding.run_gnn_embedding_tuning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.GNNEmbedding.run_gnn_embedding_tuning" title="Link to this definition"></a></dt>
+<dd><p>Run hyperparameter tuning with Ray Tune.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.SAGE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.network_embedding.</span></span><span class="sig-name descname"><span class="pre">SAGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#SAGE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.SAGE" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.SAGE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#SAGE.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.SAGE.forward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.network_embedding.SAGE.get_embeddings">
+<span class="sig-name descname"><span class="pre">get_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/network_embedding/gnn_models.html#SAGE.get_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.network_embedding.SAGE.get_embeddings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.network_embedding.gnn_embedding.html#module-bioneuralnet.network_embedding.gnn_embedding" title="bioneuralnet.network_embedding.gnn_embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gnn_embedding</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bioneuralnet.network_embedding.gnn_models.html#module-bioneuralnet.network_embedding.gnn_models" title="bioneuralnet.network_embedding.gnn_models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gnn_models</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../user_api.html" class="btn btn-neutral float-left" title="User API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bioneuralnet.network_embedding.gnn_embedding.html" class="btn btn-neutral float-right" title="bioneuralnet.network_embedding.gnn_embedding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

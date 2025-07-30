@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Correlated Clustering &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Metrics" href="metrics.html" />
+    <link rel="prev" title="GNN Embeddings" href="gnns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Correlated Clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mathematical-approach">Mathematical Approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graphical-comparison">Graphical Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-with-bioneuralnet">Integration with BioNeuralNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-for-users">Notes for Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Correlated Clustering</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/clustering.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="correlated-clustering">
+<h1>Correlated Clustering<a class="headerlink" href="#correlated-clustering" title="Link to this heading"></a></h1>
+<p>BioNeuralNet includes internal modules for performing <strong>correlated clustering</strong> on complex networks.
+These methods extend traditional community detection by integrating <strong>phenotype correlation</strong>, allowing users to extract <strong>biologically relevant, phenotype-associated modules</strong> from any network.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Our framework supports three key <strong>correlated clustering</strong> approaches:</p>
+<ul>
+<li><p><strong>Correlated PageRank</strong>:</p>
+<ul class="simple">
+<li><p>A <strong>modified PageRank algorithm</strong> that prioritizes nodes based on their correlation with an external phenotype.</p></li>
+<li><p>The <strong>personalization vector</strong> is computed using phenotype correlation, ensuring that <strong>biologically significant nodes receive more influence</strong>.</p></li>
+<li><p>This method is ideal for <strong>identifying high-impact nodes</strong> within a given network.</p></li>
+</ul>
+</li>
+<li><p><strong>Correlated Louvain</strong>:</p>
+<ul>
+<li><p>An adaptation of the <strong>Louvain community detection algorithm</strong>, modified to optimize for <strong>both network modularity and phenotype correlation</strong>.</p></li>
+<li><p>The objective function for community detection is given by:</p>
+<div class="math notranslate nohighlight">
+\[Q^* = k_L \cdot Q + (1 - k_L) \cdot \overline{\lvert \rho \rvert},\]</div>
+<p>where:</p>
+<blockquote>
+<div><ul>
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> is the standard <strong>Newman-Girvan modularity</strong>, defined as:</p>
+<div class="math notranslate nohighlight">
+\[Q = \frac{1}{2m} \sum_{i,j} \bigl(A_{ij} - \frac{k_i k_j}{2m} \bigr) \delta(c_i, c_j),\]</div>
+<p>where <span class="math notranslate nohighlight">\(A_{ij}\)</span> represents the adjacency matrix, <span class="math notranslate nohighlight">\(k_i\)</span> and <span class="math notranslate nohighlight">\(k_j\)</span> are node degrees, and <span class="math notranslate nohighlight">\(\delta(c_i, c_j)\)</span> indicates whether nodes belong to the same community.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\overline{\lvert \rho \rvert}\)</span> is the <strong>mean absolute Pearson correlation</strong> between the <strong>first principal component (PC1) of the subgraph’s features</strong> and the phenotype.</p></li>
+<li><p><span class="math notranslate nohighlight">\(k_L\)</span> is a user-defined weight (e.g., <span class="math notranslate nohighlight">\(k_L = 0.2\)</span>), balancing <strong>network modularity and phenotype correlation</strong>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>This method <strong>detects communities</strong> that are both <strong>structurally cohesive and strongly associated with phenotype</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Hybrid Louvain</strong>:</p>
+<ul class="simple">
+<li><p>A <strong>refinement approach</strong> that combines <strong>Correlated Louvain</strong> and <strong>Correlated PageRank</strong> in an iterative process.</p></li>
+<li><p>The key steps are:</p>
+<ol class="arabic simple">
+<li><p><strong>Initial Community Detection</strong>:</p>
+<ul>
+<li><p>The <strong>input network (adjacency matrix)</strong> is clustered using <strong>Correlated Louvain</strong>.</p></li>
+<li><p>This identifies <strong>initial phenotype-associated modules</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Iterative Refinement with Correlated PageRank</strong>:</p>
+<ul>
+<li><p>In each iteration:</p>
+<ul>
+<li><p>The <strong>most correlated module</strong> is <strong>expanded</strong> based on Correlated PageRank.</p></li>
+<li><p>The refined network is <strong>re-clustered using Correlated Louvain</strong>.</p></li>
+<li><p>This process continues <strong>until convergence</strong>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Final Cluster Extraction</strong>:</p>
+<ul>
+<li><p>The final <strong>phenotype-optimized modules</strong> are extracted and returned.</p></li>
+<li><p>The quality of the clustering is measured using <strong>both modularity and phenotype correlation metrics</strong>.</p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="id1">
+<img alt="Overview hybrid clustering workflow" src="_images/hybrid_clustering.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Hybrid Clustering</strong>: Precedure and steps for the hybrid clustering method.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="mathematical-approach">
+<h2>Mathematical Approach<a class="headerlink" href="#mathematical-approach" title="Link to this heading"></a></h2>
+<p><strong>Correlated PageRank:</strong></p>
+<blockquote>
+<div><blockquote>
+<div><ul class="simple">
+<li><p>Correlated PageRank extends the traditional PageRank formulation by <strong>biasing the random walk towards phenotype-associated nodes</strong>.</p></li>
+<li><p>The <strong>ranking function</strong> is defined as:</p></li>
+</ul>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\mathbf{r} = \alpha \cdot \mathbf{M} \mathbf{r} + (1 - \alpha) \mathbf{p},\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is the transition probability matrix, derived from the <strong>normalized adjacency matrix</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is the <strong>personalization vector</strong>, computed using <strong>phenotype correlation</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is the <strong>teleportation factor</strong> (default: <span class="math notranslate nohighlight">\(\alpha = 0.85\)</span>).</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Unlike standard PageRank, which assumes a <strong>uniform teleportation distribution</strong>, <strong>Correlated PageRank prioritizes phenotype-relevant nodes</strong>.</p></li>
+</ul>
+</section>
+<section id="graphical-comparison">
+<h2>Graphical Comparison<a class="headerlink" href="#graphical-comparison" title="Link to this heading"></a></h2>
+<p>Below is an illustration of <strong>different clustering approaches</strong> on a sample network:</p>
+<figure class="align-center" id="id2">
+<img alt="Comparison of Correlated Clustering Methods" src="_images/clustercorrelation.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Figure 2:</strong> Comparison between SmCCNet generated clusters and Correlated Louvain clusters</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="integration-with-bioneuralnet">
+<h2>Integration with BioNeuralNet<a class="headerlink" href="#integration-with-bioneuralnet" title="Link to this heading"></a></h2>
+<p>Our <strong>correlated clustering methods</strong> seamlessly integrate into <strong>BioNeuralNet</strong> and can be applied to <strong>any network represented as an adjacency matrix</strong>.</p>
+<p>Use cases include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Multi-Omics Networks</strong>: Extracting <strong>biologically relevant subgraphs</strong> from gene expression, proteomics, or metabolomics data.</p></li>
+<li><p><strong>Brain Connectivity Graphs</strong>: Identifying <strong>functional modules associated with neurological disorders</strong>.</p></li>
+<li><p><strong>Social &amp; Disease Networks</strong>: Detecting <strong>community structures in epidemiology and patient networks</strong>.</p></li>
+</ul>
+</div></blockquote>
+<p>Our framework supports:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Graph Neural Network Embedding</strong>: Training GNNs on <strong>phenotype-optimized clusters</strong>.</p></li>
+<li><p><strong>Predictive Biomarker Discovery</strong>: Identifying key <strong>features associated with disease outcomes</strong>.</p></li>
+<li><p><strong>Customizable Modularity Optimization</strong>: Allowing users to <strong>adjust the trade-off between structure and phenotype correlation</strong>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="notes-for-users">
+<h2>Notes for Users<a class="headerlink" href="#notes-for-users" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Input Requirements</strong>:</p>
+<ul class="simple">
+<li><p>Any <strong>graph-based dataset</strong> can be used as input, provided as an <strong>adjacency matrix</strong>.</p></li>
+<li><p>Phenotype data should be supplied in <strong>numerical format</strong> (e.g., disease severity scores, expression levels).</p></li>
+</ul>
+</li>
+<li><p><strong>Cluster Comparison</strong>:</p>
+<ul class="simple">
+<li><p><strong>Correlated Louvain extracts phenotype-associated modules.</strong></p></li>
+<li><p><strong>Hybrid Louvain iteratively refines clusters using Correlated PageRank.</strong></p></li>
+<li><p>Users can compare results using <strong>modularity scores and phenotype correlation metrics</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Method Selection</strong>:</p>
+<ul class="simple">
+<li><p><strong>Correlated PageRank</strong> is ideal for <strong>ranking high-impact nodes in a phenotype-aware manner</strong>.</p></li>
+<li><p><strong>Correlated Louvain</strong> is best for <strong>detecting phenotype-associated communities</strong>.</p></li>
+<li><p><strong>Hybrid Louvain</strong> provides the most refined, <strong>biologically meaningful clusters</strong>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>The <strong>correlated clustering methods</strong> implemented in BioNeuralNet provide a <strong>powerful, flexible framework</strong> for extracting <strong>highly structured, phenotype-associated modules</strong> from any network.
+By integrating <strong>phenotype correlation directly into the clustering process</strong>, these methods enable <strong>more biologically relevant and disease-informative network analysis</strong>.</p>
+<p>paper link: <a class="reference external" href="https://doi.org/10.3389/fdata.2022.894632">https://doi.org/10.3389/fdata.2022.894632</a></p>
+<p>Return to <a class="reference internal" href="index.html"><span class="doc">BioNeuralNet - Multi-Omics Integration with Graph Neural Networks</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gnns.html" class="btn btn-neutral float-left" title="GNN Embeddings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

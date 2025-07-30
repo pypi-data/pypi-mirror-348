@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioNeuralNet - Multi-Omics Integration with Graph Neural Networks &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BioNeuralNet - Multi-Omics Integration with Graph Neural Networks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bioneuralnet-multi-omics-integration-with-graph-neural-networks">
+<h1>BioNeuralNet - Multi-Omics Integration with Graph Neural Networks<a class="headerlink" href="#bioneuralnet-multi-omics-integration-with-graph-neural-networks" title="Link to this heading"></a></h1>
+<a class="reference external image-reference" href="https://github.com/UCD-BDLab/BioNeuralNet/blob/main/LICENSE"><img alt="https://img.shields.io/badge/license-MIT-blue.svg" src="https://img.shields.io/badge/license-MIT-blue.svg" />
+</a>
+<a class="reference external image-reference" href="https://pypi.org/project/bioneuralnet/"><img alt="https://img.shields.io/pypi/v/bioneuralnet" src="https://img.shields.io/pypi/v/bioneuralnet" />
+</a>
+<a class="reference external image-reference" href="https://pepy.tech/project/bioneuralnet"><img alt="https://static.pepy.tech/badge/bioneuralnet" src="https://static.pepy.tech/badge/bioneuralnet" />
+</a>
+<a class="reference external image-reference" href="https://github.com/UCD-BDLab/BioNeuralNet"><img alt="https://img.shields.io/badge/GitHub-View%20Code-blue" src="https://img.shields.io/badge/GitHub-View%20Code-blue" />
+</a>
+<figure class="align-center">
+<img alt="BioNeuralNet Logo" src="_images/LOGO_WB.png" />
+</figure>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>To install BioNeuralNet, simply run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>bioneuralnet
+</pre></div>
+</div>
+<p>For additional installation details, see <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a>.</p>
+</section>
+<section id="bioneuralnet-overview">
+<h2><strong>BioNeuralNet Overview</strong><a class="headerlink" href="#bioneuralnet-overview" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id5">
+<img alt="BioNeuralNet Logo" src="_images/BioNeuralNet.png" />
+<figcaption>
+<p><span class="caption-text">Embeddings form the core of BioNeuralNet, enabling a number of downstream applications.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bioneuralnet-core-features">
+<h2><strong>BioNeuralNet Core Features</strong><a class="headerlink" href="#bioneuralnet-core-features" title="Link to this heading"></a></h2>
+<p>For an End-to-End example example of BioNeuralNet, see <a class="reference internal" href="Quick_Start.html"><span class="doc">Quick Start Guide</span></a>.</p>
+<dl class="simple">
+<dt><strong>Network Embedding</strong>: <a class="reference internal" href="gnns.html"><span class="doc">GNN Embeddings</span></a></dt><dd><ul class="simple">
+<li><p>Given a multi-omics network as input, BioNeuralNet can generate embeddings using Graph Neural Networks (GNNs).</p></li>
+<li><p>Generate embeddings using methods such as <strong>GCN</strong>, <strong>GAT</strong>, <strong>GraphSAGE</strong>, and <strong>GIN</strong>.</p></li>
+<li><p>Outputs can be obtained as native tensors or converted to pandas DataFrames for easy analysis and visualization.</p></li>
+<li><p>Embeddings unlock numerous downstream applications, including disease prediction, enhanced subject representation, clustering, and more.</p></li>
+</ul>
+</dd>
+<dt><strong>Graph Clustering</strong>: <a class="reference internal" href="clustering.html"><span class="doc">Correlated Clustering</span></a></dt><dd><ul class="simple">
+<li><p>Identify functional modules or communities using <strong>correlated clustering methods</strong> (e.g., CorrelatedPageRank, CorrelatedLouvain, HybridLouvain) that integrate phenotype correlation to extract biologically relevant modules <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></li>
+<li><p>Clustering methods can be applied to any network represented allowing flexible analysis across different domains.</p></li>
+<li><p>All clustering components return either raw partitions dictionaries or induced subnetwork adjacency matrices (as DataFrames) for visualization.</p></li>
+<li><p>Use cases include, feature selection, biomarker discovery, and network-based analysis.</p></li>
+</ul>
+</dd>
+<dt><strong>Downstream Tasks</strong>: <a class="reference internal" href="downstream_tasks.html"><span class="doc">Downstream Tasks</span></a></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><strong>Subject Representation</strong>:</dt><dd><ul>
+<li><p>Integrate node embeddings back into omics data to enrich subject-level profiles by weighting features with learned embedding.</p></li>
+<li><p>This embedding-enriched data can be used for downstream tasks such as disease prediction or biomarker discovery.</p></li>
+<li><p>The result can be returned as a DataFrame or a PyTorch tensor, fitting naturally into downstream analyses.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Disease Prediction for Multi-Omics Network DPMON</strong> <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>:</dt><dd><ul>
+<li><p>Classification End-to-End pipeline for disease prediction using Graph Neural Network embeddings.</p></li>
+<li><p>DPMON supports hyperparameter tuning-when enabled, it finds the best for the given data.</p></li>
+<li><p>This approach, along with the native pandas integration across modules, ensures that BioNeuralNet can be easily incorporated into your analysis workflows.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>Metrics</strong>: <a class="reference internal" href="metrics.html"><span class="doc">Metrics</span></a></dt><dd><ul class="simple">
+<li><p>Several plotting funcctions to visualize networks, emebddings, variance distribution, cluster comparison, and more.</p></li>
+<li><p>Correlation based functions to compare clustersand omics data with the phenotype.</p></li>
+</ul>
+</dd>
+<dt><strong>Utilities</strong>: <a class="reference internal" href="utils.html"><span class="doc">Utils</span></a></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><strong>Filtering Functions</strong>:</dt><dd><ul>
+<li><p>Network filtering allows users to select variance or zero-fraction filtering to an omics network.</p></li>
+<li><p>Reducing noise, and removing outliers.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Data Conversion</strong>:</dt><dd><ul>
+<li><p>Convert RData files both CSV and to Pandas DataFrame. For ease of integration for R-based workflows.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>External Tools</strong>: <a class="reference internal" href="external_tools/index.html"><span class="doc">External Tools</span></a></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><strong>Graph Construction</strong>:</dt><dd><ul>
+<li><p>BioNeuralNet provides additional tools in the <cite>bioneuralnet.external_tools</cite> module.</p></li>
+<li><p>Allowing users to generate networks using R-based tools like SmCCNet.</p></li>
+<li><p>While optional, these tools enhance BioNeuralNet’s capabilities and are recommended for comprehensive analysis.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="what-is-bioneuralnet">
+<h2>What is BioNeuralNet?<a class="headerlink" href="#what-is-bioneuralnet" title="Link to this heading"></a></h2>
+<p>BioNeuralNet is a <strong>Python-based</strong> framework designed to bridge the gap between <strong>multi-omics data analysis</strong> and <strong>Graph Neural Networks (GNNs)</strong>. By leveraging advanced techniques, it enables:</p>
+<ul class="simple">
+<li><p><strong>Graph Clustering</strong>: Identifies biologically meaningful communities within omics networks.</p></li>
+<li><p><strong>GNN Embeddings</strong>: Learns network-based feature representations from biological graphs, capturing both <strong>biological structure</strong> and <strong>feature correlations</strong> for enhanced analysis.</p></li>
+<li><p><strong>Subject Representation</strong>: Generates high-quality embeddings for individuals based on multi-omics profiles.</p></li>
+<li><p><strong>Disease Prediction</strong>: Builds predictive models using integrated multi-layer biological networks.</p></li>
+</ul>
+</section>
+<section id="why-gnns">
+<h2>Why GNNs?<a class="headerlink" href="#why-gnns" title="Link to this heading"></a></h2>
+<p>Traditional methods often struggle to model complex multi-omics relationships due to their inability to capture <strong>biological interactions and dependencies</strong>. BioNeuralNet addresses this challenge by utilizing <strong>GNN-powered embeddings</strong>, incorporating models such as:</p>
+<ul class="simple">
+<li><p><strong>Graph Convolutional Networks (GCN)</strong>: Aggregates features from neighboring nodes to capture local structure.</p></li>
+<li><p><strong>Graph Attention Networks (GAT)</strong>: Applies attention mechanisms to prioritize important interactions between biomolecules.</p></li>
+<li><p><strong>GraphSAGE</strong>: Enables inductive learning, making it applicable to unseen omics data.</p></li>
+<li><p><strong>Graph Isomorphism Networks (GIN)</strong>: Improves expressiveness in graph-based learning tasks.</p></li>
+</ul>
+<p>By integrating omics features within a <strong>network-aware framework</strong>, BioNeuralNet preserves biological interactions, leading to <strong>more accurate and interpretable predictions</strong>.
+For a deeper dive into how BioNeuralNet applies GNN embeddings, see <a class="reference internal" href="gnns.html"><span class="doc">GNN Embeddings</span></a>.</p>
+</section>
+<section id="seamless-data-integration">
+<h2>Seamless Data Integration<a class="headerlink" href="#seamless-data-integration" title="Link to this heading"></a></h2>
+<p>One of BioNeuralNet’s core strengths is <strong>interoperability</strong>:</p>
+<ul class="simple">
+<li><p>Outputs are structured as <strong>pandas DataFrames</strong>, ensuring easy downstream analysis.</p></li>
+<li><p>Supports integration with <strong>external tools and machine learning frameworks</strong>, making it adaptable to various research workflows.</p></li>
+<li><p>Works seamlessly with network-based and graph-learning pipelines.</p></li>
+<li><p>Our <a class="reference internal" href="user_api.html"><span class="doc">User API</span></a> provides detailed information on how to use BioNeuralNet’s modules and functions.</p></li>
+</ul>
+</section>
+<section id="example-transforming-multi-omics-for-enhanced-disease-prediction">
+<h2><strong>Example: Transforming Multi-Omics for Enhanced Disease Prediction</strong><a class="headerlink" href="#example-transforming-multi-omics-for-enhanced-disease-prediction" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://bioneuralnet.readthedocs.io/en/latest/_images/Overview.png">View full-size image: Transforming Multi-Omics for Enhanced Disease Prediction</a></p>
+<figure class="align-center" id="id6">
+<img alt="Overview of BioNeuralNet's multi-omics integration process" src="_images/Overview.png" />
+<figcaption>
+<p><span class="caption-text"><strong>BioNeuralNet</strong>: Transforming Multi-Omics for Enhanced Disease Prediction</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Below is a quick example demonstrating the following steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Preparation</strong>:</p>
+<ul class="simple">
+<li><p>Input your multi-omics data (e.g., proteomics, metabolomics) along with phenotype and clinical data.</p></li>
+</ul>
+</li>
+<li><p><strong>Network Construction</strong>:</p>
+<ul class="simple">
+<li><p><strong>Not performed internally</strong>: Generate the network adjacency matrix externally (SmCCNet).</p></li>
+<li><p>Lightweight wrappers (SmCCNet) are available in <cite>bioneuralnet.external_tools</cite> for convenience, R is required for their usage.</p></li>
+</ul>
+</li>
+<li><p><strong>Disease Prediction</strong>:</p>
+<ul class="simple">
+<li><p>Use <strong>DPMON</strong> to predict disease phenotypes by integrating the network information with omics data.</p></li>
+<li><p>DPMON supports an end-to-end pipeline with hyperparameter tuning that can return predictions as pandas DataFrames, enabling seamless integration with existing workflows.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Code Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.external_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">SmCCNet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.downstream_task</span><span class="w"> </span><span class="kn">import</span> <span class="n">DPMON</span>
+
+<span class="c1"># Step 1: Data Preparation</span>
+<span class="n">phenotype_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;phenotype_data.csv&#39;</span><span class="p">)</span>
+<span class="n">omics_proteins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;omics_proteins.csv&#39;</span><span class="p">)</span>
+<span class="n">omics_metabolites</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;omics_metabolites.csv&#39;</span><span class="p">)</span>
+<span class="n">clinical_dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;clinical_data.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Network Construction</span>
+<span class="n">smccnet</span> <span class="o">=</span> <span class="n">SmCCNet</span><span class="p">(</span>
+    <span class="n">phenotype_df</span><span class="o">=</span><span class="n">phenotype_data</span><span class="p">,</span>
+    <span class="n">omics_dfs</span><span class="o">=</span><span class="p">[</span><span class="n">omics_proteins</span><span class="p">,</span> <span class="n">omics_metabolites</span><span class="p">],</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span> <span class="s2">&quot;metabolite&quot;</span><span class="p">],</span>
+    <span class="n">kfold</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">summarization</span><span class="o">=</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">global_network</span><span class="p">,</span> <span class="n">clusters</span> <span class="o">=</span> <span class="n">smccnet</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjacency matrix generated.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Disease Prediction (DPMON)</span>
+<span class="n">dpmon</span> <span class="o">=</span> <span class="n">DPMON</span><span class="p">(</span>
+    <span class="n">adjacency_matrix</span><span class="o">=</span><span class="n">global_network</span><span class="p">,</span>
+    <span class="n">omics_list</span><span class="o">=</span><span class="p">[</span><span class="n">omics_proteins</span><span class="p">,</span> <span class="n">omics_metabolites</span><span class="p">],</span>
+    <span class="n">phenotype_data</span><span class="o">=</span><span class="n">phenotype_data</span><span class="p">,</span>
+    <span class="n">clinical_data</span><span class="o">=</span><span class="n">clinical_dt</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;GCN&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">dpmon</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Disease phenotype predictions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#key-contributions">Key Contributions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#gnn-model-overviews">GNN Model Overviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#dimensionality-reduction-and-downstream-integration">Dimensionality Reduction and Downstream Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#task-driven-supervised-semi-supervised-gnns">Task-Driven (Supervised/Semi-Supervised) GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#generating-low-dimensional-embeddings-for-multi-omics">Generating Low-Dimensional Embeddings for Multi-Omics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#key-insights-into-gnn-parameters-and-outputs">Key Insights into GNN Parameters and Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#dimensionality-reduction-pca-vs-autoencoders">Dimensionality Reduction: PCA vs. Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#how-dpmon-uses-gnns-differently">How DPMON Uses GNNs Differently</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnns.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#mathematical-approach">Mathematical Approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#graphical-comparison">Graphical Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#integration-with-bioneuralnet">Integration with BioNeuralNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#notes-for-users">Notes for Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#correlation-metrics">Correlation Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#further-information">Further Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#rdata-conversion">RData Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#graph-generation">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#preprocessing-utilities">Preprocessing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#data-summary-utilities">Data Summary Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#dpmon-disease-prediction-pipeline">DPMON: Disease Prediction Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#subject-representation-embedding-integration">Subject Representation &amp; Embedding Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#unlocking-downstream-applications">Unlocking Downstream Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#get-started">Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downstream_tasks.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#BioNeuralNet-offers-a-number-of-classes-and-functions.">BioNeuralNet offers a number of classes and functions.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Load-Data">Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Generate-Global-Network-using-SmCCNet">Generate Global Network using SmCCNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Generate-Network-Embeddings-using-GNNEmbedding">Generate Network Embeddings using GNNEmbedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Embeddings-visualization">Embeddings visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Integrate-Embeddings-into-Omics-Data-with-SubjectRepresentation">Integrate Embeddings into Omics Data with SubjectRepresentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Comparing-results-for-prediction-task">Comparing results for prediction task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Disease-Prediction-using-DPMON(Disease-Prediction-using-Multi-Omics-Networks)">Disease Prediction using DPMON(Disease Prediction using Multi-Omics Networks)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Phenotype-after:">Phenotype after:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Visualizing-the-variance-distribution-and-feature-variance">Visualizing the variance distribution and feature variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#DPMON-Predictions">DPMON Predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Clustering-with-CorrelatedLouvain-and-HybridLouvain">Clustering with CorrelatedLouvain and HybridLouvain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quick_Start.html#Lets-plot-the-clustered-network-from-correlated-louvain">Lets plot the clustered network from correlated louvain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Dataset-Source">Dataset Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Dataset-Overview">Dataset Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Patients-in-Every-Dataset">Patients in Every Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Final-Shapes-(Per-Patient)">Final Shapes (Per-Patient)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Data-Summary-Table">Data Summary Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Reference-Links">Reference Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TCGA-BRCA_Dataset.html#TCGAbiolinks">TCGAbiolinks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Trans-Omics-for-Precision-Medicine-|-TOPMed">Trans-Omics for Precision Medicine | TOPMed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Loading-your-data:">Loading your data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Ease-of-component-exploration-via-DatasetLoader">Ease of component exploration via <code class="docutils literal notranslate"><span class="pre">DatasetLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Generating-a-Multi-Omics-Network-using-SmCCNet">Generating a Multi-Omics Network using SmCCNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#SmCCNet-Output">SmCCNet Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Generating-Low-Dimensional-Embeddings-using-Graph-Neural-Networks-to-capture-meaningful-biological-interactions.">Generating Low-Dimensional Embeddings using Graph Neural Networks to capture meaningful biological interactions.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Embeddings-visualization">Embeddings visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Using-the-Embeddings">Using the Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Comparing-results">Comparing results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Network-Visulization">Network Visulization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#Correlated-Clustering">Correlated Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#DPMON-(Disease-Prediction-using-Multi-Omics-Networks)-reuses-the-same-GNN-architectures-but-with-a-different-objective:">DPMON (Disease Prediction using Multi-Omics Networks) reuses the same GNN architectures but with a different objective:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TOPMED.html#DPMON-allows-BioNeuralNet-users-to-significatly-improve-phenotype-predictions-with-a-few-lines-of-code.">DPMON allows BioNeuralNet users to significatly improve phenotype predictions with a few lines of code.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/example_1.html">Example 1: SmCCNet + GNN Embeddings + Subject Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/example_2.html">Example 2: SmCCNet + DPMON for Disease Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Graph_Embedding.html">Graph Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Subject_Representation.html">Subject Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Subject_Representation.html#disease-prediction-dpmon">Disease Prediction (DPMON)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Disease_Prediction.html">Disease Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Graph_Clustering.html">Graph Clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="external_tools/Graph_Construction.html">Graph Construction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.network_embedding.html">bioneuralnet.network_embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.clustering.html">bioneuralnet.clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.downstream_task.html">bioneuralnet.downstream_task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.utils.html">bioneuralnet.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.datasets.html">bioneuralnet.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.metrics.html">bioneuralnet.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/bioneuralnet.external_tools.html">bioneuralnet.external_tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_api.html#executables">Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#key-dependencies">Key Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-references">
+<h1>Indices and References<a class="headerlink" href="#indices-and-references" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Abdel-Hafiz, M., Najafi, M., et al. “Significant Subgraph Detection in Multi-omics Networks for Disease Pathway Identification.” <em>Frontiers in Big Data</em>, 5 (2022). DOI: <a class="reference external" href="https://doi.org/10.3389/fdata.2022.894632">10.3389/fdata.2022.894632</a>.</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Hussein, S., Ramos, V., et al. “Learning from Multi-Omics Networks to Enhance Disease Prediction: An Optimized Network Embedding and Fusion Approach.” In <em>2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM)</em>, Lisbon, Portugal, 2024, pp. 4371-4378. DOI: <a class="reference external" href="https://doi.org/10.1109/BIBM62325.2024.10822233">10.1109/BIBM62325.2024.10822233</a>.</p>
+</aside>
+</aside>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

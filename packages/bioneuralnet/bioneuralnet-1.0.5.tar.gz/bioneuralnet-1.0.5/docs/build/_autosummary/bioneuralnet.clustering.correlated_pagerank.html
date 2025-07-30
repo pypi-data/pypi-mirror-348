@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.clustering.correlated_pagerank &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="bioneuralnet.clustering.hybrid_louvain" href="bioneuralnet.clustering.hybrid_louvain.html" />
+    <link rel="prev" title="bioneuralnet.clustering.correlated_louvain" href="bioneuralnet.clustering.correlated_louvain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user_api.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.network_embedding.html">bioneuralnet.network_embedding</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="bioneuralnet.clustering.html">bioneuralnet.clustering</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.clustering.html#bioneuralnet.clustering.CorrelatedLouvain"><code class="docutils literal notranslate"><span class="pre">CorrelatedLouvain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.clustering.html#bioneuralnet.clustering.CorrelatedPageRank"><code class="docutils literal notranslate"><span class="pre">CorrelatedPageRank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.clustering.html#bioneuralnet.clustering.HybridLouvain"><code class="docutils literal notranslate"><span class="pre">HybridLouvain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.clustering.correlated_louvain.html">bioneuralnet.clustering.correlated_louvain</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">bioneuralnet.clustering.correlated_pagerank</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank"><code class="docutils literal notranslate"><span class="pre">CorrelatedPageRank</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.clustering.hybrid_louvain.html">bioneuralnet.clustering.hybrid_louvain</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.downstream_task.html">bioneuralnet.downstream_task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.utils.html">bioneuralnet.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.datasets.html">bioneuralnet.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.metrics.html">bioneuralnet.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.external_tools.html">bioneuralnet.external_tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_api.html#executables">Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_api.html">User API</a></li>
+          <li class="breadcrumb-item"><a href="bioneuralnet.clustering.html">bioneuralnet.clustering</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.clustering.correlated_pagerank</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/bioneuralnet.clustering.correlated_pagerank.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bioneuralnet.clustering.correlated_pagerank">
+<span id="bioneuralnet-clustering-correlated-pagerank"></span><h1>bioneuralnet.clustering.correlated_pagerank<a class="headerlink" href="#module-bioneuralnet.clustering.correlated_pagerank" title="Link to this heading"></a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_logger</span></code>(name)</p></td>
+<td><p>Retrieves a global logger configured to write to 'bioneuralnet.log' at the project root.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pearsonr</span></code>(x, y, *[, alternative, method])</p></td>
+<td><p>Pearson correlation coefficient and p-value for testing non-correlation.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ASHAScheduler</span></code></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncHyperBandScheduler</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>(*args, **kwargs)</p></td>
+<td><p>Special type indicating an unconstrained type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CLIReporter</span></code>(*[, metric_columns, ...])</p></td>
+<td><p>Command-line reporter</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank" title="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CorrelatedPageRank</span></code></a>(graph, omics_data, ...[, ...])</p></td>
+<td><p>PageRank Class for Clustering Nodes Based on Personalized PageRank.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bioneuralnet.clustering.correlated_pagerank.</span></span><span class="sig-name descname"><span class="pre">CorrelatedPageRank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.4.2)"><span class="pre">Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">omics_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">phenotype_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tune</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>PageRank Class for Clustering Nodes Based on Personalized PageRank.</p>
+<p>This class handles the execution of the Personalized PageRank algorithm
+and identification of clusters based on sweep cuts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.alpha" title="Link to this definition"></a></dt>
+<dd><p>Damping factor for PageRank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.max_iter">
+<span class="sig-name descname"><span class="pre">max_iter</span></span><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.max_iter" title="Link to this definition"></a></dt>
+<dd><p>Maximum number of iterations for PageRank convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.tol">
+<span class="sig-name descname"><span class="pre">tol</span></span><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.tol" title="Link to this definition"></a></dt>
+<dd><p>Tolerance for convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.k">
+<span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.k" title="Link to this definition"></a></dt>
+<dd><p>Weighting factor for composite correlation-conductance score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.output_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory to save outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.generate_weighted_personalization">
+<span class="sig-name descname"><span class="pre">generate_weighted_personalization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.generate_weighted_personalization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.generate_weighted_personalization" title="Link to this definition"></a></dt>
+<dd><p>Generates a weighted personalization vector for PageRank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nodes</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) – List of node identifiers to consider.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Personalization vector with weights for each node.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[Any, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.get_quality">
+<span class="sig-name descname"><span class="pre">get_quality</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.get_quality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.get_quality" title="Link to this definition"></a></dt>
+<dd><p>Returns the composite score (or correlation) from the latest clustering run.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.phen_omics_corr">
+<span class="sig-name descname"><span class="pre">phen_omics_corr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.phen_omics_corr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.phen_omics_corr" title="Link to this definition"></a></dt>
+<dd><p>Calculates the Pearson correlation between the PCA of omics data and phenotype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nodes</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) – List of node identifiers to include in the calculation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Correlation coefficient and formatted correlation with p-value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run" title="Link to this definition"></a></dt>
+<dd><p>Executes the correlated PageRank clustering pipeline.</p>
+<p><strong>Steps:</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Initializing Clustering</strong>:</dt><dd><ul class="simple">
+<li><p>Receives a list of seed nodes to personalize the PageRank algorithm.</p></li>
+<li><p>Prepares the input graph and relevant parameters for clustering.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>PageRank Execution</strong>:</dt><dd><ul class="simple">
+<li><p>Applies the PageRank algorithm with personalization based on the seed nodes.</p></li>
+<li><p>Computes node scores and determines cluster memberships.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Result Compilation</strong>:</dt><dd><ul class="simple">
+<li><p>Compiles clustering results, including cluster sizes and node memberships, into a dictionary.</p></li>
+<li><p>Logs the successful completion of the clustering process.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="simple">
+<dt><strong>Args</strong>:</dt><dd><dl class="simple">
+<dt>seed_nodes (List[Any]):</dt><dd><ul class="simple">
+<li><p>A list of node identifiers used as seed nodes for personalized PageRank.</p></li>
+<li><p>These nodes influence the clustering process by biasing the algorithm.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Returns</strong>: Dict[str, Any]</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>A dictionary containing the clustering results. Keys may include:</dt><dd><ul>
+<li><p><cite>clusters</cite>: Lists of nodes grouped into clusters.</p></li>
+<li><p><cite>scores</cite>: PageRank scores for each node.</p></li>
+<li><p><cite>metadata</cite>: Additional metrics or details about the clustering process.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Raises</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ValueError: If the input graph is empty or seed nodes are invalid.</p></li>
+<li><p>Exception: For any unexpected errors during clustering execution.</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Notes</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Seed nodes strongly influence the clustering outcome; select them carefully based on prior knowledge or experimental goals.</p></li>
+<li><p>The PageRank algorithm requires a well-defined and connected graph to produce meaningful results.</p></li>
+<li><p>Results are sensitive to the alpha (damping factor) and other hyperparameters.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run_pagerank_clustering">
+<span class="sig-name descname"><span class="pre">run_pagerank_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.run_pagerank_clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run_pagerank_clustering" title="Link to this definition"></a></dt>
+<dd><p>Executes the PageRank clustering algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>seed_nodes</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) – List of seed node identifiers for personalization.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing clustering results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run_tuning">
+<span class="sig-name descname"><span class="pre">run_tuning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.run_tuning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.run_tuning" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.sweep_cut">
+<span class="sig-name descname"><span class="pre">sweep_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/clustering/correlated_pagerank.html#CorrelatedPageRank.sweep_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.clustering.correlated_pagerank.CorrelatedPageRank.sweep_cut" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bioneuralnet.clustering.correlated_louvain.html" class="btn btn-neutral float-left" title="bioneuralnet.clustering.correlated_louvain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bioneuralnet.clustering.hybrid_louvain.html" class="btn btn-neutral float-right" title="bioneuralnet.clustering.hybrid_louvain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

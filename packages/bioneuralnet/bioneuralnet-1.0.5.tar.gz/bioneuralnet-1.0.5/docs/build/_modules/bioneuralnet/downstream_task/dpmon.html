@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.downstream_task.dpmon &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.downstream_task.dpmon</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bioneuralnet.downstream_task.dpmon</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomNodeSplit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray</span><span class="w"> </span><span class="kn">import</span> <span class="n">train</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray</span><span class="w"> </span><span class="kn">import</span> <span class="n">tune</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray.tune</span><span class="w"> </span><span class="kn">import</span> <span class="n">Checkpoint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray.tune</span><span class="w"> </span><span class="kn">import</span> <span class="n">CLIReporter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray.tune.schedulers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASHAScheduler</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.network_embedding.gnn_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCN</span><span class="p">,</span> <span class="n">GAT</span><span class="p">,</span> <span class="n">SAGE</span><span class="p">,</span> <span class="n">GIN</span>
+
+<span class="n">logger</span><span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DPMON">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.DPMON">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DPMON</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DPMON (Disease Prediction using Multi-Omics Networks): An end-to-end pipeline for disease prediction using multi-omics networks.</span>
+
+<span class="sd">        Instead of node-level MSE regression, DPMON aggregates node embeddings with patient-level omics data.</span>
+<span class="sd">        A downstream classification head (e.g., softmax layer with CrossEntropyLoss) is applied for sample-level disease prediction.</span>
+<span class="sd">        This end-to-end approach leverages both local (node-level) and global (patient-level) network information</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">    </span>
+<span class="sd">        adjacency_matrix (pd.DataFrame): The adjacency matrix of the network.</span>
+<span class="sd">        omics_list (List[pd.DataFrame]): A list of omics datasets.</span>
+<span class="sd">        phenotype_data (pd.DataFrame): A DataFrame containing the disease phenotype.</span>
+<span class="sd">        clinical_data (Optional[pd.DataFrame]): A DataFrame containing clinical data.</span>
+<span class="sd">        model (str): The GNN model to use (GCN, GAT, SAGE, GIN). Default=&#39;GAT&#39;.</span>
+<span class="sd">        gnn_hidden_dim (int): The hidden dimension of the GNN. Default=16.</span>
+<span class="sd">        layer_num (int): The number of GNN layers. Default=5.</span>
+<span class="sd">        nn_hidden_dim1 (int): The hidden dimension of the first NN layer. Default=8.</span>
+<span class="sd">        nn_hidden_dim2 (int): The hidden dimension of the second NN layer. Default=8.</span>
+<span class="sd">        num_epochs (int): The number of training epochs. Default=100.</span>
+<span class="sd">        repeat_num (int): The number of training repeats. Default=5.</span>
+<span class="sd">        lr (float): The learning rate. Default=1e-1.</span>
+<span class="sd">        weight_decay (float): The weight decay. Default=1e-4.</span>
+<span class="sd">        tune (bool): Whether to perform hyperparameter tuning. Default=False.</span>
+<span class="sd">        gpu (bool): Whether to use GPU. Default=False.</span>
+<span class="sd">        cuda (int): The CUDA device ID. Default=0.</span>
+<span class="sd">        output_dir (Optional[str]): The output directory. Default=None.        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">adjacency_matrix</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">omics_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="n">phenotype_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">clinical_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GAT&quot;</span><span class="p">,</span>
+        <span class="n">gnn_hidden_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="n">layer_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">nn_hidden_dim1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">nn_hidden_dim2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">num_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">repeat_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-1</span><span class="p">,</span>
+        <span class="n">weight_decay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
+        <span class="n">tune</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">cuda</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Adjacency matrix cannot be empty.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">omics_list</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">omics_list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All provided omics data files must be non-empty.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">phenotype_data</span><span class="o">.</span><span class="n">empty</span> <span class="ow">or</span> <span class="s2">&quot;phenotype&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">phenotype_data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phenotype data must have column a phenotype column.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clinical_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">clinical_data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Clinical data provided is empty =&gt; treating as None =&gt; random features.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">clinical_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span> <span class="o">=</span> <span class="n">adjacency_matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omics_list</span> <span class="o">=</span> <span class="n">omics_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phenotype_data</span> <span class="o">=</span> <span class="n">phenotype_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clinical_data</span> <span class="o">=</span> <span class="n">clinical_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn_hidden_dim</span> <span class="o">=</span> <span class="n">gnn_hidden_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer_num</span> <span class="o">=</span> <span class="n">layer_num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_hidden_dim1</span> <span class="o">=</span> <span class="n">nn_hidden_dim1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_hidden_dim2</span> <span class="o">=</span> <span class="n">nn_hidden_dim2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_epochs</span> <span class="o">=</span> <span class="n">num_epochs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeat_num</span> <span class="o">=</span> <span class="n">repeat_num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span> <span class="o">=</span> <span class="n">weight_decay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tune</span> <span class="o">=</span> <span class="n">tune</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gpu</span> <span class="o">=</span> <span class="n">gpu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cuda</span> <span class="o">=</span> <span class="n">cuda</span>
+
+        <span class="k">if</span> <span class="n">output_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;dpmon&quot;</span>  
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output directory set to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialized DPMON with the provided parameters.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DPMON.run">
+<a class="viewcode-back" href="../../../user_api.html#bioneuralnet.downstream_task.DPMON.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the DPMON pipeline for disease prediction.</span>
+
+<span class="sd">        **Steps:**</span>
+
+<span class="sd">        1. **Combining Omics and Phenotype Data**:</span>
+<span class="sd">           - Merges the provided omics datasets and ensures that the phenotype (`phenotype`) column is included.</span>
+
+<span class="sd">        2. **Tuning or Training**:</span>
+<span class="sd">           - **Tuning**: If `tune=True`, performs hyperparameter tuning using Ray Tune and returns an empty DataFrame.</span>
+<span class="sd">           - **Training**: If `tune=False`, runs standard training to generate predictions.</span>
+
+<span class="sd">        3. **Predictions**:</span>
+<span class="sd">           - If training is performed, returns a DataFrame of predictions with &#39;Actual&#39; and &#39;Predicted&#39; columns.</span>
+
+<span class="sd">        **Returns**: pd.DataFrame</span>
+
+<span class="sd">            - If `tune=False`, a DataFrame containing disease phenotype predictions for each sample.</span>
+<span class="sd">            - If `tune=True`, returns an empty DataFrame since no predictions are generated.</span>
+
+<span class="sd">        **Raises**:</span>
+
+<span class="sd">            - **ValueError**: If the input data is improperly formatted or missing.</span>
+<span class="sd">            - **Exception**: For any unforeseen errors encountered during preprocessing, tuning, or training.</span>
+
+<span class="sd">        **Notes**:</span>
+
+<span class="sd">            - DPMON relies on internally-generated embeddings (via GNNs), node correlations, and a downstream neural network.</span>
+<span class="sd">            - Ensure that the adjacency matrix and omics data are properly aligned and that clinical/phenotype data match the sample indices.</span>
+
+<span class="sd">        **Example**:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            dpmon = DPMON(adjacency_matrix, omics_list, phenotype_data, clinical_data, model=&#39;GCN&#39;)</span>
+<span class="sd">            predictions = dpmon.run()</span>
+<span class="sd">            print(predictions.head())</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting DPMON run.&quot;</span><span class="p">)</span>
+
+        <span class="n">dpmon_params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+            <span class="s2">&quot;layer_num&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_num</span><span class="p">,</span>
+            <span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn_hidden_dim1</span><span class="p">,</span>
+            <span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn_hidden_dim2</span><span class="p">,</span>
+            <span class="s2">&quot;num_epochs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_epochs</span><span class="p">,</span>
+            <span class="s2">&quot;repeat_num&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat_num</span><span class="p">,</span>
+            <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span><span class="p">,</span>
+            <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span><span class="p">,</span>
+            <span class="s2">&quot;gpu&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu</span><span class="p">,</span>
+            <span class="s2">&quot;cuda&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cuda</span><span class="p">,</span>
+            <span class="s2">&quot;tune&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tune</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Combine omics datasets</span>
+        <span class="n">combined_omics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omics_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">combined_omics</span> <span class="o">=</span> <span class="n">combined_omics</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="s2">&quot;phenotype&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">combined_omics</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">combined_omics</span> <span class="o">=</span> <span class="n">combined_omics</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">phenotype_data</span><span class="p">[[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]],</span>
+                <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tune</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running hyperparameter tuning for DPMON.&quot;</span><span class="p">)</span>
+            <span class="n">best_config_df</span> <span class="o">=</span> <span class="n">run_hyperparameter_tuning</span><span class="p">(</span>
+                <span class="n">dpmon_params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">combined_omics</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clinical_data</span>
+            <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">best_config_df</span><span class="p">)</span>
+            <span class="n">best_config</span> <span class="o">=</span> <span class="n">best_config_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">])</span>
+            <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;gnn_layer_num&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;gnn_layer_num&quot;</span><span class="p">])</span>
+            <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">])</span>
+            <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">])</span>
+            <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;num_epochs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;num_epochs&quot;</span><span class="p">])</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best tuned parameters: </span><span class="si">{</span><span class="n">best_config</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best tuned parameters: </span><span class="si">{</span><span class="n">best_config</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">dpmon_params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">best_config</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running standard training with tuned parameters.&quot;</span><span class="p">)</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">run_standard_training</span><span class="p">(</span>
+                <span class="n">dpmon_params</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">,</span>
+                <span class="n">combined_omics</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clinical_data</span><span class="p">,</span>
+                <span class="n">output_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">predictions</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running standard training for DPMON.&quot;</span><span class="p">)</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">run_standard_training</span><span class="p">(</span>
+                <span class="n">dpmon_params</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">,</span>
+                <span class="n">combined_omics</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clinical_data</span><span class="p">,</span>
+                <span class="n">output_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;DPMON run completed.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">predictions</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="setup_device">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.setup_device">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_device</span><span class="p">(</span><span class="n">gpu</span><span class="p">,</span> <span class="n">cuda</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">gpu</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_DEVICE_ORDER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PCI_BUS_ID&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cuda</span><span class="p">)</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using GPU </span><span class="si">{</span><span class="n">cuda</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPU </span><span class="si">{</span><span class="n">cuda</span><span class="si">}</span><span class="s2"> requested but not available, using CPU&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using CPU&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">device</span></div>
+
+
+
+<div class="viewcode-block" id="slice_omics_datasets">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.slice_omics_datasets">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">slice_omics_datasets</span><span class="p">(</span>
+    <span class="n">omics_dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">adjacency_matrix</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Slicing omics dataset based on network nodes.&quot;</span><span class="p">)</span>
+    <span class="n">omics_network_nodes_names</span> <span class="o">=</span> <span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># Clean omics dataset columns</span>
+    <span class="n">clean_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">omics_dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">node_clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^0-9a-zA-Z_]&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node_clean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+            <span class="n">node_clean</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span> <span class="o">+</span> <span class="n">node_clean</span>
+        <span class="n">clean_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_clean</span><span class="p">)</span>
+    <span class="n">omics_dataset</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">clean_columns</span>
+
+    <span class="n">missing_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">omics_network_nodes_names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">omics_dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing_nodes</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nodes missing in omics data: </span><span class="si">{</span><span class="n">missing_nodes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing nodes in omics dataset.&quot;</span><span class="p">)</span>
+
+    <span class="n">selected_columns</span> <span class="o">=</span> <span class="n">omics_network_nodes_names</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">omics_dataset</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]]</span></div>
+
+
+
+<div class="viewcode-block" id="build_omics_networks_tg">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.build_omics_networks_tg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_omics_networks_tg</span><span class="p">(</span>
+    <span class="n">adjacency_matrix</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">omics_datasets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">clinical_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Data</span><span class="p">]:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Building PyTorch Geometric Data object from adjacency matrix.&quot;</span><span class="p">)</span>
+    <span class="n">omics_network_nodes_names</span> <span class="o">=</span> <span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="p">)</span>
+    <span class="n">node_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">node_name</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">node_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">omics_network_nodes_names</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">relabel_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_mapping</span><span class="p">)</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_mapping</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of nodes in network: </span><span class="si">{</span><span class="n">num_nodes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">clinical_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">clinical_data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="n">clinical_vars</span> <span class="o">=</span> <span class="n">clinical_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using clinical vars for node features: </span><span class="si">{</span><span class="n">clinical_vars</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">omics_dataset</span> <span class="o">=</span> <span class="n">omics_datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">missing_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">omics_network_nodes_names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">omics_dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">missing_nodes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing nodes for correlation computation.&quot;</span><span class="p">)</span>
+        <span class="n">node_features</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node_name</span> <span class="ow">in</span> <span class="n">omics_network_nodes_names</span><span class="p">:</span>
+            <span class="n">correlations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">clinical_vars</span><span class="p">:</span>
+                <span class="n">corr_value</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span>
+                    <span class="n">omics_dataset</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">clinical_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">))</span>
+                <span class="p">)</span>
+                <span class="n">correlations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corr_value</span><span class="p">)</span>
+            <span class="n">node_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">node_features</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="n">num_nodes</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No clinical data provided or empty. Using random features.&quot;</span><span class="p">)</span>
+
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_index</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">edge_weight</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="o">=</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_attr</span><span class="o">=</span><span class="n">edge_weight</span><span class="p">)</span>
+    <span class="n">num_val_nodes</span> <span class="o">=</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">&gt;=</span> <span class="mi">30</span> <span class="k">else</span> <span class="mi">5</span>
+    <span class="n">num_test_nodes</span> <span class="o">=</span> <span class="mi">12</span> <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">&gt;=</span> <span class="mi">30</span> <span class="k">else</span> <span class="mi">5</span>
+    <span class="n">transform</span> <span class="o">=</span> <span class="n">RandomNodeSplit</span><span class="p">(</span><span class="n">num_val</span><span class="o">=</span><span class="n">num_val_nodes</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="n">num_test_nodes</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="run_standard_training">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.run_standard_training">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_standard_training</span><span class="p">(</span><span class="n">dpmon_params</span><span class="p">,</span> <span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">combined_omics</span><span class="p">,</span> <span class="n">clinical_data</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">):</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">setup_device</span><span class="p">(</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;gpu&quot;</span><span class="p">],</span> <span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;cuda&quot;</span><span class="p">])</span>
+    <span class="n">omics_dataset</span> <span class="o">=</span> <span class="n">slice_omics_datasets</span><span class="p">(</span><span class="n">combined_omics</span><span class="p">,</span> <span class="n">adjacency_matrix</span><span class="p">)</span>
+    <span class="n">omics_networks_tg</span> <span class="o">=</span> <span class="n">build_omics_networks_tg</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">omics_dataset</span><span class="p">,</span> <span class="n">clinical_data</span><span class="p">)</span>
+
+    <span class="n">accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">best_accuracy</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_predictions_df</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">omics_data</span><span class="p">,</span> <span class="n">omics_network</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">omics_dataset</span><span class="p">,</span> <span class="n">omics_networks_tg</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;repeat_num&quot;</span><span class="p">]):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training iteration </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s1">&#39;repeat_num&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span>
+                <span class="n">model_type</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span>
+                <span class="n">gnn_input_dim</span><span class="o">=</span><span class="n">omics_network</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">gnn_hidden_dim</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">],</span>
+                <span class="n">gnn_layer_num</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;layer_num&quot;</span><span class="p">],</span>
+                <span class="n">ae_encoding_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">nn_input_dim</span><span class="o">=</span><span class="n">omics_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;phenotype&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">nn_hidden_dim1</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">],</span>
+                <span class="n">nn_hidden_dim2</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">],</span>
+                <span class="n">nn_output_dim</span><span class="o">=</span><span class="n">omics_data</span><span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+                <span class="n">lr</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">],</span>
+                <span class="n">weight_decay</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;weight_decay&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+
+            <span class="n">train_features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">omics_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;phenotype&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">train_labels</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">omics_data</span><span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+                <span class="s2">&quot;omics_network&quot;</span><span class="p">:</span> <span class="n">omics_network</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+            <span class="p">}</span>
+
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;num_epochs&quot;</span><span class="p">])</span>
+            <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+
+            <span class="c1"># Save model</span>
+            <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;dpm_model_iter_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">.pth&quot;</span><span class="p">)</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">model_path</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model saved to </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Evaluate model</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">predictions</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">omics_network</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">predictions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                    <span class="p">{</span><span class="s2">&quot;Actual&quot;</span><span class="p">:</span> <span class="n">omics_data</span><span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;Predicted&quot;</span><span class="p">:</span> <span class="n">predicted</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()}</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">accuracy</span> <span class="o">&gt;</span> <span class="n">best_accuracy</span><span class="p">:</span>
+                <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span>
+                <span class="n">best_predictions_df</span> <span class="o">=</span> <span class="n">predictions_df</span>
+
+    <span class="k">if</span> <span class="n">accuracies</span><span class="p">:</span>
+        <span class="n">avg_accuracy</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">accuracies</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">accuracies</span><span class="p">)</span>
+        <span class="n">std_accuracy</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">accuracies</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">accuracies</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best Accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average Accuracy: </span><span class="si">{</span><span class="n">avg_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard Deviation of Accuracy: </span><span class="si">{</span><span class="n">std_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">best_predictions_df</span><span class="p">,</span> <span class="n">avg_accuracy</span></div>
+
+
+
+<div class="viewcode-block" id="run_hyperparameter_tuning">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.run_hyperparameter_tuning">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_hyperparameter_tuning</span><span class="p">(</span>
+    <span class="n">dpmon_params</span><span class="p">,</span> <span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">combined_omics</span><span class="p">,</span> <span class="n">clinical_data</span>
+<span class="p">):</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">setup_device</span><span class="p">(</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;gpu&quot;</span><span class="p">],</span> <span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;cuda&quot;</span><span class="p">])</span>
+
+    <span class="n">omics_dataset</span> <span class="o">=</span> <span class="n">slice_omics_datasets</span><span class="p">(</span><span class="n">combined_omics</span><span class="p">,</span> <span class="n">adjacency_matrix</span><span class="p">)</span>
+    <span class="n">omics_networks_tg</span> <span class="o">=</span> <span class="n">build_omics_networks_tg</span><span class="p">(</span>
+        <span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">omics_dataset</span><span class="p">,</span> <span class="n">clinical_data</span>
+    <span class="p">)</span>
+
+    <span class="n">pipeline_configs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;gnn_layer_num&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]),</span>
+        <span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]),</span>
+        <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">),</span>
+        <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">),</span>
+        <span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]),</span>
+        <span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]),</span>
+        <span class="s2">&quot;num_epochs&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">8192</span><span class="p">]),</span>
+    <span class="p">}</span>
+
+    <span class="n">reporter</span> <span class="o">=</span> <span class="n">CLIReporter</span><span class="p">(</span><span class="n">metric_columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;training_iteration&quot;</span><span class="p">])</span>
+    <span class="n">scheduler</span> <span class="o">=</span> <span class="n">ASHAScheduler</span><span class="p">(</span>
+        <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">grace_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">gpu_resources</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;gpu&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="n">best_configs</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">omics_data</span><span class="p">,</span> <span class="n">omics_network_tg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">omics_dataset</span><span class="p">,</span> <span class="n">omics_networks_tg</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Starting hyperparameter tuning for dataset shape: </span><span class="si">{</span><span class="n">omics_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">tune_train_n</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span>
+                <span class="n">model_type</span><span class="o">=</span><span class="n">dpmon_params</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span>
+                <span class="n">gnn_input_dim</span><span class="o">=</span><span class="n">omics_network_tg</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">gnn_hidden_dim</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;gnn_hidden_dim&quot;</span><span class="p">],</span>
+                <span class="n">gnn_layer_num</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;gnn_layer_num&quot;</span><span class="p">],</span>
+                <span class="n">ae_encoding_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">nn_input_dim</span><span class="o">=</span><span class="n">omics_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;phenotype&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">nn_hidden_dim1</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim1&quot;</span><span class="p">],</span>
+                <span class="n">nn_hidden_dim2</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;nn_hidden_dim2&quot;</span><span class="p">],</span>
+                <span class="n">nn_output_dim</span><span class="o">=</span><span class="n">omics_data</span><span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">],</span> <span class="n">weight_decay</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;weight_decay&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="n">train_features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span>
+                <span class="n">omics_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;phenotype&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">train_labels</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">omics_data</span><span class="p">[</span><span class="s2">&quot;phenotype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                    <span class="n">device</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;omics_network&quot;</span><span class="p">:</span> <span class="n">omics_network_tg</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+            <span class="p">}</span>
+
+            <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;num_epochs&quot;</span><span class="p">]):</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;omics_network&quot;</span><span class="p">])</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">=</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+
+                <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+                <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempdir</span><span class="p">:</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+                        <span class="p">{</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">epoch</span><span class="p">,</span> <span class="s2">&quot;model_state&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()},</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempdir</span><span class="p">,</span> <span class="s2">&quot;checkpoint.pt&quot;</span><span class="p">),</span>
+                    <span class="p">)</span>
+                    <span class="n">train</span><span class="o">.</span><span class="n">report</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span> <span class="n">checkpoint</span><span class="o">=</span><span class="n">Checkpoint</span><span class="o">.</span><span class="n">from_directory</span><span class="p">(</span><span class="n">tempdir</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+            <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;omics_network&quot;</span><span class="p">])</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">=</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+                <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+                <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempdir</span><span class="p">:</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;num_epochs&quot;</span><span class="p">],</span>
+                            <span class="s2">&quot;model_state&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+                        <span class="p">},</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempdir</span><span class="p">,</span> <span class="s2">&quot;checkpoint.pt&quot;</span><span class="p">),</span>
+                    <span class="p">)</span>
+                    <span class="n">train</span><span class="o">.</span><span class="n">report</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span> <span class="n">checkpoint</span><span class="o">=</span><span class="n">Checkpoint</span><span class="o">.</span><span class="n">from_directory</span><span class="p">(</span><span class="n">tempdir</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">short_dirname_creator</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;T</span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">trial_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tune</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">tune_train_n</span><span class="p">,</span>
+            <span class="n">resources_per_trial</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cpu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;gpu&quot;</span><span class="p">:</span> <span class="n">gpu_resources</span><span class="p">},</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">pipeline_configs</span><span class="p">,</span>
+            <span class="n">num_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tune_dp&quot;</span><span class="p">,</span>
+            <span class="n">progress_reporter</span><span class="o">=</span><span class="n">reporter</span><span class="p">,</span>
+            <span class="n">trial_dirname_creator</span><span class="o">=</span><span class="n">short_dirname_creator</span><span class="p">,</span>
+            <span class="n">checkpoint_score_attr</span><span class="o">=</span><span class="s2">&quot;min-loss&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">best_trial</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_best_trial</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Best trial config: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_trial</span><span class="o">.</span><span class="n">config</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Best trial final loss: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_trial</span><span class="o">.</span><span class="n">last_result</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Best trial final accuracy: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_trial</span><span class="o">.</span><span class="n">last_result</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="n">best_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_trial</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="n">best_configs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_configs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">best_configs_df</span></div>
+
+
+
+<div class="viewcode-block" id="train_model">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.train_model">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">epoch_num</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epoch_num</span><span class="p">):</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">outputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;omics_network&quot;</span><span class="p">])</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epoch_num</span><span class="si">}</span><span class="s2">], Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;omics_network&quot;</span><span class="p">])</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+            <span class="n">train_labels</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">accuracy</span></div>
+
+
+
+<div class="viewcode-block" id="NeuralNetwork">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.NeuralNetwork">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_type</span><span class="p">,</span>
+        <span class="n">gnn_input_dim</span><span class="p">,</span>
+        <span class="n">gnn_hidden_dim</span><span class="p">,</span>
+        <span class="n">gnn_layer_num</span><span class="p">,</span>
+        <span class="n">ae_encoding_dim</span><span class="p">,</span>
+        <span class="n">nn_input_dim</span><span class="p">,</span>
+        <span class="n">nn_hidden_dim1</span><span class="p">,</span>
+        <span class="n">nn_hidden_dim2</span><span class="p">,</span>
+        <span class="n">nn_output_dim</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NeuralNetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;GCN&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span>
+                <span class="n">input_dim</span><span class="o">=</span><span class="n">gnn_input_dim</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">layer_num</span><span class="o">=</span><span class="n">gnn_layer_num</span><span class="p">,</span>
+                <span class="n">final_layer</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;GAT&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span> <span class="o">=</span> <span class="n">GAT</span><span class="p">(</span>
+                <span class="n">input_dim</span><span class="o">=</span><span class="n">gnn_input_dim</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">layer_num</span><span class="o">=</span><span class="n">gnn_layer_num</span><span class="p">,</span>
+                <span class="n">final_layer</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;SAGE&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span> <span class="o">=</span> <span class="n">SAGE</span><span class="p">(</span>
+                <span class="n">input_dim</span><span class="o">=</span><span class="n">gnn_input_dim</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">output_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">layer_num</span><span class="o">=</span><span class="n">gnn_layer_num</span><span class="p">,</span>
+                <span class="n">final_layer</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;GIN&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span> <span class="o">=</span> <span class="n">GIN</span><span class="p">(</span>
+                <span class="n">input_dim</span><span class="o">=</span><span class="n">gnn_input_dim</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">output_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span>
+                <span class="n">layer_num</span><span class="o">=</span><span class="n">gnn_layer_num</span><span class="p">,</span>
+                <span class="n">final_layer</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported GNN model type: </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoencoder</span> <span class="o">=</span> <span class="n">Autoencoder</span><span class="p">(</span>
+            <span class="n">input_dim</span><span class="o">=</span><span class="n">gnn_hidden_dim</span><span class="p">,</span> <span class="n">encoding_dim</span><span class="o">=</span><span class="n">ae_encoding_dim</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim_averaging</span> <span class="o">=</span> <span class="n">DimensionAveraging</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor</span> <span class="o">=</span> <span class="n">DownstreamTaskNN</span><span class="p">(</span>
+            <span class="n">nn_input_dim</span><span class="p">,</span> <span class="n">nn_hidden_dim1</span><span class="p">,</span> <span class="n">nn_hidden_dim2</span><span class="p">,</span> <span class="n">nn_output_dim</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="NeuralNetwork.forward">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.NeuralNetwork.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omics_dataset</span><span class="p">,</span> <span class="n">omics_network_tg</span><span class="p">):</span>
+        <span class="n">omics_network_nodes_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">omics_network_tg</span><span class="p">)</span>
+        <span class="n">omics_network_nodes_embedding_ae</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoencoder</span><span class="p">(</span>
+            <span class="n">omics_network_nodes_embedding</span>
+        <span class="p">)</span>
+        <span class="n">omics_network_nodes_embedding_avg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_averaging</span><span class="p">(</span>
+            <span class="n">omics_network_nodes_embedding_ae</span>
+        <span class="p">)</span>
+        <span class="n">omics_dataset_with_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span>
+            <span class="n">omics_dataset</span><span class="p">,</span>
+            <span class="n">omics_network_nodes_embedding_avg</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span>
+                <span class="n">omics_dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">omics_dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span>
+        <span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor</span><span class="p">(</span><span class="n">omics_dataset_with_embeddings</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">omics_dataset_with_embeddings</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Autoencoder">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.Autoencoder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Autoencoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">encoding_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Autoencoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">encoding_dim</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">encoding_dim</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">),</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Autoencoder.forward">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.Autoencoder.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DimensionAveraging">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.DimensionAveraging">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DimensionAveraging</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DimensionAveraging</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DimensionAveraging.forward">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.DimensionAveraging.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DownstreamTaskNN">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.DownstreamTaskNN">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DownstreamTaskNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DownstreamTaskNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">hidden_dim1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">hidden_dim2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim2</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DownstreamTaskNN.forward">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.downstream_task.dpmon.html#bioneuralnet.downstream_task.DownstreamTaskNN.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

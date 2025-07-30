@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.utils.data &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.utils.data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bioneuralnet.utils.data</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="variance_summary">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.utils.data.html#bioneuralnet.utils.variance_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">variance_summary</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">low_var_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute summary statistics for column variances in the DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;variance_mean&quot;</span><span class="p">:</span> <span class="n">variances</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s2">&quot;variance_median&quot;</span><span class="p">:</span> <span class="n">variances</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+        <span class="s2">&quot;variance_min&quot;</span><span class="p">:</span> <span class="n">variances</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+        <span class="s2">&quot;variance_max&quot;</span><span class="p">:</span> <span class="n">variances</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+        <span class="s2">&quot;variance_std&quot;</span><span class="p">:</span> <span class="n">variances</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">low_var_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;num_low_variance_features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">variances</span> <span class="o">&lt;</span> <span class="n">low_var_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">summary</span></div>
+
+
+<div class="viewcode-block" id="zero_fraction_summary">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.utils.data.html#bioneuralnet.utils.zero_fraction_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">zero_fraction_summary</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">high_zero_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute summary statistics for the fraction of zeros in each column</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">zero_fraction</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;zero_fraction_mean&quot;</span><span class="p">:</span> <span class="n">zero_fraction</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s2">&quot;zero_fraction_median&quot;</span><span class="p">:</span> <span class="n">zero_fraction</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+        <span class="s2">&quot;zero_fraction_min&quot;</span><span class="p">:</span> <span class="n">zero_fraction</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+        <span class="s2">&quot;zero_fraction_max&quot;</span><span class="p">:</span> <span class="n">zero_fraction</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+        <span class="s2">&quot;zero_fraction_std&quot;</span><span class="p">:</span> <span class="n">zero_fraction</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">high_zero_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;num_high_zero_features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">zero_fraction</span> <span class="o">&gt;</span> <span class="n">high_zero_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">summary</span></div>
+
+
+<div class="viewcode-block" id="expression_summary">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.utils.data.html#bioneuralnet.utils.expression_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">expression_summary</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute summary statistics for the mean expression of features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mean_expression</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;expression_mean&quot;</span><span class="p">:</span> <span class="n">mean_expression</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s2">&quot;expression_median&quot;</span><span class="p">:</span> <span class="n">mean_expression</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+        <span class="s2">&quot;expression_min&quot;</span><span class="p">:</span> <span class="n">mean_expression</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+        <span class="s2">&quot;expression_max&quot;</span><span class="p">:</span> <span class="n">mean_expression</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+        <span class="s2">&quot;expression_std&quot;</span><span class="p">:</span> <span class="n">mean_expression</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">summary</span></div>
+
+
+<div class="viewcode-block" id="correlation_summary">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.utils.data.html#bioneuralnet.utils.correlation_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">correlation_summary</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute summary statistics of the maximum pairwise correlation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">corr_matrix</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">max_corr</span> <span class="o">=</span> <span class="n">corr_matrix</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+    <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;max_corr_mean&quot;</span><span class="p">:</span> <span class="n">max_corr</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s2">&quot;max_corr_median&quot;</span><span class="p">:</span> <span class="n">max_corr</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+        <span class="s2">&quot;max_corr_min&quot;</span><span class="p">:</span> <span class="n">max_corr</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+        <span class="s2">&quot;max_corr_max&quot;</span><span class="p">:</span> <span class="n">max_corr</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+        <span class="s2">&quot;max_corr_std&quot;</span><span class="p">:</span> <span class="n">max_corr</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">summary</span></div>
+
+
+<div class="viewcode-block" id="explore_data_stats">
+<a class="viewcode-back" href="../../../_autosummary/bioneuralnet.utils.data.html#bioneuralnet.utils.explore_data_stats">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">explore_data_stats</span><span class="p">(</span><span class="n">omics_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Data&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print key statistics for an omics DataFrame including variance, zero fraction,</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Statistics for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="n">var_stats</span> <span class="o">=</span> <span class="n">variance_summary</span><span class="p">(</span><span class="n">omics_df</span><span class="p">,</span> <span class="n">low_var_threshold</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variance Summary: </span><span class="si">{</span><span class="n">var_stats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">zero_stats</span> <span class="o">=</span> <span class="n">zero_fraction_summary</span><span class="p">(</span><span class="n">omics_df</span><span class="p">,</span> <span class="n">high_zero_threshold</span><span class="o">=</span><span class="mf">0.50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zero Fraction Summary: </span><span class="si">{</span><span class="n">zero_stats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">expr_stats</span> <span class="o">=</span> <span class="n">expression_summary</span><span class="p">(</span><span class="n">omics_df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expression Summary: </span><span class="si">{</span><span class="n">expr_stats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">corr_stats</span> <span class="o">=</span> <span class="n">correlation_summary</span><span class="p">(</span><span class="n">omics_df</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation Summary: </span><span class="si">{</span><span class="n">corr_stats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation Summary: Could not compute due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

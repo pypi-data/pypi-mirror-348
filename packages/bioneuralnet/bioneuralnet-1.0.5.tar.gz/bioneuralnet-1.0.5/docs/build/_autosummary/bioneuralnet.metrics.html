@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bioneuralnet.metrics &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="bioneuralnet.metrics.correlation" href="bioneuralnet.metrics.correlation.html" />
+    <link rel="prev" title="bioneuralnet.datasets.dataset_loader" href="bioneuralnet.datasets.dataset_loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick_Start.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html">TCGA-BRCA Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user_api.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.network_embedding.html">bioneuralnet.network_embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.clustering.html">bioneuralnet.clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.downstream_task.html">bioneuralnet.downstream_task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.utils.html">bioneuralnet.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.datasets.html">bioneuralnet.datasets</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bioneuralnet.metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.cluster_correlation"><code class="docutils literal notranslate"><span class="pre">cluster_correlation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.compare_clusters"><code class="docutils literal notranslate"><span class="pre">compare_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_f1m"><code class="docutils literal notranslate"><span class="pre">evaluate_f1m()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_f1w"><code class="docutils literal notranslate"><span class="pre">evaluate_f1w()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_model"><code class="docutils literal notranslate"><span class="pre">evaluate_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_rf"><code class="docutils literal notranslate"><span class="pre">evaluate_rf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_single_run"><code class="docutils literal notranslate"><span class="pre">evaluate_single_run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.evaluate_xgb"><code class="docutils literal notranslate"><span class="pre">evaluate_xgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.louvain_to_adjacency"><code class="docutils literal notranslate"><span class="pre">louvain_to_adjacency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.omics_correlation"><code class="docutils literal notranslate"><span class="pre">omics_correlation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_embeddings"><code class="docutils literal notranslate"><span class="pre">plot_embeddings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_multiple_metrics"><code class="docutils literal notranslate"><span class="pre">plot_multiple_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_network"><code class="docutils literal notranslate"><span class="pre">plot_network()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_performance"><code class="docutils literal notranslate"><span class="pre">plot_performance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_performance_three"><code class="docutils literal notranslate"><span class="pre">plot_performance_three()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_variance_by_feature"><code class="docutils literal notranslate"><span class="pre">plot_variance_by_feature()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bioneuralnet.metrics.plot_variance_distribution"><code class="docutils literal notranslate"><span class="pre">plot_variance_distribution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.metrics.correlation.html">bioneuralnet.metrics.correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.metrics.evaluation.html">bioneuralnet.metrics.evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bioneuralnet.metrics.plot.html">bioneuralnet.metrics.plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bioneuralnet.external_tools.html">bioneuralnet.external_tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_api.html#executables">Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_api.html">User API</a></li>
+      <li class="breadcrumb-item active">bioneuralnet.metrics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/bioneuralnet.metrics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bioneuralnet.metrics">
+<span id="bioneuralnet-metrics"></span><h1>bioneuralnet.metrics<a class="headerlink" href="#module-bioneuralnet.metrics" title="Link to this heading"></a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.cluster_correlation" title="bioneuralnet.metrics.cluster_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster_correlation</span></code></a>(cluster_df, pheno)</p></td>
+<td><p>Compute the Pearson correlation coefficient between PC1 of a cluster and phenotype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.compare_clusters" title="bioneuralnet.metrics.compare_clusters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_clusters</span></code></a>(louvain_clusters, ...[, ...])</p></td>
+<td><p>Compare clusters from two methods by computing the correlation for each induced subnetwork.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_f1m" title="bioneuralnet.metrics.evaluate_f1m"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_f1m</span></code></a>(X, y[, model_type, ...])</p></td>
+<td><p>Evaluate macro F1-score over multiple runs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_f1w" title="bioneuralnet.metrics.evaluate_f1w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_f1w</span></code></a>(X, y[, model_type, ...])</p></td>
+<td><p>Evaluate weighted F1-score over multiple runs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_model" title="bioneuralnet.metrics.evaluate_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_model</span></code></a>(X, y[, model_type, ...])</p></td>
+<td><p>Evaluate a single model (RF or XGB, classif or reg) over multiple runs, returning three tuples.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_rf" title="bioneuralnet.metrics.evaluate_rf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_rf</span></code></a>(X, y[, mode, n_estimators, ...])</p></td>
+<td><p>Shortcut function: evaluate a RandomForest (classification or regression).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_single_run" title="bioneuralnet.metrics.evaluate_single_run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_single_run</span></code></a>(X, y[, model_type, ...])</p></td>
+<td><p>Do one train/test split, train the specified model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.evaluate_xgb" title="bioneuralnet.metrics.evaluate_xgb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_xgb</span></code></a>(X, y[, mode, n_estimators, ...])</p></td>
+<td><p>Shortcut function: evaluate an XGBoost (classification or regression).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.louvain_to_adjacency" title="bioneuralnet.metrics.louvain_to_adjacency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">louvain_to_adjacency</span></code></a>(louvain_cluster)</p></td>
+<td><p>Convert a Louvain cluster to an adjacency matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.omics_correlation" title="bioneuralnet.metrics.omics_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omics_correlation</span></code></a>(omics, pheno)</p></td>
+<td><p>Compute the Pearson correlation between a group of omics data (reduced to one principal component) and a phenotype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_embeddings" title="bioneuralnet.metrics.plot_embeddings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_embeddings</span></code></a>(embeddings[, node_labels])</p></td>
+<td><p>Plot the embeddings in 2D space using t-SNE.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_multiple_metrics" title="bioneuralnet.metrics.plot_multiple_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_multiple_metrics</span></code></a>(metrics[, title_map, ...])</p></td>
+<td><p>Consolidate multiple metric grouped performances into one figure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_network" title="bioneuralnet.metrics.plot_network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_network</span></code></a>(adjacency_matrix[, ...])</p></td>
+<td><p>Plots a network graph from an adjacency matrix with improved visualization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_performance" title="bioneuralnet.metrics.plot_performance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_performance</span></code></a>(embedding_result, raw_rf_acc)</p></td>
+<td><p>Clean and minimal bar plot comparing raw vs embeddings-based performance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_performance_three" title="bioneuralnet.metrics.plot_performance_three"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_performance_three</span></code></a>(raw_score, gnn_score, ...)</p></td>
+<td><p>Bar plot comparing performance for raw omics, GNN-enriched omics, and one other method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_variance_by_feature" title="bioneuralnet.metrics.plot_variance_by_feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_variance_by_feature</span></code></a>(df)</p></td>
+<td><p>Plot the variance for each feature against its index or name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bioneuralnet.metrics.plot_variance_distribution" title="bioneuralnet.metrics.plot_variance_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_variance_distribution</span></code></a>(df[, bins])</p></td>
+<td><p>Compute the variance for each feature (column) in the DataFrame and plot a histogram of these variances.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.cluster_correlation">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">cluster_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/metrics/correlation.html#cluster_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.cluster_correlation" title="Link to this definition"></a></dt>
+<dd><p>Compute the Pearson correlation coefficient between PC1 of a cluster and phenotype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_df</strong> – DataFrame representing a cluster of samples.</p></li>
+<li><p><strong>pheno</strong> – DataFrame representing the phenotype.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(cluster_size, correlation) or (size, None) if correlation fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.compare_clusters">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">compare_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">louvain_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">smccnet_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">omics_merged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">label1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Louvain'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SmCCNet'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#compare_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.compare_clusters" title="Link to this definition"></a></dt>
+<dd><p>Compare clusters from two methods by computing the correlation for each induced subnetwork.
+Both inputs are expected to be lists of pandas DataFrames. If the lists have different lengths,
+only the first min(n, m) clusters are compared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>louvain_clusters</strong> – list of pd.DataFrame
+Each DataFrame represents an induced subnetwork (from Louvain).</p></li>
+<li><p><strong>smccnet_clusters</strong> – list of pd.DataFrame
+Each DataFrame represents an induced subnetwork (from SMCCNET).</p></li>
+<li><p><strong>pheno</strong> – pd.DataFrame
+Phenotype data (the first column is used).</p></li>
+<li><p><strong>omics_merged</strong> – pd.DataFrame
+Full omics data</p></li>
+<li><p><strong>label1</strong> – str
+Label for the first method.</p></li>
+<li><p><strong>label2</strong> – str
+Label for the second method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results table with cluster indices, sizes, and correlations</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_f1m">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_f1m</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rf_classif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_f1m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_f1m" title="Link to this definition"></a></dt>
+<dd><p>Evaluate macro F1-score over multiple runs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_f1w">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_f1w</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rf_classif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_f1w"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_f1w" title="Link to this definition"></a></dt>
+<dd><p>Evaluate weighted F1-score over multiple runs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_model">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rf_classif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_model" title="Link to this definition"></a></dt>
+<dd><p>Evaluate a single model (RF or XGB, classif or reg) over multiple runs, returning three tuples.
+For classification:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(accuracy_mean, accuracy_std)</p></li>
+<li><p>(f1_weighted_mean, f1_weighted_std)</p></li>
+<li><p>(f1_macro_mean, f1_macro_std)</p></li>
+</ul>
+</div></blockquote>
+<p>For regression:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(r2_mean, r2_std)</p></li>
+<li><p>(None, None)</p></li>
+<li><p>(None, None)</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_rf">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_rf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_rf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_rf" title="Link to this definition"></a></dt>
+<dd><p>Shortcut function: evaluate a RandomForest (classification or regression).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_single_run">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_single_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rf_classif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_single_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_single_run" title="Link to this definition"></a></dt>
+<dd><p>Do one train/test split, train the specified model.</p>
+<p>Return: (accuracy, f1_weighted, f1_macro)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.evaluate_xgb">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">evaluate_xgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">119</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#evaluate_xgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.evaluate_xgb" title="Link to this definition"></a></dt>
+<dd><p>Shortcut function: evaluate an XGBoost (classification or regression).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.louvain_to_adjacency">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">louvain_to_adjacency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">louvain_cluster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></span><a class="reference internal" href="../_modules/bioneuralnet/metrics/correlation.html#louvain_to_adjacency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.louvain_to_adjacency" title="Link to this definition"></a></dt>
+<dd><p>Convert a Louvain cluster to an adjacency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>louvain_cluster</strong> – represents an induced subnetwork (from Louvain).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Adjacency matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.omics_correlation">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">omics_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/bioneuralnet/metrics/correlation.html#omics_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.omics_correlation" title="Link to this definition"></a></dt>
+<dd><p>Compute the Pearson correlation between a group of omics data (reduced to one principal component)
+and a phenotype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omics</strong> (<em>pd.DataFrame</em>) – Omics data with rows as samples and columns as features.</p></li>
+<li><p><strong>pheno</strong> (<em>pd.DataFrame</em>) – Phenotype data. Expected to have a single column.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pearson correlation coefficient and p-value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_embeddings">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embeddings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Plot the embeddings in 2D space using t-SNE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>embeddings</strong> (<em>array-like</em>) – High-dimensional embedding data.</p></li>
+<li><p><strong>node_labels</strong> (<em>array-like</em><em> or </em><em>DataFrame</em><em>, </em><em>optional</em>) – Labels for the nodes to color the points.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_multiple_metrics">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_multiple_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.13)"><span class="pre">Path</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/evaluation.html#plot_multiple_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_multiple_metrics" title="Link to this definition"></a></dt>
+<dd><p>Consolidate multiple metric grouped performances into one figure.</p>
+<p>Adds numeric labels on top of each bar.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_network">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_edge_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_network" title="Link to this definition"></a></dt>
+<dd><p>Plots a network graph from an adjacency matrix with improved visualization.
+Also adds a summary table mapping node indexes to actual gene names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adjacency_matrix</strong> (<em>pd.DataFrame</em>) – The adjacency matrix of the network.</p></li>
+<li><p><strong>weight_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Minimum weight to keep an edge (default: 0.0).</p></li>
+<li><p><strong>show_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether to show node labels.</p></li>
+<li><p><strong>show_edge_weights</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether to show edge weights.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of node indexes to actual gene names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_performance">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embedding_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_rf_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Performance</span> <span class="pre">Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_performance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_performance" title="Link to this definition"></a></dt>
+<dd><p>Clean and minimal bar plot comparing raw vs embeddings-based performance.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_performance_three">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_performance_three</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gnn_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Raw',</span> <span class="pre">'GNN',</span> <span class="pre">'Other']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Performance</span> <span class="pre">Comparison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_performance_three"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_performance_three" title="Link to this definition"></a></dt>
+<dd><p>Bar plot comparing performance for raw omics, GNN-enriched omics, and one other method.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_variance_by_feature">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_variance_by_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_variance_by_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_variance_by_feature" title="Link to this definition"></a></dt>
+<dd><p>Plot the variance for each feature against its index or name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generated figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.10.3)">matplotlib.figure.Figure</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bioneuralnet.metrics.plot_variance_distribution">
+<span class="sig-prename descclassname"><span class="pre">bioneuralnet.metrics.</span></span><span class="sig-name descname"><span class="pre">plot_variance_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><span class="pre">DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bioneuralnet/metrics/plot.html#plot_variance_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bioneuralnet.metrics.plot_variance_distribution" title="Link to this definition"></a></dt>
+<dd><p>Compute the variance for each feature (column) in the DataFrame and plot
+a histogram of these variances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input data.</p></li>
+<li><p><strong>bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of bins for the histogram.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generated figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.10.3)">matplotlib.figure.Figure</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.metrics.correlation.html#module-bioneuralnet.metrics.correlation" title="bioneuralnet.metrics.correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bioneuralnet.metrics.evaluation.html#module-bioneuralnet.metrics.evaluation" title="bioneuralnet.metrics.evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bioneuralnet.metrics.plot.html#module-bioneuralnet.metrics.plot" title="bioneuralnet.metrics.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bioneuralnet.datasets.dataset_loader.html" class="btn btn-neutral float-left" title="bioneuralnet.datasets.dataset_loader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bioneuralnet.metrics.correlation.html" class="btn btn-neutral float-right" title="bioneuralnet.metrics.correlation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

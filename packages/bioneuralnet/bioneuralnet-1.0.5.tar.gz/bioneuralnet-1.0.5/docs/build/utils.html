@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utils &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Downstream Tasks" href="downstream_tasks.html" />
+    <link rel="prev" title="Metrics" href="metrics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rdata-conversion">RData Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graph-generation">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocessing-utilities">Preprocessing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-summary-utilities">Data Summary Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utils">
+<h1>Utils<a class="headerlink" href="#utils" title="Link to this heading"></a></h1>
+<section id="rdata-conversion">
+<h2>RData Conversion<a class="headerlink" href="#rdata-conversion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.html#bioneuralnet.utils.rdata_to_df" title="bioneuralnet.utils.rdata_to_df"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.rdata_to_df()</span></code></a> converts an RData file to a CSV and loads it into a pandas DataFrame.</p></li>
+</ul>
+</section>
+<section id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.html#bioneuralnet.utils.get_logger" title="bioneuralnet.utils.get_logger"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.get_logger()</span></code></a> configures and returns a logger writing to <code class="docutils literal notranslate"><span class="pre">bioneuralnet.log</span></code> at the project root.</p></li>
+</ul>
+</section>
+<section id="graph-generation">
+<h2>Graph Generation<a class="headerlink" href="#graph-generation" title="Link to this heading"></a></h2>
+<p>This section details utility functions for generating networks from omics data matrices. All methods are industry-standard and open in the literature.</p>
+<p class="rubric">Methods and Examples</p>
+<ol class="arabic">
+<li><p><strong>k-NN Cosine/RBF Similarity Graph</strong></p>
+<p>Computes either cosine similarity:</p>
+<div class="math notranslate nohighlight">
+\[S_{ij} = \frac{x_i^\top x_j}{\|x_i\|\,\|x_j\|}\]</div>
+<p>or Gaussian RBF kernel:</p>
+<div class="math notranslate nohighlight">
+\[S_{ij} = \exp\bigl(-\|x_i - x_j\|^2 /(2\sigma^2)\bigr)\]</div>
+<p>Sparsify by keeping top-(k) neighbors per node, optionally mutual.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_similarity_graph</span>
+  <span class="n">A</span> <span class="o">=</span> <span class="n">gen_similarity_graph</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">mutual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">Reference</span><span class="p">:</span> <span class="n">Hastie</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="mi">2009</span> <span class="p">[</span><span class="n">Hastie2009_</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Pearson/Spearman Co-expression Graph</strong></p>
+<p>Compute correlation:</p>
+<div class="math notranslate nohighlight">
+\[C_{ij} = \mathrm{corr}(x_i, x_j)\]</div>
+<p>Then sparsify by top-(k) or threshold.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_correlation_graph</span>
+  <span class="n">A</span> <span class="o">=</span> <span class="n">gen_correlation_graph</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+
+<span class="n">Reference</span><span class="p">:</span> <span class="n">Langfelder</span> <span class="o">&amp;</span> <span class="n">Horvath</span><span class="p">,</span> <span class="mi">2008</span> <span class="p">[</span><span class="n">Langfelder2008_</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Soft-Threshold Graph</strong></p>
+<p>Soft-threshold absolute correlation, similar to WGCNA:</p>
+<div class="math notranslate nohighlight">
+\[W_{ij} = |C_{ij}|^\beta\]</div>
+<p>Then top-(k) selection and normalization.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_threshold_graph</span>
+  <span class="n">A</span> <span class="o">=</span> <span class="n">gen_threshold_graph</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">Reference</span><span class="p">:</span> <span class="n">Langfelder</span> <span class="o">&amp;</span> <span class="n">Horvath</span><span class="p">,</span> <span class="mi">2008</span> <span class="p">[</span><span class="n">Langfelder2008_</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Gaussian k-NN Graph</strong></p>
+<p>Gaussian kernel sparsified by k-nearest neighbors:</p>
+<div class="math notranslate nohighlight">
+\[S_{ij} = \exp\bigl(-\|x_i - x_j\|^2 /(2\sigma^2)\bigr),\quad W = \text{Top}_k(S)\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_gaussian_knn_graph</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">gen_gaussian_knn_graph</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Credit: adapts common practice from spectral clustering (Ng et al., 2002).</p>
+</li>
+<li><p><strong>Mutual Information Graph</strong></p>
+<p>Estimate pairwise mutual information:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{MI}_{ij} = I(x_i; x_j)\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_mutual_info_graph</span>
+  <span class="n">A</span> <span class="o">=</span> <span class="n">gen_mutual_info_graph</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">Reference</span><span class="p">:</span> <span class="n">Margolin</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="mi">2006</span> <span class="p">[</span><span class="n">Margolin2006_</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="preprocessing-utilities">
+<h2>Preprocessing Utilities<a class="headerlink" href="#preprocessing-utilities" title="Link to this heading"></a></h2>
+<p>A collection of data-cleaning and feature-selection functions for clinical and omics datasets.</p>
+<p><strong>Clinical Preprocessing</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.preprocess_clinical" title="bioneuralnet.utils.preprocess.preprocess_clinical"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.preprocess_clinical()</span></code></a>
+Splits numeric and categorical features; replaces Inf/NaN; optionally scales numeric data (RobustScaler); encodes categoricals; drops zero-variance; and selects top-k features by RandomForest importance.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_clinical</span>
+<span class="n">df_top</span> <span class="o">=</span> <span class="n">preprocess_clinical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.clean_inf_nan" title="bioneuralnet.utils.preprocess.clean_inf_nan"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.clean_inf_nan()</span></code></a>
+Replaces Inf with NaN, imputes medians, drops zero-variance columns, and logs counts.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_inf_nan</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">clean_inf_nan</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Variance-Based Selection</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.select_top_k_variance" title="bioneuralnet.utils.preprocess.select_top_k_variance"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.select_top_k_variance()</span></code></a>
+Cleans data, then picks the top-k numeric features by variance.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_top_k_variance</span>
+<span class="n">df_var</span> <span class="o">=</span> <span class="n">select_top_k_variance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Correlation-Based Selection</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.select_top_k_correlation" title="bioneuralnet.utils.preprocess.select_top_k_correlation"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.select_top_k_correlation()</span></code></a>
+- <strong>Supervised:</strong> if you pass <cite>y</cite>, selects features by absolute Pearson correlation with <cite>y</cite>.
+- <strong>Unsupervised:</strong> if <cite>y=None</cite>, picks features with the lowest average inter-feature correlation (redundancy reduction).</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_top_k_correlation</span>
+<span class="n">df_sup</span> <span class="o">=</span> <span class="n">select_top_k_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>   <span class="c1"># supervised</span>
+<span class="n">df_unsup</span> <span class="o">=</span> <span class="n">select_top_k_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>    <span class="c1"># unsupervised</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>RandomForest Feature Importance</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.select_top_randomforest" title="bioneuralnet.utils.preprocess.select_top_randomforest"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.select_top_randomforest()</span></code></a>
+Requires numeric inputs; cleans data; drops zero-variance; fits RandomForest; and returns the top-k features by importance.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_top_randomforest</span>
+<span class="n">df_rf</span> <span class="o">=</span> <span class="n">select_top_randomforest</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>ANOVA F-Test Selection</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.top_anova_f_features" title="bioneuralnet.utils.preprocess.top_anova_f_features"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.top_anova_f_features()</span></code></a>
+Runs ANOVA F-test (classification or regression), applies FDR correction, selects all significant features, and pads with next-best to reach <cite>max_features</cite>.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">top_anova_f_features</span>
+<span class="n">df_anova</span> <span class="o">=</span> <span class="n">top_anova_f_features</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Network Pruning</strong></p>
+<ul>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.prune_network" title="bioneuralnet.utils.preprocess.prune_network"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.prune_network()</span></code></a>
+Prunes edges below a weight threshold, removes isolates, and logs before/after stats.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">prune_network</span>
+<span class="n">pruned</span> <span class="o">=</span> <span class="n">prune_network</span><span class="p">(</span><span class="n">adj_df</span><span class="p">,</span> <span class="n">weight_threshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.prune_network_by_quantile" title="bioneuralnet.utils.preprocess.prune_network_by_quantile"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.prune_network_by_quantile()</span></code></a>
+Uses a quantile cutoff on edge weights, prunes accordingly, removes isolates, and logs stats.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">prune_network_by_quantile</span>
+<span class="n">pruned_q</span> <span class="o">=</span> <span class="n">prune_network_by_quantile</span><span class="p">(</span><span class="n">adj_df</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.network_remove_low_variance" title="bioneuralnet.utils.preprocess.network_remove_low_variance"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.network_remove_low_variance()</span></code></a>
+Drops rows/columns in the adjacency matrix whose variance falls below a threshold.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">network_remove_low_variance</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">network_remove_low_variance</span><span class="p">(</span><span class="n">adj_df</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><a class="reference internal" href="_autosummary/bioneuralnet.utils.preprocess.html#bioneuralnet.utils.preprocess.network_remove_high_zero_fraction" title="bioneuralnet.utils.preprocess.network_remove_high_zero_fraction"><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.preprocess.network_remove_high_zero_fraction()</span></code></a>
+Removes rows/columns where the fraction of zero weights exceeds a threshold (default 0.95).</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">network_remove_high_zero_fraction</span>
+<span class="n">filtered_z</span> <span class="o">=</span> <span class="n">network_remove_high_zero_fraction</span><span class="p">(</span><span class="n">adj_df</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="data-summary-utilities">
+<h2>Data Summary Utilities<a class="headerlink" href="#data-summary-utilities" title="Link to this heading"></a></h2>
+<ul>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.data_summary.variance_summary()</span></code>
+- Computes summary statistics for column variances.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.data_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_summary</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">variance_summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">low_var_threshold</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.data_summary.zero_fraction_summary()</span></code>
+- Computes statistics for the fraction of zeros per column.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.data_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">zero_fraction_summary</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">zero_fraction_summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">high_zero_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.data_summary.expression_summary()</span></code>
+- Computes summary of mean expression values across features.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.data_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">expression_summary</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">expression_summary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.data_summary.correlation_summary()</span></code>
+- Computes statistics of each feature’s maximum pairwise correlation (excluding self).</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.data_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation_summary</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">correlation_summary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">bioneuralnet.utils.data_summary.explore_data_stats()</span></code>
+- Prints an overall summary (variance, zero fraction, expression, correlation) to stdout.</p>
+<p><strong>Example</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.utils.data_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">explore_data_stats</span>
+<span class="n">explore_data_stats</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyOmicsData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metrics.html" class="btn btn-neutral float-left" title="Metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="downstream_tasks.html" class="btn btn-neutral float-right" title="Downstream Tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

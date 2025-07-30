@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downstream Tasks &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BioNeuralNet Demo: Quick Start Guide" href="Quick_Start.html" />
+    <link rel="prev" title="Utils" href="utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnns.html">GNN Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Downstream Tasks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dpmon-disease-prediction-pipeline">DPMON: Disease Prediction Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subject-representation-embedding-integration">Subject Representation &amp; Embedding Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unlocking-downstream-applications">Unlocking Downstream Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-started">Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Downstream Tasks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/downstream_tasks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="downstream-tasks">
+<h1>Downstream Tasks<a class="headerlink" href="#downstream-tasks" title="Link to this heading"></a></h1>
+<p>BioNeuralNet’s core innovation is the generation of low-dimensional embeddings that unlock a variety of downstream applications. By reducing the complexity of multi-omics data, these embeddings not only boost computational efficiency but also improve the accuracy of predictive models and enable exploratory analyses.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The embeddings generated by Graph Neural Networks (GNNs) serve as a transformative feature of BioNeuralNet. They allow users to:</p>
+<ul class="simple">
+<li><p><strong>Predict Disease Outcomes</strong>: Using the end-to-end DPMON pipeline.</p></li>
+<li><p><strong>Enhance Subject Representation</strong>: By integrating embeddings back into omics data, thus enriching patient-level profiles.</p></li>
+<li><p><strong>Facilitate Other Downstream Analyses</strong>: Such as clustering, biomarker discovery, and visualization.</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/Overview.png"><img alt="Overview of Downstream Tasks" class="align-center" src="_images/Overview.png" style="width: 70%;" />
+</a>
+</section>
+<section id="dpmon-disease-prediction-pipeline">
+<h2>DPMON: Disease Prediction Pipeline<a class="headerlink" href="#dpmon-disease-prediction-pipeline" title="Link to this heading"></a></h2>
+<p>The <strong>DPMON</strong> module provides a seamless, end-to-end workflow for disease prediction. It combines the network adjacency matrix, GNN-based embeddings, and subject-level data to deliver robust predictions. With built-in hyperparameter tuning, DPMON adapts to your data for optimal performance.</p>
+<a class="reference internal image-reference" href="_images/DPMON.png"><img alt="Disease Prediction with DPMON" class="align-center" src="_images/DPMON.png" style="width: 80%;" />
+</a>
+<p>Example Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.downstream_task</span><span class="w"> </span><span class="kn">import</span> <span class="n">DPMON</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Prepare data</span>
+<span class="n">phenotype_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;phenotype_data.csv&quot;</span><span class="p">)</span>
+<span class="n">omics_list</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;omics_data1.csv&quot;</span><span class="p">),</span>
+   <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;omics_data2.csv&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">clinical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;clinical_data.csv&quot;</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;network.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize DPMON for disease prediction</span>
+<span class="n">dpmon</span> <span class="o">=</span> <span class="n">DPMON</span><span class="p">(</span>
+   <span class="n">adjacency_matrix</span><span class="o">=</span><span class="n">network</span><span class="p">,</span>
+   <span class="n">omics_list</span><span class="o">=</span><span class="n">omics_list</span><span class="p">,</span>
+   <span class="n">phenotype_data</span><span class="o">=</span><span class="n">phenotype_data</span><span class="p">,</span>
+   <span class="n">clinical_data</span><span class="o">=</span><span class="n">clinical_data</span><span class="p">,</span>
+   <span class="n">model</span><span class="o">=</span><span class="s2">&quot;GAT&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the pipeline</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">dpmon</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Disease Predictions:&quot;</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="subject-representation-embedding-integration">
+<h2>Subject Representation &amp; Embedding Integration<a class="headerlink" href="#subject-representation-embedding-integration" title="Link to this heading"></a></h2>
+<p>Beyond disease prediction, the learned embeddings can be re-integrated into subject-level data to enrich the feature set. This enhanced subject representation supports downstream tasks such as:</p>
+<ul class="simple">
+<li><p><strong>Biomarker Discovery</strong>: Identifying key omics features that drive disease.</p></li>
+<li><p><strong>Enhanced Clustering</strong>: Grouping patients more effectively based on integrated data.</p></li>
+<li><p><strong>Data Visualization</strong>: Leveraging low-dimensional representations for intuitive plotting and network analysis.</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/SubjectRepresentation.png"><img alt="Subject Representation Workflow" class="align-center" src="_images/SubjectRepresentation.png" style="width: 70%;" />
+</a>
+</section>
+<section id="unlocking-downstream-applications">
+<h2>Unlocking Downstream Applications<a class="headerlink" href="#unlocking-downstream-applications" title="Link to this heading"></a></h2>
+<p>By lowering the dimensionality, BioNeuralNet’s embeddings simplify complex multi-omics data into actionable insights. This approach:</p>
+<ul class="simple">
+<li><p><strong>Accelerates Predictive Modeling</strong>: Making it easier to integrate with machine learning frameworks.</p></li>
+<li><p><strong>Improves Interpretability</strong>: Allowing users to trace back the contribution of each omics feature.</p></li>
+<li><p><strong>Enables Custom Workflows</strong>: While we support key pipelines like DPMON out-of-the-box, the embeddings can also be used in custom downstream applications.</p></li>
+</ul>
+<p>Other downstream tasks include, but are not limited to:</p>
+<ul class="simple">
+<li><p><strong>Predictive Analytics</strong></p></li>
+<li><p><strong>Community Detection in Networks</strong></p></li>
+<li><p><strong>Interactive Data Exploration</strong></p></li>
+</ul>
+</section>
+<section id="get-started">
+<h2>Get Started<a class="headerlink" href="#get-started" title="Link to this heading"></a></h2>
+<p>BioNeuralNet is designed not only to provide robust downstream pipelines but also to empower researchers to develop their own custom analyses. With the combination of disease prediction, subject representation, and other downstream tools, users can seamlessly integrate these components into their broader multi-omics workflows.</p>
+<p>For further details, check out our tutorials (see <a class="reference internal" href="tutorials/example_1.html"><span class="doc">Example 1: SmCCNet + GNN Embeddings + Subject Representation</span></a> and <a class="reference internal" href="tutorials/example_2.html"><span class="doc">Example 2: SmCCNet + DPMON for Disease Prediction</span></a>) which showcase these capabilities in action.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>For more in-depth information on the methodologies and models, please refer to the related documentation pages and our published works.</p>
+<p>Return to <a class="reference internal" href="index.html"><span class="doc">BioNeuralNet - Multi-Omics Integration with Graph Neural Networks</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Quick_Start.html" class="btn btn-neutral float-right" title="BioNeuralNet Demo: Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

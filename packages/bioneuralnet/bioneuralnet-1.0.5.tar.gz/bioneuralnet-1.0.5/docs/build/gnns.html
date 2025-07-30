@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GNN Embeddings &mdash; BioNeuralNet 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=71272d9f"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Correlated Clustering" href="clustering.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BioNeuralNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GNN Embeddings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#key-contributions">Key Contributions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gnn-model-overviews">GNN Model Overviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dimensionality-reduction-and-downstream-integration">Dimensionality Reduction and Downstream Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#task-driven-supervised-semi-supervised-gnns">Task-Driven (Supervised/Semi-Supervised) GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-low-dimensional-embeddings-for-multi-omics">Generating Low-Dimensional Embeddings for Multi-Omics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-insights-into-gnn-parameters-and-outputs">Key Insights into GNN Parameters and Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dimensionality-reduction-pca-vs-autoencoders">Dimensionality Reduction: PCA vs. Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-dpmon-uses-gnns-differently">How DPMON Uses GNNs Differently</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Correlated Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downstream_tasks.html">Downstream Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Start.html">BioNeuralNet Demo: Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html">TCGA-BRCA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Optional:-Load-the-data-we-just-saved-to-make-sure-it-looks-okay.">Optional: Load the data we just saved to make sure it looks okay.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Easy-Access-via-DatasetLoader">Easy Access via DatasetLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCGA-BRCA_Dataset.html#Preparing-Multi-Omics-Data-for-downstream-tasks">Preparing Multi-Omics Data for downstream tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TOPMED.html">TOPMed Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_tools/index.html">External Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Acknowledgments</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BioNeuralNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">GNN Embeddings</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gnns.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gnn-embeddings">
+<h1>GNN Embeddings<a class="headerlink" href="#gnn-embeddings" title="Link to this heading"></a></h1>
+<p>BioNeuralNet leverages Graph Neural Networks (GNNs) to generate rich, low-dimensional embeddings that capture the complex relationships inherent in multi-omics data. These embeddings not only preserve the network topology but also integrate biological signals, providing a robust foundation for downstream tasks such as disease prediction.</p>
+<section id="key-contributions">
+<h2>Key Contributions:<a class="headerlink" href="#key-contributions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Enhanced Representation:</strong> By training models such as GCN, GAT, GraphSAGE, and GIN, BioNeuralNet generates node embeddings that reflect both local connectivity and supervised signals each node (omics feature) is associated with a numeric label (e.g., Pearson correlation with phenotype) that guides learning.</p></li>
+<li><p><strong>Modularity and Interoperability:</strong> The framework is designed in a modular, Python-based fashion. Its outputs are returned as pandas DataFrames, allowing seamless integration with existing data analysis pipelines and facilitating further exploration with external tools.</p></li>
+<li><p><strong>End-to-End Workflow:</strong> Whether you start with raw multi-omics data or supply your own network, the pipeline proceeds through network construction, embedding generation, and ultimately disease prediction. Ensuring a streamlined workflow from data to actionable insights.</p></li>
+</ul>
+</section>
+<section id="gnn-model-overviews">
+<h2>GNN Model Overviews<a class="headerlink" href="#gnn-model-overviews" title="Link to this heading"></a></h2>
+<p><strong>Graph Convolutional Network (GCN)</strong>: GCN layers aggregate information from neighboring nodes via a spectral-based convolution:</p>
+<div class="math notranslate nohighlight">
+\[X^{(l+1)} \;=\; \mathrm{ReLU}\!\Bigl(\widehat{D}^{-\tfrac{1}{2}}\,\widehat{A}\,\widehat{D}^{-\tfrac{1}{2}}\,
+X^{(l)}\,W^{(l)}\Bigr),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\widehat{A}\)</span> adds self-loops to the adjacency matrix, ensuring that each node also considers its own features.</p>
+<p><strong>Graph Attention Network (GAT)</strong>: GAT layers learn attention weights to prioritize the most informative neighbors:</p>
+<div class="math notranslate nohighlight">
+\[h_{i}^{(l+1)} \;=\; \mathrm{ELU}\!\Bigl(\sum_{j \in \mathcal{N}(i)} \alpha_{ij}^{(l)}\,W^{(l)}\,h_{j}^{(l)}\Bigr),\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha_{ij}^{(l)}\)</span> representing the attention coefficient for node <span class="math notranslate nohighlight">\(j\)</span>’s contribution to node <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p><strong>GraphSAGE</strong>: GraphSAGE computes embeddings by concatenating a node’s own features with an aggregated summary of its neighbors:</p>
+<div class="math notranslate nohighlight">
+\[h_{i}^{(l+1)} \;=\; \sigma\!\Bigl(W^{(l)}\Bigl(
+h_{i}^{(l)} \,\|\, \mathrm{mean}_{j \,\in\, \mathcal{N}(i)}(h_{j}^{(l)})
+\Bigr)\Bigr),\]</div>
+<p>where the mean aggregator provides a simple yet effective way to summarize local neighborhood information.</p>
+<p><strong>Graph Isomorphism Network (GIN)</strong>: GIN uses a sum-aggregator combined with a learnable parameter and an MLP to capture subtle differences in network structure:</p>
+<div class="math notranslate nohighlight">
+\[h_i^{(l+1)} \;=\; \mathrm{MLP}^{(l)}\!\Bigl(\,\bigl(1 + \epsilon^{(l)}\bigr)
+h_{i}^{(l)} + \sum_{j \in \mathcal{N}(i)} h_{j}^{(l)}\Bigr),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon^{(l)}\)</span> is either learnable or fixed.</p>
+</section>
+<section id="dimensionality-reduction-and-downstream-integration">
+<h2>Dimensionality Reduction and Downstream Integration<a class="headerlink" href="#dimensionality-reduction-and-downstream-integration" title="Link to this heading"></a></h2>
+<p>After obtaining high-dimensional node embeddings from the penultimate GNN layer, BioNeuralNet applies dimensionality reduction (using PCA or autoencoders) to summarize each node with a single value. These reduced embeddings are then integrated into subject-level omics data, yielding enhanced feature representations that boost the performance of predictive models (e.g., via DPMON for disease prediction).</p>
+<p>By using GNNs to capture both structural and biological signals, BioNeuralNet delivers embeddings that truly reflect the complexity of multi-omics networks.</p>
+</section>
+<section id="task-driven-supervised-semi-supervised-gnns">
+<h2>Task-Driven (Supervised/Semi-Supervised) GNNs<a class="headerlink" href="#task-driven-supervised-semi-supervised-gnns" title="Link to this heading"></a></h2>
+<p>In our work, the GNNs are primarily <strong>task-driven</strong>:</p>
+<ul class="simple">
+<li><p><strong>Node Labeling via Phenotype Correlation:</strong> For each node, we compute the Pearson correlation between the omics data and phenotype (or clinical) data. This correlation serves as the target label during training.</p></li>
+<li><p><strong>Supervised Training Objective:</strong> The GNN is trained to predict these correlation values using a Mean Squared Error (MSE) loss. This strategy aligns node embeddings with biological signals relevant to the disease phenotype.</p></li>
+<li><p><strong>Downstream Integration:</strong> The learned node embeddings can be integrated into patient-level datasets for sample-level classification tasks. For example, <strong>DPMON</strong> (Disease Prediction using Multi-Omics Networks) leverages these embeddings in an end-to-end pipeline where the final objective is to classify disease outcomes.</p></li>
+</ul>
+</section>
+<section id="generating-low-dimensional-embeddings-for-multi-omics">
+<h2>Generating Low-Dimensional Embeddings for Multi-Omics<a class="headerlink" href="#generating-low-dimensional-embeddings-for-multi-omics" title="Link to this heading"></a></h2>
+<p>The following figure illustrates an end-to-end workflow, from raw omics data to correlation-based node labeling, GNN-driven embedding generation, dimensionality reduction, and final integration into subject-level features:</p>
+<figure class="align-center" id="id1">
+<img alt="Subject Representation Workflow" src="_images/SubjectRepresentation.png" />
+<figcaption>
+<p><span class="caption-text">A high-level overview of BioNeuralNet’s process for creating enhanced subject-level representations. Nodes represent omics features, labeled by correlation to a phenotype; GNNs learn embeddings that are reduced (PCA/autoencoder) and then reintegrated into the original omics data for improved predictive performance.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference external" href="https://bioneuralnet.readthedocs.io/en/latest/_images/SubjectRepresentation.png">View full-size image: Subject Representation</a></p>
+</section>
+<section id="key-insights-into-gnn-parameters-and-outputs">
+<h2>Key Insights into GNN Parameters and Outputs<a class="headerlink" href="#key-insights-into-gnn-parameters-and-outputs" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Input Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>Node Features Matrix:</strong> Built by correlating omics data with clinical variables.</p></li>
+<li><p><strong>Edge Index:</strong> Derived from the network’s adjacency matrix.</p></li>
+<li><p><strong>Target Labels:</strong> Numeric values representing the correlation between omics features and phenotype data.</p></li>
+</ul>
+</li>
+<li><p><strong>Output Embeddings:</strong></p>
+<ul class="simple">
+<li><p>The penultimate layer of the GNN produces dense node embeddings that capture both local connectivity and supervised signals.</p></li>
+<li><p>These embeddings can be further reduced (e.g., via PCA or an Autoencoder) for visualization or integrated into subject-level data.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="dimensionality-reduction-pca-vs-autoencoders">
+<h2>Dimensionality Reduction: PCA vs. Autoencoders<a class="headerlink" href="#dimensionality-reduction-pca-vs-autoencoders" title="Link to this heading"></a></h2>
+<p>After training a GNN, the resulting node embeddings are typically high-dimensional. To integrate these embeddings into the original omics data-by reweighting each feature-a further reduction step is performed to obtain a single summary value per feature. BioNeuralNet supports two primary approaches for this reduction:</p>
+<p><strong>Principal Component Analysis (PCA):</strong></p>
+<p>PCA is a linear dimensionality reduction technique that computes orthogonal components capturing the maximum variance in the data. The first principal component (PC1) is often used as a concise summary of each feature’s variation. PCA is:</p>
+<ul class="simple">
+<li><p><strong>Deterministic and Fast:</strong> A closed-form solution is computed from the covariance matrix.</p></li>
+<li><p><strong>Simple and Interpretable:</strong> The linear combination of the original variables is straightforward to understand.</p></li>
+<li><p><strong>Limited to Linear Relationships:</strong> It may not capture more complex, nonlinear structures in the data.</p></li>
+</ul>
+<p><strong>Autoencoders (AE):</strong></p>
+<p>Autoencoders are neural network models designed to learn a compressed representation (latent code) through a bottleneck architecture. They use nonlinear activations (e.g., ReLU) to model complex relationships:</p>
+<ul class="simple">
+<li><p><strong>Nonlinear Transformation:</strong> The encoder learns to capture intricate patterns that a linear method might miss.</p></li>
+<li><p><strong>Learned Representations:</strong> The latent code is obtained by minimizing a reconstruction loss, making it adaptive to the data.</p></li>
+<li><p><strong>Flexible and Tunable:</strong> Being neural network-based, autoencoders allow tuning of architecture parameters (e.g., number of layers, hidden dimensions, epochs, learning rate) to better capture the signal. In our framework, we highly recommend using autoencoders (i.e., setting <cite>tune=True</cite>) to leverage their enhanced expressivity for complex multi-omics data.</p></li>
+</ul>
+<p>In practice, PCA offers simplicity and interpretability, whereas autoencoders may yield superior performance by capturing more nuanced nonlinear relationships. The choice depends on the complexity of your data and the computational resources available. Our recommendation is to enable tuning (using <cite>tune=True</cite>) to optimize the autoencoder parameters for your specific dataset.</p>
+</section>
+<section id="how-dpmon-uses-gnns-differently">
+<h2>How DPMON Uses GNNs Differently<a class="headerlink" href="#how-dpmon-uses-gnns-differently" title="Link to this heading"></a></h2>
+<p><strong>DPMON</strong> (Disease Prediction using Multi-Omics Networks) reuses the same GNN architectures but with a different objective:</p>
+<ul class="simple">
+<li><p>Instead of node-level MSE regression, DPMON aggregates node embeddings with patient-level omics data.</p></li>
+<li><p>A downstream classification head (e.g., softmax layer with CrossEntropyLoss) is applied for sample-level disease prediction.</p></li>
+<li><p>This end-to-end approach leverages both local (node-level) and global (patient-level) network information.</p></li>
+</ul>
+<figure class="align-center" id="id2">
+<img alt="Disease Prediction (DPMON)" src="_images/DPMON.png" />
+<figcaption>
+<p><span class="caption-text">Embedding-enhanced subject data using DPMON for improved disease prediction.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference external" href="https://bioneuralnet.readthedocs.io/en/latest/_images/DPMON.png">View full-size image: Disease Prediction (DPMON)</a></p>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
+<p>Below is a simplified example that demonstrates the task-driven approach-where node labels are derived from phenotype correlations and used to train the GNN:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bioneuralnet.network_embedding</span><span class="w"> </span><span class="kn">import</span> <span class="n">GNNEmbedding</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">gnn</span> <span class="o">=</span> <span class="n">GNNEmbedding</span><span class="p">(</span>
+    <span class="n">adjacency_matrix</span><span class="o">=</span><span class="n">adjacency_matrix</span><span class="p">,</span>
+    <span class="n">omics_data</span><span class="o">=</span><span class="n">omics_data</span><span class="p">,</span>
+    <span class="n">phenotype_data</span><span class="o">=</span><span class="n">phenotype_data</span><span class="p">,</span>
+    <span class="n">clinical_data</span><span class="o">=</span><span class="n">clinical_data</span><span class="p">,</span>
+    <span class="n">phenotype_col</span><span class="o">=</span><span class="s1">&#39;finalgold_visit&#39;</span><span class="p">,</span>
+    <span class="n">model_type</span><span class="o">=</span><span class="s1">&#39;GAT&#39;</span><span class="p">,</span>
+    <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">64</span>
+<span class="p">)</span>
+<span class="n">gnn</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">node_embeds</span> <span class="o">=</span> <span class="n">gnn</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return to <a class="reference internal" href="index.html"><span class="doc">BioNeuralNet - Multi-Omics Integration with Graph Neural Networks</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clustering.html" class="btn btn-neutral float-right" title="Correlated Clustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
