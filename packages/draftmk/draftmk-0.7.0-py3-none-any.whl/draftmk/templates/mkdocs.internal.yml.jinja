@@ -1,0 +1,15 @@
+site_name: "{{ project_name }} (Internal)"
+site_url: "{{ site_url }}"
+repo_name: "{{ repo_name }}"
+repo_url: "https://github.com/{{ repo_name }}"
+
+nav:
+  - Welcome: index.md
+
+markdown_extensions:
+  - admonition
+  - toc
+
+plugins:
+  - search
+  - minify

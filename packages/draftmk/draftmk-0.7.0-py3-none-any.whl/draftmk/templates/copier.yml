@@ -1,0 +1,29 @@
+# copier.yml — Controls prompts for the DraftMk Copier template
+
+project_name:
+  type: str
+  help: "Project name (used for documentation site name)"
+
+repo_name:
+  type: str
+  help: "GitHub repository name (e.g. jonmatum/draftmk-docs)"
+
+site_url:
+  type: str
+  default: "https://example.com"
+  help: "Base URL for your site (used in MkDocs config)"
+
+vite_env:
+  type: str
+  default: "production"
+  help: "Frontend environment mode"
+
+use_git:
+  type: bool
+  default: true
+  help: "Initialize a Git repository?"
+
+docker_compose_path:
+  type: str
+  default: "https://raw.githubusercontent.com/jonmatum/draftmk-template/main/docker-compose.yml"
+  help: "URL to Docker Compose template file"
