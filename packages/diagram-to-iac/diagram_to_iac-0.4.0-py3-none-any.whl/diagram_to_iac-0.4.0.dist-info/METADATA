@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: diagram-to-iac
+Version: 0.4.0
+Summary: Convert architecture diagrams into IaC modules
+Author-email: vindpro <admin@vindpro.com>
+Description-Content-Type: text/markdown
+Requires-Dist: anthropic==0.51.0
+Requires-Dist: google_api_python_client==2.169.0
+Requires-Dist: openai==1.79.0
+Requires-Dist: protobuf<5.0.0dev,>=3.19.5
+Requires-Dist: PyYAML==6.0.2
+Requires-Dist: Requests==2.32.3
+Requires-Dist: google-generativeai==0.3.1
+
+# diagram-to-iac
+an automated system that intelligently translates visual cloud infrastructure diagrams (specifically Azure) into deployable Infrastructure as Code (IaC), leveraging AI for analysis and GitHub for collaborative refinement.
