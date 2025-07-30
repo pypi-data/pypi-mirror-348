@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vibelint"
+version = "0.1.2"
+description = "Suite of tools to enhance the vibe coding process."
+authors = [
+  { name = "Mithran Mohanraj", email = "mithran.mohanraj@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "click>=8.1.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+    "tomli-w",
+    "colorama>=0.4.0",
+    "rich>=12.0.0",
+    "libcst"
+]
+
+[project.scripts]
+vibelint = "vibelint.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/mithranm/vibelint"
+"Bug Tracker" = "https://github.com/mithranm/vibelint/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["vibelint*"]
+
+[tool.vibelint]
+include_globs = [
+    "src/**/*.py",
+    "tests/**/*.py",
+    "pyproject.toml",
+    "VIBECHECKER.txt"
+]
+exclude_globs = [
+    "tests/fixtures/*"
+]
+peek_globs = ["coverage.xml"]
+allowed_shebangs = ["#!/usr/bin/env python3"]
+large_dir_threshold = 500
+error_on_missing_all_in_init = false
+
+[tool.black]
+target-version = ["py310", "py311", "py312"]
+line-length=100
+
+[tool.setuptools.package-data]
+vibelint = ["VIBECHECKER.txt"]
