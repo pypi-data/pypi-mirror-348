@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: simplinear-regression
+Version: 0.1.0
+Summary: A simple Linear Regression implementation in pure Python
+Author: Md. Ismiel Hossen Abir
+Author-email: ismielabir1971@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: License
+
+# simplinear_regression
+
+A simple Linear Regression implementation in pure Python without any dependencies.
+
+## Installation
+
+```bash
+pip install simplinear_regression
+```
+
+## Usage
+```bash
+import simplinear_regression
+
+model = simplinear_regression()
+
+X = [1, 2, 3, 4, 5]
+y = [2, 4, 5, 4, 5]
+
+model.fit(X, y)
+
+predictions = model.predict([6, 7])
+print("Predictions:", predictions)
+```
