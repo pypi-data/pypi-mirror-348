@@ -1,0 +1,15 @@
+include README.md
+include PERFORMANCE.md
+include pyproject.toml
+include setup.cfg
+include .flake8
+include pytest.ini
+include tox.ini
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include docs *
+recursive-include src *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[cod]
+recursive-exclude * *.so
+recursive-exclude * *.log 
