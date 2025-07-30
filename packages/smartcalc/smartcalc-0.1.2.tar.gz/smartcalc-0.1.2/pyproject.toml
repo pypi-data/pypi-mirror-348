@@ -1,0 +1,25 @@
+[project]
+name = "smartcalc"
+version = "0.1.2"
+description = "A minimal calculator with keyboard control dark & lite themes."
+readme = "README.md"
+authors = [
+    { name = "Sergey Samoylov", email = "linews@yandex.ru" }
+]
+license = { text = "GPL-3.0-or-later" }
+requires-python = ">=3.10"
+dependencies = [
+    "build>=1.2.2.post1",
+    "pygame>=2.5",
+    "twine>=6.1.0",
+]
+
+[project.scripts]
+calc = "smartcalc.core:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
