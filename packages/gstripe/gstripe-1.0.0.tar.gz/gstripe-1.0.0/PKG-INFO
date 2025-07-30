@@ -1,0 +1,80 @@
+Metadata-Version: 2.4
+Name: gstripe
+Version: 1.0.0
+Summary: Graph-based stripe caller using chromain interaction data.
+Author-email: Michał Denkiewicz <michal.denkiewicz@datascience.edu.pl>
+License: MIT License
+        
+        Copyright (c) 2022 SFGLab
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Keywords: stripes,genomics,bioinformatics
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: numpy>=2.0.0
+Requires-Dist: pandas>=2.2.2
+Requires-Dist: scipy>=1.13.1
+Requires-Dist: igraph>=0.11.5
+Requires-Dist: matplotlib>=3.9.0
+Requires-Dist: setuptools>=70.1.0
+Requires-Dist: seaborn>=0.13.2
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Provides-Extra: stats
+Requires-Dist: hic-straw>=1.3.1; extra == "stats"
+Dynamic: license-file
+
+# gStripe
+
+Graph-based architectural stripe caller.
+
+## Requirements:
+
+* Python >= 3.10
+* Operating system: Linux *(Ubuntu 20.04 or higher, recommended)* or Windows 10 *(or higher)*.
+* All the dependencies listed in `pyproject.toml`, notably `numpy >= 2.0.0` and `igraph >= 0.11.5`.
+
+## Installation
+
+1. *Optional, but recommended*: Create and activate a python envrionment using [pyenv](https://github.com/pyenv/pyenv), [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) or [Mamba](https://mamba.readthedocs.io/en/latest/index.html).
+2. Install gStripe, depending on the chosen source:
+    * Install from PyPI (recommended): `pip3 install gstripe`
+    * Installing directly from github: run `pip install git+https://github.com/SFGLab/gStripe.git`.
+    
+To verify, that the installation proceeded correctly, you can do the following:
+1. Run `python -m gstripe.gstripe --help`: you should see the help message. If not, check if the correct environment has been activated.
+2. Run gStripe on an example file provided in `examples/basic_test.bedpe` in the github repository or in the `.zip` archive, using the following command: `python -m gstripe.gstripe basic_test.bedpe .`. The console output should end with `[INFO] main(0.06s): All done.` (timing may vary) and two new files should be created: `./basic_test.bedpe.gstripes_raw.tsv` (results) and `basic_test.bedpe.gstripe.log` (log).
+
+## Usage
+
+The `gStripe` architectural stripe caller uses a discrete set of interactions (such as chromatin loops) to perform calling.
+
+Run `python -m gstripe.gstripe input_interactions_file.bedpe output_directory` to call the stripes using interactions from `input_interactions_file.bedpe` and place the results (`input_loops_file.bedpe.gstripes_raw.tsv` by default) and the log file in _output_directory_.
+This results in saving the candidate stripes to the output directory in a `.tsv` file. They should then be filtered by the user.
+
+It is recommended to use the default values of all parameters specified in usage options (`python -m gstripe.gstripe --help`).
+
+Use `--fix_bin_start` in case of binned data, where adjacent bins would overlap (i.e. when one anchor end is "15000" and the start of an adjacent anchor is also "15000"). Recommended for HiChIP.
+
+In case of problems with multiprocessing, use `--max_workers=1`
