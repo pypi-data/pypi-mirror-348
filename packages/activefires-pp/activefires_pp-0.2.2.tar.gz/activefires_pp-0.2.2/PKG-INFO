@@ -1,0 +1,59 @@
+Metadata-Version: 2.4
+Name: activefires_pp
+Version: 0.2.2
+Summary: Post-processing of and notifications on Satellite active fire detections
+Home-page: https://github.com/adybbroe/activefires-pp
+Author: Adam Dybroe
+Author-email: adam.dybroe@smhi.se
+License: GPLv3
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: posttroll
+Requires-Dist: netifaces
+Requires-Dist: trollsift
+Requires-Dist: setuptools_scm
+Requires-Dist: pycrs
+Requires-Dist: shapely
+Requires-Dist: cartopy
+Requires-Dist: pandas
+Requires-Dist: geojson
+Requires-Dist: fiona
+Requires-Dist: geopy
+Requires-Dist: matplotlib
+Requires-Dist: requests
+Requires-Dist: pint
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+activefires-pp
+==============
+
+[![Build status](https://github.com/adybbroe/activefires-pp/workflows/CI/badge.svg?branch=main)](https://github.com/adybbroe/activefires-pp/workflows/CI/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/adybbroe/activefires-pp/badge.svg)](https://coveralls.io/github/adybbroe/activefires-pp)
+
+Post-processing (including regional filtering) of Satellite Active Fires and notify end-users
+Supports reading and processing VIIRS Active Fires EDR. There is support for filtering out fire
+detections using three different levels:
+
+  * National filtering, where all detections outside boarders as given by a shapefile are left out
+
+  * Filtering to exclude fire detections inside a set of polygons (meant to
+    define populated areas and local industries known to be heat sources that
+    can turn up as detections) from a shapefile
+
+  * Regional filtering, where detections are localisized in regions and output
+    messages are treated accordingly.
