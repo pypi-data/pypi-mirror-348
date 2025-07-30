@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "bssir"
+version = "0.3.12"
+description = ""
+authors = ["Mohammad Amin Alavian <m.amin.alavian@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+dbfread = "*"
+pandas = "*"
+PyYAML = "*"
+pydantic = ">=2"
+pyodbc = "*"
+requests = "*"
+pyarrow = "*"
+tabulate = "*"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "*"
+black = "*"
+tabulate = "*"
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocs-literate-nav = "*"
+mkdocs-autorefs = "*"
+mkdocstrings-python = "*"
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
