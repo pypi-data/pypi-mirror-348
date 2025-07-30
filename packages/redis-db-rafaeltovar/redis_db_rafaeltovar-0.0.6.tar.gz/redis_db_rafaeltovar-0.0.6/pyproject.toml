@@ -1,0 +1,31 @@
+[project]
+name = "redis-db-rafaeltovar"
+description = "Python client for Redis database and key-value store"
+version = "0.0.6"
+authors = [
+  { name="Rafa", email="author@example.com" },
+]
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://gitlab.com/rafaeltovar/tmp-redis"
+Issues = "https://gitlab.com/rafaeltovar/tmp-redis/issues"
+
+[build-system]
+requires = ["setuptools >= 77.0.3", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["redis_db_rafaeltovar"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"

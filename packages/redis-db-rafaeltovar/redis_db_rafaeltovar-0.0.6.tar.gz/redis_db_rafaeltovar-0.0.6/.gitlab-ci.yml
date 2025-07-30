@@ -1,0 +1,41 @@
+stages:
+  - tag
+  - deploy
+
+# Tag the current HEAD commit
+auto-tag:
+  stage: tag
+  image: alpine:latest
+  script:
+    - apk add --no-cache git
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+    - LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
+    - VERSION="${LATEST_TAG#v}"
+    - MAJOR=$(echo "$VERSION" | cut -d. -f1)
+    - MINOR=$(echo "$VERSION" | cut -d. -f2)
+    - PATCH=$(echo "$VERSION" | cut -d. -f3)
+    - MAJOR=${MAJOR:-0}
+    - MINOR=${MINOR:-0}
+    - PATCH=${PATCH:-0}
+    - NEW_TAG="v$MAJOR.$MINOR.$((PATCH + 1))"
+    - git tag "$NEW_TAG"
+    - git push https://oauth2:${PAT}@gitlab.com/rafaeltovar/tmp-redis.git "$NEW_TAG"
+  only:
+    - main
+
+# Upload to PyPI when a tag is pushed
+upload-to-pypi:
+  stage: deploy
+  image: python:3.11
+  before_script:
+    - pip install build twine setuptools-scm
+  script:
+    - python3 -c "import setuptools_scm; print('Resolved version:', setuptools_scm.get_version())"
+    - python3 -m build
+    - twine upload dist/*
+  only:
+    - tags
+  variables:
+    TWINE_USERNAME: "__token__"
+    TWINE_PASSWORD: "$PYPI_TOKEN"
