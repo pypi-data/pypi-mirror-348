@@ -1,0 +1,67 @@
+[project]
+name = "swapnil-mcp-server"
+version = "6.2.5"
+description = "Model Context Protocol (MCP) server for automated Outlook Calendar meeting scheduling"
+readme = "README.md"
+authors = [
+    {name = "swapnil dagade", email = "swapnildagade@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Office/Business :: Scheduling",    
+    "Topic :: Communications :: Conferencing",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Information Technology",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["mcp", "model-context-protocol", "outlook", "calendar", "meeting", "scheduling", "automation", "microsoft-outlook"]
+dependencies = [
+    "mcp>=1.2.0",
+    "pywin32>=223",
+    "datetime",
+    "requests",
+    "urllib3"
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+swapnil-mcp-server = "mcp_tools.__main__:main"
+
+[project.entry-points."mcp.tools"]
+Set_Meeting = "mcp_tools.server:Set_Meeting"
+
+[project.urls]
+"Homepage" = "https://github.com/swapnildagade/swapnil-mcp-server"
+"Bug Tracker" = "https://github.com/swapnildagade/swapnil-mcp-server/issues"
+"Documentation" = "https://github.com/swapnildagade/swapnil-mcp-server#readme"
+
+[tool.mcp.tools.Set_Meeting]
+description = "Create and schedule a meeting in Microsoft Outlook with automated reminder settings, status configurations, and all-day event settings"
+parameters = [
+    {name = "subject", description = "Meeting subject", type = "string", required = true},
+    {name = "start_date", description = "Start date and time in ISO format (e.g., '2023-10-01T10:00:00')", type = "string", required = true},
+    {name = "end_date", description = "End date and time in ISO format (e.g., '2023-10-01T11:00:00')", type = "string", required = true}
+]
+returns = {description = "Confirmation message with meeting details", type = "string"}
+
+[tool.mcp.tools.Get_Project_Repositories]
+description = "Retrieve a list of repositories from Azure DevOps for a specified project using TFS authentication"
+parameters = [
+    {name = "project_name", description = "Name of the Azure DevOps project", type = "string", required = true}
+]
+returns = {description = "List of repository names in the specified project or error message", type = "string"}
+
+[tool.mcp.tools.get_weather]
+description = "Fetch current weather information for any city using OpenWeatherMap API with detailed temperature, humidity, and wind data"
+parameters = [
+    {name = "city", description = "Name of the city to get weather information for", type = "string", required = true}
+]
+returns = {description = "Detailed weather data including temperature, humidity, wind conditions, and description", type = "object"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
