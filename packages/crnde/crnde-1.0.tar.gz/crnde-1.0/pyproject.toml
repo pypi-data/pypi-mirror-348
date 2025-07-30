@@ -1,0 +1,17 @@
+[project]
+name = "crnde"
+version = "1.0"
+description = "fast encryptic and decrpytic"
+authors = [
+    {name = "howShouldIChosseMyUsername", email = "trademark2179@gmail.com"}
+]
+readme = "Readme.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["crnde"]
