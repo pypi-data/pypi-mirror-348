@@ -1,0 +1,52 @@
+# Copyright 2019, 2021, 2022 Andrzej Cichocki
+
+# This file is part of Concern.
+#
+# Concern is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Concern is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Concern.  If not, see <http://www.gnu.org/licenses/>.
+
+from collections import OrderedDict
+from concern.getblock import ReadBlocks
+from screen import Stuff
+import os, socket, sys, timelyOSC
+
+def OSC(readblocks):
+    n = 1
+    while True:
+        chunks = [timelyOSC.Message(addrpattern, [text]).ser() for text in readblocks.chunked(n)]
+        if not chunks:
+            return # Nothing to send.
+        if max(len(chunk) for chunk in chunks) <= bufsize:
+            break
+        n *= 2
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+        for chunk in chunks:
+            sock.sendto(chunk, ('localhost', port))
+
+def stuff(readblocks):
+    Stuff(session, window, doublequotekey)(readblocks.monolith())
+
+def main():
+    _, stroke = (sys.argv.pop(1) for _ in range(2))
+    globals()[interface](ReadBlocks(stroke))
+
+interface = $"$(consumer $(consumerName) interface)
+addrpattern = $"$(consumer $(consumerName) addrpattern)
+bufsize = $"$(consumer $(consumerName) bufsize)
+port = $"$(consumer $(consumerName) port)
+session = $"$(sessionName)
+window = $"$(window consumer name)
+doublequotekey = $"$(doubleQuoteKey)
+
+if '__main__' == __name__:
+    main()
