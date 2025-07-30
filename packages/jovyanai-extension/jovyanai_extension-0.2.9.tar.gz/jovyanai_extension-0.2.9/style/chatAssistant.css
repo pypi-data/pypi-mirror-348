@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.jupyterlab-chat-extension {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+/* When used as a JupyterLab extension */
+#jupyterlab-chat-extension-root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Make the chat icon 50% transparent */
+.jp-mod-opacity-50 {
+  opacity: 0.6;
+}
+
+.lm-StackedPanel {
+  min-width: 250px;
+}
+
+.lm-StackedPanel-child {
+  min-width: 250px;
+}
