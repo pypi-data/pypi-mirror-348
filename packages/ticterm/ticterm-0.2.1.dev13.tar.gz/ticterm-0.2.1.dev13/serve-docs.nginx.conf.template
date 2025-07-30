@@ -1,0 +1,21 @@
+server {
+    listen       8080;
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    rewrite_log on;
+    
+    location /${URL_PATH_ROOT}/ {
+        alias  /usr/share/nginx/html/;
+        index  index.html index.htm;
+    }
+
+    location / {
+        rewrite ^$ /${URL_PATH_ROOT}/ redirect;
+        rewrite ^/(.*)$ /${URL_PATH_ROOT}/$1 redirect;
+    }
+
+    # error_page 404 /404.html;
+}
+
