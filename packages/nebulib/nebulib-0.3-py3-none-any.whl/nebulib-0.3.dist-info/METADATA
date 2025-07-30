@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: nebulib
+Version: 0.3
+Summary: A performance-focused system monitor library.
+Author: XZRDev
+License: MIT
+Description-Content-Type: text/markdown
+Requires-Dist: psutil
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+# Nebulib v0.3
+
+Nebulib is a Python library focused on **real-time system performance monitoring**.
+
+## Latest Changelog
+- Added CPS Monitor Function
+
+## Features
+
+- Get full system specs (CPU, RAM, GPU)
+- Live CPU usage bar in terminal
+- GPU usage monitor (NVIDIA only)
+- FPS Counter
+- CPS monitor
+
+## Example
+
+```python
+from nebulib import get_system_specs, print_cpu_usage_bar, FPSCounter
+
+print(get_system_specs())
+print_cpu_usage_bar()
+
+fps = FPSCounter()
+while True:
+    fps.tick()
+    fps.show_fps()
+```
