@@ -1,0 +1,18 @@
+[project]
+name = "ibm-git-log-stat"
+version = "2.0.2"
+description = "A CLI tool to list git commits and GitHub PRs per user for a date range. Generates output in various file formats with NLP summaries. Fetches JIRA issues as well."
+authors = [{ name = "Faizan Fordkar", email = "faizan.fordkar@ibm.com" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "requests", "pandas", "openpyxl", "transformers", "torch", "reportlab", "python-docx", "python-pptx"
+]
+
+[project.scripts]
+ibm-git-log-stat = "git_log_stat.cli:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
