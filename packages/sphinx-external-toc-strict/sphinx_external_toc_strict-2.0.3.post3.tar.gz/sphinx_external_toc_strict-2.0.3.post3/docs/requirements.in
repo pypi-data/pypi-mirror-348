@@ -1,0 +1,13 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/msftcangoblowm/sphinx-external-toc-strict/blob/master/NOTICE.txt
+
+-c ../requirements/pins.pip
+-c ../requirements/prod.unlock  # currently same venv
+
+# sphinx-external-toc-strict
+scriv       # for writing GitHub releases
+sphobjinv   # cross-references inventories, objects.inv
+sphinx-pyproject
+sphinx-autobuild
+sphinx-paramlinks
+# sphinx-licenseinfo unmaintained; has maximum versions dependencies
