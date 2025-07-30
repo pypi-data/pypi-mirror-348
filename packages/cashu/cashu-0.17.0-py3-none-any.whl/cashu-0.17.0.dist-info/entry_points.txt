@@ -1,0 +1,5 @@
+[console_scripts]
+cashu=cashu.wallet.cli.cli:cli
+mint=cashu.mint.main:main
+wallet-test=tests.test_wallet:test
+
