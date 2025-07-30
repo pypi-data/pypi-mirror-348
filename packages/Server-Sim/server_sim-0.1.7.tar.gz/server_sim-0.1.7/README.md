@@ -1,0 +1,68 @@
+@Install Python Dependencies->
+    >>> pip install -r Server_Sim
+
+@Run the WebSocket Server ->
+    Start the WebSocket server once per process.
+    Asynchronous:
+    >>> import asyncio
+    >>> from Server_Sim import start_server
+    >>> asyncio.run(start_server())
+
+    Synchronous:
+    Starts the server in a background thread.
+    >>> import threading
+    >>> from Server_Sim import start_server_sync
+    >>> threading.Thread(target=start_server_sync, daemon=True).start()
+    >>> # You might need to press enter again to continue
+
+@Send Data to the Extension -->
+    Asynchronous:
+    >>> import asyncio
+    >>> from Server_Sim import send
+    >>> asyncio.run(send("Your data here"))
+
+    Synchronous:
+    >>> from Server_Sim import send_sync
+    >>> threading.Thread(target=lambda: send_sync("Your data here"), daemon=True).start()
+
+@Receive Data from the Extension -->
+    Reconstruct data from received chunks (if any). Waits until all expected chunks are received or timeout occurs.
+    Asynchronous:
+    >>> import asyncio
+    >>> from Server_Sim import receive
+    >>> result = asyncio.run(receive(expected_chunks=5, timeout=10))
+    >>> print(result)
+
+    Synchronous:
+    >>> from Server_Sim import receive_sync
+    >>> import queue
+    >>> result_queue = queue.Queue()
+    >>> thread = threading.Thread(target=lambda: result_queue.put(receive_sync(expected_chunks=5, timeout=10)), daemon=True)  # The number of chunks is the amount retun during send_sync() and timeout is how long it will wait
+    >>> thread.start()
+    >>> data = result_queue.get()
+    >>> print("Received data:", data)
+
+@Load the Chrome Extension ->
+    Open Chrome and navigate to chrome://extensions/
+    Enable Developer Mode (toggle in the top right)
+    Click Load unpacked
+    Select the extension/ directory/ Server_Sim
+    [RECOMMENDED: Disable the extension when not using...]
+
+@Use the Extension ->
+    Click the extension icon in the Chrome toolbar
+    Click “Connect to Localhost” after you Run the Websocket
+    WebSocket connection will be established with the Python server
+
+@Data Flow ->
+    The Python server sends data chunks via WebSocket
+    The extension stores chunks in localStorage and sends back acknowledgments (ack)
+    You can reconstruct the received data using:
+    reconstructData(totalChunks)
+    inside the browser’s developer console.
+
+@Important Notes ->
+    You must run the server (start_server_sync) before calling send_sync() or receive_sync().
+    All operations happen within a single process, using threading to share memory.
+    The Chrome extension must be open and connected to receive data.
+    Chunk size is 5MB by default, even small strings are chunked (just 1 chunk).
