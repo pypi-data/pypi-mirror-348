@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "trilla-lib"
+version = "0.1.4"
+description = ""
+authors = ["Артур Лагунов <lagunovartur@inbox.ru>"]
+license = "0.1.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = ">=1.10.0,<2.0.0"
+sentry-sdk = {extras = ["fastapi", "redis", "sqlalchemy", "aiohttp", 'celery'], version = "^2.26.1"}
+opentelemetry-api = "^1.33.0"
+opentelemetry-sdk = "^1.33.0"
+opentelemetry-exporter-jaeger = "^1.21.0"
+opentelemetry-instrumentation-fastapi = "^0.54b0"
+opentelemetry-instrumentation-asgi = "^0.54b0"
+opentelemetry-instrumentation-sqlalchemy = "^0.54b0"
+opentelemetry-instrumentation-redis = "^0.54b0"
+opentelemetry-instrumentation-httpx = "^0.54b0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
