@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: osgiservicebridge
+Version: 1.5.9
+Summary: OSGi services implemented in Python
+Home-page: https://github.com/ECF/Py4j-RemoteServicesProvider
+Author: Scott Lewis
+Author-email: scottslewis@gmail.com
+License: Apache Software License
+Keywords: Java Python OSGi development
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Java
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Object Brokering
+License-File: LICENSE
+Requires-Dist: py4j>=0.10.9.7
+Requires-Dist: protobuf>=5.29.4
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+osgiservicebridge provides the Python library for OSGi R8 remote services between Java and Python.  See the github project at https://github.com/ECF/Py4j-RemoteServicesProvider for detailed information about OSGi remote services and for examples
