@@ -1,0 +1,6 @@
+[console_scripts]
+mistfs-mcp-server = mistfs_tools.__main__:main
+
+[mcp.tools]
+Get_Project_Repositories = mistfs_tools.server:Get_Project_Repositories
+Get_Repository_Checkins = mistfs_tools.server:Get_Repository_Checkins

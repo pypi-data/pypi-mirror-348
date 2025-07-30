@@ -1,0 +1,64 @@
+[project]
+name = "mistfs-mcp-server"
+version = "0.0.1"
+description = """Model Context Protocol (MCP) server providing integrated tools for Microsoft Team Foundation Server (TFS) operations and OpenWeatherMap API integration. Features include:
+- TFS repository management with commit history tracking
+- Repository listing and commit history retrieval
+- Authentication using Personal Access Tokens (PAT)
+- Detailed logging and error handling
+- Proxy support for enterprise environments"""
+readme = "README.md"
+authors = [
+    {name = "swapnil dagade", email = "swapnildagade@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Version Control",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Information Technology"
+]
+keywords = ["mcp", "model-context-protocol", "tfs", "team-foundation-server", "version-control", "git", "repository-management", "commit-history", "devops"]
+dependencies = [
+    "mcp>=1.2.0",
+    "requests",
+    "urllib3",
+    "logging"
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+mistfs-mcp-server = "mistfs_tools.__main__:main"
+
+[project.entry-points."mcp.tools"]
+Get_Project_Repositories = "mistfs_tools.server:Get_Project_Repositories"
+Get_Repository_Checkins = "mistfs_tools.server:Get_Repository_Checkins"
+
+[project.urls]
+"Homepage" = "https://github.com/swapnildagade/mistfs-mcp-server"
+"Bug Tracker" = "https://github.com/swapnildagade/mistfs-mcp-server/issues"
+"Documentation" = "https://github.com/swapnildagade/mistfs-mcp-server#readme"
+
+[tool.mcp.tools.Get_Project_Repositories]
+description = "Retrieve a list of repositories from Microsoft Visual Studio Team Foundation Server (TFS) using PAT authentication. Requires TFS_PAT environment variable for authentication."
+parameters = [
+    {name = "project_name", description = "Name of the project in Microsoft Visual Studio Team Foundation Server", type = "string", required = true}
+]
+returns = {description = "List of repository names in the specified project or error message", type = "string"}
+
+[tool.mcp.tools.Get_Repository_Checkins]
+description = "Get all check-ins (commits) from a repository in Microsoft Visual Studio Team Foundation Server using PAT authentication. Requires TFS_PAT environment variable."
+parameters = [
+    {name = "project_name", description = "Name of the project in Microsoft Visual Studio Team Foundation Server", type = "string", required = true},
+    {name = "repository_name", description = "Name of the repository", type = "string", required = true},
+    {name = "userupn", description = "User UPN (User Principal Name) to filter commits", type = "string", required = true}
+]
+returns = {description = "List of commit details including commit ID, author, date, and comment, or error message", type = "object"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
