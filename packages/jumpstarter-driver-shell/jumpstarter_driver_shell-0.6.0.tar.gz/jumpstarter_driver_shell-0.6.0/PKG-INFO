@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: jumpstarter-driver-shell
+Version: 0.6.0
+Summary: Jumpstarter shell driver, for running controlled shell commands on the exporter.
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Miguel Angel Ajo <miguelangel@ajo.es>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: anyio>=4.6.2.post1
+Requires-Dist: jumpstarter
+Description-Content-Type: text/markdown
+
+# Shell driver
+
+`jumpstarter-driver-shell` provides functionality for shell command execution.
+
+## Installation
+
+```shell
+pip3 install --extra-index-url https://pkg.jumpstarter.dev/simple/ jumpstarter-driver-shell
+```
+
+## Configuration
+
+Example configuration:
+
+```yaml
+export:
+  shell:
+    type: jumpstarter_driver_shell.driver.Shell
+    config:
+      methods:
+        ls: "ls"
+        method2: "echo 'Hello World 2'"
+        #multi line method
+        method3: |
+          echo 'Hello World $1'
+          echo 'Hello World $2'
+        env_var: "echo $1,$2,$ENV_VAR"
+      # optional parameters
+      cwd: "/tmp"
+      log_level: "INFO"
+      shell:
+        - "/bin/bash"
+        - "-c"
+```
+
+## API Reference
+
+Assuming the exporter driver is configured as in the example above, the client
+methods will be generated dynamically, and they will be available as follows:
+
+```{eval-rst}
+.. autoclass:: jumpstarter_driver_shell.client.ShellClient
+    :members:
+
+.. function:: ls()
+   :noindex:
+
+   :returns: A tuple(stdout, stderr, return_code)
+
+.. function:: method2()
+    :noindex:
+
+    :returns: A tuple(stdout, stderr, return_code)
+
+.. function:: method3(arg1, arg2)
+    :noindex:
+
+    :returns: A tuple(stdout, stderr, return_code)
+
+.. function:: env_var(arg1, arg2, ENV_VAR="value")
+    :noindex:
+
+    :returns: A tuple(stdout, stderr, return_code)
+```
