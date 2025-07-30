@@ -1,0 +1,386 @@
+Metadata-Version: 2.4
+Name: ciphercrackerMSWA02
+Version: 0.1.3
+Summary: monoalphabetic substitution cipher cracking
+Home-page: https://github.com/MSWA-02/python_semestral.git
+Author: Oskar Šefců et al.
+Author-email: oskysef@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# Dokumentace knihovny CipherCracker
+
+## Úvod
+
+`CipherCracker` je Python knihovna specializovaná na práci s monoalfabetickými substitučními šiframi. Umožňuje šifrování a dešifrování textu pomocí klíče, automatické prolamování zašifrovaného textu pomocí statistických metod a vytváření bigramových matic pro kryptoanalýzu.
+
+Knihovna implementuje Metropolis-Hastings algoritmus pro automatické prolomení šifer a pracuje s českou abecedou a texty.
+
+## Instalace a požadavky
+
+Knihovna vyžaduje Python 3.6+ a několik standardních knihoven:
+
+```
+numpy
+pandas
+matplotlib (pro vizualizace)
+```
+
+## Globální proměnné
+
+- **`alphabet`**: Seznam velkých písmen anglické abecedy (A-Z) a mezery nahrazené podtržítkem (`_`). 
+  - Formát: `["A", "B", "C", ..., "Z", "_"]`
+  - Používá se jako referenční abeceda pro šifrování a dešifrování
+
+## Základní funkcionalita
+
+### Práce s textem
+
+#### `textNormalize(text: str) -> str`
+
+Funkce pro normalizaci vstupního textu do standardizovaného formátu pro další zpracování.
+
+**Parametry:**
+- `text` (str): Libovolný text určený ke standardizaci
+
+**Vrací:**
+- Normalizovaný text (str) - velká písmena bez diakritiky, mezery nahrazené znakem `_`, bez interpunkce a jiných speciálních znaků
+
+**Implementační detaily:**
+- Převádí všechna písmena na velká
+- Odstraňuje českou diakritiku
+- Nahrazuje mezery podtržítkem
+- Odstraňuje všechny znaky, které nejsou součástí definované abecedy
+
+**Příklad použití:**
+```python
+normalized_text = textNormalize("Příliš žluťoučký kůň úpěl ďábelské ódy.")
+# Výstup: "PRILIS_ZLUTOUCKY_KUN_UPEL_DABELSKE_ODY"
+```
+
+### Bigramy a bigramové matice
+
+#### `get_bigrams(text: str) -> list`
+
+Vytvoří seznam bigramů (dvojic po sobě jdoucích znaků) z normalizovaného textu.
+
+**Parametry:**
+- `text` (str): Normalizovaný text, ze kterého budou vytvořeny bigramy
+
+**Vrací:**
+- Seznam bigramů (list)
+
+**Požadavky:**
+- Vstupní text musí být již normalizovaný (použijte `textNormalize`)
+
+**Implementační detaily:**
+- Pro každou pozici v textu (kromě poslední) vytvoří bigram ze znaku na dané pozici a následujícího znaku
+- Vrací seznam všech takto vytvořených bigramů
+
+**Příklad použití:**
+```python
+bigrams_list = get_bigrams("HELLO_WORLD")
+# Výstup: ['HE', 'EL', 'LL', 'LO', 'O_', '_W', 'WO', 'OR', 'RL', 'LD']
+```
+
+#### `transition_matrix(bigrams) -> numpy.ndarray`
+
+Vytvoří přechodovou (bigramovou) matici z poskytnutého seznamu bigramů. Tato matice je klíčová pro kryptoanalýzu a představuje četnost výskytu dvojic po sobě jdoucích znaků v textu.
+
+**Parametry:**
+- `bigram` (list, volitelný): Seznam bigramů
+- `v` (int, volitelný): Úroveň verbosity (0: žádný výstup, 1: základní progress report)
+
+**Vrací:**
+- Relativní bigramová matice (numpy.ndarray)
+
+**Implementační detaily:**
+- Vytváří matici o rozměrech len(alphabet) × len(alphabet)
+- Počítá frekvence přechodů mezi znaky (četnost výskytu jednoho znaku po druhém)
+- Při absenci bigramů ve vstupním parametru je nutné je dodatečně poskytnout
+- Ke všem nulovým hodnotám přičítá 1 pro zabránění logaritmu z nuly při následných výpočtech
+- Normalizuje matici, aby součet všech prvků byl 1 (relativní četnosti)
+
+**Příklad použití:**
+```python
+bigrams = createBigram(normalized_text)
+bigram_matrix = createBigramMatrix(bigrams, v=1)
+```
+
+### Šifrování a dešifrování
+
+#### `substitute_encrypt(plaintext: str, key: str) -> str`
+
+Zašifruje text pomocí substituční šifry s použitím dodaného klíče.
+
+**Parametry:**
+- `plaintext` (str): Text k zašifrování (normalizovaný)
+- `key` (str): Klíč pro šifrování - permutace abecedy
+
+**Vrací:**
+- Zašifrovaný text (str)
+
+**Požadavky:**
+- Text i klíč musí být normalizované
+- Klíč musí být permutací kompletní abecedy (včetně `_`)
+
+**Implementační detaily:**
+- Vytváří mapování mezi znaky původní abecedy a jejich náhradami podle klíče
+- Postupně nahrazuje každý znak v textu jeho odpovídajícím znakem z klíče
+- Znaky, které nejsou v mapování, zachovává beze změny
+
+**Příklad použití:**
+```python
+encrypted_text = substitute_encrypt(plaintext, key)
+```
+
+#### `substitute_decrypt(ciphertext: str, key: str) -> str`
+
+Dešifruje text zašifrovaný substituční šifrou pomocí dodaného klíče.
+
+**Parametry:**
+- `ciphertext` (str): Zašifrovaný text
+- `key` (str): Klíč použitý k zašifrování (permutace abecedy)
+
+**Vrací:**
+- Dešifrovaný text (str)
+
+**Požadavky:**
+- Text i klíč musí být normalizované
+- Klíč musí být permutací kompletní abecedy (včetně `_`)
+
+**Implementační detaily:**
+- Vytváří inverzní mapování mezi znaky klíče a znaky původní abecedy
+- Postupně nahrazuje každý znak zašifrovaného textu jeho původním znakem podle inverzního mapování
+- Znaky, které nejsou v inverzním mapování, zachovává beze změny
+
+**Příklad použití:**
+```python
+decrypted_text = substitute_decrypt(ciphertext, key)
+```
+
+### Kryptoanalýza a prolamování šifer
+
+#### `plausibility(text: str, TM_ref) -> float`
+
+Počítá věrohodnost textu porovnáním jeho bigramové matice s referenční maticí.
+
+**Parametry:**
+- `text` (str): Text k vyhodnocení (normalizovaný)
+- `TM_ref` (numpy.ndarray): Referenční bigramová matice
+
+**Vrací:**
+- Hodnota věrohodnosti (float) - vyšší hodnota znamená větší pravděpodobnost správného dešifrování
+
+**Implementační detaily:**
+- Vytvoří bigramy z testovaného textu pomocí funkce `get_bigrams`
+- Sestaví přechodovou matici z těchto bigramů pomocí funkce `transition_matrix`
+- Pro každou buňku v matici vypočítá příspěvek k celkové věrohodnosti jako:
+  `log(TM_ref[i][j]) * TM_obs[i][j]`
+- Sečte všechny tyto příspěvky a vrátí výslednou hodnotu věrohodnosti
+- Díky předchozímu přičtení 1 ke všem nulovým hodnotám v přechodové matici nedochází k problémům s logaritmem z nuly
+
+**Příklad použití:**
+```python
+likelihood = plausibility(text, TM_ref)
+```
+
+#### `prolom_substitute(text: str, TM_ref, iter: int = 10000, start_key: str = None) -> tuple`
+
+Implementuje Metropolis-Hastings algoritmus pro prolomení substituční šifry pomocí statistické analýzy.
+
+**Parametry:**
+- `text` (str): Zašifrovaný text k prolomení (normalizovaný)
+- `TM_ref` (numpy.ndarray): Referenční relativní matice bigramů/přechodů sestavená z textu, který není zašifrovaný
+- `iter` (int, volitelný): Počet iterací algoritmu (výchozí: 10000)
+- `start_key` (str, volitelný): Počáteční klíč; pokud není poskytnut, vygeneruje se náhodně
+
+**Vrací:**
+- Tuple ve formátu `(current_key, best_decrypted_text, p_current)`
+
+**Implementační detaily:**
+- Implementuje Metropolis-Hastings algoritmus pro hledání optimálního klíče:
+  1. Inicializuje se s náhodným klíčem nebo poskytnutým počátečním klíčem
+  2. Iterativně vytváří nové kandidátní klíče prohozením dvou náhodných znaků
+  3. Vyhodnocuje věrohodnost textu dešifrovaného kandidátním klíčem
+  4. Přijme nebo odmítne kandidátní klíč podle poměru věrohodností
+  5. Každých 50 iterací vypisuje aktuální stav (iteraci a logaritmus věrohodnosti)
+- Klíč s nejvyšší věrohodností je použit pro finální dešifrování
+
+**Příklad použití:**
+```python
+current_key, best_decrypted_text, p_current = prolom_substitute(
+    text,
+    TM_ref, 
+    iter=20000, 
+    start_key=None
+)
+```
+
+#### `keyMaker(text: str, refMatrix, iter: int = 1000, v: int = 0) -> tuple`
+
+Speciální funkce pro vytváření klíče, který je co nejdále od reálného klíče - vytváří text, který vypadá nejméně pravděpodobně jako normální text v daném jazyce.
+
+**Parametry:**
+- `text` (str): Text, ze kterého se vychází (normalizovaný)
+- `refMatrix` (numpy.ndarray): Referenční bigramová matice
+- `iter` (int, volitelný): Počet iterací algoritmu (výchozí: 1000)
+- `v` (int, volitelný): Úroveň verbosity (0-2)
+
+**Vrací:**
+- Tuple ve formátu `(worst_key, encrypted_text, plausibility_value)`
+
+**Implementační detaily:**
+- Podobný Metropolis-Hastings algoritmu, ale optimalizuje pro minimální věrohodnost
+- Hledá permutaci, která vytvoří text nejméně podobný přirozenému jazyku
+
+**Poznámka:**
+Tato funkce není součástí základních funkcí v zadání, ale je poskytnuta jako dodatečná funkcionalita knihovny.
+
+
+### Pomocné funkce
+
+#### `matchPercent(input: str, compare: str) -> float`
+
+Vypočítá procentuální shodu mezi dvěma řetězci stejné délky.
+
+**Parametry:**
+- `input` (str): První řetězec k porovnání
+- `compare` (str): Druhý řetězec k porovnání
+
+**Vrací:**
+- Procentuální shoda (float): 0-100%
+
+**Implementační detaily:**
+- Počítá počet pozic, kde se znaky shodují
+- Vrací poměr počtu shodných znaků k celkové délce jako procenta
+
+**Poznámka:**
+Tato funkce je pomocná a slouží k vyhodnocení úspěšnosti kryptoanalýzy porovnáním dešifrovaného textu s originálním (pokud je k dispozici).
+
+
+## Implementace algoritmu Metropolis-Hastings
+
+Metropolis-Hastings algoritmus je metodou stochastické optimalizace, která se zde aplikuje na prolomení substituční šifry. Algoritmus funguje následovně:
+
+1. **Inicializace**:
+   - Začíná s náhodným klíčem nebo uživatelem definovaným počátečním klíčem
+   - Dešifruje text s tímto klíčem
+   - Vypočítá počáteční věrohodnost podle referenční bigramové matice
+
+2. **Iterace**:
+   - V každé iteraci:
+     - Vytvoří nový kandidátní klíč prohozením dvou náhodných znaků současného klíče
+     - Dešifruje text s tímto kandidátním klíčem
+     - Vypočítá věrohodnost nového dešifrovaného textu
+     - Určí poměr nové a staré věrohodnosti (q = new_plausibility / current_plausibility)
+     - Přijme nebo odmítne nový klíč podle následujících pravidel:
+       - Pokud q > 1 (nový klíč je lepší), vždy ho přijme
+       - Pokud q < 1, přijme ho s pravděpodobností q (nebo jiným faktorem určeným uživatelem)
+     - Uchovává nejlepší klíč a jeho věrohodnost
+
+3. **Výstup**:
+   - Vrátí nejlepší nalezený klíč, dešifrovaný text a hodnotu věrohodnosti
+   - Volitelně vrátí historii věrohodností a klíčů pro analýzu
+
+## Bigramová matice a její význam
+
+Bigramová matice je klíčovým nástrojem pro statistickou analýzu textu a představuje pravděpodobnost výskytu dvou po sobě jdoucích znaků. V této implementaci:
+
+- Matice má rozměr 27×27 (26 písmen + podtržítko pro mezeru)
+- Každý prvek matice M[i][j] představuje pravděpodobnost, že po znaku i následuje znak j
+- Referenční matice je vytvořena z rozsáhlého textu (ideálně stovky tisíc znaků) pro zachycení jazykových vzorců
+- Pro zabránění problémům s logaritmem z nuly se ke všem nulovým hodnotám přičítá hodnota 1
+- Matice je normalizovaná, aby součet všech prvků byl 1
+
+## Příklad kompletního použití
+
+```python
+# Import knihovny
+from substitution_cipher import *
+
+# 1. Načtení referenčního textu pro vytvoření bigramové matice
+with open("krakatit.txt", "r", encoding="utf-8") as f:
+    reference_text = f.read()
+
+# 2. Normalizace textu
+normalized_ref_text = textNormalize(reference_text)
+
+# 3. Vytvoření bigramů a přechodové matice
+bigrams = get_bigrams(normalized_ref_text)
+TM_ref = transition_matrix(bigrams)
+
+# 4. Načtení a normalizace textu k dešifrování
+with open("text_1000_sample_1_ciphertext.txt", "r", encoding="utf-8") as f:
+    encrypted_text = f.read()
+normalized_encrypted = textNormalize(encrypted_text)
+
+# 5. Prolomení šifry (20000 iterací)
+current_key, decrypted_text, p_current = prolom_substitute(
+    normalized_encrypted,
+    TM_ref,
+    iter=20000
+)
+
+# 6. Výpis výsledků
+print(f"Nalezený klíč: {current_key}")
+print(f"Dešifrovaný text: {decrypted_text[:100]}...")  # Prvních 100 znaků
+print(f"Hodnota věrohodnosti: {p_current}")
+
+# 7. Uložení výsledků podle požadovaného formátu
+text_length = len(normalized_encrypted)
+sample_id = 1
+with open(f"text_{text_length}_sample_{sample_id}_plaintext.txt", "w", encoding="utf-8") as f:
+    f.write(decrypted_text)
+with open(f"text_{text_length}_sample_{sample_id}_key.txt", "w", encoding="utf-8") as f:
+    f.write(current_key)
+```
+
+## Exportování dešifrovaných textů a klíčů
+
+Pro správné exportování dešifrovaných textů a klíčů podle zadání použijte následující formát názvů souborů:
+
+```python
+def export_results(text_length, sample_id, decrypted_text, key):
+    """
+    Exportuje dešifrovaný text a klíč podle požadovaného formátu.
+    
+    Parametry:
+    - text_length: Délka textu
+    - sample_id: ID vzorku
+    - decrypted_text: Dešifrovaný text
+    - key: Dešifrovací klíč
+    """
+    plaintext_filename = f"text_{text_length}_sample_{sample_id}_plaintext.txt"
+    key_filename = f"text_{text_length}_sample_{sample_id}_key.txt"
+    
+    with open(plaintext_filename, "w", encoding="utf-8") as f:
+        f.write(decrypted_text)
+    
+    with open(key_filename, "w", encoding="utf-8") as f:
+        f.write(key)
+    
+    print(f"Výsledky exportovány jako {plaintext_filename} a {key_filename}")
+```
+
+## Doporučení pro efektivní použití
+
+1. **Referenční text**: Pro nejlepší výsledky použijte dostatečně dlouhý referenční text (ideálně několik set tisíc znaků) v češtině.
+
+2. **Počet iterací**: Pro kratší texty (do 1000 znaků) může stačit 10-20 tisíc iterací. Pro delší texty zvažte zvýšení počtu iterací.
+
+3. **Vizualizace**: Používejte verbosity úroveň 2 pro vizualizaci procesu a sledování konvergence algoritmu.
+
+4. **Optimalizace**: Pokud máte k dispozici část dešifrovaného textu nebo částečný klíč, můžete je použít jako počáteční hodnoty pro zrychlení procesu.
+
+5. **Několik pokusů**: Vzhledem k stochastické povaze algoritmu může být užitečné spustit prolomení několikrát s různými počátečními klíči a vybrat nejlepší výsledek.
