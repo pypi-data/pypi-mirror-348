@@ -1,0 +1,16 @@
+click>=8.2.0
+openai-whisper>=20231117
+platformdirs>=4.3.8
+yt-dlp>=2023.12.30
+
+[dev]
+pre-commit>=4.2.0
+pytest>=8.3.5
+pytest-cov>=4.1.0
+ruff>=0.11.9
+setuptools>=80.4.0
+setuptools-scm>=8.3.1
+
+[test]
+pytest>=8.3.5
+pytest-cov>=4.1.0
