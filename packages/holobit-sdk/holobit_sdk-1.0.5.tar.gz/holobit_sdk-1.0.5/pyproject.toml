@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "holobit-sdk"
+version = "1.0.5"
+description = "SDK para arquitectura holográfica avanzada"
+authors = [{name="Adolfo González Hernández", email="adolfogonzal@gmail.com"}]
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = []
+requires-python = ">=3.7"
