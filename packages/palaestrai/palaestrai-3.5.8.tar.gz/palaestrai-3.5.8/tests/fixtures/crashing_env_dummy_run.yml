@@ -1,0 +1,37 @@
+uid: Crashing Environment Dummy Run
+experiment_uid: "Dummy Runs"
+seed: 20250516
+version: "3.5"
+schedule:
+  - phase_0:
+      environments:  # Definition of the environments for this phase
+        - environment:
+            name: fixtures:CrashingEnvironment
+            uid: crashenv
+            params: {}
+      agents:
+        - name: Changeless Guy
+          brain:
+            name: palaestrai.agent.dummy_brain:DummyBrain
+            params: { }
+          muscle:
+            name: palaestrai.agent.dummy_muscle:DummyMuscle
+            params: { }
+          objective:
+            name: palaestrai.agent.dummy_objective:DummyObjective
+            params: {}
+          sensors: [crashenv.S1]
+          actuators: [crashenv.A1]
+      simulation:  # Definition of the simulation controller for this phase
+        name: palaestrai.simulation:Vanilla
+        conditions:
+          - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
+            params: {}
+      phase_config:  # Additional config for this phase
+        mode: train
+        worker: 1
+        episodes: 1
+run_config:  # Not a runTIME config
+  condition:
+    name: palaestrai.experiment:VanillaRunGovernorTerminationCondition
+    params: {}
