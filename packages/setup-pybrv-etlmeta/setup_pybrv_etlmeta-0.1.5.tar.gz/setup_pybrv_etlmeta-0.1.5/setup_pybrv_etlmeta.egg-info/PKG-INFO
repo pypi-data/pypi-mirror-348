@@ -1,0 +1,29 @@
+Metadata-Version: 2.2
+Name: setup_pybrv_etlmeta
+Version: 0.1.5
+Summary: A Databricks-compatible package to create etl_meta schema and rule validation tables
+Home-page: https://github.com/Ashu28555/setup_pybrv_etlmeta
+Author: Ashutosh Semwal
+Author-email: info@complereinfosystem.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: summary
+
+# setup-pybrv-etlmeta
+
+This package helps create the `etl_meta` schema and required business rule metadata tables inside a Databricks Unity Catalog database.
+
+## Installation
+
+After publishing to PyPI:
+
+```bash
+pip install setup-pybrv-etlmeta
