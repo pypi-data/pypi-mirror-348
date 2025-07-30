@@ -1,0 +1,20 @@
+[project]
+name = "txt2csv"
+version = "0.1.0"
+description = "A tool to find and convert tables in txt files to csv files"
+readme = "README.md"
+authors = [
+    { name = "philippe", email = "philippe.qu@outlook.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.2.0",
+    "pandas>=2.2.3",
+]
+
+[project.scripts]
+txt2csv = "txt2csv.cli:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
