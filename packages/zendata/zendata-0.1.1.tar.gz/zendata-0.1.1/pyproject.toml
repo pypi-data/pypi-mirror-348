@@ -1,0 +1,42 @@
+[project]
+name = "zendata"
+version = "0.1.1"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "mitchou10", email = "misu.helal-ali@interieur.gouv.fr" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic>=2.11.4",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mitchou10/zendata"
+"Issues" = "https://github.com/mitchou10/zendata/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+sources = ["src"]
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
+[dependency-groups]
+examples = [
+    "fastapi>=0.115.12",
+    "uvicorn>=0.34.2",
+]
+tests = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
+version = []
