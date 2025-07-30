@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools",
+            "setuptools_scm",
+            "wheel"]
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = "drop_analysis"
+description = "A program to capture and analyze images of droplets."
+readme = "README.md"
+requires-python = ">=3.8"
+version = "1.0.0rc4"
+authors = [{name = "Mathijs van Gorcum", email = "dropanalysis@vgorcum.com"}]
+license-files= ["LICENSE"]
+dependencies = [
+  "numpy",
+  "pandas",
+  "scipy",
+  "pyqt5",
+  "opencv-python-headless",
+  "openpyxl",
+  "fast-histogram",
+  "lsq-ellipse",
+  "imageio",
+  "shapely",
+  "pyqtgraph>=0.11.0",
+  "toml",
+  "h5py",
+  "appdirs",
+  "pillow"]
+
+
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["drop_analysis"]  # package names should match these glob patterns (["*"] by default)
+exclude = []  # exclude packages matching these glob patterns (empty by default)
+namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+  
+[tool.setuptools_scm]
+write_to = "drop_analysis/version.py"
+
+[tool.setuptools.package-data]
+drop_analysis = ["data/*"]
+
+[project.gui-scripts]
+drop_analysis = "drop_analysis.__main__:main"
+
+[project.scripts]
+drop_analysis-cli = "drop_analysis.__main__:main"
+
+
+
+[project.urls]
+'Homepage' =  'https://drop-analysis.com'
+'Documentation' = 'https://drop-analysis.com/usage.html'
+'Source Code' = 'https://codeberg.org/mvgorcum/Sessile.drop.analysis'
+'Issue Tracker' = 'https://codeberg.org/mvgorcum/Sessile.drop.analysis/issues'
+
