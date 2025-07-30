@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "smarthunter"                 # ⚠ unique on PyPI
+version     = "0.1.0"                       # bump every release
+description = "CTF-grade smart string miner that clusters, scores and HTML-reports"
+readme      = "README.md"
+requires-python = ">=3.9"
+license     = {text = "MIT"}
+authors     = [{name = "EllE", email = "yahyaalsalmi961@gmail.com"}]
+keywords    = ["CTF", "reverse-engineering", "strings", "security"]
+classifiers = [               # at least *one* “Programming Language” line
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Security",
+]
+
+dependencies = [
+  "python-Levenshtein>=0.24",
+  "jinja2>=3.1",
+  "rich>=13.0",
+  "tqdm>=4.0"
+]
+
+[project.scripts]             # ← gives the 1-word CLI
+smarthunter = "smarthunter.__main__:main"

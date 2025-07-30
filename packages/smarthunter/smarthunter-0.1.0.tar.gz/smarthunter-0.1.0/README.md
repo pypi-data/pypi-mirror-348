@@ -1,0 +1,125 @@
+# Smart-Strings Hunter
+
+A powerful, easy-to-use binary string extraction and analysis tool designed for CTF challenges.
+
+* **ASCII + UTF-16 + raw-section extraction**
+* **BK-tree Levenshtein clustering** (fast even on 50k+ strings)
+* **Flag heuristics + entropy/rarity scoring**
+* **Beautiful searchable HTML report** that auto-opens
+* **Built-in JSON export** for scripting
+
+## Quick Install (60s)
+
+```bash
+# Best: user-level, isolated
+python -m pip install --upgrade pip pipx
+pipx install "smarthunter @ git+https://github.com/ellE961/smarthunter.git"
+```
+
+*No `pipx`? Just `python -m pip install smarthunter` in a venv.*
+
+Dependencies are auto-pulled: `python-Levenshtein`, `jinja2`, `rich`, `tqdm`.
+
+## One-Command Usage
+
+```bash
+smarthunter ./vuln.bin        # writes ./vuln.bin_strings.html and opens it
+```
+
+### Optional Flags
+
+All flags default to "smart guesses":
+
+```
+-o DIR     output directory          (default: same as binary)
+--json     also dump JSON metadata   (for chaining into your own tools)
+--no-open  don't launch browser
+--depth N  Levenshtein dist (0-5)    (default 3 – sane balance)
+```
+
+## What makes it powerful yet simple
+
+| Design choice                                         | Power                                             | Simplicity                          |
+| ----------------------------------------------------- | ------------------------------------------------- | ----------------------------------- |
+| **BK-tree clustering**                                | handles 100k+ strings in seconds                  | threshold defaulted, no user tuning |
+| **Scoring stack** (regex + entropy + rarity + length) | high-signal top-20 list                           | no flags: smart defaults            |
+| **Self-contained HTML**                               | drop into Discord/GitHub, dark-theme, search-able | auto-opens—no extra step            |
+| **Auto-JSON** (opt-in)                                | integrate into bigger pipelines                   | just `--json` if you need it        |
+| **pipx / pip install**                                | global CLI, no path juggling                      | one command to set up               |
+
+## Installation Methods
+
+### Method 1: Install with pipx (recommended)
+
+[pipx](https://github.com/pypa/pipx) installs the tool in an isolated environment:
+
+```bash
+# Install pipx if needed
+python -m pip install --upgrade pip pipx
+pipx ensurepath
+
+# Install smarthunter
+pipx install "smarthunter @ git+https://github.com/ellE961/smarthunter.git"
+```
+
+### Method 2: Install with pip
+
+```bash
+python -m pip install "smarthunter @ git+https://github.com/ellE961/smarthunter.git"
+```
+
+### Method 3: Manual installation
+
+```bash
+git clone https://github.com/ellE961/smarthunter.git
+cd smarthunter
+pip install -e .
+```
+
+## How it works
+
+1. **String extraction**:
+   - ASCII strings (4+ printable chars)
+   - UTF-16 strings
+   - Raw section dump analysis via `objdump`
+
+2. **Clustering with BK-trees**:
+   - Groups similar strings using Levenshtein distance
+   - Fast even with tens of thousands of strings
+
+3. **Intelligent scoring**:
+   - Flag pattern detection
+   - Shannon entropy calculation
+   - String length consideration
+   - Rarity/uniqueness factor
+
+4. **Output generation**:
+   - Clean, searchable HTML report
+   - Optional JSON export for scripting
+   - Auto-opens in browser
+
+## Examples
+
+### Basic usage
+```bash
+smarthunter ./binary
+```
+
+### Custom output directory
+```bash
+smarthunter ./binary -o ./reports
+```
+
+### Export JSON for further processing
+```bash
+smarthunter ./binary --json
+```
+
+### Adjust clustering threshold
+```bash
+smarthunter ./binary --depth 2  # tighter clusters
+```
+
+## License
+
+MIT 
