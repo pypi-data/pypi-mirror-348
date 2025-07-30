@@ -1,0 +1,12 @@
+connexion[flask,swagger-ui,uvicorn]<4,>=3
+ruamel.yaml>=0.15.78
+schema-salad
+
+[arvados]
+arvados-cwl-runner
+
+[cwltool]
+cwlref-runner
+
+[toil]
+toil[cwl]==8.2.0
