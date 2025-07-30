@@ -1,0 +1,44 @@
+# $(name)
+$(tagline).$try($.($(verbose_blank)
+
+## Install
+These are generic installation instructions.
+
+### To use, disposably
+Install the current release from PyPI to a virtual environment:
+```
+python3 -m venv venvname
+venvname/bin/pip install -U pip
+venvname/bin/pip install $(name)
+. venvname/bin/activate
+```
+
+### To use, permanently
+```
+pip3 install --break-system-packages --user $(name)
+```
+See `~/.local/bin` for executables.
+
+### To develop
+First install venvpool to get the `motivate` command:
+```
+pip3 install --break-system-packages --user venvpool
+```
+Get codebase and install executables:
+```
+git clone git@github.com:$(github account)/$(name).git
+motivate $(name)
+```
+Requirements will be satisfied just in time, using sibling projects with matching .egg-info if any.) $.(
+
+This README is auto-generated, see [project wiki]($(wiki_url)) for details.) $.())$try($join$list$first$map($(commands) $.[
+
+## Commands]) $.())$join$map($(commands) $.[
+
+### $(name)
+$(doc)])$try($.(
+
+## API
+
+$(pydoc)$hole$.(
+)) $.())
