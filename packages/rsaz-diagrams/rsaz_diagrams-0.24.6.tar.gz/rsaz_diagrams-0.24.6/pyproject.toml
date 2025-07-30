@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "rsaz-diagrams"
+version = "0.24.6" # last digit is only for the ext where x.x.x is for the diagrams version
+description = "Azure Extended version of diagrams"
+license = "MIT"
+authors = ["Diagrams-web <no_spam@nowhere.mail>"]
+readme = "README.md"
+homepage = "https://github.com/rajesh-ms/diagrams"
+repository = "https://github.com/rajesh-ms/diagrams"
+include = ["diagrams/**/*", "resources/**/*"]
+
+[tool.poetry.scripts]
+diagrams = "diagrams.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+graphviz = ">=0.13.2,<0.21.0"
+jinja2 = ">=2.10,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3"
+pylint = "^2.7"
+rope = "^0.14.0"
+isort = "^4.3"
+black = "^22.12.0"
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"

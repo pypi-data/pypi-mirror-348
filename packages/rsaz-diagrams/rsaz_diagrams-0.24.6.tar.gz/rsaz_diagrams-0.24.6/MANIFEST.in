@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include pyproject.toml
+include setup.py
+recursive-include resources *.png *.jpg *.svg *.ico *.json *.yaml *.yml
+recursive-include diagrams *.png *.jpg *.svg *.ico *.json *.yaml *.yml *.txt *.md *.py
