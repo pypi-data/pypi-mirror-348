@@ -1,0 +1,13 @@
+diff --git a/extras/minerl_speed_test.py b/extras/minerl_speed_test.py
+index 7ecc1ce..9a4dcc3 100644
+--- a/extras/minerl_speed_test.py
++++ b/extras/minerl_speed_test.py
+@@ -35,7 +35,7 @@ def minerl_run(
+     action: dict[str, Any] = defaultdict(
+         int
+     )  # This will return 0 for any unspecified key
+-    action["camera"] = [0, 1]
++    action["camera"] = [0, 0.04]
+     print(action)
+     # Note: The minerl env seems to terminate after 3600 steps
+     for i in tqdm(range(num_steps)):
