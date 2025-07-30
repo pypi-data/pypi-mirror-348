@@ -1,0 +1,57 @@
+Metadata-Version: 2.4
+Name: ryoma_ai
+Version: 0.0.3
+Summary: AI Powered Data Platform
+License-File: LICENSE
+Keywords: Artificial Intelligence,Code Generation,Data Analysis
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Requires-Dist: ibis-framework>=10.0.0
+Requires-Dist: ipython>=8.14.0
+Requires-Dist: jupyter-ai-magics>=2.19.0
+Requires-Dist: langchain-openai>=0.1.7
+Requires-Dist: langchain<0.3.0,>=0.2.9
+Requires-Dist: langgraph>=0.1.9
+Requires-Dist: mock>=5.1.0
+Requires-Dist: openai>=1.33.0
+Requires-Dist: pandas>=2.2.2
+Requires-Dist: pyarrow>=16.1.0
+Requires-Dist: pydantic>=2.7.1
+Requires-Dist: typer>=0.12.3
+Requires-Dist: types-setuptools>=70.0.0.20240524
+Description-Content-Type: text/markdown
+
+# Ryoma
+
+Ryoma lib is the core component of the project which includes:
+- **Data Sources** that can be used to fetch data from different sources
+- **Agents** that can be used to process data with AI models
+- **Tools** that can be used by agent to process data
+
+## Installation
+
+```bash
+pip install ryoma_ai
+```
+
+## Usage
+
+```python
+from ryoma_ai.datasource.postgres import PostgresDataSource
+from ryoma_ai.agent.sql import SqlAgent
+
+datasource = PostgresDataSource("postgresql://user:password@localhost/db")
+sql_agent = SqlAgent("gpt-3.5-turbo")
+.add_datasource(datasource)
+sql_agent.stream("Get the top 10 rows from the data source")
+```
+
+## Documentation
+Visit the [documentation](https://project-ryoma.github.io/ryoma/) for more information.
