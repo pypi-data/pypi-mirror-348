@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ticterm.log &#8212; ticterm 0.2.1.post2.dev3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=a656e9ef"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ticterm.esc" href="ticterm.esc.html" />
+  <link rel='icon' href='/python-ticterm/_static/favicon-ticterm.png' />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-ticterm.log">
+<span id="ticterm-log"></span><h1>ticterm.log<a class="headerlink" href="#module-ticterm.log" title="Link to this heading">¶</a></h1>
+<section id="default-logger">
+<h2>Default Logger<a class="headerlink" href="#default-logger" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.default_logger">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">default_logger</span></span><a class="headerlink" href="#ticterm.log.default_logger" title="Link to this definition">¶</a></dt>
+<dd><p>Default <a class="reference internal" href="#ticterm.log.Logger" title="ticterm.log.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> instance for convenience.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.config">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#ticterm.log.config" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-attr docutils literal notranslate"><span class="pre">default_logger.config</span></code> (<a class="reference internal" href="#ticterm.log.Logger.config" title="ticterm.log.Logger.config"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Logger.config</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.debug">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.debug" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.debug()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.debug" title="ticterm.log.Logger.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.debug()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.info">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.info" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.info()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.info" title="ticterm.log.Logger.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.info()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.log">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.log" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.log()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.log" title="ticterm.log.Logger.log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.log()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.warn">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.warn" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.warn()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.warn" title="ticterm.log.Logger.warn"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.warn()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.error">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.error" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.error()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.error" title="ticterm.log.Logger.error"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.error()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.set_progress">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">set_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.set_progress" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <code class="xref py py-meth docutils literal notranslate"><span class="pre">default_logger.set_progress()</span></code> (<a class="reference internal" href="#ticterm.log.Logger.set_progress" title="ticterm.log.Logger.set_progress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.set_progress()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ticterm.log.ProgressContext" title="ticterm.log.Logger.Logger.ProgressContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgressContext</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.LOG_LEVEL_PAD">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">LOG_LEVEL_PAD</span></span><a class="headerlink" href="#ticterm.log.LOG_LEVEL_PAD" title="Link to this definition">¶</a></dt>
+<dd><dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.Logger.lib.LOG_LEVEL_PAD">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.Logger.lib.</span></span><span class="sig-name descname"><span class="pre">LOG_LEVEL_PAD</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#ticterm.log.Logger.lib.LOG_LEVEL_PAD" title="Link to this definition">¶</a></dt>
+<dd><p>Longest level name length</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.level_names">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">level_names</span></span><a class="headerlink" href="#ticterm.log.level_names" title="Link to this definition">¶</a></dt>
+<dd><dl class="py data">
+<dt class="sig sig-object py" id="ticterm.log.Logger.lib.level_names">
+<span class="sig-prename descclassname"><span class="pre">ticterm.log.Logger.lib.</span></span><span class="sig-name descname"><span class="pre">level_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['debug',</span> <span class="pre">'info',</span> <span class="pre">'log',</span> <span class="pre">'warn',</span> <span class="pre">'error']</span></em><a class="headerlink" href="#ticterm.log.Logger.lib.level_names" title="Link to this definition">¶</a></dt>
+<dd><p>List of all level names</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="enums">
+<h2>Enums<a class="headerlink" href="#enums" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.EmptyMessageMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">EmptyMessageMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.EmptyMessageMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.EmptyMessageMode.NEWLINE_ONLY">
+<span class="sig-name descname"><span class="pre">NEWLINE_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.EmptyMessageMode.NEWLINE_ONLY" title="Link to this definition">¶</a></dt>
+<dd><p>Print just a newline (i.e. <cite>print()</cite>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.EmptyMessageMode.NORMAL">
+<span class="sig-name descname"><span class="pre">NORMAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.EmptyMessageMode.NORMAL" title="Link to this definition">¶</a></dt>
+<dd><p>Print log output as normal just with a blank message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.Level">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">Level</span></span><a class="headerlink" href="#ticterm.log.Level" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Log severity levels</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.DEBUG">
+<span class="sig-name descname"><span class="pre">DEBUG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.Level.DEBUG" title="Link to this definition">¶</a></dt>
+<dd><p>Debug</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.INFO">
+<span class="sig-name descname"><span class="pre">INFO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.Level.INFO" title="Link to this definition">¶</a></dt>
+<dd><p>Info</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.LOG">
+<span class="sig-name descname"><span class="pre">LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ticterm.log.Level.LOG" title="Link to this definition">¶</a></dt>
+<dd><p>Log</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.WARN">
+<span class="sig-name descname"><span class="pre">WARN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ticterm.log.Level.WARN" title="Link to this definition">¶</a></dt>
+<dd><p>Warn</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.ERROR">
+<span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#ticterm.log.Level.ERROR" title="Link to this definition">¶</a></dt>
+<dd><p>Error</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Level.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#ticterm.log.Level.MAX" title="Link to this definition">¶</a></dt>
+<dd><p>Error</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.LevelLabelMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">LevelLabelMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.LevelLabelMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.LevelLabelMode.OFF">
+<span class="sig-name descname"><span class="pre">OFF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.LevelLabelMode.OFF" title="Link to this definition">¶</a></dt>
+<dd><p>Disables log level label</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.LevelLabelMode.ON">
+<span class="sig-name descname"><span class="pre">ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.LevelLabelMode.ON" title="Link to this definition">¶</a></dt>
+<dd><p>Enables log level label</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.StackMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">StackMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.StackMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.StackMode.OFF">
+<span class="sig-name descname"><span class="pre">OFF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.StackMode.OFF" title="Link to this definition">¶</a></dt>
+<dd><p>Disables stacks</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.StackMode.ON">
+<span class="sig-name descname"><span class="pre">ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.StackMode.ON" title="Link to this definition">¶</a></dt>
+<dd><p>Enables stacks</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.StackMode.ONLY_BAD">
+<span class="sig-name descname"><span class="pre">ONLY_BAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ticterm.log.StackMode.ONLY_BAD" title="Link to this definition">¶</a></dt>
+<dd><p>Only show on <cite>Level.WARN</cite> or above</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.TimestampMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">TimestampMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.TimestampMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Timestamp Modes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.TimestampMode.OFF">
+<span class="sig-name descname"><span class="pre">OFF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.TimestampMode.OFF" title="Link to this definition">¶</a></dt>
+<dd><p>Disables timestamps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.TimestampMode.SINCE_START">
+<span class="sig-name descname"><span class="pre">SINCE_START</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.TimestampMode.SINCE_START" title="Link to this definition">¶</a></dt>
+<dd><p>Shows time since start</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.TimestampMode.EPOCH">
+<span class="sig-name descname"><span class="pre">EPOCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ticterm.log.TimestampMode.EPOCH" title="Link to this definition">¶</a></dt>
+<dd><p>Shows time since epoch (unix time)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.Config">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#ticterm.log.Config" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Config.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Config.reset" title="Link to this definition">¶</a></dt>
+<dd><p>Calls <a class="reference internal" href="#ticterm.log.Config.update" title="ticterm.log.Config.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Config.update()</span></code></a> with all kwargs set to <a class="reference internal" href="#ticterm.log.Config.FLAG_DEFAULT" title="ticterm.log.Config.FLAG_DEFAULT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.FLAG_DEFAULT</span></code></a>. 
+Any kwargs passed to this function will override the former kwargs.
+e.g. <cite>Config.reset(start_time=None)</cite> will reset everything but <cite>start_time</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Config.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_label_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_message_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Config.update" title="Link to this definition">¶</a></dt>
+<dd><p>All parameters will accept <a class="reference internal" href="#ticterm.log.Config.FLAG_DEFAULT" title="ticterm.log.Config.FLAG_DEFAULT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.FLAG_DEFAULT</span></code></a> to reset to default value or <cite>None</cite> to keep current value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verbosity</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Should be a level/severity int</p></li>
+<li><p><strong>tags</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – A list of tags to prepend to log messages</p></li>
+<li><p><strong>pad_char</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Character to use when padding strings.</p></li>
+<li><p><strong>timestamp_mode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ticterm.log.TimestampMode" title="ticterm.log.Logger.lib.TimestampMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimestampMode</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Should be a <cite>TimestampMode</cite> enum.</p></li>
+<li><p><strong>timestamp_precision</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Number of decimal points to be displayed for timestamps.</p></li>
+<li><p><strong>stack_mode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ticterm.log.StackMode" title="ticterm.log.Logger.lib.StackMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackMode</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Should be a <cite>StackMode</cite> enum.</p></li>
+<li><p><strong>stack_limit</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Stack levels to show.</p></li>
+<li><p><strong>level_label_mode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ticterm.log.LevelLabelMode" title="ticterm.log.Logger.lib.LevelLabelMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">LevelLabelMode</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Should be a <cite>LevelLabelMode</cite> enum.</p></li>
+<li><p><strong>empty_message_mode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ticterm.log.EmptyMessageMode" title="ticterm.log.Logger.lib.EmptyMessageMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMessageMode</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Should be an <cite>EmptyMessageMode</cite> enum.</p></li>
+<li><p><strong>progress_width</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Progress bar width in characters.</p></li>
+<li><p><strong>project_root</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – can be truthy to get from top-level module (default), a str (path), or falsey to unset.</p></li>
+<li><p><strong>start_time</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – <cite>None</cite> will reset start_time if it hasn’t already been set (default), truthy will reset it to <cite>time.time()</cite>,</p></li>
+</ul>
+</dd>
+</dl>
+<p>any <cite>int</cite> will set it to that <cite>int</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_EMPTY_MESSAGE_MODE">
+<span class="sig-name descname"><span class="pre">DEFAULT_EMPTY_MESSAGE_MODE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.EmptyMessageMode" title="ticterm.log.Logger.lib.EmptyMessageMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMessageMode</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_EMPTY_MESSAGE_MODE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_LEVEL_LABEL_MODE">
+<span class="sig-name descname"><span class="pre">DEFAULT_LEVEL_LABEL_MODE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.LevelLabelMode" title="ticterm.log.Logger.lib.LevelLabelMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">LevelLabelMode</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_LEVEL_LABEL_MODE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_PAD_CHAR">
+<span class="sig-name descname"><span class="pre">DEFAULT_PAD_CHAR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'</span> <span class="pre">'</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_PAD_CHAR" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_PROGRESS_WIDTH">
+<span class="sig-name descname"><span class="pre">DEFAULT_PROGRESS_WIDTH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">40</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_PROGRESS_WIDTH" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_STACK_LIMIT">
+<span class="sig-name descname"><span class="pre">DEFAULT_STACK_LIMIT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_STACK_LIMIT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_STACK_MODE">
+<span class="sig-name descname"><span class="pre">DEFAULT_STACK_MODE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.StackMode" title="ticterm.log.Logger.lib.StackMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackMode</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_STACK_MODE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_TAGS">
+<span class="sig-name descname"><span class="pre">DEFAULT_TAGS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_TAGS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_TIMESTAMP_MODE">
+<span class="sig-name descname"><span class="pre">DEFAULT_TIMESTAMP_MODE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.TimestampMode" title="ticterm.log.Logger.lib.TimestampMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimestampMode</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_TIMESTAMP_MODE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_TIMESTAMP_PRECISION">
+<span class="sig-name descname"><span class="pre">DEFAULT_TIMESTAMP_PRECISION</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_TIMESTAMP_PRECISION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.DEFAULT_VERBOSITY">
+<span class="sig-name descname"><span class="pre">DEFAULT_VERBOSITY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ticterm.log.Config.DEFAULT_VERBOSITY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.FLAG_DEFAULT">
+<span class="sig-name descname"><span class="pre">FLAG_DEFAULT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.UpdateFlag" title="ticterm.log.Logger.Config.UpdateFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateFlag</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">UpdateFlag(name='DEFAULT')</span></em><a class="headerlink" href="#ticterm.log.Config.FLAG_DEFAULT" title="Link to this definition">¶</a></dt>
+<dd><p>Flag that indicates value should reset to default</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.MEMBERS">
+<span class="sig-name descname"><span class="pre">MEMBERS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['verbosity',</span> <span class="pre">'tags',</span> <span class="pre">'pad_char',</span> <span class="pre">'timestamp_mode',</span> <span class="pre">'timestamp_precision',</span> <span class="pre">'stack_mode',</span> <span class="pre">'stack_limit',</span> <span class="pre">'empty_message_mode',</span> <span class="pre">'level_label_mode',</span> <span class="pre">'progress_width',</span> <span class="pre">'project_root',</span> <span class="pre">'start_time']</span></em><a class="headerlink" href="#ticterm.log.Config.MEMBERS" title="Link to this definition">¶</a></dt>
+<dd><p>All configuration flags that vary between instances</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.empty_message_mode">
+<span class="sig-name descname"><span class="pre">empty_message_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.EmptyMessageMode" title="ticterm.log.Logger.lib.EmptyMessageMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMessageMode</span></code></a></em><a class="headerlink" href="#ticterm.log.Config.empty_message_mode" title="Link to this definition">¶</a></dt>
+<dd><p><cite>Logger.log</cite> behavior when passed an empty message.
+Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_EMPTY_MESSAGE_MODE" title="ticterm.log.Config.DEFAULT_EMPTY_MESSAGE_MODE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_EMPTY_MESSAGE_MODE</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.level_label_mode">
+<span class="sig-name descname"><span class="pre">level_label_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.LevelLabelMode" title="ticterm.log.Logger.lib.LevelLabelMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">LevelLabelMode</span></code></a></em><a class="headerlink" href="#ticterm.log.Config.level_label_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Should generally be ON for accessiblity or readability in non-interactive
+(i.e. black-and-white) terminals.
+Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_LEVEL_LABEL_MODE" title="ticterm.log.Config.DEFAULT_LEVEL_LABEL_MODE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_LEVEL_LABEL_MODE</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.pad_char">
+<span class="sig-name descname"><span class="pre">pad_char</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><a class="headerlink" href="#ticterm.log.Config.pad_char" title="Link to this definition">¶</a></dt>
+<dd><p>Character to use when padding strings
+Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_PAD_CHAR" title="ticterm.log.Config.DEFAULT_PAD_CHAR"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_PAD_CHAR</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.progress_width">
+<span class="sig-name descname"><span class="pre">progress_width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><a class="headerlink" href="#ticterm.log.Config.progress_width" title="Link to this definition">¶</a></dt>
+<dd><p>Progress bar width in characters
+Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_PROGRESS_WIDTH" title="ticterm.log.Config.DEFAULT_PROGRESS_WIDTH"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_PROGRESS_WIDTH</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.project_root">
+<span class="sig-name descname"><span class="pre">project_root</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><a class="headerlink" href="#ticterm.log.Config.project_root" title="Link to this definition">¶</a></dt>
+<dd><p>Path root for stack frames</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.stack_limit">
+<span class="sig-name descname"><span class="pre">stack_limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.StackMode" title="ticterm.log.Logger.lib.StackMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackMode</span></code></a></em><a class="headerlink" href="#ticterm.log.Config.stack_limit" title="Link to this definition">¶</a></dt>
+<dd><p>Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_STACK_LIMIT" title="ticterm.log.Config.DEFAULT_STACK_LIMIT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_STACK_LIMIT</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.stack_mode">
+<span class="sig-name descname"><span class="pre">stack_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.StackMode" title="ticterm.log.Logger.lib.StackMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackMode</span></code></a></em><a class="headerlink" href="#ticterm.log.Config.stack_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_STACK_MODE" title="ticterm.log.Config.DEFAULT_STACK_MODE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_STACK_MODE</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.start_time">
+<span class="sig-name descname"><span class="pre">start_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#ticterm.log.Config.start_time" title="Link to this definition">¶</a></dt>
+<dd><p>Logging time start for <a class="reference internal" href="#ticterm.log.TimestampMode.SINCE_START" title="ticterm.log.TimestampMode.SINCE_START"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TimestampMode.SINCE_START</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]</span></em><a class="headerlink" href="#ticterm.log.Config.tags" title="Link to this definition">¶</a></dt>
+<dd><p>A list of tags to prepend to log messages.
+Defaults to an empty list</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.timestamp_mode">
+<span class="sig-name descname"><span class="pre">timestamp_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.TimestampMode" title="ticterm.log.Logger.lib.TimestampMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimestampMode</span></code></a></em><a class="headerlink" href="#ticterm.log.Config.timestamp_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_TIMESTAMP_MODE" title="ticterm.log.Config.DEFAULT_TIMESTAMP_MODE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_TIMESTAMP_MODE</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.timestamp_precision">
+<span class="sig-name descname"><span class="pre">timestamp_precision</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><a class="headerlink" href="#ticterm.log.Config.timestamp_precision" title="Link to this definition">¶</a></dt>
+<dd><p>Number of decimal points to be displayed for timestamps.
+Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_TIMESTAMP_PRECISION" title="ticterm.log.Config.DEFAULT_TIMESTAMP_PRECISION"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_TIMESTAMP_PRECISION</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Config.verbosity">
+<span class="sig-name descname"><span class="pre">verbosity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><a class="headerlink" href="#ticterm.log.Config.verbosity" title="Link to this definition">¶</a></dt>
+<dd><p>Defaults to <a class="reference internal" href="#ticterm.log.Config.DEFAULT_VERBOSITY" title="ticterm.log.Config.DEFAULT_VERBOSITY"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Config.DEFAULT_VERBOSITY</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.Logger">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.debug" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#ticterm.log.Logger.log" title="ticterm.log.Logger.log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code></a> with <cite>level</cite> kwarg set to <a class="reference internal" href="#ticterm.log.Level.DEBUG" title="ticterm.log.Level.DEBUG"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Level.DEBUG</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.error" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#ticterm.log.Logger.log" title="ticterm.log.Logger.log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code></a> with <cite>level</cite> kwarg set to <a class="reference internal" href="#ticterm.log.Level.ERROR" title="ticterm.log.Level.ERROR"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Level.ERROR</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.info" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#ticterm.log.Logger.log" title="ticterm.log.Logger.log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code></a> with <cite>level</cite> kwarg set to <a class="reference internal" href="#ticterm.log.Level.INFO" title="ticterm.log.Level.INFO"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Level.INFO</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.log" title="Link to this definition">¶</a></dt>
+<dd><p>Write log message to console</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> (<em>int</em>) – Log message severity</p></li>
+<li><p><strong>stack_ascend</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of stack frames to ignore. e.g. If this is
+called from a custom log function, <cite>stack_ascend = 1</cite>
+would prevent every message saying it originated in
+your custom log function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.set_progress">
+<span class="sig-name descname"><span class="pre">set_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.set_progress" title="Link to this definition">¶</a></dt>
+<dd><p>Updates current logger progress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em><em>, </em><em>int</em><em>, </em><em>bool</em><em>, </em><em>None</em><em>, </em><em>optional</em>) – Can be a <cite>float</cite> or <cite>int</cite> above 0,
+<cite>True</cite> to finalize progress bar and prevent it from being overwritten then disable it,
+or <cite>None</cite> to disable progress bar.
+Defaults to <cite>None</cite></p></li>
+<li><p><strong>target</strong> (<em>float</em><em>, </em><em>int</em><em>, </em><em>optional</em>) – Can be a <cite>float</cite> or <cite>int</cite> above 0 or <cite>None</cite> to not change.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ticterm.log.ProgressContext" title="ticterm.log.ProgressContext">ProgressContext</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticterm.log.Logger.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_ascend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.Logger.warn" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#ticterm.log.Logger.log" title="ticterm.log.Logger.log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code></a> with <cite>level</cite> kwarg set to <a class="reference internal" href="#ticterm.log.Level.WARN" title="ticterm.log.Level.WARN"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Level.WARN</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Logger.config">
+<span class="sig-name descname"><span class="pre">config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.Config" title="ticterm.log.Logger.Config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a></em><a class="headerlink" href="#ticterm.log.Logger.config" title="Link to this definition">¶</a></dt>
+<dd><p>Instance Configuration</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Logger.progress_context">
+<span class="sig-name descname"><span class="pre">progress_context</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.ProgressContext" title="ticterm.log.Logger.Logger.ProgressContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgressContext</span></code></a></em><a class="headerlink" href="#ticterm.log.Logger.progress_context" title="Link to this definition">¶</a></dt>
+<dd><p>Instance progress context for <cite>with</cite> statements</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.Logger.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ticterm.log.LoggerState" title="ticterm.log.Logger.Logger.LoggerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerState</span></code></a></em><a class="headerlink" href="#ticterm.log.Logger.state" title="Link to this definition">¶</a></dt>
+<dd><p>Instance state</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.LoggerState">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">LoggerState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.LoggerState" title="Link to this definition">¶</a></dt>
+<dd><p>State object for <a class="reference internal" href="#ticterm.log.Logger" title="ticterm.log.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> instances.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.LoggerState.progress">
+<span class="sig-name descname"><span class="pre">progress</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ticterm.log.LoggerState.progress" title="Link to this definition">¶</a></dt>
+<dd><p>Current progress bar value</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticterm.log.LoggerState.progress_target">
+<span class="sig-name descname"><span class="pre">progress_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> <span class="pre">|</span> <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ticterm.log.LoggerState.progress_target" title="Link to this definition">¶</a></dt>
+<dd><p>Current progress bar target value</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.ProgressContext">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">ProgressContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.ProgressContext" title="Link to this definition">¶</a></dt>
+<dd><p>Context object for <a class="reference internal" href="#ticterm.log.Logger" title="ticterm.log.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> progress bars for use in <cite>with</cite> statements.</p>
+<p>Calls <cite>logger.set_progress(True)</cite> to finalize progress bar on exit.</p>
+<p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">logger</span><span class="o">.</span><span class="n">set_progress</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">as</span> <span class="n">update</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="c1"># or</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">set_progress</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticterm.log.UpdateFlag">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ticterm.log.</span></span><span class="sig-name descname"><span class="pre">UpdateFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ticterm.log.UpdateFlag" title="Link to this definition">¶</a></dt>
+<dd><p>Special flags recognized by <a class="reference internal" href="#ticterm.log.Config.update" title="ticterm.log.Config.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Config.update()</span></code></a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ticterm</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ticterm.esc.html">ticterm.esc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ticterm.esc.html#ticterm-esc-color">ticterm.esc.color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ticterm.esc.html#ticterm-esc-style">ticterm.esc.style</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ticterm.log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#default-logger">Default Logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ticterm.esc.html" title="previous chapter">ticterm.esc</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, gitlab.com/tictaccc.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/ticterm.log.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
