@@ -1,0 +1,17 @@
+/*
+ * Copyright 2025 Saulo V. Alvarenga. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+!function(){"use strict";async function t(){const t=await async function(){try{const t=await fetch("/api/data");return await t.json()}catch(t){console.error(t)}}();if(!t)return;const{nodes:a,links:r,types:e}=t,n=window.innerWidth,o=window.innerHeight,[c,l]=function(t,a){const r=d3.select("body").append("svg").attr("width",t).attr("height",a),e=r.append("g"),n=d3.zoom().scaleExtent([.5,5]).on("zoom",(t=>{e.attr("transform",t.transform)}));return r.call(n),r.on("mousedown",(function(t){1===t.button&&t.preventDefault()})),[r,e]}(n,o),i=d3.forceSimulation(a).force("link",d3.forceLink(r).id((t=>t.node)).distance(100)).force("charge",d3.forceManyBody().strength(-150)).force("center",d3.forceCenter(n/2,o/2)),d=function(t,a){return a.append("defs").append("marker").attr("id","arrowhead").attr("viewBox","0 -5 10 10").attr("refX",20).attr("refY",0).attr("markerWidth",6).attr("markerHeight",6).attr("orient","auto").append("path").attr("d","M0,-5L10,0L0,5").attr("stroke-opacity",.7).attr("fill","#555"),a.append("g").attr("class","links").selectAll("line").data(t).enter().append("line").attr("stroke","#555").attr("stroke-opacity",.7).attr("stroke-width",1.5).attr("marker-end","url(#arrowhead)")}(r,l),[s,f]=function(t,a,r,e){const n={};return r.forEach((t=>{n[t.type]=t.color})),[a.append("g").attr("class","nodes").selectAll("circle").data(t).enter().append("circle").attr("r",10).attr("fill",(t=>n[t.type]||"#ccc")).call(d3.drag().on("start",(function(t,a){t.active||e.alphaTarget(.01).restart(),a.fx=a.x,a.fy=a.y})).on("drag",(function(t,a){a.fx=t.x,a.fy=t.y})).on("end",(function(t,a){t.active||e.alphaTarget(0),a.fx=null,a.fy=null}))),a.append("g").attr("class","labels").selectAll("text").data(t).enter().append("text").attr("dy",-15).attr("text-anchor","middle").attr("font-size","12px").attr("font-weight","bold").attr("font-family","Arial").text((t=>t.node))]}(a,l,e,i);!function(t){t.append("g").attr("class","logo").attr("transform","translate(0, 20)").selectAll("g").data([{logo:"Dipend Graph"}]).enter().append("g").attr("transform","translate(0, 0)").append("text").attr("x",20).attr("y",12).attr("font-size","12px").attr("font-weight","bold").attr("font-family","Arial").text((t=>t.logo))}(c),function(t,a){const r=t.append("g").attr("class","legend").attr("transform","translate(20, 50)").selectAll("g").data(a).enter().append("g").attr("transform",((t,a)=>`translate(0, ${20*a})`));r.append("rect").attr("width",15).attr("height",15).attr("fill",(t=>t.color)),r.append("text").attr("x",20).attr("y",12).attr("font-size","12px").attr("font-family","Arial").text((t=>t.type))}(c,e),i.on("tick",(()=>{d.attr("x1",(t=>t.source.x)).attr("y1",(t=>t.source.y)).attr("x2",(t=>t.target.x)).attr("y2",(t=>t.target.y)),s.attr("cx",(t=>t.x)).attr("cy",(t=>t.y)),f.attr("x",(t=>t.x)).attr("y",(t=>t.y))}))}t(),window.addEventListener("resize",(()=>{d3.select("svg").remove(),t()}))}();
