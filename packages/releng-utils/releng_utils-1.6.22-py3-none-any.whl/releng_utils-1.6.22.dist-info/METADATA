@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: releng-utils
+Version: 1.6.22
+Summary: releng-utils
+Home-page: https://github.com/opnfv/releng-utils
+Download-URL: https://github.com/opnfv/releng-utils
+Author: Baxter Rogers
+Author-email: baxpr@vu1.org
+License: GNU
+Project-URL: Documentation, https://github.com/opnfv/releng-utils
+Platform: Linux
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: pylint
+Requires-Dist: cpjson
+Requires-Dist: loguru
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: download-url
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: platform
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+
+releng-utils is a lightweight and modular Python library designed to streamline 
+and automate common tasks in release engineering workflows.
+
+The library includes helpers for version normalization, Git tagging, semantic 
+versioning enforcement, build artifact handling, changelog templating, environment 
+consistency checks, and integration hooks for CI/CD pipelines.
+
+Ideal for developers, DevOps engineers, and release managers, releng-utils helps 
+reduce manual effort and minimize release errors by standardizing release 
+engineering practices in Python-based projects.
