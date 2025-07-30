@@ -1,0 +1,85 @@
+Metadata-Version: 2.4
+Name: roche_datachapter_team_lib
+Version: 0.0.10
+Summary: Modular Python library designed for building and managing robust ETL processes. Includes database connectors, Google Sheets/Drive integration, AppSheet API support, job scheduling via SQL Server Agent, Excel generation, and logging utilities.
+Project-URL: Homepage, https://github.com/pypa/sampleproject
+Project-URL: Issues, https://github.com/pypa/sampleproject/issues
+Author-email: Lucas Frías <lucasmatiasfrias@live.com>, Uciel Bustamante <ucibustamante.a@gmail.com>
+Maintainer-email: Uciel Bustamante <uciel.bustamante@contractors.roche.com>, Ignacio Castillo <ignacio.castillo@roche.com>, Diego Pedro <diego.pedro@contractors.roche.com>, Sara Fernandez <sara.fernandez.sf1@roche.com>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Requires-Dist: chardet==5.2.0
+Requires-Dist: flask-sqlalchemy==3.0.3
+Requires-Dist: flask==2.3.1
+Requires-Dist: google-api-python-client==2.99.0
+Requires-Dist: google-auth-httplib2==0.1.1
+Requires-Dist: google-auth-oauthlib==1.1.0
+Requires-Dist: openpyxl==3.1.2
+Requires-Dist: oracledb==2.0.0
+Requires-Dist: pandas==2.1.3
+Requires-Dist: psycopg
+Requires-Dist: psycopg-binary
+Requires-Dist: pymssql
+Requires-Dist: pymysql==1.1.0
+Requires-Dist: pyodbc==5.0.1
+Requires-Dist: requests==2.31.0
+Requires-Dist: snowflake-connector-python==3.15.0
+Requires-Dist: snowflake-sqlalchemy==1.7.3
+Requires-Dist: sqlalchemy-hana==1.1.1
+Requires-Dist: sqlalchemy==2.0.30
+Description-Content-Type: text/markdown
+
+# Roche Data Chapter Team Library
+
+## Description
+
+Una biblioteca modular en Python desarrollada para estandarizar y simplificar la creación de procesos ETL y automatizaciones. Pensada para equipos de datos que requieren integraciones con múltiples fuentes, soporte de logs y trazabilidad, y herramientas de administración de jobs SQL.
+
+## Características principales
+
+### 🔌 Conectores de Base de Datos
+- Conexiones automáticas a SQL Server, Oracle, SAP HANA, MySQL, Snowflake y Redshift utilizando variables de entorno para parametrización segura.
+- Soporte de ejecución de consultas personalizadas y procedimientos almacenados.
+- Lectura directa a `pandas.DataFrame` o listas JSON.
+
+### 📊 Transformaciones de Datos
+- Conversión robusta de fechas, números, nulos y tipos de datos desde hojas de cálculo o APIs externas.
+- Estándares predefinidos para Google Sheets y Excel.
+
+### 📤 Google API Services
+- Lectura/escritura en hojas de Google Sheets.
+- Carga y descarga de archivos desde Google Drive.
+- Manejo de credenciales OAuth2 y reintentos automáticos.
+
+### 📩 Email Automation con AppSheet
+- Gestión automatizada del envío de emails usando AppSheet como backend.
+- Soporte para archivos adjuntos en Google Drive (PDF, Excel, TXT).
+
+### 📁 Generación de Excel
+- Creación de archivos Excel multiformato con estilo, desde múltiples `DataFrame`.
+- Ancho de columnas y formatos aplicados automáticamente.
+
+### 📅 SQL Server Agent Job Manager
+- Creación, actualización y administración de SQL Jobs directamente desde Python.
+- Utilidad especialmente útil para entornos corporativos que ejecutan ETLs como tareas programadas.
+
+### 📑 Logging persistente
+- Sistema de log en archivos `.log` y persistencia opcional en base de datos.
+- Integrado con `JobExecution` y `JobExecutionLog`.
+
+## Usage
+Está pensada para ser utilizado como requisito en cualquier proyecto ETL en Python.
+
+## Support
+- Ignacio Castillo (ignacio.castillo@roche.com)
+- Lucas Frías (lucas.frias@roche.com)
+- Uciel Bustamante (uciel.bustamante@contractors.roche.com)
+- Sara Fernandez (sara.fernandez.sf1@roche.com)
+- Diego Pedro (diego.pedro@contractors.roche.com)
+
+## Authors and acknowledgment
+Lucas Frías (lucas.frias@roche.com)
+Uciel Bustamante (uciel.bustamante@contractors.roche.com)
