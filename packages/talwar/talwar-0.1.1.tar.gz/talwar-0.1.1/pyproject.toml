@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "talwar"
+version = "0.1.1"
+description = "AI-powered web application security testing tool"
+readme = "README.md"
+authors = [
+    {name = "anon", email = "anontech100@gmail.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+    "Topic :: Software Development :: Testing",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "anthropic>=0.47",
+    "beautifulsoup4>=4.13",
+    "colorama>=0.4",
+    "openai>=1.6",
+    "playwright>=1.40",
+    "PyYAML>=6.0",
+    "requests>=2.32",
+    "tiktoken>=0.9"
+]
+
+[project.scripts]
+talwar = "talwar.run:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+] 
