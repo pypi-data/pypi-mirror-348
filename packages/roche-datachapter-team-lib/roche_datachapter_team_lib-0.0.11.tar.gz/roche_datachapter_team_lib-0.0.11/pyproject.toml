@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+sources = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["roche_datachapter_team_lib"]
+
+[project]
+name = "roche_datachapter_team_lib"
+version = "0.0.11"
+authors = [{ name = "Lucas Frías", email = "lucasmatiasfrias@live.com" }, { name = "Uciel Bustamante", email = "ucibustamante.a@gmail.com" }]
+maintainers = [
+  { name = "Uciel Bustamante", email = "uciel.bustamante@contractors.roche.com"},
+  { name = "Ignacio Castillo", email = "ignacio.castillo@roche.com"},
+  { name = "Diego Pedro", email = "diego.pedro@contractors.roche.com"},
+  { name = "Sara Fernandez", email = "sara.fernandez.sf1@roche.com"}
+]
+description = "Modular Python library designed for building and managing robust ETL processes. Includes database connectors, Google Sheets/Drive integration, AppSheet API support, job scheduling via SQL Server Agent, Excel generation, and logging utilities."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Flask==2.3.1",
+    "Flask-SQLAlchemy==3.0.3",
+    "pymysql==1.1.0",
+    "pymssql",
+    "oracledb==2.0.0",
+    "pyodbc==5.0.1",
+    "psycopg",
+    "psycopg_binary",
+    "sqlalchemy==2.0.30",
+    "sqlalchemy-hana==1.1.1",
+    "pandas==2.1.3",
+    "openpyxl==3.1.2",
+    "requests==2.31.0",
+    "google-api-python-client==2.99.0",
+    "google-auth-httplib2==0.1.1",
+    "google-auth-oauthlib==1.1.0",
+    "chardet==5.2.0",
+    "snowflake-connector-python==3.15.0",
+    "snowflake-sqlalchemy==1.7.3"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
