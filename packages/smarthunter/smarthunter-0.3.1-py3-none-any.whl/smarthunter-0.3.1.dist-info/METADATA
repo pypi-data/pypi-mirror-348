@@ -1,0 +1,268 @@
+Metadata-Version: 2.4
+Name: smarthunter
+Version: 0.3.1
+Summary: CTF-grade smart string miner that decodes, clusters, scores and HTML-reports
+Author-email: EllE <yahyaalsalmi961@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/ellE961/smarthunter
+Project-URL: Source, https://github.com/ellE961/smarthunter
+Project-URL: Tracker, https://github.com/ellE961/smarthunter/issues
+Keywords: CTF,reverse-engineering,strings,security,forensics,binary-analysis
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Disassemblers
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: python-Levenshtein>=0.24
+Requires-Dist: jinja2>=3.1
+Requires-Dist: rich>=13.0
+Requires-Dist: tqdm>=4.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0; extra == "dev"
+Requires-Dist: flake8>=6.0; extra == "dev"
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: build>=1.0.0; extra == "dev"
+Requires-Dist: twine>=4.0.0; extra == "dev"
+Dynamic: license-file
+
+# Smart-Strings Hunter
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.3.0-blue.svg" alt="Version 0.3.0">
+  <img src="https://img.shields.io/badge/python-3.9%2B-green.svg" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License: MIT">
+</p>
+
+**Smart-Strings Hunter** is a powerful binary string analysis tool designed for CTF challenges, reverse engineering, and forensic analysis. It goes far beyond standard string extraction tools by automatically decoding various encodings, clustering similar strings, detecting patterns, and generating interactive HTML reports.
+
+## ✨ Key Features
+
+- **Multi-format string extraction and decoding**
+
+  - ASCII, UTF-16, Base64, Hex, and [15+ more encodings](#supported-formats)
+  - Recursive decoding with configurable depth
+  - Automatically tries various decoders and ciphers
+
+- **Intelligent pattern recognition**
+
+  - Flags, credentials, email addresses, URLs, IP addresses
+  - Cryptocurrency addresses (BTC, ETH)
+  - Hashes, UUIDs, and other identifiers
+
+- **Advanced clustering and scoring**
+
+  - Fast BK-tree Levenshtein clustering (handles 100k+ strings)
+  - Multi-factor scoring (entropy, patterns, rarity, length)
+  - One-click collapsible duplicates
+
+- **Beautiful interactive reports**
+
+  - Color-coded by pattern type
+  - Tooltips with detailed match information
+  - Linkable HTML output for easy sharing
+
+- **Modular plugin architecture**
+  - Easily add custom decoders or pattern detectors
+  - Optimized processing pipeline
+  - JSON export for integration with other tools
+
+## 📦 Quick Installation
+
+```bash
+# Install from PyPI
+pip install smarthunter
+
+# Or with pipx (recommended for CLI tools)
+pipx install smarthunter
+```
+
+Dependencies (`python-Levenshtein`, `jinja2`, `rich`, `tqdm`) are automatically installed.
+
+## 🚀 Usage
+
+### Basic Command
+
+```bash
+smarthunter ./binary_file
+```
+
+This will analyze the file, extract and decode strings, cluster similar ones, and open an HTML report in your browser.
+
+### Available Options
+
+```
+smarthunter <binary> [options]
+
+Options:
+  -o DIR, --out DIR     Output directory (default: same as binary)
+  --depth N             Nested decode depth (default: 2)
+  --stride N, --lev N   Levenshtein cluster distance (default: 3)
+  --budget N            Maximum strings to process (default: 100,000)
+  --json                Also generate JSON metadata
+  --no-open             Don't open browser automatically
+```
+
+### Try with Demo
+
+A demo binary with encoded flags and patterns is included:
+
+```bash
+# Get the repo with demo files
+git clone https://github.com/ellE961/smarthunter.git
+cd smarthunter
+
+# Run on the demo (or create your own with create_demo.py)
+smarthunter demo_hunter.bin
+```
+
+## 🧩 Supported Formats {#supported-formats}
+
+### String Extraction
+
+- Plain ASCII (4+ printable chars)
+- UTF-16 (wide-char strings)
+- Binary section extraction via `objdump`
+
+### Decoders
+
+| Category            | Formats                                   |
+| ------------------- | ----------------------------------------- |
+| **Base-x**          | Base64, Base32, Base85, Base58, Base62    |
+| **Text Encoding**   | URL-encoding, Hex, Octal, Binary, Decimal |
+| **Simple Ciphers**  | ROT1-25 (Caesar), XOR with common keys    |
+| **Special Formats** | Morse code, Braille                       |
+| **Compression**     | Gzip, Zlib, BZ2, XZ/LZMA                  |
+
+### Pattern Detection
+
+| Category        | Patterns                                   |
+| --------------- | ------------------------------------------ |
+| **Security**    | Passwords, API keys, Tokens                |
+| **CTF**         | Flag formats (`flag{...}`)                 |
+| **Network**     | IP addresses, Email addresses, URLs        |
+| **Crypto**      | Bitcoin/Ethereum addresses, MD5/SHA hashes |
+| **Identifiers** | UUIDs, GUIDs                               |
+
+## 🔍 How It Works
+
+1. **String Extraction**:
+
+   - Pulls ASCII and UTF-16 strings directly from binary
+   - Extracts strings from disassembled sections (via `objdump -s`)
+
+2. **Recursive Decoding**:
+
+   - For each extracted string, tries all registered decoders
+   - Decoded outputs become inputs for next iteration
+   - Continues to configured depth or budget
+
+3. **Pattern Recognition**:
+
+   - Scans all strings for registered patterns
+   - Assigns pattern-specific scores and categorizes findings
+
+4. **Intelligent Clustering**:
+
+   - Groups similar strings using Levenshtein distance
+   - Uses BK-tree algorithm for efficient processing
+   - Prevents duplicate "noise" in the output
+
+5. **Dynamic Scoring**:
+
+   - Pattern-based scoring (flags, credentials, etc.)
+   - Shannon entropy analysis
+   - String length evaluation
+   - Rarity/uniqueness factor
+
+6. **Interactive Report**:
+   - Color-coded by type for quick visual scanning
+   - Tooltips showing score components and match details
+   - Collapsible duplicates
+
+## 📊 Results Preview
+
+The HTML output groups strings by similarity and sorts them by importance score:
+
+```
+demo_hunter.bin – Smart-Strings report
+38 raw strings → 32 clusters. Generated 2025-05-19 09:15:22 UTC.
+
+[9.85] flag{demo_flag_for_testing}
+[9.54] flag{smart_hunter_demo}
+[9.41] [ROT13] flag{rot13_encoded_flag}
+[9.31] password=supersecret123
+1 more dupes
+[9.18] [Base64] flag{base64_encoded_flag}
+[8.76] key=ABCD1234
+[8.32] 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+...
+```
+
+Each entry shows:
+
+- A score in square brackets
+- Color-coded string content
+- Tooltips with detection details
+- Expandable similar strings
+
+## 🔧 Extending SmartHunter
+
+The plugin architecture makes it easy to add custom decoders and patterns. Just add new Python files to the respective directories:
+
+### Creating a Custom Decoder
+
+```python
+# smarthunter/decoders/my_decoder.py
+from ..core import decoder
+
+@decoder
+def my_custom_decoder(s: str):
+    results = []
+    # Your decoding logic here
+    # Return list of tuples: [(format_name, decoded_string), ...]
+    return results
+```
+
+### Adding a New Pattern Detector
+
+```python
+# smarthunter/patterns/my_pattern.py
+from ..core import pattern
+
+# Register pattern with name and score weight
+pattern("MyPattern", 3.5)(r"regex_pattern_here")
+```
+
+## 🤝 Comparison with Other Tools
+
+| Feature                  | Smart-Strings Hunter | strings | binwalk | floss |
+| ------------------------ | -------------------- | ------- | ------- | ----- |
+| Multi-format extraction  | ✅                   | ❌      | ✅      | ✅    |
+| Auto-decode              | ✅                   | ❌      | ❌      | ✅    |
+| Pattern detection        | ✅                   | ❌      | ❌      | ❌    |
+| Deduplication/clustering | ✅                   | ❌      | ❌      | ❌    |
+| Interactive report       | ✅                   | ❌      | ❌      | ❌    |
+| Plugin architecture      | ✅                   | ❌      | ✅      | ❌    |
+
+## 📝 License
+
+MIT
+
+## 🙏 Acknowledgements
+
+Special thanks to the following projects that inspired Smart-Strings Hunter:
+
+- The FLOSS tool from FireEye/Mandiant
+- The binwalk project
+- The strings utility
