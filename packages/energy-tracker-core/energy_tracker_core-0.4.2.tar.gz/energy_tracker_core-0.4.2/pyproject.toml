@@ -1,0 +1,25 @@
+[project]
+name = "energy-tracker-core"
+version = "0.4.2"
+description = "A cpu and gpu energy tracker based on the LibreHardwareMonitor and NVML."
+readme = "README.md"
+authors = [
+    { name = "philippe", email = "philippe.qu@outlook.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.11.18",
+    "click>=8.2.0",
+    "pydantic>=2.11.4",
+    "pynvml>=12.0.0",
+    "rich>=14.0.0",
+    "streamlit>=1.45.1",
+    "wmi>=1.5.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+energy-tracker-core = "energy_tracker_core.cli:cli"
