@@ -1,0 +1,109 @@
+name: Publish Python Package to PyPI
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*" # Trigger on version tags like v0.1.0
+  pull_request:
+    branches:
+      - main # Also run tests on PRs to main for early feedback
+
+jobs:
+  test-and-lint:
+    name: Test and Lint (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install UV (Python package installer)
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "UV installed and path configured."
+
+      - name: Create virtual environment and install dependencies
+        run: |
+          uv venv .venv --python ${{ matrix.python-version }}
+          echo "Virtual environment .venv created."
+          source .venv/bin/activate
+          echo "Virtual environment activated."
+          uv pip install ".[dev]"
+          echo "Development dependencies installed."
+
+      # Optional: Uncomment if you want to run linters in the test job
+      # - name: Run linters (Ruff, Black)
+      #   run: |
+      #     source .venv/bin/activate
+      #     echo "Virtual environment activated for linting."
+      #     uv run ruff check .
+      #     uv run black . --check
+      #     echo "Linters executed."
+
+      - name: Run tests (pytest)
+        run: |
+          source .venv/bin/activate
+          echo "Virtual environment activated for tests."
+          uv run pytest
+          echo "Pytest executed."
+
+  build-and-publish:
+    name: Build and Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: test-and-lint # Ensure tests pass before publishing
+    # Only run on tagged pushes to the main branch that match the version pattern
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: read # Needed to checkout the code
+      id-token: write # Needed for trusted publishing to PyPI
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for tools that need git history (e.g., for versioning)
+
+      - name: Set up Python for building
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11" # Or your preferred Python version for building
+
+      - name: Install UV (Python package installer)
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "UV installed and path configured for build job."
+
+      - name: Create virtual environment and install build dependencies
+        run: |
+          uv venv .venv --python 3.11 # Match the python version above
+          echo "Virtual environment .venv created for build job."
+          source .venv/bin/activate
+          echo "Virtual environment activated for build job."
+          uv pip install build hatchling # Or just 'build' if you don't use hatchling directly here
+          echo "Build dependencies (build, hatchling) installed."
+
+      - name: Build package
+        run: |
+          source .venv/bin/activate # Ensure venv is active
+          python -m build
+          echo "Package built."
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No 'user' or 'password' needed when using trusted publishing
+        # Ensure your PyPI project is configured for trusted publishing with GitHub Actions
+        # The 'PYPI_API_TOKEN' secret is not used with trusted publishing.
+        # If you are NOT using trusted publishing, you would uncomment the 'with' block below
+        # and ensure PYPI_API_TOKEN is set in your GitHub secrets.
+        # with:
+        #   user: __token__
+        #   password: ${{ secrets.PYPI_API_TOKEN }}
