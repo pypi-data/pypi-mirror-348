@@ -1,0 +1,20 @@
+[project]
+name = "pysimpledraw"
+version = "0.1.0"
+description = "simple yet all you need for protyping"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "freesimplegui>=5.2.0.post1",
+    "pillow>=11.2.1",
+    "pydantic>=2.11.4",
+    "pyperclip>=1.9.0",
+    "pysimplegui>=5.0.8.3",
+    "python-pyper>=0.4.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/fxyzbtc/pysimpledraw"
+
+[project.scripts]
+pysimpledraw = "pysimpledraw.main:main"
