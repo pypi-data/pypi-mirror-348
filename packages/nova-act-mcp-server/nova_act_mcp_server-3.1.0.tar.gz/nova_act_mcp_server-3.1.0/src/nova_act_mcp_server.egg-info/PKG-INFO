@@ -1,0 +1,128 @@
+Metadata-Version: 2.4
+Name: nova-act-mcp-server
+Version: 3.1.0
+Summary: An MCP server providing tools to control web browsers using the Amazon Nova Act SDK
+Author-email: Jacob Taunton <jandrewt82@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/madtank/nova-act-mcp
+Project-URL: Bug Tracker, https://github.com/madtank/nova-act-mcp/issues
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: pydantic>=2.11.4
+Requires-Dist: nova-act>=1.0.2579.0
+Requires-Dist: playwright==1.48.0
+Requires-Dist: fastmcp==2.2.5
+Requires-Dist: asyncio-extras>=1.3.2
+Requires-Dist: rich>=14.0.0
+Requires-Dist: structlog>=25.3.0
+Requires-Dist: tenacity>=9.1.2
+Requires-Dist: uvloop>=0.21.0; sys_platform != "win32"
+Requires-Dist: python-dotenv>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.5; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.26.0; extra == "dev"
+Requires-Dist: black>=25.1.0; extra == "dev"
+Requires-Dist: isort>=6.0.1; extra == "dev"
+Requires-Dist: mypy>=1.15.0; extra == "dev"
+Requires-Dist: ruff>=0.11.7; extra == "dev"
+Requires-Dist: pytest-dotenv>=0.5.2; extra == "dev"
+Provides-Extra: sse
+Dynamic: license-file
+
+# nova-act-mcp-server
+[![PyPI](https://img.shields.io/pypi/v/nova-act-mcp-server)](https://pypi.org/project/nova-act-mcp-server/)
+
+**nova‑act‑mcp‑server** is a zero‑install [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that exposes [Amazon Nova Act](https://nova.amazon.com/act) browser‑automation tools for AI agents.
+
+## What's New in v3.1.0
+
+- **Simplified Tool Structure**: New tools `start_session`, `execute_instruction`, `end_session` for clearer interaction flow
+- **On-Demand Visual Feedback**: `inspect_browser` tool for explicit screenshots only when needed
+- **Progress Notifications**: Improved `start_session` with Inspector UI compatibility
+- **AI Agent Usability**: Enhanced error handling and clearer responses
+- **Reduced Token Usage**: Browser actions no longer automatically include screenshots by default
+
+## Quick Start (uvx)
+
+### Step 1: Get a Nova Act API Key
+Obtain your API key from [Nova Act](https://nova.amazon.com/act).
+
+### Step 2: Add to MCP Client Configuration
+
+```jsonc
+{
+  "mcpServers": {
+    "nova_act_browser_tools": {
+      "command": "uvx",
+      "args": ["nova-act-mcp-server"],
+      "env": { "NOVA_ACT_API_KEY": "YOUR_NOVA_ACT_API_KEY_HERE" }
+    }
+  }
+}
+```
+
+### Step 3: Start Using Browser Tools
+AI agents can now call tools like `start_session`, `execute_instruction`, etc. through any MCP-compatible client such as Claude Desktop or VS Code.
+
+## Core Tools Overview
+
+| Tool | Description | Key Parameters |
+|------|-------------|----------------|
+| `start_session` | Starts a new browser session | `url`, `headless=True` |
+| `execute_instruction` | Runs a natural language instruction in the browser | `session_id`, `instruction` |
+| `inspect_browser` | Gets a screenshot and state of the current browser | `session_id`, `include_screenshot=True` |
+| `end_session` | Closes a browser session and cleans up resources | `session_id` |
+| `list_browser_sessions` | Lists all active browser sessions | None |
+
+## Local Development & Testing
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/madtank/nova-act-mcp.git
+cd nova-act-mcp
+
+# Create and activate virtual environment
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install with development dependencies
+uv pip install -e .[dev]
+```
+
+### Running Tests
+
+```bash
+# Run all tests (integration tests require NOVA_ACT_API_KEY)
+pytest
+
+# Run only unit tests (no API key required)
+pytest tests/unit
+
+# Run integration tests (requires API key)
+NOVA_ACT_API_KEY="your_key_here" pytest tests/integration
+```
+
+### Running Locally with MCP Inspector UI
+
+```bash
+# Start the server with the MCP Inspector
+npx @modelcontextprotocol/inspector -e PYTHONUNBUFFERED=1 -e NOVA_ACT_API_KEY="YOUR_KEY" -- python -m nova_mcp_server
+```
+
+Then visit `http://localhost:6274` in your browser. For optimal experience, set the Inspector UI timeout to 60 seconds for `start_session` operations.
+
+## Advanced Tools
+
+| Tool | Description |
+|------|-------------|
+| `fetch_file` | Downloads a file from the current page |
+| `view_html_log` | Gets the HTML content of the current page |
+| `compress_logs` | Creates and returns a ZIP of session logs and screenshots |
+
+## License
+[MIT](LICENSE)
