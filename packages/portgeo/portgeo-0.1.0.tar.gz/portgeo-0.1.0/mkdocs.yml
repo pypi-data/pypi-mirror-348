@@ -1,0 +1,96 @@
+site_name: portgeo
+site_description: A python package for geospatial applications
+site_author: noportman
+site_url: https://snowport.github.io/portgeo
+repo_url: https://github.com/snowport/portgeo
+
+copyright: "Copyright &copy; 2025 Noah Portman"
+
+theme:
+    palette:
+        - scheme: default
+          primary: light blue
+          accent: indigo
+          toggle:
+              icon: material/toggle-switch
+              name: Switch to dark mode
+        - scheme: slate
+          primary: black
+          accent: indigo
+          toggle:
+              icon: material/toggle-switch-off-outline
+              name: Switch to light mode
+    name: material
+    icon:
+        repo: fontawesome/brands/github
+    logo: assets/images/logo.png
+    favicon: assets/images/favicon.ico
+    features:
+        - navigation.instant
+        - navigation.tracking
+        # - navigation.sections
+        # - navigation.expand
+        - search.highlight
+        - search.share
+    custom_dir: "docs/overrides"
+    font:
+        text: Roboto
+        code: Fira Code
+
+plugins:
+    - search
+    - mkdocstrings
+    - git-revision-date
+    - git-revision-date-localized:
+          enable_creation_date: true
+          type: timeago
+    # - pdf-export
+    - mkdocs-jupyter:
+          include_source: True
+          ignore_h1_titles: True
+          execute: false
+          allow_errors: false
+          ignore: ["conf.py"]
+          execute_ignore: ["*ignore.ipynb"]
+
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - abbr
+    - attr_list
+    - def_list
+    - footnotes
+    - md_in_html
+    - pymdownx.superfences
+    - pymdownx.highlight:
+          linenums: true
+    # - pymdownx.emoji:
+    #     emoji_index: !!python/name:material.extensions.emoji.twemoji
+    #     emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# extra:
+#     analytics:
+#         provider: google
+#         property: UA-XXXXXXXXX-X
+
+# extra_css:
+#   - assets/stylesheets/extra.css
+
+nav:
+    - Home: index.md
+    - Installation: installation.md
+    - Usage: usage.md
+    - Contributing: contributing.md
+    - FAQ: faq.md
+    - Changelog: changelog.md
+    - Report Issues: https://github.com/snowport/portgeo/issues
+    - Examples:
+        - examples/intro.ipynb
+        - examples/map.ipynb
+        - examples/folium.ipynb
+        - examples/raster.ipynb
+        - examples/split_map.ipynb
+    - API Reference:
+        - portgeo module: portgeo.md
+        - common module: common.md
+        - foliumap module: foliumap.md
