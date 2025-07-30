@@ -1,0 +1,38 @@
+[project]
+name = "evrmail"
+version = "0.1.25"
+description = "Encrypted messaging over Evrmore"
+authors = [{ name = "Manticore Technologies LLC" }]
+dependencies = [
+  "typer[all]",
+  "coincurve",
+  "base58",
+  "pycryptodome",
+  "requests",
+  "cryptography",
+  "textual",
+  "evrmore_rpc",
+  "zmq",
+  "watchdog",
+  "mnemonic",
+  "hdwallet",
+  "python-evrmorelib",
+  "pyqt5",
+  "pyqtwebengine"
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+evrmail = "evrmail.cli:main"
+evrmail-eel = "evrmail.cli:eel"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
