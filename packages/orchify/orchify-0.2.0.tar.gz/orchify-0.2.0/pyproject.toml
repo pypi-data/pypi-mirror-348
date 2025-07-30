@@ -1,0 +1,83 @@
+[project]
+name = "orchify"
+version = "0.2.0"
+description = "AI-driven Dockerfile generator for any Python project"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name="Sattyam Jain", email="sattyamjain96@gmail.com" }]
+keywords = [
+    "docker",
+    "dockerfile",
+    "container",
+    "containers",
+    "containerization",
+    "cli",
+    "command-line",
+    "ai",
+    "agentic-ai",
+    "aiops",
+    "devops",
+    "automation",
+    "orchestration",
+    "cicd",
+    "continuous-integration",
+    "continuous-deployment",
+    "github-actions",
+    "gitlab-ci",
+    "jenkins",
+    "infrastructure-as-code",
+    "iac",
+    "terraform",
+    "ansible",
+    "kubernetes",
+    "helm",
+    "cloud",
+    "aws",
+    "azure",
+    "gcp",
+    "serverless",
+    "pydantic",
+    "jinja2",
+    "mcp",
+    "agn0",
+    "openai",
+    "anthropic",
+    "templates",
+    "python",
+    "tooling",
+    "dev-tooling",
+    "infrastructure",
+    "monitoring",
+    "logging",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "click",
+    "agno",
+    "mcp",
+    "anthropic",
+    "openai",
+    "jinja2"
+]
+
+[project.urls]
+Homepage = "https://github.com/sattyamjjain/Orchify"
+Repository = "https://github.com/sattyamjjain/Orchify"
+Documentation = "https://github.com/sattyamjjain/Orchify"
+
+[project.scripts]
+orchify = "orchify.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0","wheel","build"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
