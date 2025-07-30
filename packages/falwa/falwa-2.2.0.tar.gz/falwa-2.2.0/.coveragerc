@@ -1,0 +1,8 @@
+[run]
+source=falwa
+
+[report]
+show_missing = True
+omit =
+    falwa/legacy/*
+    falwa/f90_modules/*

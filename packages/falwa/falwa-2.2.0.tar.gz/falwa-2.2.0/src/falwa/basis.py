@@ -1,0 +1,205 @@
+"""
+------------------------------------------
+File name: basis.py
+Author: Clare Huang
+"""
+from typing import Tuple, Optional
+import numpy as np
+from math import pi
+
+
+def eqvlat_fawa(
+        ylat, vort, area, n_points, planet_radius=6.378e+6,
+        output_fawa=True) -> Tuple[np.ndarray, Optional[np.ndarray]]:
+
+    """
+    Compute equivalent latitude and finite amplitude wave activity with the full
+
+    Parameters
+    ----------
+    ylat : sequence or array_like
+        1-d numpy array of latitude (in degree) with equal spacing in ascending order; dimension = nlat.
+    vort : ndarray
+        2-d numpy array of vorticity values; dimension = (nlat, nlon).
+    area : ndarray
+        2-d numpy array specifying differential areal element of each grid point; dimension = (nlat, nlon).
+    n_points: int
+        Analysis resolution to calculate equivalent latitude.
+    planet_radius: float
+        Radius of spherical planet of interest consistent with input *area*. Default: earth's radius 6.378e+6
+    output_fawa: bool
+        Whether to output FAWA. If True, return tuple would consist of (qref, fawa). Else, this function will
+        return (qref, None).
+
+    Returns
+    -------
+    qref : ndarray
+        1-d numpy array of value Q(y) where latitude y is given by ylat; dimension = (nlat).
+    fawa : ndarray or None
+        1-d finite-amplitude local wave activity
+    """
+    vort_min, vort_max = np.amin(vort), np.amax(vort)
+    qbar = vort.mean(axis=-1)  # zonal mean vorticity
+    vort_bins = np.linspace(vort_min, vort_max, n_points, endpoint=True)  # uniform vort bins
+    vort_flat, area_flat = vort.flatten(), area.flatten()  # Flatten the 2D arrays to 1D
+
+    # *** Find equivalent latitude ***
+    inds = np.digitize(vort_flat, vort_bins)  # sort vorticity values into bins
+    aq = np.cumsum([0] + [area_flat[np.where(inds == i)].sum() for i in range(1, vort_bins.size)])  # cumulative area
+    cq = np.cumsum([0] + [np.multiply(area_flat, vort_flat)[np.where(inds == i)].sum()  # cumulative vort * area
+                          for i in range(1, vort_bins.size)])
+    eqv_gaussian_grid = aq / (2 * pi * planet_radius ** 2) - 1.0  # ascending from -1
+    eqv_latitude = np.rad2deg(np.arcsin(eqv_gaussian_grid))
+    qref = np.interp(ylat, eqv_latitude, vort_bins)  # ascending. qref = np.interp(alat[::-1], aq, q_part_u) also works
+
+    # *** Compute FAWA ***
+    if output_fawa:
+        cref = np.interp(ylat, eqv_latitude, cq)
+        cbar = np.zeros_like(cref)
+        for j in np.arange(ylat.size-2, 0, -1):
+            cbar[j] = cbar[j+1] + 0.5 * (qbar[j+1]*area.sum(axis=1)[j+1] + qbar[j]*area.sum(axis=1)[j])
+        fawa = -(cbar[1:] + cref[1:])/(2 * pi * planet_radius)
+        return qref, fawa
+
+    return qref, None
+
+
+def eqvlat_vgrad(ylat, vort, area, n_points, planet_radius=6.378e+6, vgrad=None):
+
+    """
+    Compute equivalent latitude, and optionally <...>_Q in Nakamura and Zhu (2010).
+
+    Parameters
+    ----------
+    ylat : sequence or array_like
+        1-d numpy array of latitude (in degree) with equal spacing in ascending order; dimension = nlat.
+    vort : ndarray
+        2-d numpy array of vorticity values; dimension = (nlat, nlon).
+    area : ndarray
+        2-d numpy array specifying differential areal element of each grid point; dimension = (nlat, nlon).
+    n_points: int
+        Analysis resolution to calculate equivalent latitude.
+    planet_radius: float
+        Radius of spherical planet of interest consistent with input *area*. Default: earth's radius 6.378e+6
+    vgrad: ndarray, optional
+        2-d numpy array of laplacian (or higher-order laplacian) values; dimension = (nlat, nlon)
+
+    Returns
+    -------
+    q_part : ndarray
+        1-d numpy array of value Q(y) where latitude y is given by ylat; dimension = (nlat).
+    brac : ndarray or None
+        1-d numpy array of averaged vgrad in the square bracket.
+        If *vgrad* = None, *brac* = None.
+
+    """
+
+    vort_min = np.min([vort.min(), vort.min()])
+    vort_max = np.max([vort.max(), vort.max()])
+    q_part_u = np.linspace(vort_min, vort_max, n_points, endpoint=True)
+    aa = np.zeros(q_part_u.size)  # to sum up area
+    vort_flat = vort.flatten()  # Flatten the 2D arrays to 1D
+    area_flat = area.flatten()
+
+    if vgrad is not None:
+        dp = np.zeros_like(aa)
+        vgrad_flat = vgrad.flatten()
+
+    # Find equivalent latitude:
+    inds = np.digitize(vort_flat, q_part_u)
+    for i in np.arange(0, aa.size):  # Sum up area in each bin
+        aa[i] = np.sum(area_flat[np.where(inds == i)])
+        if vgrad is not None:
+            # This is to avoid the divided-by-zero error
+            if aa[i] == 0.:
+                continue
+            else:
+                dp[i] = np.sum(area_flat[np.where(inds == i)] *
+                               vgrad_flat[np.where(inds == i)]) / aa[i]
+
+    aq = np.cumsum(aa)
+    if vgrad is not None:
+        brac = np.zeros_like(aa)
+        brac[1:-1] = 0.5 * (dp[:-2] + dp[2:])
+
+    y_part = aq / (2 * pi * planet_radius**2) - 1.0
+    lat_part = np.rad2deg(np.arcsin(y_part))
+    q_part = np.interp(ylat, lat_part, q_part_u)
+
+    if vgrad is not None:
+        brac_return = np.interp(ylat, lat_part, brac)
+    else:
+        brac_return = None
+
+    return q_part, brac_return
+
+
+def lwa(nlon, nlat, vort, q_part, dmu, return_partitioned_lwa=False, ncforce=None):
+
+    """
+    At each grid point of vorticity q(x,y) and reference state vorticity Q(y),
+    this function calculate the difference between the line integral of [q(x,y+y')-Q(y)]
+    (and ncforce, if given) over the domain {y+y'>y,q(x,y+y')<Q(y)} and {y+y'<y,q(x,y+y')>Q(y)}.
+    See fig. (1) and equation (13) of Huang and Nakamura (2016).
+    dmu is a vector of length nlat: dmu = cos(phi) d(phi) such that phi is the latitude.
+
+
+    Parameters
+    ----------
+    nlon : int
+        Longitudinal dimension of vort (i.e. vort.shape[1]).
+    nlat : int
+        Latitudinal dimension of vort (i.e. vort.shape[0]).
+    vort : ndarray
+        2-d numpy array of vorticity values; dimension = (nlat,nlon).
+    Q_part: sequence or array_like
+        1-d numpy array of Q (vorticity reference state) as a function of latitude. Size = nlat.
+    dmu: sequence or array_like
+        1-d numpy array of latitudinal differential length element (e.g. dmu = planet_radius * cos(lat) d(lat)). Size = nlat.
+    return_partitioned_lwa: bool
+        If True, return local wave activity as a stacked field of cyclonic and anticyclonic components.
+        If False, return a single field of local wave activity of dimension (nlat, nlon). Default is False.
+
+    ncforce: ndarray or None, optional
+        2-d numpy array of non-conservative force field (i.e. theta in NZ10(a) in equation (23a) and (23b))
+
+    Returns
+    -------
+    lwact : ndarray
+        If return_partitioned_lwa = True, return the cyclonic and anticyclonic components of local wave activity in a
+        numpy array of dimension (2, nlat, nlon).
+        If return_partitioned_lwa = True, return a single field of local wave activity in a numpy array of dimension (nlat, nlon).
+    bigsigma : ndarray or None
+        2-d numpy array of the nonconservative forces acting on local wave activity computed from *ncforce*.
+        If *ncforce* = None, *bigsigma* = None.
+
+    """
+
+    return_array = np.zeros((2, nlat, nlon))  # First dim being anticyclonic and second being cyclonic
+    if ncforce is not None:
+        bigsigma = np.zeros((nlat, nlon))
+
+    for j in np.arange(0, nlat - 1):
+        vort_e = vort[:, :] - q_part[j]
+        # *** Initialize empty arrays ***
+        cyclonic_mask = np.zeros((nlat, nlon))
+        anticyclonic_mask = np.zeros((nlat, nlon))
+        # *** anticyclonic ***
+        anticyclonic_mask[np.where(vort_e[:, :] < 0)] = -1
+        anticyclonic_mask[:j + 1, :] = 0
+        # *** Cyclonic ***
+        cyclonic_mask[np.where(vort_e[:j + 1, :] > 0)] = 1
+        # *** Calculate, for each equivalent latitude ***
+        return_array[0, j, :] = np.sum(vort_e * anticyclonic_mask * dmu[:, np.newaxis], axis=0)
+        return_array[1, j, :] = np.sum(vort_e * cyclonic_mask * dmu[:, np.newaxis], axis=0)
+        if ncforce is not None:
+            bigsigma[j, :] = np.sum(ncforce * (anticyclonic_mask+cyclonic_mask) *
+                                    dmu[:, np.newaxis], axis=0)
+
+    if ncforce is None:
+        bigsigma = None
+
+    if return_partitioned_lwa:
+        return return_array, bigsigma
+    else:
+        return return_array.sum(axis=0), bigsigma

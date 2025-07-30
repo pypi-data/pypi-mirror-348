@@ -1,0 +1,22 @@
+name: falwa_env
+
+channels:
+- conda-forge
+- defaults
+
+dependencies:
+- python=3.12
+- numpy=1.26.4
+- scipy=1.14.0
+- netCDF4=1.6.5
+- cftime=1.6.2
+- xarray=2024.1.1
+- pytest=7.4.0
+- matplotlib=3.8.2
+- cartopy=0.22.0
+- jupyter
+- pip
+# - twine
+# - gridfill
+# Other useful packages to visualize plots in notebooks
+# - cartopy
