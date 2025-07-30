@@ -1,0 +1,9 @@
+{
+  "package": "subsystems.scoring",
+  "name": "Elevator",
+  "kind": "Elevator",
+  "canbus": "canivore",
+  "motors": ["leadMotor", "followerMotor"],
+  "lead_motor": "leadMotor",
+  "encoder": "elevatorEncoder"
+}
