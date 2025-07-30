@@ -1,0 +1,19 @@
+solana==0.35.1
+solders==0.21.0
+construct
+base58
+python-dotenv
+requests>=2.31.0
+Pillow>=10.2.0
+readchar>=4.2.1
+
+[cli]
+
+[cli:sys_platform == "win32"]
+Tkinter-Designer>=1.0.2
+
+[dev]
+black
+ruff
+pytest
+mypy
