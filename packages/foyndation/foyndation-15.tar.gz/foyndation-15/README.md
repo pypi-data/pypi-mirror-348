@@ -1,0 +1,138 @@
+# foyndation
+Base library of foyono projects.
+
+This README is auto-generated, see [project wiki](https://wikiwheel.net/s/foyono/w/foyndation) for details.
+
+## API
+
+<a id="foyndation"></a>
+
+### foyndation
+
+<a id="foyndation.initlogging"></a>
+
+###### initlogging
+
+```python
+def initlogging()
+```
+
+Initialise the logging module to send debug (and higher levels) to stderr.
+
+<a id="foyndation.innerclass"></a>
+
+###### innerclass
+
+```python
+def innerclass(cls)
+```
+
+An instance of the decorated class may access its enclosing instance via `self`.
+
+<a id="foyndation.invokeall"></a>
+
+###### invokeall
+
+```python
+def invokeall(callables)
+```
+
+Invoke every callable, even if one or more of them fail. This is mostly useful for synchronising with futures.
+If all succeeded return their return values as a list, otherwise raise all exceptions thrown as a chain.
+
+<a id="foyndation.onerror"></a>
+
+###### onerror
+
+```python
+@contextmanager
+def onerror(f)
+```
+
+Context manager that runs the given function if an exception happens, like `finally` excluding the happy path.
+
+<a id="foyndation.rmsuffix"></a>
+
+###### rmsuffix
+
+```python
+def rmsuffix(text, suffix)
+```
+
+Return text with suffix removed, or `None` if text does not end with suffix.
+
+<a id="foyndation.singleton"></a>
+
+###### singleton
+
+```python
+def singleton(t)
+```
+
+The decorated class is replaced with a no-arg instance.
+Can also be used to replace a factory function with its result.
+
+<a id="foyndation.solo"></a>
+
+###### solo
+
+```python
+def solo(v)
+```
+
+Assert exactly one object in the given sequence and return it.
+
+<a id="parabject"></a>
+
+### parabject
+
+<a id="parabject.register"></a>
+
+###### register
+
+```python
+def register(obj, paracls)
+```
+
+Instantiate paracls, set `obj` to be the regular object associated with the new parabject, and return the parabject.
+
+<a id="parabject.dereference"></a>
+
+###### dereference
+
+```python
+def dereference(parabject)
+```
+
+Get the regular object associated with `parabject` or raise UnknownParabjectException.
+
+<a id="parabject.Parabject"></a>
+
+#### Parabject Objects
+
+```python
+class Parabject()
+```
+
+Subclasses typically implement `__getattr__` for dynamic behaviour on attribute access, use `unmangle` there to undo name mangling.
+
+<a id="parabject.Parabject.__neg__"></a>
+
+###### \_\_neg\_\_
+
+```python
+def __neg__()
+```
+
+Dereference this parabject.
+
+<a id="parabject.unmangle"></a>
+
+###### unmangle
+
+```python
+def unmangle(name)
+```
+
+Undo name mangling.
+
