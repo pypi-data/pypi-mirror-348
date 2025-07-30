@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "PyrogramBuildingUtils"
+version = "0.0.3"
+description = "This projects needed for fast building pyrogram templates bot"
+authors = ["amnesiawho"]
+readme = "README.md"
+dependencies.python = ">3.11,<4.0"
+dependencies.dotenv = "^0.9.9"
+dependencies.pyrofork = "^2.3.62"
+dependencies.requests = "^2.32.3"
+dependencies.numpy = "^2.2.6"
+packages = [{ include = "utils", from = "src" }, { include = "templates", from = "src" }]
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+ruff = "^0.11.10"
+pre-commit = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+
+[tool.poetry.scripts]
+create_pyrogram = "utils.pyrogram:run"
+create_tree = "utils.treeBuilder:run"
+create_env = "templates.envtemplate:run"
+
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "W", "I"]  # Выберите правила линтинга
