@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyeqx-opentelemetry"
+version = "0.3.0"
+description = "OpenTelemetry instrumentation for PyEQX"
+authors = [{ name = "ESBM Cronus" }]
+dependencies = [
+  "opentelemetry-api>=1.32.1",
+  "opentelemetry-exporter-otlp>=1.32.1",
+  "opentelemetry-exporter-prometheus>=0.53b1",
+  "opentelemetry-instrumentation>=0.53b1",
+  "opentelemetry-sdk>=1.32.1",
+  "azure-monitor-opentelemetry-exporter>=1.0.0b34",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+classifiers = ["Programming Language :: Python :: 3"]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ruff",
+    "build",
+    "twine",
+    "python-dotenv",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pyeqx", "pyeqx.opentelemetry", "pyeqx.opentelemetry.exporters"]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+pythonpath = ["src", "."]
+addopts = [
+  "--color=yes",
+  "-v",
+  "--tb=short",
+  "--cov=src",
+  "--cov-report=term-missing",
+]
+
+[tool.pytest-watch]
+nobeep = true
+ext = "py"
+runner = "pytest"
