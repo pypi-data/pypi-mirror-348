@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summary Report</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+    <!-- IGV-specific styles -->
+    <style type="text/css">
+        body {
+            font-size: 80%;
+            font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+        }
+    </style>
+
+    <!-- IGV selector table style -->
+    <style>
+        thead {
+            position: sticky;
+            top: 0;
+        }
+        tr {
+            cursor: default;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: lightblue;
+        }
+        th {
+            background-color: lightskyblue;
+            color: white;
+            cursor: pointer;
+        }
+        .selected {
+            background-color: lightblue !important;
+            outline: solid thin darkblue !important;
+        }
+        /* Custom table cell style with character limit */
+        .table td, .table th {
+            text-align: center;
+            word-break: break-word;
+        }
+        .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            cursor: pointer;
+        }
+        .table td:hover {
+            overflow: visible;
+            white-space: normal;
+            max-width: none;
+            position: relative;
+            z-index: 10;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        th {
+            white-space: pre-wrap;
+        }
+        /* Accordion style */
+        .wrap-collabsible {
+            margin-bottom: 1.2rem;
+        }
+        input[type='checkbox'] {
+            display: none;
+        }
+        .lbl-toggle {
+            display: block;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 1rem;
+            color: black;
+            background: #dddddd;
+            cursor: pointer;
+            border-radius: 7px;
+            transition: all 0.25s ease-out;
+        }
+        .lbl-toggle:hover {
+            color: blue;
+        }
+        .lbl-toggle::before {
+            content: ' ';
+            display: inline-block;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid currentColor;
+            vertical-align: middle;
+            margin-right: .7rem;
+            transform: translateY(-2px);
+            transition: transform .2s ease-out;
+        }
+        .toggle:checked + .lbl-toggle::before {
+            transform: rotate(90deg) translateX(-3px);
+        }
+        .collapsible-content {
+            max-height: 0px;
+            overflow: auto;
+            transition: max-height .25s ease-in-out;
+        }
+        .toggle:checked + .lbl-toggle + .collapsible-content {
+            max-height: 350px;
+        }
+        .toggle:checked + .lbl-toggle {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .collapsible-content .content-inner {
+            background: rgba(250, 224, 66, .2);
+            border-bottom: 1px solid rgba(250, 224, 66, .45);
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+            padding: .5rem 1rem;
+        }
+        .summary-box {
+            border: 2px solid #666;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        .summary-positive {
+            font-weight: bold;
+        }
+        /* Style for header info section */
+        .header-info {
+            margin-bottom: 1em;
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .header-info p {
+            margin: 0.5em 0;
+        }
+    </style>
+
+    <!-- IGV.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@3.0.2/dist/igv.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Summary Report</h1>
+        <p><strong>Report Date:</strong> {{ report_date }}</p>
+        <p><strong>VNtyper Version:</strong> {{ pipeline_version }}</p>
+        <!-- Display Input Files -->
+        {% if input_files %}
+            <p><strong>Input Files:</strong>
+                {% if input_files.fastq1 and input_files.fastq2 %}
+                    {{ input_files.fastq1 }}, {{ input_files.fastq2 }}
+                {% elif input_files.bam %}
+                    {{ input_files.bam }}
+                {% endif %}
+            </p>
+        {% endif %}
+
+        <!-- Display Combined Header Information if available -->
+        {% if alignment_pipeline or assembly_text or assembly_contig or header_warning %}
+            <div class="header-info">
+                {% if alignment_pipeline %}
+                    <p><strong>Alignment pipeline:</strong> {{ alignment_pipeline }}</p>
+                {% endif %}
+                {% if assembly_text %}
+                    <p><strong>Assembly detected from BAM header:</strong> {{ assembly_text }}
+                        {% if assembly_contig %}
+                            (Contig: {{ assembly_contig }})
+                        {% endif %}
+                    </p>
+                {% endif %}
+                {% if header_warning %}
+                    <p style="color: red;"><strong>Warning:</strong> {{ header_warning }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <!-- Custom switches for toggling flagged values and detailed coverage -->
+        <div class="d-flex">
+            <div class="custom-control custom-switch text-left mb-3 mr-4">
+                <input type="checkbox" class="custom-control-input" id="toggleFlagged">
+                <label class="custom-control-label" for="toggleFlagged">Show flagged values</label>
+            </div>
+            <div class="custom-control custom-switch text-left mb-3">
+                <input type="checkbox" class="custom-control-input" id="toggleDetailedCoverage">
+                <label class="custom-control-label" for="toggleDetailedCoverage">Show detailed coverage</label>
+            </div>
+        </div>
+
+        <!-- Coverage Section -->
+        <h2>VNTR Region Coverage</h2>
+        
+        <!-- Basic coverage view (default) -->
+        <div id="basicCoverageView">
+            <p><strong>Mean Coverage:</strong> {{ mean_vntr_coverage }} {{ mean_vntr_coverage_icon }}</p>
+        </div>
+        
+        <!-- Detailed coverage view (hidden by default) -->
+        <div id="detailedCoverageView" style="display: none;">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Coverage Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mean Coverage</td>
+                        <td>{{ mean_vntr_coverage }} {{ mean_vntr_coverage_icon }}</td>
+                    </tr>
+                    <tr>
+                        <td>Median Coverage</td>
+                        <td>{{ median_vntr_coverage }}</td>
+                    </tr>
+                    <tr>
+                        <td>Standard Deviation</td>
+                        <td>{{ stdev_vntr_coverage }}</td>
+                    </tr>
+                    <tr>
+                        <td>Minimum Coverage</td>
+                        <td>{{ min_vntr_coverage }}</td>
+                    </tr>
+                    <tr>
+                        <td>Maximum Coverage</td>
+                        <td>{{ max_vntr_coverage }}</td>
+                    </tr>
+                    <tr>
+                        <td>VNTR Region Length</td>
+                        <td>{{ vntr_region_length }} bp</td>
+                    </tr>
+                    <tr>
+                        <td>Uncovered Bases</td>
+                        <td>{{ vntr_uncovered_bases }} bp</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage Uncovered</td>
+                        <td>{{ percent_vntr_uncovered }}% {{ percent_vntr_uncovered_icon }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Conditionally show fastp metrics if available -->
+        {% if fastp_available %}
+            <h2>fastp Quality Metrics</h2>
+            <p><strong>Sequencing Setup:</strong> {{ sequencing_str }}</p>
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Duplication Rate (Cutoff: 10%)</td>
+                        <td>
+                            {% if duplication_rate is not none %}
+                                {{ (duplication_rate * 100)|round(2) }}%
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>                    
+                        <td>{{ duplication_rate_icon }}</td>
+                    </tr>
+                    <tr>
+                        <td>Q20 Rate (Cutoff: 80%)</td>
+                        <td>{{ (q20_rate * 100)|round(2) if q20_rate is not none else 'N/A' }}%</td>
+                        <td>{{ q20_icon }}</td>
+                    </tr>
+                    <tr>
+                        <td>Q30 Rate (Cutoff: 70%)</td>
+                        <td>{{ (q30_rate * 100)|round(2) if q30_rate is not none else 'N/A' }}%</td>
+                        <td>{{ q30_icon }}</td>
+                    </tr>
+                    <tr>
+                        <td>Passed Filter Rate (Cutoff: 80%)</td>
+                        <td>{{ (passed_filter_rate * 100)|round(2) if passed_filter_rate is not none else 'N/A' }}%</td>
+                        <td>{{ passed_filter_icon }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+
+        <h2>Screening Summary</h2>
+        <p class="summary-box {% if 'negative' not in summary_text %}summary-positive{% endif %}">
+            {{ summary_text|safe }}
+        </p>
+
+        {% if cross_match_message and advntr_available %}
+            <h2>Cross-Match Summary</h2>
+            <p class="summary-box {% if 'match' in cross_match_message|lower %}summary-positive{% endif %}">
+                {{ cross_match_message|safe }}
+            </p>
+        {% endif %}
+
+        <h2>Kestrel Identified Variants</h2>
+        <div class="table-container">
+            {{ kestrel_highlight | safe }}
+        </div>
+
+        {% if advntr_available and advntr_highlight %}
+            <h2>adVNTR Identified Variants</h2>
+            <div class="table-container">
+                {{ advntr_highlight | safe }}
+            </div>
+        {% else %}
+            <p><em>adVNTR genotyping was not performed or no adVNTR results are available.</em></p>
+        {% endif %}
+
+        <h2>IGV Alignment Visualization</h2>
+        <div id="container" style="display: flex; flex-direction: column">
+            <div id="tableContainer" class="wrap-collabsible">
+                <input id="collapsible" class="toggle" type="checkbox" checked>
+                <label for="collapsible" class="lbl-toggle">Variants</label>
+                <div class="collapsible-content">
+                    <div id="tableSelectorDiv"></div>
+                </div>
+            </div>
+            <div id="igvContainer">
+                <div id="igvDiv"></div>
+            </div>
+        </div>
+
+        <h2>Pipeline Log</h2>
+        <div class="wrap-collabsible">
+            <input id="logToggle" class="toggle" type="checkbox">
+            <label for="logToggle" class="lbl-toggle">Show/Hide Log</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <pre>{{ log_content }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and DataTables scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap Bundle for tooltips -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom filtering and flag update functions -->
+    <script>
+        // Custom filter: apply flag filtering only for tables that have a "Flag" header.
+        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            var $table = $(settings.nTable);
+            var lastHeader = $table.find('thead th:last').text().trim();
+            if(lastHeader !== "Flag") {
+                return true;
+            }
+            var showFlagged = $('#toggleFlagged').prop('checked');
+            var row = settings.aoData[dataIndex].nTr;
+            var flagCell = $(row).find('td:last');
+            var originalFlag = flagCell.attr('data-original') || flagCell.text().trim();
+            if(originalFlag === "") {
+                return true;
+            }
+            return showFlagged || originalFlag === "Not flagged" || originalFlag === "Not applicable";
+        });
+
+        // Function to round numeric values to 4 decimal places.
+        function roundValue(val) {
+            var num = parseFloat(val);
+            if (!isNaN(num)) {
+                return parseFloat(num.toFixed(4)).toString();
+            }
+            return val;
+        }
+
+        // Apply rounding to all table cells.
+        function applyRounding(tableElement) {
+            $(tableElement).find('td').each(function() {
+                var text = $(this).text().trim();
+                if ($.isNumeric(text)) {
+                    $(this).text(roundValue(text));
+                }
+            });
+        }
+
+        // Update the flag column for tables with a "Flag" header.
+        function updateFlagColumn(tableElement) {
+            var $table = $(tableElement);
+            var lastHeader = $table.find('thead th:last').text().trim();
+            if(lastHeader !== "Flag") {
+                return;
+            }
+            $table.find('tr').each(function() {
+                var $cells = $(this).find('td');
+                if ($cells.length) {
+                    var $flagCell = $cells.last();
+                    var originalText = $flagCell.attr('data-original');
+                    if (typeof originalText === "undefined") {
+                        originalText = $flagCell.text().trim();
+                        $flagCell.attr('data-original', originalText);
+                    }
+                    if (originalText === "Not flagged" || originalText === "Not applicable" || originalText === "") {
+                        $flagCell.html('<span data-toggle="tooltip" title="' + originalText + '" style="color:green;font-size:16px;">&#10003;</span>');
+                    } else {
+                        $flagCell.html('<span data-toggle="tooltip" title="' + originalText + '" style="color:red;font-size:16px;">&#10006;</span>');
+                    }
+                }
+            });
+            $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+        }
+
+        $(document).ready(function() {
+            // Initialize DataTables for tables on the page, excluding the coverage details table
+            $('table:not(#detailedCoverageView table)').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "autoWidth": false,
+                "columnDefs": [
+                    { "width": "150px", "targets": "_all" }
+                ],
+                "preDrawCallback": function(settings) {
+                    updateFlagColumn(this.api().table().node());
+                },
+                "drawCallback": function(settings) {
+                    applyRounding(this.api().table().node());
+                }
+            });
+            
+            // Update the switch label and redraw all tables when toggling.
+            $('#toggleFlagged').change(function() {
+                var isChecked = $(this).prop('checked');
+                var newLabel = isChecked ? "Hide flagged values" : "Show flagged values";
+                $('label[for="toggleFlagged"]').text(newLabel);
+                $('table:not(#detailedCoverageView table)').DataTable().draw();
+            });
+            
+            // Handle toggling between basic and detailed coverage views
+            $('#toggleDetailedCoverage').change(function() {
+                if($(this).prop('checked')) {
+                    $('#basicCoverageView').hide();
+                    $('#detailedCoverageView').show();
+                } else {
+                    $('#basicCoverageView').show();
+                    $('#detailedCoverageView').hide();
+                }
+            });
+        });
+
+        const tableJson = {{ table_json | safe }};
+        const sessionDictionary = {{ session_dictionary | safe }};
+
+        let igvBrowser;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initIGV();
+        });
+
+        function initIGV() {
+            const igvDiv = document.getElementById("igvDiv");
+            const options = {
+                sessionURL: sessionDictionary["0"],
+                showChromosomeWidget: false,
+                showCenterGuide: true,
+                search: false
+            };
+
+            igv.createBrowser(igvDiv, options).then(function (browser) {
+                igvBrowser = browser;
+                initTable();
+            });
+        }
+
+        function initTable() {
+            const table = document.createElement("table");
+            table.id = "variant_table";
+            table.style.width = "100%";
+            document.getElementById("tableSelectorDiv").appendChild(table);
+
+            const thead = document.createElement('thead');
+            table.appendChild(thead);
+            const headerRow = thead.insertRow(0);
+            const headers = tableJson.headers;
+            for (let j = 1; j < headers.length; j++) {
+                const cell = document.createElement("th");
+                headerRow.appendChild(cell);
+                cell.innerHTML = headers[j];
+            }
+
+            const tbody = document.createElement('tbody');
+            table.appendChild(tbody);
+            const tableRows = tableJson.rows;
+            for (let i = 0; i < tableRows.length; i++) {
+                const rowData = tableRows[i];
+                const unique_id = rowData[0];
+                const row = document.createElement("tr");
+                row.id = "row_" + unique_id;
+                tbody.appendChild(row);
+
+                if (i === 0) row.classList.add("selected");
+
+                row.onclick = function (event) {
+                    const list = document.getElementById("variant_table").getElementsByTagName("tr");
+                    for (let i = 0; i < list.length; i++) {
+                        list[i].classList.remove("selected");
+                    }
+                    const rowID = event.target.parentElement.id;
+                    const row = document.getElementById(rowID);
+                    row.classList.add("selected");
+                    const uniqueId = rowID.substring(4);
+                    const session = sessionDictionary[uniqueId];
+                    igvBrowser.loadSession({ url: session });
+                };
+
+                for (let j = 1; j < headers.length; j++) {
+                    const cell = document.createElement("td");
+                    row.appendChild(cell);
+                    cell.innerHTML = rowData[j];
+                }
+            }
+        }
+    </script>
+</body>
+</html>
