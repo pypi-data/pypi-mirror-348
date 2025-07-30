@@ -1,0 +1,79 @@
+[project]
+name='mzspeclib'
+version='1.0.5'
+description='HUPO-PSI Spectral library format'
+
+keywords = [
+    "mass spectrometry",
+    "spectral library",
+]
+
+license.file = "LICENSE"
+
+requires-python = ">= 3.8"
+
+classifiers=[
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+]
+
+dependencies = [
+    "sqlalchemy",
+    "click",
+    "psims >= 1.3.4",
+    "pyteomics >= 4.5.3",
+    "mzpaf"
+]
+
+authors = [
+    { name = "Joshua Klein", email="mobiusklein@gmail.com" },
+    { name = "Ralf Gabriels", email="ralf@gabriels.dev" },
+    { name = "Eric W Deutsch", email="edeutsch@systemsbiology.org" }
+]
+
+readme = "README.md"
+
+[project.optional-dependencies]
+
+test = [
+    "jsonschema"
+]
+
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "numpydoc>=1,<2",
+    "sphinx_click",
+    "myst-parser",
+    "sphinx-autobuild",
+]
+
+[project.urls]
+
+Homepage = "https://hupo-psi.github.io/mzSpecLib/"
+Repository = "https://github.com/HUPO-PSI/mzspeclib-py.git"
+Documentation = "https://mzspeclib-py.readthedocs.io/en/latest/"
+Issues = "https://github.com/HUPO-PSI/mzspeclib-py/issues"
+
+
+[project.scripts]
+mzspeclib = "mzspeclib.tools.cli:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.ruff]
+target-version = "py38"
+line-length = 120
+select = ["D"]
+ignore = ["D415", "D400", "D212", "D205", "D203", "D105"]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
