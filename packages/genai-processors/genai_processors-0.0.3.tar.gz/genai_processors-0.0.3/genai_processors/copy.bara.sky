@@ -1,0 +1,91 @@
+"""Copybara config for Processors Python library.
+
+Push to Github:
+```
+copybara third_party/py/genai_processors/copy.bara.sky postsubmit_piper_to_github --squash --dry-run --ignore-noop
+```
+
+and then the same without `--dry-run` if it looks good.
+
+To test locally as if downloading a .zip archive from GitHub, including pending changes:
+```
+# export to a local folder; the folder doesn't need to exist yet
+copybara third_party/py/genai_processors/copy.bara.sky to_local_folder .. \
+  --folder-dir=/tmp/processors --ignore-noop
+```
+"""
+
+load(
+    "//devtools/copybara/library/scrubbing",
+    "doc_scrub",
+    "message_extract_public_description",
+    "py_scrub",
+)
+load(
+    "//devtools/copybara/library/workflow",
+    "google3_glob",
+    "import_pr_config",
+    "piper_sot_to_github",
+)
+load("//third_party/py/genai_processors/copybara/authors", "authors")
+load("//third_party/py/genai_processors/copybara/common", "leakr_check")
+
+google3_path = "third_party/py/genai_processors"
+google3_excludes = [
+    "**/METADATA",
+    "tests/**",
+    "copybara/**",
+    "**/BUILD",
+    "third_party_py_genai_processors.blueprint",
+    "OWNERS",
+    "copy.bara.sky",
+    "bluze.textproto",
+    "packaging/**",
+    "README.google.md",
+]
+google3_files = google3_glob(google3_path, google3_excludes)
+github_files = glob(["**"])
+
+transforms = [
+    core.move(
+        before = "google3/third_party/py/genai_processors",
+        after = "",
+    ),
+]
+
+author = authoring.allowed(
+    default = "GDM AI Platform FTEs <gdm-ai-platform-ftes@google.com>",
+    allowlist = authors.keys(),
+)
+
+piper_sot_to_github(
+    google3_files = google3_files,
+    default_author = "GDM AI Platform FTEs <gdm-ai-platform-ftes@google.com>",
+    allowed_authors = authors,
+    contact_email = "gdm-ai-platform-ftes@google.com",
+    github_use_app = True,
+    url = "https://github.com/googlestaging/genai-processors",
+    branch = "main",
+    transformations = transforms,
+    owner_mdb = "gdm-aip-ecosystem-team",
+    status_context_names = [],
+    import_pr_config = import_pr_config(
+        review_state = "HEAD_COMMIT_APPROVED",
+    ),
+    # Require public commit message enclosed in BEGIN_PUBLIC and END_PUBLIC.
+    metadata_scrubber = message_extract_public_description(fail_if_no_match = True),
+)
+
+##
+# Local folder -> folder workflow for testing.
+# Use this to pick up local changes that may not be part of a CL.
+core.workflow(
+    name = "to_local_folder",
+    origin = folder.origin(),
+    origin_files = google3_files,
+    destination = folder.destination(),
+    destination_files = github_files,
+    authoring = author,
+    mode = "SQUASH",
+    transformations = transforms,
+)
