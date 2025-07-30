@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"] # 指定建置所需的套件
+build-backend = "setuptools.build_meta" # 指定用於建置的後端
+
+[tool.pytest.ini_options]
+# 設定 pytest 的選項
+minversion = "6.0" # 最低 pytest 版本要求 (可選)
+addopts = "-ra -q" # 執行 pytest 時的額外參數 (例如: -ra 顯示除了通過之外的所有資訊, -q 簡化輸出)
+testpaths = [ # 指定測試文件所在的目錄
+    "tests",
+]
+python_files = "test_*.py" # 指定測試文件的命名模式
+
+# [tool.flake8] # flake8 的設定也可以放在這裡，但您已有 .flake8 文件
+# max-line-length = 88
+# extend-ignore = E203, W503
+
+# 專案元數據 (目前由 setup.py 管理，未來也可移至此處)
+# [project]
+# name = "kevins_torch"
+# version = "0.1.0"
+# description = "A collection of PyTorch utilities for image AI training"
+# readme = "README.md"
+# requires-python = ">=3.8"
+# license = { file = "LICENSE" } # 假設您有 LICENSE 文件
+# authors = [
+#   { name="Kevin", email="qazsskevin@gmail.com" },
+# ]
+# classifiers = [
+#     "Programming Language :: Python :: 3",
+#     "License :: OSI Approved :: MIT License",
+#     "Operating System :: OS Independent",
+# ]
+# dependencies = [
+#     "torch>=2.0.0",
+#     "torchvision>=0.15.0",
+#     "numpy>=1.21.0",
+#     "Pillow>=8.0.0",
+# ]
+
+# [project.urls] # 可選的項目 URL
+# "Homepage" = "https://github.com/yourusername/kevins_torch"
+# "Bug Tracker" = "https://github.com/yourusername/kevins_torch/issues"
