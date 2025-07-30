@@ -1,0 +1,12 @@
+boto3>=1.38.9
+alibabacloud_oss_v2>=1.1.1
+minio>=7.2.15
+
+[:python_version < "3.8"]
+importlib_metadata~=8.7.0
+
+[:sys_platform != "win32"]
+python-magic>=0.4.27
+
+[:sys_platform == "win32"]
+python-magic-bin>=0.4.14
