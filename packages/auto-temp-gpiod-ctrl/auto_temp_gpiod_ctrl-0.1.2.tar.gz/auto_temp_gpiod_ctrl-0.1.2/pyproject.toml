@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auto-temp-gpiod-ctrl"
+version = "0.1.2"
+description = "Automatic temperature-based GPIO control for any libgpiod 2.x device."
+authors = [
+  { name="Anthony", email="anthonyma24.development@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+  "psutil",
+  "gpiod>=2.0"
+]
+
+[project.scripts]
+auto-temp-gpiod-ctrl = "auto_temp_gpiod_ctrl.main:main"
+# The following alias is deprecated and will be removed in future versions
+# auto_temp_ctrl = "auto_temp_gpiod_ctrl.main:main"
