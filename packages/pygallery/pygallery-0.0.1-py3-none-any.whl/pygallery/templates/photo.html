@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>{{ album['name'] }} - {{ name }}</title>
+        <link rel="stylesheet" type="text/css" href="../theme.css">
+    </head>
+    <body class="photo">
+
+        <div class="header">
+        <h3 class="title">
+            <a href="index.html">
+            {{ album['name'] }}
+            </a><br/>{{ name }}
+        </h3>
+        </div>
+
+        <div class="content">
+            <div class="images">
+                <div class="before">
+                    <div class="thumbnail">
+                        {%- if before -%}
+                        <a href="{{ before['code'] }}.html">
+                        <img src="{{ before['code'] }}.thumb.jpg" alt="{{ before['name'] }}">
+                        </a>
+                        {%- endif -%}
+                    </div>
+                </div>
+                <div class="image">
+                    <a href="{{ code }}.large.jpg">
+                    <img src="{{ code }}.jpg" alt="{{ name }}">
+                    </a>
+                </div>
+                <div class="after">
+                    <div class="thumbnail">
+                        {%- if after -%}
+                        <a href="{{ after['code'] }}.html">
+                        <img src="{{ after['code'] }}.thumb.jpg" alt="{{ after['name'] }}">
+                        </a>
+                        {%- endif -%}
+                    </div>
+                    <div class="metadata">
+                        <table class="metadata">
+                            {% if exif %}
+                            {% for k, v in exif.items() %}
+                            <tr>
+                                <td class="bold">{{ k }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ v }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
