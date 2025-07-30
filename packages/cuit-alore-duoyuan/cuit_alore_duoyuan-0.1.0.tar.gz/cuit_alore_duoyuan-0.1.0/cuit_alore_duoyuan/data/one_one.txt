@@ -1,0 +1,9 @@
+import numpy as np
+a = input().split(" ")
+try:
+    b = [int(i) for i in a]
+    X = np.array(b).reshape(5,5)
+    x,y = np.linalg.eig(X)
+    print("特征值：\n", x, "\n特征向量：\n", y)
+except:
+    print("输入有错！")
