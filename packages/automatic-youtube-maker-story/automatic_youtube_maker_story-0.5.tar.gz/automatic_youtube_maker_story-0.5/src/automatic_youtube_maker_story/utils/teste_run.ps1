@@ -1,0 +1,2 @@
+cd C:\Users\will_\OneDrive\Documentos\GitHub\Automatic-Youtube-Maker
+& C:/Users/will_/OneDrive/Documentos/GitHub/Automatic-Youtube-Maker/.venv/Scripts/python.exe c:/Users/will_/OneDrive/Documentos/GitHub/Automatic-Youtube-Maker/automatic-youtube-maker-story/src/automatic_youtube_maker_story/video/TextToVideo16x9.py
