@@ -1,0 +1,25 @@
+# Base requirements for ALO Agent SDK components (agents and registry service)
+
+fastapi>=0.90.0
+uvicorn[standard]>=0.20.0
+# python-a2a version needs to be determined based on the actual package
+# For now, let's assume it's available and specify a placeholder or a known version.
+# If python_a2a is a local package/submodule within this project, 
+# it would be handled differently in the Dockerfile (e.g., COPY and install).
+# Assuming it's pip-installable for now.
+python-a2a>=0.5.0 
+httpx>=0.23.0
+pydantic>=1.10.0
+
+# This line assumes alo_agent_sdk is installable as a package.
+# If building from source within a larger context, this might be handled by copying source
+# or installing from a local path. For a generated project, direct dependency is clearer.
+# Replace with actual path or version as needed, e.g.
+# alo-agent-sdk @ git+https://github.com/yourusername/alo_agent_sdk.git@main
+# alo-agent-sdk # If on PyPI
+# ./path/to/local/alo_agent_sdk # If installing from a local directory/wheel that contains pyproject.toml for alo-agent-sdk
+# Example for local development (if this template is generated outside the SDK repo, adjust path):
+# ../../alo_agent_sdk # Assuming the generated project is a sibling to the SDK repo's root
+# Or, path to a built .whl file:
+# ./path/to/alo_agent_sdk-0.1.0-py3-none-any.whl 
+alo-agent-sdk # This line should work if alo-agent-sdk is installed (e.g. from PyPI or editable install of the SDK)
