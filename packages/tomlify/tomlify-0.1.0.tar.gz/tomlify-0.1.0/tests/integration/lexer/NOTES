@@ -1,0 +1,7 @@
+Expected output can be easily parsed by running:
+
+uv run src/tomlify/lexer/lex_runner.py tests/resources/<path_to_toml> | sed 's/^/        "/' | sed 's/$/",/' > tokens.txt
+
+Then copy and paste into the integration test. This will assume the output is correct, so you can make small changes as necessary.
+
+Currently, this does not correct for raw newline and string delimiter issues that need to be fixed by hand

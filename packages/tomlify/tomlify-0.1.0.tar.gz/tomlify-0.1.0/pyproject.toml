@@ -1,0 +1,30 @@
+[project]
+name = "tomlify"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Todd Doughty", email = "w.todd.doughty@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "click <8.2.0",
+    "typer>=0.15.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1",
+    "pytest>=7.4.4",
+    "ruff>=0.11.7",
+]
+
+[tool.ruff]
+exclude = [".venv"]
+
+[tool.ruff.lint]
+ignore = ["D102"]

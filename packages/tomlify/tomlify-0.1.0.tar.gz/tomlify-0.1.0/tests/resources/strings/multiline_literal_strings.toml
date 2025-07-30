@@ -1,0 +1,19 @@
+regex2 = '''I [dw]on't need \d{2} apples'''
+lines  = '''
+The first newline is
+trimmed in raw strings.
+   All other whitespace
+   is preserved.
+'''
+
+quot15 = '''Here are fifteen quotation marks: """""""""""""""'''
+
+# apos15 = '''Here are fifteen apostrophes: ''''''''''''''''''  # INVALID
+# apos15 = "Here are fifteen apostrophes: '''''''''''''''"
+
+# TODO : Figure out how to uncomment the second apos15 and still have it work
+
+# 'That,' she said, 'is still pointless.'
+# str = ''''That,' she said, 'is still pointless.''''
+
+# TODO : Figure out how to uncomment the second str and still have it work
