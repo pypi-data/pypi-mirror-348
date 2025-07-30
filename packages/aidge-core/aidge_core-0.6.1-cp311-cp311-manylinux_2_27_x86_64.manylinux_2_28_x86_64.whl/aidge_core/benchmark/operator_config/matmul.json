@@ -1,0 +1,126 @@
+{
+	"operator": "MatMul",
+	"opset_version": 14,
+	"initializer_rank": 2,
+    "test_meta_data": {
+        "multiple_batchs": false
+    },
+	"base_configuration": {
+		"input_shapes": [
+			["input_0", [1, 10, 50, 50]],
+			["input_1", [1, 10, 50, 50]]
+		],
+		"attributes": {}
+	},
+	"test_configuration": {
+		"main_parameters": {
+			"n": [
+				10,50,100
+			],
+			"k": [
+				10,50,100
+			],
+			"m": [
+				10,50,100
+			],
+            "nb_matrices": [
+                1,10,100,1000
+            ]
+		},
+		"other_parameters": {
+			"n": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 10, 50]]
+					]
+				},
+				"50": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 50, 50]]
+                    ]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 100, 50]]
+					]
+				}
+			},
+			"k": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 50, 10]],
+						["input_1", [1, 10, 10, 50]]
+					]
+				},
+				"50": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 50, 50]],
+						["input_1", [1, 10, 50, 50]]
+                    ]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 50, 100]],
+						["input_1", [1, 10, 100, 50]]
+					]
+				}
+			},
+			"m": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_1", [1, 10, 50, 10]]
+					]
+				},
+				"50": {
+					"attributes": {},
+					"input_shapes": [
+						["input_1", [1, 10, 50, 50]]
+                    ]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_1", [1, 10, 50, 100]]
+					]
+				}
+			},
+            "nb_matrices": {
+				"1": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 1, 50, 50]],
+						["input_1", [1, 1, 50, 50]]
+					]
+				},
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 50, 50]],
+						["input_1", [1, 10, 50, 50]]
+                    ]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 100, 50, 50]],
+						["input_1", [1, 100, 50, 50]]
+					]
+				},
+                "1000": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 1000, 50, 50]],
+						["input_1", [1, 1000, 50, 50]]
+					]
+				}
+			}
+		}
+	}
+}
