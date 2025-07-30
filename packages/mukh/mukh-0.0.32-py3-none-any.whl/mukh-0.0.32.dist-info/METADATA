@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: mukh
+Version: 0.0.32
+Summary: A comprehensive face analysis library that provides unified APIs for various face-related tasks
+Home-page: https://github.com/ishandutta0098/mukh
+Author: Ishan Dutta
+Author-email: duttaishan098@gmail.com
+Project-URL: Bug Tracker, https://github.com/ishandutta0098/mukh/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: matplotlib>=3.10.0
+Requires-Dist: matplotlib-inline>=0.1.7
+Requires-Dist: mediapipe
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: opencv-contrib-python>=4.11.0.86
+Requires-Dist: opencv-python>=4.11.0.86
+Requires-Dist: opencv-python-headless
+Requires-Dist: scipy==1.13.0
+Requires-Dist: torch>=2.5.1
+Requires-Dist: torchvision>=0.20.1
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.10.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: isort>=5.0.0; extra == "dev"
+Requires-Dist: flake8>=3.8.0; extra == "dev"
+Requires-Dist: mypy>=0.800; extra == "dev"
+Requires-Dist: bump2version>=1.0.0; extra == "dev"
+Requires-Dist: tox==3.24.3; extra == "dev"
+Requires-Dist: sphinx; extra == "dev"
+Requires-Dist: sphinx-rtd-theme; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Dynamic: license-file
+
+# Mukh
+
+Mukh (मुख, meaning "face" in Sanskrit) is a comprehensive face analysis library that provides unified APIs for various face-related tasks. It simplifies the process of working with multiple face analysis models through a consistent interface.
+
+## Features
+
+- 🎯 **Unified API**: Single, consistent interface for multiple face analysis tasks
+- 🔄 **Model Flexibility**: Support for multiple models per task
+- 🛠️ **Custom Pipelines**: Optimized preprocessing and model combinations
+- 📊 **Evaluator Mode**: Intelligent model recommendations based on your dataset
+- 🚀 **Easy to Use**: Simple, intuitive APIs for quick integration
+
+## Currently Supported Tasks
+
+- Face Detection
+- Facial Landmark Prediction
+
+## Installation
+
+```bash
+pip install mukh
+```
+
+## Usage
+
+### Face Detection
+
+```python
+import cv2
+from mukh.detection import FaceDetector
+
+# Initialize detector
+detection_model = "blazeface" # Available models: "blazeface", "mediapipe", "ultralight"
+detector = FaceDetector.create(detection_model)
+
+# Detect faces
+image_path = "path/to/image.jpg"
+faces, annotated_image = detector.detect_with_landmarks(image_path)
+
+# Save output
+output_path = "path/to/output.jpg"
+cv2.imwrite(output_path, annotated_image)
+```
+
+## Contact
+
+For questions and feedback, please open an issue on GitHub.
