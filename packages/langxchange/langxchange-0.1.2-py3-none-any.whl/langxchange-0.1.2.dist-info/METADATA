@@ -1,0 +1,309 @@
+Metadata-Version: 2.4
+Name: langxchange
+Version: 0.1.2
+Summary: API management and vectorization library for LLM integrations
+Author: Timothy Owusu
+Author-email: ikolilu.tim.owusu@gmail.com
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pandas
+Requires-Dist: sentence-transformers
+Requires-Dist: chromadb
+Requires-Dist: pinecone-client
+Requires-Dist: sqlalchemy
+Requires-Dist: pymongo
+Requires-Dist: pymysql
+Requires-Dist: numpy
+Requires-Dist: google-generativeai
+Requires-Dist: openai
+Requires-Dist: anthropic
+Requires-Dist: weaviate-client
+Requires-Dist: qdrant-client
+Requires-Dist: elasticsearch
+Requires-Dist: elasticsearch-dsl
+Requires-Dist: opensearch-py
+Requires-Dist: faiss-cpu
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# 🌐 LangXchange
+
+**LangXchange** is a universal API and vector database helper suite that simplifies working with Large Language Models (LLMs) and modern vector databases across a wide range of platforms.
+
+It provides ready-to-use helper classes to:
+
+* Connect and interact with **LLMs** like OpenAI, Google GenAI, Claude, DeepSeek
+* Generate and manage **embeddings**
+* Store/query data in **vector databases**: Chroma, Pinecone, Milvus, FAISS, Qdrant, Weaviate, Elasticsearch, OpenSearch, and more
+* Connect to and retrieve data from **relational and NoSQL databases**
+* Preprocess and load data from **CSV, JSON, and Excel files**
+
+---
+
+## 🔧 Installation
+
+```bash
+pip install langxchange
+```
+
+Or clone the repo:
+
+```bash
+git clone https://github.com/yourorg/langxchange.git
+cd langxchange
+pip install -e .
+```
+
+---
+
+## 📦 Modules Overview
+
+| Category          | Helpers                                                                                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| LLMs & Embeddings | `OpenAIHelper`, `GoogleGenAIHelper`, `DeepSeekHelper`, `AnthropicHelper`                                                                                     |
+| Vector DBs        | `ChromaHelper`, `PineconeHelper`, `MilvusHelper`, `FAISSHelper`, `QdrantHelper`, `WeaviateHelper`, `ElasticsearchHelper`, `OpenSearchHelper`, `ZillizHelper` |
+| Data Sources      | `MySQLHelper`, `MongoHelper`, `DataConnector`, `DataFetcher`, `FileHelper`                                                                                   |
+
+---
+## ⚙️ Environment Variables
+# OpenAI
+export OPENAI_API_KEY=sk-...
+
+# Google GenAI
+export GOOGLE_API_KEY=...
+
+# MySQL
+export MYSQL_HOST=localhost
+export MYSQL_USER=root
+export MYSQL_PASSWORD=pass
+export MYSQL_DB=mydb
+
+# MongoDB
+export MONGO_URI="mongodb://localhost:27017"
+export MONGO_DB=mydb
+export MONGO_COLLECTION=docs
+
+# ChromaDB
+export CHROMA_PERSIST_PATH=./chroma_store
+
+# GCS
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/sa.json"
+export GCP_PROJECT_ID=my-gcp-project
+export GCS_BUCKET=my-test-bucket
+
+# Google Drive
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
+# OAuth token is saved automatically as token.pickle
+
+
+## 🚀 Getting Started
+
+### 1. 📅 Embed & Query with OpenAI + Chroma + GCS Persistence
+
+```python
+from langxchange.openai_helper import OpenAIHelper
+from langxchange.chroma_helper import ChromaHelper
+from langxchange.file_helper import FileHelper
+from langxchange.gcs_helper import GoogleCloudStorageHelper
+import os
+
+os.environ["CHROMA_PERSIST_PATH"] = "./chroma_data"
+
+llm   = OpenAIHelper()
+chroma= ChromaHelper(llm_helper=llm, persist_directory=os.environ["CHROMA_PERSIST_PATH"])
+gcs   = GoogleCloudStorageHelper()
+loader= FileHelper()
+
+# Load and embed
+records    = loader.load_file("data/articles.csv", file_type="csv")
+texts      = [r["text"] for r in records]
+embeddings = [llm.get_embedding(t) for t in texts]
+
+# Store in Chroma
+chroma.insert("articles", texts, embeddings, metadatas=records)
+
+# Sync to GCS
+for fname in os.listdir(os.environ["CHROMA_PERSIST_PATH"]):
+    gcs.upload_file(os.environ["GCS_BUCKET"], f"{os.environ['CHROMA_PERSIST_PATH']}/{fname}", f"chroma/{fname}")
+
+# Query Chroma
+query_vec = llm.get_embedding("Explain AI use cases")
+results   = chroma.query("articles", query_vec, top_k=3)
+print(results)
+
+```
+
+---
+
+### 2. 📄 RAG Pipeline from MySQL → Chroma → Chat
+
+```python
+from langxchange.mysql_helper import MySQLHelper
+from langxchange.openai_helper import OpenAIHelper
+from langxchange.chroma_helper import ChromaHelper
+
+# init
+mysql  = MySQLHelper()
+llm    = OpenAIHelper()
+chroma = ChromaHelper(llm_helper=llm, persist_directory="./chroma_store")
+
+# fetch
+df     = mysql.execute_query("SELECT id, content FROM articles")
+texts  = df["content"].tolist()
+meta   = df.to_dict(orient="records")
+
+# ingest
+embeds = [llm.get_embedding(t) for t in texts]
+chroma.insert("articles", texts, embeds, metadatas=meta)
+
+# retrieve
+qvec    = llm.get_embedding("What is data privacy policy?")
+res     = chroma.query("articles", qvec, top_k=2)
+
+# build prompt
+ctx = "\n".join(f"- {d}" for d in res["documents"])
+messages = [
+  {"role":"system","content":"You are a documentation assistant."},
+  {"role":"user","content":f"I asked: What is data privacy policy?\nContext:\n{ctx}"}
+]
+answer = llm.chat(messages)
+print(answer)
+
+
+---
+
+### 3. 🔎 Use Pinecone for Vector Search
+
+```python
+from langxchange import PineconeHelper
+
+pine = PineconeHelper()
+pine.insert([embedding], ["What is AI?"])
+pine.query(embedding)
+```
+
+---
+
+### 4. 🧠 Generate Text with Claude (Anthropic)
+
+```python
+from langxchange import AnthropicHelper
+
+claude = AnthropicHelper()
+response = claude.chat("Explain the blockchain.")
+print(response)
+```
+
+---
+
+### 5. 🧰 Load a CSV into Records
+
+```python
+from langxchange import FileHelper
+
+fh = FileHelper()
+records = fh.load_file("students.csv", file_type="csv", chunk_size=10000)
+print(records[:2])
+```
+
+---
+
+### 6. 📃 Pull Data from MySQL & Vectorize
+
+```python
+from langxchange import DataConnector, DataFetcher, OpenAIHelper
+
+dc = DataConnector()
+df = DataFetcher()
+engine = dc.mysql_engine()
+data = df.fetch_from_sqlalchemy(engine, "SELECT id, text FROM documents")
+
+texts = data["text"].tolist()
+embeddings = [OpenAIHelper().get_embedding(t) for t in texts]
+```
+
+---
+
+## 🔐 Environment Variables
+
+Set the following in your `.env` file as needed:
+
+```env
+# OpenAI
+OPENAI_API_KEY=your-openai-key
+
+# Google GenAI
+GOOGLE_API_KEY=your-google-api-key
+
+# Pinecone
+PINECONE_API_KEY=your-pinecone-key
+PINECONE_ENVIRONMENT=your-region
+
+# Chroma
+CHROMA_PERSIST_PATH=./chroma_store
+
+# Qdrant
+QDRANT_URL=http://localhost:6333
+
+# Weaviate
+WEAVIATE_URL=http://localhost:8080
+
+# Elasticsearch
+ES_HOST=http://localhost:9200
+ES_USER=elastic
+ES_PASSWORD=changeme
+
+# OpenSearch
+OS_HOST=http://localhost:9200
+OS_USER=admin
+OS_PASSWORD=admin
+
+# Milvus
+MILVUS_HOST=localhost
+MILVUS_PORT=19530
+
+# MySQL
+MYSQL_HOST=localhost
+MYSQL_DB=mydb
+MYSQL_USER=root
+MYSQL_PASSWORD=password
+
+# MongoDB
+MONGO_URI=mongodb://localhost:27017
+```
+
+---
+
+## 📙 Use Cases
+
+* AI-powered document search
+* Building RAG (Retrieval-Augmented Generation) pipelines
+* Custom chatbot memory & context
+* School or HR data analytics using LLMs
+* Semantic search across various industries
+
+---
+
+## 🛠️ Contributing
+
+1. Fork the repo
+2. Create a new branch
+3. Add your code with docstrings and examples
+4. Submit a pull request
+
+---
+
+## 🧠 Credits
+
+Built with ❤️ to empower developers and researchers working with LLMs and vector databases across the AI/ML stack.
+
+---
+
+## 📄 License
+
+MIT License © 2024 - iKolilu / LangXchange
