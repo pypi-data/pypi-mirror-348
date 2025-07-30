@@ -1,0 +1,19 @@
+import numpy as np
+a=[float(i) for i in input().split(',')]
+m,n=[int(i) for i in input().split(',')]
+x=a[::2]
+y=a[1::2]
+vx=np.mean(x)
+vy=np.mean(y)
+x1=np.array(x)-vx
+y1=np.array(y)-vy
+cov1=np.sum(x1**2/(m-1))
+cov2=np.sum(y1**2/(m-1))
+cov3=np.sum(x1*y1/(m-1))
+z=np.array([[cov1,cov3],[cov3,cov2]])
+c,d=np.linalg.eig(z)
+i=np.argmax(c)
+p1,p2=d[:,i]
+if p2>=0:
+    sign="+"
+print("第1主成分={0:.5f}*(x1-{1:.2f}){2}{3:.5f}*(x2-{4:.2f})".format(p1,vx,sign,p2,vy))
