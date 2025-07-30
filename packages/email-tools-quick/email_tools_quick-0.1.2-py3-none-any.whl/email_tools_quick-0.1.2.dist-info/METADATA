@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: email-tools-quick
+Version: 0.1.2
+Summary: A collection of tools for email processing
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: beautifulsoup4
+Requires-Dist: curl-cffi
+Requires-Dist: loguru
+Requires-Dist: pysocks
+Requires-Dist: python-dateutil
+
+# Email Tools Quick (etq)
+
+## install
+
+### Stable
+
+pip
+
+```shell
+python -m pip install -U email-tools-quick
+```
+
+uv
+
+```shell
+uv add email-tools-quick
+```
+
+### Development
+
+pip
+
+```shell
+python -m pip install -U git+git@github.com:Cosmic-Developers-Union/email_tools.git
+```
+
+uv
+
+```shell
+uv add git+git@github.com:Cosmic-Developers-Union/email_tools.git
+```
