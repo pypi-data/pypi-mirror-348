@@ -1,0 +1,197 @@
+[project]
+name = "coltrane"
+authors = [
+  {name = "Adam Hill", email = "adam@adamghill.com"}
+]
+version = "0.39.0"
+description = "A minimal app framework for content sites 🎵"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10,<4.0"
+keywords = [
+  "django",
+  "python",
+  "static",
+  "markdown"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "Django >= 3.0",
+  "python-dotenv > 0.17",
+  "click >= 8",
+  "dateparser >= 1",
+  "mistune >= 3",
+  "python-frontmatter >= 1",
+  "pygments >= 2.7.3",
+  "minestrone >= 0.6.2",
+  "halo < 1",
+  "rich-click < 2",
+  "django-fastdev < 2",
+  "django-browser-reload < 2",
+  "pywatchman > 1",
+  "msgspec < 1",
+  "click-aliases < 2",
+]
+
+[project.urls]
+Homepage = "https://github.com/adamghill/coltrane"
+Documentation = "https://github.com/adamghill/coltrane"
+Repository = "https://github.com/adamghill/coltrane.git"
+Issues = "https://github.com/adamghill/coltrane/discussions"
+Changelog = "https://github.com/adamghill/coltrane/blob/master/CHANGELOG.md"
+
+[project.scripts]
+coltrane = "coltrane.console:cli"
+
+[project.optional-dependencies]
+deploy = [
+  "gunicorn > 21",
+  "whitenoise > 6"
+]
+compressor = [
+  "django-compressor < 5"
+]
+json5 = [
+  "pyjson5 > 0"
+]
+angles = [
+  "dj-angles > 0"
+]
+unicorn = [
+  "django-unicorn > 0"
+]
+docs = [
+  "Sphinx > 7",
+  "linkify-it-py > 0",
+  "myst-parser > 0",
+  "furo > 0",
+  "sphinx-copybutton > 0",
+  "sphinx-autobuild > 0",
+  "toml > 0",
+  "attrs > 0",
+  "sphinx-inline-tabs > 0"
+]
+
+[tool.uv]
+dev-dependencies = [
+  "coverage[toml] >= 7",
+  "pytest-cov >= 4",
+  "pytest >= 7",
+  "pytest-django >= 4",
+  "pytest-pretty >= 1",
+  "django-stubs >= 5",
+  "types-toml > 0",
+  "types-dateparser > 1",
+  "django-stubs[compatible-mypy]>=5.0.4",
+]
+
+[tool.ruff]
+src = ["src"]
+exclude = []
+target-version = "py310"
+line-length = 120
+lint.select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+lint.ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105", "S106", "S107",
+  # Ignore complexity
+  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+  # Ignore unused variables
+  "F841",
+   # Ignore exception strings
+  "EM101", "EM102",
+]
+lint.unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["coltrane"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252", "ARG001"]
+
+[tool.pytest.ini_options]
+addopts = "--quiet --failed-first --reuse-db --nomigrations -p no:warnings -m 'not slow'"
+testpaths = [
+    "tests"
+]
+markers = [
+    "slow: marks tests as slow",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+skip_empty = true
+sort = "cover"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+exclude = ["venv", ".venv", "tests", "migrations"]
+ignore_missing_imports = true
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+publish-url = "https://upload.pypi.org/legacy/"
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

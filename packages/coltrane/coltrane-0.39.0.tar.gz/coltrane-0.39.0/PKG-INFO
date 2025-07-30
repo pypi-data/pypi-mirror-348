@@ -1,0 +1,188 @@
+Metadata-Version: 2.4
+Name: coltrane
+Version: 0.39.0
+Summary: A minimal app framework for content sites 🎵
+Project-URL: Homepage, https://github.com/adamghill/coltrane
+Project-URL: Documentation, https://github.com/adamghill/coltrane
+Project-URL: Repository, https://github.com/adamghill/coltrane.git
+Project-URL: Issues, https://github.com/adamghill/coltrane/discussions
+Project-URL: Changelog, https://github.com/adamghill/coltrane/blob/master/CHANGELOG.md
+Author-email: Adam Hill <adam@adamghill.com>
+License: MIT License
+        
+        Copyright (c) 2022 Adam Hill
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: django,markdown,python,static
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: <4.0,>=3.10
+Requires-Dist: click-aliases<2
+Requires-Dist: click>=8
+Requires-Dist: dateparser>=1
+Requires-Dist: django-browser-reload<2
+Requires-Dist: django-fastdev<2
+Requires-Dist: django>=3.0
+Requires-Dist: halo<1
+Requires-Dist: minestrone>=0.6.2
+Requires-Dist: mistune>=3
+Requires-Dist: msgspec<1
+Requires-Dist: pygments>=2.7.3
+Requires-Dist: python-dotenv>0.17
+Requires-Dist: python-frontmatter>=1
+Requires-Dist: pywatchman>1
+Requires-Dist: rich-click<2
+Provides-Extra: angles
+Requires-Dist: dj-angles>0; extra == 'angles'
+Provides-Extra: compressor
+Requires-Dist: django-compressor<5; extra == 'compressor'
+Provides-Extra: deploy
+Requires-Dist: gunicorn>21; extra == 'deploy'
+Requires-Dist: whitenoise>6; extra == 'deploy'
+Provides-Extra: docs
+Requires-Dist: attrs>0; extra == 'docs'
+Requires-Dist: furo>0; extra == 'docs'
+Requires-Dist: linkify-it-py>0; extra == 'docs'
+Requires-Dist: myst-parser>0; extra == 'docs'
+Requires-Dist: sphinx-autobuild>0; extra == 'docs'
+Requires-Dist: sphinx-copybutton>0; extra == 'docs'
+Requires-Dist: sphinx-inline-tabs>0; extra == 'docs'
+Requires-Dist: sphinx>7; extra == 'docs'
+Requires-Dist: toml>0; extra == 'docs'
+Provides-Extra: json5
+Requires-Dist: pyjson5>0; extra == 'json5'
+Provides-Extra: unicorn
+Requires-Dist: django-unicorn>0; extra == 'unicorn'
+Description-Content-Type: text/markdown
+
+<p align="center">
+  <a href="https://coltrane.readthedocs.io"><h1 align="center">coltrane</h1></a>
+</p>
+<p align="center">A minimal app framework for content sites 🎵</p>
+
+![PyPI](https://img.shields.io/pypi/v/coltrane?color=blue&style=flat-square)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/coltrane?color=blue&style=flat-square)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/adamghill?color=blue&style=flat-square)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+📖 Complete documentation at https://coltrane.readthedocs.io.
+
+📦 Package located at https://pypi.org/project/coltrane/.
+
+## ⭐ Features
+
+- Render `markdown` files as HTML with automatic URL routing based on the filesystem
+- Use JSON files as data sources in HTML templates or `markdown`
+- Automatic generation of `sitemap.xml` and `rss.xml` files
+- Can serve non-markdown files like `robots.txt`
+- Local development server which includes [live re-rendering of markdown and data](https://twitter.com/adamghill/status/1487522925393715205) via https://github.com/adamchainz/django-browser-reload
+- Site-wide redirects
+- Deployment best practices with `whitenoise` and `gunicorn` already configured
+- Leverage the power of built-in `Django` templates, template tags, and filters inside `markdown` files
+- Any custom template tags and filters are enabled automatically for use in `markdown` or HTML templates
+- Include any third-party [`Django` app](https://djangopackages.org) for additional functionality
+- Serve multiple domains with custom sites
+- Optional command to generate static HTML files
+- Can be integrated into a regular `Django` project as a standard third-party `Django` app to render markdown content
+
+## ⚡ Quick start
+
+1. `mkdir new-site && cd new-site` to create a new folder
+1. `python3 -m venv .venv && source .venv/bin/activate && pip install coltrane` to install the `coltrane` package
+1. `coltrane create` to create the folder structure for a new site
+1. `coltrane play` to start local development server
+1. Go to http://localhost:8000 to see the original markdown rendered into HTML
+1. Update `content/index.md`
+1. Refresh http://localhost:8000 to see the updated markdown rendered into HTML
+1. Optional: run `coltrane record` to build static HTML files
+
+### Generated `coltrane` file structure
+
+```bash
+.
+├── .gitignore
+├── Dockerfile
+├── README.md
+├── pyproject.toml
+└── site
+    ├── .env
+    ├── .watchmanconfig
+    ├── __init__.py
+    ├── app.py
+    ├── content
+    │   └── index.md
+    ├── data
+    ├── gunicorn.conf.py
+    ├── static
+    └── templates
+```
+
+## 📝 Content
+
+Add `markdown` files or sub-directories to the `content` directory and rendered HTML will be accessible via auto-generated routes.
+
+- `/` would render the `markdown` in `content/index.md`
+- `/about/` would render the `markdown` in `content/about.md`
+- `/articles/this-is-the-first-article/` would render the content from `/content/articles/this-is-the-first-article.md`
+- `/not-there/` will 404
+
+HTML will also be served automatically if a `markdown` file can not be found.
+
+- `/app/` would render the HTML from `/templates/app.html` or `/templates/app/index.html`
+- `/app/some-user` would render the HTML from `/templates/app/*.html`
+
+## Deployment
+
+Example `Dockerfile` and `gunicorn.conf.py` files are created when an app is created, and optional dependencies can be installed for efficient `static` serving with `whitenoise`.
+
+# 📖 Documentation
+
+Read all of the documentation at https://coltrane.readthedocs.io.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/Tobi-De"><img src="https://avatars.githubusercontent.com/u/40334729?v=4?s=100" width="100px;" alt="Tobi DEGNON"/><br /><sub><b>Tobi DEGNON</b></sub></a><br /><a href="https://github.com/adamghill/coltrane/commits?author=Tobi-De" title="Tests">⚠️</a> <a href="https://github.com/adamghill/coltrane/commits?author=Tobi-De" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    
+  </tfoot>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
