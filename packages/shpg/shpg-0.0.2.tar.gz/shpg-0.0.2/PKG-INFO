@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: shpg
+Version: 0.0.2
+Summary: Create static HTML pages.
+Author: Bastien Cagna
+License: BSD 3
+Description-Content-Type: text/x-rst
+License-File: LICENCE
+Provides-Extra: doc
+Requires-Dist: sphinx>=1.0; extra == "doc"
+Requires-Dist: furo; extra == "doc"
+Requires-Dist: sphinx_design; extra == "doc"
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: summary
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Static HTML Page Generator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. image:: https://github.com/BastienCagna/shpg/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/BastienCagna/shpg/actions
+   :alt: Github Actions Build Status
+
+.. image:: https://badge.fury.io/py/shpg.svg
+    :target: https://badge.fury.io/py/shpg
+
+Installation
+-------------
+
+SHPG is avaialable on PyPI. You can then install it simply by executing the pip command:
+
+.. code-block:: shell
+
+    pip install shpg
+
+If you want to contribute to development or customize the package:
+
+.. code-block:: shell
+
+    git clone https://github.com/BastienCagna/shpg.git
+    cd shpg
+    python setup.py develop
+    
+N.B: use --user to install the package only for you (might be mandatory depending of the rights you have)
+
+Basic example
+-------------
+
+
+.. code-block:: python
+
+    import shpg
+
+    # Create the HTML Page
+    page = shpg.Page(title="My Page")
+    page.content.append(shpg.Heading1("Hello world!"))
+    page.content.append(shpg.Paragraph('This is my first page using SHPG.'))
+
+    # Generate the HTML page
+    report_path = "/tmp/my_page.html"
+    page.save(report_path, portable=True)
+
+
+.. image:: doc/index/basic_page.png
+  :width: 500
+  :alt: Basic rendering
+
+
+Documentation
+-------------
+The auto-generated online documentation is hosted at [https://bastiencagna.github.io/shpg/](https://bastiencagna.github.io/shpg).
