@@ -1,0 +1,222 @@
+# Pre-commit SDLC Governance Hooks
+
+A collection of _pre-commit_ hooks for software development lifecycle (SDLC) governance. These hooks are designed to enforce best practices and standardize the software development process, ensuring consistency and quality across projects.
+
+## Overview
+
+This repository provides a set of hooks that integrate with the [pre-commit framework](https://pre-commit.com/) to help maintain code quality and governance standards throughout your development workflow. Whether you choose to install the hooks remotely or locally, they are flexible and configurable to meet your project’s requirements.
+
+## Using These Hooks
+
+### Remote Hooks
+
+To use the remote hooks, add the following configuration to your `.pre-commit-config.yaml` file:
+
+```yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: v1.0.0 # Replace with the desired version of the hooks
+```
+
+To update the remote hooks in your configuration, run:
+
+```bash
+pre-commit autoupdate --repo https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+```
+
+### Local Installation
+
+You can also install the hooks locally using pip:
+
+```bash
+pip install pre-commit-sdlcgov-hooks
+```
+
+Then, reference them in your `.pre-commit-config.yaml` file as follows:
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: local
+  # No rev is needed here
+```
+
+To update the hooks when installed locally, simply update the package using pip. Note that remote hook referencing is the preferred method.
+
+## Premises
+
+Although these hooks are configurable to some extent, they are based on the following premises:
+
+- **Commit Message Length:** Commit message subjects must be at least 4 characters long and no longer than 70 characters.
+- **Issue Branch Naming:** Issue branches should follow the format `ISSUENUM-issue[-at-PROJECTNAME]`, where:
+  - `ISSUENUM` represents the issue number.
+  - The optional `PROJECTNAME` specifies the project name, used when referencing an external issue.
+
+  Examples of valid issue branch names include:
+  - `123-issue`
+  - `456-issue-at-owner/repo`
+
+## Available Hooks
+
+### `pre-commit` Stage
+
+#### `safety-guard`
+
+This hook prevents a commit if any staged changes include a specific safety guard phrase (default: `DO NOT COMMIT`). This is particularly useful to ensure that temporary or debugging code is not accidentally committed.
+
+The guard phrase can be customized by passing a new phrase with the `--guard-phrase` argument:
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: safety-guard
+    args:
+    - "--guard-phrase"
+    - "DO NOT COMMIT"
+```
+
+#### `enforce-committing-to-issue`
+
+This hook enforces that commits are made only on issue branches, protecting against accidental commits to branches such as `development` or `production`. It is particularly useful in workflows where changes are linked to specific issues and later merged via pull or merge requests.
+
+Special branches can be allowed passing a regex through the `--allow-branches` argument (can be used several times).
+
+Example configuration:
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: enforce-committing-to-issue
+    args:
+    - "--allow-branches"
+    - "^exp(erimental)?-(\\d+)$"
+    - "--allow-branches"
+    - "sandbox"
+```
+
+##### Skipping this check
+
+If it is necessary to bypass this check (e.g., during a manual merge when automation is not feasible), use the `SKIP` environment variable:
+
+```bash
+SKIP=enforce-committing-to-issue
+```
+
+For instance:
+
+```bash
+SKIP=enforce-committing-to-issue git commit -m "..."
+```
+
+#### `enforce-merge-directions`
+
+Use this hook to enforce certain directions when merging branches. The rules to allow merging directions are passed as pairs of regular expressions, in the form `<source_branches_regex>::<target_branches_regex>`. The branches being merged must match the `<source_brances_regex>` and the current branch must match the `<target_branches_regex>`, case insensitively, for at least one of the rules. For "octopus" merges with several branched merged at the same time into a single branch, all of the source branches must match the regex in the rule.
+
+For instance, if the governance allows only the following merges:
+
+- Issue branches (`<issue_id>-issue`) into `development`
+- `development` into `preproduction`
+- `preproduction` into `production`
+
+the following example configures these rules:
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: enforce-merge-directions
+    args:
+    - "^(\\d+-issue)$::^development$"
+    - "^development$::^preproduction$"
+    - "^preproduction$::^production$"
+```
+
+##### Skipping this check
+
+If it is necessary to bypass this check (e.g., during a manual merge when automation is not feasible), use the `SKIP` environment variable:
+
+```bash
+SKIP=enforce-merge-directions
+```
+
+For instance:
+
+```bash
+SKIP=enforce-merge-directions git commit -m "..."
+```
+
+### `prepare-commit-msg` Stage
+
+#### `ellipsize-subject`
+
+This hook automatically shortens commit subjects that exceed a specified length by adding an ellipsis. The original subject is preserved in the commit message body. The default maximum subject length is 70 characters, but you can adjust this with the `--length` argument.
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: ellipsize-subject
+    args:
+    - "--length"
+    - "70"
+```
+
+#### `add-gl-issue-ref`
+
+This hook automatically adds a reference to the current GitLab issue in the commit message if no GitLab issue reference is detected. The reference is inferred from the active issue branch name. If any issue reference already exists in the commit message, no additional reference is added.
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: add-gl-issue-ref
+```
+
+For workflows where it is essential that the commit message includes the active issue reference, combine this hook with `enforce-gl-issue-ref`.
+
+### `commit-msg` Stage
+
+#### `enforce-subject-length`
+
+This hook ensures that the commit message subject adheres to the defined length constraints: a minimum of 4 characters and a maximum of 70 characters (by default). The hook will fail if the subject does not meet these criteria. Similar to the `ellipsize-subject` hook, the maximum length can be adjusted with the `--length` argument.
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: enforce-subject-length
+    args:
+    - "--length"
+    - "70"
+```
+
+#### `enforce-gl-issue-ref`
+
+This hook will fail if no GitLab issue is referenced in the commit message. When working from a standardized issue branch, the commit message must include a reference to the corresponding issue. This helps prevent errors such as typographical mistakes or committing to the wrong branch.
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: https://gitlab.com/Kencho1/pre-commit-sdlcgov-hooks
+  rev: # ...
+  hooks:
+  - id: enforce-gl-issue-ref
+```
+
+## License
+
+This project is licensed under the MIT license.
