@@ -1,0 +1,12 @@
+配置文件说明
+{
+    "energy_tracker_config": {
+        "enable_cpu_power_monitor": true,
+        "enable_gpu_power_monitor": true,
+        "measurement_interval": 3.0,
+        "cpu_power_bias": 0.0,
+        "cpu_power_coefficient": 1.0,
+        "gpu_power_bias": 0.0,
+        "gpu_power_coefficient": 1.0
+    }
+}
