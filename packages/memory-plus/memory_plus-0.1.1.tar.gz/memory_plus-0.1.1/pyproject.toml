@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "memory-plus"
+version = "0.1.1"
+dependencies = [
+    "fastmcp>=2.0.0",
+    "qdrant-client",
+    "langchain",
+    "google-genai",
+    "numpy",
+    "pandas",
+    "plotly",
+    "boto3",
+    "scikit-learn",
+    "python-dotenv",
+    "pydantic"
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Yuchen Mao", email = "yuchenmao2024@163.com"},
+]
+maintainers = [
+  {name = "Yuchen Mao", email = "yuchenmao2024@163.com"}
+]
+description = "A memory management server using FastMCP"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["memory", "server", "FastMCP"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/me/spam.git"
+"Bug Tracker" = "https://github.com/me/spam/issues"
+Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+[project.scripts]
+memory-plus = "memory_plus.core:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["memory_plus"]
