@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mergelib
+Version: 0.0.1a0
+Summary: model merging library
+Author-email: Saurav Maheshkar <sauravvmaheshkar@gmail.com>
+License-Expression: MIT
+Project-URL: repository, https://github.com/SauravMaheshkar/mergelib
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: evaluate
+Requires-Dist: ruff>=0.11.10
+Requires-Dist: transformers[torch]
+
+model merging lib
+
+see [`examples`](../examples/) for usage
