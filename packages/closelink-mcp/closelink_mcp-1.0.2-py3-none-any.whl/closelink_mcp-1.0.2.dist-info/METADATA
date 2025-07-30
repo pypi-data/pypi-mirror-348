@@ -1,0 +1,41 @@
+Metadata-Version: 2.3
+Name: closelink-mcp
+Version: 1.0.2
+Summary: Closelink MCP Server
+Requires-Dist: fastmcp>=2.3.3
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+## Publish new version
+
+- Bump version
+
+- Build
+
+```bash
+uv build
+```
+
+- Publish (See 1password for token)
+
+```bash
+ uv publish --username __token__ --password <PyPiApiToken>
+```
+
+## Usage
+
+Mcp config:
+
+```json
+"closelink-mcp": {
+    "command": "uvx",
+    "args": [
+        "closelink-mcp"
+    ],
+    "env": {
+        "CLOSELINK_API_BASE_URL": "<ReplaceMe>",
+        "CLOSELINK_API_KEY": "<ReplaceMe>"
+    }
+}
+```
