@@ -1,0 +1,82 @@
+name: Python
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "**.py"
+      - "**.rs"
+      - "pyproject.toml"
+      - "pytest.ini"
+  pull_request:
+    paths:
+      - "**.py"
+      - "**.rs"
+      - "pyproject.toml"
+      - "pytest.ini"
+  workflow_dispatch:
+
+jobs:
+  python-tests:
+    name: Python Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install HDF5 deps on host
+      - name: Install HDF5 & pkg-config
+        run: |
+          if [[ "${{ matrix.os }}" == ubuntu-latest ]]; then
+            sudo apt-get update
+            sudo apt-get install -y libhdf5-dev pkg-config
+          else
+            brew update
+            brew install cmake
+            brew install hdf5@1.10
+            brew install pkgconf
+            H5P=$(brew --prefix hdf5@1.10)
+            echo "HDF5_DIR=${H5P}" >> $GITHUB_ENV
+            echo "HDF5_ROOT=${H5P}" >> $GITHUB_ENV
+            echo "PKG_CONFIG_PATH=${H5P}/lib/pkgconfig:${PKG_CONFIG_PATH}" >> $GITHUB_ENV
+          fi
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      # Install uv & create .venv
+      - name: Install uv & create venv
+        run: |
+          pip install uv                                   # install uv into system Python
+          uv venv --python "${{ matrix.python-version }}"  # create .venv, set VIRTUAL_ENV
+          source .venv/bin/activate
+
+      - name: Install dependencies
+        run: |
+          uv pip install .[all]
+
+      - name: Build evlib
+        run: |
+          uv run maturin develop --release
+
+      - name: Run pytest
+        run: |
+          uv run pytest -v tests/
+
+      - name: Generate coverage report
+        run: |
+          uv run pytest --cov=evlib --cov-report=xml -v tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          fail_ci_if_error: false
