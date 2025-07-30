@@ -1,0 +1,216 @@
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.file-list ul {
+  padding-left: 0.5rem;
+}
+
+.file-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.filename {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 6px;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  padding: 3px 8px 3px 16px;
+  border-radius: 0;
+  transition: background-color 0.1s;
+  user-select: none;
+  overflow: hidden;
+}
+
+.folder-label, .file-label {
+  display: flex;
+  align-items: center;
+  padding: 3px 8px 3px 16px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.1s;
+  user-select: none;
+}
+
+.folder-label:hover, .file-label:hover {
+  background-color: var(--folder-hover);
+}
+
+.folder-label.active, .file-label.active {
+  background-color: #094771;
+}
+
+.folder-arrow {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  transition: transform 0.2s;
+  color: var(--text-secondary);
+}
+
+.folder-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.icon {
+  margin-right: 6px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.folder-icon {
+  color: #e3a700;
+}
+
+.file-icon {
+  color: #75beff;
+}
+
+.folder-name, .filename {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;    
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.folder-content {
+  transition: max-height 0.2s ease-out;
+}
+
+.checkbox-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  position: relative;
+}
+
+.checkbox-container input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #5a5a5a;
+  border-radius: 3px;
+  background-color: transparent;
+  position: absolute;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "✓";
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+}
+
+.file-actions {
+  margin-left: auto;
+  display: none;
+  flex-shrink: 0;
+}
+
+.file-label:hover .file-actions {
+  display: flex;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 4px;
+  opacity: 0.7;
+}
+
+.action-button:hover {
+  opacity: 1;
+}
+
+/* Folder arrow rotation */
+.folder-arrow i {
+  transition: transform 0.2s ease;
+}
+
+.folder-arrow-rotated {
+  transform: rotate(90deg);
+}
+
+/* Action button styling */
+.action-button.not-previewable {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.action-button.not-previewable:hover {
+  opacity: 0.4; /* Keep opacity low on hover */
+}
+
+.checkbox-container:hover .custom-checkbox {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #7a7a7a;
+}
+
+.checkbox-container input[type="checkbox"]:focus + .custom-checkbox {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(14, 99, 156, 0.25);
+}
+
+/* Preset file highlighting */
+.file-label.preset-file {
+  background-color: rgba(64, 128, 192, 0.15);
+  border-left: 3px solid var(--accent, #0e639c);
+  padding-left: 13px; /* 16px - 3px border */
+}
+
+.file-label.preset-file:hover {
+  background-color: rgba(64, 128, 192, 0.25);
+}
+
+.file-label.preset-file .custom-checkbox {
+  border-color: var(--accent, #0e639c);
+} 
