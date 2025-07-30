@@ -1,0 +1,67 @@
+[project]
+name = "swapnil-mcp-server"
+version = "6.2.7"
+description = "Model Context Protocol (MCP) server providing tools for Outlook Calendar scheduling, Azure DevOps repository management, and weather information retrieval"
+readme = "README.md"
+authors = [
+    {name = "swapnil dagade", email = "swapnildagade@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Office/Business :: Scheduling",    
+    "Topic :: Communications :: Conferencing",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Information Technology",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["mcp", "model-context-protocol", "outlook", "calendar", "meeting", "scheduling", "automation", "microsoft-outlook"]
+dependencies = [
+    "mcp>=1.2.0",
+    "pywin32>=223",
+    "datetime",
+    "requests",
+    "urllib3"
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+swapnil-mcp-server = "mcp_tools.__main__:main"
+
+[project.entry-points."mcp.tools"]
+Set_Meeting = "mcp_tools.server:Set_Meeting"
+
+[project.urls]
+"Homepage" = "https://github.com/swapnildagade/swapnil-mcp-server"
+"Bug Tracker" = "https://github.com/swapnildagade/swapnil-mcp-server/issues"
+"Documentation" = "https://github.com/swapnildagade/swapnil-mcp-server#readme"
+
+[tool.mcp.tools.Set_Meeting]
+description = "Create and schedule a meeting in Microsoft Outlook with automated features including 15-minute reminder, busy status, all-day event settings, and automatic sending"
+parameters = [
+    {name = "subject", description = "Meeting subject", type = "string", required = true},
+    {name = "start_date", description = "Start date and time in ISO format (e.g., '2023-10-01T10:00:00')", type = "string", required = true},
+    {name = "end_date", description = "End date and time in ISO format (e.g., '2023-10-01T11:00:00')", type = "string", required = true}
+]
+returns = {description = "Confirmation message with meeting details", type = "string"}
+
+[tool.mcp.tools.Get_Project_Repositories]
+description = "Retrieve a list of repositories from Microsoft Visual Studio Team Foundation Server (TFS) using PAT authentication. Requires TFS_PAT environment variable."
+parameters = [
+    {name = "project_name", description = "Name of the project in Microsoft Visual Studio Team Foundation Server", type = "string", required = true}
+]
+returns = {description = "List of repository names in the specified project or error message", type = "string"}
+
+[tool.mcp.tools.get_weather]
+description = "Fetch detailed weather information for any city using OpenWeatherMap API. Returns current temperature, feels like temperature, min/max temperatures, humidity, wind conditions, and weather description. Requires OPENWEATHER_API_KEY environment variable."
+parameters = [
+    {name = "city", description = "Name of the city to get weather information for", type = "string", required = true}
+]
+returns = {description = "Detailed weather data object including temperature details, humidity, wind conditions, and description", type = "object"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}

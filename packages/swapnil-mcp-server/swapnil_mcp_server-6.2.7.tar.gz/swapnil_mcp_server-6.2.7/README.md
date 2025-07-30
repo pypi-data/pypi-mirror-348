@@ -1,0 +1,150 @@
+# Swapnil MCP Server
+
+[![PyPI version](https://img.shields.io/pypi/v/swapnil-mcp-server.svg)](https://pypi.org/project/swapnil-mcp-server/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/swapnil-mcp-server.svg)](https://pypi.org/project/swapnil-mcp-server/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A Model Context Protocol (MCP) server that provides automated utilities for Outlook Calendar scheduling, Azure DevOps repository management, and weather information retrieval.
+
+## Features
+
+- Create and schedule meetings in Microsoft Outlook calendar with automated settings for reminders and status
+- Retrieve project repositories from Microsoft Visual Studio Team Foundation Server
+- Get current weather information for any city worldwide through OpenWeatherMap API
+
+## Installation
+
+```bash
+pip install swapnil-mcp-server
+```
+
+### Requirements
+
+- Python 3.9 or higher
+- Windows OS (requires Microsoft Outlook and optionally Microsoft Teams)
+- `pywin32` package
+- `mcp` package version 1.2.0 or higher
+
+## Usage
+
+### Starting the Server
+
+```bash
+# Run as a command
+swapnil-mcp-server
+
+# Or import in your Python code
+from mcp_tools.server import mcp
+mcp.run()
+```
+
+### Using with MCP Clients
+
+This package implements the Model Context Protocol (MCP), allowing AI assistants and other MCP-compatible clients to interact with your Outlook calendar.
+
+Example of how an MCP client might use this tool:
+
+```python
+from mcp.client import Client
+
+client = Client()
+result = await client.Set_Meeting(
+    subject="Team Meeting",
+    start_date="2023-10-01T10:00:00",
+    end_date="2023-10-01T11:00:00"
+)
+print(result)  # Meeting with subject 'Team Meeting' set from 2023-10-01T10:00:00 to 2023-10-01T11:00:00.
+```
+
+## API Reference
+
+### Set_Meeting
+
+Creates and schedules a meeting in Microsoft Outlook with automated configuration for reminders, status, and sending.
+
+**Parameters:**
+- `subject` (string, required): Meeting subject
+- `start_date` (string, required): Start date and time in ISO format (e.g., "2023-10-01T10:00:00")
+- `end_date` (string, required): End date and time in ISO format (e.g., "2023-10-01T11:00:00")
+
+**Features:**
+- Automatically sets a 15-minute reminder
+- Sets busy status
+- Configures as an all-day event
+- Automatically sends the meeting invitation
+
+**Returns:**
+- A confirmation message with the meeting details
+
+### Get_Project_Repositories
+
+Retrieves repositories from a specified Azure DevOps project.
+
+**Parameters:**
+- `project_name` (string, required): Name of the Azure DevOps project
+
+**Returns:**
+- List of repository names in the specified project, or an error message if the operation fails
+
+### get_weather
+
+Retrieves current weather information for a specified city using OpenWeatherMap.
+
+**Parameters:**
+- `city` (string, required): Name of the city (any global city)
+
+**Returns:**
+- Dictionary containing:
+  - `location`: City name and country
+  - `temperature`: Current, feels like, min, and max temperatures
+  - `humidity`: Current humidity percentage
+  - `wind`: Speed and direction
+  - `description`: Weather description
+  - `timestamp`: Time of the weather reading
+
+---
+
+## Available Tools
+
+| Tool                    | Description                                      |
+|------------------------|--------------------------------------------------|
+| Set_Meeting            | Create and schedule meetings in Outlook          |
+| Get_Project_Repositories| Retrieve repositories from Azure DevOps          |
+| get_weather            | Get weather information for a city               |
+
+## Development
+
+### Project Structure
+
+```
+swapnil-mcp-server/
+├── src/
+│   └── mcp_tools/
+│       ├── __init__.py
+│       ├── __main__.py
+│       └── server.py
+├── LICENSE
+├── README.md
+└── pyproject.toml
+```
+
+### Building and Publishing
+
+```bash
+python -m build
+python -m twine upload dist/*
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+- Swapnil Dagade (swapnildagade@gmail.com)
+
+## Links
+
+- [GitHub Repository](https://github.com/swapnildagade/swapnil-mcp-server)
+- [Bug Tracker](https://github.com/swapnildagade/swapnil-mcp-server/issues)
+- [Documentation](https://github.com/swapnildagade/swapnil-mcp-server#readme)
