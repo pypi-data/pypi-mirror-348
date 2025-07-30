@@ -1,0 +1,62 @@
+[project]
+name               = "spotify-actions"
+version            = "0.1.2"
+requires-python    = ">=3.13"
+description        = "Schedule Actions on Spotify"
+readme             = "README.md"
+license            = { file = "LICENSE" }
+authors            = [ { name="Joshua Prier" } ]
+dependencies       = [
+    "python-dotenv>=1.0.0",
+    "spotipy>=2.0.0",
+    "schedule>=1.0.0",
+    "click>=8.0"
+]
+classifiers        = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage           = "https://github.com/JPrier/SpotifyActionScheduler"
+Repository         = "https://github.com/JPrier/SpotifyActionScheduler"
+
+[project.scripts]
+spotify-actions = "spotify_actions.cli:cli"
+
+[build-system]
+requires           = ["setuptools>=61.0","wheel"]
+build-backend      = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"" = "spotifyActionService/src"
+
+[tool.setuptools.packages.find]
+where              = ["spotifyActionService/src"]
+include            = ["*"]
+
+[tool.ruff]
+line-length        = 88
+lint.extend-select = ["E", "F", "I", "B", "ANN", "UP", "TC"]
+fix                = true
+fix-only           = false
+
+[tool.pytest.ini_options]
+minversion         = "6.0"
+testpaths          = ["spotifyActionService/tst"]
+python_files       = ["*Test.py"]
+
+[tool.uv.sources]
+spotify-actions = { workspace = true }
+
+[project.optional-dependencies]
+dev = [
+  "coverage>=7.8.0",
+  "just>=0.8.162",
+  "pytest>=8.3.5",
+  "pytest-cov>=6.1.1",
+  "ruff>=0.11.8",
+  "typing-extensions>=4.13.2",
+]
