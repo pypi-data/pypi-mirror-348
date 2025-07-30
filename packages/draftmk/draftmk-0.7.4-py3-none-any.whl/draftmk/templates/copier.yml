@@ -1,0 +1,26 @@
+# copier.yml — Controls prompts for the DraftMk Copier template
+_exclude:
+  - "copier.yml"
+  - "__init__.py"
+  - "__pycache__"
+  
+project_name:
+  type: str
+  default: "MkDocs + DraftMk"
+  help: "Project name (used for documentation site name)"
+
+repo_name:
+  type: str
+  default: "TODO:your-org/your-repo"
+  help: "GitHub repository name (e.g. jonmatum/draftmk-docs)"
+
+site_url:
+  type: str
+  default: "TODO:https://example.com"
+  help: "Base URL for your site (used in MkDocs config)"
+
+vite_env:
+  type: str
+  default: "production"
+  help: "Frontend environment mode"
+
