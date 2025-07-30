@@ -1,0 +1,27 @@
+[project]
+name = "youtube-insight"
+version = "0.1.0"
+description = "A practice project based on dabidstudio's YouTube Insights MCP Server."
+readme = "README.md"
+authors = [
+    { name = "truestone", email = "truestone@gmail.com" }
+]
+original-author = "dabidstudio <dabidstudio08@gmail.com>"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "build>=1.2.2.post1",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+    "python-dotenv>=1.1.0",
+    "requests>=2.32.3",
+    "twine>=6.1.0",
+    "youtube-transcript-api>=1.0.3",
+]
+
+[project.scripts]
+youtube-insight = "youtube_insight:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
