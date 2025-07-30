@@ -1,0 +1,36 @@
+[project]
+name = "jira-mcp-server" # Project name used for distribution
+version = "0.1.1"
+description = "An MCP server for interacting with Jira using username/password authentication."
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10" # FastMCP requires 3.10+
+dependencies = [
+    "fastmcp>=2.0.0", # Use the latest stable version or a specific git ref if needed
+    "jira>=3.0",      # Python Jira library
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "httpx>=0.25",     # Often needed by underlying libraries
+    "anyio",          # For async operations if needed directly
+]
+readme = "README.md"
+
+[project.scripts]
+jira-mcp = "jira_mcp.__main__:main"
+
+[build-system]
+requires = ["hatchling"] # Changed from uv_build as per error message
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true # If using git dependencies like fastmcp@git+...
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jira_mcp"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"] # Let black handle line length
+
+[tool.ruff.format]
+quote-style = "double"

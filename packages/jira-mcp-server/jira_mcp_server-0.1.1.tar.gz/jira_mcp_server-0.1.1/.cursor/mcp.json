@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+      "jira-mcp-server": {
+        "command": "uvx",
+        "args": [
+          "python",
+          "-m",
+          "jira_mcp"
+        ],
+          "env": {
+            "JIRA_BASE_URL": "https://bts.snowcorp.com",
+            "JIRA_USERNAME": "SN99072",
+            "JIRA_PASSWORD": "B^!@djemals6"
+          }
+         }
+    }
+}   
