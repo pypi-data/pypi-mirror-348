@@ -1,0 +1,3 @@
+from ardhi_framework.RequestProcessing.parse_request import ProcessedApplicationRequest
+
+application_instance = ProcessedApplicationRequest(instance=None)
