@@ -1,0 +1,23 @@
+# proto-file: devtools/blueprint/blueprint_file.proto
+# proto-message: BlueprintFile
+# DO NOT EDIT! Regenerate the contents by running go/bluze after changing any BUILD file or the Blueprint.
+# Override the default values in third_party_py_genai_processors.blueprint instead.
+
+buildable_unit: {
+  name: "third_party_py_genai_processors"
+  build_pattern: "//third_party/py/genai_processors/..."
+  test_pattern: "//third_party/py/genai_processors/..."
+  test_tag_filter: "-nofastbuild"
+  build_tag_filter: "-nofastbuild"
+  enable_coverage: true
+  enable_presubmit: true
+  enable_continuous_build: true
+  continuous_build_email: {
+    build_cop_email_id: "gdm-aip-ecosystem-team+buildgardener@google.com"
+  }
+  enable_release: false
+}
+continuous_tests: {
+  name: "third_party_py_genai_processors"
+  buildable_unit_name: "third_party_py_genai_processors"
+}

@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: genai_processors
+Version: 0.0.3
+Summary: GenAI Processors Library
+Keywords: 
+Author-email: gdm-aip-ecosystem-team <gdm-aip-ecosystem-team@google.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE
+Requires-Dist: google-genai>=1.15.0
+Requires-Dist: Pillow>=9.0.0
+Requires-Dist: dataclasses-json>=0.6.0
+Requires-Dist: absl-py>=1.0.0
+Requires-Dist: pytest ; extra == "dev"
+Requires-Dist: pytest-xdist ; extra == "dev"
+Requires-Dist: pylint>=2.6.0 ; extra == "dev"
+Requires-Dist: pyink ; extra == "dev"
+Project-URL: repository, https://github.com/google/genai-processors
+Provides-Extra: dev
+
+# GenAI Processor library
+
+**Build Modular, Asynchronous, and Composable AI Pipelines for Generative AI.**
+
+GenAI Processors is a lightweight Python library that enables efficient,
+parallel content processing.
+
+See more details on [Github](https://github.com/google/genai-processors).
