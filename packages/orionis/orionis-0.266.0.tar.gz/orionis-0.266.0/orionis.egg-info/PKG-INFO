@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: orionis
+Version: 0.266.0
+Summary: Orionis Framework – Elegant, Fast, and Powerful.
+Home-page: https://github.com/orionis-framework/framework
+Author: Raul Mauricio Uñate Castro
+Author-email: raulmauriciounate@gmail.com
+Keywords: orionis,framework,python,orionis-framework,django,flask,fastapi,starlettewerkzeuguvicorn
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Typing :: Typed
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENCE
+Requires-Dist: apscheduler>=3.11.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: requests>=2.32.3
+Requires-Dist: rich>=13.9.4
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: cryptography>=44.0.3
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Orionis Framework
+
+Orionis Framework is an opinionated Python framework designed for rapid, elegant, and powerful application development. Originally created to help teams transition from PHP to Python, Orionis provides familiar concepts like organized class structures, request lifecycles, and middleware support. It is suitable for modern challenges such as RPA, AI, Blockchain, Data Analytics, OCR, and Computer Vision.
+
+**Status:** Beta
+
+For more information, visit the [Orionis Framework repository](https://github.com/orionis-framework/framework).
