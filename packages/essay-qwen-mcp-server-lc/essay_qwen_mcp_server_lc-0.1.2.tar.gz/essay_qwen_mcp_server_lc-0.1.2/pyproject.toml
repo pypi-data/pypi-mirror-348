@@ -1,0 +1,17 @@
+[project]
+name = "essay-qwen-mcp-server-lc"
+version = "0.1.2"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli,httpx]>=1.9.0",
+    "openai>=1.78.1",
+]
+
+[project.scripts]
+essay-qwen-mcp-server-lc = "essay_qwen_mcp_server_lc:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
