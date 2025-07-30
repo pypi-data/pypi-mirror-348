@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: tl-exp
+Version: 0.1
+Summary: Transfer learning experiments package
+Home-page: https://github.com/yourusername/tl_exp
+Author: Your Name
+Author-email: your@email.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: tensorflow
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# tl_exp
+
+A Python package for running deep learning transfer learning experiments.
+
+## Installation
+
+```bash
+pip install tl-exp
