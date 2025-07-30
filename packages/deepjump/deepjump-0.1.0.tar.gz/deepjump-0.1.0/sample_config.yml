@@ -1,0 +1,33 @@
+env:
+    # device: "0"
+    device: "1, 2, 3, 4, 5, 6, 7"
+
+sample:
+    seed: 100
+    num_steps: 100
+    batch_size: 7
+    repeat: 1
+    mode: crystal
+
+model:
+    # id: zcun2wc3
+    # id: aellcpc6
+    id: xqm3fyio
+    checkpoint: -1
+    temperature: 320
+
+data:
+    dataset: fast-folding
+    proteins:
+        # - chignolin
+        # - trpcage
+        # - bba
+        # - wwdomain
+        # - villin
+        # - ntl9
+        - proteinb
+        # - bbl
+        # - homeodomain
+        # - proteing
+        # - a3D
+        # - lambda

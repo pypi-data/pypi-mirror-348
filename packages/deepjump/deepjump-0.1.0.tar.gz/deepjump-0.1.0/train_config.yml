@@ -1,0 +1,48 @@
+env:
+    device: 5
+    disable_jit: false
+    debug_nans: false
+    seed: 0
+
+data:
+    mode: mdCATH
+    path: /mas/projects/molecularmachines/db/mdCATH
+    crop_size: 100
+    temperatures: [320, 348, 379, 413, 450]
+
+model:
+    depth: 6
+    cond_depth: 6
+    header_depth: 2
+
+    irreps: "128x0e + 128x1e"
+
+    k: 48
+    k_seq: 12
+
+    radial_cut: 20.0
+
+    var_features: 1.0
+    var_coords: 1.5
+
+    timesteps: 60
+train:
+    seed: 42
+
+    num_epochs: 10000
+    epoch_size: 3000 # how many steps per epoch
+    val_every: 5
+
+    batch_size: 60
+    num_workers: 32
+
+    lr_start: 0.01
+    lr_end: 0.001
+    lr_steps: 150000
+
+    save_every: 300
+    checkpoint_every: 10000
+
+    single_datum: false
+    single_batch: false
+# ====================================
