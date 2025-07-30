@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: plmbr
+Version: 0.1.0
+Summary: create data processing pipelines
+Author-email: Deekshant Yadav <d33kshant@gmail.com>
+Requires-Python: >=3.13
+Requires-Dist: pandas>=2.2.3
+Description-Content-Type: text/markdown
+
+# plmbr
+
+A lightweight, extensible pipeline framework for processing pandas DataFrames with composable layers.
+
+> **Attention!**  
+> The library is currently in development. Commonly used data transformer and filter functions will be avialable by default
+
+## Overview
+
+`plmbr` lets you define reusable data processing steps with Keras like API. Define steps as `Layer` classes and compose them into a `PipeLine`. Each layer transforms the data, and the pipeline manages the flow and error handling.
+
+---
+
+## Getting Started 
+
+### Layer
+
+A base class for all processing steps. Subclass it and implement the `flow` method.
+
+```python
+import pandas as pd
+from plmbr.core import Layer
+
+class AddColumnLayer(Layer):
+    def __init__(self, name, col_name, value):
+        super().__init__(name)
+        self.col_name = col_name
+        self.value = value
+
+    def flow(self, data: pd.DataFrame) -> pd.DataFrame:
+        data = data.copy()
+        data[self.col_name] = self.value
+        return data
+
+class FilterRowsLayer(Layer):
+    def __init__(self, name, filter_fn):
+        super().__init__(name)
+        self.filter_fn = filter_fn
+
+    def flow(self, data: pd.DataFrame) -> pd.DataFrame:
+        return data[self.filter_fn(data)]
+```
+
+### PipeLine
+
+A sequence of `Layer` objects. It applies each layer in order to the data.
+
+```python
+from plmbr.core import PipeLine
+
+pipeline = PipeLine([
+    AddColumnLayer("AddFoo", "foo", 42),
+    FilterRowsLayer("FilterA>1", lambda df: df["a"] > 1),
+])
+```
+
+### Example Usage
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
+
+result = pipeline.flow(df)
+print(result)
+```
+
+#### Output
+```bash
+   a  b  foo
+1  2  4   42
+```
