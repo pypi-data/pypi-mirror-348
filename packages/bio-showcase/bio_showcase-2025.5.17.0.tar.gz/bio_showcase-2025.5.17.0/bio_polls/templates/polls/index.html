@@ -1,0 +1,6 @@
+{% load static %}
+{% include 'polls/header.html' %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+<h1>PCR Primer Design</h1>
+<a href="{% url 'primer:index' %}">PCR Primer Design</a>

@@ -1,0 +1,45 @@
+[
+    {
+        "model": "bio_polls.question",
+        "pk": 1,
+        "fields": {
+            "question_text": "What's up?",
+            "pub_date": "2025-05-12T07:33:00Z"
+        }
+    },
+    {
+        "model": "bio_polls.question",
+        "pk": 2,
+        "fields": {
+            "question_text": "Yeeh~",
+            "pub_date": "2025-05-14T02:40:00Z"
+        }
+    },
+    {
+        "model": "bio_polls.choice",
+        "pk": 1,
+        "fields": {
+            "question": 1,
+            "choice_text": "Not much",
+            "votes": 4
+        }
+    },
+    {
+        "model": "bio_polls.choice",
+        "pk": 2,
+        "fields": {
+            "question": 1,
+            "choice_text": "The sky",
+            "votes": 4
+        }
+    },
+    {
+        "model": "bio_polls.choice",
+        "pk": 4,
+        "fields": {
+            "question": 2,
+            "choice_text": "no",
+            "votes": 4
+        }
+    }
+]
