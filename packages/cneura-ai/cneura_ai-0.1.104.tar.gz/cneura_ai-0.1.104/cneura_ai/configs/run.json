@@ -1,0 +1,161 @@
+[
+  {
+    "name": "logger",
+    "dockerfile_path": "./services/logger",
+    "tag": "logger",
+    "ports": { "8765/tcp": 8765 },
+    "env": {
+      "WEBSOCKET_SERVER": "0.0.0.0",
+      "WEBSOCKET_PORT": "8765",
+      "POSTGRES_USER": "logger_user",
+      "POSTGRES_PASSWORD": "logger_pass",
+      "POSTGRES_DB": "log_db",
+      "POSTGRES_HOST": "db_0"
+    },
+    "count": 1
+  },
+  {
+    "name": "code-synth",
+    "dockerfile_path": "./services/tool_builder/synthesize/",
+    "tag": "code-synth",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "RABBITMQ_USER": "guest",
+      "RABBITMQ_PASS": "guest",
+      "INPUT_QUEUE": "tool.code.synth",
+      "OUTPUT_QUEUE": "tool.code.test",
+      "ERROR_QUEUE": "tool.synth.error",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "code-test",
+    "dockerfile_path": "./services/tool_builder/test/",
+    "tag": "code-test",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "RABBITMQ_USER": "guest",
+      "RABBITMQ_PASS": "guest",
+      "INPUT_QUEUE": "tool.code.test",
+      "OUTPUT_QUEUE": "tool.code.deps",
+      "ERROR_QUEUE": "tool.test.error",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "code-depend",
+    "dockerfile_path": "./services/tool_builder/dependencies/",
+    "tag": "code-depend",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "RABBITMQ_USER": "guest",
+      "RABBITMQ_PASS": "guest",
+      "INPUT_QUEUE": "tool.code.deps_in",
+      "OUTPUT_QUEUE": "tool.code.exec",
+      "DEPEND_QUEUE": "tool.code.deps_out",
+      "ERROR_QUEUE": "tool.deps.error",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "code-exec",
+    "dockerfile_path": "./services/tool_builder/execute/",
+    "tag": "code-exec",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "RABBITMQ_USER": "guest",
+      "RABBITMQ_PASS": "guest",
+      "INPUT_QUEUE": "tool.code.exec",
+      "OUTPUT_QUEUE": "tool.code.debug",
+      "OUT_QUEUE": "tool.code.deploy",
+      "REMOTE_URL": "tcp://host.docker.internal:2375",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765",
+      "REDIS_HOST": "host.docker.internal",
+      "MONGO_URI": "mongodb://host.docker.internal:27017/"
+    },
+    "count": 1
+  },
+  {
+    "name": "code-debug",
+    "dockerfile_path": "./services/tool_builder/debug/",
+    "tag": "code-debug",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "REMOTE_URL": "tcp://host.docker.internal:2375",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "tool-deploy",
+    "dockerfile_path": "./services/tool_builder/deploy/",
+    "tag": "tool-deploy",
+    "env": {
+      "RABBITMQ_HOST": "host.docker.internal",
+      "REMOTE_URL": "tcp://host.docker.internal:2375",
+      "MONGO_URI": "mongodb://host.docker.internal:27017/",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "tool-manager",
+    "dockerfile_path": "./services/tool_builder/manager/",
+    "tag": "tool-manager",
+    "ports": { "8800/tcp": 8800 },
+    "env": {
+      "CHROMA_HOST": "host.docker.internal",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "REDIS_HOST": "host.docker.internal",
+      "RABBITMQ_HOST": "host.docker.internal",
+      "REMOTE_URL": "tcp://host.docker.internal:2375",
+      "MONGO_URI": "mongodb://host.docker.internal:27017/",
+      "LOGGER_SERVER": "ws://host.docker.internal:8765"
+    },
+    "count": 1
+  },
+  {
+    "name": "shell",
+    "dockerfile_path": "./services/shell/",
+    "tag": "shell",
+    "ports": { "8600/tcp": 8600 },
+    "env": {
+      "REMOTE_URL": "tcp://host.docker.internal:2375",
+      "MONGO_URI": "mongodb://host.docker.internal:27017/"
+    },
+    "count": 1
+  },
+  {
+    "name": "research",
+    "dockerfile_path": "./services/research/",
+    "tag": "research",
+    "ports": { "8500/tcp": 8500 },
+    "env": {
+      "BRAVE_API_KEY": "BSAPiaFMmG6EPz1U-s4Fi_MkcNoGLd3",
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0"
+    },
+    "count": 1
+  },
+  {
+    "name": "meta-agent",
+    "dockerfile_path": "./services/meta_agent/",
+    "tag": "meta-agent",
+    "env": {
+      "GEMINI_API_KEY": "AIzaSyANNwLpHKOf5lFJkJdMfQw_cjPlOFhYFg0",
+      "MONGO_URI": "mongodb://host.docker.internal:27017/",
+      "RABBITMQ_HOST": "host.docker.internal",
+      "RABBITMQ_USER": "guest",
+      "RABBITMQ_PASS": "guest"
+    },
+    "count": 1
+  }
+]
