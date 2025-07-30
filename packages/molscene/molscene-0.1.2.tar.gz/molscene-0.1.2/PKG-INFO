@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: molscene
+Version: 0.1.2
+Summary: PDB/mmCIF file parsing using pandas DataFrames
+Author-email: Carlos Bueno <carlos.bueno@rice.edu>
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=1.3.3
+Requires-Dist: numpy>=1.21.0
+Provides-Extra: test
+Requires-Dist: pytest>=6.1.2; extra == "test"
+Dynamic: license-file
+
+MolScene
+==============================
+[//]: # (Badges)
+[![GitHub Actions Build Status](https://github.com/cabb99/molscene/workflows/CI/badge.svg)](https://github.com/cabb99/molscene/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/cabb99/MolScene/branch/main/graph/badge.svg)](https://codecov.io/gh/cabb99/MolScene/branch/main)
+
+
+PDB file parsing using pandas DataFrames
+
+### Copyright
+
+Copyright (c) 2025, Carlos Bueno
+
+
+#### Acknowledgements
+ 
+Project based on the 
+[Computational Molecular Science Python Cookiecutter](https://github.com/molssi/cookiecutter-cms) version 1.10.
