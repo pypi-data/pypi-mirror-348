@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend="setuptools.build_meta"
+
+[project]
+name = "ipydfconfig"
+version = "0.1.0"
+authors = [
+    { name="David Koop", email="dakoop@niu.edu" }
+]
+dependencies = [
+    "ipython",
+]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/dakoop/ipydfconfig"
