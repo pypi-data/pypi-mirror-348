@@ -1,0 +1,40 @@
+[project]
+name = "github-client-sdk"
+version = "1.1.0"
+description = "A Python SDK for interacting with the GitHub API"
+authors = [
+    {name = "Azim Hossain Tuhin", email = "codeocmmerze@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "httpx[http2]>=0.28.1,<0.29.0"
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["github", "api", "sdk", "client"]
+
+[tool.poetry]
+name = "github-client-sdk"
+version = "1.1.0"
+packages = [{include = "github_client_sdk", from = "src"}]
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
+pytest-mock = "^3.14.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
