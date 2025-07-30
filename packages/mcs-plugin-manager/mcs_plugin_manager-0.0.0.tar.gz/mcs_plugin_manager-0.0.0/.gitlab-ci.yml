@@ -1,0 +1,65 @@
+image: python:3
+
+variables:
+  PIP_DEPENDENCIES_TEST: hatch
+  PIP_DEPENDENCIES_BUILD: build twine
+  # PIP_DEPENDENCIES_DOCS: sphinx sphinx sphinx-autodoc-typehints hatch
+
+# before_script:
+
+stages:
+  # - test
+  # - build
+  # - deploy
+  - release
+
+# test:
+#   stage: test
+#   script:
+#   - pip install $PIP_DEPENDENCIES_TEST
+#   - ./test/manual-test
+
+# build non-main docs:
+#   stage: build
+#   script:
+#     - pip install $PIP_DEPENDENCIES_DOCS
+#     - ./build-docs -v
+#   artifacts:
+#     paths:
+#       - build/docs
+#   rules:
+#     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
+#       changes: &changes_rule
+#       - .gitlab-ci.yml
+#       - docs/**
+#       - mcs-plugin-manager/**
+
+# pages:
+#   stage: deploy
+#   script:
+#     - pip install $PIP_DEPENDENCIES_DOCS
+#     - ./build-docs -v
+#     - mv build/docs/html ./public
+#   artifacts:
+#     paths:
+#       - public
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+#       changes: *changes_rule
+
+release pypi package:
+  stage: release
+  variables:
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD: ${pypi_token}
+  script:
+    - pip install $PIP_DEPENDENCIES_BUILD
+    - python -m build -o build/dist
+    - python -m twine upload build/dist/*
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - changes:
+      - .gitlab-ci.yml
+      - pyproject.toml
+      - mcs-plugin-manager/**
