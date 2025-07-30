@@ -1,0 +1,23 @@
+Name: ATLAS_STDM_2021_10
+Year: 2021
+Summary: High-mass Drell-Yan prototype at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 0
+Status: UNVALIDATED
+Reentrant: true
+Authors:
+ - Jon B 
+Keywords:
+ - drellyan
+RunInfo:
+  Drell-Yan production in $pp$ collisons at 13 TeV ditau
+Luminosity_fb: 140
+Beams: [p+, p+]
+Energies: [13000]
+NeedCrossSection: yes
+Options:
+ - STITCH=ON
+ - isPP8=ON
+Description:
+	internal prototype for SM measurement

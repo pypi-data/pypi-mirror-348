@@ -1,0 +1,36 @@
+sm_test:
+  command: contur-smtest
+
+grid_spey:
+  command: contur
+  switches: [s, q, -whw, -wbv, -awz, -nopyscripts,-nomultip, -spey, -databg]
+  options: {csv: spey_calc.csv, grid: sources/myscan00, beams: all, dbfile: spey_results.db}
+
+grid_default:
+  command: contur
+  switches: [s, q, -whw, -wbv, -awz, -nopyscripts, -databg]
+  options: {csv: contur.csv, grid: sources/myscan00, beams: all, dbfile: contur_run.db}
+
+grid_xsbf:
+  command: contur-extract-xs-bf
+  switches: [-br]
+  args: [sources/myscan00/13TeV/0003]
+
+single_default:
+  command: contur
+  args: [sources/myscan00/13TeV/0003/runpoint_0003.yoda.gz]
+  switches: [s, u, -whw, -wbv, -awz, -databg]
+  options: {dbfile: single_results.db}
+  
+contur_plot:
+  command: contur-plot
+  args: [contur_run.db, mZp, cotH]
+
+rivetplots:
+  command: contur-rivetplots
+  options: {indir: sources, runpoint: 13TeV/0000, ana-match: ATLAS_2024_I2765017}
+
+contur_oracle:
+  command: contur-oracle
+  #options: {wd: sources/oracle}
+  # will test the `start` arg
