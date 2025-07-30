@@ -1,0 +1,109 @@
+[tool.poetry]
+name = "tensora"
+version = "0.4.0"
+description = "Library for dense and sparse tensors built on the tensor algebra compiler"
+authors = ["David Hagen <david@drhagen.com>"]
+license = "MIT"
+readme = "README.md"
+documentation = "https://tensora.drhagen.com"
+repository = "https://github.com/drhagen/tensora"
+keywords = ["tensor", "sparse", "matrix", "array"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+returns = "^0.20|^0.21|^0.22|^0.23|^0.24|^0.25"
+cffi = "^1.16"
+# setuptools is required for cffi compilation on Python 3.12 and up
+# https://cffi.readthedocs.io/en/latest/whatsnew.html#v1-16-0rc1
+setuptools = { version = "^69", python = ">=3.12", optional = true }
+llvmlite = "^0.44"
+parsita = "^2.0"
+typer = "^0.15"
+tensora-taco = { version = "^0.1.2", optional = true }
+numpy = { version = "^1.24", optional = true }
+scipy = { version = "^1.7", optional = true }
+
+[tool.poetry.dev-dependencies]
+nox_poetry = "^1.0.3"
+
+# Test
+pytest = "^7"  # Upgrading to pytest 8 breaks hypofuzz
+coverage = "*"
+
+# Fuzzing
+hypothesis = "^6"
+hypofuzz = "^24"
+
+# Lint
+ruff = "^0.6"
+
+# Docs
+mkdocs-material = "^9"
+
+[tool.poetry.scripts]
+tensora = "tensora.cli:app"
+
+[tool.poetry.extras]
+taco = ["tensora-taco", "setuptools"]
+cffi = ["setuptools"]
+numpy = ["numpy"]
+scipy = ["scipy"]
+
+[tool.coverage.run]
+branch = true
+source = ["tensora"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "pass",
+    "raise NotImplementedError",
+    "def __str__",
+    "def __repr__",
+]
+
+[tool.coverage.paths]
+source = [
+    "src/",
+    "**/site-packages/",
+]
+
+[tool.ruff]
+src = ["src"]
+line-length = 99
+
+[tool.ruff.lint]
+extend-select = [
+    "I", # isort
+    "N", # pep8-naming
+    "RUF", # ruff
+    "B", # flake8-bugbear
+    "N", # flake8-broken-line
+    "C4", # flake8-comprehensions
+    "PIE", # flake8-pie
+    "PT", # flake8-pytest-style
+    "PTH", # flake8-use-pathlib
+    "ERA", # flake8-eradicate
+]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["hypothesis.strategies.integers"]
+
+[tool.ruff.lint.per-file-ignores]
+# Allow glob imports and uppercase identifiers in tests
+"tests*/*" = ["F403", "F405", "N802", "N806"]
+
+# F401: Allow unused imports in __init__.py
+"__init__.py" = ["F401"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
