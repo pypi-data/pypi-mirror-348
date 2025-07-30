@@ -1,0 +1,56 @@
+services:
+  backend:
+    image: jonmatum/draftmk-backend:latest
+    environment:
+      APP_ENV: local
+      MODULE_NAME: app.main
+      VARIABLE_NAME: app
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_REPO: ${GITHUB_REPO}
+      GITHUB_BRANCH: ${GITHUB_BRANCH}
+      CONTENT_DIR: docs
+    ports:
+      - "${BACKEND_PORT:-8888}:8888"
+    volumes:
+      - .draftmk/config:/app/config:cached
+      - ./docs:/app/docs:cached
+      - .draftmk/site:/app/site:cached
+      - .:/repo:cached
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.git-credentials:/root/.git-credentials:ro
+    networks:
+      - draftmk-net
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+
+  frontend:
+    image: jonmatum/draftmk-frontend:latest
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+      VITE_DOCS_PREVIEW_BASE_URL: ${VITE_DOCS_PREVIEW_BASE_URL}
+      VITE_ENVIRONMENT: ${VITE_ENVIRONMENT}
+    entrypoint: ["/entrypoint.sh"]
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    networks:
+      - draftmk-net
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+
+  preview:
+    image: jonmatum/draftmk-preview:latest
+    ports:
+      - "${PREVIEW_PORT:-8080}:8080"
+    volumes:
+      - .draftmk/site/public:/usr/share/nginx/html/public:ro
+      - .draftmk/site/internal:/usr/share/nginx/html/internal:ro
+    networks:
+      - draftmk-net
+    restart: unless-stopped
+
+networks:
+  draftmk-net:
+    driver: bridge
