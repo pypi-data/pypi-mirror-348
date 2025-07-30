@@ -1,0 +1,144 @@
+Metadata-Version: 2.4
+Name: menu_select
+Version: 1.0.3
+Summary: Uma biblioteca para criação de menus seletivos
+Home-page: https://github.com/VG-Correa/menu_select
+Author: VG-Correa
+Author-email: v.victorgabriel2014@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# Menu_Terminal_Select
+
+Esse menu de seleÃ§Ã£o para terminal foi criado para suprir a necessidade de fluidez dentro de um sistema feito para o terminal, onde a entrada de dados e seleÃ§Ã£o de opÃ§Ãµes torna-se complicada e pouquÃ­ssimo atrativo para o usuÃ¡rio.
+
+
+**DescriÃ§Ã£o tÃ©cnica:**
+
+Este programa contÃ©m duas funÃ§Ãµes e uma classe. A funÃ§Ã£o **cls()** Ã© responsÃ¡vel por limpar a tela do terminal. A funÃ§Ã£o **getch()** captura a tecla pressionada pelo usuÃ¡rio sem exibir o caractere digitado no terminal. A classe **Menu_seleÃ§Ã£o** Ã© responsÃ¡vel por criar um menu de seleÃ§Ã£o de opÃ§Ãµes no terminal, permitindo que o usuÃ¡rio navegue pelas opÃ§Ãµes usando as setas de direÃ§Ã£o e selecione uma opÃ§Ã£o pressionando a tecla Enter.
+
+A classe **Menu_seleÃ§Ã£o** possui um construtor **__init__()** que define as opÃ§Ãµes de formataÃ§Ã£o de texto para o cabeÃ§alho e as opÃ§Ãµes de menu, alÃ©m de outras configuraÃ§Ãµes. A classe tem tambÃ©m o mÃ©todo **Set_Paleta()** que permite definir um conjunto personalizado de opÃ§Ãµes de formataÃ§Ã£o de texto para o menu.
+
+O mÃ©todo **options()** da classe **Menu_seleÃ§Ã£o** Ã© responsÃ¡vel por exibir o menu e permitir que o usuÃ¡rio navegue pelas opÃ§Ãµes e selecione uma delas. Esse mÃ©todo recebe como parÃ¢metros o **cabeÃ§alho**, a **descriÃ§Ã£o** e as **opÃ§Ãµes** de menu a serem exibidas. O mÃ©todo usa a funÃ§Ã£o **cls()** para limpar a tela e, em seguida, exibe o **cabeÃ§alho**, a **descriÃ§Ã£o** e as **opÃ§Ãµes** de menu no terminal. O mÃ©todo permite que o usuÃ¡rio navegue pelas opÃ§Ãµes de menu usando as teclas de seta para cima e para baixo. Quando o usuÃ¡rio seleciona uma opÃ§Ã£o, pressionando a tecla **Enter**, o mÃ©todo retorna o **Ã­ndice** da opÃ§Ã£o selecionada.
+
+Para utilizar em seu cÃ³digo, coloque o arquivo "Menu_seleÃ§Ã£o.py" na pasta de seu projeto de forma que consiga importa-lo.
+Importe o menu de seleÃ§Ã£o, aconselho colocar o apelido como **ms**
+
+```python
+from Menu_seleÃ§Ã£o import Menu_seleÃ§Ã£o as ms
+```
+
+Defina um cabeÃ§alho que sempre irÃ¡ aparecer nas telas de navegaÃ§Ã£o:
+```python
+cabecalho = "B.R.A.I.N.S"
+```
+
+Instancie um objeto do tipo Menu_seleÃ§Ã£o que receberÃ¡ todas as configuraÃ§Ãµes bÃ¡sicas para seu menu funcionar.
+
+```python
+menu = ms(cabeÃ§alho=cabecalho)
+```
+Apenas com o cabeÃ§alho jÃ¡ Ã© possÃ­vel utiliza-lo, pois ele vem com configuraÃ§Ãµes default!
+As configuraÃ§Ãµes que podem ser definidas ao instanciar o menu sÃ£o:
+
+**1 - CabeÃ§alho:** Como no exemplo acima, ideal que tenha um tamanho legal para caber dentro do terminal e ainda conseguir mostrar as opÃ§Ãµes. Ele tambÃ©m pode ser vazio caso nÃ£o queira cabeÃ§alho, Basta apenas nÃ£o especifica-lo.
+
+**2 - limite_opÃ§oes:** Ã‰ o limite de opÃ§Ãµes que aparecerÃ£o por vez na tela. Em casos onde as opÃ§Ãµes passariam da tela e ficaria inviÃ¡vel visualizar de forma confortÃ¡vel. Ele por padrÃ£o vem como 10 itens, mas pode ser alterado da seguinte maneira:
+```python
+menu = ms(cabeÃ§alho=cabeÃ§alho,limite_opÃ§oes=5)
+```
+Dessa forma ele vai imprimir na tela apenas cinco opÃ§Ãµes, e terÃ¡ o rolamento deles caso o usuÃ¡rio tente selecionar o item 6.
+
+**3 - texto_seleÃ§Ã£o:** Ã‰ a configuraÃ§Ã£o do estilo de texto, cor do texto e cor de fundo. Por padrÃ£o, o texto selecionado serÃ¡ em negrito, texto vermelho e fundo cinza.
+Para alterar essa opÃ§Ã£o, basta informar uma lista com trÃªs strings respectivamente: 
+```python
+texto = ["negrito","vermelho","cinza"] # ["Estilo","Cor do texto","Cor de fundo"]
+```
+
+**As opÃ§Ãµes para alteraÃ§Ã£o do estilo do texto sÃ£o:**
+
+**"negrito":** Deixa o texto mais grosso, no estilo bold;
+
+**"sublinhado:"** Deixa o texto com uma linha abaixo;
+
+**"normal":** Volta a formataÃ§Ã£o original do estilo;
+
+**"negativo** Inverte a cor de texto com a cor de fundo;
+
+**As opÃ§Ãµes para as cores de texto e cores de fundo sÃ£o:**
+
+**"branco","vermelho","verde","amarelo","azul","roxo","ciano","cinza","normal"**
+
+Para editar essa formataÃ§Ã£o ao instanciar o menu, vocÃª pode fazer:
+
+```python
+menu = ms(texto_seleÃ§Ã£o=["normal","vermelho","verde"])
+```
+
+**texto_padrÃ£o:** Ã‰ outro argumento parecido com o texto_seleÃ§Ã£o, tem as mesmas configuraÃ§Ãµes e a sua ediÃ§Ã£o Ã© da mesma maneira, porÃ©m, ele vai editar as cores das opÃ§Ãµes que nÃ£o estÃ£o selecionadas.
+
+Caso queira editar as cores do terminal apÃ³s instanciar o menu, vocÃª possui duas maneiras:
+
+1 - Editando diretamente a variÃ¡vel interna **"texto_seleÃ§Ã£o** ou **"texto_padrao"**:
+```python
+menu.texto_seleÃ§Ã£o = ['normal','verde','branco']
+menu.texto_padrao = ['negrito','ciano','cinza']
+```
+2 - Utilizando a funÃ§Ã£o **Set_Paleta(texto_seleÃ§Ã£o,texto_padrÃ£o)**
+```python
+menu.Set_Paleta(['normal','verde','branco'],['negrito','ciano','cinza'])
+```
+
+**E por fim, temos a funÃ§Ã£o que mostra as opÃ§Ãµes de navegaÃ§Ã£o do usuÃ¡rio.**
+
+FunÃ§Ã£o **options**
+**cabeÃ§alho:** Ela por padrÃ£o utiliza o **cabeÃ§alho** informado anteriormente, mas que pode ser informado nesse momento caso queira utilizar outro para essa tela especÃ­fica (NÃ£o precisa ser especificado na funÃ§Ã£o, por padrÃ£o, utilizarÃ¡ o cabeÃ§alho informado anteriormente); 
+
+**descriÃ§Ã£o:** Ã‰ um argumento que pode mudar em toda tela, onde pode mostrar orientaÃ§Ãµes ao usuÃ¡rio, descriÃ§Ã£o da tela,  mostrar alguns dados, etc. Ã‰ um argumento String (NÃ£o precisa ser especificado na funÃ§Ã£o, por padrÃ£o apenas nÃ£o vai printar nenhuma descriÃ§Ã£o;
+
+**opÃ§Ãµes:** Ã‰ o argumento obrigatÃ³rio para funcionar! VocÃª informa uma lista de Strings que serÃ£o printadas na mesma ordem como opÃ§Ãµes para o usuÃ¡rio. NÃ£o hÃ¡ limite para a quantidade de opÃ§Ãµes. As Ãºnicas teclas reconhecidas nesse momento sÃ£o as teclas para cima, baixo e enter.
+
+O mÃ©todo vai retornar o index da lista informada de opÃ§Ãµes.
+
+**Exemplo completo:**
+```python
+from Menu_seleÃ§Ã£o import Menu_seleÃ§Ã£o as ms
+
+cabeÃ§alho = "B.R.A.I.N.S"
+
+seleÃ§Ã£o = ["negrito","vermelho","verde"]
+padrÃ£o = ['normal','branco','normal']
+
+menu = ms(cabeÃ§alho=cabeÃ§alho,
+          limite_opÃ§oes=5,
+          texto_seleÃ§Ã£o=seleÃ§Ã£o,
+          texto_padrao=padrÃ£o
+          )
+
+opÃ§Ãµes = ["Logar","Me Cadastrar","Sair","opÃ§Ã£o 4","opÃ§Ã£o 5","opÃ§Ã£o 6","opÃ§Ã£o 7","opÃ§Ã£o 8"]
+
+select = menu.options(descriÃ§Ã£o="Bem vindo, o que deseja fazer?",opÃ§Ãµes=opÃ§Ãµes)
+
+if select == 0:
+    print('FunÃ§Ã£o logar()')
+elif select == 1: 
+    print('FunÃ§Ã£o Cadastrar()')
+elif select == 2:
+    print('FunÃ§Ã£o Exit()')
+else:
+    print("OpÃ§Ã£o selecionada: " + opÃ§Ãµes[select])
+```
+## LicenÃ§a
+
+Este projeto estÃ¡ licenciado sob a licenÃ§a MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
