@@ -1,0 +1,161 @@
+
+# Package build system
+
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = [ "flit-core>=3.2,<4" ]
+
+[project]
+name = "anndata-fcs"
+description = "Converting FCS files to AnnData objects."
+readme = { file = "README.md", content-type = "text/markdown" }
+
+license = { file = "LICENSE" }
+
+maintainers = [ { name = "harryhaller001", email = "harryhaller001@gmail.com" } ]
+
+authors = [ { name = "harryhaller001", email = "harryhaller001@gmail.com" } ]
+
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dynamic = [ "version" ]
+
+dependencies = [ "anndata", "flowio", "matplotlib" ]
+
+optional-dependencies.docs = [
+    "ipython",
+    "nbsphinx",
+    "sphinx",
+    "sphinx-autoapi",
+    "sphinx-autodoc-typehints",
+    "sphinx-book-theme",
+]
+
+optional-dependencies.test = [
+    "coverage",
+    "flit",
+    "ipykernel",
+    "ipython",
+    "ipywidgets",
+    "mypy",
+    # Typing support
+    "pandas-stubs",
+    "pre-commit",
+    "pytest",
+    "ruff",
+    "scanpy",
+    "twine",
+]
+urls.Documentation = "https://harryhaller001.github.io/anndata-fcs/"
+urls.Home-page = "https://github.com/harryhaller001/anndata-fcs"
+urls.Source = "https://github.com/harryhaller001/anndata-fcs"
+
+[tool.flit.sdist]
+include = [ "anndata_fcs/", "test/" ]
+exclude = [
+    "docs",
+    "coverage",
+    ".vscode",
+    "data",
+    ".github",
+    ".git",
+    ".pre-commit-config.yaml",
+    ".python-version",
+    "requirements.txt",
+    "Makefile",
+    ".gitignore",
+]
+
+[tool.ruff]
+line-length = 120
+extend-include = [ "*.ipynb" ]
+format.docstring-code-format = true
+lint.select = [
+    "B",      # flake8-bugbear
+    "BLE",    # flake8-blind-except
+    "C4",     # flake8-comprehensions
+    "D",      # pydocstyle
+    "E",      # Error detected by Pycodestyle
+    "F",      # Errors detected by Pyflakes
+    "I",      # isort
+    "RUF100", # Report unused noqa directives
+    "TID",    # flake8-tidy-imports
+    "UP",     # pyupgrade
+    "W",      # Warning detected by Pycodestyle
+]
+lint.ignore = [
+    "B008", # Errors from function calls in argument defaults. These are fine when the result is immutable.
+    "C408", # Ignore write dict as literal
+    "D100", # Missing docstring in public module
+    "D104", # Missing docstring in public package
+    "D105", # __magic__ methods are often self-explanatory, allow missing docstrings
+    "D107", # Missing docstring in __init__
+    # Disable one in each pair of mutually incompatible rules
+    "D203", # We don’t want a blank line before a class docstring
+    "D213", # <> We want docstrings to start immediately after the opening triple quote
+    "D400", # first line should end with a period [Bug: doesn’t work with single-line docstrings]
+    "D401", # First line should be in imperative mood; try rephrasing
+    "E501", # line too long -> we accept long comment lines; formatter gets rid of long code lines
+    "E731", # Do not assign a lambda expression, use a def -> lambda expression assignments are convenient
+    "E741", # allow I, O, l as variable names -> I is the identity matrix
+]
+lint.per-file-ignores."*/__init__.py" = [ "F401" ]
+lint.per-file-ignores."docs/*" = [ "I" ]
+lint.per-file-ignores."test/*" = [ "D" ]
+lint.pydocstyle.convention = "google"
+
+[tool.pyproject-fmt]
+column_width = 120
+indent = 4
+keep_full_version = false
+max_supported_python = "3.13"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_level = "INFO"
+log_cli = true
+python_files = "test_*.py"
+testpaths = [ "test" ]
+xfail_strict = true
+addopts = [
+    "--import-mode=importlib", # allow using test files with same name
+]
+
+# Coverage config
+
+[tool.coverage.run]
+source = [ "anndata_fcs" ]
+omit = [ "*/test/*" ]
+
+[tool.coverage.report]
+exclude_lines = [ "raise", "except" ]
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "docs/coverage_report"
+
+# Mypy config (https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file)
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+# Ignore libs which are not PEP 561 compliant
+[[tool.mypy.overrides]]
+module = [ "anndata", "flowio", "scipy", "scanpy" ]
+ignore_missing_imports = true
