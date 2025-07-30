@@ -1,0 +1,1 @@
+from algowalk.games.colors import visualize_vibgyor
