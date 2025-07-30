@@ -1,0 +1,109 @@
+Metadata-Version: 2.4
+Name: greetron
+Version: 0.1.3
+Summary: A lightweight library to generate formal and informal greetings and goodbyes.
+Author-email: Aryan Bhan <vsaryan151@gmail.com>
+License: MIT
+Project-URL: Homepage, https://pypi.org/project/greetron
+Keywords: greeting,chatbot,assistant,conversation,friendly-bot
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Communications :: Chat
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+
+---
+
+## 🤖 Greetron
+
+**Greetron** is a lightweight Python package designed for chatbots and virtual assistants that need friendly, professional, or informal greetings and goodbyes — with optional personalization via the user's name.
+
+---
+
+### ✨ Features
+
+* ✅ Randomized greetings and goodbyes
+* ✅ Supports **formal** and **informal** tones
+* ✅ Adds the user’s **name** naturally into responses
+* ✅ Lightweight and dependency-free
+
+---
+
+### 📦 Installation
+
+If published to PyPI:
+
+```bash
+pip install greetron
+```
+
+
+### 🚀 Usage
+
+```python
+from greetron import get_random_greeting, get_random_goodbye
+
+print(get_random_greeting())  # formal greeting
+print(get_random_greeting("Aryan"))  # formal greeting with name
+print(get_random_greeting("Aryan", mode="informal"))  # Informal greeting with name
+
+print(get_random_goodbye())  # formal goodbye
+print(get_random_goodbye("Aryan"))  # formal goodbye with name
+print(get_random_goodbye("Aryan", mode="informal"))  # inFormal goodbye with name
+```
+
+---
+
+### 📂 Greeting Modes
+
+| Mode       | Description                                 |
+| ---------- | ------------------------------------------- |
+| `formal`   | Professional tone (e.g., business/chatbots) |
+| `informal` | Friendly/casual tone for personal bots      |
+
+---
+
+### 🔧 Function Signatures
+
+```python
+get_random_greeting(name: str = None, mode: str = "informal") -> str
+get_random_goodbye(name: str = None, mode: str = "informal") -> str
+```
+
+* `name`: Optional — A user’s name to personalize the message
+* `mode`: Optional — `"formal"` or `"informal"` tone
+
+---
+
+### 🧠 Example Output
+
+```python
+get_random_greeting("Aryan", mode="formal")
+# "Hello, Aryan! How may I assist you today?"
+
+get_random_goodbye("Aryan", mode="informal")
+# "Catch ya later, Aryan!"
+```
+
+---
+
+### 📘 License
+
+MIT License
+
+---
+
+Let me know if you'd like:
+
+* Badge support (e.g., version, build)
+* GitHub Actions setup for publishing to PyPI
+* CLI or Streamlit demo interface
+
