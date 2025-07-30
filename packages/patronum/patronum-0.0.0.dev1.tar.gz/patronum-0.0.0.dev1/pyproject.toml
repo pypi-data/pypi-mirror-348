@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "patronum"
+version = "0.0.0.dev1"
+authors = [
+  { name = "Kordian Grabowski", email = "kordiangrabowski@gmail.com" },
+]
+description = "A Spring Boot-inspired Dependency Injection and Configuration Framework for Python."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+keywords = ["dependency injection", "service discovery", "di", "ioc", "configuration", "framework", "spring", "python"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha", # Start with Pre-Alpha
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "PyYAML>=6.0",
+    "pydantic>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/patronum-project/patronum"
+Repository = "https://github.com/patronum-project/patronum"
+Issues = "https://github.com/patronum-project/patronum/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=6.0", 
+    "ruff>=0.11.0"
+]
