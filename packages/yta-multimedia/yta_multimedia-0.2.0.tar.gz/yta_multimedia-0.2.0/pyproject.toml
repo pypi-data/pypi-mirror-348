@@ -1,0 +1,45 @@
+[project]
+name = "yta-multimedia"
+version = "0.2.0"
+description = "Youtube Autónomo Multimedia Module is here."
+authors = [
+    {name = "danialcala94",email = "danielalcalavalera@gmail.com"}
+]
+readme = "README.md"
+requires-python = "==3.9"
+dependencies = [
+    "yta_general_utils (>=0.0.250,<1.0.0)",
+    "yta_constants (>=0.0.1,<1.0.0)",
+    "yta_validation (>=0.0.1,<1.0.0)",
+    "yta_file_downloader (>=0.0.1,<1.0.0)",
+    "yta_programming (>=0.0.1,<1.0.0)",
+    "yta_multimedia_utils (>=0.0.1,<1.0.0)",
+    "yta_multimedia_ffmpeg_handler (>=0.0.1,<1.0.0)",
+    # TODO: Commented until I confirm it is needed here and until I
+    # solve the circular dependency if existing.
+    #"yta_multimedia_manim (>=0.0.1,<1.0.0)",
+    "yta_image (>=0.0.10,<1.0.0)",
+    "yta_audio (>=0.0.29,<1.0.0)",
+    "moviepy (>=2.0.0,<3.0.0)",
+    "pillow (>=9.5.0,<10.0.0)",
+    "backgroundremover (>=0.2.6,<1.0.0)",
+    "scikit-image (>=0.22.0,<1.0.0)",
+    "opencv-python (>=4.11.0.86,<5.0.0.0)",
+    #"numpy (>=1.23.5,<2.0.0)",
+    "scenedetect (>=0.6.5.1,<1.0.0.0)",
+    "imageio (>=2.33.0,<3.0.0)",
+    "numba (>=0.60.0,<1.0.0)",
+    "pygame (>=2.5.2,<3.0.0)",
+    "scipy (>=1.13.1,<2.0.0)",
+    "matplotlib (>=3.8.4,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "yta_multimedia", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
