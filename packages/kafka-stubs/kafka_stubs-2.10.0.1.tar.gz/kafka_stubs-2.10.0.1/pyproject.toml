@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools >= 61.0", "setuptools-scm >= 8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "kafka-stubs"
+requires-python = ">=3.10"
+authors = [{ name = "Timofei Kukushkin", email = "tima@kukushkin.me" }]
+description = "Type stubs for Confluent Kafka Python client"
+readme = "README.md"
+dependencies = ["confluent-kafka>=2.10.0"]
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Typing :: Stubs Only",
+]
+
+[dependency-groups]
+lint = ["pyright", "ruff", "fastavro", "avro"]
+dev = [
+  { include-group = "lint" },
+  "tox",
+  "tox-uv",
+  "uv",
+]
+
+[project.urls]
+Homepage = "https://github.com/tkukushkin/kafka-stubs"
+Repository = "https://github.com/tkukushkin/kafka-stubs.git"
+Issues = "https://github.com/tkukushkin/kafka-stubs/issues"
+Documentation = "https://kafka-stubs.readthedocs.io/stable"
+Changelog = "https://github.com/tkukushkin/kafka-stubs/releases"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["confluent_kafka-stubs"]
+
+[tool.setuptools_scm]

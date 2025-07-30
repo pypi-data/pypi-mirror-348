@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: kafka-stubs
+Version: 2.10.0.1
+Summary: Type stubs for Confluent Kafka Python client
+Author-email: Timofei Kukushkin <tima@kukushkin.me>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/tkukushkin/kafka-stubs
+Project-URL: Repository, https://github.com/tkukushkin/kafka-stubs.git
+Project-URL: Issues, https://github.com/tkukushkin/kafka-stubs/issues
+Project-URL: Documentation, https://kafka-stubs.readthedocs.io/stable
+Project-URL: Changelog, https://github.com/tkukushkin/kafka-stubs/releases
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Typing :: Stubs Only
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: confluent-kafka>=2.10.0
+Dynamic: license-file
+
+# kafka-stubs
+
+[![PyPI - Status](https://img.shields.io/pypi/status/kafka-stubs)](https://pypi.org/project/kafka-stubs)
+[![PyPI](https://img.shields.io/pypi/v/kafka-stubs)](https://pypi.org/project/kafka-stubs)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kafka-stubs)](https://pypi.org/project/kafka-stubs)
+[![PyPI - License](https://img.shields.io/pypi/l/kafka-stubs)](https://pypi.org/project/kafka-stubs)
+[![CI Status](https://github.com/tkukushkin/kafka-stubs/actions/workflows/check.yml/badge.svg)](https://github.com/tkukushkin/kafka-stubs/actions/workflows/check.yml)
+
+Type stubs for [Confluent Kafka Python Client](https://pypi.org/project/confluent-kafka/).
+
+## Installation
+
+```bash
+pip install kafka-stubs
+```
