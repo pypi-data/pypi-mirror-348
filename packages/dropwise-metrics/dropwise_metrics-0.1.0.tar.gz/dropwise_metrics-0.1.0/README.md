@@ -1,0 +1,163 @@
+# Dropwise-Metrics
+
+**Dropwise-Metrics** is a lightweight TorchMetrics-compatible toolkit for performing Monte Carlo Dropout–based uncertainty estimation in Transformers. It enables confidence-aware decision making by revealing how certain a model is about its predictions — packaged as plug-and-play PyTorch `Metric` classes.
+
+---
+
+## Features
+
+- Enable dropout during inference for Bayesian-like uncertainty estimation  
+- Compute predictive entropy, confidence, and per-class standard deviation  
+- Modular support for classification, QA, token tagging, and regression  
+- Works seamlessly with Hugging Face Transformers and PyTorch  
+- TorchMetrics-compatible: `.update()` + `.compute()`  
+- Supports batch inference, CPU/GPU, and customizable `num_passes`  
+- Cleanly packaged and extensible for research or production
+
+---
+
+## Supported Tasks
+
+- `sequence-classification` — e.g. `distilbert-base-uncased-finetuned-sst-2-english`
+- `token-classification` — e.g. `dslim/bert-base-NER`
+- `question-answering` — e.g. `deepset/bert-base-cased-squad2`
+- `regression` — e.g. `roberta-base` with a custom head
+
+> Note: Your model must contain dropout layers for MC sampling to work (most Hugging Face models do).
+
+---
+
+## Installation
+
+```bash
+pip install dropwise-metrics
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/aryanator/dropwise-metrics.git
+cd dropwise-metrics
+pip install -e .
+```
+
+---
+
+## Example Usage (Metric Style)
+
+### Sequence Classification
+
+```python
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from dropwise_metrics.metrics.entropy import PredictiveEntropyMetric
+
+model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
+tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
+
+metric = PredictiveEntropyMetric(model, tokenizer, task_type="sequence-classification", num_passes=20)
+metric.update(["The movie was fantastic!", "Awful experience."])
+results = metric.compute()
+
+print(results[0])
+```
+
+### Token Classification (NER)
+
+```python
+from transformers import AutoModelForTokenClassification, AutoTokenizer
+from dropwise_metrics.metrics.entropy import PredictiveEntropyMetric
+
+model = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER")
+tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
+
+metric = PredictiveEntropyMetric(model, tokenizer, task_type="token-classification", num_passes=15)
+metric.update(["Hugging Face is based in New York City."])
+results = metric.compute()
+
+print(results[0]['token_predictions'])
+```
+
+### Question Answering
+
+```python
+from transformers import AutoModelForQuestionAnswering, AutoTokenizer
+from dropwise_metrics.metrics.entropy import PredictiveEntropyMetric
+
+model = AutoModelForQuestionAnswering.from_pretrained("deepset/bert-base-cased-squad2")
+tokenizer = AutoTokenizer.from_pretrained("deepset/bert-base-cased-squad2")
+
+question = "Where is Hugging Face based?"
+context = "Hugging Face Inc. is a company based in New York City."
+qa_input = f"{question} [SEP] {context}"
+
+metric = PredictiveEntropyMetric(model, tokenizer, task_type="question-answering", num_passes=10)
+metric.update([qa_input])
+results = metric.compute()
+
+print(results[0]['answer'])
+```
+
+### Regression
+
+```python
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from dropwise_metrics.metrics.entropy import PredictiveEntropyMetric
+
+model = AutoModelForSequenceClassification.from_pretrained("roberta-base", num_labels=1)
+tokenizer = AutoTokenizer.from_pretrained("roberta-base")
+
+metric = PredictiveEntropyMetric(model, tokenizer, task_type="regression", num_passes=20)
+metric.update(["The child is very young."])
+results = metric.compute()
+
+print(results[0]['predicted_score'], "+/-", results[0]['uncertainty'])
+```
+
+---
+
+## Output Dictionary (per sample)
+
+Common fields returned:
+
+- `predicted_class`: Most probable class (classification)
+- `predicted_score`: Scalar prediction (regression)
+- `confidence`: Highest softmax probability
+- `entropy`: Predictive entropy (lower = more confident)
+- `std_dev`: Per-class standard deviation
+- `probs`: Raw softmax probabilities
+- `margin`: Confidence gap between top-2 classes
+- `answer`: Predicted span (question answering only)
+- `token_predictions`: Per-token predictions (NER only)
+
+---
+
+## Run Tests
+
+```bash
+python test_entropy.py
+```
+
+---
+
+## Folder Structure
+
+```
+dropwise_metrics/
+├── base.py
+├── metrics/
+│   └── entropy.py
+├── tasks/
+│   ├── __init__.py
+│   ├── sequence_classification.py
+│   ├── token_classification.py
+│   ├── question_answering.py
+│   └── regression.py
+```
+
+---
+
+## License
+
+MIT License
+
+Built with ❤️ for robust, explainable, uncertainty-aware AI systems.
