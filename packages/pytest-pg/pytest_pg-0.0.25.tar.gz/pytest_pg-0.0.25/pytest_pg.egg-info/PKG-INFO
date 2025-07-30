@@ -1,0 +1,161 @@
+Metadata-Version: 2.4
+Name: pytest_pg
+Version: 0.0.25
+Summary: A tiny plugin for pytest which runs PostgreSQL in Docker
+Home-page: https://github.com/anna-money/pytest-pg
+Author: Yury Pliner
+Author-email: yury.pliner@gmail.com
+License: MIT
+Platform: macOS
+Platform: POSIX
+Platform: Windows
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Pytest
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: docker>=7.0.0
+Requires-Dist: pytest>=7.4
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: platform
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+To speed up tests, pytest-pg does the following tweaks:
+
+1. fsync=off
+1. full_page_writes=off
+1. synchronous_commit=off
+1. jit=off
+1. bgwriter_lru_maxpages=0
+1. data directory is mounted to a tmpfs 
+
+# How to use?
+
+```
+import asyncpg
+
+
+async def test_asyncpg_query(pg):
+    conn = await asyncpg.connect(
+        user=pg.user,
+        password=pg.password,
+        database=pg.database,
+        host=pg.host,
+        port=pg.port,
+    )
+
+    await conn.execute("CREATE TABLE test_table (id serial PRIMARY KEY, value text);")
+    await conn.execute("INSERT INTO test_table (value) VALUES ($1)", "hello")
+    row = await conn.fetchrow("SELECT value FROM test_table WHERE id = $1", 1)
+
+    assert row["value"] == "hello"
+
+    await conn.close()
+```
+
+## v0.0.25 (2025-05-18)
+
+* Add `pg_17` fixture
+
+
+## v0.0.24 (2025-05-11)
+
+* [Downgrade pytest ](https://github.com/anna-money/pytest-pg/pull/224)
+
+
+## v0.0.23 (2025-04-11)
+
+* [Do not pull if we have an image locally](https://github.com/anna-money/pytest-pg/pull/223)
+
+
+## v0.0.22 (2025-04-03)
+
+* Override docker host with env variable
+
+
+## v0.0.17 (2024-04-03)
+
+* Override docker host with env variable
+
+
+## v0.0.15 (2023-05-04)
+
+* Pin version of `urllib3` ([see for more details](https://github.com/docker/docker-py/issues/3113))
+* Add `pg_15` fixture
+
+
+## v0.0.14 (2022-09-19)
+
+* Disable jit by default
+* Set bgwriter_lru_maxpages
+
+
+## v0.0.12 (2022-01-18)
+
+* Ditch logging because it seems to be useless
+
+
+## v0.0.11 (2022-01-09)
+
+* Move volume to tmpfs
+
+
+## v0.0.10 (2022-01-08)
+
+* Volumes used to remain after running test consuming disk space
+
+
+## v0.0.9 (2021-12-28)
+
+* Disable fsync, full_page_writes, synchronous_commit to speedup the tests
+
+
+## v0.0.8 (2021-12-26)
+
+* Add typing marker, mypy. Run tests in CI
+
+
+## v0.0.7 (2021-12-25)
+
+* Fix is_ready based on psycopg2
+
+
+## v0.0.6 (2021-12-25)
+
+* Add all recent major versions of PG
+
+
+## v0.0.4 (2021-12-10)
+
+* Fix is_postgres_ready usage
+
+## v0.0.3 (2021-12-10)
+
+* Fix uuid generation
+
+## v0.0.2 (2021-12-10)
+
+* Follow pytest guide for plugins
+
+## v0.0.1 (2021-12-10)
+
+* A first version
