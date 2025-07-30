@@ -1,0 +1,45 @@
+{
+  "bwa_path": "bwa",
+  "md5_chunk_size": 4096,
+
+  "ucsc_references": {
+    "hg19": {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/chr1.fa.gz",
+      "target_path": "alignment/chr1.hg19.fa.gz",
+      "index_command": "bwa index {path}"
+    },
+    "hg38": {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/chromosomes/chr1.fa.gz",
+      "target_path": "alignment/chr1.hg38.fa.gz",
+      "index_command": "bwa index {path}"
+    }
+  },
+
+  "vntyper_references": {
+    "vntr_db_advntr": {
+      "url": "https://raw.githubusercontent.com/hassansaei/VNtyper/refs/heads/main/reference/vntr_db_advntr.zip",
+      "target_path": "vntr_db_advntr.zip",
+      "extract_to": "."
+    }
+  },
+
+  "own_repository_references": {
+    "raw_files": [
+      {
+        "url": "https://raw.githubusercontent.com/hassansaei/VNtyper/main/reference/All_Pairwise_and_Self_Merged_MUC1_motifs_filtered.fa",
+        "target_path": "All_Pairwise_and_Self_Merged_MUC1_motifs_filtered.fa",
+        "index_command": "samtools faidx {path}"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/hassansaei/VNtyper/main/reference/MUC1_motifs_Rev_com.fa",
+        "target_path": "MUC1_motifs_Rev_com.fa",
+        "index_command": "samtools faidx {path}"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/hassansaei/VNtyper/main/reference/code-adVNTR_RUs.fa",
+        "target_path": "code-adVNTR_RUs.fa",
+        "index_command": "samtools faidx {path}"
+      }
+    ]
+  }
+}

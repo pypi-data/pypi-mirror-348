@@ -1,0 +1,88 @@
+{
+  "default_values": {
+    "threads": 4,
+    "output_dir": "out",
+    "output_name": "processed",
+    "archive_format": "zip",
+    "report_file": "summary_report.html",
+    "flanking": 50,
+    "summary_file": "cohort_summary.html",
+    "reference_assembly": "hg19"
+  },
+  "cli_defaults": {
+    "log_level": "INFO",
+    "log_file": "pipeline.log"
+  },
+  "api": {
+    "base_url": "https://vntyper.org/api"
+  },
+  "reference_data": {
+    "muc1_reference_vntr": "reference/All_Pairwise_and_Self_Merged_MUC1_motifs_filtered.fa",
+    "advntr_reference_vntr_hg19": "reference/vntr_db_advntr/hg19_muc1.db",
+    "advntr_reference_vntr_hg38": "reference/vntr_db_advntr/hg38_muc1.db",
+    "bwa_reference_hg19": "reference/alignment/chr1.hg19.fa",
+    "bwa_reference_hg38": "reference/alignment/chr1.hg38.fa",
+    "code_adVNTR_RUs": "reference/code-adVNTR_RUs.fa",
+    "muc1_motifs_rev_com": "reference/MUC1_motifs_Rev_com.fa"
+  },
+  "tools": {
+    "fastp": "fastp",
+    "samtools": "samtools",
+    "bwa": "bwa",
+    "advntr": "mamba run -n envadvntr advntr",
+    "shark": "mamba run -n shark_env shark",
+    "kestrel": "vntyper/dependencies/kestrel/kestrel.jar",
+    "java_path": "java"
+  },
+  "tool_params": {
+    "bwa_index_extensions": [".amb", ".ann", ".bwt", ".pac", ".sa"]
+  },
+  "bam_processing": {
+    "bam_region_hg19": "chr1:155158000-155163000",
+    "bam_region_hg38": "chr1:155184000-155194000",
+    "vntr_region_hg19": "chr1:155160500-155162000",
+    "vntr_region_hg38": "chr1:155188000-155192500",
+    "compression_level": 6,
+    "disable_adapter_trimming": true,
+    "deduplication": true,
+    "dup_calc_accuracy": 3,
+    "length_required": 50,
+    "qualified_quality_phred": 20
+  },
+  "visualization": {
+    "donut_colors": ["#56B4E9", "#D55E00", "#999999"],
+    "donut_hole_size": 0.6,
+    "plot_height": 500,
+    "plot_width": 500,
+    "annotation_font_size": 14
+  },
+  "thresholds": {
+    "mean_vntr_coverage": 100,
+    "percent_vntr_uncovered": 50.0,
+    "duplication_rate": 0.1,
+    "q20_rate": 0.8,
+    "q30_rate": 0.7,
+    "passed_filter_reads_rate": 0.8
+  },
+  "cohort": {
+    "kestrel_result_file": "kestrel_result.tsv",
+    "advntr_result_file": "output_adVNTR.tsv"
+  },
+  "file_processing": {
+    "snv_length": 1
+  },
+  "install_references": {
+    "md5_chunk_size": 4096,
+    "checksum_filename": "md5_checksums.txt"
+  },
+  "paths": {
+    "template_dir": "vntyper/templates"
+  },
+  "utils": {
+    "fastq_validation_lines": 4
+  },
+  "cross_match": {
+    "match_logic": "Kestrel_Allele_Change == Advntr_Allele_Change and Kestrel_Variant_Type.lower() == Advntr_Variant_Type.lower()"
+  },
+  "welcome_message": "==========================================================================================================\nGiven alignment (BAM) or raw file (FASTQ), this tool genotypes MUC1 coding-VNTR \n-- For rapid genotyping, BAM files are preferred!\n-- User can Skip code-adVNTR genotyping step using --ignore_advntr option (This step will take a while..)\nThis is free non-commercial software.\n=========================================================================================================="
+}
