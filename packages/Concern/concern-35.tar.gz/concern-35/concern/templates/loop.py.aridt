@@ -1,0 +1,41 @@
+# Copyright 2019, 2021, 2022 Andrzej Cichocki
+
+# This file is part of Concern.
+#
+# Concern is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Concern is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Concern.  If not, see <http://www.gnu.org/licenses/>.
+
+from pathlib import Path
+import subprocess, sys
+
+def main():
+    windowname, shellcommand = sys.argv[1:]
+    while True:
+        process = subprocess.Popen(shellcommand, shell = True)
+        try:
+            status = process.wait()
+        except KeyboardInterrupt:
+            status = process.wait()
+        print(f"{windowname} exited with status: {status}", file = sys.stderr)
+        if signalpath.exists():
+            break
+        sys.stderr.write('''Press enter to restart it, or your system's EOF key combination to finish.''')
+        try:
+            input()
+        except EOFError:
+            break
+
+signalpath = Path($"$(signalpath))
+
+if '__main__' == __name__:
+    main()

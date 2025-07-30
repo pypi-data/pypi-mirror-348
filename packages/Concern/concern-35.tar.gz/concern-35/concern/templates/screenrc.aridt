@@ -1,0 +1,10 @@
+vbell off
+split -v
+focus
+resize $str$(window consumer size)
+screen $(window consumer screencmd)
+title $(window consumer name)
+scrollback $(window consumer scrollback)
+focus
+screen $(window vim screencmd)
+title $(window vim name)
