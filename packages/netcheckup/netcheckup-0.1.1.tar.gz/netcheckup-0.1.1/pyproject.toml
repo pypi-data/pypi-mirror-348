@@ -1,0 +1,20 @@
+[project]
+name = "netcheckup"
+version = "0.1.1"
+description = "A simple internet health diagnostic tool"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [{name = "akhilsudhakaran", email = "akhilsudhakaran14@gmail.com"}]
+dependencies = []
+
+[project.scripts]
+netcheckup = "netcheckup:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/AkhilSu/netcheckup"
+Repository = "https://github.com/AkhilSu/netcheckup"
