@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: vba-sync
+Version: 0.1.5
+Summary: Export and import VBA macros from Word (.docm .dotm) and Excel (.xlsm .xlam)
+Author: "Andrey Kolesov"
+Author-email: "never-ya@yandex.ru"
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pywin32
+Dynamic: license-file
+
+# VBA-Sync
+
+A command-line tool for exporting and importing VBA macros from Microsoft Word (.docm .dotm) and Excel (.xlsm .xlam) files.
+
+This script allows you to:
+- Export all VBA modules from a document into a folder.
+- Import previously exported modules back into the document.
+
+Create a backup copy of the document before importing macros.
+
+
+## Installation
+
+```bash
+pip install vba-sync
+```
+
+# Requirements
+
+Python >= 3.7
+
+Microsoft Word or Excel installed
+
+Trust access to the VBA project object model enabled in Office settings
+
+# Usage
+
+## Export macros
+vba-sync export your_file.docm
+
+## Import macros
+vba-sync import your_file.docm
+
+[![License](https://img.shields.io/github/license/AndyTakker/VBA-Sync)](https://github.com/AndyTakker/VBA-Sync)
