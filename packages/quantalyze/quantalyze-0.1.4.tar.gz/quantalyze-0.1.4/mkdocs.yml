@@ -1,0 +1,45 @@
+site_name: Quantalyze
+repo_url: https://github.com/jakeayres/Quantalyze
+repo_name: Quantalyze
+nav:
+  - Overview: index.md
+  - Core:
+      - Overview: core.md
+      - Fitting: fitting.md
+      - Differentiation: differentiation.md
+      - Smoothing: smoothing.md
+      - Symmetrization: symmetrization.md
+      - Interpolation: interpolation.md
+      - FFT: fft.md
+  - Transport: transport.md
+  - Beta:
+      - Overview: beta/overview.md
+      - Quantum Oscillations: beta/quantum_oscillations.md
+      - Plotting: beta/plotting.md
+      - Thermometry: beta/thermometry.md
+
+theme:
+  name: material
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            heading_level: 2
+            show_root_heading: true
+            show_root_toc_entry: false
+            show_root_full_path: false
+            merge_init_into_class: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_docstring_examples: true
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
