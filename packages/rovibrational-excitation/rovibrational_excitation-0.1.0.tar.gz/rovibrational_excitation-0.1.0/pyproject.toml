@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rovibrational_excitation"
+version = "0.1.0"        # bump!
+description = "Rovibrational wave-packet simulation toolkit"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{name = "Hiroki Tsusaka", email = "tsusaka4research@gmail.com"}]
+license = {text = "MIT"}   # 例
+
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.10",
+    "numba>=0.59",
+    "cupy; extra == \"gpu\"",
+    "pandas",
+    "tqdm",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["rovibrational_excitation*", "linmol_dipole*", "rot_tdms*", "vib_tdms*"]
+exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+
+[project.optional-dependencies]
+gpu = ["cupy-cuda12x"]   # 例：GPU 用 extras
+dev = ["pytest", "build", "twine"]
