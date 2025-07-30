@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: voiceflow-module
+Version: 0.4.3
+Summary: Module to help you with knowledge base management
+Home-page: https://parnidia.com
+Author: Alex
+Author-email: Alex@parnidia.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: xmltodict
+Requires-Dist: tiktoken
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+## voiceflow-module
+
+Module to help speed up Voiceflow text agents' development
+
+# Installation
+
+pip install voiceflow-module
