@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: fastapi
+      POSTGRES_PASSWORD: fastapi
+      POSTGRES_DB: fastapi_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://fastapi:fastapi@db:5432/fastapi_db
+      SECRET_KEY: "CHANGE_ME"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: ["{{ cookiecutter.project_slug }}", "dev", "--host", "0.0.0.0", "--port", "8000"]
+
+volumes:
+  postgres_data:
