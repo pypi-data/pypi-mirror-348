@@ -1,0 +1,131 @@
+# Mock Engine
+
+Mock Engine 是一个强大的 Python 模拟执行引擎，提供了模板渲染、结构化断言和代码执行功能，支持调试模式，帮助开发者更好地理解和调试接口或脚本执行过程。
+
+## 功能特点
+
+- **模板引擎**：支持变量替换、自定义方法、结构化断言
+- **代码引擎**：支持 SQL 查询、上下文变量、灵活的代码级断言
+- **调试模式**：详细的执行日志和调试信息
+- **数据库支持**：内置 SQL 查询功能
+- **上下文管理**：支持变量传递和共享
+- **通用断言**：在 code 脚本中可直接用 ASSERT 进行多类型断言
+
+## 安装
+
+```bash
+pip install mock-engine
+```
+
+## 快速开始
+
+### 模板引擎示例
+
+```python
+from mock_engine.core.template_engine import TemplateEngine
+
+engine = TemplateEngine(debug=True)
+
+template = {
+    "greeting": "Hello, @name!",
+    "name": "@name",
+    "age": "@age",
+    "faker_name": "@faker.name",
+    "nested": {
+        "level1": {
+            "level2": "@nested.level1.level2"
+        }
+    }
+}
+
+request_data = {
+    "name": "John",
+    "age": 25,
+    "nested": {"level1": {"level2": "deep"}}
+}
+
+# 定义结构化断言
+assertions = [
+    {"path": "$.age", "op": ">", "value": 18},
+    {"path": "$.name", "op": "==", "value": "John"},
+    {"path": "$.nested.level1.level2", "op": "==", "value": "deep"},
+    {"path": "$.faker_name", "op": "len>", "value": 0}
+]
+
+result, assertion_results, debug = engine.generate_with_assertions(template, request_data, assertions)
+print("渲染结果:", result)
+print("断言结果:", assertion_results)
+print("调试信息:", debug)
+```
+
+### 代码引擎示例
+
+```python
+from mock_engine.core.code_engine import CodeEngine
+
+engine = CodeEngine(debug=True)
+
+# 代码模式下的断言和SQL示例
+code = '''
+ASSERT("hello world", op="contains", expected="hello")
+ASSERT(5, op=">", expected=3)
+ASSERT("abc123", op="regex", expected=r"\\d+")
+ASSERT("foo", op="==", expected="foo")
+ASSERT("bar", op="not_contains", expected="baz")
+result = "断言全部通过"
+'''
+
+output = engine.execute(code)
+print(output)
+```
+
+### 通用断言（代码模式）
+
+在 code 脚本中可直接使用 `ASSERT` 进行多类型断言：
+
+```python
+ASSERT("hello world", op="contains", expected="hello")
+ASSERT(5, op=">", expected=3)
+ASSERT("abc123", op="regex", expected=r"\\d+")
+ASSERT("foo", op="==", expected="foo")
+ASSERT("bar", op="not_contains", expected="baz")
+```
+
+支持的操作符包括：`==`, `!=`, `>`, `<`, `>=`, `<=`, `contains`, `not_contains`, `regex`, `startswith`, `endswith`。
+
+断言失败会自动抛出 AssertionError 并在 execute 返回结果的 error 字段体现。
+
+## 文档
+
+- [调试模式使用文档](docs/debug_mode.md)
+- [API 文档](docs/api.md)
+
+## 开发
+
+### 环境设置
+
+1. 克隆仓库：
+```bash
+git clone https://github.com/Yarsar-l/mock_engine.git
+cd mock_engine
+```
+
+2. 创建虚拟环境：
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+3. 安装依赖：
+```bash
+pip install -r requirements.txt
+```
+
+## 贡献
+
+欢迎提交 Pull Request 或创建 Issue。
+
+## 许可证
+
+MIT License
