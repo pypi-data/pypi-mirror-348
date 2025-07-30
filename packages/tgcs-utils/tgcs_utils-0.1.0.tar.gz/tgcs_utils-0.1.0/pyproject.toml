@@ -1,0 +1,23 @@
+[project]
+name = "tgcs-utils"
+version = "0.1.0"
+description = "Python CLI utilities for David's Trail Guide System."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "cappa>=0.27.2",
+    "requests>=2.32.3",
+]
+
+[project.scripts]
+tgcs-utils = "tgcs_utils.main:main"
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.27.0",
+    "ruff>=0.11.7",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
