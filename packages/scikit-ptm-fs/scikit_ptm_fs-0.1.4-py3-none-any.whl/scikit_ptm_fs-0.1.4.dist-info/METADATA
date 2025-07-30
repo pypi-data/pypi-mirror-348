@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: scikit-ptm-fs
+Version: 0.1.4
+Summary: A Python package for integrating scikit-learn feature selection with multi-label problem transformation methods.
+Home-page: https://github.com/Omaimah-AlHosni/scikit-ptm-fs
+Author: Omaima Al Hosni
+Author-email: alhosni_o@hotmail.com
+Project-URL: Source, https://github.com/Omaimah-AlHosni/scikit-ptm-fs
+Project-URL: Tracker, https://github.com/Omaimah-AlHosni/scikit-ptm-fs/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.20
+Requires-Dist: scikit-learn>=1.0
+Requires-Dist: scipy>=1.5
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Scikit-PTM-FS
+
+A modular framework for integrating scikit-learn feature selection with multi-label PTMs.
