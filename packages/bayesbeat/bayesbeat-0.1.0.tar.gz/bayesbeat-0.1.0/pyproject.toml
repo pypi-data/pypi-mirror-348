@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bayesbeat"
+authors = [
+    {name = "Michael J. Williams", email = "michaeljw1@googlemail.com"},
+    {name = "Simon C. Tait", email = "stait@caltech.edu"},
+    {name = "Joseph Bayley", email = "joseph.bayley@glasgow.ac.uk"},
+    {name = "Bryan Barr", email  = "bryan.barr@glasgow.ac.uk"},
+]
+description = "Bayesian inference for two decaying beating signals"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "click",
+    "hdf5storage",
+    "nessai>=0.8",
+    "corner",
+    "dill",
+    "sympy",
+    "h5py",
+    "seaborn",
+    "scipy",
+    "click",
+]
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+numba = [
+    "numba",
+]
+condor = [
+    "pycondor",
+]
+slurm = [
+    "simple-slurm",
+]
+
+dev = [
+    "pytest",
+    "numba",
+]
+
+[project.scripts]
+bayesbeat_run = "bayesbeat.cli.run:run"
+bayesbeat_build = "bayesbeat.cli.build:build"
+bayesbeat_base_config = "bayesbeat.cli.config:base_config"
+bayesbeat_create_ini = "bayesbeat.cli.config:create_ini"
+bayesbeat_generate_injections = "bayesbeat.cli.generate:generate_injections"
+bayesbeat_plot_data = "bayesbeat.cli.plot:plot_data"
+bayesbeat_plot_posterior = "bayesbeat.cli.plot:plot_posterior"
+bayesbeat_plot_fit = "bayesbeat.cli.plot:plot_fit"
+bayesbeat_estimate_priors = "bayesbeat.cli.priors:estimate_priors"
+
+[project.entry-points."nessai.reparameterisations"]
+bayesbeat_log_amplitude_reparameterisation = "bayesbeat.reparameterisations:log_amplitude_reparameterisation"
+
+
+[tool.setuptools_scm]
+
+[tool.black]
+line-length = 79
