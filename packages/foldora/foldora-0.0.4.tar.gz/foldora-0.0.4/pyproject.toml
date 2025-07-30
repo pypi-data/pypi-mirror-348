@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "foldora"
+version = "0.0.4"
+license = {text = "MIT"}
+readme = {file = "README.md", content-type = "text/markdown"}
+description = "A CLI tool that manages files and directories."
+authors = [{name = "Ayoub A."}, {email = "aberbach.me@gmail.com"}]
+keywords = ["cli", "file i/o", "file/directory manager"]
+maintainers = [{name = "Ayoub A."}, {email = "aberbach.me@gmail.com"}]
+requires-python = ">=3.6"
+dependencies = [
+    "click",
+    "colorama",
+    "importlib-metadata; python_version < '3.12'",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+
+[project.scripts]
+fd = "foldora.__main__:cli"
+
+[project.urls]
+Homepage = "https://pypi.org/project/foldora/"
+Repository = "https://github.com/ayoub-aberbach/foldora"
+Issues = "https://github.com/ayoub-aberbach/foldora/issues"
+Changelog = "https://github.com/ayoub-aberbach/foldora/releases"
