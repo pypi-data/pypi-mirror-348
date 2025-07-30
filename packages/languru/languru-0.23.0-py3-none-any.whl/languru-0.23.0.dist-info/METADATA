@@ -1,0 +1,59 @@
+Metadata-Version: 2.3
+Name: languru
+Version: 0.23.0
+Summary: The general purpose LLM app stacks.
+License: Apache-2.0 license
+Author: Allen Chou
+Author-email: f1470891079@gmail.com
+Requires-Python: >=3.11,<4.0
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: all
+Requires-Dist: anthropic (>0.27,<1)
+Requires-Dist: diskcache (>=5,<6)
+Requires-Dist: email-validator (>=2,<3)
+Requires-Dist: faker
+Requires-Dist: fakeredis (>=2,<3)
+Requires-Dist: groq (>=0.4.2,<1)
+Requires-Dist: json-repair
+Requires-Dist: logfire (>=3.16,<4)
+Requires-Dist: logging-bullet-train (>=0.3.0,<1)
+Requires-Dist: openai (>=1.66.0,<2)
+Requires-Dist: openai-agents
+Requires-Dist: pydantic (>=2,<3)
+Requires-Dist: pydantic-settings (>=2,<3)
+Requires-Dist: redis (>=5,<6)
+Requires-Dist: rich (>=13,<14)
+Requires-Dist: str-or-none (>=0.1.0,<1)
+Requires-Dist: tiktoken (>=0.3,<1)
+Requires-Dist: typing-extensions (>=4,<5)
+Requires-Dist: voyageai (>=0,<1)
+Project-URL: Documentation, https://allen2c.github.io/languru/
+Project-URL: Homepage, https://github.com/allen2c/languru
+Project-URL: Repository, https://github.com/allen2c/languru
+Description-Content-Type: text/markdown
+
+# Languru
+
+The general-purpose LLM app stacks deploy AI services quickly and (stupidly) simply.
+
+```txt
+ _
+| |    __ _ _ __   __ _ _   _ _ __ _   _
+| |   / _` | '_ \ / _` | | | | '__| | | |
+| |__| (_| | | | | (_| | |_| | |  | |_| |
+|_____\__,_|_| |_|\__, |\__,_|_|   \__,_|
+                  |___/
+```
+
+[![image](https://img.shields.io/pypi/v/languru.svg)](https://pypi.python.org/pypi/languru)
+[![image](https://img.shields.io/pypi/l/languru.svg)](https://pypi.python.org/pypi/languru)
+[![image](https://img.shields.io/pypi/pyversions/languru.svg)](https://pypi.python.org/pypi/languru)
+[![PytestCI](https://github.com/dockhardman/languru/actions/workflows/python-pytest.yml/badge.svg)](https://github.com/dockhardman/languru/actions/workflows/python-pytest.yml)
+[![codecov](https://codecov.io/gh/dockhardman/languru/graph/badge.svg?token=OFX6C8Z31C)](https://codecov.io/gh/dockhardman/languru)
+
+Documentation: [Github Pages](https://dockhardman.github.io/languru/)
+
