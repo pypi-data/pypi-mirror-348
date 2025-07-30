@@ -1,0 +1,98 @@
+Metadata-Version: 2.4
+Name: dbridge
+Version: 0.2.10
+Project-URL: Documentation, https://github.com/e3oroush/dbridge#readme
+Project-URL: Issues, https://github.com/e3oroush/dbridge/issues
+Project-URL: Source, https://github.com/e3oroush/dbridge
+Author-email: e3oroush <ebrahim.soroush@gmail.com>
+License-Expression: MIT
+License-File: LICENSE.txt
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.8
+Requires-Dist: duckdb==1.1.3
+Requires-Dist: fastapi==0.115.6
+Requires-Dist: numpy==2.2.1
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pydantic-settings==2.7.0
+Requires-Dist: pydantic==2.10.4
+Requires-Dist: pyyaml==6.0.2
+Requires-Dist: sqlparse==0.5.3
+Requires-Dist: uvicorn==0.34.0
+Provides-Extra: mysql
+Requires-Dist: pymysql; extra == 'mysql'
+Provides-Extra: postgres
+Requires-Dist: psycopg2; extra == 'postgres'
+Provides-Extra: snowflake
+Requires-Dist: snowflake-connector-python; extra == 'snowflake'
+Description-Content-Type: text/markdown
+
+# dbridge
+
+[![actions status](https://img.shields.io/github/actions/workflow/status/e3oroush/dbridge/publish-pypi.yml?logo=github&style=)](https://github.com/e3oroush/dbridge/actions)
+[![PyPI - Version](https://img.shields.io/pypi/v/dbridge.svg)](https://pypi.org/project/dbridge)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dbridge.svg)](https://pypi.org/project/dbridge)
+
+---
+
+A unified database management server that acts as a bridge between client applications and various database engines, providing a consistent interface for database operations and schema exploration.
+
+This project is a server application that tries to serve all the requriments for any UI applications similar to [dbeaver](https://dbeaver.io/) that can be as a UI database client.
+
+## Table of Contents
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Run the Server](#run-the-server)
+- [License](#license)
+
+## Installation
+
+```console
+pip install dbridge
+```
+
+## Run the server
+
+```console
+pythom -m dbridge.server.app
+```
+
+## DB Connection
+
+A Database connection accepts a custom connection config which depending on the db driver, you are flexible to use any form of config.
+
+## Features
+
+- Supported DBs:
+  - sqlite
+  - duckdb
+  - mysql
+  - postgres
+  - snowflake
+- Get databases
+- Get Schemas
+- Get tables
+- Get columns
+- Run a sql file with multiple statements
+
+## TODOs
+
+- [x] Autocomplete and suggestion
+- [ ] Edit tables and schemas
+
+## UIs
+
+Here is a list of UI clients that are using this server to provide a dbridge user interface.
+
+- [dbridge.nvim](https://github.com/e3oroush/dbridge.nvim) a neovim plugin
+- [dbridge.tui](https://github.com/e3oroush/dbridge.nvim) a terminal user interface developed with [Textual](https://textual.textualize.io/)
+
+## License
+
+`dbridge` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
