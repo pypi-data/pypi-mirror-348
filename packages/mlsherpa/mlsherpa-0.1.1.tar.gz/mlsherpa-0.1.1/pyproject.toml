@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project]
+name = "mlsherpa"
+version = "0.1.1"
+description = "A lightweight AutoML framework"
+readme = "README.md"
+authors = [
+  { name = "Tanmai Raghava", email = "your.email@example.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.7"
+dependencies = [
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "matplotlib",
+  "seaborn"
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
