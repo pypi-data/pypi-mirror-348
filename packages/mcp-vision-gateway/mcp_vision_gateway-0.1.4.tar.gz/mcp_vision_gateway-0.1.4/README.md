@@ -1,0 +1,146 @@
+# MCP Vision Gateway (视觉AI网关)
+
+一个连接MCP与视觉AI模型的网关服务，支持纯文本对话和图像分析（通过URL或Base64编码）。
+
+## 安装
+
+```bash
+pip install mcp-vision-gateway
+```
+
+## 功能
+
+### 工具 (Tools)
+
+- `vision_query`: 向AI模型发送查询，支持纯文本对话和图像分析
+  - 支持通过URL引用图像
+  - 支持通过image_ref引用图像（推荐方式）
+  - 支持通过base64编码传递图像
+  - 可自定义模型、温度等参数
+
+- `vision_query_stream`: 流式返回结果的查询接口
+  - 支持与`vision_query`相同的所有功能
+  - 以流式方式返回结果，模拟打字效果
+  - 可通过`chunk_delay`参数调整输出速度
+
+- `upload_image_from_url`: 从URL下载图像并获取引用ID
+  - 返回一个图像引用ID而非base64字符串
+  - 避免传输大量base64文本
+
+- `upload_local_image`: 从本地文件读取图像并获取引用ID
+  - 返回一个图像引用ID而非base64字符串
+  - 避免传输大量base64文本
+
+- `list_available_models`: 列出可用的AI模型
+
+## 环境变量配置
+
+设置以下环境变量来配置默认参数：
+
+- `VISION_API_BASE`: API基础URL (默认: https://api.ssopen.top)
+- `VISION_API_KEY`: API密钥 (必须设置)
+- `VISION_DEFAULT_MODEL`: 默认模型 (默认: gpt-4o)
+- `VISION_DEBUG`: 调试模式 (设置为"true"启用)
+
+## 在阿里云百炼中使用
+
+在阿里云百炼平台的MCP服务配置中，使用以下JSON：
+
+```json
+{
+  "mcpServers": {
+    "vision-gateway": {
+      "command": "uvx",
+      "args": ["mcp-vision-gateway"],
+      "env": {
+        "VISION_API_KEY": "你的API密钥",
+        "VISION_DEFAULT_MODEL": "gpt-4o"
+      }
+    }
+  }
+}
+```
+
+## 本地运行
+
+安装后，在设置好环境变量的情况下，可以通过以下方式运行：
+
+```bash
+# 使用uvx
+uvx mcp-vision-gateway
+
+# 使用包提供的命令
+mcp-vision-gateway
+
+# 使用Python -m
+python -m mcp_vision_gateway
+```
+
+## 使用示例
+
+### 1. 纯文本对话
+
+```python
+vision_query(
+    prompt="你好，请问今天的天气如何？"
+)
+```
+
+### 2. 使用URL传递图像
+
+```python
+vision_query(
+    prompt="描述这张图片",
+    image_url="https://example.com/image.jpg"
+)
+```
+
+### 3. 使用图像引用ID（推荐方式）
+
+```python
+# 从本地文件获取图像引用ID
+image_id = upload_local_image("C:/Users/YourName/Pictures/photo.jpg")
+
+# 或从URL获取图像引用ID
+# image_id = upload_image_from_url("https://example.com/image.jpg")
+
+# 使用图像引用ID进行查询
+vision_query(
+    prompt="描述这张图片",
+    image_ref=image_id
+)
+```
+
+### 4. 流式输出（模拟打字效果）
+
+```python
+# 纯文本流式对话
+vision_query_stream(
+    prompt="请详细解释量子计算的原理",
+    chunk_delay=0.05  # 每个文本块之间的延迟时间（秒）
+)
+
+# 图像分析流式输出
+vision_query_stream(
+    prompt="详细描述这张图片",
+    image_ref=image_id,
+    chunk_delay=0.03  # 调整速度更快
+)
+```
+
+### 5. 指定自定义参数
+
+```python
+vision_query(
+    prompt="描述这张图片",
+    image_ref=image_id,
+    model="gpt-4o-mini",
+    temperature=0.5,
+    max_tokens=500,
+    api_key="自定义API密钥"
+)
+```
+
+## 许可证
+
+MIT License 
