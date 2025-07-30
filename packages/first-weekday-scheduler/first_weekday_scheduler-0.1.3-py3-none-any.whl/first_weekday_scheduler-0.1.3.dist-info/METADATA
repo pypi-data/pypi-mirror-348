@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: first-weekday-scheduler
+Version: 0.1.3
+Summary: A lightweight utility to schedule tasks on the first Monday or Tuesday evening of the month.
+Home-page: https://github.com/VijayKumarBudatha/first-weekday-scheduler
+Author: Vijay
+Author-email: vijayb@dataflix.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# First Weekday Scheduler
+
+This Python utility checks whether the current time is the first Monday or Tuesday evening of the month. Ideal for use in scheduled jobs or cron-triggered pipelines.
+
+## Installation
+
+```bash
+pip install first-weekday-scheduler
