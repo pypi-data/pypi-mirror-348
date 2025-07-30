@@ -1,0 +1,5 @@
+[console_scripts]
+swapnil-mcp-server = mcp_tools.__main__:main
+
+[mcp.tools]
+Set_Meeting = mcp_tools.server:Set_Meeting
