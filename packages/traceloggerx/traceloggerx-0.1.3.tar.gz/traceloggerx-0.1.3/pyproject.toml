@@ -1,0 +1,17 @@
+[project]
+name = "traceloggerx"
+version = "0.1.3"
+description = "Structured JSON logger with trace_id, user_id and colored console output."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name="Daye", email="daye@example.com" }
+]
+license = { text = "MIT" }
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["traceloggerx", "traceloggerx.logutils"]
