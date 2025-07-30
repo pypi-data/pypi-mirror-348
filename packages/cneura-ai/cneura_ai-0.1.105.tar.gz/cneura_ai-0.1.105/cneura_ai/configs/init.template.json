@@ -1,0 +1,26 @@
+[
+  {
+    "name": "redis",
+    "image": "redis:latest",
+    "ports": { "6379/tcp": 6379 },
+    "count": 1
+  },
+  {
+    "name": "rabbitmq",
+    "image": "rabbitmq:3-management",
+    "ports": { "5672/tcp": 5672, "15672/tcp": 15672 },
+    "count": 1
+  },
+  {
+    "name": "mongodb",
+    "image": "mongo:6",
+    "ports": { "27017/tcp": 27017 },
+    "count": 1
+  },
+  {
+    "name": "chromadb",
+    "image": "ghcr.io/chroma-core/chroma:latest",
+    "ports": { "8000/tcp": 8888 },
+    "count": 1
+  }
+]
