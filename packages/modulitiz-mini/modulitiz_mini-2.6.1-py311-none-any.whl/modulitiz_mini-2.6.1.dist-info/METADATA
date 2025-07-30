@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: modulitiz_mini
+Version: 2.6.1
+Summary: Raccolta dei miei moduli - versione mini
+Author-email: tiz <sderfo1234@altervista.org>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: modulitiz-micro>=2
+Requires-Dist: cryptography>=41.0
+Requires-Dist: instabot>=0.117
+Requires-Dist: pypdf==5.0.1
+
+# modulitiz-mini
+
+It's a Python library that contains daily use or generic functions.  
+The difference between "micro" is that it requires other dependencies.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install:
+
+```bash
+pip install modulitiz_mini
+```
+The other required dependencies will be installed automatically.
+
+## Usage
+
+```python
+from modulitiz_mini.ModuloRsa import ModuloRsa
+
+moduloRsa=ModuloRsa()
+moduloRsa.generateKeys()
+
+# returns cripted string
+moduloRsa.encrypt("test")
+...
+```
+
+## Contributing
+
+If you find any bug you can write me at [sderfo1234@altervista.org](mailto:sderfo1234@altervista.org)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
