@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: resms
+Version: 0.1.0
+Summary: Python SDK for ReSMS, a simple and powerful SMS API.
+Project-URL: Documentation, https://github.com/resms/resms-python#readme
+Project-URL: Issues, https://github.com/resms/resms-python/issues
+Project-URL: Source, https://github.com/resms/resms-python
+Author-email: louanbel <louanbelicaud63@gmail.com>
+License-Expression: MIT
+License-File: LICENSE.txt
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.9
+Requires-Dist: requests>=2.31
+Provides-Extra: async
+Requires-Dist: httpx>=0.26; extra == 'async'
+Provides-Extra: dev
+Requires-Dist: ipython; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# resms
+
+[![PyPI - Version](https://img.shields.io/pypi/v/resms.svg)](https://pypi.org/project/resms)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/resms.svg)](https://pypi.org/project/resms)
+
+-----
+
+## Table of Contents
+
+- [Installation](#installation)
+- [License](#license)
+
+## Installation
+
+```console
+pip install resms
+```
+
+## License
+
+`resms` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
