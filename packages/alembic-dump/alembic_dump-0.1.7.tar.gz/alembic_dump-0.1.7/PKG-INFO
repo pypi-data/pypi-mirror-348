@@ -1,0 +1,260 @@
+Metadata-Version: 2.4
+Name: alembic-dump
+Version: 0.1.7
+Summary: A Python library to dump, load, and mask data between databases in Alembic-managed environments, with SSH tunnel support.
+Project-URL: Homepage, https://github.com/jaeyoung0509/alembic-dump
+Author-email: Jaeyoung <jaeyoung0509@naver.com>
+License: MIT License
+        
+        Copyright (c) 2025 Lee Jaeyoung <jaeyoung0509@naver.com>
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: alembic,anonymization,copy,database,db,dump,load,masking,migration,mysql,postgresql,schema,sqlalchemy,ssh,tunnel
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Requires-Dist: alembic>=1.12.0
+Requires-Dist: faker>=18.0.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: sqlalchemy>=2.0.0
+Requires-Dist: sshtunnel>=0.4.0
+Provides-Extra: aws
+Requires-Dist: boto3-stubs[secretsmanager]>=1.28.0; extra == 'aws'
+Requires-Dist: boto3>=1.28.0; extra == 'aws'
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: build; extra == 'dev'
+Requires-Dist: docker>=7.0.0; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: psycopg2-binary>=2.9.5; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: pytest>=8.0.0; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Requires-Dist: sphinx; extra == 'dev'
+Requires-Dist: sphinx-rtd-theme; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Provides-Extra: vault
+Requires-Dist: hvac>=1.0.0; extra == 'vault'
+Description-Content-Type: text/markdown
+
+# Alembic Dump
+
+A Python library to dump, load, and mask data between databases (e.g., PostgreSQL, MySQL) in environments managed by Alembic, with SSH tunnel support.
+
+This tool is designed to help developers synchronize database schemas using Alembic revisions and then transfer data, optionally applying masking rules to sensitive information. It's particularly useful for creating staging or development environments from production data, or for migrating data between different database instances while maintaining schema integrity.
+
+## Key Features
+
+* **Schema Synchronization**: Ensures target database schema matches the source database schema based on Alembic revisions before data transfer.
+* **Data Dump & Load**: Efficiently transfers data table by table, respecting foreign key constraints by processing tables in a topologically sorted order.
+* **Data Masking**: Supports various strategies (e.g., hashing, partial masking, using Faker) to anonymize sensitive data during the transfer. Masking rules can be configured per table and per column.
+* **SSH Tunneling**: Built-in support for connecting to databases via an SSH bastion host.
+* **Configuration**: Uses Pydantic for clear and validated configuration of database connections, SSH tunnels, and masking rules.
+* **Chunking**: Processes data in chunks to manage memory usage effectively, especially for large tables.
+* **Flexible Table Selection**: Allows specifying tables to include or exclude from the dump/load process.
+* **External Secret Management**: Integration with AWS Secrets Manager and HashiCorp Vault for managing sensitive information.
+
+## Installation
+
+You can install `alembic-dump` using `pip`:
+
+```bash
+# Basic installation
+pip install alembic-dump
+
+# With AWS Secrets Manager support
+pip install alembic-dump[aws]
+
+# With HashiCorp Vault support
+pip install alembic-dump[vault]
+
+# With both secret management systems
+pip install alembic-dump[aws,vault]
+
+# For development (includes all optional dependencies)
+pip install alembic-dump[dev]
+```
+
+## Quick Start
+
+```python
+from alembic_dump.core import dump_and_load
+from alembic_dump.config import AppSettings
+
+# Basic configuration
+settings = AppSettings(
+    source_db={
+        "driver": "postgresql",
+        "host": "source.example.com",
+        "port": 5432,
+        "username": "source_user",
+        "password": "source_pass",
+        "database": "source_db",
+    },
+    target_db={
+        "driver": "postgresql",
+        "host": "target.example.com",
+        "port": 5432,
+        "username": "target_user",
+        "password": "target_pass",
+        "database": "target_db",
+    }
+)
+
+# Run the dump and load process
+dump_and_load(settings, alembic_dir="path/to/alembic")
+```
+
+## Configuration
+
+Configuration can be provided through environment variables, a `.env` file, or directly in code using the `AppSettings` class.
+
+### Using Secret Management
+
+#### AWS Secrets Manager
+
+```python
+from alembic_dump.config import AppSettings
+
+settings = AppSettings(
+    source_db={
+        "driver": "postgresql",
+        "database": "source_db",
+        "secret_provider_config": {
+            "provider_type": "aws_secrets_manager",
+            "secret_id": "arn:aws:secretsmanager:region:account:secret:db-credentials",
+            "region_name": "us-west-2",
+            # Optional: role_arn for cross-account access
+            # "role_arn": "arn:aws:iam::account:role/role-name",
+            # Optional: profile_name for local AWS credentials
+            # "profile_name": "my-profile"
+        },
+        "secret_key_mapping": {
+            "host": "db_host",
+            "port": "db_port",
+            "username": "db_user",
+            "password": "db_pass"
+        }
+    }
+)
+```
+
+#### HashiCorp Vault
+
+```python
+from alembic_dump.config import AppSettings
+
+settings = AppSettings(
+    source_db={
+        "driver": "postgresql",
+        "database": "source_db",
+        "secret_provider_config": {
+            "provider_type": "hashicorp_vault",
+            "vault_addr": "https://vault.example.com:8200",
+            "secret_path": "secret/data/db-credentials",
+            # Either vault_token or role_id/secret_id must be provided
+            "vault_token": "s.token",
+            # "role_id": "role-id",
+            # "secret_id": "secret-id"
+        },
+        "secret_key_mapping": {
+            "host": "db_host",
+            "port": "db_port",
+            "username": "db_user",
+            "password": "db_pass"
+        }
+    }
+)
+```
+
+### Environment Variables
+
+All configuration can also be provided through environment variables:
+
+```bash
+# Basic configuration
+ALEMBIC_DUMP_SOURCE_DB__DRIVER=postgresql
+ALEMBIC_DUMP_SOURCE_DB__HOST=source.example.com
+ALEMBIC_DUMP_SOURCE_DB__PORT=5432
+ALEMBIC_DUMP_SOURCE_DB__USERNAME=source_user
+ALEMBIC_DUMP_SOURCE_DB__PASSWORD=source_pass
+ALEMBIC_DUMP_SOURCE_DB__DATABASE=source_db
+
+# AWS Secrets Manager configuration
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__PROVIDER_TYPE=aws_secrets_manager
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__SECRET_ID=arn:aws:secretsmanager:region:account:secret:db-credentials
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__REGION_NAME=us-west-2
+ALEMBIC_DUMP_SOURCE_DB__SECRET_KEY_MAPPING__HOST=db_host
+ALEMBIC_DUMP_SOURCE_DB__SECRET_KEY_MAPPING__PORT=db_port
+ALEMBIC_DUMP_SOURCE_DB__SECRET_KEY_MAPPING__USERNAME=db_user
+ALEMBIC_DUMP_SOURCE_DB__SECRET_KEY_MAPPING__PASSWORD=db_pass
+
+# HashiCorp Vault configuration
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__PROVIDER_TYPE=hashicorp_vault
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__VAULT_ADDR=https://vault.example.com:8200
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__SECRET_PATH=secret/data/db-credentials
+ALEMBIC_DUMP_SOURCE_DB__SECRET_PROVIDER_CONFIG__VAULT_TOKEN=s.token
+```
+
+## Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jaeyoung0509/alembic-dump.git
+   cd alembic-dump
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. Install development dependencies:
+   ```bash
+   pip install -e ".[dev]"
+   ```
+
+4. Run tests:
+   ```bash
+   pytest
+   ```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+MIT
