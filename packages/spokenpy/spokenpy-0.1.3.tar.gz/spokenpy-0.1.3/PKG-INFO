@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: spokenpy
+Version: 0.1.3
+Summary: Voice-driven programming language for accessibility
+Author: Arun
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Software Development :: Interpreters
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: SpeechRecognition
+Requires-Dist: pyttsx3
+Requires-Dist: pyaudio; platform_system != "Windows"
+Requires-Dist: pywin32; platform_system == "Windows"
+Requires-Dist: lark-parser
+Dynamic: author
+Dynamic: classifier
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

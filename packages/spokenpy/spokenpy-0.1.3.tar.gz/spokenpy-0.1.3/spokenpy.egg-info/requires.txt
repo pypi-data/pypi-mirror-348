@@ -1,0 +1,9 @@
+SpeechRecognition
+pyttsx3
+lark-parser
+
+[:platform_system != "Windows"]
+pyaudio
+
+[:platform_system == "Windows"]
+pywin32
