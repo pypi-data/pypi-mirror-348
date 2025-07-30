@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: eacy
+Version: 1.0.0
+Summary: This is a simple python package to parse, collect, and collate parameters relevant to the Habitable Worlds Observatory Exploratory Analytic Cases into an object-oriented python framework.
+Home-page: https://github.com/curriem/eacy
+Author: Miles Currie
+Author-email: Miles Currie <miles.h.currie@nasa.gov>
+License: MIT
+Project-URL: Homepage, https://github.com/curriem/eacy
+Project-URL: Bug Tracker, https://github.com/curriem/eacy/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: astropy
+Requires-Dist: tqdm
+Requires-Dist: joblib
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
+# Take it EACy!
+
+This is a simple python package to parse, collect, and collate parameters relevant to the Habitable Worlds Observatory Exploratory Analytic Cases into an object-oriented python framework. 
+
+## Installation
+Eventually: `pip install eacy`
+
+For now: clone this repo, then `pip install .` in the `eacy` directory.
+
+## Requirements:
+HWO Sci-Eng-Interface should be downloaded/installed: https://github.com/HWO-GOMAP-Working-Groups/Sci-Eng-Interface
+An environment variable should be set:
+`export SCI_ENG_DIR=/Users/mhcurrie/science/packages/Sci-Eng-Interface/hwo_sci_eng`
