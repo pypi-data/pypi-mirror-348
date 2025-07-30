@@ -1,0 +1,27 @@
+{
+    "manifest_version": 2,
+    "name": "Lino react",
+    "version": "1.0.0",
+    "content_scripts": [
+        {
+            "matches": ["https://jane.mylino.net/*"],
+            "js": ["main.js"]
+        }
+    ],
+    "icons": {
+        "48": "favicon.ico",
+        "96": "favicon.ico"
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "favicon.ico",
+            "38": "favicon.ico"
+        },
+        "default_title": "Pinned URLs",
+        "default_popup": "ext.html"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": ["tabs", "activeTab"]
+}
