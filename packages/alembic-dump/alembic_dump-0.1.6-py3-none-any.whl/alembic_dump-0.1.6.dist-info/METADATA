@@ -1,0 +1,152 @@
+Metadata-Version: 2.4
+Name: alembic-dump
+Version: 0.1.6
+Summary: A Python library to dump, load, and mask data between databases in Alembic-managed environments, with SSH tunnel support.
+Project-URL: Homepage, https://github.com/jaeyoung0509/alembic-dump
+Author-email: Jaeyoung <jaeyoung0509@naver.com>
+License: MIT License
+        
+        Copyright (c) 2025 Lee Jaeyoung <jaeyoung0509@naver.com>
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: alembic,anonymization,copy,database,db,dump,load,masking,migration,mysql,postgresql,schema,sqlalchemy,ssh,tunnel
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Requires-Dist: alembic>=1.12.0
+Requires-Dist: faker>=18.0.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: sqlalchemy>=2.0.0
+Requires-Dist: sshtunnel>=0.4.0
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: build; extra == 'dev'
+Requires-Dist: docker>=7.0.0; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: psycopg2-binary>=2.9.5; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: pytest>=8.0.0; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Requires-Dist: sphinx; extra == 'dev'
+Requires-Dist: sphinx-rtd-theme; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# Alembic Dump
+
+A Python library to dump, load, and mask data between databases (e.g., PostgreSQL, MySQL) in environments managed by Alembic, with SSH tunnel support.
+
+This tool is designed to help developers synchronize database schemas using Alembic revisions and then transfer data, optionally applying masking rules to sensitive information. It's particularly useful for creating staging or development environments from production data, or for migrating data between different database instances while maintaining schema integrity.
+
+## Key Features
+
+* **Schema Synchronization**: Ensures target database schema matches the source database schema based on Alembic revisions before data transfer.
+* **Data Dump & Load**: Efficiently transfers data table by table, respecting foreign key constraints by processing tables in a topologically sorted order.
+* **Data Masking**: Supports various strategies (e.g., hashing, partial masking, using Faker) to anonymize sensitive data during the transfer. Masking rules can be configured per table and per column.
+* **SSH Tunneling**: Built-in support for connecting to databases via an SSH bastion host.
+* **Configuration**: Uses Pydantic for clear and validated configuration of database connections, SSH tunnels, and masking rules.
+* **Chunking**: Processes data in chunks to manage memory usage effectively, especially for large tables.
+* **Flexible Table Selection**: Allows specifying tables to include or exclude from the dump/load process.
+
+## Installation
+
+You can install `alembic-dump` using `pip`:
+
+```bash
+pip install alembic-dump
+```
+
+baisc usage 
+```python3
+from alembic_dump.config import AppSettings, DBConfig, MaskingConfig, MaskingRule
+from alembic_dump.core import dump_and_load
+
+# 1. Define Source and Target Database Configurations
+source_db_config = DBConfig(
+    driver="postgresql",
+    host="source.db.example.com",
+    port=5432,
+    username="user",
+    password="password", # In real use, manage secrets carefully (e.g., env vars)
+    database="sourcedb"
+)
+
+target_db_config = DBConfig(
+    driver="postgresql",
+    host="target.db.example.com",
+    port=5432,
+    username="user",
+    password="password",
+    database="targetdb"
+)
+
+# 2. (Optional) Define Masking Rules
+masking_config = MaskingConfig(
+    rules={
+        "users": {
+            "email": MaskingRule(strategy="hash"),
+            "full_name": MaskingRule(strategy="faker", faker_provider="name")
+        },
+        "sensitive_logs": {
+            "ip_address": MaskingRule(strategy="null")
+        }
+    }
+)
+
+# 3. (Optional) Define SSH Tunnel Configuration if needed
+# ssh_config = SSHConfig(...)
+
+# 4. Create AppSettings
+app_settings = AppSettings(
+    source_db=source_db_config,
+    target_db=target_db_config,
+    # ssh_tunnel=ssh_config, # Uncomment if using SSH tunnel
+    masking=masking_config,
+    chunk_size=1000,
+    tables_to_exclude=["some_large_irrelevant_table"],
+    # tables_to_include=["users", "orders"] # Only include these if specified
+)
+
+# 5. Specify the path to your Alembic migrations directory
+# This directory should contain your alembic.ini and version scripts.
+alembic_migrations_directory = "/path/to/your/alembic_migrations" 
+# For testing, you might use a dedicated test Alembic environment.
+
+# 6. Run the dump and load process
+try:
+    dump_and_load(settings=app_settings, alembic_dir=alembic_migrations_directory)
+    print("Data dump and load completed successfully!")
+except Exception as e:
+    print(f"An error occurred: {e}")
+```
