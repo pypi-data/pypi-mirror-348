@@ -1,0 +1,47 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'  # タグがv*のパターンにマッチする場合に実行（例：v0.1.0）
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Extract version from setup.py
+      id: get_version
+      run: |
+        VERSION=$(grep -m 1 'version=' setup.py | sed -E 's/.*version="([^"]+)".*/\1/')
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Extracted version: $VERSION"
+    
+    - name: Verify tag matches version
+      run: |
+        TAG_VERSION=${GITHUB_REF#refs/tags/v}
+        if [ "$TAG_VERSION" != "$VERSION" ]; then
+          echo "Error: Tag version ($TAG_VERSION) does not match setup.py version ($VERSION)"
+          exit 1
+        fi
+        echo "Tag version matches setup.py version: $VERSION"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+    
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        python -m build
+        twine check dist/*
+        twine upload dist/*
