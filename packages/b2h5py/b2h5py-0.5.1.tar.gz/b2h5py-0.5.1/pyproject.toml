@@ -1,0 +1,40 @@
+[project]
+name = "b2h5py"
+description = "Transparent optimized reading of n-dimensional Blosc2 slices for h5py"
+keywords = [ "h5py", "HDF5", "Blosc2" ]
+readme = "README.rst"
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Database",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+authors = [
+    { name = "Blosc Development Team", email = "blosc@blosc.org" },
+]
+version = "0.5.1"
+requires-python = ">= 3.3"  # contextlib.ExitStack
+dependencies = [
+    "blosc2 >= 2.3.0",  # open schunk by offset
+    "numpy",
+    "h5py >= 3.0",  # chunk iterate & get info by coordinate
+    "hdf5plugin >= 4.3.0",  # b2nd support
+]
+
+[project.urls]
+Homepage = "https://github.com/Blosc/b2h5py"
+Issues = "https://github.com/Blosc/b2h5py/issues"
+
+[project.optional-dependencies]
+h5py-test = [
+    # "h5py[test]",  # no such extra in h5py
+    "pytest",  # to run h5py tests
+]
