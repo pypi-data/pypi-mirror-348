@@ -1,0 +1,43 @@
+certifi==2025.4.26
+    # via requests
+charset-normalizer==3.4.2
+    # via requests
+click==8.2.0
+    # via pip-tools
+get-pypi-latest-version==0.0.12
+    # via -r requirements/pip-tools.in
+html5lib==1.1
+    # via get-pypi-latest-version
+idna==3.10
+    # via requests
+importlib-metadata==8.7.0; python_version < "3.10"
+    # via setuptools-scm
+packaging==25.0
+    # via
+    #   -r requirements/pip.pip
+    #   build
+    #   setuptools-scm
+pip-tools==7.4.1
+    # via -r requirements/pip-tools.in
+pyproject-hooks==1.2.0
+    # via
+    #   build
+    #   pip-tools
+requests==2.31.0
+    # via get-pypi-latest-version
+six==1.17.0
+    # via html5lib
+tomli==2.2.1; python_version < "3.11"
+    # via
+    #   -c requirements/pins.pip
+    #   -r requirements/pip.pip
+    #   build
+    #   pip-tools
+    #   pyproject-hooks
+    #   setuptools-scm
+typing-extensions==4.12.2; python_version<"3.10"
+    # via setuptools-scm
+urllib3==2.2.3
+    # via requests
+webencodings==0.5.1
+    # via html5lib
