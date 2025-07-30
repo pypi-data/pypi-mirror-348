@@ -1,0 +1,20 @@
+[build-system]
+requires = ["flit-core >=3.11, <4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "coherent.deps"
+version = "1.5.0"
+description = "Utilities for resolving imports to dependencies."
+readme = "README.md"
+requires-python = ">= 3.9"
+dependencies = ["jaraco.ui", "more-itertools", "tqdm", "typer", "jaraco.context", "jaraco.collections", "jaraco.mongodb", "keyring", "tempora", "jaraco.compat", "jaraco.functools", "requests", "requests-file", "requests-toolbelt", "retry-requests", "zipp"]
+classifiers = ["Development Status :: 5 - Production/Stable", "Intended Audience :: Developers", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+license = "MIT"
+
+[[project.authors]]
+name = "Jason R. Coombs"
+email = "jaraco@jaraco.com"
+
+[project.urls]
+Source = "https://github.com/coherent-oss/coherent.deps"
