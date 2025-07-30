@@ -1,0 +1,88 @@
+import os
+import json
+from pathlib import Path
+
+
+class CLIConfig:
+    VERSION = "0.2.0"
+
+    PACKAGE_DIR = Path(__file__).resolve().parent
+    BASE_DIR = PACKAGE_DIR.parent
+    CONFIG_DIR = BASE_DIR / "config"
+
+    DEFAULT_RUN_CONFIG = CONFIG_DIR / "run.json"
+    DEFAULT_INIT_CONFIG = CONFIG_DIR / "init.json"
+
+    # External service configuration
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
+    RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "host.docker.internal")
+    RABBITMQ_USER = os.getenv("RABBITMQ_USER", "guest")
+    RABBITMQ_PASS = os.getenv("RABBITMQ_PASS", "guest")
+    LOGGER_SERVER = os.getenv("LOGGER_SERVER", "ws://host.docker.internal:8765")
+    REMOTE_URL = os.getenv("REMOTE_URL", "tcp://host.docker.internal:2375")
+    REDIS_HOST = os.getenv("REDIS_HOST", "host.docker.internal")
+    MONGO_URI = os.getenv("MONGO_URI", "mongodb://host.docker.internal:27017/")
+    CHROMA_HOST = os.getenv("CHROMA_HOST", "host.docker.internal")
+
+    # Queue names
+    CODE_SYNTH_INPUT = "tool.code.synth"
+    CODE_SYNTH_OUTPUT = "tool.code.test"
+    CODE_SYNTH_ERROR = "tool.synth.error"
+
+    CODE_TEST_INPUT = "tool.code.test"
+    CODE_TEST_OUTPUT = "tool.code.deps"
+    CODE_TEST_ERROR = "tool.test.error"
+
+    CODE_DEPS_INPUT = "tool.code.deps_in"
+    CODE_DEPS_OUTPUT = "tool.code.exec"
+    CODE_DEPS_OUT = "tool.code.deps_out"
+    CODE_DEPS_ERROR = "tool.deps.error"
+
+    CODE_EXE_INPUT = "tool.code.exec"
+    CODE_EXE_OUTPUT = "tool.code.debug"
+    CODE_EXE_OUT = "tool.code.deploy"
+    CODE_EXE_ERROR = "tool.exec.error"
+
+    CODE_DEBUG_INPUT = "tool.code.debug"
+    CODE_DEBUG_OUTPUT = "tool.code.test"
+    CODE_DEBUG_ERROR = "tool.debug.error"
+
+    TOOL_DEPLOY_INPUT = "tool.code.deploy"
+    TOOL_DEPLOY_OUTPUT = "meta.agent.in"
+    TOOL_DEPLOY_ERROR = "tool.deploy.error"
+
+    META_AGENT_INPUT = "meta.agent.in"
+    META_AGENT_OUTPUT = "meta.agent.out"
+    META_AGENT_ERROR = "meta.agent.error"
+
+    # Override paths
+    run_config_override = None
+    init_config_override = None
+
+    # Prevent overriding these
+    IMMUTABLE_FIELDS = {
+        "VERSION", "BASE_DIR", "PACKAGE_DIR", "CONFIG_DIR", "DEFAULT_RUN_CONFIG", "DEFAULT_INIT_CONFIG"
+    }
+
+    @classmethod
+    def ensure_paths(cls):
+        cls.CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+
+    @classmethod
+    def apply_override(cls, override_path: str):
+        override_path = Path(override_path).resolve()
+        if not override_path.exists():
+            raise FileNotFoundError(f"Override config file not found: {override_path}")
+        
+        with open(override_path, "r") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"Invalid JSON in override config: {e}")
+        
+        for key, value in data.items():
+            if key in cls.IMMUTABLE_FIELDS:
+                continue
+            if hasattr(cls, key):
+                setattr(cls, key, value)
