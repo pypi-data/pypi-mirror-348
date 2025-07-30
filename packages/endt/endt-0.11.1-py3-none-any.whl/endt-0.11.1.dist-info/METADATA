@@ -1,0 +1,115 @@
+Metadata-Version: 2.4
+Name: endt
+Version: 0.11.1
+Summary: Enhanced Decision Tree
+Author-email: Alexander Ershov <fiaf1@mail.ru>
+Project-URL: Homepage, https://gitlab.com/nanoworld_ml/enhanceddecisiontree
+Project-URL: Bug Tracker, https://gitlab.com/nanoworld_ml/enhanceddecisiontree/-/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: System :: Distributed Computing
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+
+# Enhanced Decision Tree (EDT)
+
+## What is Enhanced Decision Tree
+
+TODO
+
+## Install
+
+There is two option to install EDT library: from PyPi (easy) or from source.
+
+### PyPi
+
+Use simple command:
+
+```bash
+pip install edt
+```
+
+That's it
+
+### From source
+
+TODO
+
+## Get started
+
+Here some simple example to use EDT
+
+### Classical Decision Tree
+
+Construct classical Decision Tree on syntatic dataset:
+
+```python
+import endt
+
+x1 = endt.ContinuumData([1.,1.,2.,2.], name="x1")
+x2 = endt.ContinuumData([100.,200.,100.,200.], name="x2")
+y = endt.ContinuumData([10.,20.,30.,40])
+
+tree = endt.Tree()
+tree.fit([x1, x2], y)
+print(tree)
+
+res = tree.predict(1,2)
+print("predict y(1,2) =", res)
+```
+
+### Simple Enhanced Decision Tree
+
+Add LSQ of order 2 in previous code:
+
+```python
+import endt
+
+x1 = endt.ContinuumData([1.,1.,2.,2.], name="x1")
+x2 = endt.ContinuumData([100.,200.,100.,200.], name="x2")
+y = endt.ContinuumData([10.,20.,30.,40])
+
+funcs = endt.func.create_lsq_functions([x1, x2], order=2)
+
+tree = endt.Tree(lsq_funcs=funcs)
+tree.fit([x1, x2], y)
+print(tree)
+
+res = tree.predict(1,2)
+print("predict y(1,2) =", res)
+```
+
+### EDT from CSV
+
+Let our dataset save is in the CSV file data.csv, containing two collumn of feature parameters and third collumn of reults
+
+Create EDT from CSV file:
+
+```python
+import endt
+import numpy as np
+
+data = np.loadtxt("data.csv").T
+x = list(map(endt.ContinuumData, data[:-1]))
+y = endt.ContinuumData(data[-1])
+for i, xi in enumerate(x, start=1):
+    xi.name = f"x{i}" # set name x1, x2, x3... for every feature parameters
+funcs = endt.func.create_lsq_functions(x, order=2)
+tree = endt.Tree(lsq_funcs=funcs)
+tree.fit(x, y)
+print(tree)
+
+res = tree.predict(1,2)
+print("predict y(1,2) =", res)
+```
+
+## Full documentation
+
+Read full documentation [https://nanoworld_ml.gitlab.io/enhanceddecisiontree/](https://nanoworld_ml.gitlab.io/enhanceddecisiontree/)
