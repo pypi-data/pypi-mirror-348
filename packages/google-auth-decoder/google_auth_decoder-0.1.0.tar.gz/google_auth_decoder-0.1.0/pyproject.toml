@@ -1,0 +1,42 @@
+[project]
+name = "google-auth-decoder"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Elisei", email = "elisey.rav@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "protobuf==5.29.3",
+]
+
+[project.scripts]
+google_auth_decoder = "google_auth_decoder:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+sources = ["src"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.10",
+]
+
+[tool.ruff]
+line-length = 120
+lint.select = ["ALL"]
+lint.ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107", "D203", "D211", "D213", "COM812", "S603"]
+target-version = "py313"
+extend-exclude = ["src/google_auth_decoder/google_auth_pb2.py", "src/google_auth_decoder/tests/"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+ignore_missing_imports = true
+

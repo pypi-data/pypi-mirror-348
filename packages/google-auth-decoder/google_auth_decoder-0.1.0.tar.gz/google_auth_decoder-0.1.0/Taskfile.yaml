@@ -1,0 +1,45 @@
+version: '3'
+
+tasks:
+  compile-proto:
+    desc: Compile .proto file to Python module in decoder/
+    cmds:
+      - protoc --proto_path=decoder --python_out=decoder decoder/google_auth.proto
+    sources:
+      - decoder/google_auth.proto
+    generates:
+      - decoder/google_auth_pb2.py
+
+  run:
+    desc: Run the main application with uv
+    cmds:
+      - uv run google_auth_decoder {{.CLI_ARGS}}
+
+  format:
+    desc: Format code with Black
+    cmds:
+      - uv run ruff format
+
+  lint:
+    desc: Lint with Ruff
+    cmds:
+      - uv run ruff check --fix
+
+  mypy:
+    desc: Type-check with mypy
+    cmds:
+      - uv run mypy .
+
+  test:
+    desc: Run unit tests
+    cmds:
+      - uv run pytest src/google_auth_decoder/tests
+
+  check:
+    desc: Run format, lint and typecheck
+    cmds:
+      - task lint
+      - task mypy
+      - task test
+
+
