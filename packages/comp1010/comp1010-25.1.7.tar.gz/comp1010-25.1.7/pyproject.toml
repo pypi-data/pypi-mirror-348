@@ -1,0 +1,63 @@
+[project]
+name = "comp1010"
+version = "25.1.7"
+description = "The COMP1010 metapackage, used to specify dependencies required for UNSW's COMP1010 course."
+authors = [
+    { name = "COMP1010 UNSW", email = "cs1010@cse.unsw.edu.au" },
+    { name = "Maddy Guthridge", email = "hello@maddyguthridge.com" },
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "flask (>=3.1.0,<4.0.0)",
+    "pyhtml-enhanced (>=2.2.0,<3.0.0)",
+    "pytest (>=8.3.4,<9.0.0)",
+    "jestspectation (>=1.4.3,<2.0.0)",
+    "ipykernel (>=6.29.5,<7.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "types-requests (>=2.32.0.20241016,<3.0.0.0)",
+    "pillow (>=11.1.0,<12.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "colorama (>=0.4.6,<0.5.0)",
+    "types-colorama (>=0.4.15.20240311,<0.5.0.0)",
+    "numpy (>=2.2.2,<3.0.0)",
+    "subtask (>=1.1.2,<2.0.0)",
+    "mypy (>=1.15.0,<2.0.0)",
+]
+license = { file = "LICENSE.md" }
+
+[project.scripts]
+comp1010 = "comp1010.__main__:main"
+
+[tool.poetry]
+packages = [{ include = "comp1010" }]
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.2"
+
+[tool.mypy]
+check_untyped_defs = true
+files = ["comp1010"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
