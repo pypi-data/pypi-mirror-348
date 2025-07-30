@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "syspect"
+version = "0.1.0"
+description = "A lightweight, modular diagnostic rule engine to help your Python apps introspect and explain system issues — like a built-in sysadmin."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+  { name="Rahul Sharma", email="rahulxsh@gmail.com" }
+]
+maintainers = [{ name="Rahul Sharma", email="rahulxsh@gmail.com" }]
+keywords = ["diagnostics", "rule-engine", "system-monitoring", "cli", "observability", "python-tools"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: System :: Monitoring"
+]
+
+dependencies = [
+    "click>=8.0",
+    "psutil>=5.9.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/rahulXs/syspect"
+"Documentation" = "https://github.com/rahulXs/syspect#readme"
+"Issues" = "https://github.com/rahulXs/syspect/issues"
+"Source" = "https://github.com/rahulXs/syspect"
+
+[project.scripts]
+syspect = "syspect.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests", "examples"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__", "*.pyc", "*.pyo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "syspect.__version__"}
