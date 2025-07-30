@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: tea-chainquery
+Version: 0.1.0
+Summary: Sonia: A CLI tool for querying blockchain data
+Home-page: https://github.com/idyweb/sonia
+Author: Idongesit Inyang
+Author-email: inyangidongesit22@gmail.com
+License: MIT
+Project-URL: Source, https://github.com/idyweb/sonia
+Description-Content-Type: text/markdown
+Requires-Dist: web3>=5.0.0
+Requires-Dist: click>=8.0.0
+Requires-Dist: requests>=2.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary
+
+# Sonia
+A CLI tool for querying blockchain data (Ethereum/Base).
+
+## Installation
+```bash
+pip install sonia
+```
+
+# Usage
+```bash
+sonia balance 0xYourAddress
+sonia tx_count 0xYourAddress
+```
+
+# Contributing
+
+Fork the repo, submit PRS to
+https://github.com/idyweb/sonia
+
+- Commit and push:
+```bash
+git init
+git add .
+git commit -m "Initial Sonia release"
+git remote add origin https://github.com/idyweb/sonia.git
+git push -u origin main
+```
