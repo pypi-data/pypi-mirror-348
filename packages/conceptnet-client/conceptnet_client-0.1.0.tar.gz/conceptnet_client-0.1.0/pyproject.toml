@@ -1,0 +1,22 @@
+[project]
+name = "conceptnet-client"
+version = "0.1.0"
+description = "A Pythonic, object-oriented client for the ConceptNet API"
+authors = [
+  { name = "Alireza Mousiani", email = "a.mousiani@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+  "requests"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/aalireza83/conceptnet-client"
+"Source" = "https://github.com/aalireza83/conceptnet-client"
+"Issues" = "https://github.com/aalireza83/conceptnet-client/issues"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
