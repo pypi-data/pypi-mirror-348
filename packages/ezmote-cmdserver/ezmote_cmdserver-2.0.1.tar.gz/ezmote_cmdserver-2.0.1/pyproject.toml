@@ -1,0 +1,49 @@
+[project]
+name = "ezmote-cmdserver"
+version = "2.0.1"
+description = "A small webapp which can be used for web based home cinema automation"
+authors = [
+    { name = "3ll3d00d", email = "mattkhan+cmdserver@gmail.com" }
+]
+license = "MIT"
+readme = "README.md"
+homepage = "http://github.com/3ll3d00d/cmdserver"
+repository = "http://github.com/3ll3d00d/cmdserver"
+requires-python = ">=3.13, <3.14"
+dependencies = [
+    "flask-restx >=1.3.0, <2.0.0",
+    "Werkzeug >=2.0.0, <3.0",
+    "flask >=2.3.3, <3.0",
+    "pyyaml >=6.0.2, <7.0",
+    "plumbum >=1.9.0, <2.0",
+    "requests >=2.32.3, <3.0",
+    "autobahn[twisted] >=24.4.2, <25.0",
+    "paho-mqtt >=1.6.1, <2.0",
+]
+
+[tool.poetry]
+include = [
+    { path = "LICENSE", format = "sdist" },
+    { path = "cmdserver/VERSION", format = ["sdist", "wheel"] }
+]
+packages = [
+    { include = "cmdserver" }
+]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-httpserver = "*"
+pytest-cov = "*"
+
+[tool.poetry.group.exe]
+optional = true
+
+[tool.poetry.group.exe.dependencies]
+pyinstaller = { version = "*" }
+
+[tool.poetry.scripts]
+cmdserver = 'cmdserver.main:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
