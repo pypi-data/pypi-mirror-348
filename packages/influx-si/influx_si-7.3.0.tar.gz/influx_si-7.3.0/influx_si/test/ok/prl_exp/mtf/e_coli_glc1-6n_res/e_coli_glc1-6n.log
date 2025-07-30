@@ -1,0 +1,222 @@
+"/home/sokol/sysbio/dev/ftbl2sys/influx_si/influx_s.py" "--pref" "e_coli" "--pref" "e_coli_growth" "--pref" "../prl_exp/mtf/e_coli_glc1-6n"
+code gen: 2025-05-19 11:46:18
+calcul  : 2025-05-19 11:46:18
+load    : 2025-05-19 11:46:19.44 cpu=0.624
+rinit   : 2025-05-19 11:46:19.44 cpu=0.626
+r_flux  : 2025-05-19 11:46:19.44 cpu=0.626
+Afl qr(): 2025-05-19 11:46:19.46 cpu=0.643
+dfl_dffg: 2025-05-19 11:46:19.47 cpu=0.651
+spAbr   : 2025-05-19 11:46:19.47 cpu=0.653
+weight  1: 2025-05-19 11:46:19.47 cpu=0.653
+weight  2: 2025-05-19 11:46:19.47 cpu=0.654
+weight  3: 2025-05-19 11:46:19.47 cpu=0.656
+weight  4: 2025-05-19 11:46:19.47 cpu=0.659
+weight  5: 2025-05-19 11:46:19.48 cpu=0.661
+weight  6: 2025-05-19 11:46:19.48 cpu=0.662
+weight  7: 2025-05-19 11:46:19.48 cpu=0.662
+weight  8: 2025-05-19 11:46:19.48 cpu=0.663
+measure : 2025-05-19 11:46:19.54 cpu=0.707
+ineq    : 2025-05-19 11:46:19.58 cpu=0.748
+Following 122 inequalities are redundant and removed:
+	d.x.v26_4>=0
+	f.x.v26_1>=0
+	f.x.v26_1>=0
+	f.x.v25_1<=0.999
+	d.x.v26_3<=0.999
+	d.x.v26_4<=0.999
+	f.x.v26_1<=0.999
+	f.x.v27_1<=0.999
+	d.n.v65>=-1000
+	d.n.v66>=-1000
+	f.n.v71>=-1000
+	f.n.v64>=-1000
+	d.n.v70>=-1000
+	d.n.v67>=-1000
+	d.n.v68>=-1000
+	d.n.v47>=-1000
+	d.n.v69>=-1000
+	d.n.v19<=1000
+	d.n.v13<=1000
+	d.n.v16<=1000
+	d.n.v17>=-1000
+	d.n.v17>=-1000
+	d.n.v16>=-1000
+	d.n.v22<=1000
+	d.n.v25_2<=1000
+	d.n.v26_2<=1000
+	d.n.v26_3<=1000
+	d.n.v26_4<=1000
+	d.n.v26_3<=1000
+	d.n.v26_4<=1000
+	d.n.v26_4<=1000
+	d.n.v27_2<=1000
+	d.n.v29_2<=1000
+	d.n.v5<=1000
+	d.n.v69<=1000
+	d.n.v48_3<=1000
+	d.n.v48_4<=1000
+	d.n.v48_4<=1000
+	d.n.v49_2<=1000
+	d.n.v51_2<=1000
+	d.n.v60<=1000
+	d.n.v19>=-1000
+	d.n.v13>=-1000
+	d.n.v16>=-1000
+	d.n.v22>=-1000
+	d.n.v25_2>=-1000
+	d.n.v26_2>=-1000
+	d.n.v26_3>=-1000
+	d.n.v26_4>=-1000
+	d.n.v26_3>=-1000
+	d.n.v26_4>=-1000
+	d.n.v26_4>=-1000
+	d.n.v27_2>=-1000
+	d.n.v29_2>=-1000
+	d.n.v4>=-1000
+	d.n.v5>=-1000
+	d.n.v5>=-1000
+	d.n.v69>=-1000
+	d.n.v48_2>=-1000
+	d.n.v48_3>=-1000
+	d.n.v48_4>=-1000
+	d.n.v48_3>=-1000
+	d.n.v48_4>=-1000
+	d.n.v48_4>=-1000
+	d.n.v49_2>=-1000
+	d.n.v60>=-1000
+	d.x.v25_2>=0
+	d.x.v26_2>=0
+	d.x.v26_2>=0
+	d.x.v26_2>=0
+	d.x.v27_2>=0
+	d.x.v26_3<=0.999
+	d.x.v26_3<=0.999
+	d.x.v26_4<=0.999
+	f.n.v18<=1000
+	d.n.v11<=1000
+	d.n.v15<=1000
+	d.n.v15<=1000
+	d.n.v16<=1000
+	d.n.v17<=1000
+	d.n.v17<=1000
+	d.n.v21<=1000
+	d.n.v25_1<=1000
+	d.n.v26_1<=1000
+	d.n.v26_1<=1000
+	d.n.v26_1<=1000
+	d.n.v26_2<=1000
+	d.n.v26_2<=1000
+	d.n.v26_3<=1000
+	d.n.v27_1<=1000
+	d.n.v29_1<=1000
+	d.n.v3<=1000
+	d.n.v3<=1000
+	d.n.v47<=1000
+	d.n.v48_1<=1000
+	d.n.v48_1<=1000
+	d.n.v48_1<=1000
+	d.n.v48_2<=1000
+	d.n.v48_2<=1000
+	d.n.v48_3<=1000
+	d.n.v49_1<=1000
+	d.n.v58<=1000
+	f.n.v18>=-1000
+	d.n.v11>=-1000
+	d.n.v21>=-1000
+	d.n.v25_1>=-1000
+	d.n.v26_1>=-1000
+	d.n.v26_1>=-1000
+	d.n.v26_1>=-1000
+	d.n.v26_2>=-1000
+	d.n.v26_2>=-1000
+	d.n.v26_3>=-1000
+	d.n.v27_1>=-1000
+	d.n.v29_1>=-1000
+	d.n.v4>=-1000
+	d.n.v47>=-1000
+	d.n.v48_2>=-1000
+	d.n.v48_2>=-1000
+	d.n.v48_3>=-1000
+	d.n.v49_1>=-1000
+	d.n.v51_1>=-1000
+	d.n.v58>=-1000
+preopt  : 2025-05-19 11:46:19.68 cpu=0.827
+labargs : 2025-05-19 11:46:19.68 cpu=0.829
+run    1: 2025-05-19 11:46:19.68 cpu=0.83
+
+Starting point
+zc ineq : 2025-05-19 11:46:19.68 cpu=0.833
+The following 1 zerocross inequalities are redundant and are removed:
+zc d.n.v47>=0
+The following 4 ineqalitie(s) are active at starting point:
+f.x.v16>=0
+f.x.v44>=0
+f.x.v7>=0
+zc f.n.v32>=0
+optim   : 2025-05-19 11:46:20.03 cpu=1.121
+it=0	res=22.48825
+it=1	res=22.28502	normstep=77.06274	btk=0.25
+it=2	res=22.11041	normstep=59.86128	btk=1
+it=3	res=22.07036	normstep=19.42764	btk=0.25
+it=4	res=22.04449	normstep=12.75467	btk=0.25
+it=5	res=22.02845	normstep=8.243053	btk=0.25
+it=6	res=22.01867	normstep=5.261398	btk=0.25
+it=7	res=22.01271	normstep=3.346247	btk=0.25
+it=8	res=22.00905	normstep=2.15912	btk=0.25
+it=9	res=22.00683	normstep=1.44797	btk=0.25
+it=10	res=22.00558	normstep=1.018806	btk=0.25
+it=20	res=21.99228	normstep=3.191259	btk=0.07975403
+it=30	res=21.97278	normstep=8.843367	btk=0.06925284
+it=40	res=21.94456	normstep=13.32358	btk=0.06303499
+it=50	res=21.90494	normstep=1.622676	btk=1
+***Warning: in first optimization pass in run : nlsic: Maximal non linear iteration number is achieved
+secondzc: 2025-05-19 11:46:28.39 cpu=21.122
+The following inequalities are active after first pass
+   of zero crossing strategy and will be inverted:
+zc d.n.v31>=0
+zc f.n.v32>=0
+Second zero crossing pass
+it=0	res=21.90494
+it=1	res=21.90147	normstep=45.3552	btk=0.0625
+it=2	res=21.89967	normstep=31.29451	btk=0.0625
+it=3	res=21.89831	normstep=19.76478	btk=0.1042177
+it=4	res=21.89222	normstep=11.15847	btk=1
+it=5	res=21.86846	normstep=19.71364	btk=1
+it=6	res=21.85792	normstep=9.440695	btk=1
+it=7	res=21.85783	normstep=0.233529	btk=1
+it=8	res=21.85783	normstep=0.100022	btk=1
+it=9	res=21.85783	normstep=0.003109214	btk=1
+it=10	res=21.85783	normstep=0.001372895	btk=1
+it=20	res=21.85783	normstep=2.115306e-05	btk=0.0002441406
+it=30	res=21.85783	normstep=2.104776e-05	btk=1e-07
+it=40	res=21.85783	normstep=1.593011e-05	btk=1e-07
+it=50	res=21.85783	normstep=1.591815e-05	btk=1e-07
+***Warning: second zero crossing pass: nlsic: Maximal non linear iteration number is achieved
+nlsic: Maximal backtrack iteration number is achieved
+last zc : 2025-05-19 11:46:41.82 cpu=46.865
+Last zero crossing pass (free of zc constraints)
+it=0	res=21.85783
+***Warning: last zero crossing (free of zc): nlsic: LSI returned not descending direction
+
+postopt : 2025-05-19 11:46:41.90 cpu=46.956
+linstats: 2025-05-19 11:46:41.98 cpu=47.245
+***Warning: inverse of covariance matrix is numerically singular.
+Statistically undefined parameter(s) seems to be:
+f.n.v32
+f.n.v63
+f.x.v11
+f.x.v12
+f.x.v13
+f.x.v15
+f.x.v17
+f.x.v22
+f.x.v25_1
+f.x.v26_1
+f.x.v28
+f.x.v35
+f.x.v4
+f.x.v5
+f.x.v6
+f.x.v63
+For a more complete list, see SD column in '.tvar.sim' result file.
+rend    : 2025-05-19 11:46:42.02 cpu=47.377

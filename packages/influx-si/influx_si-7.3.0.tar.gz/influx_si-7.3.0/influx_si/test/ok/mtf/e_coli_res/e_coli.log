@@ -1,0 +1,91 @@
+"/home/sokol/sysbio/dev/ftbl2sys/influx_si/influx_s.py" "--pref" "e_coli" "--pref" "e_coli_growth" "--pref" "../prl_exp/mtf/e_coli_glc1-6n"
+code gen: 2025-05-19 11:46:18
+calcul  : 2025-05-19 11:46:18
+load    : 2025-05-19 11:46:19.35 cpu=0.538
+rinit   : 2025-05-19 11:46:19.35 cpu=0.538
+r_flux  : 2025-05-19 11:46:19.35 cpu=0.538
+Afl qr(): 2025-05-19 11:46:19.37 cpu=0.559
+dfl_dffg: 2025-05-19 11:46:19.38 cpu=0.566
+spAbr   : 2025-05-19 11:46:19.38 cpu=0.568
+weight  1: 2025-05-19 11:46:19.38 cpu=0.568
+weight  2: 2025-05-19 11:46:19.38 cpu=0.57
+weight  3: 2025-05-19 11:46:19.38 cpu=0.572
+weight  4: 2025-05-19 11:46:19.39 cpu=0.575
+weight  5: 2025-05-19 11:46:19.39 cpu=0.578
+weight  6: 2025-05-19 11:46:19.39 cpu=0.578
+measure : 2025-05-19 11:46:19.45 cpu=0.636
+ineq    : 2025-05-19 11:46:19.45 cpu=0.647
+Following 55 inequalities are redundant and removed:
+	n:0.0001<=ppc
+	d.n.pgi<=1000
+	f.x.fum_a>=0
+	f.x.fum_a<=0.999
+	d.n.out_co2>=-1000
+	f.n.out_Ac>=-1000
+	d.n.Glucupt_U<=1000
+	f.n.Glucupt_1>=-1000
+	f.n.Glucupt_1<=1000
+	d.n.Glucupt_U>=-1000
+	d.n.Glucupt_U>=-1000
+	d.n.pgi>=-1000
+	f.n.Glucupt_1>=-1000
+	d.n.pfk<=1000
+	d.n.idh<=1000
+	d.n.pfk<=1000
+	d.n.fum_b<=1000
+	d.n.ta>=-1000
+	d.n.tk1>=-1000
+	d.n.tk2>=-1000
+	d.n.tk1<=1000
+	d.n.tk2<=1000
+	d.n.pdh>=-1000
+	d.n.tk2<=1000
+	d.n.pdh>=-1000
+	d.n.pdh>=-1000
+	d.n.citsynth>=-1000
+	d.n.idh>=-1000
+	d.n.eno>=-1000
+	d.n.pfk>=-1000
+	d.n.pgk>=-1000
+	d.n.idh>=-1000
+	d.n.pgk>=-1000
+	d.n.fum_b>=-1000
+	d.n.pgk>=-1000
+	d.n.tk1>=-1000
+	d.x.fum_b<=0.999
+	d.n.akgdh<=1000
+	d.n.akgdh<=1000
+	d.n.ald<=1000
+	d.n.ald<=1000
+	d.n.ald<=1000
+	d.n.citsynth<=1000
+	d.n.eno<=1000
+	d.n.fum_a<=1000
+	d.n.mae<=1000
+	d.n.pfk<=1000
+	d.n.ta<=1000
+	d.n.ald>=-1000
+	d.n.citsynth>=-1000
+	d.n.eno>=-1000
+	d.n.fum_a>=-1000
+	d.n.ta>=-1000
+	d.n.ta>=-1000
+	d.n.tk1>=-1000
+preopt  : 2025-05-19 11:46:19.46 cpu=0.665
+labargs : 2025-05-19 11:46:19.46 cpu=0.672
+run    1: 2025-05-19 11:46:19.47 cpu=0.675
+
+Starting point
+res esti: 2025-05-19 11:46:19.47 cpu=0.676
+check ja: 2025-05-19 11:46:19.48 cpu=0.715
+optim   : 2025-05-19 11:46:19.54 cpu=0.796
+it=0	res=33.60668
+it=1	res=8.537147	normstep=0.372971	btk=1
+it=2	res=7.844899	normstep=0.1372184	btk=1
+it=3	res=7.843106	normstep=0.005504594	btk=1
+it=4	res=7.843096	normstep=0.0004985717	btk=1
+it=5	res=7.843096	normstep=2.725573e-05	btk=1
+it=6	res=7.843096	normstep=3.688584e-06	btk=1
+postopt : 2025-05-19 11:46:19.76 cpu=1.003
+linstats: 2025-05-19 11:46:19.85 cpu=1.072
+rend    : 2025-05-19 11:46:19.87 cpu=1.093
