@@ -1,0 +1,44 @@
+Faster indicomb with mkdocs markdown support.
+An alternative to the original [indicomb](https://gitlab.cern.ch/indicomb/indicomb).
+
+This is fast enough to run in the CI as your docs get built (say goodby to your cron jobs!), and comes with mkdocs markdown support.
+
+
+## Quick Start
+
+```bash
+pip install indicomb2
+```
+
+Set up a config, see the [example](https://gitlab.cern.ch/indicomb/indicomb2/-/blob/main/example.yaml)
+
+Run:
+
+```bash
+indicomb2 -c my_config.yaml
+```
+
+You can configure `indicomb2` to do a couple of things:
+
+1. The `scrape` section grabs events from an indico category and dumps them to json. You events in within the category.
+2. The `meeting_summaries` section creates a dedicated page listing all the selected meetings in the category. For an example see [here](https://ftag.docs.cern.ch/meetings/algorithms/)
+3. The `minutes_summary` section creates a dedicated page listing all the minutes for seleccted meetings in the category. For an example see [here](https://ftag.docs.cern.ch/meetings/algorithms-minutes/)
+4. The `topical_contributions` appends a table to an existing page with contributions matching the given criteria. For an example see [here](https://ftag.docs.cern.ch/algorithms/taggers/GN2/#meeting-contributions)
+
+
+## More details
+
+1. Set up a CERN docs site: https://how-to.docs.cern.ch/
+2. Add an environment variable `INDICO_API_TOKEN` with the token from https://indico.cern.ch/user/tokens/
+3. Setup a config, see the [example](https://gitlab.cern.ch/indicomb/indicomb2/-/blob/main/example.yaml)
+4. Run `indicomb2 -c my_config.yaml`
+
+
+## Search (WIP)
+
+The new search API is still a work in progress.
+You can test it by running
+
+```bash
+indisearch --config search.yaml 
+```
