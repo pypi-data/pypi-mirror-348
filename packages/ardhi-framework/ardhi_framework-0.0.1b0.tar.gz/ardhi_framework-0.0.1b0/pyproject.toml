@@ -1,0 +1,16 @@
+[project]
+name = "ardhi-framework"
+version = "0.0.1-beta"
+description = "A Land management framework for The Care Free"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Vincent Kioko", email = "kiokovincent12@gmail.com"}]
+dependencies = []
+requires-python = ">=3.8"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
