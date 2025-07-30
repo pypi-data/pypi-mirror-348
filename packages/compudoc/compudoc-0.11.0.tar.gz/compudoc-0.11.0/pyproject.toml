@@ -1,0 +1,39 @@
+[project]
+name = "compudoc"
+version = "0.11.0"
+description = "Add python calculations to your LaTeX and Markdown documents."
+authors = [
+    { name = "CD Clark III", email = "clifton.clark@gmail.com" }
+]
+dependencies = [
+    "pyparsing[diagrams]>=3.1.4",
+    "jinja2>=3.1.4",
+    "pint>=0.24.3",
+    "fspathtree>=1.0",
+    "cyclopts>=3.1.2",
+    "art>=6.4",
+]
+readme = "README.md"
+requires-python = ">= 3.9"
+
+[project.scripts]
+"compudoc" = "compudoc.__main__:app"
+[build-system]
+requires = ["hatchling==1.26.3"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+managed = true
+dev-dependencies = [
+    "black>=24.10.0",
+    "clirunner>=0.1.0",
+    "cram>=0.7",
+    "mypy>=1.14.1",
+    "pytest>=8.3.4",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/compudoc"]

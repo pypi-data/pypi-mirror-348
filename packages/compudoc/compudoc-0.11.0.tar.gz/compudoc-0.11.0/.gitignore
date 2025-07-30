@@ -1,0 +1,18 @@
+# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venv
+.venv
+.python-version
+requirements-dev.lock
+requirements.lock
+examples/latex_with_refs/main-rendered.aux
+examples/latex_with_refs/main-rendered.log
+examples/latex_with_refs/main-rendered.pdf
+examples/latex_with_refs/main-rendered.tex
+uv.lock

@@ -1,0 +1,10 @@
+build:
+  just preprocess
+  just compile
+
+preprocess:
+  uv run compudoc main.tex.cd
+
+compile:
+  arara main.tex
+
