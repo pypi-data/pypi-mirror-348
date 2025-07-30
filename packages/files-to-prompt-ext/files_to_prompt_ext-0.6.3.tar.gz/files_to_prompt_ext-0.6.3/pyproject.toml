@@ -1,0 +1,23 @@
+[project]
+name = "files-to-prompt-ext"
+version = "0.6.3"
+description = "Build project file/directory context prompts for use with LLMs"
+readme = "README.md"
+authors = [{name = "Janis Hahn"}]
+license = {text = "Apache-2.0"}
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "click"
+]
+
+[project.urls]
+Homepage = "https://github.com/janishahn/files-to-prompt"
+
+[project.entry-points.console_scripts]
+files-to-prompt = "files_to_prompt.cli:cli"
+
+[project.optional-dependencies]
+test = ["pytest"]
