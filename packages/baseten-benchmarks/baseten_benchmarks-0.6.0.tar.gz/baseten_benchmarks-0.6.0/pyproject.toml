@@ -1,0 +1,26 @@
+[project]
+name = "baseten-benchmarks"
+version = "0.6.0"
+description = ""
+authors = [
+    {name = "Pankaj Gupta",email = "pankaj.roark@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp (>=3.11.14,<4.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "transformers (>=4.50.1,<5.0.0)",
+    "torch (>=2.6.0,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "baseten_benchmarks", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+baseten_benchmark = "baseten_benchmarks.llm_benchmark:run"
