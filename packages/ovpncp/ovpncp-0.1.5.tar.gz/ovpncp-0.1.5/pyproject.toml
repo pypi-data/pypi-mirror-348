@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovpncp"
+version = "0.1.5"
+license = { text = "Apache License 2.0" }
+description = "OpenVPN Control Panel for Restricted Network."
+authors = [{ name = "Nick Yao", email = "ipaddict@outlook.com" }]
+dependencies = [
+    "cryptography",
+    "fastapi[all]",
+    "PyYAML",
+    "sqlmodel",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+security = [
+    "python-jose[cryptography]",
+    "types-python-jose"
+]
+azure = [
+    "ovpncp[security]",
+    "azure-storage-blob"
+]
+
+[project.urls]
+Homepage = "https://github.com/scia-iot"
+Source = "https://github.com/scia-iot/ovpncp"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.scripts]
+ovpncp = "sciaiot.ovpncp.main:run"
+
+[tool.setuptools.packages.find]
+exclude = [
+    "*tests.*",
+    "*tests"
+]
+
+[tool.setuptools.package-data]
+sciaiot = ["**/*.yml", "**/*.sh"]

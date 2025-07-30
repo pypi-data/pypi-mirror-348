@@ -1,0 +1,13 @@
+cryptography
+fastapi[all]
+PyYAML
+sqlmodel
+uvicorn
+
+[azure]
+ovpncp[security]
+azure-storage-blob
+
+[security]
+python-jose[cryptography]
+types-python-jose
