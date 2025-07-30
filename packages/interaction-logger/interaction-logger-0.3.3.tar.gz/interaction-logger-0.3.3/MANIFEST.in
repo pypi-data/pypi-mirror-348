@@ -1,0 +1,5 @@
+include LICENSE
+include README.md
+recursive-include interaction_logger/migrations *.py
+recursive-include interaction_logger/templates *.html
+recursive-include interaction_logger/static *
