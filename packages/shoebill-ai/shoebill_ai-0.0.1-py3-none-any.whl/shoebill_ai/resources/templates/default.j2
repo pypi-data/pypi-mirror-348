@@ -1,0 +1,9 @@
+{# Default template for models without specific formatting needs #}
+{% if System %}
+System: {{ System }}
+
+{% endif %}
+{% for msg in Messages %}
+{% if msg.Role == "user" %}User: {{ msg.Content }}{% elif msg.Role == "assistant" %}Assistant: {{ msg.Content }}{% else %}{{ msg.Role|title }}: {{ msg.Content }}{% endif %}
+{% endfor %}
+{% if Messages[-1].Role != "assistant" %}Assistant: {% endif %}
