@@ -1,0 +1,162 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools.packages.find]
+include = [
+    "tibiawikisql*",
+]
+
+[project]
+name = "tibiawikisql"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+authors = [
+    { name = "Allan Galarza", email = "allan.galarza@gmail.com" }
+]
+maintainers = [
+    { name = "Allan Galarza", email = "allan.galarza@gmail.com" }
+]
+license = { text = 'Apache 2.0' }
+description = "Python script that generates a SQLite database from TibiaWiki articles"
+requires-python = '>=3.10'
+readme = "README.md"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: SQL",
+    "Topic :: Database",
+    "Topic :: Games/Entertainment :: Role-Playing",
+    "Topic :: Internet",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Galarzaa90/tibiawiki-sql"
+
+[project.scripts]
+tibiawikisql = "tibiawikisql.__main__:cli"
+
+[tool.setuptools.dynamic]
+version = { attr = "tibiawikisql.__version__" }
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.dynamic.optional-dependencies]
+docs = { file = ["requirements-docs.txt"] }
+testing = { file = ["requirements-testing.txt"] }
+server = { file = ["requirements-server.txt"] }
+
+[tool.ruff]
+exclude = [
+    "__pycache__",
+    ".git/",
+    "build/",
+    ".idea/",
+    "venv/",
+    ".venv/",
+    "docs/",
+    "images/",
+    "logs/",
+    "tibiawikisql/__main__.py",
+    "tibiawikisql/server.py",
+]
+
+
+[tool.ruff.lint]
+select = [
+    "A", # flake8-builtins
+    "ANN", # flake8-annotations
+    "ARG", # flake8-unused-arguments
+    "B", # flake8-bugbear
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
+    "COM", # flake8-commas
+    "D", # pydocstyle
+    "DOC", # pydoclint
+    "DTZ", # flake8-datetimez
+    "E", "W", # pycodestyle
+    "EM", # flake8-errmsg
+    "ERA", # eradicate
+    "F", # Pyflakes
+    "FA", # flake8-future-annotations
+    "FLY", # flynt
+    "FURB", # refurb"
+    "G", # flake8-logging-format
+    "ICN", # flake8-import-conventions
+    "INP", # flake8-no-pep420
+    "ISC", # flake8-implicit-str-concat
+    "LOG", # flake8-logging
+    "N", # pep8-naming
+    "PERF", # Perflint
+    "PIE", # flake8-pie
+    "PL", # Pylint
+    "Q", # flake8-quotes
+    "RET", # flake8-return
+    "RSE", # flake8-raise
+    "RUF", # Ruff-specific rules
+    "S", # flake8-bandit
+    "SIM", # flake8-simplify
+    "SLF", # flake8-self
+    "SLOT", # flake8-slots
+    "T10", # flake8-debugger
+    "T20", # flake8-print
+    "TC", # refurb
+    "TID", # flake8-tidy-imports
+    "UP", # pyupgrade
+    "YTT", # flake8-2020
+]
+ignore = [
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name}
+    "PLR2004", # Magic value used in comparison, consider replacing {value} with a constant variable
+    "PLR0913", # Too many arguments in function definition ({c_args} > {max_args})
+    "D105", # Missing docstring in magic method
+    "PERF203", # `try`-`except` within a loop incurs performance overhead
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = ["D", "ANN201", "SLF001"]
+"**/models/*" = ["D100"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pep8-naming]
+extend-ignore-names = ["assert*"]
+
+
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+
+
+[tool.coverage.run]
+include = ["tibiawikisql/**/*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "def __repr__",
+    "def __eq__",
+    "def __len__",
+    "def __lt__",
+    "def __gt__",
+    "def __ne__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:"
+]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"typing.Self".msg = "Use typing_extensions.Self instead."
