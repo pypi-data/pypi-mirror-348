@@ -1,0 +1,32 @@
+   [build-system]
+   requires = ["setuptools>=61.0"]
+   build-backend = "setuptools.build_meta"
+
+   [project]
+   name = "h_ai_brain"
+   version = "0.0.26"
+   authors = [
+       {name = "shoebill", email = "shoebill.hai@gmail.com"},
+   ]
+   description = "AI Research agent API"
+   readme = "README.md"
+   requires-python = ">=3.10"
+   classifiers = [
+       "Programming Language :: Python :: 3",
+       "License :: OSI Approved :: Apache Software License",
+       "Operating System :: OS Independent",
+   ]
+   dependencies = [
+       "requests~=2.32.3",
+       "jinja2~=3.1.3"
+   ]
+
+   [project.optional-dependencies]
+   dev = [
+       "pytest",
+       # Other development dependencies
+   ]
+
+   [tool.setuptools.package-data]
+    "src.h_ai.resources" = ["*.json"]  # This will include all JSON files in the resources directory
+    "src.h_ai.resources.templates" = ["*.j2"]  # This will include all j2 files in the resources directory
