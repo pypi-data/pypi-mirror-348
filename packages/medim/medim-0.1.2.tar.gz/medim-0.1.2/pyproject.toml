@@ -1,0 +1,30 @@
+[project]
+name = "medim"
+version = "0.1.2"
+requires-python = ">=3.9"
+description = "MedIM is a all-in-one collection for Medical Image Models in PyTorch Style."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Haoyu Wang", email = "small_dark@sina.com"},
+]
+dependencies = [
+    "appdirs",
+    "numpy",
+    "torch>=2.4.0",
+    "einops",
+    "huggingface_hub",
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/uni-medical/Pytorch-Medical-Image-Models"
+
+[build-system]
+requires = ["setuptools>=67.8.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.codespell]
+skip = '.git,*.pdf,*.svg'
+#
+# ignore-words-list = ''
