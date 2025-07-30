@@ -1,0 +1,166 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wheke-auth"
+dynamic = ["version"]
+description = "A Pod that adds auth to Wheke"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Humberto Rocha", email = "humrochagf@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "aiotinydb",
+  "bcrypt==4.0.1",
+  "email-validator",
+  "passlib[bcrypt]",
+  "python-jose[cryptography]",
+  "python-multipart",
+  "wheke>=0.1.1",
+]
+
+[project.urls]
+Documentation = "https://github.com/humrochagf/wheke-auth#readme"
+Issues = "https://github.com/humrochagf/wheke-auth/issues"
+Source = "https://github.com/humrochagf/wheke-auth"
+
+[tool.hatch.version]
+path = "src/wheke_auth/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "httpx",
+  "mypy",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+]
+[tool.hatch.envs.default.scripts]
+cov = "pytest --cov"
+tests = "pytest {args:tests}"
+typing = "mypy --install-types --non-interactive {args:src/wheke_auth tests}"
+lint = "ruff check {args:.}"
+fmt = "ruff format {args:.}"
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs-material",
+  "mkdocstrings[python]",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build"
+server = "mkdocs serve"
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.12", "3.13"]
+
+[tool.ruff.lint]
+exclude = [
+  ".env",
+  ".hatch",
+  ".mypy_cache",
+  ".venv",
+  "__pycache__",
+  "env",
+  "venv",
+]
+select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+ignore = [
+  # Same line string implicit string concatenation
+  "ISC001",
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105", "S106", "S107",
+  # Ignore complexity
+  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+]
+unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["wheke_auth"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
+
+[tool.coverage.run]
+source_pkgs = ["wheke_auth", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/wheke_auth/__about__.py",
+]
+
+[tool.coverage.paths]
+wheke_auth = ["src/wheke_auth", "*/wheke-auth/src/wheke_auth"]
+tests = ["tests", "*/wheke-auth/tests"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.mypy]
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+exclude = """
+  .env
+  | .hatch
+  | .mypy_cache
+  | .venv
+  | __pycache__
+  | env
+  | venv
+"""
