@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subdata"
+version = "1.0.1"
+description = "A Python library for automatically creating targeted hate speech datasets."
+authors = [
+    {name = "Subdata", email = "subdatalibrary@gmail.com"}
+]
+license = {text = "GNU"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+    "numpy",
+    "huggingface_hub",
+    "pyarrow",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/subdata-library/subdata"
