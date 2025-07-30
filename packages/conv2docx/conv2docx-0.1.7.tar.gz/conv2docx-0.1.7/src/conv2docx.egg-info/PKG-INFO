@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: conv2docx
+Version: 0.1.7
+Summary: Convert JSON/YAML files to Microsoft Word (.docx) format using Markdown and Pandoc
+Home-page: https://github.com/AndyTakker/conv2docx
+Author: "Andrey Kolesov"
+Author-email: "never-ya@yandex.ru"
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pypandoc>=1.10
+Requires-Dist: pyyaml
+Dynamic: license-file
+
+# conv2docx
+
+A simple CLI tool to convert JSON/YAML files into Microsoft Word (.docx) documents.
+
+## Overview
+
+This script wraps JSON content in markdown delimiters (```\json```) and uses
+ [Pandoc](https://pandoc.org/ ) via the `pypandoc` module to convert it 
+ to a `.docx` document — useful when you need to turn structured data into printable
+ or editable documents.
+ YAML is also supported. It convert to JSON and then processed as JSON/
+
+## Features
+
+- Converts `.json/yaml` files to `.docx`
+- Supports single file mode and batch processing
+- Automatically creates and cleans up temporary files
+- Can be used as a command-line utility
+
+## Usage
+
+To convert a single file:
+
+```bash
+conv2docx input.json
+```
+
+To convert all .json files in the current directory:
+
+```bash
+conv2docx
+```
+
+parameter `--keep-temp` keeps temporary files
+
+## Installation
+
+```bash
+pip install conv2docx
+```
+
+# Requirements
+
+Python >= 3.7
+
+
+[![License](https://img.shields.io/github/license/AndyTakker/conv2docx)](https://github.com/AndyTakker/conv2docx)
+
