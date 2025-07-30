@@ -1,0 +1,37 @@
+[project]
+name = "vais_mcp"
+version = "0.1.0a7"
+description = "MCP server to search private data in Vertex AI Search."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.3.3",
+    "google-cloud-discoveryengine>=0.13.8",
+    "loguru>=0.7.3",
+    "mcp[cli]>=1.8.0",
+    "pytest>=8.3.5",
+    "uvicorn>=0.34.2",
+]
+license = {text = "Apache-2.0"}
+license-files = ["LICENSE"]
+
+authors = [
+  { name = "Shintaro Mormioto", email = "mrmtsntr1@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.11.8",
+]
+
+[project.scripts]
+vais-mcp = "vais_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
