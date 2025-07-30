@@ -1,0 +1,21 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "@jovyanai/labextension",
+  "description": "@jovyanai/labextension settings.",
+  "type": "object",
+  "properties": {
+    "authToken": {
+      "type": "string",
+      "title": "Authentication Token",
+      "description": "Your Jovyan AI authentication token for accessing the backend services",
+      "default": ""
+    },
+    "backendUrl": {
+      "type": "string",
+      "title": "Backend URL",
+      "description": "The URL of the Jovyan AI backend service",
+      "default": "wss://backend.jovyan-ai.com"
+    }
+  },
+  "additionalProperties": false
+}
