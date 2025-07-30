@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image-tools-stackabletech"
+dynamic = ["version"]
+authors = [{ name = "Razvan Mihai", email = "razvan.mihai@stackable.tech" }]
+description = "Image tools for the Stackable Data Platform."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = ["Jinja2>=3.1.2", "PyYAML>=6.0"]
+[project.optional-dependencies]
+lint = ['ruff>=0.5', 'mypy>=1.10']
+publish = ['twine>=5.0', 'build>=1.2']
+
+[project.scripts]
+bake = "image_tools.bake:main"
+check-container = "image_tools.preflight:main"
+
+[project.urls]
+"Homepage" = "https://github.com/stackabletech/image-tools"
+"Bug Tracker" = "https://github.com/stackabletech/image-tools/issues"
+
+[tool.ruff]
+# Allow lines to be as long as 120 characters.
+line-length = 120
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.setuptools.dynamic]
+version = { attr = "image_tools.version.__version__" }
