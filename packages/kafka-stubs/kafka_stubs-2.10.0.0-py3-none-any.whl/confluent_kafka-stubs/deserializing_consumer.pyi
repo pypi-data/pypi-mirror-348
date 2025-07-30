@@ -1,0 +1,3 @@
+from confluent_kafka.cimpl import Consumer
+
+class DeserializingConsumer(Consumer): ...
