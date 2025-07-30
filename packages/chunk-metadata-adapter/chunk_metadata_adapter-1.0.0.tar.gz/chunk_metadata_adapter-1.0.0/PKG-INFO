@@ -1,0 +1,218 @@
+Metadata-Version: 2.4
+Name: chunk_metadata_adapter
+Version: 1.0.0
+Summary: Reusable metadata builder for chunk-based systems
+Author: SmartAssistant
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/yourusername/chunk_metadata_adapter
+Project-URL: Bug Tracker, https://github.com/yourusername/chunk_metadata_adapter/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pydantic>=2.0.0
+
+# Chunk Metadata Adapter
+
+[![PyPI version](https://badge.fury.io/py/chunk-metadata-adapter.svg)](https://badge.fury.io/py/chunk-metadata-adapter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A library for creating, transforming, and managing universal metadata for content chunks for RAG systems, documentation processing, and machine learning training.
+
+[Русская версия](README.md)
+
+## Purpose
+
+The package provides tools for:
+
+1. Creating structured metadata for content chunks (text, code, messages)
+2. Converting between flat and structured formats
+3. Safely storing and validating connections between chunks
+4. Tracking quality and usage metrics of chunks
+5. Ensuring data integrity through SHA256 hashing
+6. Strict validation of identifiers (UUID4) and timestamps (ISO8601 with timezone)
+
+## Installation
+
+```bash
+pip install chunk-metadata-adapter
+```
+
+## Data Models
+
+The package provides two main data formats:
+
+### SemanticChunk
+
+A fully structured model with nested objects, convenient for programmatic processing:
+
+```python
+chunk = SemanticChunk(
+    uuid="550e8400-e29b-41d4-a716-446655440000",
+    type=ChunkType.DOC_BLOCK,
+    role=ChunkRole.DEVELOPER,
+    project="MyProject",
+    task_id="TASK-123",
+    subtask_id="TASK-123-A",
+    unit_id="chunker-service",
+    text="# Introduction\n\nThis is the system documentation.",
+    summary="Documentation introduction",
+    language="markdown",
+    source_id="48bb4273-1f56-4015-8b14-3d685b8cc9ae",
+    source_path="docs/intro.md",
+    source_lines=[1, 3],
+    ordinal=0,
+    created_at="2023-10-15T12:34:56.789+00:00",
+    status=ChunkStatus.INDEXED,
+    chunking_version="1.0",
+    sha256="abcdef1234567890...",
+    links=["parent:a1b2c3d4-e5f6-4a5b-8c7d-9e0f1a2b3c4d"],
+    tags=["introduction", "documentation"],
+    metrics=ChunkMetrics(quality_score=0.95, used_in_generation=True)
+)
+```
+
+### FlatSemanticChunk
+
+A flat structure for storage systems that prefer simple key-value formats:
+
+```python
+flat_chunk = FlatSemanticChunk(
+    uuid="550e8400-e29b-41d4-a716-446655440000",
+    source_id="48bb4273-1f56-4015-8b14-3d685b8cc9ae",
+    project="MyProject",
+    task_id="TASK-123",
+    subtask_id="TASK-123-A",
+    unit_id="chunker-service",
+    type="DocBlock",
+    role="developer",
+    language="markdown",
+    text="# Introduction\n\nThis is the system documentation.",
+    summary="Documentation introduction",
+    ordinal=0,
+    sha256="abcdef1234567890...",
+    created_at="2023-10-15T12:34:56.789+00:00",
+    status="indexed",
+    source_path="docs/intro.md",
+    source_lines_start=1,
+    source_lines_end=3,
+    tags="introduction,documentation",
+    link_parent="a1b2c3d4-e5f6-4a5b-8c7d-9e0f1a2b3c4d",
+    quality_score=0.95,
+    used_in_generation=True
+)
+```
+
+## Usage
+
+### Creating Chunk Metadata
+
+```python
+import uuid
+from chunk_metadata_adapter import ChunkMetadataBuilder, ChunkType, ChunkRole
+
+# Create a metadata builder for the project
+builder = ChunkMetadataBuilder(project="MyProject", unit_id="chunker-service-1")
+
+# Generate a UUID for the source document
+source_id = str(uuid.uuid4())
+
+# Create metadata for a code chunk
+metadata = builder.build_flat_metadata(
+    text="def hello_world():\n    print('Hello, World!')",
+    source_id=source_id,
+    ordinal=1,
+    type=ChunkType.CODE_BLOCK,
+    language="python",
+    source_path="src/hello.py",
+    source_lines_start=10,
+    source_lines_end=12,
+    tags="example,hello",
+    role=ChunkRole.DEVELOPER
+)
+
+print(f"Chunk UUID: {metadata['uuid']}")
+print(f"SHA256: {metadata['sha256']}")
+```
+
+### Creating a Structured Chunk
+
+```python
+from chunk_metadata_adapter import ChunkMetadataBuilder, ChunkType, ChunkRole
+
+# Create a builder for a documentation project
+builder = ChunkMetadataBuilder(
+    project="DocumentationProject",
+    unit_id="docs-generator"
+)
+
+# Create a structured chunk
+chunk = builder.build_semantic_chunk(
+    text="# Introduction\n\nThis is the system documentation.",
+    language="markdown",
+    type=ChunkType.DOC_BLOCK,
+    source_id=str(uuid.uuid4()),
+    summary="Project introduction section",
+    role=ChunkRole.DEVELOPER,
+    source_path="docs/intro.md",
+    source_lines=[1, 3],
+    ordinal=0,
+    task_id="DOC-123",
+    subtask_id="DOC-123-A",
+    tags=["introduction", "documentation", "overview"],
+    links=[f"parent:{str(uuid.uuid4())}"]
+)
+
+print(f"Chunk UUID: {chunk.uuid}")
+print(f"Summary: {chunk.summary}")
+```
+
+### Converting Between Formats
+
+```python
+# Convert from structured to flat format
+flat_dict = builder.semantic_to_flat(chunk)
+
+# Convert from flat to structured format
+restored_chunk = builder.flat_to_semantic(flat_dict)
+
+# Verify they are equivalent
+assert restored_chunk.uuid == chunk.uuid
+assert restored_chunk.text == chunk.text
+assert restored_chunk.type == chunk.type
+```
+
+## Features
+
+- **Strict Type Validation:** All UUIDs are validated against the UUIDv4 format, dates are validated against ISO8601 with timezone.
+- **Flexible Formats:** Support for both structured and flat data representations for different storage systems.
+- **Built-in Integrity:** Automatic calculation of SHA256 hashes for integrity verification.
+- **Compatibility:** Designed to work in the RAG and ML system ecosystem.
+- **Type Safety:** Full typing support for IDEs and static analysis.
+
+## Documentation
+
+Documentation is available in English and Russian:
+
+### English Documentation
+- [Documentation Overview](docs/README.md)
+- [Metadata Structure](docs/Metadata.md)
+- [Usage Guide](docs/Usage.md)
+- [Component Interaction](docs/Component_Interaction.md)
+
+### Russian Documentation
+- [Обзор документации](docs/README.ru.md)
+- [Структура метаданных](docs/Metadata.ru.md)
+- [Руководство по использованию](docs/Usage.ru.md)
+- [Взаимодействие компонентов](docs/Component_Interaction.ru.md)
+
+## License
+
+MIT
+
+## Author
+
+SmartAssistant Team 
