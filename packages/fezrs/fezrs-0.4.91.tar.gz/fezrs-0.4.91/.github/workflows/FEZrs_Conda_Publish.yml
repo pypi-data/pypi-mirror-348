@@ -1,0 +1,58 @@
+name: Conda Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-conda:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Miniconda with Mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: "3.10"
+          miniforge-variant: Miniforge3
+          mamba: true
+
+      - name: Install conda-build and anaconda-client
+        shell: bash -l {0}
+        run: |
+          mamba install -y conda-build anaconda-client
+
+      - name: Extract version and sha256 from .bumpversion.cfg and PyPI
+        shell: bash -l {0}
+        run: |
+          VERSION=$(python -c "from configparser import ConfigParser; cfg=ConfigParser(); cfg.read('.bumpversion.cfg'); print(cfg['bumpversion']['current_version'])")
+          SHA256=$(curl -sL https://pypi.io/packages/source/f/fezrs/fezrs-${VERSION}.tar.gz | sha256sum | awk '{print $1}')
+          echo "FEZRS_VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "SHA256_HASH=${SHA256}" >> $GITHUB_ENV
+
+      - name: Build Conda package
+        shell: bash -l {0}
+        env:
+          FEZRS_VERSION: ${{ env.FEZRS_VERSION }}
+          SHA256_HASH: ${{ env.SHA256_HASH }}
+        run: |
+          conda-build recip/
+
+      - name: Configure Anaconda API token
+        shell: bash -l {0}
+        env:
+          ANACONDA_API_KEY: ${{ secrets.ANACONDA_API_KEY }}
+        run: |
+          mkdir -p ~/.conda
+          echo -e "channels:\n  - defaults\nanaconda_upload: true\nclient_ssl_verify: true\n" > ~/.condarc
+          mkdir -p ~/.anaconda
+          echo "$ANACONDA_API_KEY" > ~/.anaconda/token.txt
+
+      - name: Upload to Anaconda Cloud
+        shell: bash -l {0}
+        run: |
+          anaconda upload $(conda-build recip/ --output) --force
