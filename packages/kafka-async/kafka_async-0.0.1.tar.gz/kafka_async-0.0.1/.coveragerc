@@ -1,0 +1,17 @@
+[run]
+branch = true
+relative_files = true
+source =
+  kafka_async
+context = $COVERAGE_CONTEXT
+
+[paths]
+source =
+  src
+  */site-packages
+
+[report]
+show_missing = true
+exclude_also =
+  assert_never\(.*\)
+  if TYPE_CHECKING:
