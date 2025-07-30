@@ -1,0 +1,67 @@
+Metadata-Version: 2.3
+Name: fastapi_vue3_admin
+Version: 0.0.3
+Summary: FastAPI + Vue3 管理後台腳手架
+License: MIT
+Author: Jeremy.Huang
+Author-email: forpythonwork0225@gmail.com
+Requires-Python: >=3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: aiosqlite (>=0.19.0,<1.0.0)
+Requires-Dist: alembic (>=1.13.0,<2.0.0)
+Requires-Dist: cookiecutter (>=2.3.0,<3.0.0)
+Requires-Dist: fastapi (>=0.110.0,<1.0.0)
+Requires-Dist: passlib[bcrypt] (>=1.7.4,<2.0.0)
+Requires-Dist: psycopg2-binary (>=2.9.9,<3.0.0)
+Requires-Dist: pydantic-settings (>=2.2.1,<3.0.0)
+Requires-Dist: python-jose[cryptography] (>=3.3.0,<4.0.0)
+Requires-Dist: sqlalchemy (>=2.0.0,<3.0.0)
+Requires-Dist: typer[all] (>=0.9.0,<1.0.0)
+Requires-Dist: uvicorn[standard] (>=0.29.0,<1.0.0)
+Project-URL: Homepage, https://github.com/yourusername/fastapi_vue3_admin
+Description-Content-Type: text/markdown
+
+# fastapi_vue3_admin
+
+FastAPI + Vue3 的現代化管理後台腳手架。 
+
+## 快速開始
+
+### 後端
+```bash
+poetry install --no-root
+poetry run fastapi_vue3_admin dev
+```
+
+### 前端
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 資料庫遷移 (Alembic)
+```bash
+poetry run fastapi_vue3_admin migrate -m "init"
+```
+
+### Docker
+```bash
+# 建立映像並啟動（含 Postgres）
+docker-compose up --build
+```
+
+### 生成新專案腳手架
+```bash
+# 安裝套件後
+fva create my_project
+```
+
+啟動後：
+- API: http://localhost:8000/docs
+- DB:  postgres://fastapi:fastapi@localhost:5432/fastapi_db 
