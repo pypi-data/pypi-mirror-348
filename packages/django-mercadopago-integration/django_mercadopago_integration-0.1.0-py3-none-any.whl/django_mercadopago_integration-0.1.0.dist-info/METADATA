@@ -1,0 +1,47 @@
+Metadata-Version: 2.3
+Name: django-mercadopago-integration
+Version: 0.1.0
+Summary: Reusable Mercado Pago integration for Django projects
+License: MIT
+Author: Crhistyan Silva
+Author-email: crhistyan.silva@falcode.dev
+Requires-Python: >=3.8,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: django (>=3.2)
+Requires-Dist: djangorestframework
+Requires-Dist: requests
+Description-Content-Type: text/markdown
+
+# django-mercadopago-integration
+
+**Reusable Mercado Pago integration for Django projects.**
+
+This package provides a reusable and extensible integration with [Mercado Pago](https://www.mercadopago.com) for Django applications. It includes OAuth2 connection, split payments, webhook signature verification, and default serializers and viewsets to plug into any Django REST Framework backend.
+
+---
+
+## 🔧 Features
+
+- 🔐 OAuth2 authorization flow to link accounts
+- 💸 Split payments with `marketplace_fee`
+- 🧾 Automatic preference creation and redirection
+- 📬 Webhook handling with HMAC signature verification
+- 🧩 Extensible base service to override core logic
+- ✅ Default DRF serializers and viewsets ready to use
+
+---
+
+## 📦 Installation
+
+### From PyPI
+
+```bash
+pip install django-mercadopago-integration
+
