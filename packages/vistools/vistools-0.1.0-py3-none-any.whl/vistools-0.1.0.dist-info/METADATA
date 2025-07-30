@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: vistools
+Version: 0.1.0
+Summary: Utility functionality for vtk and pyvista
+Author-email: Ivo Steinbrecher <ivo.steinbrecher@unibw.de>
+Project-URL: Repository, https://github.com/isteinbrecher/vtktools/
+Project-URL: Issues, https://github.com/isteinbrecher/vtktools/issues/
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: vtk
+Provides-Extra: pyvista
+Requires-Dist: pyvista<0.45.0; extra == "pyvista"
+Requires-Dist: opencv-python; extra == "pyvista"
+Provides-Extra: dev
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Dynamic: license-file
