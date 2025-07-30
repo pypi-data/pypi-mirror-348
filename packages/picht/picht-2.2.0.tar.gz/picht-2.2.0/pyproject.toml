@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "numpy==1.26.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "picht"
+version = "2.2.0"
+description = "Electron optics simulation tool"
+readme = "README.md"
+requires-python = ">=3.6"
+license = "MIT"
+
+authors = [
+    {name = "Rishiit Sharma", email = "rishiitsharma@gmail.com"}
+]
+
+dependencies = [
+    "matplotlib",
+    "scipy",
+    "numba",
+    "mendeleev",
+    "pyamg",
+    "joblib",
+    "cadquery",
+    "h5py",
+    "numpy==1.26.4",
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Intended Audience :: Science/Research",
+    "Development Status :: 5 - Production/Stable"
+]
+
+[project.urls]
+Homepage = "https://github.com/rolypolytoy/picht"
