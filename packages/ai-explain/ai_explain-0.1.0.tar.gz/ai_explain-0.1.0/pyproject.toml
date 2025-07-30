@@ -1,0 +1,17 @@
+[project]
+name = "ai-explain"
+readme = "README.md"
+authors = [{ name = "Kyle O'Malley", email = "j.kyle.omalley@gmail.com" }]
+requires-python = ">=3.10"
+dynamic = ["version", "description"]
+dependencies = [
+    "click>=8.2.0",
+    "google-genai>=1.15.0",
+]
+
+[project.scripts]
+ai-explain = "ai_explain:main"
+
+[build-system]
+requires = ["flit_core >=3.11,<4"]
+build-backend = "flit_core.buildapi"
