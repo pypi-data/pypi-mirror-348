@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: pyrefdev
+Version: 2025.1
+Summary: The entry point to Python reference docs
+Keywords: documentation
+Author-email: Mango Umbrella LLC <hi@mangoumbrella.com>
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-Expression: Apache-2.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Documentation
+License-File: LICENSE
+Requires-Dist: uvicorn[standard]>=0.34.2,<1 ; extra == "server"
+Requires-Dist: fastapi>=0.115.12,<1 ; extra == "server"
+Project-URL: Home, https://pyref.dev
+Project-URL: Source, https://github.com/mangoumbrella/pyref.dev
+Provides-Extra: server
+
+# pyref.dev
+
+[pyref.dev](https://pyref.dev) is a fast, convenient way to access Python reference docs.
+
+It allows you to quickly jump to the official documentation for any Python standard library module, class, or function by using a simple URL pattern:
+
+```
+https://pyref.dev/<fully.qualified.symbol.name>
+```
+
+Alternatively, you could also `pip install pyrefdev` and run the `pyrefdev` CLI tool.
+
+## Examples
+
+* https://pyref.dev/json
+* https://pyref.dev/pathlib.Path
+* https://pyref.dev/datetime.datetime.strftime
+
+For now, the symbols are case-insensitive.
+
+## License
+
+[pyref.dev](https://pyref.dev) is licensed under the terms of the Apache license. See [LICENSE](LICENSE) for more information.
+
