@@ -1,0 +1,31 @@
+[package]
+name = "quizx"
+version = "0.2.0"
+description = "Quantum Circuit Optimisation and Compilation using the ZX-calculus"
+keywords = ["Quantum", "ZX-calculus", "Optimisation", "Compilation"]
+categories = ["science"]
+
+edition = { workspace = true }
+rust-version = { workspace = true }
+authors = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+readme = "README.md"
+
+[dependencies]
+num = { workspace = true }
+rustc-hash = { workspace = true }
+rayon = { workspace = true }
+ndarray = { workspace = true, features = ["rayon"] }
+approx = { workspace = true }
+regex = { workspace = true }
+rand = { workspace = true }
+itertools = { workspace = true }
+openqasm = { workspace = true }
+rstest = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+derive_more = { workspace = true, features = ["display", "error", "from"] }
+
+[dev-dependencies]
+rstest = { workspace = true }

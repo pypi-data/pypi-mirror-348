@@ -1,0 +1,27 @@
+[package]
+name = "quizx_pybindings"
+version = "0.0.0"
+authors = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+
+publish = false
+
+[lib]
+name = "libquizx"
+crate-type = ["cdylib"]
+
+[dependencies]
+quizx = { version = "0.2.0", path = "../quizx" }
+num = { workspace = true }
+pyo3 = { workspace = true, features = [
+    "extension-module",
+    "num-complex",
+    "num-rational",
+    "abi3-py39",
+] }
+derive_more = { workspace = true, features = ["add", "mul"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
