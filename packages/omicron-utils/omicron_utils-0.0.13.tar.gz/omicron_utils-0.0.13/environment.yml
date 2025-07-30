@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.11,<3.12
+  - setuptools>=60
+  - setuptools_scm[toml]>=3.4
+  - wheel

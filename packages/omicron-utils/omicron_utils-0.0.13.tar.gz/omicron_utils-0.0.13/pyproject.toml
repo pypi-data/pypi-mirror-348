@@ -1,0 +1,44 @@
+[build-system]
+requires = [
+    "setuptools>=60",
+    "setuptools_scm[toml]>=3.4",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "omicron_utils/_version.py"
+
+[tool.pytest.ini_options]
+addopts = "-r a"
+
+[project.urls]
+"Bug Tracker" = "https://git.ligo.org/joseph-areeda/omicron_utils/-/issues"
+"Source Code" = "https://git.ligo.org/joseph-areeda/omicron_utils"
+
+[project]
+name = "omicron_utils"
+authors = [ { name = "Joseph Areeda", email = "joseph.areeda@ligo.org" } ]
+description = "Collection of common classes and function supporting LIGO Omicron pipelines"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+
+dependencies = []
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.scripts]
+omicron-config-utils = "omicron_utils.config_utils:main"
