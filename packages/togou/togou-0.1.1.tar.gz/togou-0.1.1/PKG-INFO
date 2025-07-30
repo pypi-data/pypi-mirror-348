@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: togou
+Version: 0.1.1
+Summary: A distributed-safe file writer with sync/async/thread/process support
+Home-page: https://github.com/yourname/togou 
+Author: 今天掉头发了嘛
+Author-email: qwqssr@qq.com
+Keywords: file-writer redis distributed-lock async safe-io
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Development Status :: 4 - Beta
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: aiofiles==24.1.0
+Requires-Dist: redlock_py==1.0.8
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
