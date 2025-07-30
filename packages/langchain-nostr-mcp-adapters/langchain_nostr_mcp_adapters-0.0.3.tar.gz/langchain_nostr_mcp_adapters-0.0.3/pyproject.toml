@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langchain-nostr-mcp-adapters"
+version = "0.0.3"
+description = "Make Anthropic Model Context Protocol (MCP) tools compatible with LangChain and LangGraph agents."
+authors = [
+    { name = "Vadym Barda", email = "19161700+vbarda@users.noreply.github.com" },
+    { name = "Evan Hallmark", email = "ehallmark1122@gmail.com" }
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain-core>=0.3.36,<0.4",
+    "mcp>=1.7",
+    "nostr-agent-tools>=0.5.0",
+]
+
+[tool.uv]
+reinstall-package = ["nostr-agent-tools"]
+
+[dependency-groups]
+test = [
+    "pytest>=8.0.0",
+    "ruff>=0.9.4",
+    "mypy>=1.8.0",
+    "pytest-socket>=0.7.0",
+    "pytest-asyncio>=0.26.0",
+    "types-setuptools>=69.0.0",
+    "websockets>=15.0.1"
+]
+
+[tool.uv.workspace]
+members = [
+    "examples/clients/nostr-client",
+]
+
+[project.urls]
+Homepage = "https://www.github.com/ehallmark/langchain-mcp-adapters"
+Issues = "https://www.github.com/ehallmark/langchain-mcp-adapters/issues"
+
