@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_atoti_jupyterlab_extension=self.webpackChunk_atoti_jupyterlab_extension||[]).push([[7872],{87872:(t,e,s)=>{s.r(e),s.d(e,{atotiUIVersion:()=>n});const n="5.2.8"}}]);
