@@ -1,0 +1,53 @@
+Metadata-Version: 2.4
+Name: mlsherpa
+Version: 0.1.1
+Summary: A lightweight AutoML framework
+Author-email: Tanmai Raghava <your.email@example.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
+
+# AutoML
+
+**AutoML** is a lightweight AutoML library to automatically choose the best algorithm for your dataset.
+
+## Features
+
+- Supports classification and regression
+- Auto model selection
+- Performance graphs
+
+## Usage
+
+```python
+from automl import AutoML
+model = AutoML(df, target='target_column')
+model.run()
+```
+
+## Data Cleaning
+
+```python
+from automl.preprocessing import DataCleaner
+
+cleaner = DataCleaner()
+df_cleaned = cleaner.clean(df)
+```
+
+## Install
+
+```bash
+pip install -r requirements.txt
+```
