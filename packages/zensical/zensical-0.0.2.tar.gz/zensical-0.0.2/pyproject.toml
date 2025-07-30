@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zensical"
+version = "0.0.2"
+description = "Zensical CLI"
+license = { text = "MIT" }
+
+[project.urls]
+Source = "https://github.com/zensical/zensical"
