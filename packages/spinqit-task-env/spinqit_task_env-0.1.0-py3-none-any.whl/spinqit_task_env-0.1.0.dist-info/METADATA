@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: spinqit-task-env
+Version: 0.1.0
+Summary: Add your description here
+Home-page: https://github.com/yourusername/spinqit_task_manager
+Author: Your Name
+Author-email: your.email@example.com
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: antlr4-python3-runtime==4.9.2
+Requires-Dist: autograd>=1.8.0
+Requires-Dist: autoray>=0.7.1
+Requires-Dist: flask>=3.1.1
+Requires-Dist: igraph>=0.11.8
+Requires-Dist: mcp>=1.8.1
+Requires-Dist: pycryptodome>=3.22.0
+Requires-Dist: python-constraint>=1.4.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: scipy>=1.15.3
+Requires-Dist: setuptools>=80.7.1
+Requires-Dist: twine>=6.1.0
+Requires-Dist: wheel>=0.45.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: requires-python
+
+### TODOLIST
+- 整理调用的逻辑，确认这个工具的可插拔性，可自适应找环境变量，找不到时要求配置 ✅
+- 发布 
+- 测试不同工具的可行性
