@@ -1,0 +1,112 @@
+Metadata-Version: 2.1
+Name: kwok
+Version: 1.1.7
+Summary: A fast maximum weight bipartite matching algorithm from 'A Faster Algorithm for Maximum Weight Matching on Unrestricted Bipartite Graphs'
+Home-page: https://github.com/aimidi/kwok
+Author: Shawxing Kwok
+Author-email: shawxingkwok@126.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: C++
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# Kwok
+
+A Cython-based implementation of "A Faster Algorithm for Maximum Weight Matching on Unrestricted Bipartite Graphs" that supports multiple Python versions and platforms.
+
+## About
+
+Kwok implements a fast maximum weight bipartite matching algorithm based on the paper "A Faster Algorithm for Maximum Weight Matching on Unrestricted Bipartite Graphs" (https://arxiv.org/abs/2502.20889). The algorithm achieves runtime O(E^1.4 + LR) estimated from experimental tests on random graphs where |L| <= |R|.
+
+## Installation
+
+```bash
+pip install kwok
+```
+
+## Usage
+
+```python
+import kwok
+
+# Example usage
+adj = [
+    [(0, 10), (1, 5), (2, 1)],  # Edges from left vertex 0
+    [(0, 2), (1, 15), (2, 0)],  # Edges from left vertex 1
+    [(0, 0), (1, 8), (2, 12)]   # Edges from left vertex 2
+]
+
+# Solve the matching problem
+matching = kwok.kwok(adj)
+print("Left pairs:", matching.left_pairs)
+print("Right pairs:", matching.right_pairs)
+print("Total weight:", matching.total_weight)
+```
+
+### API Reference
+
+#### kwok(adj, keeps_virtual_matching)
+
+Computes the maximum weight matching in a bipartite graph.
+
+**Parameters:**
+- `adj` (list): Adjacency list where each element is a list of (vertex, weight) tuples representing edges from a vertex in L to vertices in R. Note that |L| <= |R| is required.
+- `keeps_virtual_matching` (bool) : Default is true. The algorithm's output is mathematically equivalent to the solution obtained by computing matches on a complete bipartite graph augmented with zero-weight virtual edges. However, for computational efficiency, the implementation operates directly on the original sparse graph structure. When the keeps_virtual_matching parameter is disabled (false), the algorithm automatically filters out any zero-weight matches from the final results.
+
+**Returns:**
+- `Matching`: A dataclass with the following attributes:
+  - `left_pairs` (list): Maps L vertices to their matched R vertices (-1 if unmatched)
+  - `right_pairs` (list): Maps R vertices to their matched L vertices (-1 if unmatched)
+  - `total_weight` (int|float): Total weight of the matching
+
+**Note:** Integer weights are not required, but using integers may improve performance.
+
+## Development
+
+To build the package locally:
+
+```bash
+pip install -e .
+```
+
+## Building wheels with cibuildwheel
+
+To build wheels for multiple Python versions and platforms, we use [cibuildwheel](https://github.com/pypa/cibuildwheel).
+
+cibuildwheel is a powerful tool that:
+- Builds wheels for CPython and PyPy on Windows, macOS, and Linux
+- Handles platform-specific wheels (including manylinux)
+- Tests the built wheels in isolated environments
+- Integrates with CI services like GitHub Actions
+
+### Local testing with cibuildwheel
+
+To test cibuildwheel locally:
+
+```bash
+pip install cibuildwheel
+python -m cibuildwheel --platform linux
+```
+
+Available platforms are: `linux`, `windows`, and `macos`.
+
+### CI integration
+
+This project is configured to automatically build wheels using GitHub Actions.
+See the `.github/workflows/build_wheels.yml` file for the configuration.
+
+
