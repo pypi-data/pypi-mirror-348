@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: aa-proxy-reg
+Version: 0.21
+Summary: Register user IP address in proxy for Alliance Auth
+Author: Aleksey Misyagin
+Author-email: me@misyagin.ru
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: allianceauth >=2.0.0
+Requires-Dist: django-ipware
+Requires-Dist: requests
+
+Provides registration for Alliance Auth users to register their IP address in proxy server.

@@ -1,0 +1,1 @@
+default_app_config = 'aa_proxy_reg.apps.pluginConfig'
