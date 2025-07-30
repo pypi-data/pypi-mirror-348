@@ -1,0 +1,47 @@
+ANSI Formatter - Python Package
+
+Description:
+A lightweight Python package for text formatting using ANSI escape codes. Provides colored text, text styles, and basic terminal control.
+
+Installation:
+pip install ansiformatter
+
+Basic Usage:
+from ansiformatter import ANSIFormatter, RED, BOLD
+
+f = ANSIFormatter()
+print(f.format("Error", RED, BOLD))
+print(f.red("Red text"))
+print(f.bold("Bold text")) 
+
+Available Styles:
+Text styles: BOLD, DIM, ITALIC, UNDERLINE, BLINK, REVERSE, HIDDEN, RESET
+Text colors: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
+Background colors: BG_BLACK, BG_RED, BG_GREEN, BG_YELLOW, BG_BLUE, BG_MAGENTA, BG_CYAN, BG_WHITE
+
+Examples:
+# Colorful output
+print(f.red("Error: ") + f.yellow("Warning"))
+
+# Status message
+status = f.green("✓ Success") if success else f.red("✗ Failed")
+
+# Combined styles
+print(f.format("Important", BOLD, UNDERLINE))
+
+Utilities:
+from ansiformatter import is_ansi_supported, strip_ansi_codes
+
+# Check ANSI support
+if is_ansi_supported():
+    print(f.green("Terminal supports ANSI"))
+
+# Remove ANSI codes
+clean_text = strip_ansi_codes(formatted_text)
+
+Notes:
+1. Not all terminals support all ANSI features
+2. For Windows, may need to enable ANSI support
+3. Basic 8-color system only
+
+License: MIT
