@@ -1,0 +1,65 @@
+# Aliasify CLI
+
+[![PyPI version](https://badge.fury.io/py/aliasify-cli.svg)](https://badge.fury.io/py/aliasify-cli)
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Aliasify CLI is a powerful command-line tool for managing and synchronizing your Unix shell aliases across different systems. It helps you maintain a consistent shell environment by organizing aliases into groups and syncing them with your dotfiles repository.
+
+## Features
+
+- 🚀 Create, edit, and delete aliases with ease
+- 📁 Organize aliases into groups
+- 🔄 Sync aliases with your dotfiles repository
+- 🎯 Support for multiple shell types (bash, zsh, fish, etc.)
+- 💻 Cross-platform compatibility
+- 🔧 Simple and intuitive CLI interface
+
+## Quick Start
+
+### Installation
+
+```bash
+# Create and activate a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install the package
+pip install aliasify-cli
+```
+
+### Basic Usage
+
+```bash
+# Create a new alias
+aliasify create myalias "my command" --group "My Group"
+
+# List all aliases
+aliasify show
+
+# Edit an alias
+aliasify edit myalias "new command" --group "New Group"
+
+# Delete an alias
+aliasify delete myalias
+
+# Sync with dotfiles repository
+aliasify sync --direction local-to-remote
+```
+
+## Documentation
+
+- [Installation Guide](docs/installation.md)
+- [User Guide](docs/user-guide.md)
+- [Configuration](docs/configuration.md)
+- [Advanced Usage](docs/advanced-usage.md)
+- [Contributing](docs/contributing.md)
+- [FAQ](docs/faq.md)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Developed by [Islam Zekry](https://github.com/theizekry)
