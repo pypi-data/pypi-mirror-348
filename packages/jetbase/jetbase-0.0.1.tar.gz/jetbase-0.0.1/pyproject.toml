@@ -1,0 +1,14 @@
+[project]
+name = "jetbase"
+version = "0.0.1"
+description = "Jetbase is a Python database migration tool"
+readme = "README.md"
+authors = [
+    { name = "jaz", email = "jaz.allibhai@gmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
