@@ -1,0 +1,60 @@
+[project]
+name = "clicksign_lib_v2"
+version = "0.1.7"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12.3"
+dependencies = [
+    "uuid7>=0.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.1.0",
+    "httpx>=0.28.1",
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.2",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.6",
+    "setuptools>=75.8.0",
+    "wheel>=0.45.1",
+]
+pytest = [
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.6",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = "ignore::DeprecationWarning"
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+markers = ["bugfix: Mark tests used to fix bugs"]
+
+[tool.coverage.report]
+exclude_also = ["class HttpClient(Protocol):"]
+
+[tool.coverage.run]
+omit = [
+    "*/protocols/*",
+    "*/__init__.py",
+    "*/tests/*",
+    "*/tortoise_models/tortoise_helper.py",
+    "*/tortoise_models/config.py",
+]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+ignore = ["F401"]
+extend-select = ["I"]
+
+
+[tool.setuptools.packages]
+find = {}
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
