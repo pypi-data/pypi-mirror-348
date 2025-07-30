@@ -1,0 +1,126 @@
+Metadata-Version: 2.1
+Name: ray-cli
+Version: 0.4.4
+Summary: Command-line utility for generating and broadcasting DMX over sACN
+Home-page: https://github.com/nobbmaestro/ray-cli
+License: MIT
+Keywords: dmx,sacn,cli,utility,python
+Author: Norbert Batiuk
+Author-email: norbert@batiuk.se
+Requires-Python: >=3.8,<4.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: numpy (==1.24.4)
+Requires-Dist: sacn (>=1.10.0,<2.0.0)
+Project-URL: Repository, https://github.com/nobbmaestro/ray-cli
+Description-Content-Type: text/markdown
+
+# Ray CLI
+
+[![GitHub Release](https://img.shields.io/github/v/release/nobbmaestro/ray-cli)](github-release)
+[![GitHub last commit](https://img.shields.io/github/last-commit/nobbmaestro/ray-cli/development)](github-last-commit)
+[![GitHub commits since](https://img.shields.io/github/commits-since/nobbmaestro/ray-cli/v0.4.4/development)](githut-commits-since)
+![Tests](https://github.com/nobbmaestro/ray-cli/actions/workflows/tests.yml/badge.svg)
+![License](https://img.shields.io/github/license/nobbmaestro/ray-cli)
+
+Ray CLI is a command-line utility designed for generating and broadcasting DMX data over sACN.
+
+## Installation
+
+### Prerequisites
+
+- Python 3.7+ is required.
+- Poetry is required.
+- **_Optional_** For Pipx, ensure it is installed by running `pip install pipx`
+
+### Pipx (Recommended)
+
+```sh
+pipx install ray-cli
+```
+
+### Pip
+
+```sh
+pip install ray-cli
+```
+
+### GitHub
+
+```sh
+git clone git@github.com:nobbmaestro/ray-cli.git
+cd ray-cli
+make install
+```
+
+## Usage
+
+### Basic Example
+
+To broadcast a ramp DMX signal to a specific IP address:
+
+```sh
+ray-cli 192.168.86.198 \
+    --dst 192.168.86.67 \
+    --mode chase \
+    --universes 1 2 \
+    --channels 24 \
+    --fps 50 \
+    --duration 60
+```
+
+### Complete List of Command-Line Options
+
+```sh
+usage: ray-cli [-m {chase,ramp,ramp-down,ramp-up,sine,square,static}] [-d DURATION]
+               [-u UNIVERSES [UNIVERSES ...]] [-c CHANNELS] [-i INTENSITY]
+               [-I INTENSITY_MIN] [-f FREQUENCY] [--fps FPS] [--dst DST] [-v] [-q]
+               [--dry] [--purge] [-h] [-V]
+               [IP_ADDRESS]
+
+Command-line utility for generating and broadcasting DMX over sACN
+
+positional arguments:
+  IP_ADDRESS                                 IP address of the DMX source
+
+optional arguments:
+  -m, --mode {chase,ramp,ramp-down,ramp-up,sine,square,static}
+                                             DMX signal shape mode (default: ramp)
+  -d, --duration DURATION                    broadcast duration in seconds (default:
+                                             INDEFINITE)
+  -u, --universes UNIVERSES [UNIVERSES ...]  sACN universe(s) to send to (range:
+                                             1-63999, default: 1)
+  -c, --channels CHANNELS                    DMX channels at universe to send to (range:
+                                             1-512, default: 24)
+  -i, --intensity INTENSITY                  DMX channels output intensity (range:
+                                             1-255, default: 10)
+  -I, --intensity-min INTENSITY_MIN          DMX channels minimum output intensity
+                                             (range: 0-255, default: 0)
+  -f, --frequency FREQUENCY                  frequency of the generated signal (default:
+                                             1.0)
+  --fps FPS                                  frames per second per universe (default:
+                                             10)
+  --dst DST                                  IP address of the dmx destination (default:
+                                             MULTICAST)
+
+display options:
+  -v, --verbose                              run in verbose mode
+  -q, --quiet                                run in quiet mode
+
+operational options:
+  --dry                                      simulate outputs without broadcast
+  --purge                                    send zero-data on all channels and exit
+
+query options:
+  -h, --help                                 print help and exit
+  -V, --version                              show program's version number and exit
+```
+
