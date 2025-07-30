@@ -1,0 +1,164 @@
+Metadata-Version: 2.1
+Name: transcript-tagger
+Version: 0.1.1
+Summary: A toolkit for tagging and analyzing transcript content using AI
+Home-page: https://github.com/yourusername/transcript-tagger
+Author: Your Name
+Author-email: your.email@example.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: openai (>=1.0.0)
+Requires-Dist: python-dotenv (>=0.19.0)
+Requires-Dist: tenacity (>=8.0.0)
+Requires-Dist: textstat (>=0.7.3)
+Requires-Dist: wordfreq (>=3.0.0)
+
+# Transcript Tagger
+
+[![PyPI version](https://img.shields.io/badge/pypi-0.1.0-blue.svg)](https://pypi.org/project/transcript-tagger/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A comprehensive toolkit for tagging and analyzing transcript content using AI. This SDK allows you to automatically categorize and determine the difficulty level of transcript text.
+
+## Features
+
+- **AI-Powered Content Tagging**: Generate relevant topic, format, audience, and other tags for transcript content
+- **Content Difficulty Analysis**: Analyze and rate the difficulty level of transcript content based on various metrics
+- **Fully Customizable**: Configure thresholds, categories, and storage options to fit your needs
+- **Command Line Interface**: Process transcripts directly from the command line
+- **Python API**: Integrate tagging and analysis capabilities into your own applications
+
+## Installation
+
+```bash
+pip install transcript-tagger
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+from transcript_tagger_sdk import TranscriptTagger, Config
+
+# Create a tagger with default configuration
+tagger = TranscriptTagger()
+
+# Process a transcript file
+result = tagger.process_transcript("path/to/transcript.txt")
+
+# Access the results
+print(f"Difficulty level: {result['difficulty']['difficulty_name']}")
+print(f"Topics: {result['tags'].get('Topic', [])}")
+```
+
+### Analyzing Difficulty Only
+
+```python
+from transcript_tagger_sdk import DifficultyAnalyzer
+
+# Create an analyzer
+analyzer = DifficultyAnalyzer()
+
+# Analyze text
+result = analyzer.analyze_text("Your transcript text here...")
+
+# Print difficulty level
+print(f"Difficulty: {result['difficulty_name']} ({result['difficulty_level']}/5)")
+```
+
+### Custom Configuration
+
+```python
+from transcript_tagger_sdk import Config, TranscriptTagger
+
+# Create custom configuration
+config = Config()
+config.set_api_key("your-openai-api-key")
+config.set_model("gpt-4")
+config.set_storage_path("./custom/path")
+
+# Custom readability thresholds
+config.set_readability_thresholds({
+    "Beginner": 3.0,  # 0-3.0
+    "Intermediate": 9.0,  # 3.1-9.0
+    "Advanced": 15.0,  # 9.1+
+})
+
+# Create tagger with custom config
+tagger = TranscriptTagger(config)
+```
+
+## Command Line Usage
+
+### Process transcripts:
+
+```bash
+# Process a single transcript
+transcript-tagger process path/to/transcript.txt
+
+# Process multiple transcripts
+transcript-tagger process file1.txt file2.txt file3.txt
+
+# Only analyze difficulty (no tagging)
+transcript-tagger process --difficulty-only transcript.txt
+
+# Only generate tags (no difficulty analysis)
+transcript-tagger process --tags-only transcript.txt
+```
+
+### View results:
+
+```bash
+# View all results
+transcript-tagger view
+
+# View results for a specific video ID
+transcript-tagger view --video-id video123
+```
+
+## Advanced Usage
+
+For more advanced usage examples, check out the examples directory:
+
+- `basic_usage.py`: Simple usage example
+- `advanced_usage.py`: Advanced features including batch processing and custom configurations
+
+## API Reference
+
+### Main Classes
+
+- **TranscriptTagger**: Main class for tagging and analyzing transcripts
+- **Config**: Configuration class for customizing tagger behavior
+- **DifficultyAnalyzer**: Class for analyzing the difficulty level of text
+
+### Difficulty Levels
+
+The toolkit defines 5 difficulty levels:
+
+1. **初级/Beginner**: Basic vocabulary, simple sentences, suitable for beginners
+2. **初中级/Elementary**: Slightly more complex vocabulary, suitable for early learners
+3. **中级/Intermediate**: Moderate complexity, suitable for intermediate learners
+4. **中高级/Upper-Intermediate**: More complex language, suitable for advanced learners
+5. **高级/Advanced**: Complex vocabulary and sentence structures, suitable for proficient users
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
+
