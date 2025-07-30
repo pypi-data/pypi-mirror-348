@@ -1,0 +1,36 @@
+[project]
+name = "llms4pcg"
+version = "2.0.0"
+description = "LLMs4PCG is a python package containing required and utility functions as a part of LLMs4PCG competition."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+keywords = ["llms", "llms4pcg", "competition"]
+authors = [
+    { name = "ChatGPT4PCG Organizing Team", email = "chatgpt4pcg@gmail.com" },
+    { name = "Pittawat Taveekitworachai", email = "pittawat.pete@gmail.com" },
+    { name = "LLMs4PCG Organizing Team", email = "llm4pcg@ice.ci.ritsumei.ac.jp" }
+]
+maintainers = [
+    { name = "ChatGPT4PCG Organizing Team", email = "chatgpt4pcg@gmail.com" },
+    { name = "LLMs4PCG Organizing Team", email = "llm4pcg@ice.ci.ritsumei.ac.jp" }
+]
+classifiers = [# Optional
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "openai < 2"
+]
+[project.urls]
+"Homepage" = "https://github.com/chatgpt4pcg"
+"Bug Reports" = "https://github.com/chatgpt4pcg/llms4pcg-python/issues"
+"Source" = "https://github.com/chatgpt4pcg/llms4pcg-python"
+[build-system]
+requires = ["setuptools>=69.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
