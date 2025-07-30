@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: PyrogramBuildingUtils
+Version: 0.0.4
+Summary: This projects needed for fast building pyrogram templates bot
+Author: amnesiawho
+Requires-Python: >3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: dotenv (>=0.9.9,<0.10.0)
+Requires-Dist: numpy (>=2.2.6,<3.0.0)
+Requires-Dist: pyrofork (>=2.3.62,<3.0.0)
+Requires-Dist: requests (>=2.32.3,<3.0.0)
+Description-Content-Type: text/markdown
+
+
+# PyrogramBuildingUtils
+
+## Description
+
+This project needed for fast building pyrogram templates bot. WIP
+
+## Install
+
+For install you can use this
+
+```code
+poetry install
+```
+
+## Usage
+
+You can run fast template build from
+
+```code
+poetry run create_pyrogram
+```
+
