@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: mlda
+Version: 2025.5.18
+Summary: mlda: A Python package for Machine Learning-base Data Assimilation
+Home-page: https://github.com/fzhu2e/mlda
+Author: Feng Zhu
+Author-email: fengzhu@ucar.edu
+License: BSD-3
+Keywords: Machine Learning,Data Assimilation
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: netCDF4
+Requires-Dist: xarray
+Requires-Dist: dask
+Requires-Dist: nc-time-axis
+Requires-Dist: colorama
+Requires-Dist: tqdm
+Requires-Dist: x4c-exp
+
+# mlda: A Python package for Machine Learning-based Data Assimilation
+
+`mlda` is a Python package for Machine Learning-base Data Assimilation (DA).
+It aims to provide a universal framework and the corresponding utilities for conducting reproducible data assimilation experiments using novel machine learning-based DA methods.
