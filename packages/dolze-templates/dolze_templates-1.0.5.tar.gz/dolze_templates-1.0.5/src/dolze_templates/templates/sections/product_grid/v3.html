@@ -1,0 +1,32 @@
+<section id="product-grid" class="py-24 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+        {{ sections.product_grid.title }}
+      </h2>
+      <p class="text-lg text-gray-600 mt-4">{{ sections.product_grid.subheading }}</p>
+    </div>
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {% for product in sections.product_grid.items %}
+      <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="{{ loop.index * 100 }}">
+        <img src="{{ product.image.src }}" alt="{{ product.image.alt }}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-2">{{ product.name }}</h3>
+          <p class="text-gray-600 mb-4 flex-1">{{ product.description }}</p>
+          <div class="flex items-center gap-4 mb-4">
+            <span class="text-xl font-bold text-primary">${{ product.price.amount }}</span>
+            <span class="text-sm text-gray-500">{{ product.price.currency }}</span>
+            {% if product.offer %}
+            <span class="ml-auto bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-semibold">{{ product.offer.discount }}</span>
+            {% endif %}
+          </div>
+          {% if product.offer %}
+          <div class="text-sm text-success mb-4">{{ product.offer.description }}</div>
+          {% endif %}
+          <button class="mt-auto bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition">Add to Cart</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
