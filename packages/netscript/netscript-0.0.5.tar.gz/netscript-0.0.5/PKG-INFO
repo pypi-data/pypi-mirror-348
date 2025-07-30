@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: netscript
+Version: 0.0.5
+Summary: Flask server wrapper for running Python scripts
+Author: Grey Liedtke
+Author-email: grey.liedtke@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: flask
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+# Net Script
+
+First python library to understand creating pip installable packages.
+
+### File Structure
+
+- netscript
+  - __init__.py
+  - __main__.py
+  - __version__.py
+  - cli.py
+  - config.py
+  - utils.py
+  - requirements.txt
+  - [app](netscript/app.py)
+
+
+### Build steps
+
+1. Navigate to the root directory of the project.
+2. Local install
+   1. pip install .
+3. Pip install
+   1. account information
+
+### TODO
+
+- Include html file for serving system
