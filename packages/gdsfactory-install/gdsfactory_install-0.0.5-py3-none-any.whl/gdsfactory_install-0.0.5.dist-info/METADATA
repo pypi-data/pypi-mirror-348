@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: gdsfactory_install
+Version: 0.0.5
+Summary: Install GDSFactory
+Keywords: python
+Author-email: GDSFactory <contact@gdsfactory.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
+Requires-Dist: uv>=0.5.0
+Requires-Dist: typer>=0.15.0
+Requires-Dist: pre-commit ; extra == "dev"
+Requires-Dist: pytest ; extra == "dev"
+Requires-Dist: pytest-cov ; extra == "dev"
+Requires-Dist: pytest_regressions ; extra == "dev"
+Requires-Dist: pytest-github-actions-annotate-failures ; extra == "dev"
+Requires-Dist: jupytext ; extra == "docs"
+Requires-Dist: matplotlib ; extra == "docs"
+Requires-Dist: jupyter-book>=0.15.1,<1.1 ; extra == "docs"
+Provides-Extra: dev
+Provides-Extra: docs
+
+# gdsfactory-install 0.0.5
+
+Install GDSFactory
+
+## Installation
+
+```bash
+pip install gdsfactory_install
+gfi install
+```
+
