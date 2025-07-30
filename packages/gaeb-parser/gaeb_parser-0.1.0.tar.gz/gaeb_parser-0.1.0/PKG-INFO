@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: gaeb_parser
+Version: 0.1.0
+Summary: parses xml gaeb files and converts them to a pandas dataframe
+Author-email: Lucas Carlier <mail@carlier.info>
+License: MIT
+Project-URL: Homepage, https://github.com/meindonut/gaeb_parser
+Project-URL: Issues, https://github.com/meindonut/gaeb_parser/issues
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: beautifulsoup4>=4.10.0
+Requires-Dist: lxml>=5.4.0
+Dynamic: license-file
+
+# gaeb_parser
+parses xml gaeb files and converts them to a pandas dataframe
+
+![Screenshot of the example import.](example_screenshot.jpg)
+
+## Use it:
+- run main.py
+- see console output
+
+## Change it:
+
+### Install required modules in venv
+
+`python -m venv .venv`
+
+`Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force`
+
+`.venv/Scripts/activate.ps1`
+
+`pip install -r requirements.txt`
+
+
+### runt tests
+`Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force`
+
+`.venv/Scripts/activate.ps1`
+
+`pytest`
+
+## To-Dos:
+- some elements are not parsed yet, see console output
+- XML export
