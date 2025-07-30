@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMM-Fair Chat</title>
+
+    <!-- Load Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Include CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+</head>
+
+<body onload="document.body.className = localStorage.getItem('mmmfair_theme') || 'dark';">
+    <button id="theme-toggle">🌙 Dark Mode</button>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header with Logo on the Left & Text Centered -->
+        <div class="header">
+            <div class="header-content">
+                <img src="{{ url_for('static', filename='mmm-fair.png') }}" alt="MMM-Fair Logo" class="logo">
+                <div class="header-text">
+                    <h1>Welcome to MMM-Fair</h1>
+                    <p>
+                        Preference driven selection of Multi-Objective, Multi-Attribute, and Multi-Definition Fairness-Aware Solutions. 
+                        Because “What’s fair?” should be Your Choice, not your Algorithm’s!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content: Chat + Visualization -->
+        <div class="content">
+            <!-- Chat Box (With Scrolling) -->
+            <div id="chat-container">
+                <div id="chat-box"></div>
+
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." autofocus>
+                    
+                    <button id="send-btn">&nbsp; Send &nbsp;</button>
+                </div>
+
+                <div class="reset-container">
+                    <button id="reset-btn">Reset Chat</button>
+                </div>
+            </div>
+
+            <!-- Visualization Box (With Scrolling) -->
+            <div id="visualization-container">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+    <div id="loading-overlay" style="display: none;">
+      <div class="spinner"></div>
+      <p class="loading-text">Please wait...</p>
+    </div>
+</body>
+</html>
