@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: imageinsightai
+Version: 0.1.0
+Summary: ImageInsightAI: An image captioning package using BLIP model
+Home-page: https://github.com/kham123123/imageinsightai
+Author: Asad khan
+Author-email: asakha@ktu.lt
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: torch
+Requires-Dist: transformers
+Requires-Dist: Pillow
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# imageinsightai
+
+`imageinsightai` is a Python package that generates captions for images using AI.
+
+## Features
+- Automatically generates captions for images
+- Easy-to-use API
+- Built with deep learning
+
+## Installation
+```bash
+pip install imageinsightai
