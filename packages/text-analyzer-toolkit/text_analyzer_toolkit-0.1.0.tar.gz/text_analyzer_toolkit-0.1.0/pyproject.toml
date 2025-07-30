@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "text-analyzer-toolkit"
+version = "0.1.0"
+description = "A simple text analysis toolkit for basic text processing tasks"
+readme = "README.md"
+authors = [{name = "Zoe Duan", email = "zoe_dyh@hotmail.com"}]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+dependencies = []
+requires-python = ">=3.7"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black",
+    "flake8",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/ZoeDuan/text-analyzer-toolkit"
+Repository = "https://github.com/ZoeDuan/text-analyzer-toolkit.git"
+"Bug Tracker" = "https://github.com/ZoeDuan/text-analyzer-toolkit/issues"
