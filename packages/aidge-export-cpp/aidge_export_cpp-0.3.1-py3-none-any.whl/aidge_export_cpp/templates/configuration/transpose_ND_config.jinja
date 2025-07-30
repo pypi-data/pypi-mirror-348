@@ -1,0 +1,15 @@
+{#- For name header -#}
+#ifndef {{ name|upper }}_LAYER_H
+#define {{ name|upper }}_LAYER_H
+
+{# For layer configuration -#}
+{% include "./_def_io.jinja" %}
+{% include "./_meminfo.jinja" %}
+{# Export suppose that batchsize = 1#}
+#define {{ name|upper }}_NB_ELTS {{ in_dims[0]|join('*') }}
+#define {{ name|upper }}_NB_DIMS {{ in_dims[0] | length }}
+
+static constexpr unsigned int {{ name|upper }}_PERMUTE[] = { {{ output_dims_order | join(', ') }} };
+static constexpr unsigned int {{ name|upper }}_DIMS[] = { {{ in_dims[0] | join(', ') }}};
+
+#endif /* {{ name|upper }}_LAYER_H */

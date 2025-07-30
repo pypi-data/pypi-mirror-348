@@ -1,0 +1,12 @@
+{% filter indent(width=4, first=False) %}
+{% include "./_mem_offset.jinja" %}
+transpose_ND_forward<{{in_cdtype[0]}},
+                     {{name|upper}}_NB_DIMS>
+                    ({{in_name[0]}},
+                     {{name|upper}}_DIMS,
+                     {{name|upper}}_PERMUTE,
+                     {{name|upper}}_NB_ELTS,
+                     {{out_name[0]}});
+{% include "./_save_outputs.jinja" %}
+{% include "./_aidge_cmp.jinja" %}
+{% endfilter %}

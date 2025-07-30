@@ -1,0 +1,8 @@
+{%- if aidge_cmp is defined and aidge_cmp %}
+#if AIDGE_CMP
+    aidge_cmp<{{ out_name[0] | upper }}_NB_OUTPUTS, 
+              {{ out_name[0] | upper }}_OUT_HEIGHT, 
+              {{ out_name[0] | upper }}_OUT_WIDTH>
+             ("{{ name }}", ({{out_cdtype[0]}}*) {{ out_name[0] }}_aidge, {{ out_name[0] }});
+#endif
+{%- endif %}

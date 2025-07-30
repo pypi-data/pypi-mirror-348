@@ -1,0 +1,10 @@
+{% filter indent(width=4, first=False) %}
+{% include "./_mem_offset.jinja" %}
+matmul_forward<{{name|upper}}_M,
+               {{name|upper}}_K,
+               {{name|upper}}_N,
+               {{name|upper}}_ACTIVATION>
+               ({{in_name[0]}}, {{in_name[1]}}, {{out_name[0]}}, {{name|upper}}_RESCALING);
+{% include "./_save_outputs.jinja" %}
+{% include "./_aidge_cmp.jinja" %}
+{% endfilter %}

@@ -1,0 +1,16 @@
+{#- For name header -#}
+#ifndef {{ name|upper }}_LAYER_H
+#define {{ name|upper }}_LAYER_H
+#include "network/rescaling_utils.hpp"
+
+{# For layer configuration -#}
+{% include "./_def_io.jinja" %}
+{% include "./_meminfo.jinja" %}
+
+#define {{ name|upper }}_NB_DATA {{ in_chan[0] * in_height[0] * in_width[0] }}
+
+// Activation
+#define {{ name|upper }}_ACTIVATION     {{ activation }}
+{% include "./_rescaling.jinja" %}
+
+#endif /* {{ name|upper }}_LAYER_H */

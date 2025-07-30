@@ -1,0 +1,7 @@
+#include <stdint.h>
+
+static const {{ data_t }} {{ name }}
+{%- for dim in dims -%}
+    [{{ dim }}]
+{%- endfor %} = 
+{{ values }};

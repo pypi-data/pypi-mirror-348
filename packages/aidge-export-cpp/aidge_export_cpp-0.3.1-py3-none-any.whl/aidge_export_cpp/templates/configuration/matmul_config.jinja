@@ -1,0 +1,19 @@
+{#- For name header -#}
+#ifndef {{ name|upper }}_LAYER_H
+#define {{ name|upper }}_LAYER_H
+#include "network/rescaling_utils.hpp"
+
+{% include "./_def_io.jinja" %}
+{% include "./_meminfo.jinja" %}
+
+{# For layer configuration -#}
+#define {{ name|upper }}_M {{ in_dims[0][0] }}
+#define {{ name|upper }}_K {{ in_dims[0][1] }}
+#define {{ name|upper }}_N {{ in_dims[1][1] }}
+#define {{ name|upper }}_ACTIVATION {{ activation }}
+{% include "./_rescaling.jinja" %}
+
+{#- Calculate sizes #}
+
+
+#endif /* {{ name|upper }}_LAYER_H */
