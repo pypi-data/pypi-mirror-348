@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: ossbomer-schema
+Version: 1.2.1
+Summary: OSSBOMER - SBOM Schema Validator for SPDX and CycloneDX
+Author: Oscar Valenzuela
+Author-email: oscar.valenzuela.b@gmail.com
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: jsonschema
+Requires-Dist: xmlschema
+Requires-Dist: requests
