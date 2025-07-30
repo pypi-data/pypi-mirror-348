@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evtool"
+version = "0.0.4"
+authors = [ { name="Marc van der Sluys", email="git@vandersluys.nl" } ]
+description = "Analyse and display output from the binary stellar-evolution code ev (a.k.a. STARS and TWIN)."
+readme   = "README.md"
+license  = "EUPL-1.2"
+keywords = ["astrophysics","stellar evolution","binary evolution","stellar model","binary model"]
+dependencies = ["pandas"]
+
+# See: https://pypi.org/pypi?:action=list_classifiers
+classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Intended Audience :: Science/Research",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering",
+        "Topic :: Scientific/Engineering :: Astronomy",
+        "Topic :: Scientific/Engineering :: Physics",
+    ]
+
+[project.urls]
+GitHub = "https://github.com/MarcvdSluys/evTool"
+ReadTheDocs = "https://evtool.readthedocs.io"
