@@ -1,0 +1,1 @@
+from .bjtube import main
