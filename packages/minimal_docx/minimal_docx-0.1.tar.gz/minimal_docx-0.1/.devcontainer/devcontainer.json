@@ -1,0 +1,10 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+  },
+  "workspaceMount": "type=bind,src=${localWorkspaceFolder},dst=${containerWorkspaceFolder},ro",
+  "mounts": [
+    "source=${localWorkspaceFolder}/dist,target=${containerWorkspaceFolder}/dist,type=bind,consistency=cached"
+  ]
+  "runArgs": ["--rm", "--cidfile", "tmp/devcontainer.cid"],
+}

@@ -1,0 +1,17 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/zsh -e\nexec make devcontainer\/build"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/zsh -e\nexec make devcontainer\/down"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/zsh -e\nexec make devcontainer\/up"
+    }
+  },
+  "openLogOnRun" : "start"
+}
