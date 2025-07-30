@@ -1,0 +1,107 @@
+---
+- name: ensure packages is installed
+  ansible.builtin.package:
+    name:
+      - bash
+      - curl
+      - iproute2
+      - nftables
+    state: present
+
+- name: ensure required kernel module is loaded
+  community.general.modprobe:
+    name: "{{ module }}"
+    state: present
+    persistent: present
+  loop:
+    - nft_tproxy
+    - nft_socket
+    - nf_tproxy_ipv4
+    - nf_tproxy_ipv6
+  loop_control:
+    loop_var: module
+
+# should we enable net.ipv4.conf.all.route_localnet=1 ?
+- name: ensure ip_forward is enabled
+  ansible.posix.sysctl:
+    name: "{{ line }}"
+    value: 1
+    state: present
+    ignoreerrors: true
+  loop:
+    - net.ipv4.ip_forward
+    - net.ipv4.conf.all.proxy_arp
+    - net.ipv6.conf.all.forwarding
+  loop_control:
+    loop_var: line
+
+- name: ensure parent directory exists on remote
+  ansible.builtin.file:
+    path: "{{ ['/', file] | ansible.builtin.path_join | ansible.builtin.dirname }}"
+    state: directory
+  loop: "{{ sing_box_templates }}"
+  loop_control:
+    loop_var: file
+
+- name: template iproute2 rt_tables on remote
+  ansible.builtin.template:
+    src: etc/iproute2/rt_tables.d/sing_box_tproxy.conf.j2
+    dest: /etc/iproute2/rt_tables.d/sing_box_tproxy.conf
+
+- name: template nftables.conf on remote
+  ansible.builtin.template:
+    src: etc/nftables.conf.j2
+    dest: /etc/nftables.conf
+  notify:
+    - systemctl restart nftables.service
+
+- name: template systemd service on remote
+  ansible.builtin.template:
+    src: "{{ template }}"
+    dest: "{{ ['/', template] | ansible.builtin.path_join | ansible.builtin.splitext | first }}"
+  loop:
+    - etc/systemd/system/sing-box.service.j2
+    - etc/systemd/system/sing-box-reload.path.j2
+    - etc/systemd/system/sing-box-reload.service.j2
+  loop_control:
+    loop_var: template
+  notify:
+    - systemctl daemon-reload
+
+- name: template netplan config on remote
+  ansible.builtin.template:
+    src: etc/netplan/99-sing_box_tproxy.yaml.j2
+    dest: /etc/netplan/99-sing_box_tproxy.yaml
+    mode: "0600"
+  notify:
+    - netplan apply
+
+- name: ensure sing-box working directory ownership
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    owner: "{{ proxy_user.name }}"
+    group: "{{ proxy_group.name }}"
+    recurse: true
+  loop:
+    - "{{ sing_box_etc_dir }}"
+    - "{{ sing_box_log_dir }}"
+    - "{{ sing_box_state_dir }}"
+  loop_control:
+    loop_var: directory
+
+- name: ensure systemd service started and enabled
+  ansible.builtin.systemd_service:
+    name: "{{ service }}"
+    state: started
+    enabled: true
+  loop:
+    - nftables.service
+    - sing-box-reload.path
+  loop_control:
+    loop_var: service
+
+- name: ensure sing-box.service restarted
+  ansible.builtin.systemd_service:
+    name: sing-box.service
+    state: restarted
+    enabled: true

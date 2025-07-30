@@ -1,0 +1,36 @@
+---
+# defaults file for sing_box_tproxy
+# https://wiki.debian.org/SystemGroups#Groups_with_an_associated_user
+# proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+proxy_user:
+  name: proxy
+  uid: 13
+  home: /bin
+  shell: /usr/sbin/nologin
+proxy_group:
+  name: proxy
+  gid: 13
+
+# 对应 sing-box 中 type = tproxy 的 inbounds
+sing_box_tproxy_port: 7895
+
+# ip -f inet rule add fwmark $PROXY_MARK lookup $PROXY_ROUTE_TABLE
+# ip -f inet route add local default dev $INTERFACE table $PROXY_ROUTE_TABLE
+# echo "224 sing_box_tproxy" | sudo tee /etc/iproute2/rt_tables.d/sing_box_tproxy.conf >/dev/null
+sing_box_proxy_route_table: 224
+sing_box_proxy_mark: 224
+
+# 对应 sing-box 配置项 route.default_mark
+sing_box_route_default_mark: 225
+
+sing_box_etc_dir: /etc/sing-box
+sing_box_log_dir: /var/log/sing-box
+sing_box_state_dir: /var/lib/sing-box
+
+sing_box_templates:
+  - etc/iproute2/rt_tables.d/sing_box_tproxy.conf.j2
+  - etc/netplan/99-sing_box_tproxy.yaml.j2
+  - etc/nftables.conf.j2
+  - etc/systemd/system/sing-box.service.j2
+  - etc/systemd/system/sing-box-reload.path.j2
+  - etc/systemd/system/sing-box-reload.service.j2
