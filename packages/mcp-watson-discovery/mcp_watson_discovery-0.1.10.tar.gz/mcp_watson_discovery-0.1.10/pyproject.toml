@@ -1,0 +1,21 @@
+[project]
+name = "mcp-watson-discovery"
+version = "0.1.10"
+authors = [
+  { name="Jose Castellanos", email="jose.castellanos.molina@ibm.com" },
+]
+description = "MCP server for watson discovery"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "asyncio>=3.4.3",
+    "httpx>=0.28.1",
+    "ibm-watson>=9.0.0",
+    "mcp[cli]>=1.4.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/matlock08/watson_discovery_mcp"
+
+[project.scripts]
+mcp-watson-discovery = "server.__main__:main"
