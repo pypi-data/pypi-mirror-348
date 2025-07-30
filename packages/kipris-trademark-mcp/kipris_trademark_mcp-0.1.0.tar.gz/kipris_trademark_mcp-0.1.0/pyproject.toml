@@ -1,0 +1,47 @@
+# 생성 2025/04/28 12:00 아키텍트
+# 수정 2025/05/18 11:57 Code
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"] # build 추가
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kipris-trademark-mcp"
+version = "0.1.0"
+description = "KIPRIS 상표 관련 기능을 제공하는 MCP 서버"
+authors = [
+    {name = "Song", email = "song@songohip.com"}
+]
+readme = "README.md"
+requires-python = "~=3.12"
+dependencies = [
+    "fastmcp>=2.1.2",
+    "pydantic>=2.5.3",
+    "httpx>=0.28.1",
+    "lxml>=5.4.0",
+    "kipris-api-wrapper==0.1.0"
+]
+license = {text = "MIT"}
+keywords = ["kipris", "trademark", "mcp", "ai agent", "intellectual property"]
+
+[project.urls]
+Homepage = "https://github.com/patentsong/songohip.git"
+Repository = "https://github.com/patentsong/songohip.git"
+
+[project.scripts]
+kipris-mcp-server = "mcp_server.server:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.0",
+    "python-dotenv>=1.0.0",
+    "build"
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
