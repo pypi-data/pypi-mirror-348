@@ -1,0 +1,13 @@
+numpy>=1.21
+
+[docs]
+numpydoc==1.1.*
+matplotlib
+sphinx
+sphinx-book-theme
+sphinx-remove-toctrees
+
+[test]
+pytest
+pytest-cov
+scipy-doctest
