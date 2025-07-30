@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: llama-api-bench
+Version: 0.0.2
+Summary: Llama API Benchmark
+Project-URL: Documentation, https://github.com/yanxi0830/llama-api-bench#readme
+Project-URL: Issues, https://github.com/yanxi0830/llama-api-bench/issues
+Project-URL: Source, https://github.com/yanxi0830/llama-api-bench
+Author-email: Xi Yan <yanxi970830@gmail.com>
+License-Expression: MIT
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.10
+Requires-Dist: llama-api-client
+Requires-Dist: openai
+Requires-Dist: pandas
+Requires-Dist: pydantic
+Requires-Dist: rich
+Requires-Dist: tabulate
+Requires-Dist: tqdm
+Requires-Dist: typer
+Provides-Extra: dev
+Requires-Dist: ipykernel; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pre-commit; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# llama_api_bench
+
+[![PyPI - Version](https://img.shields.io/pypi/v/llama-api-bench.svg)](https://pypi.org/project/llama-api-bench)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/llama-api-bench.svg)](https://pypi.org/project/llama-api-bench)
+
+-----
+
+## Table of Contents
+
+- [Installation](#installation)
+- [License](#license)
+
+## Installation
+
+```console
+pip install llama-api-bench
+```
+
+## License
+
+`llama-api-bench` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
