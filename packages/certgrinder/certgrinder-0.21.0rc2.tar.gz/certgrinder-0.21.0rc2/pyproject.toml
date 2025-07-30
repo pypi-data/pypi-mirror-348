@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+  {email = "thomas@gibfest.dk"},
+  {name = "Thomas Steen Rasmussen"}
+]
+
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "dnspython == 2.7.0",
+    "PyYAML == 6.0.1",
+    "cryptography == 44.0.3",
+    "pid == 3.0.4",
+    "pydantic-settings==2.6.0",
+]
+
+description = "The client part of the Certgrinder project"
+dynamic = ["version"]
+license = {text = "BSD 3-Clause License"}
+name = "certgrinder"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+certgrinder = "certgrinder.certgrinder:main"
+
+[project.optional-dependencies]
+dev = ["twine == 6.1.0", "pre-commit == 4.2.0", "setuptools-scm == 8.3.1", "build==1.2.2.post1"]
+test = ["pytest == 8.3.5", "pytest-cov==6.1.1", "tox == 4.26.0"]
+docs = ["Sphinx==8.2.3", "sphinx-rtd-theme==3.0.2", "sphinx-argparse==0.4.0"]
+
+[project.urls]
+homepage = "https://github.com/tykling/certgrinder"
+documentation = "https://certgrinder.readthedocs.org/"
+
+[tool.setuptools_scm]
+root = ".."
+
+[tool.setuptools.packages.find]
+exclude = ["man*"]
+
+########### RUFF ######################
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "G004", # Logging statement uses f-string
+    "ANN101", # Missing type annotation for `self` in method
+    "ANN102", # Missing type annotation for `cls` in classmethod
+    "EM101", # Exception must not use a string literal, assign to variable first
+    "COM812", # missing-trailing-comma (https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules)
+    "ISC001", # single-line-implicit-string-concatenation (https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"*/tests/*.py" = [
+    "S101", # asserts allowed in tests...
+    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    "PLR2004", # Magic value used in comparison, ...
+    "ANN001", # Missing type annotation for function argument ...
+    "ANN201", # Missing return type annotation for public function ...
+    "S113", # Probable use of requests call without timeout
+    "E501", # Line too long
+    "S603", # subprocess.run
+    "S607", # subprocess partial path
+    "S103", # permissive file modes
+    "T201", # print
+    "ANN401", # Any annotations
+]
