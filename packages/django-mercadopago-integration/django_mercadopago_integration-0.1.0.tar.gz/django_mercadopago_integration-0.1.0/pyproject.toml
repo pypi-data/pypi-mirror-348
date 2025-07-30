@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "django-mercadopago-integration"
+version = "0.1.0"
+description = "Reusable Mercado Pago integration for Django projects"
+authors = ["Crhistyan Silva <crhistyan.silva@falcode.dev>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "mercado_pago" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = ">=3.2"
+djangorestframework = "*"
+requests = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
