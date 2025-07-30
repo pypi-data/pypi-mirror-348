@@ -1,0 +1,39 @@
+{
+//    // Python settings
+//    "python.analysis.autoSearchPaths": true,
+//    "python.analysis.diagnosticSeverityOverrides": {
+//        "reportMissingImports": "none"
+//    },
+//    "python.analysis.extraPaths": [
+//        "${workspaceFolder}/src"
+//    ],
+//    "python.envFile": "${workspaceFolder}/.env",
+//    "python.terminal.activateEnvironment": true,
+//    // Test settings
+//    "python.testing.pytestEnabled": true,
+//    "python.testing.unittestEnabled": false,
+//    "python.testing.cwd": "${workspaceFolder}/tests",
+//    "python.testing.pytestPath": "${workspaceFolder}/.venv/bin/pytest",
+//    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+
+    // we're going to use virtual envs anyway, and VSCode doesn't seem to pick them up automatically
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+
+    // ruff formatter
+    "ruff.importStrategy": "useBundled",
+    // Editor settings, Python specific
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+    },
+    "spellright.language": [
+        "en_GB"
+    ],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext",
+        "markdown"
+    ],
+}
