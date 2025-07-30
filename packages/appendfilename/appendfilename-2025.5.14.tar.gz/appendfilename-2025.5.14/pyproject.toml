@@ -1,0 +1,39 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "appendfilename"
+version = "2025.5.14"
+description = "Intelligent appending text to file names, considering file extensions and file tags"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+authors = ["Karl Voit <tools@Karl-Voit.at>"]
+keywords = [
+    "file managing",
+    "file management",
+    "files",
+    "name",
+    "time",
+    "time-stamps"
+]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+pyreadline3 = "*"
+
+[tool.poetry.dev-dependencies]
+build = "*"
+pytest = "*"
+
+[tool.poetry.scripts]
+appendfilename = "appendfilename:main"
+
