@@ -1,0 +1,4 @@
+[console_scripts]
+json-clean = pbip_tools.clean.clean_JSON:main
+json-smudge = pbip_tools.smudge.smudge_JSON:main
+pbip-tools = pbip_tools.cli:main
