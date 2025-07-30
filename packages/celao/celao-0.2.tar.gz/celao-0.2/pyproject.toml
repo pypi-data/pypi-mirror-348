@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "celao"
+version = "0.2"
+description = "Visualization tool for correlation n-ptychs of linguistic attributes"
+readme = "README.md"
+authors = [{ name = "Good" }]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "seaborn",
+    "networkx",
+    "gensim"
+]
