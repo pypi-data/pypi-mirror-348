@@ -1,0 +1,2 @@
+class InvalidObject:
+  pass
