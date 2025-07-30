@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: vuhx4-mysum
+Version: 0.0.1
+Summary: Sort description
+Home-page: https://github.com/pypa/sampleproject
+Author: Xuan Vu
+Author-email: xuanvuzzz2601@gmail.com
+Classifier: Programming Language :: Python :: 2
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: license
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: summary
+
+# Hand-on Python Package
+
+A hands-on project demonstrating how to create, structure, and publish a Python package for MLOps workflows.
+
+## Features
+
+- Modular Python package structure
+- Example machine learning utilities
+- Easy installation and usage
+
+## Installation
+
+```bash
+pip install .
+```
+
+## Usage
+
+```python
+from your_package import your_module
+
+result = your_module.your_function()
+print(result)
+```
+
+## Project Structure
+
+```
+hand-on-python-package/
+â”œâ”€â”€ your_package/
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â””â”€â”€ your_module.py
+â”œâ”€â”€ tests/
+â”œâ”€â”€ setup.py
+â””â”€â”€ README.md
+```
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
