@@ -1,0 +1,97 @@
+# pystockquery
+
+[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+pystockquery is a powerful Python library for stock screening, analysis, and visualization using natural language queries. It allows investors and analysts to filter, rank, and analyze stocks using plain English commands.
+
+## Features
+
+- **Natural Language Processing**: Query stocks using human-readable sentences
+- **Comprehensive Metrics**: 150+ financial metrics and technical indicators
+- **Advanced Filtering**: Complex multi-condition screening
+- **Visualization**: Automatic chart generation based on queries
+- **Export Capabilities**: Save results to Excel, CSV, or JSON
+- **Industry Comparisons**: Relative valuation against industry peers
+
+## Installation
+
+```bash
+pip install pystockquery
+
+git clone https://github.com/yourusername/pystockparameter.git
+cd pystockquery
+pip install .
+
+
+
+from pystockquery import StockParameterAPI
+
+# Initialize with your data file
+api = StockParameterAPI('path/to/your/data.xlsx')
+
+# Example queries
+growth_stocks = api.query(
+    "Show top 20 stocks with CAGR > 15%, Return on Equity > 20%, and positive ROI"
+)
+
+defensive_picks = api.query(
+    "List defensive picks with Sharpe Ratio > 1.2, Volatility < 20%, and Dividend Yield > 3%"
+)
+
+# Generate visualization
+api.visualize("Scatter plot of Sharpe Ratio vs Annualized Volatility")
+
+# Export results
+api.export(
+    "Show undervalued stocks with P/E < 10 and P/B < 1",
+    "undervalued_stocks.xlsx"
+)
+
+
+"Show top 20 stocks with CAGR > 15%, Return on Equity > 20%, and positive ROI"
+"Filter stocks with Return on Assets (ttm) > 10% and Revenue Growth > 20%"
+"Find high alpha stocks (Annualized Alpha > 5%) with low Beta (<1)"
+
+
+
+
+"List defensive picks with Sharpe Ratio > 1.2, Volatility < 20%, and Dividend Yield > 3%"
+"Find stocks with low Downside Deviation (<15%) and Maximum Drawdown < -10%"
+"Filter stocks with high R-Squared (>0.85) and Tracking Error (<5%)"
+
+
+
+"Rank all stocks by highest Sharpe Ratio"
+"Show undervalued stocks with P/E < industry average and high ROE"
+"Sort by Market Cap descending and filter Sector = Technology"
+
+
+
+# Scatter plots
+api.visualize("Plot Return on Equity vs Beta")
+
+# Bar charts
+api.visualize("Compare P/E ratios across sectors")
+
+# Histograms
+api.visualize("Show distribution of Profit Margins")
+api.visualize("Show distribution of Profit Margins")
+api.visualize("Show distribution of Profit Margins")
+
+# Custom plots
+api.visualize("Create bubble chart of Market Cap vs ROE colored by Sector")
+
+
+# Complex boolean logic
+api.query("""
+Find stocks where:
+    (P/E < 15 OR EV/EBITDA < 10)
+    AND (ROE > 15% AND Revenue Growth > 10%)
+    AND Sector in ('Technology', 'Healthcare')
+""")
+
+# Time-series analysis
+api.query("Show stocks with improving ROE over last 3 years")
+
+
