@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="grogupy.physics.Builder" href="_generated/grogupy.physics.Builder.html" />
+    <link rel="prev" title="API reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Physics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#physical-classes">Physical classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.Builder.html">grogupy.physics.Builder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.Contour.html">grogupy.physics.Contour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.Hamiltonian.html">grogupy.physics.Hamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.Kspace.html">grogupy.physics.Kspace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.MagneticEntity.html">grogupy.physics.MagneticEntity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.Pair.html">grogupy.physics.Pair</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.get_number_of_electrons.html">grogupy.physics.get_number_of_electrons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.automatic_emin.html">grogupy.physics.automatic_emin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.blow_up_orbindx.html">grogupy.physics.blow_up_orbindx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.spin_tracer.html">grogupy.physics.spin_tracer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.parse_magnetic_entity.html">grogupy.physics.parse_magnetic_entity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.interaction_energy.html">grogupy.physics.interaction_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.second_order_energy.html">grogupy.physics.second_order_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.calculate_anisotropy_tensor.html">grogupy.physics.calculate_anisotropy_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.fit_anisotropy_tensor.html">grogupy.physics.fit_anisotropy_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.calculate_exchange_tensor.html">grogupy.physics.calculate_exchange_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.physics.fit_exchange_tensor.html">grogupy.physics.fit_exchange_tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#background-information">Background information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html">Batch calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">Command line interface for grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#grogupy">grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tqdm-in-grogupy">tqdm in grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API reference</a></li>
+      <li class="breadcrumb-item active">Physics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/API/physics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="physics">
+<h1>Physics<a class="headerlink" href="#physics" title="Link to this heading"></a></h1>
+<p>This subpackage contains the physical classes and functions closely related 
+to energy and magnetic parameter calculation.</p>
+<section id="physical-classes">
+<h2>Physical classes<a class="headerlink" href="#physical-classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.Builder.html#grogupy.physics.Builder" title="grogupy.physics.Builder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Builder</span></code></a>([ref_xcf_orientations, matlabmode])</p></td>
+<td><p>This class contains the data and the methods related to the Simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.Contour.html#grogupy.physics.Contour" title="grogupy.physics.Contour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Contour</span></code></a>(eset, esetp[, emin, emax, ...])</p></td>
+<td><p>This class contains and creates the data of the energy contour for the integration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.Hamiltonian.html#grogupy.physics.Hamiltonian" title="grogupy.physics.Hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hamiltonian</span></code></a>(infile[, scf_xcf_orientation])</p></td>
+<td><p>This class contains the data and the methods related to the Hamiltonian and geometry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.Kspace.html#grogupy.physics.Kspace" title="grogupy.physics.Kspace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Kspace</span></code></a>([kset])</p></td>
+<td><p>This class contains and creates the data of the reciprocal space integral.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.MagneticEntity.html#grogupy.physics.MagneticEntity" title="grogupy.physics.MagneticEntity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MagneticEntity</span></code></a>(infile[, atom, l, orb])</p></td>
+<td><p>This class contains the data and the methods related to the magnetic entities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.Pair.html#grogupy.physics.Pair" title="grogupy.physics.Pair"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pair</span></code></a>(M1, M2[, supercell_shift])</p></td>
+<td><p>This class contains the data and the methods related to the pairs of magnetic entities.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.get_number_of_electrons.html#grogupy.physics.get_number_of_electrons" title="grogupy.physics.get_number_of_electrons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_number_of_electrons</span></code></a>(dm)</p></td>
+<td><p>Determines the number of electrons in the system from the density matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.automatic_emin.html#grogupy.physics.automatic_emin" title="grogupy.physics.automatic_emin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">automatic_emin</span></code></a>(infile)</p></td>
+<td><p>It reads the lowest energy level from siesta.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.blow_up_orbindx.html#grogupy.physics.blow_up_orbindx" title="grogupy.physics.blow_up_orbindx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">blow_up_orbindx</span></code></a>(orb_indices)</p></td>
+<td><p>Expand orbital indices to make SPIN BOX indices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.spin_tracer.html#grogupy.physics.spin_tracer" title="grogupy.physics.spin_tracer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spin_tracer</span></code></a>(M)</p></td>
+<td><p>Extracts orbital dependent Pauli traces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.parse_magnetic_entity.html#grogupy.physics.parse_magnetic_entity" title="grogupy.physics.parse_magnetic_entity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_magnetic_entity</span></code></a>(dh[, atom, l, orb])</p></td>
+<td><p>Function to get the orbital indices of a given magnetic entity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.interaction_energy.html#grogupy.physics.interaction_energy" title="grogupy.physics.interaction_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interaction_energy</span></code></a>(Vu1_1, Vu1_2, Gij, Gji, ...)</p></td>
+<td><p>The interaction energy variation upon rotations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.second_order_energy.html#grogupy.physics.second_order_energy" title="grogupy.physics.second_order_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_order_energy</span></code></a>(Vu1, Vu2, Gii, weights)</p></td>
+<td><p>The second order energy variation upon rotations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.calculate_anisotropy_tensor.html#grogupy.physics.calculate_anisotropy_tensor" title="grogupy.physics.calculate_anisotropy_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_anisotropy_tensor</span></code></a>(energies)</p></td>
+<td><p>Calculates the renormalized anisotropy tensor from the energies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.fit_anisotropy_tensor.html#grogupy.physics.fit_anisotropy_tensor" title="grogupy.physics.fit_anisotropy_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_anisotropy_tensor</span></code></a>(energies, ref_xcf)</p></td>
+<td><p>Fits the anisotropy tensor to the energies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.physics.calculate_exchange_tensor.html#grogupy.physics.calculate_exchange_tensor" title="grogupy.physics.calculate_exchange_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_exchange_tensor</span></code></a>(energies)</p></td>
+<td><p>Calculates the exchange tensor from the energies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.physics.fit_exchange_tensor.html#grogupy.physics.fit_exchange_tensor" title="grogupy.physics.fit_exchange_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_exchange_tensor</span></code></a>(energies, ref_xcf)</p></td>
+<td><p>Fits the exchange tensor to the energies.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="background-information">
+<h2>Background information<a class="headerlink" href="#background-information" title="Link to this heading"></a></h2>
+<p>This module contains the high level API of the package. It was purposefully 
+written to be highly modular, which is ideal for complicated systems that are 
+easier to set up in a jupyter notebook environment.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_generated/grogupy.physics.Builder.html" class="btn btn-neutral float-right" title="grogupy.physics.Builder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

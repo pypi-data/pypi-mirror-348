@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="grogupy._core.solve_parallel_over_k" href="_generated/grogupy._core.solve_parallel_over_k.html" />
+    <link rel="prev" title="grogupy.physics.fit_exchange_tensor" href="_generated/grogupy.physics.fit_exchange_tensor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-solvers">Cpu solvers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.solve_parallel_over_k.html">grogupy._core.solve_parallel_over_k</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-solvers">Gpu solvers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.solve_parallel_over_k.html">grogupy._core.solve_parallel_over_k</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.gpu_solver.html">grogupy._core.gpu_solver</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.commutator.html">grogupy._core.commutator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.tau_u.html">grogupy._core.tau_u</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.crossM.html">grogupy._core.crossM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.RotM.html">grogupy._core.RotM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.RotMa2b.html">grogupy._core.RotMa2b</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.setup_from_range.html">grogupy._core.setup_from_range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.arrays_lists_equal.html">grogupy._core.arrays_lists_equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.arrays_None_equal.html">grogupy._core.arrays_None_equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.parallel_Gk.html">grogupy._core.parallel_Gk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.sequential_Gk.html">grogupy._core.sequential_Gk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.onsite_projection.html">grogupy._core.onsite_projection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.calc_Vu.html">grogupy._core.calc_Vu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.build_hh_ss.html">grogupy._core.build_hh_ss</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.make_contour.html">grogupy._core.make_contour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.make_kset.html">grogupy._core.make_kset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy._core.hsk.html">grogupy._core.hsk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html">Batch calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">Command line interface for grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#grogupy">grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tqdm-in-grogupy">tqdm in grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API reference</a></li>
+      <li class="breadcrumb-item active">Core</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/API/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core">
+<h1>Core<a class="headerlink" href="#core" title="Link to this heading"></a></h1>
+<p>This subpackage contains the core functionalities including mathematical 
+function, and important class methods from all over the main package.</p>
+<section id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h2>
+<p>Here are the physical constants and default values for the input.</p>
+</section>
+<section id="cpu-solvers">
+<h2>Cpu solvers<a class="headerlink" href="#cpu-solvers" title="Link to this heading"></a></h2>
+<p>Functions used in the solution method of the <code class="docutils literal notranslate"><span class="pre">Builder</span></code> class.
+Parallelization is done using MPI.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.solve_parallel_over_k.html#grogupy._core.solve_parallel_over_k" title="grogupy._core.solve_parallel_over_k"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_parallel_over_k</span></code></a>(builder)</p></td>
+<td><p>It calculates the energies by the Greens function method.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpu-solvers">
+<h2>Gpu solvers<a class="headerlink" href="#gpu-solvers" title="Link to this heading"></a></h2>
+<p>Functions used in the solution method of the <code class="docutils literal notranslate"><span class="pre">Builder</span></code> class.
+Because GPUs run asyncronusly, we can unlock the GIL in python
+and run in a parallel manner over multiple GPUs. The only constrain
+is the input/output writing between hardwares.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.solve_parallel_over_k.html#grogupy._core.solve_parallel_over_k" title="grogupy._core.solve_parallel_over_k"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_parallel_over_k</span></code></a>(builder)</p></td>
+<td><p>It calculates the energies by the Greens function method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.gpu_solver.html#grogupy._core.gpu_solver" title="grogupy._core.gpu_solver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpu_solver</span></code></a>(mode, gpu_number, kpoints, ...)</p></td>
+<td><p>Solves the Green's function parallel on GPU.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<p>Miscellaneous suport functions used around the code. There are mathematical functions, 
+<code class="docutils literal notranslate"><span class="pre">Contour</span></code>, <code class="docutils literal notranslate"><span class="pre">Kspace</span></code> and <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> methods, magnetic entity and pair generation.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.commutator.html#grogupy._core.commutator" title="grogupy._core.commutator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commutator</span></code></a>(a, b)</p></td>
+<td><p>Shorthand for commutator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.tau_u.html#grogupy._core.tau_u" title="grogupy._core.tau_u"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tau_u</span></code></a>(u)</p></td>
+<td><p>Pauli matrix in direction u.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.crossM.html#grogupy._core.crossM" title="grogupy._core.crossM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crossM</span></code></a>(u)</p></td>
+<td><p>Definition for the cross-product matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.RotM.html#grogupy._core.RotM" title="grogupy._core.RotM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RotM</span></code></a>(theta, u[, eps])</p></td>
+<td><p>Definition of rotation matrix with angle theta around direction u.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.RotMa2b.html#grogupy._core.RotMa2b" title="grogupy._core.RotMa2b"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RotMa2b</span></code></a>(a, b[, eps])</p></td>
+<td><p>Definition of rotation matrix rotating unit vector a to unit vector b.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.setup_from_range.html#grogupy._core.setup_from_range" title="grogupy._core.setup_from_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_from_range</span></code></a>(dh, R[, subset])</p></td>
+<td><p>Generates all the pairs and magnetic entities from atoms in a given radius.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.arrays_lists_equal.html#grogupy._core.arrays_lists_equal" title="grogupy._core.arrays_lists_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrays_lists_equal</span></code></a>(array1, array2)</p></td>
+<td><p>Compares two objects with specific rules.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.arrays_None_equal.html#grogupy._core.arrays_None_equal" title="grogupy._core.arrays_None_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrays_None_equal</span></code></a>(array1, array2)</p></td>
+<td><p>Compares two objects with specific rules.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.parallel_Gk.html#grogupy._core.parallel_Gk" title="grogupy._core.parallel_Gk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallel_Gk</span></code></a>(HK, SK, samples, eset)</p></td>
+<td><p>Calculates the Greens function by inversion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.sequential_Gk.html#grogupy._core.sequential_Gk" title="grogupy._core.sequential_Gk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequential_Gk</span></code></a>(HK, SK, samples, eset)</p></td>
+<td><p>Calculates the Greens function by inversion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.onsite_projection.html#grogupy._core.onsite_projection" title="grogupy._core.onsite_projection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onsite_projection</span></code></a>(matrix, idx1, idx2)</p></td>
+<td><p>It produces the slices of a matrix for the on site projection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.calc_Vu.html#grogupy._core.calc_Vu" title="grogupy._core.calc_Vu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_Vu</span></code></a>(H, Tu)</p></td>
+<td><p>Calculates the local perturbation in case of a spin rotation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.build_hh_ss.html#grogupy._core.build_hh_ss" title="grogupy._core.build_hh_ss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_hh_ss</span></code></a>(dh)</p></td>
+<td><p>It builds the Hamiltonian and Overlap matrix from the sisl.dh class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.make_contour.html#grogupy._core.make_contour" title="grogupy._core.make_contour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_contour</span></code></a>([emin, emax, enum, p])</p></td>
+<td><p>A more sophisticated contour generator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy._core.make_kset.html#grogupy._core.make_kset" title="grogupy._core.make_kset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_kset</span></code></a>([kset])</p></td>
+<td><p>Simple k-grid generator to sample the Brillouin zone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy._core.hsk.html#grogupy._core.hsk" title="grogupy._core.hsk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hsk</span></code></a>(H, S, sc_off[, k])</p></td>
+<td><p>Speed up Hk and Sk generation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_generated/grogupy.physics.fit_exchange_tensor.html" class="btn btn-neutral float-left" title="grogupy.physics.fit_exchange_tensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_generated/grogupy._core.solve_parallel_over_k.html" class="btn btn-neutral float-right" title="grogupy._core.solve_parallel_over_k" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

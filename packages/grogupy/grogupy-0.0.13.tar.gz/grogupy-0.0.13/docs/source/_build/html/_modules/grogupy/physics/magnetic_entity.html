@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>grogupy.physics.magnetic_entity &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html#grogupy">grogupy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">grogupy.physics.magnetic_entity</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for grogupy.physics.magnetic_entity</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) [2024-2025] [Grogupy Team]</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.hamiltonian</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hamiltonian</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sisl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._core.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">arrays_lists_equal</span><span class="p">,</span> <span class="n">arrays_None_equal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">blow_up_orbindx</span><span class="p">,</span>
+    <span class="n">calculate_anisotropy_tensor</span><span class="p">,</span>
+    <span class="n">fit_anisotropy_tensor</span><span class="p">,</span>
+    <span class="n">interaction_energy</span><span class="p">,</span>
+    <span class="n">parse_magnetic_entity</span><span class="p">,</span>
+    <span class="n">second_order_energy</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="MagneticEntity">
+<a class="viewcode-back" href="../../../API/_generated/grogupy.physics.MagneticEntity.html#grogupy.physics.MagneticEntity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MagneticEntity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class contains the data and the methods related to the magnetic entities.</span>
+
+<span class="sd">    It sets up the instance based on the indexing of the Hamiltonian by the ``atom``,</span>
+<span class="sd">    ``l`` and orbital (``orb``) parameters.</span>
+
+<span class="sd">    There are four possible input types:</span>
+<span class="sd">    1. Cluster: a list of atoms</span>
+<span class="sd">    2. AtomShell: one atom and a list of shells indexed in the atom or</span>
+<span class="sd">    a list of atoms and a list of lists containing the shells</span>
+<span class="sd">    3. AtomOrbital: one atom and a list of orbitals indexed in the atom or</span>
+<span class="sd">    a list of atoms and a list of lists containing the orbitals</span>
+<span class="sd">    4. Orbitals: a list of orbitals  indexed in the Hamiltonian</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    infile: Union[str, tuple[Union[sisl.physics.Hamiltonian, Hamiltonian], Union[sisl.physics.DensityMatrix, None]]]</span>
+<span class="sd">        Either the path to the .fdf file or a tuple of sisl or grogupy hamiltonian and a sisl density matrix</span>
+<span class="sd">    atom: Union[None, int, list[int]], optional</span>
+<span class="sd">        Defining atom (or atoms) in the unit cell forming the magnetic entity, by default None</span>
+<span class="sd">    l: Union[None, int, list[int], list[list[int]]], optional</span>
+<span class="sd">        Defining the angular momentum channel, by default None</span>
+<span class="sd">    orb: Union[None, int, list[int], list[list[int]]], optional</span>
+<span class="sd">            Defining the orbital index in the Hamiltonian or on the atom, by default None</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Creating a magnetic entity can be done by giving the Hamiltonian from the</span>
+<span class="sd">    DFT calculation and somehow specifying the corresponding atoms and orbitals.</span>
+
+<span class="sd">    The following examples show you how to create magnetic entities in the</span>
+<span class="sd">    **Fe3GeTe2** system. You can compare the tags of the ``MagneticEntity``</span>
+<span class="sd">    to the input parameters, to understand how to build the magnetic entity,</span>
+<span class="sd">    that suits your needs.</span>
+
+<span class="sd">    &gt;&gt;&gt; fdf_path = &quot;/Users/danielpozsar/Downloads/Fe3GeTe2/Fe3GeTe2.fdf&quot;</span>
+
+<span class="sd">    To define a Cluster of atoms use a dictionary that only contains atoms.</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, atom=[3,4,5])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    3Fe(l:All)--4Fe(l:All)--5Fe(l:All)</span>
+
+<span class="sd">    To define a magnetic entity with a single atom, but with specific</span>
+<span class="sd">    shells use both the ``atom`` and ``l`` key in the dictionary.</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, atom=5, l=[[1,2,3]])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    5Fe(l:1-2-3)</span>
+
+<span class="sd">    Or you can define multiple atoms with different shells:</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, atom=[4,5], l=[[1],[1,2,3]])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    4Fe(l:1)--5Fe(l:1-2-3)</span>
+
+<span class="sd">    To define a magnetic entity with a single atom, but with specific</span>
+<span class="sd">    orbitals use both the ``atom`` and ``orb`` key in the dictionary.</span>
+<span class="sd">    Be aware that these orbitals are indexed inside the atom, not in the</span>
+<span class="sd">    total Hamiltonian.</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, atom=5, orb=[[1,2,3,4,5,6,7,8,9,10]])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    5Fe(o:1-2-3-4-5-6-7-8-9-10)</span>
+
+<span class="sd">    Or you can define multiple atoms with different orbitals:</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, atom=[4,5], orb=[[1],[1,2,3,4,5,6,7,8,9,10]])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    4Fe(o:1)--5Fe(o:1-2-3-4-5-6-7-8-9-10)</span>
+
+<span class="sd">    And finally you can use only the ``orb`` key to directly index the</span>
+<span class="sd">    orbitals from the Hamiltonian.</span>
+
+<span class="sd">    &gt;&gt;&gt; magnetic_entity = MagneticEntity(fdf_path, orb=[1,10,30,40,50])</span>
+<span class="sd">    &gt;&gt;&gt; print(magnetic_entity.tag)</span>
+<span class="sd">    0Te(o:1-10)--2Ge(o:4)--3Fe(o:1-11)</span>
+
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    calculate_energies(weights) :</span>
+<span class="sd">        Calculates the energies of the infinitesimal rotations.</span>
+<span class="sd">    calculate_anisotropy() :</span>
+<span class="sd">        Calculates the anisotropy matrix and the consistency from the energies.</span>
+<span class="sd">    copy() :</span>
+<span class="sd">        Return a copy of this MagneticEntity</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    _orbital_box_indices : NDArray</span>
+<span class="sd">        The ORBITAL BOX indices</span>
+<span class="sd">    _atom : NDArray</span>
+<span class="sd">        The list of atoms in the magnetic entity</span>
+<span class="sd">    _l : list[list[Union[None, int]]]</span>
+<span class="sd">        The list of l in the magnetic entity, None if it is incomplete</span>
+<span class="sd">    _spin_box_indices : NDArray</span>
+<span class="sd">        The SPIN BOX indices</span>
+<span class="sd">    _total_mulliken: Union[None, NDArray]</span>
+<span class="sd">        Sisl Mulliken charges from the total atom</span>
+<span class="sd">    _local_mulliken: Union[None, NDArray]</span>
+<span class="sd">        Sisl Mulliken charges from the given orbitals</span>
+<span class="sd">    SBS : int</span>
+<span class="sd">        Length of the SPIN BOX indices</span>
+<span class="sd">    _xyz : NDArray</span>
+<span class="sd">        The coordinates of the magnetic entity (it can consist of many atoms)</span>
+<span class="sd">    _xyz_center : NDArray</span>
+<span class="sd">        The center of coordinates for the magnetic entity</span>
+<span class="sd">    _tag : str</span>
+<span class="sd">        The description of the magnetic entity</span>
+<span class="sd">    _Vu1 : list[list[float]]</span>
+<span class="sd">        The list of the first order rotations</span>
+<span class="sd">    _Vu2 : list[list[float]]</span>
+<span class="sd">        The list of the second order rotations</span>
+<span class="sd">    _Gii : list[NDArray]</span>
+<span class="sd">        The list of the projected Greens functions</span>
+<span class="sd">    energies : Union[None, NDArray]</span>
+<span class="sd">        The calculated energies for each direction</span>
+<span class="sd">    K : Union[NDArray, None]</span>
+<span class="sd">        The magnetic anisotropy, by default None</span>
+<span class="sd">    K_consistency : Union[float, None]</span>
+<span class="sd">        Consistency check on the diagonal K elements, by default None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">number_of_entities</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="MagneticEntity.__init__">
+<a class="viewcode-back" href="../../../API/_generated/grogupy.physics.MagneticEntity.html#grogupy.physics.MagneticEntity.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">infile</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span>
+                <span class="n">Union</span><span class="p">[</span><span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">,</span> <span class="s2">&quot;Hamiltonian&quot;</span><span class="p">],</span>
+                <span class="n">Union</span><span class="p">[</span><span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">DensityMatrix</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+        <span class="n">atom</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">l</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">orb</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the magnetic entity.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># get sisl sile</span>
+            <span class="n">sile</span> <span class="o">=</span> <span class="n">sisl</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">get_sile</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+            <span class="c1"># load density and hamiltonian</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span> <span class="o">=</span> <span class="n">sile</span><span class="o">.</span><span class="n">read_hamiltonian</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">DensityMatrix</span> <span class="o">=</span> <span class="n">sile</span><span class="o">.</span><span class="n">read_density_matrix</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">infile</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span> <span class="o">=</span> <span class="n">infile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">DensityMatrix</span> <span class="o">=</span> <span class="n">infile</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Unknown!&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot setup without path or sisl objects!&quot;</span><span class="p">)</span>
+        <span class="n">atom</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">orbital</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">parse_magnetic_entity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">orb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_atom</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_l</span> <span class="o">=</span> <span class="n">l</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">orbital</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span> <span class="o">=</span> <span class="n">tag</span>
+
+        <span class="c1"># try to get Mulliken charges</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">mulliken</span><span class="p">()[</span>
+                <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">a2o</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_atom</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">mulliken</span><span class="p">()[</span>
+                <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orbital_box_indices</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spin_box_indices</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">blow_up_orbindx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">xyz</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atom</span><span class="p">])</span>
+
+        <span class="c1"># initialize simulation parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Vu2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gii</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gii_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># pre calculate hidden unuseed properties</span>
+        <span class="c1"># they are here so they are dumped to the self.__dict__ upon saving</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tag</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tags</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spin_box_indices</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># setup Mullikens if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Q</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Q</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__K_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__K_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">MagneticEntity</span><span class="o">.</span><span class="n">number_of_entities</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">MagneticEntity</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Only MagneticEntity instances can be added!&quot;</span><span class="p">)</span>
+
+        <span class="c1"># do not change the current instance</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># reset the values that does not make sense for a new magnetic entity</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="c1"># update out instance</span>
+        <span class="c1"># accept both kinds of hamiltonian</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The sisl Hamiltonians are not the same!&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The sisl Overlap matrices are not the same!&quot;</span><span class="p">)</span>
+
+        <span class="n">new</span><span class="o">.</span><span class="n">_atom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">_atom</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_atom</span><span class="p">))</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_l</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">_l</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">_l</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_orbital_box_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_tags</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">_tags</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">_tags</span>
+
+        <span class="n">new</span><span class="o">.</span><span class="n">_spin_box_indices</span> <span class="o">=</span> <span class="n">blow_up_orbindx</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">_xyz</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_xyz</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">new</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">MagneticEntity</span><span class="p">):</span>
+            <span class="c1"># if the IDs are identical, skip comaprison</span>
+            <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="c1"># if there are sisl Hamiltonians, then compare</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">Dk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">Dk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_ds</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">infile</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_atom</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_atom</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_l</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">_l</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_orbital_box_indices</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_orbital_box_indices</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">_tags</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spin_box_indices</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_spin_box_indices</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_xyz</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Vu2</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_Vu2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Gii</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_Gii</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">energies</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">K</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="c1"># Checking K_consistency separately</span>
+            <span class="c1"># if both are None, then pass and no other check is perfomred because of elif</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="c1"># if either one is None, but the other is not, then return false</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="c1"># If neither of them is None, compare them</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation of the instance.&quot;&quot;&quot;</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;grogupy.MagneticEntity tag=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">, SBS=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">SBS</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The description of the magnetic entity&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tag</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tags</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tag</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SBS</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The spin box size of the magnetic entity&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spin_box_indices</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SBS</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">xyz_center</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The mean of the position of the atoms that are in the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_Q</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The total charge of the atom or the atoms of magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__total_Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_Q</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_Sx</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sx of the atom or the atoms of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sx</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_Sy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sy of the atom or the atoms of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_Sz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sz of the atom or the atoms of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_mulliken</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_Sz</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_Q</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The charge of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__local_Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__local_Q</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_Sx</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sx of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sx</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_Sy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sy of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_Sz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sz of the magnetic entity.&quot;&quot;&quot;</span>
+        <span class="c1"># check if DM is available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_mulliken</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__local_Sz</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energies_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The energies, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energies_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The energies, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">K_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The anisotropy tensor, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__K_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">K_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The anisotropy tensor, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__K_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">K_consistency_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The consistency check, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span>
+                <span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">K_consistency_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The consistency check, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span>
+                <span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__K_consistency_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets the simulation results.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Vu2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gii</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gii_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_energies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">matlabmode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the energies of the infinitesimal rotations.</span>
+
+<span class="sd">        It uses the instance properties to calculate the energies and</span>
+<span class="sd">        dumps the results to the ``energies`` property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        weights : NDArray</span>
+<span class="sd">            The weights of the energy contour integral</span>
+<span class="sd">        matlabmode : bool, optional</span>
+<span class="sd">            Wether to use a linear combination of the two perpendicular</span>
+<span class="sd">            orientation, by default False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">energies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">Gii</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Gii</span><span class="p">):</span>
+            <span class="n">storage</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># iterate over the first and second order local perturbations</span>
+            <span class="n">V1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">V2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Vu2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="c1"># fill up the magnetic entities dictionary with the energies</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_order_energy</span><span class="p">(</span><span class="n">V1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">V2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction_energy</span><span class="p">(</span><span class="n">V1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">V1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction_energy</span><span class="p">(</span><span class="n">V1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">V1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_order_energy</span><span class="p">(</span><span class="n">V1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">V2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">matlabmode</span><span class="p">:</span>
+                <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_order_energy</span><span class="p">(</span><span class="n">V1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">V2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">Gii</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
+
+        <span class="c1"># convert to array</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_anisotropy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the anisotropy matrix and the consistency from the energies.</span>
+
+<span class="sd">        It uses the instance properties to calculate the anisotropy matrix and the</span>
+<span class="sd">        consistency and dumps them to the `K`, `K_consistency` properties.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">K</span><span class="p">,</span> <span class="n">K_consistency</span> <span class="o">=</span> <span class="n">calculate_anisotropy_tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">K_consistency</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_anisotropy_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_xcf</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fits the anisotropy tensor to the energies.</span>
+
+<span class="sd">        It uses a fitting method to calculate the anisotropy tensor from the</span>
+<span class="sd">        reference directions and its different representations and dumps</span>
+<span class="sd">        them to the ``K`` property. It writes ``None`` to the ``K_consistency``</span>
+<span class="sd">        property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ref_xcf: list[dict]</span>
+<span class="sd">            The reference directions containing the orientation and perpendicular directions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">K</span> <span class="o">=</span> <span class="n">fit_anisotropy_tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">ref_xcf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="c1"># it is not relevant with this method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K_consistency_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the deepcopy of the instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MagneticEntity</span>
+<span class="sd">            The copied instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

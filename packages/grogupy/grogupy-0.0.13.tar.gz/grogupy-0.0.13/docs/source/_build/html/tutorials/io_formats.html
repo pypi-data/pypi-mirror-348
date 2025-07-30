@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input/Output formats &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up magnetic entities" href="magnetic_entity.html" />
+    <link rel="prev" title="Tutorials" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input/Output formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-parameters">Input parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnetic_entity.html">Setting up magnetic entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_management.html">Memory management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convergence_with_high_throughput.html">Convergence with high throughput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_usage.html">Command line usage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Input/Output formats</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/io_formats.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-output-formats">
+<span id="io-formats"></span><h1>Input/Output formats<a class="headerlink" href="#input-output-formats" title="Link to this heading"></a></h1>
+<p>The <strong>grogupy_run</strong> command line tool accepts input in the  <em>.py</em> and <em>.fdf</em>
+format. See and compare the following examples.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" open="open">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Input formats</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="code" data-sync-id="python" for="sd-tab-item-0">
+PYTHON</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1">#                                 Input files</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="n">infolder</span> <span class="o">=</span> <span class="s2">&quot;./benchmarks/CrI3&quot;</span>
+<span class="n">infile</span> <span class="o">=</span> <span class="s2">&quot;CrI3.fdf&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                            Convergence parameters</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># kset should be at leas 100x100 for 2D diatomic systems</span>
+<span class="n">kset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># eset should be 100 for insulators and 1000 for metals</span>
+<span class="n">eset</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># esetp should be 600 for insulators and 10000 for metals</span>
+<span class="n">esetp</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="c1"># emin None sets the minimum energy to the minimum energy in the eigfile</span>
+<span class="n">emin</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># emax is at the Fermi level at 0</span>
+<span class="n">emax</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># the bottom of the energy contour should be shifted by -5 eV</span>
+<span class="n">emin_shift</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="c1"># the top of the energy contour can be shifted to the middle of the gap for</span>
+<span class="c1"># insulators</span>
+<span class="n">emax_shift</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                 Orientations</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># usually the DFT calculation axis is [0, 0, 1]</span>
+<span class="n">scf_xcf_orientation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># the reference directions for the energy derivations</span>
+<span class="n">ref_xcf_orientations</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                      Magnetic entity and pair definitions</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># magnetic entities and pairs can be defined automatically from the cutoff</span>
+<span class="c1"># radius and magnetic atoms</span>
+<span class="n">setup_from_range</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">atomic_subset</span> <span class="o">=</span> <span class="s2">&quot;Cr&quot;</span>
+<span class="n">kwargs_for_mag_ent</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                Memory management</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># maximum number of pairs per loop, reduce it to avoid memory overflow</span>
+<span class="n">max_pairs_per_loop</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="c1"># in low memory mode we discard some temporary data that could be useful for</span>
+<span class="c1"># interactive work</span>
+<span class="n">low_memory_mode</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># sequential solver is better for large systems</span>
+<span class="n">greens_function_solver</span> <span class="o">=</span> <span class="s2">&quot;Parallel&quot;</span>
+<span class="c1"># maximum number of greens function samples per loop, when</span>
+<span class="c1"># greens_function_solver is set to &quot;Sequential&quot;, reduce it to avoid memory</span>
+<span class="c1"># overflow on GPU for large systems</span>
+<span class="n">max_g_per_loop</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                 Solution methods</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># the calculation of J and K from the energy derivations, either Fit or Grogupy</span>
+<span class="n">exchange_solver</span> <span class="o">=</span> <span class="s2">&quot;Fit&quot;</span>
+<span class="n">anisotropy_solver</span> <span class="o">=</span> <span class="s2">&quot;Fit&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                   Output files</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># either total or local, which controls if only the magnetic</span>
+<span class="c1"># entity&#39;s magnetic monent or the whole atom&#39;s magnetic moment is printed</span>
+<span class="c1"># used by all output modes</span>
+<span class="n">out_magnetic_moment</span> <span class="o">=</span> <span class="s2">&quot;Total&quot;</span>
+
+<span class="c1"># save the magnopy file</span>
+<span class="n">save_magnopy</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># precision of numerical values in the magnopy file</span>
+<span class="n">magnopy_precision</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># add the simulation parameters to the magnopy file as comments</span>
+<span class="n">magnopy_comments</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># save the Uppsala Atomistic Spin Dynamics software input files</span>
+<span class="c1"># uses the outfolder and out_magentic_moment</span>
+<span class="n">save_UppASD</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># add the simulation parameters to the cell.tmp.txt file as</span>
+<span class="c1"># comments</span>
+<span class="n">uppasd_comments</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># save the pickle file</span>
+<span class="n">save_pickle</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The compression level can be set to 0,1,2. Every other value defaults to 2.</span>
+<span class="sd">0. This means that there is no compression at all.</span>
+
+<span class="sd">1. This means, that the keys &quot;_dh&quot; and &quot;_ds&quot; are set</span>
+<span class="sd">to None, because othervise the loading would be dependent</span>
+<span class="sd">on the sisl version</span>
+
+<span class="sd">2. This contains compression 1, but sets the keys &quot;Gii&quot;,</span>
+<span class="sd">&quot;Gij&quot;, &quot;Gji&quot;, &quot;Vu1&quot; and &quot;Vu2&quot; to [], to save space</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">pickle_compress_level</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># output folder, for example the current folder</span>
+<span class="n">outfolder</span> <span class="o">=</span> <span class="s2">&quot;./src/grogupy/cli/tests/&quot;</span>
+<span class="c1"># outfile name</span>
+<span class="n">outfile</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="code" data-sync-id="fdf" for="sd-tab-item-1">
+FDF</label><div class="sd-tab-content docutils">
+<div class="highlight-fdf notranslate"><div class="highlight"><pre><span></span>###############################################################################
+#                                 Input files
+###############################################################################
+
+
+InFolder        ./benchmarks/CrI3
+Infile          CrI3.fdf
+
+
+###############################################################################
+#                            Convergence parameters
+###############################################################################
+
+
+# kset should be at leas 100x100 for 2D diatomic systems
+Kset        2 2 1
+# eset should be 100 for insulators and 1000 for metals
+Eset        100
+# esetp should be 600 for insulators and 10000 for metals
+Esetp       600
+# emin None sets the minimum energy to the minimum energy in the eigfile
+Emin        None
+# emax is at the Fermi level at 0
+Emax        0
+# the bottom of the energy contour should be shifted by -5 eV
+EminShift   -5
+# the top of the energy contour can be shifted to the middle of the gap for
+# insulators
+EmaxShift   0
+
+
+###############################################################################
+#                                 Orientations
+###############################################################################
+
+
+# usually the DFT calculation axis is [0, 0, 1]
+ScfXcfOrientation   0   0   1
+# the reference directions for the energy derivations
+%block RefXcfOrientations
+    1   0   0
+    0   1   0
+    0   0   1
+%endblock RefXcfOrientations
+
+
+###############################################################################
+#                      Magnetic entity and pair definitions
+###############################################################################
+
+
+# magnetic entities and pairs can be defined automatically from the cutoff
+SetupFromRange          True
+Radius                  20                      # radius and magnetic atoms
+AtomicSubset            Cr
+KwargsForMagEnt         l   2
+
+
+###############################################################################
+#                                Memory management
+###############################################################################
+
+
+# maximum number of pairs per loop, reduce it to avoid memory overflow
+MaxPairsPerLoop         10000
+# in low memory mode we discard some temporary data that could be useful for
+# interactive work
+low_memory_mode         True
+# sequential solver is better for large systems
+GreensFunctionSolver    Parallel
+# maximum number of greens function samples per loop, when
+greens_function_solver is set to &quot;Sequential&quot;, reduce it to avoid memory
+# overflow on GPU for large systems
+MaxGPerLoop             20
+
+
+###############################################################################
+#                                 Solution methods
+###############################################################################
+
+
+# the calculation of J and K from the energy derivations, either Fit or Grogupy
+ExchangeSolver          Fit
+AnisotropySolver        Fit
+
+
+###############################################################################
+#                                   Output files
+###############################################################################
+
+
+# either total or local, which controls if only the magnetic
+# entity&#39;s magnetic monent or the whole atom&#39;s magnetic moment is printed
+# used by all output modes
+OutMagneticMoment           Total
+
+# save the magnopy file
+SaveMagnopy                 True
+# precision of numerical values in the magnopy file
+MagnopyPrecision            None
+# add the simulation parameters to the magnopy file as comments
+MagnopyComments             True
+
+# save the Uppsala Atomistic Spin Dynamics software input files
+SaveUppASD                  True
+# add the simulation parameters to the cell.tmp.txt file as
+# comments
+UppASDComments = True
+
+
+# save the pickle file
+SavePickle                  True
+# The compression level can be set to 0,1,2. Every other value defaults to 2.
+# 0. This means that there is no compression at all.
+#
+# 1. This means, that the keys &quot;_dh&quot; and &quot;_ds&quot; are set
+#    to None, because othervise the loading would be dependent
+#    on the sisl version
+#
+# 2. This contains compression 1, but sets the keys &quot;Gii&quot;,
+#    &quot;Gij&quot;, &quot;Gji&quot;, &quot;Vu1&quot; and &quot;Vu2&quot; to [], to save space
+PickleCompressLevel         2
+
+# output folder, for example the input folder
+OutFolder                   ./src/grogupy/cli/tests/
+# outfile name, default name
+OutFile                     test
+
+
+###############################################################################
+###############################################################################
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</details><section id="input-parameters">
+<h2>Input parameters<a class="headerlink" href="#input-parameters" title="Link to this heading"></a></h2>
+<p>The above examples contained a generally acceptable setup for a simulation,
+but in this section you can find all the recognised input parameters by
+<strong>grogupy_run</strong>. The parameter names are case insensitive and for better
+readability and formatting the underlines and dots are stripped. Furthermore
+most of the parameters have  some sensible default values for ease of use.</p>
+<dl class="simple">
+<dt>infolder, <em>by default ./</em></dt><dd><p>The base folder of the DFT calculation.</p>
+</dd>
+<dt>infile</dt><dd><p>The configuration file of the DFT calculation that can be read by sisl,
+for example <em>.fdf</em> in case if Siesta. It has no default value.</p>
+</dd>
+<dt>kset</dt><dd><p>The number of k points for the Brillouin-zone integration. The meshgrid is
+created by a Monkhorst-Pack like sample generation. For 2D diatomic systems
+it should be in the order of (100, 100, 1), but convergence tests should be
+made. It is desirable to keep this as low as possible to reduce
+computational time and resources.</p>
+</dd>
+<dt>eset, <em>by default 1000</em></dt><dd><p>The number of energy points for the Green’s function sampling. For
+insulators it should be in the order of 100 if the Fermi level is choosen
+carefully and for metals it should be in the order of 1000 for convergence,
+but convergence tests should be made. It is desirable to keep this as low
+as possible to reduce computational time and resources.</p>
+</dd>
+<dt>esetp, <em>by default 10000</em></dt><dd><p>This parameter changes the distribution of sample points along the energy
+contour. For insulators this should be around 100, but for metals to
+accurately evaluate the integral near the Fermi level, we need a dense
+sampling so it should be set to 10000, which puts most of the samples near
+the Fermi level.</p>
+</dd>
+<dt>emin, <em>by default None</em></dt><dd><p>The bottom of the energy integration. Should be reasonably lower, than the
+lowest energy level in the system, but <strong>eminshift</strong> also tweaks this
+value. It is set up like this, because the default value (<em>None</em>) tries to
+read the DFT files and find the enrgy minimum automatically.</p>
+</dd>
+<dt>eminshift, <em>by default -5 eV</em></dt><dd><p>It is added to the <strong>emin</strong> parameter.</p>
+</dd>
+<dt>emax, <em>by default 0 eV</em></dt><dd><p>The top of the energy integration. It is not set automatically, because in
+case of metals it should be precisely at the Fermi level, <strong>which is
+always set to zero</strong>. In case of insulators better convergence can be
+achieved for the number of energy samples if the top of the contour avoids
+the energy levels, so it should be set to the middle of the gap either by
+this or by the <strong>emaxshift</strong> parameter.</p>
+</dd>
+<dt>emaxshift, <em>by default 0 eV</em></dt><dd><p>It is added to the <strong>emax</strong> parameter. When we try to set the top of the
+contour to avoid the energy levels the shift is done in a way that the
+bands are staying in the same position and Fermi level is shifted, so a
+positive shift will put the top closer to the conduction band.</p>
+</dd>
+<dt>scfxcforientation, <em>by default [0, 0, 1]</em></dt><dd><p>The direction of the exchange field in the original DFT calculation.
+Usually the system is set up in a way that the magnetic moments are
+parallel to the Z direction.</p>
+</dd>
+<dt>refxcforientations, <em>by default [[1, 0, 0], [0, 1, 0], [0, 0, 1]]</em></dt><dd><p>The orientations of the reference directions, where we rotate the
+exchange field and where we perturb the system. The perpendicular
+directions are generated automatically. It is advised to choose these
+directions in a way that they represent the symmetries of the system and
+use the fitting methods for the calculation of the exchange and anisotropy
+tensor. These orientations depend on the specific unit cell and atomic
+postions so it is hard to determine them automatically.</p>
+</dd>
+<dt>magneticentities</dt><dd><p>Explicit magnetic entity definition for comlicated systems.</p>
+</dd>
+<dt>pairs</dt><dd><p>Explicit pair definition for comlicated systems.</p>
+</dd>
+<dt>setupfromrange</dt><dd><p>If False, then grogupy will try to read from the <strong>magneticentities</strong> and
+<strong>pairs</strong> parameters, but if True, then it will try to automatically find
+all the pairs in a given range. It only works if the magnetic entities are
+atoms.</p>
+</dd>
+<dt>radius, <em>by default 20 Ang</em></dt><dd><p>The cutoff range for the <strong>setupfromrange</strong> parameter, othervise it is
+ignored. It iterates over the magentic entities in the unit cell, then
+finds the corresponding pairs for each of them in the given .
+radius.</p>
+</dd>
+<dt>atomicsubset</dt><dd><p>Generally we have many kind of atoms in the system, and this parameter can
+use sisl tags to choose the ones that are magnetic. For example in
+Fe3GeTe2 it can be set to <em>Fe</em>.</p>
+</dd>
+<dt>kwargsformagent, <em>by default dict(l=None)</em></dt><dd><p>Even if the magnetic entity is confined to a single atom there are many
+ways to tweak its definition. See the <a class="reference internal" href="magnetic_entity.html#setting-up-magnetic-entities"><span class="std std-ref">setting magnetic entities</span></a> tutorial. This parameter passes a
+dictionary to each magnetic entity definition.</p>
+</dd>
+<dt>maxpairsperloop, <em>by default 1000</em></dt><dd><p>Maximum number of pairs in a single simulation. This can be set to avoid
+memory overflow in RAM. If the total number of pairs are larger than this
+value, then the simulation will be split up into smaller batches, which
+are ran sequentially.</p>
+</dd>
+<dt>maxgperloop, <em>by default 1</em></dt><dd><p>The maxmum number of parallel matrix inversions. It can be useful, when
+there is a memory overflow in RAM or in GPU memory. It is only used when
+<strong>greensfunctionsolver</strong> is “Sequential”, otherwise grogupy uses full
+parallelization of matrix inversions on all energy levels.</p>
+</dd>
+<dt>lowmemorymode, <em>by default True</em></dt><dd><p>Discards some temporary data that can be useful in interactive mode or for
+some post processing. Reduces RAM usage so it is useful for memory bound
+systems.</p>
+</dd>
+<dt>greensfunctionsolver, <em>by default Parallel</em></dt><dd><p>It can be parallel or sequential and determines the parallelization over
+the energy levels for the matrix inversions. Useful of the system is memory
+bound. If it is set to sequential, then <strong>maxgperloop</strong> is used to try some
+less aggresive parallelization.</p>
+</dd>
+<dt>exchangesolver, <em>by default Fit</em></dt><dd><p>Can be fit or grogu and it determines the calculation method of the
+exchange tensor from the energies upon rotations. grogu describes the
+method in the original paper, but can only be used for the x,y,z reference
+directions. Fit can be used for any number of reference directions, which
+can follow the symmetry of the system.</p>
+</dd>
+<dt>anisotropysolver, <em>by default Fit</em></dt><dd><p>Can be fit or grogu and it determines the calculation method of the
+anisotropy tensor from the energies upon rotations. grogu describes the
+method in the original paper, but can only be used for the x,y,z reference
+directions. Fit can be used for any number of reference directions, which
+can follow the symmetry of the system.</p>
+</dd>
+<dt>outmagneticmoment, <em>by default total</em></dt><dd><p>It can be total or local and determines wether to use the total magnetic
+moment from the atom or just magnetic moment of the selected shells or
+orbitals. It is used for the Uppsala input file.</p>
+</dd>
+<dt>savemagnopy, <em>by default False</em></dt><dd><p>If True the magnopy input file is saved.</p>
+</dd>
+<dt>magnopyprecision, <em>by default None</em></dt><dd><p>It sets the numerical precision in the magnopy input file by rounding.
+None means that there is no rounding at all.</p>
+</dd>
+<dt>magnopycomments, <em>by default True</em></dt><dd><p>If it is True, then the system and simulaton information is prepended in
+the magnopy input file as comments.</p>
+</dd>
+<dt>saveuppasd, <em>by default False</em></dt><dd><p>If True the UppASD spin dynamics input file is saved.</p>
+</dd>
+<dt>uppasdcomments, <em>by default True</em></dt><dd><p>If it is True, then the system and simulaton information is prepended in
+the UppASD <em>cell.tmp.txt</em> file as comments.</p>
+</dd>
+<dt>savepickle, <em>by default False</em></dt><dd><p>If True the Builder object is saved in the <em>.pkl</em> file as dictionary. The
+choise to first convert the object to a dictionary was made so the data
+can remain version and object definition independent.</p>
+</dd>
+<dt>picklecompresslevel, <em>by default 2</em></dt><dd><p>It determines the compression level in the <em>.pkl</em> output file, Of course
+if <strong>lowmemorymode</strong> is used a large part of the data is already discarded.
+Otherwise the compression level can be set to 0,1,2. Every other value
+defaults to 2. 0 means that there is no compression at all. 1 means, that
+the keys “_dh” and “_ds” are set to None, because othervise the loading of
+the object would depend on the sisl version. And finally 2 contains
+compression 1, but furthermore sets the keys “Gii”, “Gij”, “Gji”, “Vu1”
+and “Vu2” to [], to save space.</p>
+</dd>
+<dt>outfolder, <em>by default infolder</em></dt><dd><p>The output folder of all the requested output formats. If not specified
+everything will be saved in the input folder.</p>
+</dd>
+<dt>outfile, <em>by default &lt;infile&gt;_kset_&lt;kset&gt;_eset_&lt;eset&gt;_&lt;anisotropysolver&gt;</em></dt><dd><p>The base name of the output files. The different output formats may
+concatenate some information or filename extension to this. For example
+the UppASD output format is a directory of multiple input files.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="magnetic_entity.html" class="btn btn-neutral float-right" title="Setting up magnetic entities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running grogupy in HPC &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Citing grogupy" href="../citing.html" />
+    <link rel="prev" title="Visualize the exchange" href="visualize_the_exchange.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Quickstart</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#quickstart-tutorials">Quickstart tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="calculate_magnetic_parameters.html">Calculate magnetic parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualize_the_exchange.html">Visualize the exchange</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running grogupy in HPC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-slurm-batch-script">Example SLURM batch script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#explanation-of-the-script">Explanation of the script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-input-file-format">Example input file format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Quickstart</a></li>
+      <li class="breadcrumb-item active">Running grogupy in HPC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/quickstart/running_in_hpc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-grogupy-in-hpc">
+<span id="running-in-hpc"></span><h1>Running grogupy in HPC<a class="headerlink" href="#running-grogupy-in-hpc" title="Link to this heading"></a></h1>
+<p>This section provides instructions on how to configure and run grogupy on a
+High-Performance Computing (HPC) system using SLURM. Below is an example of a
+bash script for submitting a job to the SLURM scheduler.</p>
+<section id="example-slurm-batch-script">
+<h2>Example SLURM batch script<a class="headerlink" href="#example-slurm-batch-script" title="Link to this heading"></a></h2>
+<p>The following is an example SLURM batch script (<cite>sbatch</cite>) for running grogupy
+on an HPC system, in this case on <a class="reference external" href="https://hpc.kifu.hu/hu/komondor.html">Komondor</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=grogupy</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --ntasks-per-node=1</span>
+<span class="c1">#SBATCH --cpus-per-task=128</span>
+<span class="c1">#SBATCH --time=01:00:00</span>
+<span class="c1">#SBATCH --gres=gpu:8</span>
+<span class="c1">#SBATCH --partition=ai</span>
+<span class="c1">#SBATCH --exclusive</span>
+<span class="c1">#SBATCH --mem-per-cpu 4000</span>
+
+<span class="nb">ulimit</span><span class="w"> </span>-s<span class="w"> </span>unlimited
+
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>module<span class="w"> </span>clear
+module<span class="w"> </span>purge
+module<span class="w"> </span>load<span class="w"> </span>PrgEnv-gnu<span class="w"> </span>cray-pals<span class="w"> </span>cray-python<span class="w"> </span>cuda/12.3
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="nv">$SLURM_CPUS_PER_TASK</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="nv">$SLURM_CPUS_PER_TASK</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="nv">$SLURM_CPUS_PER_TASK</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VECLIB_MAXIMUM_THREADS</span><span class="o">=</span><span class="nv">$SLURM_CPUS_PER_TASK</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NUMEXPR_NUM_THREADS</span><span class="o">=</span><span class="nv">$SLURM_CPUS_PER_TASK</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/opt/software/packages/cuda/12.3/targets/x86_64-linux/lib
+<span class="nb">export</span><span class="w"> </span><span class="nv">grogupy_ARCHITECTURE</span><span class="o">=</span>GPU
+
+<span class="nb">time</span><span class="w"> </span>srun<span class="w"> </span>grogupy_run<span class="w"> </span>./grogupy_input.py
+</pre></div>
+</div>
+</section>
+<section id="explanation-of-the-script">
+<h2>Explanation of the script<a class="headerlink" href="#explanation-of-the-script" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><cite>#SBATCH –job-name=grogupy</cite>: Sets the name of the job.</p></li>
+<li><p><cite>#SBATCH –nodes=1</cite>: Requests one node.</p></li>
+<li><p><cite>#SBATCH –ntasks=1</cite>: Requests one task.</p></li>
+<li><p><cite>#SBATCH –ntasks-per-node=1</cite>: Specifies one task per node.</p></li>
+<li><p><cite>#SBATCH –cpus-per-task=128</cite>: Allocates 128 CPUs per task.</p></li>
+<li><p><cite>#SBATCH –time=01:00:00</cite>: Sets a time limit of 1 hours for the job.</p></li>
+<li><p><cite>#SBATCH –gres=gpu:8</cite>: Requests 8 GPUs.</p></li>
+<li><p><cite>#SBATCH –partition=ai</cite>: Specifies the partition to submit the job to.</p></li>
+<li><p><cite>#SBATCH –exclusive</cite>: Ensures exclusive access to the node.</p></li>
+<li><p><cite>#SBATCH –mem-per-cpu 4000</cite>: Allocates 4000 MB of memory per CPU.</p></li>
+</ul>
+<p>The script also sets up the environment by loading necessary
+modules and setting environment variables for optimal
+performance. Exportin the LD_LIBRARY_PATH variable is necessary
+to ensure that the CUDA library is accessible for cupy. The
+script also sets the <cite>grogupy_ARCHITECTURE</cite> environment
+variable to <cite>GPU</cite> to enable GPU acceleration in grogupy.
+Finally, it runs the grogupy application using <cite>srun</cite> and the
+<cite>grogupy</cite> command line script.</p>
+<p>Make sure to adjust the script parameters according to
+your HPC system’s configuration and your specific requirements.</p>
+</section>
+<section id="example-input-file-format">
+<h2>Example input file format<a class="headerlink" href="#example-input-file-format" title="Link to this heading"></a></h2>
+<p>This is the corresponding input file for the above script, <cite>grogupy_input.py</cite>,
+which contains the parameters for the grogupy simulation. These variables
+are passed to the appropriate functions in the grogupy package very similarly
+as we did in the jupyter notebook examples.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (c) [2024-2025] [Laszlo Oroszlany, Daniel Pozsar]</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                 Input files</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="n">infolder</span> <span class="o">=</span> <span class="s2">&quot;./benchmarks/CrI3&quot;</span>
+<span class="n">infile</span> <span class="o">=</span> <span class="s2">&quot;CrI3.fdf&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                            Convergence parameters</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># kset should be at leas 100x100 for 2D diatomic systems</span>
+<span class="n">kset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># eset should be 100 for insulators and 1000 for metals</span>
+<span class="n">eset</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># esetp should be 600 for insulators and 10000 for metals</span>
+<span class="n">esetp</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="c1"># emin None sets the minimum energy to the minimum energy in the eigfile</span>
+<span class="n">emin</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># emax is at the Fermi level at 0</span>
+<span class="n">emax</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># the bottom of the energy contour should be shifted by -5 eV</span>
+<span class="n">emin_shift</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="c1"># the top of the energy contour can be shifted to the middle of the gap for</span>
+<span class="c1"># insulators</span>
+<span class="n">emax_shift</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                 Orientations</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># usually the DFT calculation axis is [0, 0, 1]</span>
+<span class="n">scf_xcf_orientation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># the reference directions for the energy derivations</span>
+<span class="n">ref_xcf_orientations</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                      Magnetic entity and pair definitions</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># magnetic entities and pairs can be defined automatically from the cutoff</span>
+<span class="c1"># radius and magnetic atoms</span>
+<span class="n">setup_from_range</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">atomic_subset</span> <span class="o">=</span> <span class="s2">&quot;Cr&quot;</span>
+<span class="n">kwargs_for_mag_ent</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                Memory management</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># maximum number of pairs per loop, reduce it to avoid memory overflow</span>
+<span class="n">max_pairs_per_loop</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="c1"># in low memory mode we discard some temporary data that could be useful for</span>
+<span class="c1"># interactive work</span>
+<span class="n">low_memory_mode</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># sequential solver is better for large systems</span>
+<span class="n">greens_function_solver</span> <span class="o">=</span> <span class="s2">&quot;Parallel&quot;</span>
+<span class="c1"># maximum number of greens function samples per loop, when</span>
+<span class="c1"># greens_function_solver is set to &quot;Sequential&quot;, reduce it to avoid memory</span>
+<span class="c1"># overflow on GPU for large systems</span>
+<span class="n">max_g_per_loop</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                 Solution methods</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># the calculation of J and K from the energy derivations, either Fit or Grogupy</span>
+<span class="n">exchange_solver</span> <span class="o">=</span> <span class="s2">&quot;Fit&quot;</span>
+<span class="n">anisotropy_solver</span> <span class="o">=</span> <span class="s2">&quot;Fit&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#                                   Output files</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="c1"># either total or local, which controls if only the magnetic</span>
+<span class="c1"># entity&#39;s magnetic monent or the whole atom&#39;s magnetic moment is printed</span>
+<span class="c1"># used by all output modes</span>
+<span class="n">out_magnetic_moment</span> <span class="o">=</span> <span class="s2">&quot;Total&quot;</span>
+
+<span class="c1"># save the magnopy file</span>
+<span class="n">save_magnopy</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># precision of numerical values in the magnopy file</span>
+<span class="n">magnopy_precision</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># add the simulation parameters to the magnopy file as comments</span>
+<span class="n">magnopy_comments</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># save the Uppsala Atomistic Spin Dynamics software input files</span>
+<span class="c1"># uses the outfolder and out_magentic_moment</span>
+<span class="n">save_UppASD</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># add the simulation parameters to the cell.tmp.txt file as</span>
+<span class="c1"># comments</span>
+<span class="n">uppasd_comments</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># save the pickle file</span>
+<span class="n">save_pickle</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The compression level can be set to 0,1,2. Every other value defaults to 2.</span>
+<span class="sd">0. This means that there is no compression at all.</span>
+
+<span class="sd">1. This means, that the keys &quot;_dh&quot; and &quot;_ds&quot; are set</span>
+<span class="sd">to None, because othervise the loading would be dependent</span>
+<span class="sd">on the sisl version</span>
+
+<span class="sd">2. This contains compression 1, but sets the keys &quot;Gii&quot;,</span>
+<span class="sd">&quot;Gij&quot;, &quot;Gji&quot;, &quot;Vu1&quot; and &quot;Vu2&quot; to [], to save space</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">pickle_compress_level</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># output folder, for example the current folder</span>
+<span class="n">outfolder</span> <span class="o">=</span> <span class="s2">&quot;./src/grogupy/cli/tests/&quot;</span>
+<span class="c1"># outfile name</span>
+<span class="n">outfile</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="visualize_the_exchange.html" class="btn btn-neutral float-left" title="Visualize the exchange" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../citing.html" class="btn btn-neutral float-right" title="Citing grogupy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

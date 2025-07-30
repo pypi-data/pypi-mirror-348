@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>grogupy._core.utilities &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html#grogupy">grogupy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">grogupy._core.utilities</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for grogupy._core.utilities</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) [2024-2025] [Grogupy Team]</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sisl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">roots_legendre</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">_tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..config</span><span class="w"> </span><span class="kn">import</span> <span class="n">CONFIG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">TAU_X</span><span class="p">,</span> <span class="n">TAU_Y</span><span class="p">,</span> <span class="n">TAU_Z</span>
+
+<span class="k">if</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">is_GPU</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">cupy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cp</span>
+
+
+<div class="viewcode-block" id="commutator">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.commutator.html#grogupy._core.commutator">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">commutator</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shorthand for commutator.</span>
+
+<span class="sd">    Commutator of two matrices in the mathematical sense.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        a: NDArray</span>
+<span class="sd">            The first matrix</span>
+<span class="sd">        b: NDArray</span>
+<span class="sd">            The second matrix</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            The commutator of a and b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span> <span class="o">-</span> <span class="n">b</span> <span class="o">@</span> <span class="n">a</span></div>
+
+
+
+<div class="viewcode-block" id="tau_u">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.tau_u.html#grogupy._core.tau_u">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tau_u</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pauli matrix in direction u.</span>
+
+<span class="sd">    Returns the vector u in the basis of the Pauli matrices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        u: list or NDArray</span>
+<span class="sd">            The direction</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            Arbitrary direction in the base of the Pauli matrices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># u is force to be of unit length</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">TAU_X</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">TAU_Y</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">TAU_Z</span></div>
+
+
+
+<div class="viewcode-block" id="crossM">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.crossM.html#grogupy._core.crossM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">crossM</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition for the cross-product matrix.</span>
+
+<span class="sd">    It acts as a cross product with vector u.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        u: list or NDArray</span>
+<span class="sd">            The second vector in the cross product</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            The matrix that represents teh cross product with a vector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">]])</span></div>
+
+
+
+<div class="viewcode-block" id="RotM">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.RotM.html#grogupy._core.RotM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">RotM</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of rotation matrix with angle theta around direction u.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        theta: float</span>
+<span class="sd">            The angle of rotation</span>
+<span class="sd">        u: NDArray</span>
+<span class="sd">            The rotation axis</span>
+<span class="sd">        eps: float, optional</span>
+<span class="sd">            Cutoff for small elements in the resulting matrix. Defaults to 1e-10</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            The rotation matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">crossM</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># kill off small numbers</span>
+    <span class="n">M</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">M</span></div>
+
+
+
+<div class="viewcode-block" id="RotMa2b">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.RotMa2b.html#grogupy._core.RotMa2b">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">RotMa2b</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of rotation matrix rotating unit vector a to unit vector b.</span>
+
+<span class="sd">    Function returns array R such that R @ a = b holds.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        a: NDArray</span>
+<span class="sd">            First vector</span>
+<span class="sd">        b: NDArray</span>
+<span class="sd">            Second vector</span>
+<span class="sd">        eps: float, optional</span>
+<span class="sd">            Cutoff for small elements in the resulting matrix. Defaults to 1e-10</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            The rotation matrix with the above property</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">crossM</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">crossM</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">@</span> <span class="n">crossM</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="c1"># kill off small numbers</span>
+    <span class="n">M</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">M</span></div>
+
+
+
+<div class="viewcode-block" id="setup_from_range">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.setup_from_range.html#grogupy._core.setup_from_range">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_from_range</span><span class="p">(</span>
+    <span class="n">dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">,</span>
+    <span class="n">R</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">subset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates all the pairs and magnetic entities from atoms in a given radius.</span>
+
+<span class="sd">    It takes all the atoms from the unit cell and generates</span>
+<span class="sd">    all the corresponding pairs and magnetic entities in the given</span>
+<span class="sd">    radius. It can generate pairs for a subset of of atoms,</span>
+<span class="sd">    which can be given by the ``subset`` parameter.</span>
+
+<span class="sd">    1. If subset is None all atoms can create pairs</span>
+
+<span class="sd">    2. If subset is a list of integers, then all the</span>
+<span class="sd">    possible pairs will be generated to these atoms in</span>
+<span class="sd">    the unit cell</span>
+
+<span class="sd">    3. If subset is two list, then the first list is the</span>
+<span class="sd">    list of atoms in the unit cell (``Ri``), that can create</span>
+<span class="sd">    pairs and the second list is the list of atoms outside</span>
+<span class="sd">    the unit cell that can create pairs (``Rj``)</span>
+
+<span class="sd">    !!!WARNING!!!</span>
+<span class="sd">    In the third case it is really ``Ri`` and ``Rj``, that</span>
+<span class="sd">    are given, so in some cases we could miss pairs in the</span>
+<span class="sd">    unit cell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dh : sisl.physics.Hamiltonian</span>
+<span class="sd">        The sisl Hamiltonian that contains the geometry and</span>
+<span class="sd">        atomic information</span>
+<span class="sd">    R : float</span>
+<span class="sd">        The radius where the pairs are found</span>
+<span class="sd">    subset : Union[None, list[int], list[list[int], list[int]]], optional</span>
+<span class="sd">        The subset of atoms that contribute to the pairs, by default None</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    kwargs: otpional</span>
+<span class="sd">        These are passed to the magnetic entity dictionary</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    magnetic_entities : list[dict]</span>
+<span class="sd">        The magnetic entities dictionaries</span>
+<span class="sd">    pairs : list[dict]</span>
+<span class="sd">        The pair dictionaries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># copy so we do not overwrite</span>
+    <span class="n">dh</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># case 1</span>
+    <span class="c1"># if subset is not given, then use all the atoms in the</span>
+    <span class="c1"># unit cell</span>
+    <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">uc_atoms</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">na</span><span class="p">)</span>
+        <span class="n">uc_out_atoms</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">na</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="c1"># case 2</span>
+        <span class="c1"># if only the unit cell atoms are given</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">uc_atoms</span> <span class="o">=</span> <span class="n">subset</span>
+            <span class="n">uc_out_atoms</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">na</span><span class="p">)</span>
+
+        <span class="c1"># case 3</span>
+        <span class="c1"># if the unit cell atoms and the atoms outside the unit cell</span>
+        <span class="c1"># are both given</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">uc_atoms</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">uc_out_atoms</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># the center from which we measure the distance</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uc_atoms</span><span class="p">:</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">xyz</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># update number of supercells based on the range from</span>
+        <span class="c1"># the input R</span>
+
+        <span class="c1"># two times the radius should be the length along each</span>
+        <span class="c1"># lattice vector + 2 for the division</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">//</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">offset</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="c1"># of offset is odd, then chose it, if even, chose the larger</span>
+        <span class="c1"># odd number beside it</span>
+        <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">offset</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">dh</span><span class="o">.</span><span class="n">set_nsc</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+
+        <span class="c1"># get all atoms in the range</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+        <span class="c1"># get the supercell indices and the atom indices in</span>
+        <span class="c1"># the shifted supercell</span>
+        <span class="n">aj</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">asc2uc</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+        <span class="n">Ruc</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">a2isc</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+        <span class="c1"># this is where we fulfill the second part of condition</span>
+        <span class="c1"># three</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="ow">in</span> <span class="n">uc_out_atoms</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">aj</span><span class="p">]</span>
+        <span class="n">aj</span> <span class="o">=</span> <span class="n">aj</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">Ruc</span> <span class="o">=</span> <span class="n">Ruc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">aj</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ai</span><span class="p">)):</span>
+            <span class="c1"># do not include self interaction</span>
+            <span class="k">if</span> <span class="n">ai</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">aj</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Ruc</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># append pairs</span>
+            <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">ai</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">aj</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">Ruc</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ruc</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">Ruc</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]])</span>
+
+    <span class="c1"># sort pairs for nicer output</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lexsort</span><span class="p">((</span><span class="n">pairs</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">pairs</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">pairs</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">pairs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">pairs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># create magnetic entities</span>
+    <span class="n">atoms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pairs</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">magnetic_entities</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="n">at</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">]</span>
+
+    <span class="c1"># create output pair information</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">atoms</span> <span class="o">==</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">aj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">atoms</span> <span class="o">==</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">ai</span><span class="o">=</span><span class="n">ai</span><span class="p">,</span> <span class="n">aj</span><span class="o">=</span><span class="n">aj</span><span class="p">,</span> <span class="n">Ruc</span><span class="o">=</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">4</span><span class="p">]]))</span>
+
+    <span class="k">return</span> <span class="n">magnetic_entities</span><span class="p">,</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="arrays_lists_equal">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.arrays_lists_equal.html#grogupy._core.arrays_lists_equal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">arrays_lists_equal</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">array2</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares two objects with specific rules.</span>
+
+<span class="sd">    if the objects are not arrays or nested lists ending in</span>
+<span class="sd">    arrays, then it returns False. Otherwise it goes</span>
+<span class="sd">    down the list structure and checks all the arrays with</span>
+<span class="sd">    np.allclose for equality. If the structure itself or any</span>
+<span class="sd">    array is different, then it returns False. Otherwise it</span>
+<span class="sd">    returns True. It is useful to check the Greens function</span>
+<span class="sd">    results and the perturbations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array1: Any</span>
+<span class="sd">        The first object to compare</span>
+<span class="sd">    array2: Any</span>
+<span class="sd">        The second object to compare</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool:</span>
+<span class="sd">        Wether the above described structures are equal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># if both are array, then they can be equal</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># the array shapes should be equal</span>
+        <span class="k">if</span> <span class="n">array1</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">array2</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="c1"># the array elements should be equal</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># if both are lists, then they can be equal</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array2</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="c1"># the list legngths should be equal</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">):</span>
+            <span class="n">equality</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># all the list elements should be equal</span>
+            <span class="k">for</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
+                <span class="n">equality</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arrays_lists_equal</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">equality</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># othervise they are not the desired structure</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="arrays_None_equal">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.arrays_None_equal.html#grogupy._core.arrays_None_equal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">arrays_None_equal</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">array2</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares two objects with specific rules.</span>
+
+<span class="sd">    if the objects are not arrays or None, then it returns</span>
+<span class="sd">    False. Otherwise it compares the arrays.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array1: Any</span>
+<span class="sd">        The first object to compare</span>
+<span class="sd">    array2: Any</span>
+<span class="sd">        The second object to compare</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool:</span>
+<span class="sd">        Wether the above described structures are equal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># if both are array, then they can be equal</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># the array shapes should be equal</span>
+        <span class="k">if</span> <span class="n">array1</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">array2</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="c1"># the array elements should be equal</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># if both are None, then they are equal</span>
+    <span class="k">elif</span> <span class="n">array1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">array2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># othervise they are not the desired structure</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="parallel_Gk">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.parallel_Gk.html#grogupy._core.parallel_Gk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parallel_Gk</span><span class="p">(</span><span class="n">HK</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">SK</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">eset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Greens function by inversion.</span>
+
+<span class="sd">    It calculates the Greens function on all the energy levels at the same time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        HK: (NO, NO), NDArray</span>
+<span class="sd">            Hamiltonian at a given k point</span>
+<span class="sd">        SK: (NO, NO), NDArray</span>
+<span class="sd">            Overlap Matrix at a given k point</span>
+<span class="sd">        samples: (eset) NDArray</span>
+<span class="sd">            Energy sample along the contour</span>
+<span class="sd">        eset: int</span>
+<span class="sd">            Number of energy samples along the contour</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        Gk: (eset, NO, NO), NDArray</span>
+<span class="sd">            Green&#39;s function at a given k point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculates the Greens function on all the energy levels</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">SK</span> <span class="o">*</span> <span class="n">samples</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">eset</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">HK</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="sequential_Gk">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.sequential_Gk.html#grogupy._core.sequential_Gk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sequential_Gk</span><span class="p">(</span><span class="n">HK</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">SK</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">eset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Greens function by inversion.</span>
+
+<span class="sd">    It calculates sequentially over the energy levels.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        HK: (NO, NO), NDArray</span>
+<span class="sd">            Hamiltonian at a given k point</span>
+<span class="sd">        SK: (NO, NO), NDArray</span>
+<span class="sd">            Overlap Matrix at a given k point</span>
+<span class="sd">        samples: (eset) NDArray</span>
+<span class="sd">            Energy sample along the contour</span>
+<span class="sd">        eset: int</span>
+<span class="sd">            Number of energy samples along the contour</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        Gk: (eset, NO, NO), NDArray</span>
+<span class="sd">            Green&#39;s function at a given k point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># creates an empty holder</span>
+    <span class="n">Gk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">eset</span><span class="p">,</span> <span class="n">HK</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">HK</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+    <span class="c1"># fills the holder sequentially by the Greens function on a given energy</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">eset</span><span class="p">):</span>
+        <span class="n">Gk</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">SK</span> <span class="o">*</span> <span class="n">samples</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">HK</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Gk</span></div>
+
+
+
+<div class="viewcode-block" id="onsite_projection">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.onsite_projection.html#grogupy._core.onsite_projection">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">onsite_projection</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">idx1</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">idx2</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;It produces the slices of a matrix for the on site projection.</span>
+
+<span class="sd">    The slicing is along the last two axes as these contains the orbital indexing.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        matrix: (..., :, :) NDArray</span>
+<span class="sd">            Some matrix</span>
+<span class="sd">        idx: NDArray</span>
+<span class="sd">            The indexes of the orbitals</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            Reduced matrix based on the projection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">idx1</span><span class="p">,</span> <span class="p">:][</span><span class="o">...</span><span class="p">,</span> <span class="n">idx2</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="calc_Vu">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.calc_Vu.html#grogupy._core.calc_Vu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_Vu</span><span class="p">(</span><span class="n">H</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">Tu</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the local perturbation in case of a spin rotation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        H: (NO, NO) NDArray</span>
+<span class="sd">            Hamiltonian</span>
+<span class="sd">        Tu: (NO, NO) array_like</span>
+<span class="sd">            Rotation around u</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        Vu1: (NO, NO) NDArray</span>
+<span class="sd">            First order perturbed matrix</span>
+<span class="sd">        Vu2: (NO, NO) NDArray</span>
+<span class="sd">            Second order perturbed matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Vu1</span> <span class="o">=</span> <span class="mi">1</span><span class="n">j</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">commutator</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">Tu</span><span class="p">)</span>  <span class="c1"># equation 100</span>
+    <span class="n">Vu2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">commutator</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">Tu</span><span class="p">,</span> <span class="n">H</span><span class="p">),</span> <span class="n">Tu</span><span class="p">)</span>  <span class="c1"># equation 100</span>
+
+    <span class="k">return</span> <span class="n">Vu1</span><span class="p">,</span> <span class="n">Vu2</span></div>
+
+
+
+<div class="viewcode-block" id="build_hh_ss">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.build_hh_ss.html#grogupy._core.build_hh_ss">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_hh_ss</span><span class="p">(</span><span class="n">dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;It builds the Hamiltonian and Overlap matrix from the sisl.dh class.</span>
+
+<span class="sd">    It restructures the data in the SPIN BOX representation, where NS is</span>
+<span class="sd">    the number of supercells and NO is the number of orbitals.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        dh: sisl.physics.Hamiltonian</span>
+<span class="sd">            Hamiltonian read in by sisl</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        hh: (NS, NO, NO) NDArray</span>
+<span class="sd">            Hamiltonian in SPIN BOX representation</span>
+<span class="sd">        ss: (NS, NO, NO) NDArray</span>
+<span class="sd">            Overlap matrix in SPIN BOX representation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NO</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">no</span>  <span class="c1"># shorthand for number of orbitals in the unit cell</span>
+
+    <span class="c1"># this is known for polarized, non-collinear and spin orbit</span>
+    <span class="n">h11</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 0 is M11 or M11r</span>
+    <span class="c1"># If there is spin orbit interaction in the Hamiltonian add the imaginary part, else</span>
+    <span class="c1"># it will be zero, when we convert to complex</span>
+    <span class="k">if</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">h11</span> <span class="o">+=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">M11i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="n">j</span>
+    <span class="n">h11</span> <span class="o">=</span> <span class="n">h11</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">NO</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+
+    <span class="c1"># this is known for polarized, non-collinear and spin orbit</span>
+    <span class="n">h22</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 1 is M22 or M22r</span>
+    <span class="c1"># If there is spin orbit interaction in the Hamiltonian add the imaginary part, else</span>
+    <span class="c1"># it will be zero, when we convert to complex</span>
+    <span class="k">if</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">h22</span> <span class="o">+=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">M22i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="n">j</span>
+    <span class="n">h22</span> <span class="o">=</span> <span class="n">h22</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">NO</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if it is non-colinear or spin orbit, then these are known</span>
+    <span class="k">if</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">h12</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 2 is dh.M12r</span>
+        <span class="n">h12</span> <span class="o">+=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="n">j</span>  <span class="c1"># 3 is dh.M12i</span>
+        <span class="n">h12</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">h12</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">NO</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># if it is polarized then this should be zero</span>
+    <span class="k">elif</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">h12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">h11</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if it is spin orbit, then these are known</span>
+    <span class="k">if</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">h21</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">M21r</span><span class="p">)</span>
+        <span class="n">h21</span> <span class="o">+=</span> <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">M21i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="n">j</span>
+        <span class="n">h21</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">h21</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">NO</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># if it is non-colinear or polarized then this should be zero</span>
+    <span class="k">elif</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">dh</span><span class="o">.</span><span class="n">spin</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">h21</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">h11</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unpolarized DFT calculation cannot be used!&quot;</span><span class="p">)</span>
+
+    <span class="n">sov</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">dh</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">S_idx</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">NO</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Reorganization of Hamiltonian and overlap matrix elements to SPIN BOX representation</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">NO</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is the permutation that transforms ud1ud2 to u12d12</span>
+    <span class="c1"># That is this transforms FROM SPIN BOX to ORBITAL BOX =&gt; U</span>
+    <span class="c1"># the inverse transformation is U.T u12d12 to ud1ud2</span>
+    <span class="c1"># That is FROM ORBITAL BOX to SPIN BOX =&gt; U.T</span>
+
+    <span class="c1"># progress bar</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">_tqdm</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">3</span> <span class="o">*</span> <span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Setting up Hamiltonian&quot;</span><span class="p">)</span>
+
+    <span class="c1"># From now on everything is in SPIN BOX!!</span>
+    <span class="k">if</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">is_CPU</span><span class="p">:</span>
+        <span class="n">hh</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">row1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">h11</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">h12</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">h21</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">h22</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">])</span>
+            <span class="n">hh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">block</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="n">hh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hh</span><span class="p">)</span>
+
+        <span class="n">ss</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">row1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">])</span>
+            <span class="n">ss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">block</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="n">ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sc_index</span><span class="p">(</span><span class="o">-</span><span class="n">dh</span><span class="o">.</span><span class="n">sc_off</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">h1</span><span class="p">,</span> <span class="n">h1d</span> <span class="o">=</span> <span class="n">hh</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">hh</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">h1d</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">h1d</span> <span class="o">+</span> <span class="n">h1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">s1</span><span class="p">,</span> <span class="n">s1d</span> <span class="o">=</span> <span class="n">ss</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ss</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">ss</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ss</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">s1d</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">s1d</span> <span class="o">+</span> <span class="n">s1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">elif</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">is_GPU</span><span class="p">:</span>
+        <span class="n">h11</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h11</span><span class="p">)</span>
+        <span class="n">h12</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h12</span><span class="p">)</span>
+        <span class="n">h21</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h21</span><span class="p">)</span>
+        <span class="n">h22</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h22</span><span class="p">)</span>
+        <span class="n">sov</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sov</span><span class="p">)</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+
+        <span class="n">hh</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">row1</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">h11</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">h12</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">h21</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">h22</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">])</span>
+            <span class="n">hh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">block</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="n">ss</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">row1</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sov</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]])</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">])</span>
+            <span class="n">ss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">block</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sc_index</span><span class="p">(</span><span class="o">-</span><span class="n">dh</span><span class="o">.</span><span class="n">sc_off</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">h1</span><span class="p">,</span> <span class="n">h1d</span> <span class="o">=</span> <span class="n">hh</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">hh</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hh</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">h1d</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">h1d</span> <span class="o">+</span> <span class="n">h1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">s1</span><span class="p">,</span> <span class="n">s1d</span> <span class="o">=</span> <span class="n">ss</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ss</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">ss</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ss</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">s1d</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">s1d</span> <span class="o">+</span> <span class="n">s1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="n">hh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">h</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hh</span><span class="p">])</span>
+        <span class="n">ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ss</span><span class="p">])</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown architecture: </span><span class="si">{</span><span class="n">CONFIG</span><span class="o">.</span><span class="n">architecture</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hh</span><span class="p">,</span> <span class="n">ss</span></div>
+
+
+
+<div class="viewcode-block" id="make_contour">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.make_contour.html#grogupy._core.make_contour">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_contour</span><span class="p">(</span>
+    <span class="n">emin</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">emax</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A more sophisticated contour generator.</span>
+
+<span class="sd">    Calculates the parameters for the complex contour integral. It uses the</span>
+<span class="sd">    Legendre-Gauss quadrature method. It returns a class that contains</span>
+<span class="sd">    the information for the contour integral.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        emin: int, optional</span>
+<span class="sd">            Energy minimum of the contour. Defaults to -20</span>
+<span class="sd">        emax: float, optional</span>
+<span class="sd">            Energy maximum of the contour. Defaults to 0.0, so the Fermi level</span>
+<span class="sd">        enum: int, optional</span>
+<span class="sd">            Number of sample points along the contour. Defaults to 42</span>
+<span class="sd">        p: int, optional</span>
+<span class="sd">            Shape parameter that describes the distribution of the sample points. Defaults to 150</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        ze: NDArray</span>
+<span class="sd">            Contour points</span>
+<span class="sd">        we: NDArray</span>
+<span class="sd">            Weights along the contour</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">wl</span> <span class="o">=</span> <span class="n">roots_legendre</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">emax</span> <span class="o">-</span> <span class="n">emin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># radius</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="p">(</span><span class="n">emax</span> <span class="o">+</span> <span class="n">emin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># center point</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># lower bound</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># upper bound</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span> <span class="o">+</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>  <span class="c1"># angle parameter</span>
+    <span class="n">ze</span> <span class="o">=</span> <span class="n">z0</span> <span class="o">+</span> <span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>  <span class="c1"># complex points for path</span>
+    <span class="n">we</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">ze</span> <span class="o">-</span> <span class="n">z0</span><span class="p">)</span> <span class="o">*</span> <span class="n">wl</span>
+
+    <span class="k">return</span> <span class="n">ze</span><span class="p">,</span> <span class="n">we</span></div>
+
+
+
+<div class="viewcode-block" id="make_kset">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.make_kset.html#grogupy._core.make_kset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_kset</span><span class="p">(</span><span class="n">kset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple k-grid generator to sample the Brillouin zone.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        kset: Union[list, NDArray]</span>
+<span class="sd">            The number of k points in each direction</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            An array of k points that uniformly sample the Brillouin zone in the given directions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">kset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kset</span><span class="p">)</span>
+    <span class="n">mpi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="o">-</span><span class="n">kset</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mpi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">kset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">kset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mpi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">kset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">kset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mpi</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">kset</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">kset</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">kset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">z</span><span class="o">.</span><span class="n">flatten</span><span class="p">()])</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">return</span> <span class="n">kset</span></div>
+
+
+
+<div class="viewcode-block" id="hsk">
+<a class="viewcode-back" href="../../../API/_generated/grogupy._core.hsk.html#grogupy._core.hsk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hsk</span><span class="p">(</span>
+    <span class="n">H</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">sc_off</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Speed up Hk and Sk generation.</span>
+
+<span class="sd">    Calculates the Hamiltonian and the Overlap matrix at a given k point. It is faster that the sisl version.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        H: NDArray</span>
+<span class="sd">            Hamiltonian in spin box form</span>
+<span class="sd">        ss: NDArray</span>
+<span class="sd">            Overlap matrix in spin box form</span>
+<span class="sd">        sc_off: list</span>
+<span class="sd">            supercell indexes of the Hamiltonian</span>
+<span class="sd">        k: tuple, optional</span>
+<span class="sd">            The k point where the matrices are set up. Defaults to (0, 0, 0)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            Hamiltonian at the given k point</span>
+<span class="sd">        NDArray</span>
+<span class="sd">            Overlap matrix at the given k point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># this two conversion lines are from the sisl source</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">k</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span>
+
+    <span class="c1"># this generates the list of phases</span>
+    <span class="n">phases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">k</span> <span class="o">@</span> <span class="n">sc_off</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># phases applied to the hamiltonian</span>
+    <span class="n">HK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;abc,a-&gt;bc&quot;</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">phases</span><span class="p">)</span>
+    <span class="n">SK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;abc,a-&gt;bc&quot;</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">phases</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">HK</span><span class="p">,</span> <span class="n">SK</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

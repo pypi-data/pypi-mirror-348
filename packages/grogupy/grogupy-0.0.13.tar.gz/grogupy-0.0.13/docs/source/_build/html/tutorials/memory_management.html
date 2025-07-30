@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory management &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convergence with high throughput" href="convergence_with_high_throughput.html" />
+    <link rel="prev" title="Setting up magnetic entities" href="magnetic_entity.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="io_formats.html">Input/Output formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnetic_entity.html">Setting up magnetic entities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Memory management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overflow-in-ram">Overflow in RAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overflow-in-gpu-memory">Overflow in GPU memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convergence_with_high_throughput.html">Convergence with high throughput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_usage.html">Command line usage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Memory management</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/memory_management.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memory-management">
+<h1>Memory management<a class="headerlink" href="#memory-management" title="Link to this heading"></a></h1>
+<p>If you are working on large systems, with hundreds of atoms in the unit cell,
+then the Hamiltonian of the system can be a very large matrix. In this case
+storing all the intermediate data and keeping enough memory for the matrix
+inversion can be memory consuming. In this special scenario, where the
+bottleneck is not the runtime, but the total memory of the hardware, then you
+should use the memory management part of grogupy. There could be two possible
+problems, the first one is the memory overflow in RAM and the second one is the
+memory overflow on a single GPU in the GPU accelerated case. Usually the
+statistics of a job can be checked by the <strong>jobstats</strong> command and some HPC
+environments like Komondor (<a class="reference external" href="https://jobstats.komondor.hpc.einfra.hu">https://jobstats.komondor.hpc.einfra.hu</a>) provide a
+more detailed interactive dashboard.</p>
+<section id="overflow-in-ram">
+<h2>Overflow in RAM<a class="headerlink" href="#overflow-in-ram" title="Link to this heading"></a></h2>
+<p>The first thing to try is to turn on the <strong>low memory mode</strong> , where grogupy
+discards some temporary data that could be useful for interactive work and some
+post processing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">low_memory_mode</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>If this does not solve the problem and if you are not using GPU acceleration,
+then there are two feasible paths to counter memory allocation errors. The
+first is to change the parameters of the SLURM job, by <strong>increasing the
+allocated memory for each task</strong>. If you already used up all the computation
+and memory resources on the node, then you could try to decrease the number of
+processes and increase the memory allocated to each process. The CPUs that
+were used in different processes for the parallelization can be used to speed
+up the matrix inversions. If runtime is crucial, then you could increase the
+number of nodes instead of dividing resources.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=grogupy</span>
+<span class="c1">#SBATCH --nodes=1               —&gt;  1       -&gt;  2</span>
+<span class="c1">#SBATCH --ntasks=128            -&gt;  64      -&gt;  128</span>
+<span class="c1">#SBATCH --ntasks-per-node=128   —&gt;  64      —&gt;  128</span>
+<span class="c1">#SBATCH --cpus-per-task=1       -&gt;  2       -&gt;  1</span>
+<span class="c1">#SBATCH --mem-per-cpu 2000      -&gt;  4000    -&gt;  4000</span>
+</pre></div>
+</div>
+<p>The second possibility is to set the <strong>maximum number of pairs per loop</strong>.
+This breaks up the list of pairs into smaller, more manageable chunks and
+solves the system for these chunks. However this also means that the
+integration over the Brillouion zone and the energy contour has to be repeated
+for every chunk. <strong>The overhead of this method is much larger than the first
+one.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_pairs_per_loop</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>A more conservative parallelization in the grogupy code is to do the matrix
+inversions for the Green’s function in a for loop. This can be set by the
+Green’s function solver parameter. If the number of energy points is large,
+which is true in case of metals, then it is worth to tweak this parallelization
+even more by setting the maximum number of Green’s function in a batch.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">greens_function_solver</span> <span class="o">=</span> <span class="s2">&quot;Sequential&quot;</span>
+<span class="n">max_g_per_loop</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</section>
+<section id="overflow-in-gpu-memory">
+<h2>Overflow in GPU memory<a class="headerlink" href="#overflow-in-gpu-memory" title="Link to this heading"></a></h2>
+<p>If the error message comes from CUDA, then the problem is the GPU memory,
+which is usually just a fraction of RAM. grogupy should not store anything in
+GPU memory that is not neccecary so the only possible problem is the too
+aggressive parallelization over the Green’s functions. To change this we can
+use the same parameters as before.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">greens_function_solver</span> <span class="o">=</span> <span class="s2">&quot;Sequential&quot;</span>
+<span class="n">max_g_per_loop</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="magnetic_entity.html" class="btn btn-neutral float-left" title="Setting up magnetic entities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="convergence_with_high_throughput.html" class="btn btn-neutral float-right" title="Convergence with high throughput" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input/Output &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="grogupy.io.load" href="_generated/grogupy.io.load.html" />
+    <link rel="prev" title="grogupy._core.hsk" href="_generated/grogupy._core.hsk.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input/Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-output-functions">Input/Output Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.load.html">grogupy.io.load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.save.html">grogupy.io.save</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.read_magnopy.html">grogupy.io.read_magnopy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.save_magnopy.html">grogupy.io.save_magnopy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.save_UppASD.html">grogupy.io.save_UppASD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.read_fdf.html">grogupy.io.read_fdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.read_py.html">grogupy.io.read_py</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-functions">Utility functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.decipher.html">grogupy.io.decipher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.decipher_all_by_pos.html">grogupy.io.decipher_all_by_pos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.decipher_all_by_tag.html">grogupy.io.decipher_all_by_tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.strip_dict_structure.html">grogupy.io.strip_dict_structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/grogupy.io.standardize_input.html">grogupy.io.standardize_input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html">Batch calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">Command line interface for grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#grogupy">grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tqdm-in-grogupy">tqdm in grogupy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API reference</a></li>
+      <li class="breadcrumb-item active">Input/Output</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/API/io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-output">
+<h1>Input/Output<a class="headerlink" href="#input-output" title="Link to this heading"></a></h1>
+<p>This subpackage contains various routines to read in different input files
+and to process the information. The main goal is to convert the information
+from the input files to a format that can be used by the <code class="docutils literal notranslate"><span class="pre">Builder</span></code> class 
+and to save the data in other input formats.</p>
+<section id="input-output-functions">
+<h2>Input/Output Functions<a class="headerlink" href="#input-output-functions" title="Link to this heading"></a></h2>
+<p>These are the main input output functions for the user.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.load.html#grogupy.io.load" title="grogupy.io.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(infile)</p></td>
+<td><p>Recreates the instance from a pickled state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.io.save.html#grogupy.io.save" title="grogupy.io.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(object, path[, compress])</p></td>
+<td><p>Saves the instance from a pickled state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.read_magnopy.html#grogupy.io.read_magnopy" title="grogupy.io.read_magnopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_magnopy</span></code></a>(file)</p></td>
+<td><p>This function reads the magnopy input file and return a dictionary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.io.save_magnopy.html#grogupy.io.save_magnopy" title="grogupy.io.save_magnopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_magnopy</span></code></a>(builder, path[, ...])</p></td>
+<td><p>Creates a magnopy input file based on a path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.save_UppASD.html#grogupy.io.save_UppASD" title="grogupy.io.save_UppASD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_UppASD</span></code></a>(builder, folder[, fast_compare, ...])</p></td>
+<td><p>Writes the UppASD input files to the given folder.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.io.read_fdf.html#grogupy.io.read_fdf" title="grogupy.io.read_fdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fdf</span></code></a>(path)</p></td>
+<td><p>It reads the simulation parameters, magnetic entities and pairs from an fdf file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.read_py.html#grogupy.io.read_py" title="grogupy.io.read_py"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_py</span></code></a>(path)</p></td>
+<td><p>Reading input parameters from a .py file.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utility-functions">
+<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Link to this heading"></a></h2>
+<p>These are utility functions that are mostly used in the background, but 
+could be useful in some special applications.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.decipher.html#grogupy.io.decipher" title="grogupy.io.decipher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decipher</span></code></a>(tag)</p></td>
+<td><p>Gets the <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code> and <code class="docutils literal notranslate"><span class="pre">orb</span></code> from the tag of the magnetic entity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.io.decipher_all_by_pos.html#grogupy.io.decipher_all_by_pos" title="grogupy.io.decipher_all_by_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decipher_all_by_pos</span></code></a>(dh, magnetic_entities, pairs)</p></td>
+<td><p>This function deciphers the magnetic entities and pairs based on coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.decipher_all_by_tag.html#grogupy.io.decipher_all_by_tag" title="grogupy.io.decipher_all_by_tag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decipher_all_by_tag</span></code></a>(magnetic_entities, pairs)</p></td>
+<td><p>Creates the magnetic entities and pairs from the tag.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/grogupy.io.strip_dict_structure.html#grogupy.io.strip_dict_structure" title="grogupy.io.strip_dict_structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strip_dict_structure</span></code></a>(dictionary[, pops, setto])</p></td>
+<td><p>Sets the values in the pops keys from the whole dictionary structure to the given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/grogupy.io.standardize_input.html#grogupy.io.standardize_input" title="grogupy.io.standardize_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standardize_input</span></code></a>(input, defaults)</p></td>
+<td><p>Standardizes the input from .py and .fdf using the default values</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_generated/grogupy._core.hsk.html" class="btn btn-neutral float-left" title="grogupy._core.hsk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_generated/grogupy.io.load.html" class="btn btn-neutral float-right" title="grogupy.io.load" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

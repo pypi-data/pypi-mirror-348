@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>grogupy.physics.pair &mdash; grogupy 0.0.12</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=3bbcec59"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            grogupy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/index.html#grogupy">grogupy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../environment/index.html">Environment Variables</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Contributing to grogupy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog/index.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">grogupy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">grogupy.physics.pair</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for grogupy.physics.pair</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) [2024-2025] [Grogupy Team]</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sisl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._core.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">arrays_lists_equal</span><span class="p">,</span> <span class="n">arrays_None_equal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.magnetic_entity</span><span class="w"> </span><span class="kn">import</span> <span class="n">MagneticEntity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_exchange_tensor</span><span class="p">,</span>
+    <span class="n">fit_exchange_tensor</span><span class="p">,</span>
+    <span class="n">interaction_energy</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Pair">
+<a class="viewcode-back" href="../../../API/_generated/grogupy.physics.Pair.html#grogupy.physics.Pair">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class contains the data and the methods related to the pairs of magnetic entities.</span>
+
+<span class="sd">    It sets up the instance based on the Hamiltonian of the DFT calculation, a pair of</span>
+<span class="sd">    MagneticEntities and the supercell shift of the second MagneticEntities, given that the first</span>
+<span class="sd">    one is not shifted. By default ``dh`` is ``None`` and we use the Hamiltonian from the magnetic</span>
+<span class="sd">    entities. If the Hamiltonian from the two magnetic entities are different it raises an error.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M1: MagneticEntity</span>
+<span class="sd">        The first magnetic entity</span>
+<span class="sd">    M2: MagneticEntity</span>
+<span class="sd">        The second magnetic entity</span>
+<span class="sd">    supercell_shift: Union[list, NDArray]</span>
+<span class="sd">        The integer coordinates of the supercell shift</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The following examples show you how to create pairs in the **Fe3GeTe2** system.</span>
+
+<span class="sd">    &gt;&gt;&gt; fdf_path = &quot;/Users/danielpozsar/Downloads/Fe3GeTe2/Fe3GeTe2.fdf&quot;</span>
+
+<span class="sd">    &gt;&gt;&gt; Fe3 = MagneticEntity(fdf_path, atom=3, l=2)</span>
+<span class="sd">    &gt;&gt;&gt; Fe5 = MagneticEntity(fdf_path, atom=5, l=2)</span>
+<span class="sd">    &gt;&gt;&gt; pair_of_Fe = Pair(Fe3, Fe5, [0,0,0])</span>
+<span class="sd">    &gt;&gt;&gt; print(pair_of_Fe)</span>
+<span class="sd">    &lt;grogupy.Pair tag1=3Fe(l:2), tag2=5Fe(l:2), Ruc=[0 0 0]&gt;</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    calculate_energies(weights) :</span>
+<span class="sd">        Calculates the energies of the infinitesimal rotations.</span>
+<span class="sd">    calculate_exchange_tensor() :</span>
+<span class="sd">        Calculates the exchange tensor from the energies.</span>
+<span class="sd">    fit_exchange_tensor(ref_xcf) :</span>
+<span class="sd">        Fits the exchange tensor to the energies.</span>
+<span class="sd">    copy() :</span>
+<span class="sd">        Return a copy of this Pair</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M1: MagneticEntity</span>
+<span class="sd">        The first magnetic entity</span>
+<span class="sd">    M2: MagneticEntity</span>
+<span class="sd">        The second magnetic entity</span>
+<span class="sd">    supercell_shift: NDArray</span>
+<span class="sd">        The supercell shift normed by the supercell vectors</span>
+<span class="sd">    cell: NDArray</span>
+<span class="sd">        The supercell vectors</span>
+<span class="sd">    Gij: list</span>
+<span class="sd">        Projected Greens function from M1 to M2</span>
+<span class="sd">    Gji: list</span>
+<span class="sd">        Projected Greens function from M2 to M1</span>
+<span class="sd">    SBS1: int</span>
+<span class="sd">        The SPIN BOX size of M1</span>
+<span class="sd">    SBS2: int</span>
+<span class="sd">        The SPIN BOX size of M2</span>
+<span class="sd">    SBI1: NDArray</span>
+<span class="sd">        The SPIN BOX indices of M1</span>
+<span class="sd">    SBI2: NDArray</span>
+<span class="sd">        The SPIN BOX indices of M2</span>
+<span class="sd">    tags: list[str]</span>
+<span class="sd">        The tags of the two magnetic entities</span>
+<span class="sd">    supercell_shift_xyz: NDArray</span>
+<span class="sd">        The supercell shift in real coordinates</span>
+<span class="sd">    xyz: list[NDArray, NDArray]</span>
+<span class="sd">        The coordinates of the magnetic entity (it can consist of many atoms)</span>
+<span class="sd">    xyz_center: list[NDArray, NDArray]</span>
+<span class="sd">        The center of coordinates for the magnetic entities</span>
+<span class="sd">    distance: float</span>
+<span class="sd">        The distance of the magnetic entities (it uses the center of coordinates</span>
+<span class="sd">        for each magnetic entity)</span>
+<span class="sd">    energies : Union[None, NDArray]</span>
+<span class="sd">        The calculated energies for each direction</span>
+<span class="sd">    self.J_iso: Union[float, None]</span>
+<span class="sd">        Isotropic exchange, by default None</span>
+<span class="sd">    self.J: Union[NDArray, None]</span>
+<span class="sd">        Complete exchange tensor, by default None</span>
+<span class="sd">    self.J_S: Union[NDArray, None]</span>
+<span class="sd">        Symmetric exchange, by default None</span>
+<span class="sd">    self.D: Union[NDArray, None]</span>
+<span class="sd">        Dzyaloshinskii-Morilla vector, by default None</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    Exception</span>
+<span class="sd">        Different Hamiltonians from the magnetic entities</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">number_of_pairs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="Pair.__init__">
+<a class="viewcode-back" href="../../../API/_generated/grogupy.physics.Pair.html#grogupy.physics.Pair.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">M1</span><span class="p">:</span> <span class="n">MagneticEntity</span><span class="p">,</span>
+        <span class="n">M2</span><span class="p">:</span> <span class="n">MagneticEntity</span><span class="p">,</span>
+        <span class="n">supercell_shift</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This class contains the data and the methods related to the pairs of magnetic entities.</span>
+
+<span class="sd">        It sets up the instance based on the Hamiltonian of the DFT calculation, a pair of</span>
+<span class="sd">        MagneticEntities and the supercell shift of the second MagneticEntities, given that the first</span>
+<span class="sd">        one is not shifted. By default ``dh`` is ``None`` and we use the Hamiltonian from the magnetic</span>
+<span class="sd">        entities. If the Hamiltonian from the two magnetic entities are different it raises an error.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M1: MagneticEntity</span>
+<span class="sd">            The first magnetic entity</span>
+<span class="sd">        M2: MagneticEntity</span>
+<span class="sd">            The second magnetic entity</span>
+<span class="sd">        supercell_shift: Union[list, NDArray]</span>
+<span class="sd">            The integer coordinates of the supercell shift</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        The following examples show you how to create pairs in the **Fe3GeTe2** system.</span>
+
+<span class="sd">        &gt;&gt;&gt; fdf_path = &quot;/Users/danielpozsar/Downloads/Fe3GeTe2/Fe3GeTe2.fdf&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; Fe3 = MagneticEntity(fdf_path, atom=3, l=2)</span>
+<span class="sd">        &gt;&gt;&gt; Fe5 = MagneticEntity(fdf_path, atom=5, l=2)</span>
+<span class="sd">        &gt;&gt;&gt; pair_of_Fe = Pair(Fe3, Fe5, [0,0,0])</span>
+<span class="sd">        &gt;&gt;&gt; print(pair_of_Fe)</span>
+<span class="sd">        &lt;grogupy.Pair tag1=3Fe(l:2), tag2=5Fe(l:2), Ruc=[0 0 0]&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">M1</span><span class="o">.</span><span class="n">_dh</span> <span class="ow">is</span> <span class="n">M2</span><span class="o">.</span><span class="n">_dh</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">_dh</span>
+        <span class="k">elif</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+            <span class="n">M1</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">M2</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+        <span class="p">)</span> <span class="ow">and</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="n">M1</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">M2</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="p">:</span> <span class="n">sisl</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">Hamiltonian</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">_dh</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Different Hamiltonians from the magnetic entities!&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="p">:</span> <span class="n">MagneticEntity</span> <span class="o">=</span> <span class="n">M1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="p">:</span> <span class="n">MagneticEntity</span> <span class="o">=</span> <span class="n">M2</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">supercell_shift</span><span class="p">)</span>
+
+        <span class="c1"># initialize simulation parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gij</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gji</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gij_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gji_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># pre calculate hidden unuseed properties</span>
+        <span class="c1"># they are here so they are dumped to the self.__dict__ upon saving</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">SBS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">SBS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBI1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">_spin_box_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBI2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">_spin_box_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tags</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">cell</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__supercell_shift_xyz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">_xyz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift_xyz</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">xyz_center</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift_xyz</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__D_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__D_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">Pair</span><span class="o">.</span><span class="n">number_of_pairs</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">M1</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">MagneticEntity</span><span class="p">)</span>
+        <span class="n">M1</span><span class="o">.</span><span class="n">__setstate__</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;M1&quot;</span><span class="p">])</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">M1</span>
+        <span class="n">M2</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">MagneticEntity</span><span class="p">)</span>
+        <span class="n">M2</span><span class="o">.</span><span class="n">__setstate__</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;M2&quot;</span><span class="p">])</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;M2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">M2</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Pair</span><span class="p">):</span>
+            <span class="c1"># if the IDs are identical, skip comaprison</span>
+            <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="c1"># if there are sisl Hamiltonians, then compare</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Hk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">value</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">Sk</span><span class="p">()</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">M1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">M2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">supercell_shift</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Gij</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_Gij</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_lists_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Gji</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">_Gji</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">energies</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">J</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J_S</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">J_S</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays_None_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">D</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="c1"># Checking J_iso separately</span>
+            <span class="c1"># if both are None, then pass and no other check is perfomred because of elif</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="c1"># if either one is None, but the other is not, then return false</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="c1"># If neither of them is None, compare them</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">J_iso</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation of the instance.&quot;&quot;&quot;</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;grogupy.Pair tag1=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, tag2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, Ruc=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SBS1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Spin box size of the first magnetic entity.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">SBS</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SBS1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SBS2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Spin box size of the second magnetic entity.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBS2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">SBS</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SBS2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SBI1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Spin box indices of the first magnetic entity.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBI1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">_spin_box_indices</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SBI1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SBI2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Spin box indices of the second magnetic entity.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__SBI2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">_spin_box_indices</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SBI2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tags of the magnetic entities.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tags</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tags</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unit cell of the system.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dh</span><span class="o">.</span><span class="n">cell</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Property could not be calculated. This is only acceptable for loaded Hamiltonian!&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cell</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercell_shift_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Supercell shift in Angstrom.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__supercell_shift_xyz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__supercell_shift_xyz</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Coordinates of the magnetic entities.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">_xyz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift_xyz</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xyz</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">xyz_center</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Center coordinates of the magnetic entities.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">xyz_center</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_shift_xyz</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xyz_center</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Distance of the magnetic entities.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xyz_center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energies_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The energies, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__energies_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energies_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The energies, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energies</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__energies_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The exchange tensor, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The exchange tensor, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">D_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The DM vector, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__D_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__D_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__D_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">D_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The DM vector, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__D_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__D_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__D_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_S_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The symmetric part of the exchange tensor, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_S_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The symmetric part of the exchange tensor, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_S_mRy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_iso_meV</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The isotropic exchange, but in meV.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_meV</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_meV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;meV&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_meV</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">J_iso_mRy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The isotropic exchange, but in mRy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_mRy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_mRy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span> <span class="o">*</span> <span class="n">sisl</span><span class="o">.</span><span class="n">unit_convert</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="s2">&quot;mRy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__J_iso_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets the simulation results of the Pair.</span>
+
+<span class="sd">        Does not reset the underlying Magnetic Entity instances.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gij</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gji</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gij_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Gji_tmp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_energies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the energies of the infinitesimal rotations.</span>
+
+<span class="sd">        It uses the instance properties to calculate the energies and</span>
+<span class="sd">        dumps the results to the `energies` property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        weights: NDArray</span>
+<span class="sd">            The weights of the energy contour integral</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">energies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">Gij</span><span class="p">,</span> <span class="n">Gji</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Gij</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Gji</span><span class="p">)):</span>
+            <span class="n">storage</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># iterate over the first order local perturbations in all possible orientations for the two sites</span>
+            <span class="c1"># actually all possible orientations without the orientation for the off-diagonal anisotropy</span>
+            <span class="c1"># that is why we only take the first two of each Vu1</span>
+            <span class="k">for</span> <span class="n">Vui</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">M1</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">Vuj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">M2</span><span class="o">.</span><span class="n">_Vu1</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction_energy</span><span class="p">(</span><span class="n">Vui</span><span class="p">,</span> <span class="n">Vuj</span><span class="p">,</span> <span class="n">Gij</span><span class="p">,</span> <span class="n">Gji</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+            <span class="c1"># fill up the pairs dictionary with the energies</span>
+            <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
+
+        <span class="c1"># convert to np array</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energies_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_exchange_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the exchange tensor from the energies.</span>
+
+<span class="sd">        It uses the instance properties to calculate the exchange tensor</span>
+<span class="sd">        and its different representations and dumps them to the `J`, `J_iso`,</span>
+<span class="sd">        `J_S` and `D` properties.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">J_iso</span><span class="p">,</span> <span class="n">J_S</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">calculate_exchange_tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">J</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">J_S</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">J_iso</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">D</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_exchange_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_xcf</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fits the exchange tensor to the energies.</span>
+
+<span class="sd">        It uses a fitting method to calculate the exchange tensor from the</span>
+<span class="sd">        reference directions and its different representations and dumps</span>
+<span class="sd">        them to the `J`, `J_iso`, `J_S` and `D` properties.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ref_xcf: list[dict]</span>
+<span class="sd">            The reference directions containing the orientation and perpendicular directions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">J_iso</span><span class="p">,</span> <span class="n">J_S</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">fit_exchange_tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">ref_xcf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">J</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">J_S</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">J_iso</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">:</span> <span class="n">NDArray</span> <span class="o">=</span> <span class="n">D</span>
+        <span class="c1"># call these so they are updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_S_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_iso_mRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D_meV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D_mRy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the deepcopy of the instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Pair</span>
+<span class="sd">            The copied instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Grogupy Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
