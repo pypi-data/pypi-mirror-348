@@ -1,0 +1,85 @@
+site_name: SpiderChef
+site_description: A powerful, recipe-based web scraping tool
+site_url: https://spiderchef.readthedocs.io
+repo_url: https://github.com/vonsteer/spiderchef
+repo_name: vonsteer/spiderchef
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: purple
+      accent: purple
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: purple
+      accent: purple
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: purple
+      accent: purple
+  icon:
+    repo: fontawesome/brands/github
+  logo: icons/icon.svg
+  favicon: icons/spider-transparent.ico
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - def_list
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [spiderchef]
+          options:
+            show_source: true
+            show_submodules: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - User Guide:
+    - Basic Usage: user-guide/basic-usage.md
+    - Recipe Format: user-guide/recipe-format.md
+    - Variables: user-guide/variables.md
+    - Step Types: user-guide/step-types.md
+  - Advanced:
+    - Custom Steps: advanced/custom-steps.md
+    - Async Support: advanced/async-support.md
+  - API Reference:
+    - Recipe: api/recipe.md
+    - Steps: api/steps.md
+  - Contributing: contributing.md
