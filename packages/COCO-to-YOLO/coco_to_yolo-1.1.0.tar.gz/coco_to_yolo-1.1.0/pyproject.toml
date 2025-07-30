@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "COCO_to_YOLO"
+version = "1.1.0"
+authors = [
+  { name="Mathias Zinnen", email="mathias.zinnen@gmail.com" },
+]
+description = "Simple command line tool to convert COCO datasets to ultralytics YOLO format."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "tqdm",
+  "pyyaml"
+]
+
+
+[project.urls]
+Homepage = "https://github.com/mathiaszinnen/coco_to_yolo"
+Issues = "https://github.com/mathiaszinnen/coco_to_yolo/issues"
+
+[project.scripts]
+coco_to_yolo = "coco_to_yolo:main"
+
+[tool.setuptools]
+packages = ["coco_to_yolo"]
