@@ -1,0 +1,1 @@
+from coragem.cli import cli

@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: coragem
+Version: 0.1.0
+Summary: Coragem: A CLI tool for querying blockchain data
+Home-page: https://github.com/idyweb/coragem
+Author: Idongesit Inyang
+Author-email: inyangidongesit22@gmail.com
+License: MIT
+Project-URL: Source, https://github.com/idyweb/coragem
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: web3>=5.0.0
+Requires-Dist: click>=8.0.0
+Requires-Dist: requests>=2.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary
+
+# Coragem
+A CLI tool for querying blockchain data (Ethereum/Base).
+
+## Installation
+```bash
+pip install coragem
+```
+
+# Usage
+```bash
+coragem balance 0xYourAddress
+coragem tx_count 0xYourAddress
+```
+
+# Contributing
+
+Fork the repo, submit PRS to
+https://github.com/idyweb/coragem
+
+- Commit and push:
+```bash
+git init
+git add .
+git commit -m "Initial Sonia release"
+git remote add origin https://github.com/idyweb/coragem.git
+git push -u origin main
+```
