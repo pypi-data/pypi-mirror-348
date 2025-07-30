@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+    "setuptools",
+    "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "DLMSCommunicationProfile"
+version = "0.1.6"
+authors = [
+    {name="Serj Kotilevski", email="youserj@outlook.com"}
+]
+dependencies = [
+    "DLMS-SPODES >= 0.84, < 0.87",
+]
+description="dlms-spodes"
+readme = "README.md"
+requires-python = ">=3.12"
+keywords=["dlms", "greenbook"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
