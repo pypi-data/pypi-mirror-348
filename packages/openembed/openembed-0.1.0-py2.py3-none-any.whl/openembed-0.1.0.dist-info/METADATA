@@ -1,0 +1,204 @@
+Metadata-Version: 2.4
+Name: openembed
+Version: 0.1.0
+Summary: A unified interface for vector embeddings from different providers
+Author: OpenEmbed Team
+Author-email: OpenEmbed Team <info@openembed.example.com>
+License: MIT
+Project-URL: Bug Tracker, https://github.com/username/openembed/issues
+Project-URL: Documentation, https://openembed.readthedocs.io/
+Project-URL: Source Code, https://github.com/username/openembed
+Keywords: embeddings,vectors,nlp,ai,machine learning
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: requests
+Provides-Extra: openai
+Requires-Dist: openai>=1.0.0; extra == "openai"
+Provides-Extra: cohere
+Requires-Dist: cohere; extra == "cohere"
+Provides-Extra: huggingface
+Requires-Dist: transformers; extra == "huggingface"
+Requires-Dist: torch; extra == "huggingface"
+Provides-Extra: voyageai
+Requires-Dist: voyageai; extra == "voyageai"
+Provides-Extra: amazon
+Requires-Dist: boto3; extra == "amazon"
+Provides-Extra: all
+Requires-Dist: openai>=1.0.0; extra == "all"
+Requires-Dist: cohere; extra == "all"
+Requires-Dist: transformers; extra == "all"
+Requires-Dist: torch; extra == "all"
+Requires-Dist: voyageai; extra == "all"
+Requires-Dist: boto3; extra == "all"
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: sphinx; extra == "dev"
+Requires-Dist: sphinx_rtd_theme; extra == "dev"
+Dynamic: license-file
+Dynamic: requires-python
+
+# OpenEmbed
+
+[![PyPI version](https://img.shields.io/pypi/v/openembed.svg)](https://pypi.org/project/openembed/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/pypi/pyversions/openembed.svg)](https://pypi.org/project/openembed/)
+
+A unified interface for vector embeddings from different providers.
+
+## Features
+
+- Single API for multiple embedding providers (OpenAI, Cohere, Hugging Face, Voyage AI, Amazon Titan)
+- Support for different input types (text, with extensibility for images)
+- Caching mechanism to avoid redundant API calls
+- Batching support for efficient processing
+- Extensible architecture for adding new providers and input types
+
+## Installation
+
+```bash
+pip install openembed
+```
+
+To install with specific provider dependencies:
+
+```bash
+pip install openembed[openai]     # For OpenAI support
+pip install openembed[cohere]     # For Cohere support
+pip install openembed[huggingface] # For Hugging Face support
+pip install openembed[voyageai]   # For Voyage AI support
+pip install openembed[amazon]     # For Amazon Titan support
+pip install openembed[all]        # For all providers
+```
+
+## Usage
+
+### Basic Usage
+
+```python
+from openembed import EmbeddingClient
+
+# Initialize the client
+client = EmbeddingClient()
+
+# Create an embedding using OpenAI
+embedding = client.create_embedding(
+    "This is a sample text",
+    model_name="text-embedding-ada-002"
+)
+
+# Create an embedding using Cohere
+embedding = client.create_embedding(
+    "This is a sample text",
+    model_name="embed-english-v2.0"
+)
+
+# Create an embedding using Hugging Face
+embedding = client.create_embedding(
+    "This is a sample text",
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+# Create an embedding using Voyage AI
+embedding = client.create_embedding(
+    "This is a sample text",
+    model_name="voyage-large-2"
+)
+
+# Create an embedding using Amazon Titan
+embedding = client.create_embedding(
+    "This is a sample text",
+    model_name="amazon.titan-embed-text-v1"
+)
+```
+
+### Batch Processing
+
+```python
+from openembed import EmbeddingClient
+
+client = EmbeddingClient()
+
+texts = [
+    "This is the first document",
+    "This is the second document",
+    "And this is the third one"
+]
+
+embeddings = client.batch_create_embeddings(
+    texts,
+    model_name="text-embedding-ada-002",
+    batch_size=10
+)
+```
+
+### Custom Configuration
+
+```python
+from openembed import EmbeddingClient
+
+client = EmbeddingClient(
+    provider_config={
+        "openai": {
+            "api_key": "sk-...",
+            "organization": "org-..."
+        },
+        "cohere": {
+            "api_key": "..."
+        },
+        "voyageai": {
+            "api_key": "..."
+        },
+        "amazon": {
+            "aws_access_key_id": "...",
+            "aws_secret_access_key": "...",
+            "region_name": "us-west-2"
+        }
+    },
+    cache_enabled=True,
+    cache_dir="./cache"
+)
+```
+
+## Development
+
+### Setup development environment
+
+```bash
+# Clone the repository
+git clone https://github.com/username/openembed.git
+cd openembed
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install development dependencies
+pip install -e ".[dev,all]"
+```
+
+### Run tests
+
+```bash
+pytest
+```
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
