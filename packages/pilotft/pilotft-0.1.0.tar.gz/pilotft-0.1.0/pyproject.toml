@@ -1,0 +1,28 @@
+[project]
+name = "pilotft"
+version = "0.1.0"
+description = "Pilotft es una libreria para crear aplicaciones con Flet sinplificando las rutas y el manejo de estados."
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+    { name = "Héctor", email = "danielramirezr27@gmail.com" }
+]
+license = { text = "MIT" }
+keywords = ["testing", "logging", "example"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "flet[all]>=0.27.6",
+    "repath>=0.1.2",
+    "python-jose>=3.4.0"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
