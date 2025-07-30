@@ -1,0 +1,49 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "datem"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+
+[dependency-groups]
+dev = [
+    "codespell[hard-encoding-detection,toml]==2.4.1",
+    "pre-commit==4.2.0",
+    "maturin>=1.7.4",
+    "pip>=24.3.1",
+    "ruff>=0.11.2",
+    "ipython>=8.34.0",
+]
+
+test = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+    "coverage[toml]==7.8.0"
+]
+
+[tool.maturin]
+python-source = "python"
+features = ["pyo3/extension-module"]
+
+[tool.ruff.lint]
+extend-select = ["I", "ICN"]
+
+[tool.ruff.lint.per-file-ignores]
+"python/xorq/__init__.py" = ["I001"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["xorq"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+lines-after-imports = 2
+
+[tool.codespell]
+skip = "*.lock,.direnv,.git,docs/_freeze/**/html.json"
+ignore-regex = '\b(DOUB|i[if]f|I[IF]F|lamduh|AFE|crate|ba)\b'
+builtin = "clear,rare,names"
