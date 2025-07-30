@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: microbiome-imputer
+Version: 0.1.1
+Summary: A CLI tool to impute microbiome abundance data using a denoising autoencoder.
+Author: Your Name
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: tensorflow>=2.10.0
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+
+# Microbiome Imputer
+
+A command-line tool for imputing microbiome abundance data using pretrained Denoising Autoencoder models.
+
+## Installation
+
+```bash
+pip install microbiome-imputer
