@@ -1,0 +1,13 @@
+Metadata-Version: 2.2
+Name: pypiquant
+Version: 0.1.0
+Summary: Multithreaded SIMD int8 and int4 quantization kernels.
+Author-email: Mario Sieg <mario.sieg.64@gmail.com>
+Requires-Dist: cffi
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: torch; extra == "dev"
+Requires-Dist: numpy; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: matplotlib; extra == "dev"
