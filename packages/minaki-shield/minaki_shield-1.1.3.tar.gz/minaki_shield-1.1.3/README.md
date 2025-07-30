@@ -1,0 +1,175 @@
+# 🛡️ MinakiShield
+
+**Modular Linux Intrusion Detection CLI**  
+Built by [MinakiLabs](https://github.com/MinakiLabs-Official)
+
+---
+
+## 🚀 Overview
+
+**MinakiShield** is a lightweight, modular command-line intrusion detection system for Linux. It monitors system logs in real time to detect unauthorized access attempts, privilege escalations, and more. MinakiShield alerts you instantly via webhooks (Slack, Discord, or custom endpoints) and can run continuously using systemd (user or system scope).
+
+---
+
+## ✅ Features
+
+- 🔐 **SSH Brute-Force Detection**
+- 🧑‍💻 **Sudo Abuse Monitoring**
+- 🔎 **Real-Time Log Watching** (`/var/log/auth.log`)
+- 📦 **Slack & Discord Webhook Alerts**
+- 🧩 **Modular Detection Services**
+- 🧱 **Plugin System for Custom Rules**
+- ⚙️ **Systemd Integration** (User & System Level)
+- 📁 **Plaintext & JSON Logging**
+- 🧪 **Built-in Testing, Configuration, and Log Review**
+
+---
+
+## 📦 Installation
+
+### From PyPI (recommended):
+
+```bash
+pip install --user minaki-shield
+
+Then confirm:
+
+shield --help
+
+Optional: Make globally accessible
+
+sudo ln -s ~/.local/bin/shield /usr/local/bin/shield
+
+
+⸻
+
+🧠 Quick Start
+
+Start monitoring:
+
+shield monitor --logfile /var/log/auth.log --json --log-to-file
+
+Configure your webhook:
+
+shield config --set-webhook https://hooks.slack.com/services/...
+
+Install as a systemd user service:
+
+shield systemd
+
+Install as a system-wide service:
+
+sudo shield systemd --scope system
+
+
+⸻
+
+📜 Command Overview
+
+shield monitor         # Start live log monitoring
+shield config          # Set or view webhook settings
+shield services        # Enable/disable detection modules
+shield systemd         # Create and launch systemd service
+shield uninstall       # Stop and remove service
+shield test            # Verify webhook and log file setup
+shield logs            # Show recent alerts
+shield plugins         # View custom plugin commands
+
+
+⸻
+
+🔔 Supported Detection Modules
+
+Module	Description
+ssh_bruteforce	Detects repeated failed SSH login attempts
+sudo_abuse	Detects brute-forced or abnormal sudo usage
+
+Enable/disable them with:
+
+shield services enable sudo_abuse
+shield services disable ssh_bruteforce
+
+
+⸻
+
+📂 File Locations
+
+File or Directory	Purpose
+~/.minakishield/config.yaml	Webhook configuration
+~/.minakishield/shield.log	JSON or plaintext alert log
+~/.config/systemd/user/minakishield.service	User-level systemd service
+/etc/systemd/system/minakishield.service	System-wide systemd service (optional)
+
+
+⸻
+
+🤖 Plugin Development
+
+To create your own custom plugin:
+	1.	Save the following to ~/.minakishield/plugins/my_plugin.py:
+
+import click
+
+@click.command()
+def cli():
+    click.echo("🧪 Plugin loaded successfully!")
+
+	2.	Then run:
+
+shield plugins
+
+
+⸻
+
+🧪 Developer Setup
+
+Clone and install from source:
+
+git clone https://github.com/MinakiLabs-Official/minaki_shield-.git
+cd minaki_shield-
+pip install --user .
+
+Reinstall after making local changes:
+
+pip install --user --force-reinstall .
+
+
+⸻
+
+🌍 Webhook Support
+
+✅ MinakiShield supports:
+	•	Slack
+	•	Discord
+	•	Custom Webhook URLs (HTTP POST with JSON payloads)
+
+⸻
+
+🧽 Uninstallation
+
+Stop and remove services:
+
+shield uninstall
+
+Uninstall the package:
+
+pip uninstall minaki-shield
+
+Remove global executable (if created):
+
+sudo rm /usr/local/bin/shield
+
+
+⸻
+
+📜 License
+
+MIT License
+© 2025 Andrew Polykandriotis / MinakiLabs
+
+⸻
+
+👋 Contributions & Feedback
+
+Pull requests, ideas, feedback, and security reports are welcome.
+Join the mission at MinakiLabs-Offical on GitHub
