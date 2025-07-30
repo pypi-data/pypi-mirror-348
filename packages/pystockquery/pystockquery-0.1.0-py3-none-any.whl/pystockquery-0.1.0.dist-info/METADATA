@@ -1,0 +1,45 @@
+Metadata-Version: 2.4
+Name: pystockquery
+Version: 0.1.0
+Summary: A powerful stock screening and analysis tool
+Author: PredictRAM
+Author-email: support@predictram.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=1.0
+Requires-Dist: openpyxl>=3.0
+Requires-Dist: matplotlib>=3.0
+Requires-Dist: seaborn>=0.11
+Requires-Dist: numpy>=1.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# PyStockParameter
+
+[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+PyStockParameter is a powerful Python library for stock screening, analysis, and visualization using natural language queries. It allows investors and analysts to filter, rank, and analyze stocks using plain English commands.
+
+## Features
+
+- **Natural Language Processing**: Query stocks using human-readable sentences
+- **Comprehensive Metrics**: 150+ financial metrics and technical indicators
+- **Advanced Filtering**: Complex multi-condition screening
+- **Visualization**: Automatic chart generation based on queries
+- **Export Capabilities**: Save results to Excel, CSV, or JSON
+- **Industry Comparisons**: Relative valuation against industry peers
+
+## Installation
+
+```bash
+pip install pystockparameter
