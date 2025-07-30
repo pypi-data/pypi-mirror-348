@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: dopynion
+Version: 0.4.5
+Summary: Dopynion
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic
+Dynamic: license-file
+
+# dopynion
+
+Dominion in Python
+
+## TODO
+
+- faire une mini page web locale qui affiche le classement du moment
+- gérer les exceptions dans les hooks et la désactivation des joueurs (y compris dans other_players)
+- checker les identifiants de partie renvoyés par les API
+- s'assurer que les stratégies random fonctionnent avec des parties en simultané
+- afficher sur le site les dernières parties
+- afficher les noms des équipes sur le leader board et le graphe
