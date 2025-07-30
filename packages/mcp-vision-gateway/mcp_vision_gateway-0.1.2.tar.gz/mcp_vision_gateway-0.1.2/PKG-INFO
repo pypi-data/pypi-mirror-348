@@ -1,0 +1,135 @@
+Metadata-Version: 2.4
+Name: mcp-vision-gateway
+Version: 0.1.2
+Summary: 连接MCP与视觉AI模型的网关服务，支持图像处理和纯文本对话
+Home-page: https://github.com/yourusername/mcp-vision-gateway
+Author: MCP Vision Gateway Authors
+Author-email: your.email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: requests>=2.25.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# MCP Vision Gateway (视觉AI网关)
+
+一个连接MCP与视觉AI模型的网关服务，支持通过URL或Base64编码方式发送图像。
+
+## 安装
+
+```bash
+pip install mcp-vision-gateway
+```
+
+## 功能
+
+### 工具 (Tools)
+
+- `vision_query`: 向视觉AI模型发送带图像的查询
+  - 支持通过URL引用图像
+  - 支持通过base64编码传递图像
+  - 可自定义模型、温度等参数
+
+- `upload_image_from_url`: 从URL下载图像并转换为base64
+  - 方便后续使用base64方式传递图像
+
+- `list_available_models`: 列出可用的AI模型
+
+## 环境变量配置
+
+设置以下环境变量来配置默认参数：
+
+- `VISION_API_BASE`: API基础URL (默认: https://api.ssopen.top)
+- `VISION_API_KEY`: API密钥 (必须设置)
+- `VISION_DEFAULT_MODEL`: 默认模型 (默认: gpt-4o)
+- `VISION_DEBUG`: 调试模式 (设置为"true"启用)
+
+## 在阿里云百炼中使用
+
+在阿里云百炼平台的MCP服务配置中，使用以下JSON：
+
+```json
+{
+  "mcpServers": {
+    "vision-gateway": {
+      "command": "uvx",
+      "args": ["mcp-vision-gateway"],
+      "env": {
+        "VISION_API_KEY": "你的API密钥",
+        "VISION_DEFAULT_MODEL": "gpt-4o"
+      }
+    }
+  }
+}
+```
+
+## 本地运行
+
+安装后，在设置好环境变量的情况下，可以通过以下方式运行：
+
+```bash
+# 使用uvx
+uvx mcp-vision-gateway
+
+# 使用包提供的命令
+mcp-vision-gateway
+
+# 使用Python -m
+python -m mcp_vision_gateway
+```
+
+## 使用示例
+
+### 使用URL传递图像
+
+```
+vision_query(
+    prompt="描述这张图片",
+    image_url="https://example.com/image.jpg"
+)
+```
+
+### 使用Base64传递图像
+
+```
+# 先从URL获取图像的base64
+base64_image = upload_image_from_url("https://example.com/image.jpg")
+
+# 然后使用base64图像
+vision_query(
+    prompt="描述这张图片",
+    image_base64=base64_image
+)
+```
+
+### 指定自定义参数
+
+```
+vision_query(
+    prompt="描述这张图片",
+    image_url="https://example.com/image.jpg",
+    model="gpt-4o-mini",
+    temperature=0.5,
+    max_tokens=500,
+    api_key="自定义API密钥"
+)
+```
+
+## 许可证
+
+MIT License 
