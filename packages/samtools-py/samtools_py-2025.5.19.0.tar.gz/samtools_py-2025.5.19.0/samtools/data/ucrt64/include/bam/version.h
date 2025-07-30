@@ -1,0 +1,8 @@
+#define SAMTOOLS_VERSION "1.21"
+#define SAMTOOLS_CC "gcc"
+#define SAMTOOLS_CPPFLAGS "-D_XOPEN_SOURCE=600"
+#define SAMTOOLS_CFLAGS "-Wall -march=nocona -msahf -mtune=generic -O2 -pipe -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wp,-D__USE_MINGW_ANSI_STDIO=1"
+#define SAMTOOLS_LDFLAGS ""
+#define SAMTOOLS_HTSDIR ""
+#define SAMTOOLS_LIBS "-lregex "
+#define SAMTOOLS_CURSES_LIB "-lncursesw"

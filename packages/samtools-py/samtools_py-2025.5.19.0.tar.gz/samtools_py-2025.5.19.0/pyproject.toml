@@ -1,0 +1,43 @@
+[project]
+name = "samtools-py"
+version = "2025.5.19.0"
+description = "samtools python wrapper (Windows only)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["msys2-env>=2025.5.19.0"]
+
+[project.urls]
+Repository = "https://github.com/soda92/samtools_py"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+ignore-vcs = true
+packages = ["samtools_py", "samtools"]
+exclude = [
+    "__pycache__",
+    "*.pyc",
+    "*.exe~",
+    "*.syso",
+    "*.sam",
+    "*.bam",
+    "samtools/data/usr",
+    "samtools/data/var",
+    "samtools/data/etc",
+    "samtools/data/home",
+]
+
+[tool.hatch.build.targets.wheel]
+ignore-vcs = true
+packages = ["samtools_py", "samtools"]
+exclude = ["__pycache__", "*.pyc", "*.exe~", "*.syso", "*.sam", "*.bam"]
+
+[tool.hatch.build.hooks.custom]
+
+[dependency-groups]
+dev = ["hatchling>=1.27.0"]
+
+[project.scripts]
+samtools = "samtools_py.main:main"
