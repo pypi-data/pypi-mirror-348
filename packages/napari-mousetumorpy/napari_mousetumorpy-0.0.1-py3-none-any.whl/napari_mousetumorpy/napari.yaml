@@ -1,0 +1,24 @@
+name: napari-mousetumorpy
+display_name: Mousetumorpy
+contributions:
+  commands:
+    - id: napari-mousetumorpy.roi
+      title: ROI and Lungs detection
+      python_name: napari_mousetumorpy:LungsSegmentationWidget
+    - id: napari-mousetumorpy.predict
+      title: Tumor segmentation
+      python_name: napari_mousetumorpy:TumorSegmentationWidget
+    - id: napari-mousetumorpy.track
+      title: Track tumors
+      python_name: napari_mousetumorpy:TrackingWidget
+  widgets:
+    - command: napari-mousetumorpy.roi
+      display_name: ROI and Lungs detection
+    - command: napari-mousetumorpy.predict
+      display_name: Tumor segmentation
+    - command: napari-mousetumorpy.track
+      display_name: Track tumors
+  sample_data:
+  - key: lung_ct
+    display_name: Mouse lung CT scan
+    uri: https://zenodo.org/records/13268683/files/ct_example_image.tif
