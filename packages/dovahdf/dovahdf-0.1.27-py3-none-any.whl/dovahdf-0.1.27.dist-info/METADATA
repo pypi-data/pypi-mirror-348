@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: dovahdf
+Version: 0.1.27
+Summary: （个人测试版）修改的音频增强工具,0.1.9试图将config的版本恢复到0.1.5，并对train.py做了更新,0.1.10修复了上次对train.py修改后的错误,0.1.11修改train部分的代码，确保内容可用，0.1.12处理了train.py的新报错,0.1.13添加了自动写入config的功能用于调试，0.1.14在train.py中修改了一点config的载入逻辑，0.1.15在train.py中修改了一点config的载入逻辑，0.1.16在train.py中修改了一点config的载入逻辑,0.1.25已经确保了config能生成并修改参数，0.1.26修改的是评估的逻辑
+Author-email: Dovahkiin <your.email@example.com>
+License: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy<2.0,>=1.22
+Requires-Dist: loguru>=0.5
+Requires-Dist: appdirs>=1.4
+Requires-Dist: requests>=2.27
+Requires-Dist: packaging<25,>=23
+Requires-Dist: sympy>=1.6
+Requires-Dist: soundfile>=0.10
+
+# MyDF 音频增强工具
+这是一个修改版的音频增强库，用于自用和Docker环境中。
