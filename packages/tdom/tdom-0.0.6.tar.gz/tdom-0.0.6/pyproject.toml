@@ -1,0 +1,48 @@
+[project]
+name = "tdom"
+version = "0.0.6"
+description = "An html() implementation for t-strings that supports both SSR and FE rendering."
+readme = "README.md"
+authors = [
+    { name = "Andrea Giammarchi", email = "andrea.giammarchi@gmail.com" },
+]
+license = { text = "Apache-2.0" }
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+]
+requires-python = ">=3.14"
+dependencies = ["dill>=0.4.0"]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "black",
+    "hatchling>=1.27.0",
+    "pytest",
+    "myst-parser",
+    "furo",
+    "sphinx",
+    "jinja2",
+    "markupsafe",
+]
+
+[tool.uv.sources]
+black = { git = "https://github.com/davepeck/black", branch = "pep750-support" }
+markupsafe = { git = "https://github.com/pauleveritt/markupsafe.git", branch = "main" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "examples"]
+
+[project.urls]
+Homepage = "https://t-strings.github.io/tdom/"
+Documentation = "https://t-strings.github.io/tdom/"
+Respository = "https://github.com/t-strings/tdom"
+Changelog = "https://github.com/t-strings/tdom/releases"
+Issues = "https://github.com/t-strings/tdom/issues"
+CI = "https://github.com/t-strings/tdom/actions"
