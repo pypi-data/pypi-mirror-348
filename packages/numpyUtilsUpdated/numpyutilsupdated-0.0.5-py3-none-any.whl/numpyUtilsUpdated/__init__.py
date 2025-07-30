@@ -1,0 +1,5 @@
+print("[numpyUtilsUpdated] Submodules loaded: daa, cs, ai, 'dab', 'aib', 'daaNew'")
+print("for more details import the submodule you want to use:")
+print("use `import numpyUtilsUpdated.daa`....")
+print("use `import numpyUtilsUpdated.cs`....")
+print("use `import numpyUtilsUpdated.ai`....")
