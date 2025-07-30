@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "htcompile"
+version = "0.0.6"
+authors = [
+  { name="KittKat", email="kittkat@kittkat.xyz" },
+]
+description = "A static import compiler for HTML pages."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://kittkat.xyz/projects/htcompile/"
+Issues = "https://github.com/KittKat7/htcompile/issues"
+
+[project.scripts]
+htcompile = "htcompile.cli:app"
