@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myutils-xsy"
+version = "0.1.1"
+description = "A small utility package with a date calculator GUI."
+authors = [
+  { name = "Shengyi Xu", email = "xushengyichn@users.noreply.github.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+
+dependencies = [
+  "branca",
+  "chinese-calendar",
+  "clipboard",
+  "fiona",
+  "PyMuPDF",
+  "folium",
+  "geopandas",
+  "Jinja2",
+  "numpy",
+  "pandas",
+  "Pillow",
+  "PyQt5",
+  "PyQt5_sip",
+  "PySide6",
+  "PySide6-Addons",
+  "PySide6-Essentials",
+  "python-docx",
+  "pywin32",  # ← 仅在 Windows 下需要
+  "tkcalendar",
+  "zhdate"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/myutils"
+
+[project.scripts]
+myutils = "myutils.launcher:main"
+
+
+[tool.setuptools]
+packages = ["myutils"]
+
+[tool.setuptools.package-data]
+myutils = ["tools.json"]
