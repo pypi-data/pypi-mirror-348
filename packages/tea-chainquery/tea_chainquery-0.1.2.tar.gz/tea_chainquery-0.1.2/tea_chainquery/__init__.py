@@ -1,0 +1,1 @@
+from tea_chainquery.cli import cli
