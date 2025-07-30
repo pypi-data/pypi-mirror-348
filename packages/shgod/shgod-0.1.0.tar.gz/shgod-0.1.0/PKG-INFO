@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: shgod
+Version: 0.1.0
+Summary: Add your description here
+Project-URL: Homepage, https://github.com/samuelstevens/shgod
+Project-URL: Issues, https://github.com/samuelstevens/shgod/issues
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: beartype>=0.20.2
+Requires-Dist: litellm>=1.70.0
+Requires-Dist: rich>=14.0.0
+Requires-Dist: tyro>=0.9.20
+
+# shgod
+
+shgod is a tool for answering shell-related questions directly from the command line.
+
+You can ask it how to do something in your shell, or for explanations of specific command-line options.
+
+## Example Usage
+
+```sh
+shgod where is my OPENROUTER_API_KEY being set?
+```
+
+```sh
+shgod "can you explain what -a and -F are in tmux list-panes?"
+```
