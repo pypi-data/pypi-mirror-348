@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: langid_indian
+Version: 0.1.0
+Summary: A language identifier for Indian languages using a pretrained Random Forest model.
+Home-page: https://github.com/yashingle-ai/TextLangDetect
+Author: Yash Ingle
+Author-email: yash.ingle003@gmail.com
+License: MIT
+Project-URL: Bug Tracker, https://github.com/yashingle-ai/TextLangDetect/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: scikit-learn
+Requires-Dist: numpy
+Requires-Dist: tqdm
+Requires-Dist: requests
+Requires-Dist: joblib
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# langid_indian
+
+A language identifier for Indian languages using a pretrained Random Forest model.
+
+## Installation
+
+```bash
+pip install langid_indian
+
+
+### Supported Languages
+
+- Assamese (অসমীয়া)
+- Bengali (বাংলা)
+- Bodo
+- Dogri
+- English
+- Gujarati
+- Hindi (हिन्दी)
+- Kannada (ಕನ್ನಡ)
+- Kashmiri
+- Konkani
+- Maithili
+- Malayalam (മലയാളം)
+- Manipuri
+- Marathi (मराठी)
+- Nepali
+- Odia
+- Punjabi (ਪੰਜਾਬੀ)
+- Santali
+- Sindhi
+- Tamil (தமிழ்)
+- Telugu (తెలుగు)
+- Urdu (اردو)
