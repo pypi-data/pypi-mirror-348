@@ -1,0 +1,29 @@
+[project]
+name = 'package_formula_report_vl'
+version = '0.0.1'
+authors = [
+    {name='Valeriia', email='valerialisovec606@gmail.com'}
+]
+description = 'A package for processing log files and generating Formula 1 racing reports'
+readme = 'README.md'
+requires-python = '>=3.9'
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'Operating System :: OS Independent',
+]
+license = 'MIT'
+
+[tool.hatch.build.targets.wheel]
+
+[tool.hatch.build.targets.wheel.sources]
+"report" = "report"
+
+[tool.hatch.build]
+include = [
+    "README.md",
+    "LICENSE",
+    "report/**/*.py"
+]
+
+[project.scripts]
+formula-report = "report.formula_report:main"
