@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyvdv736"
+description = "Simple reference implementation for VDV 736 subscriber and publisher written in Python"
+authors = [{ name = "Sebastian Knopf", email = "mail@sebastian-knopf.de" }]
+readme = "README.md"
+license = {text = "Apache License (2.0)"}
+dependencies = [
+    "fastapi[all]",
+    "lxml",
+    "pyyaml",
+    "requests",
+    "uvicorn",
+]
+requires-python = ">=3.10"
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "responses"
+]
+
+all = [
+    "pyvdv736[test]"
+]
+
+[tool.setuptools_scm]
+write_to = "src/vdv736/version.py"
