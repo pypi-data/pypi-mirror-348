@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: pytxt2morse
+Version: 0.1.0
+Summary: Convert text to Morse code and Morse code to text.
+Author: Md. Ismiel Hossen Abir
+Author-email: ismielabir1971@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: License
+
+# pytxt2morse
+
+**pytxt2morse** is a simple Python package that converts text to Morse code and Morse code back to text.
+
+## Installation
+
+```bash
+pip install pytxt2morse
+```
+
+## Usage
+```bash
+import pytxt2morse
+
+morse_code = pytxt2morse.txt2morse("HELLO WORLD")
+print(morse_code)
+
+text = pytxt2morse.morse2txt(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+print(text)
+```
+
+## 🚀 Features
+✅ Bidirectional Conversion
+Convert from text to Morse code and Morse code back to text seamlessly.
+
+🔤 Full Alphabet Support
+Handles A–Z (case-insensitive) and 0–9 digits.
+
+✨ Punctuation Handling
+Supports a wide range of symbols: . , ? ' ! / ( ) & : ; = + - _ " $ @
+
+🧠 Simple API
+Just import the package and call txt2morse() or morse2txt()—no extra setup needed.
+
+📦 Minimal Dependencies
+Written in pure Python with no external packages required.
+
+📘 Beginner Friendly
+Great for educational use or learning about string processing and Morse code.
