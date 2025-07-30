@@ -1,0 +1,100 @@
+Metadata-Version: 2.4
+Name: django-smart-media
+Version: 0.5.0
+Summary: Django file fields with SVG support
+Home-page: https://github.com/sveetch/django-smart-media
+Author: David Thenon
+Author-email: sveetch@gmail.com
+License: MIT
+Project-URL: Source Code, https://github.com/sveetch/django-smart-media
+Project-URL: Issue Tracker, https://github.com/sveetch/django-smart-media/issues
+Project-URL: Changelog, https://django-smart-media.readthedocs.io/en/latest/history.html
+Project-URL: Documentation, https://django-smart-media.readthedocs.io/
+Keywords: Python,Django,Image,Sorl
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 5.0
+Classifier: Framework :: Django :: 5.1
+Classifier: Framework :: Django :: 5.2
+Requires-Python: >=3.10
+Description-Content-Type: text/x-rst
+License-File: LICENCE.txt
+Requires-Dist: Django>=4.2
+Requires-Dist: pillow>=9.0.0
+Requires-Dist: sorl-thumbnail>=12.9.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-django>=4.5.2; extra == "dev"
+Requires-Dist: factory-boy>=3.3.0; extra == "dev"
+Requires-Dist: pyquery>=2.0.0; extra == "dev"
+Requires-Dist: freezegun>=1.2.0; extra == "dev"
+Provides-Extra: frontend
+Requires-Dist: boussole>=2.1.2; extra == "frontend"
+Provides-Extra: quality
+Requires-Dist: flake8>=6.0.0; extra == "quality"
+Requires-Dist: tox>=4.11.0; extra == "quality"
+Provides-Extra: doc
+Requires-Dist: sphinx>=8.0.2; extra == "doc"
+Requires-Dist: furo>=2024.8.6; extra == "doc"
+Requires-Dist: sphinx-copybutton>=0.5.2; extra == "doc"
+Provides-Extra: doc-live
+Requires-Dist: livereload>=2.6.0; extra == "doc-live"
+Provides-Extra: release
+Requires-Dist: twine>=5.0.0; extra == "release"
+Dynamic: license-file
+
+.. _Python: https://www.python.org/
+.. _Django: https://www.djangoproject.com/
+.. _sorl-thumbnail: https://github.com/jazzband/sorl-thumbnail
+
+==================
+Django smart media
+==================
+
+A suit of tools to use a FileField to upload image with light SVG support, include
+thumbnail preview in field and a template tag around `sorl-thumbnail`_ library.
+
+
+Dependencies
+************
+
+* `Python`_>=3.10;
+* `Django`_>=4.2;
+* `sorl-thumbnail`_>=12.9.0;
+
+
+Overview
+********
+
+Concretely this contains:
+
+* Form widgets to build HTML for a ``FileField`` either with or without clearable
+  mode. Both mode have a version to include needed layout assets (CSS and Javascript)
+  and another one without assets;
+* Form fields which already set a "smart" widget;
+* Templates to build the widgets HTML;
+* CSS and Javascript for the widget layout;
+* Field validator;
+* Model signals to purge stale files;
+* Model field with all "smart" features;
+* A template tag to make thumbnail safely with SVG image (original SVG is just used
+  without Sorl raising issue for a non bitmap image);
+* Some helpers to ease some specific implementations;
+
+Although this can work with ``ImageField``, SVG support will only work with
+``FileField`` since ``ImageField`` rely on PIL that does not support SVG format.
+
+
+Links
+*****
+
+* Read the documentation on `Read the docs <https://django-smart-media.readthedocs.io/>`_;
+* Download its `PyPi package <https://pypi.python.org/pypi/django-smart-media>`_;
+* Clone it on its `Github repository <https://github.com/sveetch/django-smart-media>`_;
