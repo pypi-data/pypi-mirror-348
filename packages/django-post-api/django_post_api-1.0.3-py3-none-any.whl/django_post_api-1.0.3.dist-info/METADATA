@@ -1,0 +1,213 @@
+Metadata-Version: 2.1
+Name: django-post-api
+Version: 1.0.3
+Summary: Django Post API
+Home-page: https://gitee.com/songhaoi/django-api
+Author: songhaoi
+Author-email: songhao2020@hotmail.com
+Classifier: Framework :: Django
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Django (>=4.2)
+Requires-Dist: requests (>=2.32.3)
+
+# django-post-api
+
+## 安装
+
+```angular2html
+pip install django_post_api
+```
+
+## 使用
+
+models.py 中的代码
+
+``` python
+from django.db import models
+
+from django_post_api.models import BaseModel
+
+
+# Create your models here.
+
+class Tag(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=20)
+    img = models.CharField(verbose_name="图片", max_length=20)
+
+    class Meta:
+        verbose_name = "标签"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class Grade(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=20)
+    img = models.CharField(verbose_name="名称", max_length=20)
+    tag = models.ForeignKey(Tag, verbose_name="标签", on_delete=models.DO_NOTHING, db_constraint=False)
+
+    class Meta:
+        verbose_name = "年级"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class Teacher(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=20)
+    grade = models.ManyToManyField(Grade, db_constraint=False,
+                                   related_name="related_teacher_list")
+
+    class Meta:
+        verbose_name = "老师"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class Student(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=20)
+    age = models.IntegerField(verbose_name="年龄", null=True)
+    grade = models.ForeignKey(Grade, on_delete=models.DO_NOTHING, db_constraint=False,
+                              related_name="related_student_list")
+
+    class Meta:
+        verbose_name = "学生"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class Score(BaseModel):
+    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, related_name="related_score_list")
+    subject = models.CharField(verbose_name="科目", max_length=50)
+    score = models.FloatField()
+
+    class Meta:
+        verbose_name = "分数"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class Order(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=200)
+
+    class Meta:
+        verbose_name = "订单"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+
+class OrderDetail(BaseModel):
+    order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, related_name="related_order_detail_list")
+    name = models.CharField(verbose_name="名称", max_length=200)
+
+    class Meta:
+        verbose_name = "订单详情"
+        verbose_name_plural = verbose_name
+        ordering = ("-id",)
+
+```
+
+views.py 中的代码
+
+``` python
+from django.db import models
+from django.db.models import Q, Count, Case, When
+from django_post_api.constants import QueryWayEnum
+from django_post_api.fields import ModelField, ForeignKeyField, ManyToManyField, AnnotateField
+from django_post_api.params import StrParam, DictParam, IntParam, ListParam
+from django_post_api.returns import success_return
+from django_post_api.views import APIGetAllView, APIGetPageView, APIGetDetailView, APIPostView, APIPutView, \
+    APIDeleteView
+
+from index_app.models import Grade, Student, Tag, Teacher, Order, OrderDetail
+
+
+class GradeView(APIGetAllView, APIGetPageView, APIGetDetailView, APIPostView, APIPutView):
+    model = Grade
+
+    page_field_list = [
+        ModelField(model_field=Grade.name),
+        ModelField(model_field=Grade.img),
+        ForeignKeyField(model_field=Grade.tag, related_field_list=[
+            ModelField(model_field=Tag.name),
+        ]),
+        ManyToManyField(model_field=Student.grade, reverse=True, related_field_list=[
+            ModelField(model_field=Student.name),
+            AnnotateField(name="pass_subject_count", label="及格科目数量",
+                          annotate_func=lambda cls_self: Count(Case(
+                              When(related_score_list__score__gte=60, then=1),  # 及格的科目计数
+                              output_field=models.IntegerField()
+                          )))
+        ], limit_num=3),
+        AnnotateField(
+            name="teacher_count", label="教师数量",
+            annotate_func=lambda cls_self: Count("related_teacher_list", distinct=True),
+        ),
+        AnnotateField(
+            name="student_count", label="学生数量",
+            annotate_func=lambda cls_self: Count("related_student_list", distinct=True),
+        ),
+    ]
+    detail_field_list = [
+        ForeignKeyField(model_field=Grade.tag, related_field_list=[
+            ModelField(model_field=Tag.img),
+        ]),
+        ManyToManyField(model_field=Teacher.grade, reverse=True, related_field_list=[
+            ModelField(model_field=Teacher.name),
+        ]),
+        ManyToManyField(model_field=Student.grade, reverse=True, related_field_list=[
+            ModelField(model_field=Student.age),
+        ]),
+    ]
+
+    page_query_params_list = [
+        StrParam(model_field=Grade.name, query_fun=lambda param_self, v: Q(name=v) | Q(img=v)),
+        StrParam(model_field=Grade.img,
+                 query_fun=lambda param_self, v: {f"{param_self.name}__{QueryWayEnum.icontains.name}": v}),
+        DictParam(model_field=Grade.tag, dict_key_list=[
+            IntParam(name="id"),
+            StrParam(model_field=Tag.name),
+        ], is_foreign=True)
+    ]
+
+    post_params_list = [
+        DictParam(model_field=Grade.tag, dict_key_list=[
+            IntParam(name="id", not_allow_null=True),
+        ], not_allow_null=True, is_foreign=True),
+        StrParam(model_field=Grade.name),
+        StrParam(model_field=Grade.img),
+    ]
+    put_params_list = post_params_list
+
+
+class StudentView(APIGetPageView, APIGetAllView, APIPostView, APIPutView, APIGetDetailView, APIDeleteView):
+    model = Student
+
+    def test_api(self):
+        return success_return()
+
+
+class OrderView(APIGetPageView, APIPostView):
+    model = Order
+    page_field_list = [
+        ModelField(model_field=Order.name),
+        ManyToManyField(model_field=OrderDetail.order, reverse=True, related_field_list=[
+            ModelField(model_field=OrderDetail.name),
+        ])
+    ]
+
+    post_params_list = [
+        StrParam(model_field=Order.name),
+    ]
+    post_related_many_to_many_params_list = [
+        ListParam(
+            model_field=OrderDetail.order, reverse=True,
+            list_element=DictParam(dict_key_list=[
+                StrParam(model_field=OrderDetail.name),
+            ]), not_allow_null=True, min_length=1,
+        ),
+    ]
+```
