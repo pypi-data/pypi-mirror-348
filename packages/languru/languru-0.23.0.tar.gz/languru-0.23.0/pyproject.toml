@@ -1,0 +1,68 @@
+[tool.poetry]
+authors = ["Allen Chou <f1470891079@gmail.com>"]
+description = "The general purpose LLM app stacks."
+documentation = "https://allen2c.github.io/languru/"
+homepage = "https://github.com/allen2c/languru"
+license = "Apache-2.0 license"
+name = "languru"
+readme = "README.md"
+repository = "https://github.com/allen2c/languru"
+version = "0.23.0"
+
+[tool.poetry.dependencies]
+anthropic = "<1,>0.27"
+diskcache = "^5"
+email-validator = "^2"
+faker = "*"
+fakeredis = "^2"
+groq = "<1,>=0.4.2"
+json-repair = "*"
+logfire = ">=3.16,<4"
+logging-bullet-train = ">=0.3.0,<1"
+openai = ">=1.66.0,<2"
+openai-agents = "*"
+pydantic = "^2"
+pydantic-settings = "^2"
+python = ">=3.11,<4.0"
+redis = "^5"
+rich = "^13"
+str-or-none = ">=0.1.0,<1"
+tiktoken = { version = ">=0.3,<1" }
+typing-extensions = "^4"
+voyageai = "^0"
+
+[tool.poetry.extras]
+all = []
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-git-authors-plugin = "*"
+mkdocs-git-committers-plugin-2 = "*"
+mkdocs-git-revision-date-localized-plugin = "*"
+mkdocs-material = "^9"
+mkdocs-minify-plugin = "*"
+mkdocs-nav-weight = "*"
+mkdocs-redirects = "*"
+mkdocs-render-swagger-plugin = "*"
+neoteroi-mkdocs = "*"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+isort = "*"
+
+poetry-plugin-export = "*"
+pytest = "*"
+pytest-asyncio = "*"
+pytest-cov = "*"
+pytest-xdist = "*"
+setuptools = "*"
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+ignore = ["E203", "E704", "W503"]
+max-line-length = 88
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
