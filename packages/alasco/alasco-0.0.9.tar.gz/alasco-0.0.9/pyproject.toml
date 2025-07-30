@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "alasco"
+version = "0.0.9"
+authors = [{ name = "Sylvain Hellin", email = "hellinsylvain@gmail.com" }]
+description = "A SDK to facilitate the interaction with the Alasco API."
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests",
+    "pandas",
+    "python-dotenv>=1.1.0",
+    "pydantic>=2.11.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/sylvainHellin/Alasco"
+Issues = "https://github.com/sylvainHellin/Alasco/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["alasco"]
+
+[tool.hatch.build]
+exclude = ["__pycache__"]
+
+[tool.hatch.build.targets.sdist]
+packages = ["alasco"]
+
+[tool.hatch.build.sources]
+directory = "."
