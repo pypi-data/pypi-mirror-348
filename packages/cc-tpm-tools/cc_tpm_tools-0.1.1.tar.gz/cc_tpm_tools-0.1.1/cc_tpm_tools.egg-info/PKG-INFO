@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: cc-tpm-tools
+Version: 0.1.1
+Summary: CLI and Python tools for CC-TPM.
+Project-URL: Homepage, https://github.com/Deleranax/tpm
+Project-URL: Issues, https://github.com/Deleranax/tpm/issues
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: typer-slim>=0.15
+Requires-Dist: click<8.2
+
+# CC-TPM Repository Tools
+
+This package contains CLI tools for managing [CC-TPM](https://github.com/Deleranax/tpm) repositories.
+
+Install `cc-tpm-tools` with your favorite Python3 package manager (e.g., with `pip install cc-tpm-tools`).
+
+## Tools
+### CC-TPM Repository Control Utility 
+The main tool is the *CC-TPM Repository Control Utility*, a command-line tool for managing self-hosted TPM repositories.
+
+See `cctpm --help` or [TPM on GitHub](https://github.com/Deleranax/tpm) for more information.
