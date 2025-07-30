@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: ocds-babel
+Version: 0.3.7
+Summary: Provides Babel extractors and translation methods for standards like OCDS or BODS
+Author-email: Open Contracting Partnership <data@open-contracting.org>
+License: BSD
+Project-URL: Homepage, https://github.com/open-contracting/ocds-babel
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Provides-Extra: markdown
+Requires-Dist: markdown-it-py>=2; extra == "markdown"
+Requires-Dist: mdformat>=0.7.11; extra == "markdown"
+Provides-Extra: yaml
+Requires-Dist: pyyaml; extra == "yaml"
+Provides-Extra: test
+Requires-Dist: coverage; extra == "test"
+Requires-Dist: pytest; extra == "test"
+Dynamic: license-file
+
+|PyPI Version| |Build Status| |Coverage Status| |Python Version|
+
+This Python package provides `Babel extractors <http://babel.pocoo.org/en/latest/messages.html>`__ and translation methods for standards like:
+
+* Open Contracting Data Standard (OCDS), plus its extensions and profiles
+* Open Contracting for Infrastructure Data Standard (OC4IDS)
+* Beneficial Ownership Data Standard (BODS)
+* Social Investment Data Lab Specification (SEDL)
+
+If you are viewing this on GitHub or PyPI, open the `full documentation <https://ocds-babel.readthedocs.io/>`__ for additional details.
+
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/ocds-babel.svg
+   :target: https://pypi.org/project/ocds-babel/
+.. |Build Status| image:: https://github.com/open-contracting/ocds-babel/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/open-contracting/ocds-babel/actions/workflows/ci.yml
+.. |Coverage Status| image:: https://coveralls.io/repos/github/open-contracting/ocds-babel/badge.svg?branch=main
+   :target: https://coveralls.io/github/open-contracting/ocds-babel?branch=main
+.. |Python Version| image:: https://img.shields.io/pypi/pyversions/ocds-babel.svg
+   :target: https://pypi.org/project/ocds-babel/
