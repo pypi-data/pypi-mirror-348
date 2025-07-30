@@ -1,0 +1,351 @@
+Metadata-Version: 2.4
+Name: openai-agent-factory
+Version: 0.2.4
+Summary: SDK for creating and managing OpenAI agents with MCP server integration
+Author-email: Jiahao Zhu <jiahzhu@outlook.com>
+Project-URL: Repository, https://github.com/jiahzhu1989/agent-factory
+Project-URL: Issues, https://github.com/jiahzhu1989/agent-factory/issues
+Project-URL: Documentation, https://github.com/jiahzhu1989/agent-factory/tree/main/docs
+Keywords: openai,agent,mcp,server,factory,sdk,service,sse,http
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: openai>=1.77.0
+Requires-Dist: openai-agents>=0.0.14
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: fastapi>=0.110.0
+Requires-Dist: uvicorn>=0.27.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.18.0; extra == "dev"
+Requires-Dist: pytest-cov>=3.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: isort>=5.10.0; extra == "dev"
+Requires-Dist: mypy>=0.931; extra == "dev"
+Requires-Dist: sphinx>=4.4.0; extra == "dev"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "dev"
+Dynamic: license-file
+
+# OpenAI Agent Factory
+
+A toolkit for creating and managing OpenAI Agents with MCP server integration.
+
+## Features
+
+- Create and manage multiple AI agents with different configurations
+- Support for MCP (Model Context Protocol) servers
+- Integration with Azure OpenAI models
+- Command-line interface for interactive agent communication with conversation history management
+- HTTP service support via FastAPI for exposing agents as web endpoints (JSON and streaming responses)
+- Async context manager support for easy resource management
+- Comprehensive environment variable configuration
+- Advanced model settings customization (temperature, tokens, penalties, etc.)
+- Metadata support for agents
+
+## Installation
+
+### Via pip
+
+```bash
+pip install openai-agent-factory
+```
+
+### For development
+
+```bash
+git clone https://github.com/jiahzhu1989/agent-factory.git
+cd agent-factory
+pip install -e .
+```
+
+### Requirements
+
+- Python 3.10 or higher
+- openai >= 1.77.0
+- openai-agents >= 0.0.14
+- pydantic >= 2.0.0
+- fastapi >= 0.109.0 (for HTTP service)
+- uvicorn >= 0.27.0 (for running HTTP services)
+- pyyaml >= 6.0.1 (for configuration files)
+- Additional dependencies in pyproject.toml
+
+## Command-line Interface
+
+The package includes a CLI tool for interacting with agents:
+
+```bash
+agent-cli -c path/to/config.yaml
+```
+
+Options:
+- `-c, --config`: Path to the agent configuration YAML file (required)
+- `-l, --list`: List all available agents
+- `-a, --agent`: Name of the agent to interact with
+- `-v, --verbose`: Enable verbose logging
+- `--max-history`: Maximum number of conversation turns to keep in history (default: 500)
+- `--max-tokens`: Maximum token limit for conversation history (default: 100000)
+
+### Example Usage
+
+List all available agents:
+```bash
+agent-cli -c examples/configs/cli_example.yaml -l
+```
+
+Interact with a specific agent:
+```bash
+agent-cli -c examples/configs/cli_example.yaml -a "General Assistant"
+```
+
+## Configuration
+
+Agent configuration is defined in YAML format:
+
+```yaml
+agents:
+  - name: "General Assistant"
+    instructions: |
+      You are a helpful, friendly AI assistant.
+      Answer questions clearly and concisely.
+    model: "gpt-4.1"
+    model_settings:
+      temperature: 0.7
+      max_tokens: 1000
+      frequency_penalty: 0.0
+      presence_penalty: 0.0
+    mcp_servers: ["time"]
+    metadata:
+      description: "General-purpose AI assistant"
+      version: "1.0"
+      capabilities: ["answering questions", "casual conversation"]
+
+  - name: "Python Coder"
+    instructions: |
+      You are a Python coding expert. 
+      Always provide working code examples.
+    model: "gpt-4.1"
+    model_settings:
+      temperature: 0.5
+      max_tokens: 2000
+    mcp_servers: ["time"]
+    metadata:
+      description: "Python programming expert"
+      version: "1.0"
+      capabilities: ["code generation", "debugging", "code explanation"]
+
+mcp_servers:
+  time:
+    type: "stdio"
+    command: "python"
+    args: ["-m", "mcp_server_time"]
+    env:
+      DEBUG: "true"
+    encoding: "utf-8"
+  azure:
+    type: "stdio"
+    command: "npx"
+    args: ["-y", "@azure/mcp@latest", "server", "start"]
+    env:
+      AZURE_MCP_INCLUDE_PRODUCTION_CREDENTIALS: "true"
+
+openai_models:
+  - api_key: "${AZURE_OPENAI_API_KEY}"
+    endpoint: "${AZURE_OPENAI_ENDPOINT}"
+    api_version: "${OPENAI_API_VERSION}"
+    model: "gpt-4.1"
+```
+
+### Environment Variables
+
+**Override with environment variables**: You can override any configuration value by setting environment variables with the prefix `AGENT_FACTORY_`. For example:
+
+```bash
+# Override the API key for the first OpenAI model
+export AGENT_FACTORY_OPENAI_MODELS_0_API_KEY="your-api-key"
+
+# Override the temperature for the first agent
+export AGENT_FACTORY_AGENTS_0_TEMPERATURE="0.5"
+
+# Override the instructions for the second agent
+export AGENT_FACTORY_AGENTS_1_INSTRUCTIONS="You are a helpful assistant."
+```
+
+Environment variable overrides take precedence over values defined in the configuration file.
+
+## Code Examples
+
+### Using As Async Context Manager (Recommended)
+
+```python
+async with AgentFactory(config) as factory:
+    agent = factory.get_agent("General Assistant")
+    response = await agent.generate("Tell me a joke")
+    print(response)
+```
+
+### Using Explicit Initialization and Shutdown
+
+```python
+factory = AgentFactory(config)
+await factory.initialize()
+
+try:
+    agent = factory.get_agent("General Assistant")
+    response = await agent.generate("Tell me a joke")
+    print(response)
+    
+    # Get a list of all available agents
+    all_agents = factory.get_all_agents()
+    print(f"Available agents: {list(all_agents.keys())}")
+finally:
+    await factory.shutdown()
+```
+
+### Creating an HTTP Service
+
+Use the `AgentServiceFactory` to create a FastAPI application that exposes agents as HTTP endpoints:
+
+```python
+import os
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from agent_factory import AgentConfig, AgentFactoryConfig, AzureOpenAIConfig, AgentServiceFactory, ModelSettings
+
+# Create an asynccontextmanager for the service lifecycle
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create agent configurations with advanced model settings
+    weather_agent_config = AgentConfig(
+        name="weather-assistant",
+        instructions="You are a helpful weather assistant.",
+        model="gpt-4.1",
+        model_settings=ModelSettings(
+            temperature=0.7,
+            max_tokens=1000,
+            frequency_penalty=0.0,
+            presence_penalty=0.0
+        ),
+        metadata={
+            "description": "Weather information and forecast assistant",
+            "version": "1.0",
+            "capabilities": ["current weather", "forecasts", "historical data"]
+        }
+    )
+    
+    # Create the factory configuration
+    factory_config = AgentFactoryConfig(
+        agents=[weather_agent_config],
+        openai_models=[
+            AzureOpenAIConfig(
+                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+                api_version=os.getenv("OPENAI_API_VERSION"),
+                model="gpt-4.1"
+            )
+        ]
+    )
+    
+    # Create and initialize the agent service factory
+    async with AgentServiceFactory(factory_config) as service_factory:
+        # Mount the agent service to the main app
+        service_factory.mount_to(app, prefix="/")
+        
+        # Yield control to FastAPI, keeping the service alive
+        yield
+        # Cleanup happens automatically when exiting the context
+
+# Create the main FastAPI application with the lifespan
+app = FastAPI(title="Agent Service Example", lifespan=lifespan)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+```
+
+This creates the following endpoints for each agent:
+- `/agents/weather-assistant/` - Get agent information and metadata
+- `/agents/weather-assistant/chat/stream` - Stream agent responses with Server-Sent Events
+- `/agents` - List all available agents with their details
+
+You can use curl to test the streaming endpoint:
+```bash
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"messages":[{"role":"user","content":"Tell me about the weather"}]}' \
+  http://localhost:8000/agents/weather-assistant/chat/stream
+```
+
+## Development
+
+### Running Tests
+
+```bash
+bash scripts/run_tests.sh
+```
+
+### Building Documentation
+
+```bash
+cd docs
+make html
+```
+
+## License
+
+[MIT](LICENSE)
+
+## Examples
+
+The `examples` directory contains complete usage samples:
+
+- `agent_service_example.py`: Basic setup for exposing agents through HTTP endpoints
+- `cli_example.py`: Command-line interface usage
+- `config_agent_service.py`: Using configuration files with AgentServiceFactory
+- `kubernetes_server_example.py`: Deploying agents in a Kubernetes environment
+- `model_configuration_example.py`: Advanced model settings configuration
+- `time_server_example.py`: Using MCP time server with agents
+
+## API Documentation
+
+### Key Classes
+
+- **AgentFactory**: Core factory for creating and managing OpenAI agents
+- **AgentServiceFactory**: Exposes agents as HTTP endpoints using FastAPI
+- **AgentConfig**: Configuration for a single agent
+- **AgentFactoryConfig**: Configuration for the agent factory
+- **ModelSettings**: Advanced model parameter settings
+- **MCPServerManager**: Manages MCP server lifecycle
+
+### Configuration
+
+The library provides comprehensive configuration options through both YAML/JSON files and environment variables:
+
+- Agent instructions, model settings, and dependencies
+- MCP server configurations
+- OpenAI model settings and credentials
+- Service endpoints and metadata
+
+## Development
+
+### Prerequisites
+
+- Python 3.10 or higher
+- OpenAI API access
+- Required MCP servers for your use case
+
+### Testing
+
+```bash
+pytest
+```
+
+## License
+
+[MIT License](LICENSE)
