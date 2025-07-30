@@ -1,0 +1,16 @@
+[project]
+name = "geoid"
+version = "1.1.7"
+description = "Classes for working with census geoids"
+readme = "README.md"
+authors = [
+    { name = "Eric Busboom", email = "eric@busboom.org" }
+]
+requires-python = ">=3.10"
+dependencies = []
+
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
