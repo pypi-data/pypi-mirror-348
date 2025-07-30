@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "nonebot2-plugin-napcat-process-filtering"
+version = "0.1.2"
+description = "自动同意被过滤的 QQ 好友请求的 NoneBot2 插件"
+authors = ["yzdd <2901581089@qq.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yscdzxj/nonebot2_plugin_napcat_process_filtering"
+repository = "https://github.com/yscdzxj/nonebot2_plugin_napcat_process_filtering"
+keywords = ["nonebot2", "plugin", "qq", "napcat", "自动同意被过滤的好友请求"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+nonebot2 = "^2.0.0"
+httpx = "^0.23.0"
+
+[tool.nonebot]
+plugins = ["nonebot2_plugin_napcat_process_filtering"]
+plugin_dirs = ["nonebot2_plugin_napcat_process_filtering"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
