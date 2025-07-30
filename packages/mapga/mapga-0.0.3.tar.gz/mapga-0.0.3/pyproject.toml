@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools >= 77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mapga"
+version = "0.0.3"
+authors = [
+  { name="Sandro Sage", email="sandro.sage@iis.fraunhofer.de" },
+]
+description = "Model Analysis and Partitioning with Genetic Algorithms"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "keras==2.14.0",
+    "tensorflow ==2.14.0",
+    "numpy==1.26.4",
+    "matplotlib>=3.10.1,<4.0.0",
+    "deap>=1.4.2,<2.0.0",
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
