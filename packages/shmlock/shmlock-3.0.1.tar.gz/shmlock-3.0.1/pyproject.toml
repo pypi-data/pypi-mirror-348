@@ -1,0 +1,39 @@
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "shmlock"
+dynamic = []
+description = "Implementation of an inter-process lock based on multiprocessing’s shared memory module."
+long_description = "file: README.md"
+long_description_content_type = "text/markdown"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Fabian Krumm", email = "ghub_fk@gmx.de" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+version = "3.0.1"
+
+[project.urls]
+homepage = "https://github.com/fwkrumm/shmlock"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.build]
+source-includes = [
+    "tests/",
+    "requirements.txt",
+]
+
+[tool.pdm.version]
+source = "file"
+path = "shmlock/__init__.py"
