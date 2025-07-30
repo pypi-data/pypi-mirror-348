@@ -1,0 +1,113 @@
+---
+site_name: "pid4cat Documentation"
+site_url: https://nfdi4cat.github.io/pid4cat-model
+repo_url: https://github.com/nfdi4cat/pid4cat-model
+
+theme:
+  name: material
+  # logo-customization: https://github.com/squidfunk/mkdocs-material/discussions/2729
+  custom_dir: docs/overrides
+  logo_dark_mode: 'images/logo-icon.svg'
+  logo_light_mode: 'images/logo-icon.svg'
+
+  # Toggling between default/light/dark color schemes
+  # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: 'blue grey'
+      accent: 'indigo'
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: 'blue grey'
+      accent: 'indigo'
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+  features:
+    - content.tabs.link
+    - search.highlight
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+
+  favicon: 'images/favicon.svg'
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+  - mknotebooks:
+      execute: false
+  - mermaid2:
+      version: 11.4.1
+      # Optionally provide a local copy of mermaid.js (path relative to docs/)
+      # javascript: local-js-pkgs/mermaid.min.js
+  - mike:
+      # Multi-version support, https://github.com/jimporter/mike
+      canonical_version: "latest"
+      version_selector: true
+
+  # TODO rebuild docs on schema change see
+  # https://github.com/dalito/linkml-project-copier/issues/39
+  # - gen-files:
+  #     scripts:
+  #       - gen_pages.py  # or any other name or path
+
+watch:
+  - src/pid4cat_model/schema
+
+not_in_nav: |
+  /elements/**/*.md
+
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Getting Started: getting-started.md
+  - Metadata:
+    - Basics: metadata.md
+    - Schema: elements/overview.md
+    - Versioning: versioning.md
+  - APIs: apis.md
+  - Tools & Services: tools.md
+  - Open Data: open-data.md
+  - About:
+    - Credits: about.md
+    - Policies: policies.md
+
+
+# enable version selector for multi-version support
+extra:
+  version:
+    provider: mike
+    alias: true
+    default:
+      - stable
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences:
+      # make exceptions to highlighting of code:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+exclude_docs: |
+  /templates-linkml/
