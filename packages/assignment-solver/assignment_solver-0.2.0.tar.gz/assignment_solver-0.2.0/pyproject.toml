@@ -1,0 +1,10 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "assignment_solver"
+version = "0.2.0"
+description = "Rust-based assignment solver for Python"
+authors = [{name = "Your Name"}]
+requires-python = ">=3.8"
