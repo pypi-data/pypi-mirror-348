@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scripts-of-tribute"
+version = "1.1.0"
+authors = [
+    { name="Ematerasu", email="tot.thesis.project@gmail.com" },
+]
+description = "Library wrapper to create bots for Scripts of Tribute AI programming game. It runs gRPC client-servers instances and connect with main engine made in C#"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file="LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "grpcio>=1.68.0",
+    "grpcio-tools>=1.68.0",
+    "protobuf>=5.29.0",
+    "requests>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ematerasu/ScriptsOfTribute-Python"
