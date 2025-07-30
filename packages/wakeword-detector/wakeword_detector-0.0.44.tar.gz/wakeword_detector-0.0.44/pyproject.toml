@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wakeword-detector"
+version = "0.0.44" 
+authors = [
+  { name="Lara Whybrow", email="lara.whybrow@gmail.com" }
+]
+maintainers = [
+  { name="Lara Whybrow", email="lara.whybrow@gmail.com" }
+]
+description = "A Python package for wakeword detection"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "numpy>=1.19.0,<=1.26.4",
+    "torch>=2.0.0,<2.7",
+    "librosa>=0.8.0,<0.9.1",
+    "pyaudio>=0.2.11,<=0.2.14",
+    "requests>=2.21.0,<3",
+    "certifi>=2025.1.31",
+    "cffi>=1.17.1",
+    "charset-normalizer>=3.4.1",
+    "cryptography>=44.0.2",
+    "docutils>=0.21.2",
+    "flask>=2.2.0",
+    "id>=1.5.0",
+    "idna>=3.10",
+    "jaraco.classes>=3.4.0",
+    "jaraco.context>=6.0.1",
+    "jaraco.functools>=4.1.0",
+    "jeepney>=0.9.0",
+    "keyring>=25.6.0",
+    "markdown-it-py>=3.0.0",
+    "matplotlib>=3.8.0",
+    "mdurl>=0.1.2",
+    "more-itertools>=10.6.0",
+    "nh3>=0.2.21",
+    "onnx>=1.17.0",
+    "packaging>=24.2",
+    "pycparser>=2.22",
+    "Pygments>=2.19.1",
+    "pyproject_hooks>=1.2.0",
+    "readme_renderer>=44.0",
+    "requests-toolbelt>=1.0.0",
+    "rfc3986>=2.0.0",
+    "rich>=13.9.4",
+    "SecretStorage>=3.3.3",
+    "setuptools>=76.1.0",
+    "sounddevice>=0.4.6",
+    "soundfile>=0.10.2",
+    "tensorflow>=2.15.0",
+    "twine>=6.1.0",
+    "urllib3>=2.3.0",
+    "websockets>=10.0",
+    "wheel>=0.45.1"
+]
+
+license = { file = "LICENSE" }
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+
+keywords = ["wakeword", "speech recognition", "AI", "machine learning"]
+
+[project.urls]
+Homepage = "https://github.com/larawhybrow/wakeword-detector"
+Repository = "https://github.com/larawhybrow/wakeword-detector.git"
+Issues = "https://github.com/larawhybrow/wakeword-detector/issues"
+Changelog = "https://github.com/larawhybrow/wakeword-detector/blob/main/CHANGELOG.md"
+
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "mypy"]
+
+[project.scripts]
+wakeword-detector = "wakeword_detector.__main__:main"
+wakeword-record-wakeword = "wakeword_detector.record_audio:record_wakeword_main"
+wakeword-record-negative = "wakeword_detector.record_audio:record_negative_main"
+wakeword-detector-start = "wakeword_detector.start:main"
+
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,5 @@
+[console_scripts]
+wakeword-detector = wakeword_detector.__main__:main
+wakeword-detector-start = wakeword_detector.start:main
+wakeword-record-negative = wakeword_detector.record_audio:record_negative_main
+wakeword-record-wakeword = wakeword_detector.record_audio:record_wakeword_main
