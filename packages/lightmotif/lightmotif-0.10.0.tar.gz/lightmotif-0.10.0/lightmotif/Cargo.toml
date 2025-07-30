@@ -1,0 +1,27 @@
+[package]
+name = "lightmotif"
+version = "0.10.0"
+authors = ["Martin Larralde <martin.larralde@embl.de>"]
+edition = "2021"
+license = "MIT"
+description = "A lightweight platform-accelerated library for biological motif scanning using position weight matrices."
+repository = "https://github.com/althonos/lightmotif"
+homepage = "https://github.com/althonos/lightmotif"
+readme = "README.md"
+categories = ["science::bioinformatics"]
+keywords = ["bioinformatics", "genomics", "motif", "pssm", "matrix"]
+
+[dependencies]
+typenum = "1.16"
+generic-array = "1.0"
+
+[dependencies.rand]
+optional = true
+version = "0.8.5"
+[dependencies.rand_distr]
+optional = true
+version = "0.4.3"
+
+[features]
+default = ["sampling"]
+sampling = ["rand", "rand_distr"]

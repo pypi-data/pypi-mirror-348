@@ -1,0 +1,24 @@
+[package]
+name = "lightmotif-io"
+version = "0.10.0"
+authors = ["Martin Larralde <martin.larralde@embl.de>"]
+edition = "2021"
+license = "MIT"
+description = "Parser implementations of several formats for the lightmotif crate."
+repository = "https://github.com/althonos/lightmotif"
+homepage = "https://github.com/althonos/lightmotif/tree/main/lightmotif-io"
+readme = "README.md"
+categories = ["science::bioinformatics", "parser-implementations"]
+keywords = ["bioinformatics", "motif", "parser", "transfac", "meme"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+nom = "8"
+memchr = "2"
+generic-array = "1.0"
+
+[dependencies.lightmotif]
+path = "../lightmotif"
+version = "0.10.0"
+default-features = false
