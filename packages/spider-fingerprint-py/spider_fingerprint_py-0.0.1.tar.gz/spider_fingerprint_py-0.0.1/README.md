@@ -1,0 +1,117 @@
+# spider_fingerprint_py
+
+Python bindings for the [spider_fingerprint](https://github.com/spider-rs/spider_fingerprint) Rust crate, leveraging PyO3 for improved type safety, reliability, and performance.
+
+`spider_fingerprint_py` allows you to easily generate browser fingerprint and stealth scripts directly from Python. It's perfect for effective automation, web scraping, bot-test evasion, and security testing workflows.
+
+---
+
+## Installation
+
+Install from PyPI:
+
+```bash
+pip install spider_fingerprint_py
+```
+
+## Quick Start
+
+Here's how to generate a stealth emulation JavaScript in a few lines of Python:
+
+```python
+from spider_fingerprint_py import (
+    PyViewport,
+    PyTier,
+    PyFingerprintMode,
+    generate_emulation_script,
+)
+
+user_agent = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/120.0.0.0 Safari/537.36"
+)
+
+# Random viewport simulating a real user
+viewport = PyViewport.random()
+
+# Generate the fingerprint spoofing script
+script = generate_emulation_script(
+    user_agent=user_agent,
+    tier=PyTier.Full,
+    fingerprint_mode=PyFingerprintMode.Basic,
+    dismiss_dialogs=True,
+    viewport=viewport,
+    eval_script=None
+)
+
+print("Stealth Emulation JavaScript:\n")
+print(script)
+```
+
+## Documentation
+
+Below you'll find complete reference documentation for classes, enums, and functions provided by the `spider_fingerprint_py` Python library:
+
+---
+
+### PyViewport (`class`)
+
+Represents viewport configurations for browser fingerprint emulation.
+
+| Attribute              | Type              | Description                                            |
+|------------------------|-------------------|--------------------------------------------------------|
+| `width`                | `int`             | Viewport width in pixels                               |
+| `height`               | `int`             | Viewport height in pixels                              |
+| `device_scale_factor`  | `float` or `None` | Device pixel ratio (e.g., 2.0 for Retina)             |
+| `emulating_mobile`     | `bool`            | Enable emulation of mobile-device behavior             |
+| `is_landscape`         | `bool`            | Landscape (`True`) or Portrait (`False`) orientation   |
+| `has_touch`            | `bool`            | Simulate touch-enabled devices                         |
+
+**Usage Example:**
+```python
+viewport = PyViewport(1280, 720)
+viewport.emulating_mobile = True
+viewport.device_scale_factor = 2.0
+viewport.is_landscape = False
+viewport.has_touch = True
+```
+
+### PyTier (`enum`)
+
+Controls the aggressiveness and scope of stealth applied through fingerprint spoofing.
+
+| Variant            | Description                                                      |
+|--------------------|------------------------------------------------------------------|
+| `Basic`            | Basic stealth spoofing capabilities including GPU/WebGL spoofing.|
+| `BasicWithConsole` | Basic stealth mode combined with console output (for debugging). |
+| `BasicNoWebgl`     | Basic stealth spoofing without WebGL spoofing techniques.        |
+| `Mid`              | Intermediate stealth protections with improved spoofing coverage.|
+| `Full`             | Comprehensive stealth protections covering most fingerprinting.  |
+| `None`             | No spoofing; original browser fingerprint exposed fully.         |
+
+**Example:**
+```python
+tier = PyTier.Full
+```
+
+### PyAgentOs (`enum`)
+
+Defines operating system target profiles for browser fingerprint emulation.
+
+| Variant    | Description                                              |
+|------------|----------------------------------------------------------|
+| `Linux`    | Linux operating system fingerprint and profile emulation.|
+| `Mac`      | macOS fingerprint and browser environment emulation.     |
+| `Windows`  | Windows operating system fingerprint emulation.          |
+| `Android`  | Android device fingerprint and browser emulation.        |
+
+**Example:**
+```python
+agent_os = PyAgentOs.Mac
+```
+
+### Testing
+
+1. maturin develop
+1. pytest -s test_spider_fingerprint.py
