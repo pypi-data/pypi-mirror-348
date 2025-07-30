@@ -1,0 +1,365 @@
+""" SAMPLE CODE
+This is a sample code to demonstrate how to use the LangXchange API for vectorization and querying."""
+
+from dotenv import load_dotenv
+from langxchange import DataConnector
+
+load_dotenv()  # Load env vars from .env file
+
+dc = DataConnector()
+df = dc.from_postgres()
+print(df.head())
+
+
+from langxchange import DataConnector, LangXchangeAPI, VectorDBHelper
+
+# Connect to PostgreSQL
+dc = DataConnector()
+df = dc.from_postgres(
+    host="localhost",
+    db="school",
+    user="postgres",
+    password="yourpassword",
+    query="SELECT id, description FROM courses"
+)
+
+# Ingest and vectorize
+api = LangXchangeAPI()
+texts = api.ingest(df, source_type="dataframe", text_column="description")
+vectors = api.vectorize()
+
+# Push to vector DB
+vdb = VectorDBHelper(engine="chroma", collection_name="courses")
+vdb.push(vectors, texts)
+
+DATA SOURCES ENVIRONMENT VARIABLES
+
+| Data Source  | Environment Variables                                                                  |
+| ------------ | -------------------------------------------------------------------------------------- |
+| **MySQL**    | `MYSQL_HOST`, `MYSQL_DB`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_QUERY`                |
+| **Postgres** | `POSTGRES_HOST`, `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_QUERY` |
+| **SQLite**   | `SQLITE_PATH`, `SQLITE_QUERY`                                                          |
+| **MongoDB**  | `MONGO_URI`, `MONGO_DB`, `MONGO_COLLECTION`                                            |
+| **JSON**     | `JSON_PATH`                                                                            |
+
+CHROMA_PERSIST_PATH=./vector_store/chroma
+# Pinecone
+PINECONE_API_KEY=your-pinecone-api-key
+PINECONE_ENVIRONMENT=your-region
+PINECONE_INDEX=your-index-name
+
+from dotenv import load_dotenv
+from langxchange import PineconeHelper, LangXchangeAPI
+
+load_dotenv()
+
+llm = LangXchangeAPI()
+texts = ["What is AI?", "Explain the internet."]
+vectors = [llm.get_vector(t) for t in texts]
+
+# Insert
+pine = PineconeHelper()
+pine.insert(vectors, documents=texts)
+
+# Query
+query_vec = llm.get_vector("Define AI")
+results = pine.query(query_vec)
+print(results)
+
+
+
+
+#MYSQL HELPER
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=mydatabase
+MYSQL_USER=root
+MYSQL_PASSWORD=password
+
+import pandas as pd
+from dotenv import load_dotenv
+from langxchange import MySQLHelper
+
+load_dotenv()
+
+# Sample usage
+mysql = MySQLHelper()
+
+# Insert DataFrame
+df = pd.DataFrame([
+    {"id": 1, "name": "Timothy"},
+    {"id": 2, "name": "Jane"}
+])
+print(mysql.insert_dataframe("users", df))
+
+# Query Data
+result = mysql.query("SELECT * FROM users")
+print(result)
+
+# Execute custom command
+print(mysql.execute("DELETE FROM users WHERE id = 2"))
+
+
+#MONGO HELPER
+from dotenv import load_dotenv
+from langxchange import MongoHelper
+
+load_dotenv()
+
+mongo = MongoHelper()
+
+# Insert documents
+docs = [{"name": "Timothy", "role": "Engineer"}, {"name": "Jane", "role": "Designer"}]
+inserted_ids = mongo.insert(docs)
+print("Inserted IDs:", inserted_ids)
+
+# Query all
+df = mongo.query()
+print(df)
+
+# Count documents
+print("Total documents:", mongo.count())
+
+
+
+
+#FILE HELPER CLASS
+from langxchange import FileHelper
+
+fh = FileHelper()
+
+# Load large CSV
+records = fh.load_file("people.csv", file_type="csv", chunk_size=10000)
+print(records[:2])  # Preview first 2 records
+
+# Load JSON or Excel
+json_records = fh.load_file("data.json")
+excel_records = fh.load_file("people.xlsx")
+
+
+#OPENAI HELPER
+from dotenv import load_dotenv
+from langxchange import OpenAIHelper
+
+load_dotenv()
+
+openai_helper = OpenAIHelper()
+
+# Embedding
+embedding = openai_helper.get_embedding("What is artificial intelligence?")
+print(embedding[:5])
+
+# Chat Completion
+response = openai_helper.chat([
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Explain how machine learning works."}
+])
+print(response)
+
+# Token count
+print(openai_helper.count_tokens("How many tokens will this be?"))
+
+
+#GOOGLE GENAI
+GOOGLE_API_KEY=your-google-genai-api-key
+GOOGLE_CHAT_MODEL=gemini-pro
+GOOGLE_EMBED_MODEL=models/embedding-001
+
+from dotenv import load_dotenv
+from langxchange import GoogleGenAIHelper
+
+load_dotenv()
+
+genai_helper = GoogleGenAIHelper()
+
+# Generate Text
+response = genai_helper.generate_text("Explain how solar panels work.")
+print(response)
+
+# Get Embedding
+embedding = genai_helper.get_embedding("What is artificial intelligence?")
+print(embedding[:5])
+
+# Token count estimate
+print(genai_helper.count_tokens("This is a simple prompt."))
+
+
+#DEEPSEEK HELPER
+
+DEEPSEEK_API_KEY=your-deepseek-api-key
+DEEPSEEK_BASE_URL=https://api.deepseek.com/v1
+DEEPSEEK_CHAT_MODEL=deepseek-chat
+DEEPSEEK_EMBED_MODEL=deepseek-embedding
+
+from dotenv import load_dotenv
+from langxchange import DeepSeekHelper
+
+load_dotenv()
+
+deepseek = DeepSeekHelper()
+
+# Chat
+reply = deepseek.chat([
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Tell me about renewable energy."}
+])
+print(reply)
+
+# Embedding
+embedding = deepseek.get_embedding("What is AI?")
+print(embedding[:5])
+
+
+#ANTHROPIC HELPER
+ANTHROPIC_API_KEY=your-anthropic-api-key
+ANTHROPIC_MODEL=claude-3-opus-20240229
+
+from dotenv import load_dotenv
+from langxchange import AnthropicHelper
+
+load_dotenv()
+
+claude = AnthropicHelper()
+
+# Claude chat example
+response = claude.chat("What is reinforcement learning?", system="You are a helpful AI assistant.")
+print(response)
+
+# Token count estimate
+print(claude.count_tokens("Hello, Claude! Can you explain AI in simple terms?"))
+
+
+#FAISS HELPER
+from langxchange.faiss_helper import FAISSHelper
+from langxchange.openai_helper import OpenAIHelper
+
+# Initialize
+faiss_db = FAISSHelper()
+embedder = OpenAIHelper()
+
+texts = ["What is AI?", "Explain quantum computing.", "Define machine learning."]
+vectors = [embedder.get_embedding(t) for t in texts]
+
+# Insert
+faiss_db.insert(vectors, texts)
+
+# Query
+query_vector = embedder.get_embedding("What is artificial intelligence?")
+results = faiss_db.query(query_vector)
+print(results)
+
+
+#ELASTICSEARCH HELPER
+from dotenv import load_dotenv
+from langxchange import ElasticsearchHelper, OpenAIHelper
+
+load_dotenv()
+
+es_helper = ElasticsearchHelper()
+embedder = OpenAIHelper()
+
+texts = ["What is AI?", "How does Elasticsearch work?", "Explain neural networks."]
+vectors = [embedder.get_embedding(t) for t in texts]
+
+# Insert
+es_helper.insert(vectors, texts)
+
+# Query
+query_vec = embedder.get_embedding("Search engines and relevance")
+results = es_helper.query(query_vec)
+print(results)
+
+#OPENSEARCH HELPER
+OS_HOST=http://localhost:9200
+OS_USER=admin
+OS_PASSWORD=admin
+
+from dotenv import load_dotenv
+from langxchange import OpenSearchHelper, OpenAIHelper
+
+load_dotenv()
+
+os_helper = OpenSearchHelper()
+embedder = OpenAIHelper()
+
+texts = ["What is OpenSearch?", "Vector search engines", "Large language models."]
+vectors = [embedder.get_embedding(t) for t in texts]
+
+# Insert
+os_helper.insert(vectors, texts)
+
+# Query
+query_vec = embedder.get_embedding("Search engines using vectors")
+results = os_helper.query(query_vec)
+print(results)
+
+
+#Google Driver Helper Class
+from langxchange.google_drive_helper import GoogleDriveHelper
+
+# Step 1: Initialize the helper
+drive = GoogleDriveHelper(
+    credentials_path="credentials.json",
+    token_path="token.pickle"
+)
+
+# Step 2: Create a folder
+folder_id = drive.create_folder("LangXchange Demo Folder")
+print(f"📁 Created folder ID: {folder_id}")
+
+# Step 3: Upload a file to the folder
+file_id = drive.upload_file("examples/sample.txt", parent_id=folder_id, mime_type="text/plain")
+print(f"📄 Uploaded file ID: {file_id}")
+
+# Step 4: List files in the folder
+files = drive.list_files_in_folder(folder_id)
+print("📂 Files in folder:")
+for f in files:
+    print(f" - {f['name']} ({f['id']})")
+
+# Step 5: Read contents of a file
+content = drive.read_file_content(file_id)
+print("📖 File Content:\n", content)
+
+# Step 6: Rename the file
+new_name = drive.rename_file(file_id, "renamed_sample.txt")
+print(f"✏️ Renamed file to: {new_name}")
+
+# Step 7: Get metadata
+metadata = drive.get_file_metadata(file_id)
+print("ℹ️ Metadata:", metadata)
+
+# Step 8: Download file locally
+drive.download_file(file_id, "examples/downloaded_sample.txt")
+print("⬇️ File downloaded to 'examples/downloaded_sample.txt'")
+
+# Step 9: Delete the file
+drive.delete_file(file_id)
+print(f"🗑️ Deleted file ID: {file_id}")
+
+
+#Google Cloud Storage Helper Class
+from langxchange.gcs_helper import GoogleCloudStorageHelper
+
+gcs = GoogleCloudStorageHelper(project_id="your-project-id")
+
+# Create bucket
+gcs.create_bucket("langxchange-test-bucket")
+
+# Upload
+gcs.upload_file("langxchange-test-bucket", "path/to/file.txt")
+
+# Read
+print(gcs.read_blob("langxchange-test-bucket", "file.txt"))
+
+# List
+print(gcs.list_blobs("langxchange-test-bucket"))
+
+# Download
+gcs.download_file("langxchange-test-bucket", "file.txt", "local_copy.txt")
+
+# Delete
+gcs.delete_blob("langxchange-test-bucket", "file.txt")
+
+# Delete bucket
+gcs.delete_bucket("langxchange-test-bucket")
