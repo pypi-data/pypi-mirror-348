@@ -1,0 +1,14 @@
+[project]
+name = "moss_mcp_server"
+version = "0.1.3"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "cryptography>=45.0.1",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.9.0",
+    "requests>=2.32.3",
+]
+[project.scripts]
+moss_mcp_server = "moss_mcp_server.server:main" # 指定默认执行的方法
