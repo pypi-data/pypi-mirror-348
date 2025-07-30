@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "ssmbak"
+license = "MIT"
+repository = "https://github.com/newvoll/ssmbak"
+homepage = "https://github.com/newvoll/ssmbak"
+version = "0.1.2"
+description = "Event-driven SSM Param backups and point-in-time restore."
+authors = ["olmouse <olmouse@newvoll.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.26.39"
+prettytable = "^3.5.0"
+cfn-flip = "1.3.0"
+
+[tool.poetry.scripts]
+ssmbak = "ssmbak.cli.cli:main"
+ssmbak-all = "ssmbak.cli.backup_all:main"
+ssmbak-stack = "ssmbak.cli.stack:main"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.2.1"
+black = "^24.4.2"
+pylint = "^3.2.2"
+pre-commit = "^3.7.1"
+isort = "^5.13.2"
+pdoc3 = "^0.10.0"
+pytype = "^2024.4.11"
+requests = "^2.32.3"
+pysocks = "^1.7.1"
+awscli-local = "^0.22.0"
+sphinx = "^7.3.7"
+sphinx-rtd-theme = "^2.0.0"
+
+[tool.pytype]
+inputs = ['ssmbak']
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint]
+ignored-classes = ["pytest"]
+ignore-paths = '^docs/'
+
+
+[tool.poetry.urls]
+Homepage = "https://github.com/newvoll/ssmbak"
+Documentation = "https://ssmbak.readthedocs.io/en/latest/index.html"
+Repository = "https://github.com/newvoll/ssmbak"
+Issues = "https://github.com/newvoll/ssmbak/issues"
