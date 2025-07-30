@@ -1,0 +1,25 @@
+name: Publish Python Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 'pypi'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        run: uv sync --all-groups
+      - name: Build wheel
+        run: uv build
+      - name: Publish package
+        run: uv publish

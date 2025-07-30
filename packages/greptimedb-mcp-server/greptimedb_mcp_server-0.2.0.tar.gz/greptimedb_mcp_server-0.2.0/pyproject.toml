@@ -1,0 +1,40 @@
+[project]
+name = "greptimedb-mcp-server"
+packages = [{ include = "src/greptimedb_mcp_server" }]
+version = "0.2.0"
+description = "A Model Context Protocol (MCP) server that enables secure interaction with GreptimeDB databases. This server allows AI assistants to list tables, read data, and execute SQL queries through a controlled interface, making database exploration and analysis safer and more structured."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "mysql-connector-python>=9.1.0",
+    "pyyaml>=6.0.2",
+]
+[[project.authors]]
+name = "dennis zhuang"
+email = "killme2008@gmail.com"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+exclude = [
+    "venv",
+    ".git",
+    ".gitignore"
+]
+
+[tool.uv]
+dev-dependencies = [
+  "pyright",
+  "black",
+  "flake8",
+  "pytest",
+  "pytest-asyncio",
+  "pytest-cov",
+]
+
+[project.scripts]
+greptimedb-mcp-server = "greptimedb_mcp_server:main"
