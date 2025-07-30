@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: kqcircuits
+Version: 4.8.19
+Summary: KQCircuits is a KLayout/Python-based superconducting quantum circuit library developed by IQM.
+Author-email: IQM Finland Oy <kqcircuits@meetiqm.com>
+License: GPL-3.0
+Project-URL: Homepage, https://iqm-finland.github.io/KQCircuits/
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: klayout
+Requires-Dist: numpy
+Requires-Dist: scipy<=1.12.0
+Requires-Dist: tqdm
+Requires-Dist: versiontag
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: networkx; extra == "docs"
+Requires-Dist: matplotlib; extra == "docs"
+Provides-Extra: tests
+Requires-Dist: networkx; extra == "tests"
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: pytest-cov~=2.11.1; extra == "tests"
+Requires-Dist: pytest-xdist; extra == "tests"
+Requires-Dist: tox; extra == "tests"
+Requires-Dist: pylint==2.14.0; extra == "tests"
+Requires-Dist: matplotlib; extra == "tests"
+Requires-Dist: black; extra == "tests"
+Requires-Dist: pytest-mock; extra == "tests"
+Provides-Extra: notebooks
+Requires-Dist: jupyter; extra == "notebooks"
+Provides-Extra: graphs
+Requires-Dist: networkx; extra == "graphs"
+Requires-Dist: matplotlib; extra == "graphs"
+Provides-Extra: simulations
+Requires-Dist: gmsh; extra == "simulations"
+Requires-Dist: pandas; extra == "simulations"
+Requires-Dist: matplotlib; extra == "simulations"
+Requires-Dist: scikit-rf; extra == "simulations"
+Requires-Dist: qutip<=4.7.5; extra == "simulations"
+
+See https://iqm-finland.github.io/KQCircuits/developer/standalone.html#klayout-standalone-usage
