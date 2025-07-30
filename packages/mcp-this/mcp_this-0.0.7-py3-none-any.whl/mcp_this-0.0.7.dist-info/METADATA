@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: mcp-this
+Version: 0.0.7
+Summary: MCP Server that exposes CLI commands as tools for Claude using YAML configuration files
+Author-email: Shane Kercheval <shane.kercheval@gmail.com>
+License-File: LICENSE
+Keywords: AI,CLI,Claude,MCP,tools
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.11
+Requires-Dist: click>=8.1.8
+Requires-Dist: mcp
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: pyyaml
+Description-Content-Type: text/markdown
+
+# MCP-This
+
+> MCP Server that exposes CLI commands as tools using YAML files.
+
+`mcp-this` is an MCP server creates tools from YAML configuration files to define which commands should be exposed as MCP tools, along with their parameters and execution details. This allows Claude to execute CLI commands without requiring you to write any code.
+
+# Default Config
+
+## Default Tools
+
+If using the default config (no --tools, no --tools_path parameters) then 
+
+TODO:
+
+## Dependencies
+
+Dependencies for default config (`configs/default.yaml`)
+
+Mac:
+
+```
+brew install tree
+brew install lynx
+```
+
+- `tree`- used in `get-directory-tree`
+- `lynx` - used in `web-scrape`
+    - `lynx -dump https://example.com`
+
