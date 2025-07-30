@@ -1,0 +1,1 @@
+| 0.0.1<br>May 2025 | Establishing macos-gemini-overlay application. |
