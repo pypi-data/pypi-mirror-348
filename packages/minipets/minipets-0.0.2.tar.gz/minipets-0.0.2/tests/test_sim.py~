@@ -1,0 +1,16 @@
+from os.path import join as pjoin
+from minipets import Dataset
+
+
+ds = Dataset()
+logs = "/work/data/ztf/ztf_survey.pkl"
+ds.generate(logs, N=3000)
+
+# print(f"{ds.sne['valid'].sum()}")
+# r = ds.sanity_cuts()
+# print(f"{ds.sne['valid'].sum()}")
+# print(r)
+# r = ds.dr2_cuts()
+# print(f"{ds.sne['valid'].sum()}")
+# print(r)
+

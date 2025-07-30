@@ -1,0 +1,24 @@
+"""
+utilitary functions to:
+- convert data from skysurvey to nacl and vice versa
+"""
+
+def make_sne_nacl(data):
+    """Convert skysurvey df into nacl recarray.
+    
+    data: skysurvey snia catalog
+    """
+    sn_data_dtype = np.dtype([
+        ('sn', '<i8'), ('z', '<f8'), ('tmax', '<f8'), ('x1', '<f8'),
+        ('x0', '<f8'), ('c', '<f8'), ('mwebv', '<f8'), ('valid', '<i8'), ('IAU', 'O')])
+    N = len(data)
+    sne = np.recarray((N), dtype=sn_data_dtype)
+    sne["sn"] = data.index.values
+    sne["z"] = data["z"]
+    sne["tmax"] = data["t0"]
+    sne["x1"] = data["x1"]
+    sne["x0"] = data["x0"]
+    sne["c"] = data["c"]
+    sne["valid"] = np.ones((N))
+    return sne
+
