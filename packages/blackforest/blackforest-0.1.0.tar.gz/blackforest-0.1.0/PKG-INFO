@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: blackforest
+Version: 0.1.0
+Summary: The official Python library for the Black Forest Labs API
+Author-email: Black Forest Labs <support@blackforestlabs.ai>
+License: Apache-2.0
+Project-URL: Homepage, https://github.com/black-forest-labs/blackforest
+Project-URL: Source, https://github.com/black-forest-labs/blackforest
+Project-URL: Documentation, https://blackforestlabs.ai/docs
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.31.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pillow==10.4.0
+Dynamic: license-file
+
+# BFL Client - Black Forest Labs API Client
+
+A Python client for interacting with the Black Forest Labs API.
+
+## Installation
+
+You can install the package using either name:
+
+```bash
+pip install blackforest
+```
+
+## Quick Start
+
+```python
+# You can import using either name
+from blackforest import BFLClient
+# or
+from blackforestlabs import BFLClient
+
+# Initialize the client
+client = BFLClient(api_key="your-api-key")
+
+# Use the client to make API calls
+# Example usage will be added here
+```
+
+## Features
+
+- Easy-to-use Python interface for Black Forest Labs API
+- Automatic request handling and response parsing
+- Comprehensive error handling
+- Type hints for better IDE support
+
+## Requirements
+
+- Python 3.7+
+- requests>=2.31.0
+
+## License
+
+This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. 
