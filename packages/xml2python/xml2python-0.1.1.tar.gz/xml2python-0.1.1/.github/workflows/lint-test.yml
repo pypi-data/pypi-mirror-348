@@ -1,0 +1,69 @@
+name: lint
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  # make workflow "callable" by others
+  workflow_call:
+
+jobs:
+  prepare:
+    runs-on: ubuntu-22.04  # Provides system Python 3.10
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup Python v3.10 with uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.10'
+          enable-cache: true
+
+      - name: install packages
+        run: uv venv && uv pip install -r pyproject.toml --extra testing
+
+
+  lint:
+    runs-on: ubuntu-22.04  # Provides system Python 3.10
+    needs: prepare
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: setup Python v3.10 with uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: '3.10'
+        enable-cache: true
+
+    - name: install packages
+      run: uv venv && uv pip install -r pyproject.toml --extra testing
+
+    - name: lint using ruff
+      run: uv run ruff check --output-format github ./src ./tests
+
+    - name: format check using ruff
+      run: uv run ruff format --check ./src ./tests
+
+  test:
+    runs-on: ubuntu-22.04  # Provides system Python 3.10
+    needs: prepare
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: setup Python v3.10 with uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: '3.10'
+        enable-cache: true
+
+    - name: install packages
+      run: uv venv && uv pip install -r pyproject.toml --extra testing
+
+    - name: run pytest
+      run: uv run pytest tests
