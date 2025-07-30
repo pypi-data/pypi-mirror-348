@@ -1,0 +1,171 @@
+import gffutils
+import re
+import os
+import yaml
+from pathlib import Path
+import pkg_resources
+import time
+
+
+from orfmine.orfribo import __version__
+
+# set default config file (key:value pairs can be overriden with '--config key=value' in snakemake command)
+#configfile: pkg_resources.resource_filename("orfribo", "config.yaml")
+
+# Check if `--config` is provided
+config_path = None
+if "--config" in sys.argv:
+    index = sys.argv.index("--config") + 1
+    if index < len(sys.argv):  # Ensure a file path was provided
+        config_path = os.path.abspath(sys.argv[index])
+
+# Otherwise, use `config.yaml` from orfribo if it exists
+if not config_path or not os.path.exists(config_path):
+    default_config = pkg_resources.resource_filename("orfribo", "config.yaml")
+    if os.path.exists(default_config):
+        print(f"Using default package config: {default_config}")
+        config_path = default_config
+    else:
+        print("Warning: No config file found. Running with command-line arguments only.")
+        config_path = None  # Allows Snakemake to run without a config file
+
+# Assign `configfile:` only if a config file is found
+if config_path:
+    configfile: config_path
+
+
+
+
+# get location of Rscript files
+RSCRIPTS_PATH = pkg_resources.resource_filename("orfribo", 'Rscripts')
+find_adapter_sequence = str(Path(RSCRIPTS_PATH) / "find_adapter_sequence.R")
+periodicity_riboWaltz_exome = str(Path(RSCRIPTS_PATH) / "periodicity_riboWaltz_exome.R")
+
+
+#Sets resources (threads number, maximum RAM ...)
+THREADS_NB = config['threads']
+MEM_MB = config['ram']
+
+# set project name 
+PROJECT_NAME = config['project_name']
+
+#get input path 
+
+GFF_PATH = Path(config['gff']).resolve()
+GFF_INTERGENIC_PATH = Path(config["gff_intergenic"]).resolve()
+FASTA_PATH = Path(config['fna']).resolve()
+RNA_TO_EXCLUDE_PATH = Path(config['rna_to_exclude']).resolve()
+FASTQ_PATH = Path(config['fastq']).resolve()
+
+
+# set intermediary output path 
+
+OUT_BASE_PATH = Path(config["out"])
+OUT_BASE_PATH.mkdir(parents=True, exist_ok=True)
+
+RESULTS_PATH = OUT_BASE_PATH / "RESULTS"
+RESULTS_PATH.mkdir(parents=True, exist_ok=True)
+
+DATA_PROCESSING_PATH = OUT_BASE_PATH / "DATA_PROCESSING"
+DATA_PROCESSING_PATH.mkdir(parents=True, exist_ok=True)
+
+SUPPLEMENTARY_DATA_PATH = OUT_BASE_PATH / "SUPPLEMENTARY_DATA"
+SUPPLEMENTARY_DATA_PATH.mkdir(parents=True, exist_ok=True)
+
+
+#set supplementary data (logs & benchmark) output path 
+LOGS_PATH = OUT_BASE_PATH / "SUPPLEMENTARY_DATA" / "Logs"
+LOGS_PATH.mkdir(parents=True, exist_ok=True)
+
+BENCHMARKS_PATH = OUT_BASE_PATH / "SUPPLEMENTARY_DATA" / "Benchmarks"
+BENCHMARKS_PATH.mkdir(parents=True, exist_ok=True)
+
+
+# set vars 
+
+MIN_READ_LENGTH = str(config['min_read_length'])
+MAX_READ_LENGTH = str(config['max_read_length'])
+#NAME_GFF_ATTRIBUTE = config['gff_attribute']
+ORFSTATS_THRESHOLD_MEAN = config['mean_threshold']
+ORFSTATS_THRESHOLD_MEDIAN = config['median_threshold']
+GFF_ELEMENT_TO_COUNT = config['gff_feature']
+ARE_ADAPTERS_TRIMMED = "1" if config['trimmed'] else "0"
+SEQUENCE_ADAPTER = config['adapter']
+FEATURES_TO_COUNT = config['intergenic_features']
+MULTIMAPPING = config["multi_alignement"]
+MAPPING_TOOL= config["aligner"]
+INTRONS_LENGTH = config["introns_length"] if 'introns_length' in config else 3000 
+# Wildcards definition 
+
+SAMPLES, = glob_wildcards(FASTQ_PATH / "{sample}.fastq.gz")
+LENGTHS = list(map(str, range(int(MIN_READ_LENGTH), int(MAX_READ_LENGTH) + 1)))
+HISAT2 = ["1", "2", "3", "4", "5", "6", "7", "8"]
+BOWTIE2 = ["1", "2", "3", "4", "rev.1", "rev.2"]
+
+
+# Strings with minimum and maximum read lengths to be used in file names
+FRAG_LENGTH_S = "." + LENGTHS[0]
+FRAG_LENGTH_L = "." + LENGTHS[0] + "-" + LENGTHS[-1]
+
+
+    
+
+
+include: "rules/01_quality_control.smk"
+include: "rules/02_gff_AGAT.smk"
+include: "rules/03_find_adapter_trimming.smk"
+
+if MAPPING_TOOL == "hisat2":
+    if config.get('rna_to_exclude'):
+        include: "rules/04_filter_outRNA_BOWTIE2.smk"
+        include: "rules/05_mapping_genome_filter_outRNA_HISAT2.smk"
+    else:
+        include: "rules/06_mapping_genome_without_filter_outRNA_HISAT2.smk"
+    include: "rules/07_samtools_genome_HISAT2.smk"    
+    include: "rules/08_Exome_construction.smk"
+    include: "rules/09_mapping_exome_HISAT2.smk"
+    include: "rules/10_samtools_exome_HISAT2.smk"
+
+if MAPPING_TOOL == "star":
+    if config.get('rna_to_exclude'):
+        include: "rules/04_filter_outRNA_BOWTIE2.smk"
+        include: "rules/05_mapping_genome_filter_outRNA_STAR.smk"
+    else:
+        include: "rules/06_mapping_genome_without_filter_outRNA_STAR.smk"
+    include: "rules/07_samtools_genome_STAR.smk" 
+    include: "rules/08_Exome_construction.smk"
+    include: "rules/09_mapping_exome_STAR.smk"
+    include: "rules/10_samtools_exome_STAR.smk"
+
+include: "rules/11_ribowaltz.smk"
+include: "rules/12_Bam2Reads_Exome.smk"
+include: "rules/13_ORFstat.smk"
+include: "rules/14_Selected_length.smk"
+include: "rules/15_bam2reads_genome.smk"
+include: "rules/16_concatenate.smk"
+include: "rules/17_report.smk"
+
+# define all the output target
+all_targets = [
+    str(DATA_PROCESSING_PATH / "Quality_control" / "Before_Trimming" / "multiqc_results" / "multiqc_report.html"),
+    str(DATA_PROCESSING_PATH / "Quality_control" / "After_Trimming" / "multiqc_results" / "multiqc_report.html"),
+    expand(expand(str(RESULTS_PATH / "BAM" / "Exome" / "{sample}" / "{sample}.bam.bai"), sample=SAMPLES)),
+    expand(str(DATA_PROCESSING_PATH / "Bam2Reads_Exome" / "{sample}" / "{sample}_{length}" / ("Exome_{length}_reads.stats")), sample=SAMPLES, length=LENGTHS),
+    expand(str(DATA_PROCESSING_PATH / "Selected_length" / "{sample}" / "Selected_length.txt"), sample=SAMPLES),
+    str(RESULTS_PATH / "Genome" / f"all_samples_Genome{FRAG_LENGTH_L}.mean{ORFSTATS_THRESHOLD_MEAN}_median{ORFSTATS_THRESHOLD_MEDIAN}_reads_concatenated.tab"),
+    str(RESULTS_PATH / (PROJECT_NAME + "_report_analysis.txt"))
+]
+
+
+# Add output if rna_to_exclude_is_added: 
+
+if config.get('rna_to_exclude'):
+    output_out_rna = expand(str(DATA_PROCESSING_PATH / "Mapping" / "Mapping_Unwanted_Sequence_And_Filtering" / "Results" / "{sample}" / "{sample}_Unmapped.fastq.gz"), sample=SAMPLES)
+    all_targets.append(output_out_rna)
+
+
+rule all:
+    input:
+        all_targets
+
+
