@@ -1,0 +1,12 @@
+// Regular query but with all the JADX facts imported from the database.
+
+#include "information-flow/query.dl"
+#include "jadx-fact-decls.dl"
+#include "importdb.dl"
+
+
+// Bringing this in to resolve methods to specific classes
+// This is a jadx-only table at the moment!
+.decl Method_DeclaringType(method: CFunction, cls: symbol)
+.input Method_DeclaringType(IO=sqlite, filename=QUOTE(CTADL_INPUT_DB))
+
