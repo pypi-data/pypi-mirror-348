@@ -1,0 +1,15 @@
+openai
+python-dotenv
+requests
+beautifulsoup4
+PyYAML>=6.0
+pytest
+
+[dev]
+black
+ruff
+pytest
+
+[web]
+flask
+streamlit

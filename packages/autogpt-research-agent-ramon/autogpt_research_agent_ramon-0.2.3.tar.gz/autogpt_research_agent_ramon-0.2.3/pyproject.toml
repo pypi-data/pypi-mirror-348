@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autogpt-research-agent-ramon"
+version = "0.2.3"
+description = "Autonomous Research Agent: plan, execute, remember, and report with Python + LLM"
+readme = "README.md"
+license = "MIT"
+authors = [ { name = "Your Name", email = "you@example.com" } ]
+keywords = ["AI", "agent", "RAG", "LLM"]
+classifiers = [
+  "Programming Language :: Python :: 3"
+]
+
+dependencies = [
+  "openai",
+  "python-dotenv",
+  "requests",
+  "beautifulsoup4",
+  "PyYAML>=6.0",
+  "pytest"
+]
+
+[project.scripts]
+autogpt-agent = "autogpt_research_agent.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/ramonbnuezjr/autogpt-research-agent"
+Source = "https://github.com/ramonbnuezjr/autogpt-research-agent"
+
+[project.optional-dependencies]
+web = ["flask", "streamlit"]
+dev = ["black", "ruff", "pytest"]
+
+[tool.setuptools.packages.find]
+include = ["autogpt_research_agent*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+exclude = '''
+/(
+  \.eggs
+ | \.git
+ | \.venv
+ | build
+ | dist
+)/
+'''
