@@ -1,0 +1,42 @@
+Metadata-Version: 2.3
+Name: axidence
+Version: 0.3.4
+Summary: strax-based data-driven accidental coincidence background simulation and peak-level salting
+License: BSD-3-Clause
+Author: Dacheng Xu,
+Author-email: dx2227@columbia.edu
+Requires-Python: >=3.10,<4.0
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Dist: GOFevaluation (>=0.1.5)
+Requires-Dist: strax (>=2.0.5)
+Requires-Dist: straxen (>=3.0.3)
+Project-URL: Documentation, https://readthedocs.org/projects/axidence/
+Project-URL: Repository, https://github.com/XENONnT/axidence
+Description-Content-Type: text/markdown
+
+# Axidence
+
+[![DOI](https://zenodo.org/badge/786146724.svg)](https://zenodo.org/badge/latestdoi/786146724)
+[![Test package](https://github.com/XENONnT/axidence/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/XENONnT/axidence/actions/workflows/pytest.yml)
+[![Coverage Status](https://coveralls.io/repos/github/XENONnT/axidence/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/XENONnT/axidence?branch=main&kill_cache=1)
+[![PyPI version shields.io](https://img.shields.io/pypi/v/axidence.svg)](https://pypi.python.org/pypi/axidence/)
+[![Documentation Status](https://readthedocs.org/projects/axidence/badge/?version=latest)](https://axidence.readthedocs.io/en/latest/?badge=latest)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/XENONnT/axidence/main.svg)](https://results.pre-commit.ci/latest/github/XENONnT/axidence/main)
+
+Axidence is a stax-based data-driven accidental coincidence background simulation framework. It can also perform the peak-level salting to calculate the features related to ambient environment.
+
+# Installation
+```
+cd axidence
+pip install ./ --user
+```
+
