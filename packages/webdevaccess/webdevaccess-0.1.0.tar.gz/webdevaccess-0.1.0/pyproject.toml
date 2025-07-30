@@ -1,0 +1,52 @@
+[project]
+name = "webdevaccess"
+version = "0.1.0"
+authors = [
+    {name = "Joel Dodson",email = "joeldodson@gmail.com"}
+]
+readme = "README.md"
+license = "MIT"
+description = "some scripts using the domible package to help with web development"
+requires-python = ">=3.11, <4.0"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+
+keywords = [
+    "html",
+    "accessibility",
+    "a11y",
+    "web development",
+    "frontend",
+]
+
+dependencies = ["domible (>=0.1.17,<0.2.0)", "requests (>=2.32.3,<3.0.0)", "beautifulsoup4 (>=4.13.4,<5.0.0)", "jsonloggeriso8601datetime (>=3.0.0,<4.0.0)"]
+
+[project.urls]
+homepage = "https://joeldodson.github.io/webdevaccess"
+documentation = "https://joeldodson.github.io/webdevaccess"
+repository = "https://github.com/joeldodson/webdevaccess"
+issues = "https://github.com/joeldodson/webdevaccess/issues"
+
+
+[project.scripts]
+htmlElements="webdevaccess.htmlElements:run" 
+
+[tool.poetry]
+packages = [
+    { include = "webdevaccess", from = "src" },
+]
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^8.2.3"
+myst-parser = "^4.0.1"
+pydata-sphinx-theme = "^0.16.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
