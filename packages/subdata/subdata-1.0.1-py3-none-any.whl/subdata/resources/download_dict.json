@@ -1,0 +1,123 @@
+{
+    "fanton_2021": {
+        "mode": "automatic",
+        "source": "github",
+        "urls": [
+            "https://raw.githubusercontent.com/marcoguerini/CONAN/refs/heads/master/Multitarget-CONAN/Multitarget-CONAN.csv"
+        ],
+        "format": "csv",
+        "filename": null,
+        "params": {
+            "index_col": 0
+        },
+        "requirement": ""
+    },
+    "hartvigsen_2022": {
+        "mode": "automatic",
+        "source": "huggingface",
+        "urls": [
+            "https://huggingface.co/datasets/toxigen/toxigen-data/resolve/main/train/train-00000-of-00001.parquet?download=true",
+            "https://huggingface.co/datasets/toxigen/toxigen-data/resolve/main/annotations/train-00000-of-00001.parquet?download=true",
+            "https://huggingface.co/datasets/toxigen/toxigen-data/resolve/main/annotated/test-00000-of-00001.parquet?download=true",
+            "https://huggingface.co/datasets/toxigen/toxigen-data/resolve/main/annotated/train-00000-of-00001.parquet?download=true"
+        ],
+        "format": "hartvigsen_2022",
+        "filename": null,
+        "params": {},
+        "requirement": "hf_token"
+    },
+    "jigsaw_2019": {
+        "mode": "manual",
+        "source": "kaggle",
+        "urls": [
+            "https://www.kaggle.com/competitions/jigsaw-unintended-bias-in-toxicity-classification/data"
+        ],
+        "format": "manual_zip",
+        "filename": "all_data.csv",
+        "params": {},
+        "requirement": "dataset_upload"
+    },
+    "jikeli_2023_antisemitism": {
+        "mode": "automatic",
+        "source": "zenodo",
+        "urls": [
+            "https://zenodo.org/records/7932888/files/Updated_dataset_with_full_text.zip?download=1"
+        ],
+        "format": "online_zip",
+        "filename": "Updated_dataset_with_full_text.csv",
+        "params": {},
+        "requirement": null
+    },
+    "jikeli_2023_general": {
+        "mode": "automatic",
+        "source": "zenodo",
+        "urls": [
+            "https://zenodo.org/records/8147308/files/DatasetForMachineLearning.csv?download=1"
+        ],
+        "format": "csv",
+        "filename": null,
+        "params": {},
+        "requirement": null
+    },
+    "mathew_2021": {
+        "mode": "automatic",
+        "source": "github",
+        "urls": [
+            "https://raw.githubusercontent.com/hate-alert/HateXplain/refs/heads/master/Data/dataset.json"
+        ],
+        "format": "mathew_2021",
+        "filename": null,
+        "params": {},
+        "requirement": null
+    },
+    "r\u00f6ttger_2021": {
+        "mode": "automatic",
+        "source": "github",
+        "urls": [
+            "https://raw.githubusercontent.com/paul-rottger/hatecheck-data/refs/heads/main/all_cases.csv"
+        ],
+        "format": "csv",
+        "filename": null,
+        "params": {
+            "index_col": 0
+        },
+        "requirement": null
+    },
+    "sachdeva_2022": {
+        "mode": "automatic",
+        "source": "huggingface",
+        "urls": [
+            "hf://datasets/ucberkeley-dlab/measuring-hate-speech/measuring-hate-speech.parquet"
+        ],
+        "format": "parquet",
+        "filename": null,
+        "params": {},
+        "requirement": null
+    },
+    "vidgen_2021": {
+        "mode": "automatic",
+        "source": "github",
+        "urls": [
+            "https://raw.githubusercontent.com/bvidgen/Dynamically-Generated-Hate-Speech-Dataset/refs/heads/main/Dynamically%20Generated%20Hate%20Dataset%20v0.2.3.csv"
+        ],
+        "format": "csv",
+        "filename": null,
+        "params": {
+            "index_col": 0
+        },
+        "requirement": null
+    },
+    "vidgen_2021_cad": {
+        "mode": "automatic",
+        "source": "zenodo",
+        "urls": [
+            "https://zenodo.org/records/4881008/files/data.zip?download=1"
+        ],
+        "format": "online_zip",
+        "filename": "data/cad_v1_1.tsv",
+        "params": {
+            "sep": "\t"
+        },
+        "requirement": null
+    }
+}
