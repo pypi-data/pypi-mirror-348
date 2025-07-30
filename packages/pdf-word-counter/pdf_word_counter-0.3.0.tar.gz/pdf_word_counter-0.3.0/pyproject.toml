@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-word-counter"
+version = "0.3.0"
+description = "Search PDF files for specific words and generate frequency statistics."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Rubén García-Benito", email = "rgb@iaa.es"}
+]
+keywords = ["pdf", "text extraction", "word count", "command line tool"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "PyPDF2",
+    "astropy",
+    "tqdm",
+    "pandas"
+]
+
+[project.optional-dependencies]
+miner = ["pdfminer.six"]
+astropy = ["astropy"]
+
+[project.scripts]
+pdf-word-counter = "pdf_word_counter.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/rgbIAA/pdf-word-counter"
