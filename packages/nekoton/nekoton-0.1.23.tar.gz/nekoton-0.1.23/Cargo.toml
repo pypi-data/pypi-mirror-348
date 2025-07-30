@@ -1,0 +1,56 @@
+[package]
+name = "nekoton-python"
+version = "0.1.23"
+edition = "2021"
+
+[lib]
+name = "nekoton"
+crate-type = ["cdylib"]
+
+[dependencies]
+ahash = "0.8"
+anyhow = "1.0"
+async-trait = "0.1"
+base64 = "0.21.0"
+dashmap = "5.4"
+hex = "0.4"
+hmac = "0.11"
+log = "0.4"
+num-bigint = "0.4"
+once_cell = "1.17"
+parking_lot = "0.12"
+pbkdf2 = "0.9"
+pyo3 = { version = "0.18.0", features = ["extension-module", "num-bigint"] }
+pyo3-asyncio = { version = "0.18", features = ["attributes", "tokio-runtime"] }
+pyo3-log = { version = "0.8.1" }
+rand = "0.8"
+sha2 = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1.0.93"
+tokio = { version = "1", features = ["sync", "macros", "rt-multi-thread"] }
+tokio-util = "0.7"
+
+ed25519-dalek = { git = "https://github.com/broxus/ed25519-dalek.git" }
+tiny-bip39 = { git = "https://github.com/broxus/tiny-bip39.git", default-features = false }
+tiny-hderive = { git = "https://github.com/broxus/tiny-hderive.git" }
+
+ton_abi = { git = "https://github.com/broxus/ton-labs-abi.git" }
+ton_block = { git = "https://github.com/broxus/ton-labs-block.git", features = ["venom"] }
+ton_types = { git = "https://github.com/broxus/ton-labs-types.git" }
+ton_executor = { git = "https://github.com/broxus/ton-labs-executor.git" }
+
+everscale-asm = { git = "https://github.com/broxus/everscale-asm.git", rev = "bbd284a72676300c89ab074bd39cd91fde21d597" }
+everscale-types = { version = "0.1.2", default-features = false }
+
+[dependencies.nt]
+package = "nekoton"
+git = "https://github.com/broxus/nekoton.git"
+features = ["gql_transport", "jrpc_transport", "proto_transport"]
+
+[dependencies.nekoton-transport]
+git = "https://github.com/broxus/nekoton.git"
+features = ["gql_transport", "jrpc_transport", "proto_transport"]
+
+[patch.crates-io]
+hmac-drbg = { git = "https://github.com/Rexagon/rust-hmac-drbg" }
+everscale-types = { git = "https://github.com/broxus/everscale-types.git", rev = "b55da379aba126d4496c88bc7b8cc7af553ab37a" }
