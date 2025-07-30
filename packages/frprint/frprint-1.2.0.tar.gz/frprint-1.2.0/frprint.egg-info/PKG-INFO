@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: frprint
+Version: 1.2.0
+Summary: more easier to use for-print
+Author-email: howShouldIChosseMyUsername <trademark2179@gmail.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Introducing "rprint"!
+
+If we want to repeat using "print()" before,<br>
+We should use "for()" or spam "print()".<br>
+But now! we can use "rprint()"!
+
+## how to use
+
+It is very easy to use.<br>
+Just type rprint(), and put two variables in the "rprint()".<br>
+There's a 2 Type of rprint must need.<br>
+rprint() needs "text" and "int".<br>
+for an example,<br>
+&nbsp; rprint("Hello python!",4)<br>
+&nbsp; It is same with...<br>
+```
+for i in range(4) :
+    print("Hello python!")
+```
+Is same with,<br>
+```
+rprint("Hello python!")
+```
+Yup. It goes like rprint(text,int,boolean(optional,Default value is True) )
+If you write rprint like this...
+```
+rprint("Hello python!",4,False)
+```
+It goes like...
+```
+for i in range(4) :
+    print("Hello word!", end=" ")
+```
+
+And this is all to use rprint()!<br>
+Ps.<br>
+you can also print variables.()
