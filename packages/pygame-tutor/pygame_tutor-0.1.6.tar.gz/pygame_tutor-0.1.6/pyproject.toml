@@ -1,0 +1,41 @@
+[project]
+name = "pygame-tutor"
+version = "0.1.6"
+description = "Interactive educational platform for learning Pygame"
+readme = "README.md"
+authors = [
+    {name = "Sergey Samoylov", email = "linews@yandex.ru"},
+]
+license = {text = "GNU General Public License v3.0"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Topic :: Education",
+    "Topic :: Games/Entertainment",
+]
+keywords = ["pygame", "education", "tutorial", "learning"]
+requires-python = ">=3.8"
+dependencies = [
+    "pygame>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sergey-samoylov/pygame-tutor"
+Source = "https://github.com/sergey-samoylov/pygame-tutor"
+
+[project.scripts]
+pygame-tutor = "pygametutor.main:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
