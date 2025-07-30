@@ -1,0 +1,13 @@
+# Website Configuration
+
+title = "My Awesome Website"
+author = "Webby McWebface"
+description = "A simple example of a TOML configuration file for a website."
+
+[server]
+hostname = "localhost"
+port = 8080
+
+[database]
+username = "admin"
+password = "password123"

@@ -1,0 +1,279 @@
+{
+  "name": "fancy_dataclass",
+  "created_time": "2024-03-20T22:58:02-04:00",
+  "projects": {
+    "0": {
+      "name": "curd",
+      "uuid": "fe43ccbc-1a3c-4b7d-a339-fedc5eaf5deb",
+      "created_time": "2024-09-15T19:12:15.097424-04:00",
+      "modified_time": "2024-09-16T21:17:34.111498-04:00",
+      "parent": 1
+    },
+    "1": {
+      "name": "a123",
+      "uuid": "b3bfeb77-394a-45fe-9876-cf5121423b86",
+      "created_time": "2024-09-16T19:43:01.928719-04:00",
+      "modified_time": "2024-09-16T19:43:01.928780-04:00"
+    }
+  },
+  "tasks": {
+    "1": {
+      "name": "toml-dataclass",
+      "uuid": "36f967e2-5270-44ea-8dbf-0636e42e2f3d",
+      "description": "Provide a toml submodule with TOMLDataclass mixin.",
+      "priority": 8.0,
+      "expected_duration": 0.10416666666666667,
+      "created_time": "2024-03-20T22:59:57-04:00",
+      "modified_time": "2024-08-25T17:11:01.780627-04:00",
+      "first_started_time": "2024-04-13T15:22:08-04:00",
+      "completed_time": "2024-04-14T15:08:13-04:00"
+    },
+    "2": {
+      "name": "doc-config",
+      "uuid": "80fdcc6f-40f3-4546-b495-ddf37360741c",
+      "description": "Documentation for configuring fancy dataclasses.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:01:36-04:00",
+      "modified_time": "2024-08-25T17:11:01.780699-04:00",
+      "first_started_time": "2024-06-02T11:10:46-04:00",
+      "completed_time": "2024-06-02T11:25:48-04:00"
+    },
+    "3": {
+      "name": "doc-json",
+      "uuid": "6130e83d-61fb-469d-a021-a6d66b77b242",
+      "description": "Documentation for JSONDataclass.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:01:56-04:00",
+      "modified_time": "2024-08-25T17:11:01.780757-04:00",
+      "first_started_time": "2024-06-02T11:50:03-04:00",
+      "completed_time": "2024-06-02T12:35:05-04:00"
+    },
+    "4": {
+      "name": "doc-toml",
+      "uuid": "7996d628-cf05-411b-8957-5b1c119ef180",
+      "description": "Documentation for TOMLDataclass.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:02:08-04:00",
+      "modified_time": "2024-08-25T17:11:01.780803-04:00",
+      "first_started_time": "2024-06-02T13:29:00-04:00",
+      "completed_time": "2024-06-02T13:45:31-04:00"
+    },
+    "5": {
+      "name": "doc-sql",
+      "uuid": "6a9932e2-a834-4d95-812e-43f2c24634f3",
+      "description": "Documentation for SQLDataclass.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:02:22-04:00",
+      "modified_time": "2024-08-25T17:11:04.385822-04:00"
+    },
+    "6": {
+      "name": "doc-cli",
+      "uuid": "82a1f43e-cd69-4d81-9c14-ce62500b127d",
+      "description": "Documentation for ArgparseDataclass.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:02:37-04:00",
+      "modified_time": "2024-08-25T17:11:01.780865-04:00"
+    },
+    "7": {
+      "name": "doc-subprocess",
+      "uuid": "edcf9f2d-ade8-438f-a1ef-5bb0cd654829",
+      "description": "Documentation for SubprocessDataclass.",
+      "expected_duration": 0.027777777777777776,
+      "created_time": "2024-03-20T23:02:56-04:00",
+      "modified_time": "2024-08-25T17:11:01.780883-04:00"
+    },
+    "8": {
+      "name": "pypi",
+      "uuid": "8bdbe117-b6ca-47d3-95eb-a919edb05ecc",
+      "description": "Upload package to PyPI.",
+      "expected_duration": 0.03125,
+      "created_time": "2024-03-20T23:03:22-04:00",
+      "modified_time": "2024-08-25T17:11:01.780902-04:00",
+      "first_started_time": "2024-04-13T13:14:55-04:00",
+      "completed_time": "2024-04-13T13:29:55-04:00"
+    },
+    "9": {
+      "name": "gh-actions",
+      "uuid": "f5cab588-d1b2-4f9a-b2b5-b26e2bafc44b",
+      "description": "Set up Github Actions for automated linting/testing.",
+      "priority": 6.0,
+      "expected_duration": 0.08333333333333333,
+      "created_time": "2024-03-20T23:03:50-04:00",
+      "modified_time": "2024-08-25T17:11:01.780946-04:00",
+      "first_started_time": "2024-04-14T18:17:55-04:00",
+      "completed_time": "2024-04-16T00:00:00-04:00"
+    },
+    "10": {
+      "name": "flatten-merge",
+      "uuid": "2b6ca26a-75ef-4a52-8bfe-8937dd293eb0",
+      "description": "Implement flattening/merging of dataclasses.",
+      "priority": 8.0,
+      "expected_duration": 0.16666666666666666,
+      "created_time": "2024-03-27T18:23:19-04:00",
+      "modified_time": "2024-08-25T17:11:01.780988-04:00",
+      "first_started_time": "2024-03-27T18:23:30-04:00",
+      "completed_time": "2024-03-29T23:50:04-04:00"
+    },
+    "11": {
+      "name": "field-settings",
+      "uuid": "9ef7f264-94b2-4ecf-b08a-7f0169fbda10",
+      "description": "Standardize field settings for each mixin.",
+      "priority": 7.0,
+      "expected_duration": 0.08333333333333333,
+      "created_time": "2024-03-28T20:24:29-04:00",
+      "modified_time": "2024-08-25T17:11:01.781030-04:00",
+      "first_started_time": "2024-03-30T10:19:43-04:00",
+      "completed_time": "2024-04-01T18:50:31-04:00"
+    },
+    "13": {
+      "name": "basic-docs",
+      "uuid": "e3b1c508-96db-43e0-985e-ef6a46c9d21a",
+      "description": "Placeholders for mixin pages; CHANGELOG.",
+      "priority": 5.0,
+      "expected_duration": 0.03125,
+      "created_time": "2024-03-28T20:25:43-04:00",
+      "modified_time": "2024-08-25T17:11:01.781071-04:00",
+      "first_started_time": "2024-04-01T18:00:00-04:00",
+      "completed_time": "2024-04-11T22:00:00-04:00"
+    },
+    "0": {
+      "name": "unit-tests",
+      "uuid": "cd0cf8b7-348c-4fbd-9da4-bacb2ca3a686",
+      "description": "Unit tests for new behavior.",
+      "priority": 7.0,
+      "expected_duration": 0.0625,
+      "created_time": "2024-04-12T20:51:56-04:00",
+      "modified_time": "2024-09-16T20:02:08.126392-04:00",
+      "first_started_time": "2024-04-12T21:00:00-04:00",
+      "completed_time": "2024-04-13T10:08:13-04:00"
+    },
+    "12": {
+      "name": "doc-subpage-intro",
+      "uuid": "76739460-5974-4d66-a7c5-62ad3d31a2fb",
+      "description": "Write 1-2 sentence intro for each dataclass mixin.",
+      "priority": 7.0,
+      "expected_duration": 0.020833333333333332,
+      "created_time": "2024-04-12T20:52:37-04:00",
+      "modified_time": "2024-08-25T17:11:01.781150-04:00",
+      "first_started_time": "2024-04-13T11:08:26-04:00",
+      "completed_time": "2024-04-13T13:08:59-04:00"
+    },
+    "14": {
+      "name": "config-dataclass",
+      "uuid": "bc255d82-d662-4b51-a8b1-aaffdf306462",
+      "description": "Finish ConfigDataclass functionality.",
+      "priority": 9.0,
+      "expected_duration": 0.0625,
+      "created_time": "2024-04-13T13:31:38-04:00",
+      "modified_time": "2024-08-25T17:11:01.781189-04:00",
+      "first_started_time": "2024-04-13T13:41:48-04:00",
+      "completed_time": "2024-04-13T17:32:39-04:00"
+    },
+    "15": {
+      "name": "test-toml",
+      "uuid": "80f68f25-0dc7-4d45-891e-22dad1bce9db",
+      "description": "Unit tests for TOMLDataclass.",
+      "priority": 7.0,
+      "expected_duration": 0.03125,
+      "created_time": "2024-04-13T13:32:53-04:00",
+      "modified_time": "2024-08-25T17:11:01.781228-04:00",
+      "first_started_time": "2024-04-13T22:49:09-04:00",
+      "completed_time": "2024-04-14T15:08:05-04:00"
+    },
+    "16": {
+      "name": "test-config",
+      "uuid": "18317ebf-c5b7-4f8f-bf9c-bbf59e364065",
+      "description": "Unit tests for ConfigDataclass.",
+      "priority": 7.0,
+      "expected_duration": 0.041666666666666664,
+      "created_time": "2024-04-13T13:33:15-04:00",
+      "modified_time": "2024-08-25T17:11:01.781267-04:00",
+      "first_started_time": "2024-04-13T13:51:55-04:00",
+      "completed_time": "2024-04-14T15:08:10-04:00"
+    },
+    "17": {
+      "name": "basic-doc-config",
+      "uuid": "5f21ad48-23df-46e2-95eb-3d880813f772",
+      "description": "Basic doc page for ConfigDataclass.",
+      "priority": 6.0,
+      "expected_duration": 0.03125,
+      "created_time": "2024-04-13T13:34:20-04:00",
+      "modified_time": "2024-08-25T17:11:01.781306-04:00",
+      "first_started_time": "2024-04-14T15:28:09-04:00",
+      "completed_time": "2024-04-14T16:34:48-04:00"
+    },
+    "18": {
+      "name": "basic-doc-toml",
+      "uuid": "9adb23a3-0146-4ab4-a2af-2bebdd5bbc8c",
+      "description": "Basic doc page for TOMLDataclass.",
+      "priority": 6.0,
+      "expected_duration": 0.03125,
+      "created_time": "2024-04-13T13:34:40-04:00",
+      "modified_time": "2024-08-25T17:11:01.781346-04:00",
+      "first_started_time": "2024-04-14T15:09:54-04:00",
+      "completed_time": "2024-04-14T15:28:04-04:00"
+    },
+    "19": {
+      "name": "host-docs",
+      "uuid": "2e6012ac-7c63-4926-a750-28c7371611ce",
+      "description": "Host docs on GH Pages or Readthedocs.",
+      "priority": 6.0,
+      "expected_duration": 0.041666666666666664,
+      "created_time": "2024-04-13T13:35:20-04:00",
+      "modified_time": "2024-08-25T17:11:01.781384-04:00",
+      "first_started_time": "2024-04-14T16:40:20-04:00",
+      "completed_time": "2024-04-14T18:01:10-04:00"
+    },
+    "20": {
+      "name": "mkdocs-in-pkg",
+      "uuid": "b7601af3-7615-4ea5-a499-074477438f3b",
+      "description": "Include mkdocs output in package_data.",
+      "priority": 8.0,
+      "expected_duration": 0.041666666666666664,
+      "created_time": "2024-04-26T19:32:24-04:00",
+      "modified_time": "2024-08-25T17:11:01.781423-04:00",
+      "first_started_time": "2024-04-28T10:00:00-04:00",
+      "completed_time": "2024-04-29T18:15:07-04:00"
+    },
+    "21": {
+      "name": "external-hooks",
+      "uuid": "cee39e25-ce39-4d23-bd0f-5933d3afc8df",
+      "description": "Put hooks into external repo.",
+      "priority": 8.0,
+      "expected_duration": 0.041666666666666664,
+      "created_time": "2024-04-26T19:33:17-04:00",
+      "modified_time": "2024-08-25T17:11:01.781462-04:00",
+      "first_started_time": "2024-04-26T19:38:21-04:00",
+      "completed_time": "2024-04-29T17:44:06-04:00"
+    },
+    "22": {
+      "name": "doc-mixin",
+      "uuid": "db04acc9-3ea6-4a40-a3ef-e0c18a153636",
+      "description": "Documentation for DataclassMixin.",
+      "expected_duration": 0.08333333333333333,
+      "created_time": "2024-06-02T13:24:25-04:00",
+      "modified_time": "2024-08-25T17:11:01.781501-04:00"
+    },
+    "23": {
+      "name": "versioned-dataclass",
+      "uuid": "1c63e1c2-3505-4896-8623-b7857afdb968",
+      "description": "Support VersionedDataclass for version-controlled dataclass schemas.",
+      "expected_duration": 0.125,
+      "created_time": "2024-06-02T14:01:11-04:00",
+      "modified_time": "2024-08-25T17:11:01.781520-04:00"
+    },
+    "24": {
+      "name": "curd",
+      "uuid": "200b721a-e0dc-4762-aa86-53611eb35501",
+      "project_id": 1,
+      "created_time": "2024-09-15T21:20:40.593984-04:00",
+      "modified_time": "2024-09-16T21:48:20.430943-04:00",
+      "blocked_by": [
+        21,
+        24
+      ],
+      "parent": 19
+    }
+  },
+  "version": 0
+}

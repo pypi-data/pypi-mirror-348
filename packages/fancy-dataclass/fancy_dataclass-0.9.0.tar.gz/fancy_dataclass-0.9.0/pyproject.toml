@@ -1,0 +1,184 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fancy-dataclass"
+dynamic = ["version"]
+description = "Spiff up your dataclasses with extra features."
+readme = "docs/README.md"
+requires-python = ">=3.8"
+license = {text = "MIT License"}
+keywords = ["dataclass", "cli", "config", "orm", "serialize", "json", "toml"]
+authors = [
+  { name = "Jeremy Silver", email = "jeremys@nessiness.com" }
+]
+classifiers = [
+  "Programming Language :: Python"
+]
+dependencies = [
+  "sqlalchemy >= 2.0",
+  "tomlkit >= 0.13.2",
+  "typing_extensions >= 4.13"
+]
+
+[project.urls]
+Documentation = "https://fancy-dataclass.readthedocs.io"
+Issues = "https://github.com/jeremander/fancy-dataclass/issues"
+Source = "https://github.com/jeremander/fancy-dataclass"
+Changelog = "https://fancy-dataclass.readthedocs.io/en/stable/CHANGELOG"
+
+[tool.hatch.build.targets.sdist]
+exclude = [".venv", "TODO.md"]
+
+[tool.hatch.version]
+path = "fancy_dataclass/__init__.py"
+
+[tool.hatch.envs.doc]
+dependencies = [
+  "mkdocs",
+  "mkdocs-autorefs",
+  "mkdocs-material",
+  "mkdocstrings[python] >= 0.29",
+  "mkdocs-gen-files",
+  "mkdocs-literate-nav",
+  "py-gadzooks >= 0.2.8",
+  "ruff >= 0.9",
+]
+
+[tool.hatch.envs.doc.scripts]
+# build docs to site/ directory
+build = "mkdocs build --clean --strict --no-directory-urls {args}"
+# check whether input docs have changed
+check = "gadzooks build-docs --src-docs docs --check-only {args}"
+# serve docs on development server
+serve = "mkdocs serve"
+# build docs for Readthedocs
+deploy = "mkdocs build --site-dir $READTHEDOCS_OUTPUT/html"
+# validate version string, CHANGELOG, Git tag, etc.
+pre-publish = [
+  "cat docs/.changelog-version-regex.txt | xargs gadzooks check-version --check-tag --dist-dir dist --changelog docs/CHANGELOG.md --changelog-version-regex",
+]
+
+[tool.hatch.envs.lint]
+dependencies = [
+  "mypy>=1.15",
+  "numpy",
+  "py-gadzooks>=0.2.9",
+  "pytest",
+  "ruff>=0.9",
+  "vermin>=1.6",
+]
+
+[tool.hatch.envs.lint.scripts]
+# linting
+run-ruff = "ruff check"
+# ensure compatibility with Py3.8 and higher
+run-vermin = "vermin {args:.}"
+# type-checking
+run-mypy = "mypy --install-types --non-interactive {args:fancy_dataclass tests}"
+# print info about lines of code
+run-loc-summarize = "gadzooks loc-summarize fancy_dataclass"
+# print out formatter diffs
+run-format = "gadzooks check-format {args:fancy_dataclass} --formatter yapf --ignore-patterns '\\s*'"
+all = ["run-ruff", "run-vermin", "run-mypy", "run-loc-summarize"]
+
+[tool.hatch.envs.test]
+dependencies = [
+    "numpy",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.hatch.envs.test.scripts]
+test = "pytest {args:tests}"
+test-debug = "pytest --pdb {args:tests}"
+cov-report = ["- coverage combine", "coverage report", "coverage html"]
+cov = ["test", "cov-report"]
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+
+[tool.hatch.envs.badge]
+dependencies = [
+  "coverage",
+  "genbadge[tests,coverage]"
+]
+
+[tool.hatch.envs.badge.scripts]
+badge-cov = ["coverage xml", "genbadge coverage -i coverage.xml"]
+badges = ["badge-cov"]
+
+[tool.hatch.publish.index]
+disable = true
+
+[tool.coverage.run]
+source_pkgs = ["fancy_dataclass"]
+branch = true
+parallel = true
+omit = ["venv/*"]
+
+[tool.coverage.report]
+skip_covered = true
+show_missing = true
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.commitizen]
+tag_format = "v$major.$minor.$patch"
+
+[tool.mypy]
+exclude = ["docs/", "scripts/", "site/", "tmp.*"]
+warn_unused_configs = true
+strict = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+strict = false
+disable_error_code = ["arg-type", "attr-defined", "call-arg", "comparison-overlap", "no-redef", "no-untyped-call", "no-untyped-def", "type-arg"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_cli"
+disable_error_code = ["assignment", "index", "operator", "union-attr"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_config"
+disable_error_code = ["index", "misc", "union-attr"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_dict"
+disable_error_code = ["assignment", "misc"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_inheritance"
+disable_error_code = ["assignment", "misc"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_mixin"
+disable_error_code = ["assignment", "call-overload", "has-type", "misc", "union-attr"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_serializable"
+disable_error_code = ["assignment", "misc"]
+
+[[tool.mypy.overrides]]
+module = "tests.test_subprocess"
+disable_error_code = ["assignment", "misc"]
+
+[tool.pytest.ini_options]
+addopts = "--verbose --cov=fancy_dataclass"
+
+[tool.yapf]
+# NOTE: we'd like to disable vertical whitespace adjustment,
+# but there appears to be no way to do that
+based_on_style = "pep8"
+blank_lines_between_top_level_imports_and_variables = 2
+coalesce_brackets = true
+column_limit = 10000
+dedent_closing_brackets = true
+space_between_ending_comma_and_closing_bracket = false
+spaces_around_power_operator = true
+split_all_top_level_comma_separated_values = true
