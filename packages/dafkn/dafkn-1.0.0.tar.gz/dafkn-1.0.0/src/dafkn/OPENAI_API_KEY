@@ -1,0 +1,10 @@
+import os
+from openai import OpenAI  # or 'import openai' depending on how you installed it
+
+os.environ["OPENAI_API_KEY"] = "sk-proj-..."  # Paste your full key here
+
+client = OpenAI(
+    api_key=os.environ["OPENAI_API_KEY"]
+)
+
+# Now you can call GPT
