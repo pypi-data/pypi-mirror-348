@@ -1,0 +1,49 @@
+Metadata-Version: 2.2
+Name: genome-ninja
+Version: 0.0.2
+Summary: A lightweight toolkit for fast genome data wrangling
+Author-Email: Qinzhong Tian <tianqinzhong@qq.com>
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Project-URL: Homepage, https://github.com/LoadStar822/GenomeNinja
+Project-URL: Documentation, https://loadstar822.github.io/GenomeNinja
+Project-URL: Issues, https://github.com/LoadStar822/GenomeNinja/issues
+Requires-Python: >=3.10
+Requires-Dist: typer~=0.15
+Requires-Dist: numpy<3.0.0,>=2.0.0
+Requires-Dist: pandas>=2.2
+Requires-Dist: rich>=13
+Requires-Dist: questionary>=2.1.0
+Requires-Dist: prompt-toolkit>=3.0.51
+Requires-Dist: click==8.1.8
+Requires-Dist: requests
+Provides-Extra: ml
+Requires-Dist: scikit-learn>=1.6; extra == "ml"
+Requires-Dist: scipy>=1.15; extra == "ml"
+Provides-Extra: plot
+Requires-Dist: matplotlib>=3.10; extra == "plot"
+Requires-Dist: seaborn>=0.13; extra == "plot"
+Provides-Extra: tests
+Requires-Dist: pytest>=8.3; extra == "tests"
+Requires-Dist: pytest-cov>=6.1; extra == "tests"
+Provides-Extra: dev
+Requires-Dist: black>=25.1; extra == "dev"
+Requires-Dist: isort>=6.0; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: mypy>=1.15; extra == "dev"
+Requires-Dist: pre-commit>=4.2; extra == "dev"
+Requires-Dist: tox>=4.25; extra == "dev"
+Requires-Dist: mkdocs>=1.6; extra == "dev"
+Requires-Dist: mkdocs-material>=9.6; extra == "dev"
+Description-Content-Type: text/markdown
+
+# GenomeNinja
+GenomeNinja: A lightweight and powerful toolkit for high-throughput genome data wrangling.
