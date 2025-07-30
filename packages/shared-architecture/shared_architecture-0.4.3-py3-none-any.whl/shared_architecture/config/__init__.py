@@ -1,0 +1,3 @@
+"""
+Shared Architecture - Configuration Package.
+"""

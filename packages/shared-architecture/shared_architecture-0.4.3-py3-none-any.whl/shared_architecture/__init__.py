@@ -1,0 +1,3 @@
+"""
+Shared Architecture Root Package.
+"""
