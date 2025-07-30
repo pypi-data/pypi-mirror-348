@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: qmathlib
+Version: 0.1.0
+Summary: A simple math library for basic operations and problem generation.
+Author: Cipherix
+Author-email: 
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+# qmathlib
+
+`qmathlib` small, but cool library for easy math.
+## Instalation
+
+```
+pip install qmathlib
+```
+
+## Usage
+
+```python
+from qmathlib import QuickMath
+
+math = QuickMath()
+print(math.add(2, 3))       # 5
+print(math.random(10, 20))  # Random Number
+```
+
