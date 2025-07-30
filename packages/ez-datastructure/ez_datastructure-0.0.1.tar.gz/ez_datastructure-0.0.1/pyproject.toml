@@ -1,0 +1,21 @@
+#setuptools
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+# Metadata
+[project]
+name = "ez_datastructure"
+version = "0.0.1"
+authors = [
+  { name="E Z" },
+]
+description = "Easy Data Structures"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+
