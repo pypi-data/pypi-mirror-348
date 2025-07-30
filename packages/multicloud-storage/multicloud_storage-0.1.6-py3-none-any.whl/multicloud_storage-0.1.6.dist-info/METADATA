@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: multicloud-storage
+Version: 0.1.6
+Summary: 统一操作 MinIO/OSS/S3 兼容存储的工具包
+Home-page: https://github.com/your_username/multicloud-storage
+Author: Your Name
+Author-email: you@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Requires-Dist: boto3>=1.38.9
+Requires-Dist: alibabacloud_oss_v2>=1.1.1
+Requires-Dist: minio>=7.2.15
+Requires-Dist: importlib_metadata~=8.7.0; python_version < "3.8"
+Requires-Dist: python-magic>=0.4.27; sys_platform != "win32"
+Requires-Dist: python-magic-bin>=0.4.14; sys_platform == "win32"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
