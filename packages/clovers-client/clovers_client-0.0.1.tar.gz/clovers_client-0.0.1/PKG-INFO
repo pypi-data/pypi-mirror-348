@@ -1,0 +1,27 @@
+Metadata-Version: 2.3
+Name: clovers-client
+Version: 0.0.1
+Summary: 
+Author: KarisAya
+Author-email: 1048827424@qq.com
+Requires-Python: >=3.12,<4.0.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: all
+Provides-Extra: console
+Provides-Extra: onebot-v11
+Provides-Extra: qq
+Requires-Dist: clovers (>=0.4,<0.5)
+Requires-Dist: httpx (>=0.28.1,<0.29.0) ; extra == "all"
+Requires-Dist: httpx (>=0.28.1,<0.29.0) ; extra == "onebot-v11"
+Requires-Dist: pillow (>=11.1.0,<12.0.0) ; extra == "all"
+Requires-Dist: pillow (>=11.1.0,<12.0.0) ; extra == "console"
+Requires-Dist: pydantic (>=2.10.6,<3.0.0)
+Requires-Dist: qq-botpy (>=1.2.1,<2.0.0) ; extra == "qq"
+Requires-Dist: websockets (>=15.0.1,<16.0.0) ; extra == "all"
+Requires-Dist: websockets (>=15.0.1,<16.0.0) ; extra == "onebot-v11"
+Description-Content-Type: text/markdown
+
+# Clovers Client
+
