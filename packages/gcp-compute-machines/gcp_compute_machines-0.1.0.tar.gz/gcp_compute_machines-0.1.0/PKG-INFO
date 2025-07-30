@@ -1,0 +1,95 @@
+Metadata-Version: 2.1
+Name: gcp_compute_machines
+Version: 0.1.0
+Summary: A python package for scraping and exporting GCP Compute Machines metadata and costs information.
+Home-page: https://github.com/vbutoma/gcp-compute-machines-costs
+License: Apache-2.0
+Keywords: gcp,google-compute-machines,google-compute-machines-costs
+Author: Vitaly
+Author-email: vit.butoma@gmail.com
+Requires-Python: >=3.12,<4.0
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: google-cloud-billing (>=1.15.0,<2.0.0)
+Requires-Dist: google-cloud-compute (>=1.23.0,<2.0.0)
+Requires-Dist: loguru (>=0.7.2,<0.8.0)
+Requires-Dist: lxml (>=5.3.0,<6.0.0)
+Requires-Dist: pandas (>=2.2.3,<3.0.0)
+Requires-Dist: pydantic (>=2.6.4,<3.0.0)
+Requires-Dist: pyyaml (>=6.0.1,<7.0.0)
+Project-URL: Repository, https://github.com/vbutoma/gcp-compute-machines-costs
+Description-Content-Type: text/markdown
+
+# GCP Compute Machines Costs
+
+This project is a python package for scraping and exporting GCP Compute Machines metadata and costs information.
+
+# Requirements
+
+* python >= 3.12
+* GCP service account with the next assigned permissions:
+  * compute.machineTypes.list 
+  * compute.regions.list 
+  * compute.zones.list
+
+# Installation
+
+```bash
+pip install gcp-compute-machines
+```
+
+# Usage
+
+Create new file scrape.py with the next content and change `gcp_project_name` and `gcp_sa_account_path` variables.
+
+## API Scraper
+
+```python
+from gcp_compute_machines import GCPMachinesScraper
+
+gcp_project_name = 'CHANGE_ME'
+gcp_sa_account_path = 'CHANGE_ME'
+
+scraper = GCPMachinesScraper(
+    gpc_project_name=gcp_project_name,
+    gcp_sa_account_path=gcp_sa_account_path
+)
+machines = scraper.fetch_gcp_machines(
+    # dump=True means that app saves the scrapped SKUs data locally
+    dump=True,
+    # Set load=True if you want to use local SKUs data between sequential runs.
+    load=False
+)
+
+scraper.dump_pricing_info(
+    file_path='./data/flat_gcp_machines_pricing.yaml'
+)
+```
+
+## Loader for https://gcloud-compute.com/
+
+This code downloads data from the website above and loads it into pydantic model.
+
+```python
+from gcp_compute_machines import GCloudComputeMachinesProvider
+
+scraper = GCloudComputeMachinesProvider()
+machines = scraper.fetch_gcp_machines()
+scraper.dump_pricing_info("./data/flat_gcloud_compute_machines_pricing.yaml")
+```
+
+Keep in mind that:
+* All pricing fields are normalized to hourly cost
+* Some fields were renamed or dropped
+
+# License 
+
+This project is under the [Apache License, Version 2.0](./LICENSE) unless noted otherwise.
+
+# Important info
+
+Please note this project is not an official Google product. 
+
+That means no warranty in costs data integrity. Use scraped data wisely.
+
