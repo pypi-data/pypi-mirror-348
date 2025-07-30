@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: halfapi
+Version: 0.6.31
+Summary: Core to write deep APIs using a module's tree
+Home-page: https://github.com/halfAPI/halfapi
+Author: Maxime ALVES
+Author-email: maxime@freepoteries.fr
+License: GPLv3
+Project-URL: Source, https://github.com/halfAPI/halfapi
+Keywords: web-api development boilerplate
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: PyJWT<2.7.0,>=2.6.0
+Requires-Dist: starlette<0.34,>=0.33
+Requires-Dist: click<9,>=8
+Requires-Dist: uvicorn<1,>=0.13
+Requires-Dist: orjson<4,>=3.8.5
+Requires-Dist: pyyaml<7,>=6
+Requires-Dist: timing-asgi<1,>=0.2.1
+Requires-Dist: schema<1,>=0.7.4
+Requires-Dist: toml<0.11,>=0.10
+Requires-Dist: packaging>=19.0
+Requires-Dist: python-multipart
+Provides-Extra: tests
+Requires-Dist: pytest<8,>=7; extra == "tests"
+Requires-Dist: pytest-asyncio; extra == "tests"
+Requires-Dist: pylint; extra == "tests"
+Requires-Dist: requests; extra == "tests"
+Requires-Dist: httpx; extra == "tests"
+Requires-Dist: openapi-schema-validator; extra == "tests"
+Requires-Dist: openapi-spec-validator; extra == "tests"
+Requires-Dist: coverage; extra == "tests"
+Provides-Extra: pyexcel
+Requires-Dist: pyexcel; extra == "pyexcel"
+Requires-Dist: pyexcel-ods3; extra == "pyexcel"
+Requires-Dist: pyexcel-xlsx; extra == "pyexcel"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# HalfAPI
+
+Base tools to develop complex API with rights management.
+
+This project was developped by Maxime Alves and Joël Maïzi. The name was chosen
+to reference [HalfORM](https://github.com/collorg/halfORM), a project written by Joël Maïzi.
+
+
+## Dependencies
+
+- python3
+- python3-pip
+- libgit2-dev
+- starlette
+- PyJWT
+- click
+- uvicorn
+- orjson
+- pyyaml
+
+
+## Configuration
+
+Configure HalfAPI in the file : .halfapi/config .
+
+It's a **toml** file that contains at least two sections, project and domains.
+
+https://toml.io/en/
+
+
+### Project
+
+The main configuration options without which HalfAPI cannot be run.
+
+**secret** : The file containing the secret to decode the user's tokens.
+
+**port** : The port for the test server.
+
+**loglevel** : The log level (info, debug, critical, ...)
+
+
+### Domains
+
+Specify the domains configurations in the following form :
+
+```
+[domains.DOMAIN_NAME]
+name = "DOMAIN_NAME"
+enabled = true
+prefix = "/prefix"
+module = "domain_name.path.to.api.root"
+port = 1002
+```
+
+Specific configuration can be done under the "config" section :
+
+```
+[domains.DOMAIN_NAME.config]
+boolean_option = false
+string_value = "String"
+answer = 42
+listylist = ["hello", "world"]
+```
+
+And can be accessed through the app's "config" dictionnary.
+
+
+## Usage
+
+Develop an HalfAPI domain by following the examples located in
+tests/dummy_domain . An HalfAPI domain should be an importable python module
+that is available in the python path.
+
+Run the project by using the `halfapi run` command.
+
+You can try the dummy_domain with the following command.
+
+```
+PYTHONPATH=$PWD/tests python -m halfapi domain dummy_domain
+```
+
+### CLI documentation
+
+Use the CLI help.
+
+```
+python -m halfapi --help
+python -m halfapi domain --help
+```
+
+## API Testing
+
+@TODO
+
+
+### Example
+
+Check out the [sample project](https://github.com/halfAPI/halfapi_sample_project)
+that helps you to build your own domain.
+
+
+## Development
+
+@TODO
