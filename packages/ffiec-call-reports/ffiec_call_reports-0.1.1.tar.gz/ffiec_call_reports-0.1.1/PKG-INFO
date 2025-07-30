@@ -1,0 +1,158 @@
+Metadata-Version: 2.4
+Name: ffiec-call-reports
+Version: 0.1.1
+Summary: A Python library for downloading and processing FFIEC Call Reports
+Home-page: https://github.com/yourusername/ffiec_call_reports
+Author: Mayank Bambal
+Author-email: your.email@example.com
+Project-URL: Documentation, https://github.com/yourusername/ffiec_call_reports#readme
+Project-URL: Source, https://github.com/yourusername/ffiec_call_reports
+Project-URL: Tracker, https://github.com/yourusername/ffiec_call_reports/issues
+Keywords: ffiec,call-reports,banking,financial-data,xbrl
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: requests>=2.26.0
+Requires-Dist: beautifulsoup4>=4.9.3
+Requires-Dist: lxml>=4.9.0
+Requires-Dist: streamlit>=1.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# FFIEC Call Reports Library
+
+A Python library for downloading and processing FFIEC Call Reports. This library provides a simple interface to download call reports from the FFIEC's Central Data Repository (CDR) and process them into a usable format.
+
+## Installation
+
+```bash
+pip install ffiec-call-reports
+```
+
+## Quick Start
+
+```python
+from ffiec_call_reports import FFIECClient
+from datetime import datetime
+
+# Initialize client
+client = FFIECClient(username="your_username", passphrase="your_passphrase")
+
+# Download a single call report
+report = client.get_call_report(
+    rssd_id=1842065,
+    period_end_date="2019/03/31"
+)
+
+# Get specific metrics
+total_assets = report.get_metric("RCFD2170")  # Total Assets
+total_loans = report.get_metric("RCFD1400")   # Total Loans
+
+# Download multiple reports
+reports = client.get_multiple_call_reports(
+    rssd_ids=[1842065, 1842066],
+    period_end_date=datetime(2019, 3, 31)
+)
+
+# Save to CSV
+report.to_csv("call_report.csv")
+```
+
+## Features
+
+- Download call reports for single or multiple institutions
+- Process XBRL data into pandas DataFrames
+- Map metric IDs to human-readable descriptions
+- Extract specific metrics easily
+- Save reports to CSV format
+- Streamlit web interface for easy access
+
+## Web Interface
+
+The library includes a Streamlit web interface for easy access. To run it:
+
+```bash
+streamlit run src/app_streamlit.py
+```
+
+## Usage Examples
+
+### Basic Usage
+
+```python
+from ffiec_call_reports import FFIECClient
+
+# Initialize client
+client = FFIECClient(username="your_username", passphrase="your_passphrase")
+
+# Download a report
+report = client.get_call_report(1842065, "2019/03/31")
+
+# Get the data as a DataFrame
+df = report.to_dataframe()
+```
+
+### Working with Multiple Reports
+
+```python
+from ffiec_call_reports import FFIECClient, get_mapping_dict, apply_mapping
+import pandas as pd
+
+# Initialize client
+client = FFIECClient(username="your_username", passphrase="your_passphrase")
+
+# Download multiple reports
+reports = client.get_multiple_call_reports(
+    rssd_ids=[1842065, 1842066, 1842067],
+    period_end_date="2019/03/31"
+)
+
+# Combine all reports
+all_data = pd.concat([report.to_dataframe() for report in reports])
+
+# Apply mapping
+mapping_dict = get_mapping_dict()
+mapped_data = apply_mapping(all_data, mapping_dict)
+```
+
+### Extracting Specific Metrics
+
+```python
+# Get a single metric
+total_assets = report.get_metric("RCFD2170")
+
+# Get multiple metrics
+metrics = report.get_metrics([
+    "RCFD2170",  # Total Assets
+    "RCFD1400",  # Total Loans
+    "RCFD1410"   # Commercial & Industrial Loans
+])
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
