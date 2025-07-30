@@ -1,0 +1,96 @@
+Metadata-Version: 2.4
+Name: ldanalysis
+Version: 0.1.6
+Summary: Linked Document Analysis - A provenance-driven project management system
+Author-email: ErnieP <ernie@cincineuro.com>
+License: MIT
+Project-URL: Homepage, https://cincineuro.github.io/ldanalysis/
+Project-URL: Documentation, https://cincineuro.github.io/ldanalysis/
+Project-URL: Repository, https://github.com/cincineuro/ldanalysis
+Project-URL: Issues, https://github.com/cincineuro/ldanalysis/issues
+Project-URL: Changelog, https://github.com/cincineuro/ldanalysis/blob/main/CHANGELOG.md
+Keywords: document-analysis,provenance,project-management,tracking,scientific-computing
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: rich>=13.0
+Requires-Dist: click>=8.1
+Requires-Dist: jinja2>=3.0
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: twine>=6.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+Requires-Dist: black>=22.0; extra == "dev"
+Requires-Dist: flake8>=5.0; extra == "dev"
+Requires-Dist: mypy>=0.990; extra == "dev"
+Requires-Dist: build>=1.2.0; extra == "dev"
+Requires-Dist: twine>=6.0.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: mkdocs>=1.5.0; extra == "docs"
+Requires-Dist: mkdocs-material>=9.4.0; extra == "docs"
+Requires-Dist: mkdocs-material-extensions>=1.3; extra == "docs"
+Requires-Dist: mkdocs-minify-plugin>=0.7.0; extra == "docs"
+Requires-Dist: pymdown-extensions>=10.0; extra == "docs"
+Requires-Dist: mkdocs-git-revision-date-localized-plugin>=1.2.0; extra == "docs"
+Requires-Dist: mike>=2.1.0; extra == "docs"
+Provides-Extra: all
+Requires-Dist: ldanalysis[dev,docs]; extra == "all"
+Dynamic: license-file
+
+# Linked Document Analysis (LDA)
+
+A project management and provenance system where every analytical process, input, and output is mapped directly to a section of the working document (e.g., manuscript, protocol, regulatory report).
+
+Each analysis folder, manifest, and result is named and organized to mirror the document outline, creating a one-to-one link between text, code, data, and results.
+
+This architecture ensures that every figure, table, or claim in the document is transparently and immutably traceable back to its generating code and data—enabling instant audit, replication, and regulatory review.
+
+## Installation
+
+Requires Python 3.10 or later with the Rich library for enhanced terminal output.
+
+```bash
+pip install rich
+```
+
+## Usage
+
+Create a new LDA project scaffold:
+
+```bash
+python lda_scaffold.py
+```
+
+The scaffold will:
+1. Create section folders matching your document structure
+2. Generate file manifests for inputs and outputs
+3. Set up provenance tracking with unique IDs
+4. Initialize logging and documentation
+
+## Project Structure
+
+Each LDA project contains:
+- **Section folders**: One-to-one mapping with document sections
+- **File manifests**: Explicit lists of expected inputs and outputs
+- **Provenance tracking**: Hashes, timestamps, and analyst attribution
+- **Audit logs**: Complete history of all changes
+
+## Documentation
+
+See [CLAUDE.md](CLAUDE.md) for detailed architecture and usage instructions.
+
+## License
+
+MIT License - see LICENSE file for details.
