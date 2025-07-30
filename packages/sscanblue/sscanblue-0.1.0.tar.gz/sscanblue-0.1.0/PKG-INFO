@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: sscanblue
+Version: 0.1.0
+Summary: Execute pre-configured EPICS/synApps sscans using Bluesky.
+Author: BCDA
+Maintainer: Pete Jemian
+License-Expression: LicenseRef-ANL-Open-Source-License
+Project-URL: Homepage, https://github.com/BCDA-APS/sscanblue/
+Project-URL: Bug Tracker, https://github.com/BCDA-APS/sscanblue/issues
+Keywords: EPICS,synApps,sscan,data acquisition,bluesky
+Classifier: Development Status :: 6 - Mature
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Embedded Systems
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: apstools
+Requires-Dist: bluesky
+Requires-Dist: databroker
+Requires-Dist: ophyd
+Requires-Dist: pyRestTable
+Requires-Dist: pyzmq
+
+# sscanblue
+
+Execute pre-configured EPICS/synApps sscans using Bluesky.
+
+Package was developed to enable current users of the EPICS `sscan` record to use
+tools provided by Bluesky, especially data storage, metadata, and access to live
+data visualization.
+
+- [User Guide](./docs/guide.md)
+- [Install](./docs/install.md)
+- [Predevelopment notes](./docs/notes.md)
