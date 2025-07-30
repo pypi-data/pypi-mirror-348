@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm_inference"
+version = "0.1.1"
+description = "Vision language models for robotics"
+authors = [
+    { name = "Edison Bejarano", email = "edison.bejarano@upc.edu" }
+]
+license = { text = "MIT" }
+dependencies = []
