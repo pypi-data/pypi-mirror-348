@@ -1,0 +1,225 @@
+[project]
+name = "project-version-manager"
+version = "0.1.1"
+description = "Project Version Manager. A tool for bumping python project versions following SemVer 2.0.0"
+authors = [
+    { name = "Malvin Ndip", email = "23006212+DazzyMlv@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = [
+    "bump",
+    "bumping",
+    "changelog",
+    "manager",
+    "version",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Version Control",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: System :: Archiving :: Packaging",
+    "Topic :: System :: Installation/Setup",
+    "Topic :: System :: Software Distribution",
+    "Typing :: Typed",
+]
+dependencies = [
+    "configupdater>=3.2",
+    "gitpython>=3.1.44",
+    "jinja2>=3.1.6",
+    "packaging>=25.0",
+    "ruamel-yaml>=0.18.10",
+    "semver>=3.0.0",
+    "tomlkit>=0.13.2",
+    "typer>=0.15.3",
+]
+
+
+[project.scripts]
+pvm = "pvm.cli:app"
+release = "pvm.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/dazzymlv/pvm"
+source = "https://github.com/dazzymlv/pvm.git"
+changelog = "https://github.com/dazzymlv/pvm/CHANGELOG.md"
+issues = "https://github.com/dazzymlv/pvm/issues"
+documentation = "https://github.com/dazzymlv/pvm/README.md"
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "gprof2dot>=2025.4.14",
+    "keepachangelog>=2.0.0",
+    "mypy>=1.15.0",
+    "pre-commit-hooks>=5.0.0",
+    "pre-commit>=4.2.0",
+    "project-version-manager",
+    "pytest-asyncio>=0.26.0",
+    "ruff>=0.11.8",
+    "twine>=6.1.0",
+    "taskipy>=1.14.1",
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "tox>=4.25.0",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.taskipy.tasks]
+default = "task --list"
+publish = {cmd = "uv build --no-sources && uv publish", help = "Build and publish the package using uv (excluding source files)" }
+install = {cmd = "uv sync --group dev --group test", help = "Install development and test dependencies using uv" }
+format = {cmd = "uv run ruff format . && uv run ruff check --fix --exit-zero && uv run pre-commit run --all-files && uv run mypy .", help = "Format, lint, run pre-commit hooks, and check type hints" }
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+project-version-manager = { workspace = true }
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+publish-url = "https://upload.pypi.org/legacy/"
+explicit = false
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+[tool.pvm]
+version-files = [
+    "pyproject.toml:project.version",
+    "src/pvm/__init__.py:__version__",
+    # "config.json:app.version",
+    # "settings.yaml:meta.version",
+    # "docs/README.md:Version",
+    # "setup.cfg:metadata.version",                # INI format
+    # "your_package/__init__.py:__version__\\s*=\\s*[\"']([^\"']+)[\"']",
+    # "README.md:Version[:=]\\s*([\\w\\.\\-\\+]+)",
+    # "notes.txt:AppVersion\\s*=\\s*['\"]([^'\"]+)['\"]"
+]
+
+[tool.tox]
+minversion = "4.25.0"
+envlist = ["py311", "py313"]
+
+[tool.tox.envs.py311]
+deps = [
+    "coverage",
+    "pytest",
+    # "tomli; python_version < '3.11'"
+]
+commands = [
+    "coverage run -m pytest",
+    "coverage report",
+]
+
+[tool.tox.envs.py313]
+deps = ["pytest"]
+commands = ["pytest"]
+
+[tool.black]
+skip-string-normalization = true
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+unsafe-fixes = true
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+
+[tool.ruff.lint]
+preview = true
+select = ["A", "B", "C", "D", "E", "F", "I", "UP"]
+fixable = ["A", "B", "C", "D", "E", "F", "I", "UP"]
+ignore = [
+    "B008",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D213",
+    "D415",
+    "UP004",
+]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.coverage.run]
+omit = [
+    "*/__main__.py",
+    "*/base.py",
+    "*/tests/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "pragma: no cover",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.exclude-package-data]
+pvm = [
+    "*.DS_Store",
+    "*.bak",
+    "*.log",
+    "*.pyc",
+    "*.pyo",
+    ".github/*",
+    "__pycache__/*",
+    "docs/*",
+    "tests/*",
+    "uv.lock",
+]
