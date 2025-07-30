@@ -1,0 +1,3 @@
+from transfer.generic_funcs.RequestProcessing.parse_request import ProcessedApplicationRequest
+
+application_instance = ProcessedApplicationRequest(instance=None)
