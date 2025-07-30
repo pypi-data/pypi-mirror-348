@@ -1,0 +1,70 @@
+Metadata-Version: 2.4
+Name: epic-api-client
+Version: 2025.1.10
+Summary: EPIC API Client including authentication flow and some wrapped API calls
+Author-email: Oscar van der Meer <o.m.vandermeer@amsterdamumc.nl>
+Maintainer-email: Oscar van der Meer <o.m.vandermeer@amsterdamumc.nl>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: PyJWT
+Requires-Dist: cryptography
+Requires-Dist: uuid
+Requires-Dist: requests_unixsocket
+
+# EPIC API Client
+
+## Installation
+
+use pip install EPIC-API-Client.<br/>
+see example.py for usage and setup .env accordingly.<br/>
+tip: use uv pip for faster pip (`pip install uv`)!<br/>
+
+## How to use
+
+### Testing on EPIC sandbox
+To familiarize, play around and test out the functionality of this package, you can use the EPIC sandbox. To use this sandbox, you only need to register an app at vendor services of EPIC, enable the EPIC sandbox and you're done! In the environment file, leave the url blanc, the epic api client will then automatically refer requests to the EPIC sandbox.
+
+### Using this wrapper within Nebula
+Nebula uses unix websockets to send web requests instead of simple http requests. This capability has been added to this wrapper which can be activated setting the use_unix_socket=True argument:<br/>
+`client = EPICClient(client_id=client_id, jwt_generator=jwt_generator, base_url=base_url, use_unix_socket=True)`<br/>
+Make sure to setup your Nebula environment as if you would use the Webcallout functionality from EPIC itself.<br/>
+
+still to write about and implement
+1. Using FHIR API functions
+3. authentication methods OAUTH but also basic token?
+4. how is this wrapper organized and what are base vs extensions?
+
+If your favorite function is not yet implemented, let me know, I will do this for you!
+
+## Troubleshooting
+- To print full requests and response for debugging purposes, initialise the client with `debug_mode=True`.<br/>
+- AttributeError: module 'jwt' object has no attribute 'encode'<br/>
+    ```
+    uv pip uninstall jwt
+    uv pip uninstall PyJWT
+    uv pip install PyJWT
+    ```
+
+## Implemented functions
+
+- FHIR API functions
+    - get_metadata
+    - patient_read
+    - patient_search
+    - encounter_read
+    - encounter_search
+    - document_reference_read
+    - document_reference_search
+    - document_reference_create
+    - observation_create
+    - condition_read
+    - condition_search
+    - condition_create
+- FHIR API extention functions
+    - patient_search_MRN
+    - mrn_to_FHIRid
+
