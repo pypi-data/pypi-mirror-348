@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: FamaFrenchDownloader
+Version: 0.1.1
+Summary: A Python library to easly download Fama-French Factor data for various regions and factor models (3-factors, 5-factors, Momentum).
+Home-page: https://github.com/finardfr/FamaFrenchDownloader
+Author: Francesco Finardi
+Author-email: finardfr@gmail.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=1.0
+Requires-Dist: requests>=2.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
