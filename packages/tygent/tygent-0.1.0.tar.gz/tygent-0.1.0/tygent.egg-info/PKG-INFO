@@ -1,0 +1,96 @@
+Metadata-Version: 2.4
+Name: tygent
+Version: 0.1.0
+Summary: Transform LLM Agents into High-Performance Engines with DAG optimization
+Home-page: https://tygent.ai
+Author: Tygent Team
+Author-email: Tygent AI <info@tygent.ai>
+License: CC BY-NC 4.0
+Project-URL: Homepage, https://github.com/tygent-ai/tygent-py
+Project-URL: Bug Tracker, https://github.com/tygent-ai/tygent-py/issues
+Project-URL: Documentation, https://tygent.ai/docs
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: openai>=1.0.0
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# Tygent Python Package
+
+Transform LLM Agents into High-Performance Engines with DAG optimization.
+
+## Installation
+
+```bash
+pip install tygent
+```
+
+## Overview
+
+Tygent converts agent-generated plans into typed Directed Acyclic Graphs (DAGs) for optimized execution through critical path analysis. This enables parallel execution of independent tasks and more efficient use of resources.
+
+## Key Features
+
+- **DAG Optimization**: Transform sequential plans into parallel execution graphs
+- **Typed Execution**: Strong typing for inputs and outputs between nodes
+- **Critical Path Analysis**: Identify and optimize the critical execution path
+- **Constraint-Aware Scheduling**: Schedule tasks based on resource constraints
+- **Dynamic Runtime Adaptation**: Adapt execution based on intermediate results
+
+## Quick Start
+
+```python
+from tygent import DAG, ToolNode, LLMNode, Scheduler
+
+# Create a DAG for your workflow
+dag = DAG("my_workflow")
+
+# Define tool functions
+async def search_data(inputs):
+    # Implementation
+    return {"results": f"Search results for {inputs.get('query')}"}
+
+async def extract_info(inputs):
+    # Implementation
+    return {"extracted": f"Extracted from {inputs.get('results')}"}
+
+# Add nodes to the DAG
+dag.add_node(ToolNode("search", search_data))
+dag.add_node(ToolNode("extract", extract_info))
+dag.add_node(LLMNode(
+    "analyze", 
+    model="gpt-4o",
+    prompt_template="Analyze this data: {extracted}"
+))
+
+# Define execution flow with dependencies
+dag.add_edge("search", "extract")
+dag.add_edge("extract", "analyze")
+
+# Create a scheduler to execute the DAG
+scheduler = Scheduler(dag)
+
+# Execute the workflow
+import asyncio
+async def run():
+    result = await scheduler.execute({"query": "What is the latest news about AI?"})
+    print(result)
+
+asyncio.run(run())
+```
+
+## Documentation
+
+For detailed documentation and more examples, visit [tygent.ai](https://tygent.ai/docs) or check out the [examples repository](https://github.com/tygent-ai/tygent-examples).
