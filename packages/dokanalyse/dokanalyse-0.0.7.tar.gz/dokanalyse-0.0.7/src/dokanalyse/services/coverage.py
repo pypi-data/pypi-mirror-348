@@ -1,0 +1,105 @@
+from io import BytesIO
+from typing import List, Tuple, Dict
+from lxml import etree as ET
+from osgeo import ogr
+from ..models.config import CoverageService
+from ..http_clients.wfs import query_wfs
+from ..http_clients.arcgis import query_arcgis
+from ..utils.helpers.common import xpath_select_one
+from ..utils.helpers.geometry import geometry_from_gml
+
+
+async def get_values_from_wfs(wfs_config: CoverageService, geometry: ogr.Geometry, epsg: int) -> Tuple[List[str], float, List[Dict]]:
+    _, response = await query_wfs(wfs_config.url, wfs_config.layer, wfs_config.geom_field, geometry, epsg)
+
+    if response is None:
+        return [], 0, []
+
+    source = BytesIO(response.encode('utf-8'))
+    context = ET.iterparse(source, huge_tree=True)
+
+    prop_path = f'.//*[local-name() = "{wfs_config.property}"]/text()'
+    geom_path = f'.//*[local-name() = "{wfs_config.geom_field}"]/*'
+    values: List[str] = []
+    feature_geoms: List[ogr.Geometry] = []
+    hit_area_percent = 0
+
+    for _, elem in context:
+        localname = ET.QName(elem).localname
+
+        if localname == 'member':
+            value = xpath_select_one(elem, prop_path)
+            values.append(value)
+
+            if value == 'ikkeKartlagt':
+                geom_element = xpath_select_one(elem, geom_path)
+                gml_str = ET.tostring(geom_element, encoding='unicode')
+                feature_geom = geometry_from_gml(gml_str)
+
+                if feature_geom:
+                    feature_geoms.append(feature_geom)
+
+    if len(feature_geoms) > 0:
+        hit_area_percent = _get_hit_area_percent(geometry, feature_geoms)
+
+    distinct_values = list(set(values))
+
+    return distinct_values, hit_area_percent, []
+
+
+async def get_values_from_arcgis(arcgis_config: CoverageService, geometry: ogr.Geometry, epsg: int) -> Tuple[List[str], float, List[Dict]]:
+    _, response = await query_arcgis(arcgis_config.url, arcgis_config.layer, None, geometry, epsg)
+
+    if response is None:
+        return [], 0, []
+
+    features: List[Dict] = response.get('features')
+
+    if len(features) == 0:
+        return [], 0, []
+
+    values: List[str] = []
+    data: List[Dict] = []
+
+    for feature in features:
+        value = feature.get('properties').get(arcgis_config.property)
+        values.append(value)
+
+        if len(arcgis_config.properties) > 0:
+            props = _map_arcgis_properties(feature, arcgis_config.properties)
+            data.append(props)
+
+    distinct_values = list(set(values))
+
+    return distinct_values, 0, data
+
+
+def _get_hit_area_percent(geometry: ogr.Geometry, feature_geometries: List[ogr.Geometry]) -> float:
+    geom_area: float = geometry.GetArea()
+    hit_area: float = 0
+
+    for geom in feature_geometries:
+        intersection: ogr.Geometry = geom.Intersection(geometry)
+
+        if intersection is None:
+            continue
+
+        area: float = intersection.GetArea()
+        hit_area += area
+
+    percent = (hit_area / geom_area) * 100
+
+    return round(percent, 2)
+
+
+def _map_arcgis_properties(feature: Dict, mappings: List[str]) -> Dict:
+    props = {}
+    feature_props: Dict = feature['properties']
+
+    for mapping in mappings:
+        props[mapping] = feature_props.get(mapping)
+
+    return props
+
+
+__all__ = ['get_values_from_wfs']
