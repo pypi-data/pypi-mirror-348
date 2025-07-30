@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: zeroskids
+Version: 1.5.2
+Summary: Truly skid-proof Python obfuscator
+Home-page: https://github.com/SkitDev/ZeroSkids
+Author: SkitDev
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+# 💀 ZeroSkids
+
+> pip-installable chaos engine for code obfuscation 😭
+
+## 📦 Install
+
+```bash
+pip install zeroskids
+```
+
+## 🔧 Usage
+
+```python
+from zeroskids import obfuscate
+
+original_code = "print('skidzz supremacy')"
+obfuscated = obfuscate(original_code)
+
+print(obfuscated)
+```
+
+```python
+from zeroskids import ultra_obfuscate
+
+original_code = "print('skidzz is cool')"
+obfuscated = ultra_obfuscate(original_code)
+
+print(obfuscated)
+```
+
+✅ works on `.py`, `.js`, `.ts`
+❌ does not work on readable code
+
+---
+
+## 💠 Local Dev Setup
+
+```bash
+git clone https://github.com/SkitDev/ZeroSkidsPackage.git
+cd ZeroSkidsPackage
+python3 -m build
+twine upload dist/*
+```
+
+---
+
+## 🔄 Versioning / Updating PyPI
+
+1. Edit your local `README.md`
+2. Bump version in `setup.py` (PyPI doesn't allow overwriting)
+
+   ```py
+   version="1.0.1"
+   ```
+3. Rebuild & reupload
+
+   ```bash
+   python -m build
+   twine upload dist/*
+   ```
+
+---
+
+## 🧙‍♀️ Made by
+
+* 👑 **Skidzz** – certified code criminal 💀
