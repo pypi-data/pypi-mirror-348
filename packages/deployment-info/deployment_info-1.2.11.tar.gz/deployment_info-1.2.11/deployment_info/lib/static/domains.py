@@ -1,0 +1,23 @@
+PRIMARY_DOMAINS = [
+    "google.com",
+    "facebook.com",
+    "youtube.com",
+    "amazon.com",
+    "wikipedia.org",
+    "twitter.com",
+    "instagram.com",
+    "linkedin.com",
+    "netflix.com",
+    "reddit.com",
+    "pinterest.com",
+    "openxta.com",
+    "ebay.com",
+    "bing.com",
+    "yahoo.com",
+    "microsoft.com",
+    "apple.com",
+    "quora.com",
+    "github.com",
+    "stackoverflow.com",
+    "whatsapp.com"
+]
