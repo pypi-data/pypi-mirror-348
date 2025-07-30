@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "quick-jwt"
+version = "0.0.2"
+description = ""
+authors = ["maxim-f1 <maxconal228@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.12"
+pyjwt = "^2.10.1"
+pydantic-settings = "^2.9.1"
+
+
+[tool.poetry.group.develop.dependencies]
+pytest = "^8.3.5"
+httpx = "^0.28.1"
+uvicorn = "^0.34.2"
+coverage = "^7.8.0"
+twine = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
