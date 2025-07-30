@@ -1,0 +1,5 @@
+pip
+{% if snipkit.command_line_interface|lower == 'click' -%}
+Click{% endif %}
+{% if snipkit.use_pytest == 'y' -%}
+pytest{% endif %}

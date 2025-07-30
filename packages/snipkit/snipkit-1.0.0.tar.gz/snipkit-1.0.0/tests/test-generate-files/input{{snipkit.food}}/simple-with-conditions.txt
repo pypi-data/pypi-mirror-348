@@ -1,0 +1,5 @@
+{% if snipkit %}
+    {% if snipkit.food %}
+I eat {{ snipkit.food }}
+    {% endif %}
+{% endif %}
