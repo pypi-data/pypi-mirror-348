@@ -1,0 +1,146 @@
+Metadata-Version: 2.4
+Name: tstr
+Version: 0.1.0
+Summary: Template string utilities and backports
+Project-URL: Repository, https://github.com/ilotoki0804/tstr
+Author-email: ilotoki0804 <ilotoki0804@gmail.com>
+License-Expression: Apache-2.0
+License-File: LICENSE
+Keywords: backport,string,template,utility
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.14
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+# tstr
+
+`tstr` is a Python library that provides convenient utility functions for working with [PEP 750 template strings](https://peps.python.org/pep-0750/). While template strings (`t"..."`) are powerful on their own, `tstr` makes them even easier to use by providing common processing patterns and utilities.
+
+For Python versions older than 3.14, `tstr` includes a backport implementation allowing you to use template strings functionality in earlier Python versions.
+
+## Installation
+
+```bash
+pip install tstr
+```
+
+## Requirements
+
+- Python 3.14+ (template strings were introduced in Python 3.14 via PEP 750)
+
+## Quick Start
+
+```python
+from tstr import f
+
+# Use template strings
+name = "world"
+template = t"Hello, {name}!"
+
+# Convert to a string (just like f-strings)
+result = f(template)  # "Hello, world!"
+```
+
+## Core Functions
+
+### Working with Template Strings
+
+- **`f(template)` / `evaluate(template)`**: Convert a template to a string (like f-strings)
+- **`normalize(interpolation)`**: Process an interpolation to get its value or string representation
+- **`normalize_str(interpolation)`**: Convert an interpolation to a formatted string
+
+### Template Processing
+
+- **`bind(template, binder, *, joiner="".join)`**: Apply a function to each interpolation in a template
+- **`binder(function, joiner="".join)`**: Create a reusable template processor function
+- **`converter(conversion)`**: Get a conversion function (ascii, repr, str) for a conversion specifier
+- **`convert(value, conversion)`**: Apply a conversion to a value
+
+## Examples
+
+### Basic Usage: Template to String
+
+```python
+from tstr import f, evaluate
+
+name = "world"
+template = t"Hello, {name}!"
+
+# Both functions do the same thing
+result1 = f(template)        # "Hello, world!"
+result2 = evaluate(template) # "Hello, world!"
+```
+
+### Creating Custom Template Processors
+
+```python
+from tstr import bind, normalize_str
+
+def html_escape(text):
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+def safe_html(template):
+    # Apply HTML escaping to each interpolation
+    return bind(template, lambda i: html_escape(normalize_str(i)))
+
+user_content = "<script>alert('XSS attack')</script>"
+template = t"<div>{user_content}</div>"
+safe_output = safe_html(template)
+# "<div>&lt;script&gt;alert('XSS attack')&lt;/script&gt;</div>"
+```
+
+### Using Binders for Reusable Processors
+
+```python
+from tstr import binder, normalize_str
+
+# Create a custom template processor
+uppercase = binder(lambda i: normalize_str(i).upper())
+
+# Use it on multiple templates
+name = "world"
+place = "Python"
+template1 = t"Hello, {name}!"
+template2 = t"Welcome to {place}!"
+
+result1 = uppercase(template1)  # "Hello, WORLD!"
+result2 = uppercase(template2)  # "Welcome to PYTHON!"
+```
+
+### Advanced Template Comparison
+
+```python
+from tstr import template_equivalent
+
+name = "World"
+template1 = t"Hello {name}"
+template2 = t"Hello {name}"
+
+# Compare templates with full equality check
+assert template_equivalent(template1, template2)
+
+# Compare only structure, not values
+template3 = t"Hello {name}"
+name = "Python"
+template4 = t"Hello {name}" 
+assert template_equivalent(template3, template4, compare_value=False)
+```
+
+## Why Use Template Strings?
+
+Template strings allow you to work with both the literal string parts and interpolated values before they're combined. This enables:
+
+1. **Security**: Sanitize user input before rendering (prevent XSS, SQL injection)
+2. **Custom formatting**: Format values based on their types or context
+3. **Domain-specific languages**: Build HTML, SQL, or other languages safely
+4. **Structural analysis**: Examine template structure for validation or optimization
+
+## Documentation
+
+For more detailed documentation, see the [API Reference](https://tstr.readthedocs.io/).
+
+## License
+
+Apache License 2.0
