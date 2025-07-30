@@ -1,0 +1,58 @@
+{
+	"operator": "Add",
+	"opset_version": 21,
+	"initializer_rank": 2,
+    "test_meta_data": {
+        "multiple_batchs": true
+    },
+	"base_configuration": {
+		"input_shapes": [
+			["input_0", [32, 32, 32, 32]],
+			["input_1", [32, 32, 32, 32]]
+		],
+		"attributes": {}
+	},
+	"test_configuration": {
+		"main_parameters": {
+			"dim size": [
+				1,4,16,32,64
+			]
+		},
+		"other_parameters": {
+			"dim size": {
+                "1": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 1, 1, 1]],
+                        ["input_1", [1, 1, 1, 1]]
+					]
+				},
+				"4": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [4, 4, 4, 4]],
+                        ["input_1", [4, 4, 4, 4]]
+					]
+				},
+				"16": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [16, 16, 16, 16]],
+                        ["input_1", [16, 16, 16, 16]]
+					]
+				},
+                "32": {
+					"attributes": {},
+					"input_shapes": []
+				},
+                "64": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [64, 64, 64, 64]],
+                        ["input_1", [64, 64, 64, 64]]
+					]
+				}
+			}
+		}
+	}
+}

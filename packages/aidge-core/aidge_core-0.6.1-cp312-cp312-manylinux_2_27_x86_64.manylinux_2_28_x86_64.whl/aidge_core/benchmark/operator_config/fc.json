@@ -1,0 +1,49 @@
+{
+	"operator": "Gemm",
+	"opset_version": 21,
+	"initializer_rank": 1,
+    "test_meta_data": {
+        "multiple_batchs": false
+    },
+	"base_configuration": {
+		"input_shapes": [
+			["input_0", [1, 100]],
+			["weight_1", [100, 50]],
+            ["bias_2", [50]]
+		],
+		"attributes": {
+		}
+	},
+	"test_configuration": {
+		"main_parameters": {
+			"input_size_0": [
+				10, 100, 1000
+			]
+		},
+		"other_parameters": {
+			"input_size_0": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10]],
+                        ["weight_1", [10, 50]]
+					]
+				},
+				"100": {
+                    "attributes": {},
+					"input_shapes": [
+						["input_0", [1, 100]],
+                        ["weight_1", [100, 50]]
+					]
+                },
+				"1000": {
+                    "attributes": {},
+					"input_shapes": [
+						["input_0", [1, 1000]],
+                        ["weight_1", [1000, 50]]
+					]
+                }
+			}
+		}
+	}
+}
