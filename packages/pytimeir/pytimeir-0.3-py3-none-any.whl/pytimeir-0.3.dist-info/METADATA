@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: pytimeir
+Version: 0.3
+Summary: Get events and holidays from time.ir
+Home-page: https://github.com/saeedghadiri/pytimeir
+Author: Saeed Ghadiri
+Author-email: saeed.ghadiri@gmail.com
+Project-URL: Bug Tracker, https://github.com/saeedghadiri/pytimeir/issues
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: pandas
+Requires-Dist: jdatetime
+Requires-Dist: Unidecode
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# pytimeir
+
+[![Python ver](https://img.shields.io/pypi/pyversions/pytimeir.svg)](https://pypi.python.org/pypi/pytimeir)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+A simple package to get events and holidays from [time.ir](https://www.time.ir/)
+
+## Getting Started
+
+Install the package with:
+
+```
+pip install pytimeir
+```
+
+## Usage
+
+```python
+import pytimeir
+
+# get holidays for a year
+df = pytimeir.get_holidays(1401)
+
+# get holidays for a range of years
+df = pytimeir.get_holidays(1390, 1410)
+
+# get events for a year
+df = pytimeir.get_events(1401)
+
+# get events for a range of years
+df = pytimeir.get_events(1390, 1410)
+```
