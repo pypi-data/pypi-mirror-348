@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: pypitester
+Version: 0.1.1
+Summary: A simple Python package for PyPI testing.
+Author-email: Test User <test@example.com>
+Description-Content-Type: text/markdown
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+License-File: LICENSE
+
+# pypitester
+
+A simple Python package for testing PyPI publishing.
+
+## Installation
+
+```bash
+pip install pypitester
+```
+
+## Usage
+
+### Command Line
+
+```bash
+# Show version
+pypitester --version
+
+# Greet someone
+pypitester --name "Your Name"
+```
+
+### Python API
+
+```python
+from pypitester import utils
+
+# Greet someone
+utils.greet("Your Name")
+
+# Add two numbers
+result = utils.add(1, 2)
+print(result)  # 3
+```
+
+## License
+
+MIT 
