@@ -1,0 +1,8 @@
+# Name: RAS Equipment
+PREFIX cim: <${cim}>
+PREFIX alg: <${ALG}>
+SELECT ?mrid ?equipment_mrid ?name WHERE {
+  ?rpact (alg:ProtectiveActionEquipment.Equipment | alg:ProtectiveActionAdjustmentAC.ConductingEquipment | alg:ProtectiveActionAdjustmentDCController.DCController)/cim:IdentifiedObject.mRID ?equipment_mrid ;
+         cim:IdentifiedObject.mRID ?mrid ;
+         cim:IdentifiedObject.name ?name .
+}
