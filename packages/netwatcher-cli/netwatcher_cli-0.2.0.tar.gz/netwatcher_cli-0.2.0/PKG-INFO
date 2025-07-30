@@ -1,0 +1,139 @@
+Metadata-Version: 2.4
+Name: netwatcher-cli
+Version: 0.2.0
+Summary: Monitor and track active network connections
+Project-URL: Documentation, https://github.com/pfischer1687/netwatcher-cli/blob/main/docs/cli.md
+Project-URL: Repository, https://github.com/pfischer1687/netwatcher-cli
+Project-URL: Issues, https://github.com/pfischer1687/netwatcher-cli/issues
+Project-URL: Changelog, https://github.com/pfischer1687/netwatcher-cli/blob/main/CHANGELOG.md
+Author-email: Paul Fischer <paulfischerdev@gmail.com>
+Maintainer-email: Paul Fischer <paulfischerdev@gmail.com>
+License-Expression: MIT
+Keywords: CLI,Typer,monitoring,network,security
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.9
+Requires-Dist: click~=8.1.8
+Requires-Dist: httpx~=0.28.1
+Requires-Dist: loguru~=0.7.3
+Requires-Dist: psutil~=7.0.0
+Requires-Dist: pydantic-settings~=2.9.1
+Requires-Dist: pydantic~=2.11.4
+Requires-Dist: rich~=14.0.0
+Requires-Dist: typer~=0.15.3
+Requires-Dist: yarl~=1.20.0
+Description-Content-Type: text/markdown
+
+# NetWatcher CLI
+
+[![PyPI version](https://badge.fury.io/py/netwatcher-cli.svg)](https://pypi.org/project/netwatcher-cli/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+**NetWatcher CLI** monitors outbound network connections on your local machine and enriches them with IP geolocation and
+ownership data to help identify potentially suspicious processes.
+
+### Example Output
+
+```text
+┏━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ IP      ┃ Geolocation     ┃ Ownership          ┃ Threat Level ┃ Assessment              ┃ Process Info            ┃
+┡━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 8.8.8.8 │ City, State Zip │ - ISP: Example ISP │ Suspicious   │ - Hosting provider      │ - Executable Path: …    │
+│         │ Country         │ - Org: Example Org │              │ - Proxy or VPN detected │ - Command Line: …       │
+│         │                 │ - AS: ASEXAMPLE    │              │ ...                     │ - Process Name: sus.exe │
+│         │                 │ - AS Name: EX      │              │                         │ - PID: 1234             |
+└─────────┴─────────────────┴────────────────────┴──────────────┴─────────────────────────┴─────────────────────────┘
+...
+```
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Development](#development)
+- [License](#license)
+
+## Features
+
+- View geolocation and BGP table details about remote internet connections.
+- Retrieve process information associated with each connection.
+- Flag reasons to suspect possibly malicious activity.
+- Optionally generate threat assessment as HTML report.
+- Optionally output logs to disk.
+
+## Installation
+
+Install from [PyPI](https://pypi.org/project/netwatcher-cli):
+
+```bash
+pip install netwatcher-cli
+```
+
+## Usage
+
+See the Typer-generated [docs](docs/cli.md) for the full CLI usage reference.
+
+## Development
+
+1. Install `uv`:
+
+   To manage dependencies and install **NetWatcher CLI** efficiently, use **uv**. You can install `uv`
+   ([here](https://docs.astral.sh/uv/getting-started/installation/)).
+
+2. Install Python >= 3.9:
+
+```bash
+uv python install 3.13
+```
+
+3. Create a virtual environment and activate it:
+
+```bash
+uv venv --python 3.13
+
+# macOS and Linux
+source .venv/activate/bin
+
+# Windows
+.venv\Scripts\activate
+```
+
+4. Install dependencies:
+
+```bash
+uv pip install -r pyproject.toml --all-extras
+```
+
+5. Run unit tests
+
+```bash
+# -s allows print() output
+# -vvv increases verbosity
+uv run pytest -s -vvv
+```
+
+6. Run pre-commit (requires **git-cliff**, see [Changelog Generation](#changelog-generation) for more)
+
+```bash
+# This runs formatters, linters, type checks (Pyright), secret scanners, and doc generators.
+uv run pre-commit run --all-files
+```
+
+### Changelog Generation
+
+This project uses [`git-cliff`](https://git-cliff.org/docs/) to generate changelogs automatically based on conventional
+commit messages. To use or update the changelog, you must have `git-cliff` installed locally or in your CI environment.
+You can do this via cargo, the Rust package manager (which you can install
+[here](https://www.rust-lang.org/tools/install)):
+
+```bash
+cargo install git-cliff
+```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
