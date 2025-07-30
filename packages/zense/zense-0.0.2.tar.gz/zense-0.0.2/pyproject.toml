@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zense"
+version = "0.0.2"
+description = "Lightweight web stack"
+license = { text = "MIT" }
+
+[project.urls]
+Source = "https://github.com/zensical/zense"
