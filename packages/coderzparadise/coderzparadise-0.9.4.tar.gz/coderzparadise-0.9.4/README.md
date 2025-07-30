@@ -1,0 +1,293 @@
+# Data Structure
+Organized way to store and manage data.
+
+Index | Data Structure | Class Name
+--- | --- | ---
+**0** | Binary Search Tree | BST()
+**1** | Disjoint Forrest Set | DSF(int::size)
+**2** | Graph - Adjacency List | AdjacencyList(list::nodes)
+**3** | Graph - Adjacency Matrix | AdjacencyList(list::nodes)
+**4** | Graph - Edge List | EdgeList(list::nodes)
+**5** | HashMap | HashMap(int::size)
+**6** | Heap | Heap()
+**7** | LinkedList | LinkedList()
+**8** | Queue | Queue()
+**9** | Set | Set()
+**10** | Stack | Stack()
+**11** | Trie() | Trie()
+
+
+## How To Get Started
+
+1. pip install coderzparadise
+
+2. Use examples below in code
+
+### Binary Search Tree
+```
+from coderzparadise import DataStructure
+
+b = DataStructure.BST()
+
+b.insert(50)
+b.insert(75)
+b.insert(25)
+b.insert(100)
+b.insert(95)
+
+b.display()
+```
+
+### DisjointForrestSet
+```
+from coderzparadise import DataStructure
+
+d = DataStructure.DSF(10) #parameter: (integer) 10 is setting size of disjointforrestset.
+
+d.insert(0, 1)
+d.insert(0, 3)
+d.insert(0, 5)
+d.insert(0, 7)
+d.insert(0, 9)
+d.insert(2, 4)
+d.insert(2, 6)
+
+number_of_sets_found = d.num_of_sets()
+print('dsf num of sets: ', number_of_sets_found,\n)
+
+d.display()
+```
+
+### Graph - Adjacency List
+```
+from coderzparadise import DataStructure
+
+a = DataStructure.AdjacencyList([0,1,2,3,4,5,6,7,8,9]) #parameter: list is nodes that make up the graph.
+
+a.insert(9, 1)
+a.insert(9, 2)
+a.insert(9, 3)
+a.insert(9, 4)
+a.insert(0, 5)
+a.insert(0, 3)
+
+a.display()
+```
+
+### Graph - Adjacency Matrix
+```
+from coderzparadise import DataStructure
+
+a = DataStructure.AdjacencyMatrix([0,1,2,3,4,5,6,7,8,9]) #parameter: list is nodes that make up the graph.
+
+a.insert(9, 1)
+a.insert(9, 2)
+a.insert(9, 3)
+a.insert(9, 4)
+a.insert(0, 5)
+a.insert(0, 3)
+
+a.display()
+```
+
+### Graph - EdgeList
+```
+from coderzparadise import DataStructure
+
+e = DataStructure.AdjacencyMatrix([0,1,2,3,4,5,6,7,8,9]) #paramter: list is nodes that make up the graph.
+
+e.insert(9, 1)
+e.insert(9, 2)
+e.insert(9, 3)
+e.insert(9, 4)
+e.insert(0, 5)
+e.insert(0, 3)
+
+e.display()
+```
+
+### Hash Map
+```
+from coderzparadise import DataStructure
+
+h = HashMap(2) #parameter: (integer) 2 is setting up the inital size of hashmap.
+
+h.insert('soccer')
+h.insert('soccer')
+h.insert('basketball')
+h.insert('pizza')
+h.insert('hamburger')
+
+h.display()
+```
+
+### Heap
+```
+from coderzparadise import DataStructure
+
+h = Heap()
+
+h.insert(16)
+h.insert(16)
+h.insert(37)
+h.insert(28)
+h.insert(49)
+h.insert(21)
+h.insert(5)
+
+h.display()
+```
+
+
+### Linked List
+```
+from coderzparadise import DataStructure
+
+ll = DataStructure.LinkedList()
+
+ll.insert(75)
+ll.insert(75)
+ll.insert(80)
+ll.insert(81)
+ll.insert(99)
+ll.insert(2)
+ll.insert(77)
+
+ll.display()
+```
+
+### Queue
+```
+from coderzparadise import DataStructure
+
+q = DataStructure.Queue()
+
+q.insert(10)
+q.insert(10)
+q.insert(20)
+q.insert(30)
+q.insert(40)
+q.insert(50)
+
+q.display()
+```
+
+### Set
+```
+from coderzparadise import DataStructure
+
+ll = DataStructure.Set()
+
+s.insert(10)
+s.insert(10)
+s.insert(20)
+s.insert(50)
+s.insert(50)
+s.insert(50)
+s.insert(50)
+s.insert(30)
+
+s.display()
+```
+
+### Stack
+```
+from coderzparadise import DataStructure
+
+s = DataStructure.Stack()
+
+s.insert(10)
+s.insert(10)
+s.insert(20)
+s.insert(30)
+s.insert(40)
+s.insert(50)
+
+s.display()
+```
+
+
+### Trie
+```
+from coderzparadise import DataStructure
+
+t = DataStructure.Trie()
+t.insert("socks")
+t.insert("soccer")
+t.insert("colors")
+t.search_word("sock")
+t.search_word("socks")
+t.is_prefix("b")
+t.is_prefix("s")
+```
+---
+---
+---
+# GitHub Daily Exercise Below...
+
+## @CoderzParadise 🇺🇸
+- 👋 Hello world, this is @coderzparadise 
+
+- 👀 Top 200 data structure and leetcode questions to pass multiple swe technical interviews in college
+
+- ⚡ You are currently learning how to pass cs technical interviews pursing cs/ee degree
+
+- 💞️ Data structures made from scratch also including real questions from google, fb, twitter, microsoft, uber, pinterest, bloomberg... 
+
+- 📫 Instructions: clone/fork both github repo's ([DataStructure](https://github.com/coderzparadise/DataStructure) && [Algorithm](https://github.com/coderzparadise/Algorithm)).\
+Complete 1 new function each day and all previous fuctions [follow repo template] until all 200 questions/functions are complete (must be able to code and explain any data structure or function within 5 to 13 minutes tops).
+
+#### Repository
+- 1. [Home Page](https://github.com/coderzparadise)
+- 2. [DataStructure](https://github.com/coderzparadise/DataStructure)
+- 3. [Algorithm](https://github.com/coderzparadise/Algorithm)
+---
+---
+---
+
+## @CoderzParadise - en espanol 🇲🇽 🇪🇸
+- ¡Hola mundo 👋, este es @coderzparadise!
+
+- 👀 Las 200 mejores preguntas de estructura de datos y LeetCode para aprobar múltiples entrevistas técnicas de technologia en la universidad.
+
+- ⚡ Tu eres algien aprendiendo cómo aprobar entrevistas técnicas de technologia mientras estudias una carrera en la universidad en ciencia de computación.
+
+- 💞️ Estructuras de datos estan creadas de mano incluyendo tmb preguntas reales de Google, Facebook, Twitter, Microsoft, Uber, Pinterest, Bloomberg...
+
+- 📫 Instrucciones: clone/fork para hacer dos repositorios de Github ([DataStructure](https://github.com/coderzparadise/DataStructure) && [Algorithm](https://github.com/coderzparadise/Algorithm)). Completa 1 nueva función cada día y todas las funciones anteriores [sigue la plantilla del repositorio] hasta que se completen las 200 funciones/preguntas (debes ser capaz de programar y explicar cualquier estructura de datos o función en un máximo de 5 a 13 minutos).
+
+- 🌱 Dato curioso: hecho por un graduado universitario en technologia/ingeniería para ayudarte a conseguir tu trabajo en tecnología y programar en paraíso 🌴.
+
+#### Repositorio 
+- 1. [Portada](https://github.com/coderzparadise)
+- 2. [Estructura Datos](https://github.com/coderzparadise/DataStructure)
+- 3. [Algoritmo](https://github.com/coderzparadise/Algorithm)
+---
+---
+---
+
+## @CoderzParadise - en portugues 🇧🇷 🇵🇹
+- Olá mundo 👋, este é @coderzparadise!
+
+- 👀 Top 200 questões de estrutura de dados e LeetCode para passar em múltiplas entrevistas técnicas de ciência da computação na faculdade.
+
+- ⚡ Você está atualmente aprendendo como passar em entrevistas técnicas de ciência da computação cursando graduação em ciência da computação/engenharia elétrica.
+
+- 💞️ Estruturas de dados feitas do zero, incluindo também perguntas reais do Google, Facebook, Twitter, Microsoft, Uber, Pinterest, Bloomberg...
+
+- 📫 Instruções: clone/fork farca um dos repositórios do Github ([DataStructure](https://github.com/coderzparadise/DataStructure) && [Algorithm](https://github.com/coderzparadise/Algorithm)). Complete 1 nova função a cada dia e todas as funções anteriores [siga o modelo do repositório] até que todas as 200 funções/perguntas estejam completas (deve ser capaz de codificar e explicar qualquer estrutura de dados ou função em no máximo 5 a 13 minutos).
+
+- 🌱 Curiosidade: feito por um graduado universitário de ciência da computação/engenharia para te ajudar a conseguir seu emprego na área de tecnologia e programar paraíso 🌴.
+
+#### Repositório 
+- 1. [Pagina Principa](https://github.com/coderzparadise)
+- 2. [DataStructure](https://github.com/coderzparadise/DataStructure)
+- 3. [Algorithm](https://github.com/coderzparadise/Algorithm)
+---
+---
+---
+
+<!---
+coderzparadise/coderzparadise is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
