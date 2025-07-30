@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: quplots
+Version: 0.0.1
+Summary: Allows you to visualize and interact with plots that describes quantum phenoms
+Project-URL: Documentation, https://github.com/JoseAdrianRodriguezGonzalez/quplots#readme
+Project-URL: Issues, https://github.com/JoseAdrianRodriguezGonzalez/quplots/issues
+Project-URL: Source, https://github.com/JoseAdrianRodriguezGonzalez/quplots
+Author-email: Adrian <kerpador@gmail.com>, Isabel <isabelrocha31415@gmail.com>
+License-Expression: MIT
+License-File: LICENSE.txt
+Keywords: interactive,physics,plots,quantum,visualization
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.10
+Requires-Dist: matplotlib>=3.6.0
+Requires-Dist: numpy>=1.23.0
+Requires-Dist: plotly>=5.0.0
+Requires-Dist: scipy>=1.9.0
+Description-Content-Type: text/markdown
+
+# QuPlots
+
+[![PyPI - Version](https://img.shields.io/pypi/v/quplots.svg)](https://pypi.org/project/quplots)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/quplots.svg)](https://pypi.org/project/quplots)
+
+-----
+
+## Table of Contents
+
+- [Installation](#installation)
+- [License](#license)
+
+## Installation
+
+```console
+pip install quplots
+```
+
+## License
+
+`quplots` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
