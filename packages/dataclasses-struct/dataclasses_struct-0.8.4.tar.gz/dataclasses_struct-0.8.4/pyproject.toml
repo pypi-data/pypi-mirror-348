@@ -1,0 +1,76 @@
+[tool.poetry]
+name = "dataclasses-struct"
+version = "0.8.4"
+description = "Converting dataclasses to and from fixed-length binary data using struct"
+authors = ["Harry Mander <harrymander96@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/harrymander/dataclasses-struct"
+repository = "https://github.com/harrymander/dataclasses-struct"
+documentation = "https://github.com/harrymander/dataclasses-struct/blob/main/README.md#usage"
+packages = [{include = "dataclasses_struct"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+typing-extensions = "^4.5.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = [
+    { version = "^1.15.0", python = ">=3.9,<4.0.0" },
+    { version = "^1.14.1", python = "<3.9" },
+]
+pytest = "^7.2.2"
+pytest-cov = "^4.0.0"
+pytest-mypy-plugins = "^1.10.1"
+ruff = "^0.2.2"
+flake8 = "^7.0.0"
+
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+markers = [
+	"cc: marks a test as requiring a C compiler"
+]
+
+
+[tool.coverage.run]
+source = ["dataclasses_struct/"]
+omit = ["dataclasses_struct/ext/**/*.py", "dataclasses_struct/sizes.py"]
+
+
+[tool.ruff]
+line-length = 79
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+	"E", "W", # pycodestyle errors and warnings
+	"F", # pyflakes
+	"I", # isort
+	"UP", # pyupgrade
+]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
