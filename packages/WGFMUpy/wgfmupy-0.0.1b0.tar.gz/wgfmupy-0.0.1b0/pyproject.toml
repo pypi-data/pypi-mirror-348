@@ -1,0 +1,21 @@
+[project]
+name = "WGFMUpy"
+version = "0.0.1b"
+authors = [
+  { name="Davide Florini", email="davideflorini92@gmail.com" },
+]
+description = "WGFMU library port to python"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/DavideFlorini/WGFMUpy"
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
