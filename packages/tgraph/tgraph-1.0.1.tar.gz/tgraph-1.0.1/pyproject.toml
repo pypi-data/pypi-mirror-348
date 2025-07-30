@@ -1,0 +1,33 @@
+[build-system]
+
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "tgraph"
+version = "1.0.1"
+description = "Implementation of the t-graph package presented in the paper 'CallMine: Fraud Detection and Visualization of Million-Scale Call Graphs'."
+readme = "README.md"
+authors = [{ name = "Mirela Cazzolato", email = "mirelac@usp.br" }]
+license = "MIT"
+keywords = ["tgraph", "tgraph-spot", "callmine", "callmine-focus"]
+dependencies = [
+    "matplotlib",
+    "pandas",
+    "numpy",
+    'plotly',
+    "networkx",
+    "scipy"
+]
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://github.com/joaovlpss/tgraph-fork"
+
+[project.scripts]
+staticgraph = "tgraph.static_graph:main"
+temporalgraph = "tgraph.temporal_graph:main"
+ndcloud = "tgraph.nd_cloud:main"
+joinfeaturefiles = "tgraph.join_feature_files:main"
+
