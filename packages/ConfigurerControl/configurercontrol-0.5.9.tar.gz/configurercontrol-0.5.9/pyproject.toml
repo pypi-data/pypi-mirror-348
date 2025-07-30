@@ -1,0 +1,33 @@
+[build-system]
+requires = [
+    "setuptools",
+    "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "ConfigurerControl"
+version = "0.5.9"
+requires-python = ">= 3.12"
+authors = [
+    {name="Sergei Vasilev", email="vasilsv@ite-ng.ru"}
+]
+dependencies = [
+    "Pillow>=10.4.0",
+    "DLMS-SPODES >= 0.85.1, <0.87",
+    "DLMS_SPODES_client >= 0.16.3, < 0.17",
+    "DLMSCommunicationProfile >= 0.1.4, < 0.2",
+    "tKot>=0.7.9"
+]
+description="dlms-spodes"
+readme = "README.md"
+keywords=['dlms', 'GUI', 'MVC']
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+[project.urls]
+Source = "http://git.ite-ng.ru/dep/configurer_control_services_prj"
