@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: streamlit-math-keyboard
+Version: 0.1.1
+Summary: A custom Streamlit component for a math input keyboard.
+Home-page: https://github.com/yourusername/streamlit-math-keyboard
+Author: Nuttibase Charupeng
+Author-email: basedevbackend@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: streamlit>=1.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+
+**Key things to customize/add:**
+
+1.  **`[![PyPI version](...)](...)`**: Once your package is on PyPI, update this badge. You can get the markdown from [shields.io](https://shields.io/) or directly from your PyPI project page.
+2.  **`placeholder_screenshot.png`**: **Definitely replace this!** Take a nice screenshot of your component in action within a Streamlit app and add it to your repository (e.g., in the root or an `assets/` folder) and update the link.
+3.  **`yourusername` / `your.email@example.com`**: Update these in the `setup.py` section and potentially in the README if you list yourself as the author.
+4.  **GitHub URL**: Update the `url` in `setup.py` and any links in the README to point to your actual GitHub repository.
+5.  **`LICENSE.txt`**: Create this file in your project root and paste the text of your chosen license (e.g., MIT License).
+6.  **More Examples:** If your component has more advanced features or common use cases, add more examples to the "Usage" section.
+7.  **`requirements.txt` (for development):** If your development environment needs more than just `streamlit`, create a `requirements.txt` in the root and list them.
+
+This README provides a solid foundation for users to understand, install, and use your component. Good luck with the publishing!
