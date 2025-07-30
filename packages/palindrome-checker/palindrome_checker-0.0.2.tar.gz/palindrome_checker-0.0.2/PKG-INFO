@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: palindrome_checker
+Version: 0.0.2
+Summary: A simple Python package to check if a string is a palindrome.
+Project-URL: Homepage, https://github.com/pypa/sampleproject
+Project-URL: Bug Tracker, https://github.com/pypa/sampleproject/issues
+Author-email: Faizan Anwar <faizanunique.5@gmail.com>
+License: MIT
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Palindrome Checker
+
+A simple Python package to check if a string and integer is a palindrome. It ignores case and punctuation.
+
+## Usage
+
+```python
+from palindrome_checker.phrase import Phrase
+
+Phrase("Madam, I'm Adam.").ispalindrome() #True
