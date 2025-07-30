@@ -1,0 +1,20 @@
+[build-system]
+requires      = ["setuptools>=61.0", "wheel", "build", "pipreqs", "tomlkit"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "diagram-to-iac"
+version     = "0.3.0"
+description = "Convert architecture diagrams into IaC modules"
+readme      = "README.md"
+authors     = [{ name="vindpro", email="admin@vindpro.com" }]
+dependencies = ["anthropic==0.51.0", "google_api_python_client==2.169.0", "openai==1.79.0", "protobuf>=3.19.5,<5.0.0dev", "PyYAML==6.0.2", "Requests==2.32.3", "google-generativeai==0.3.1"]   # ← always overwritten by update_deps.py
+
+[project.scripts]
+diagram-to-iac = "diagram_to_iac.cli:main"
+
+[tool.setuptools]                    # (intentionally left empty)
+
+[tool.setuptools.packages.find]      # find‑options live here
+where   = ["src"]
+exclude = ["tests*", "scripts*"]
