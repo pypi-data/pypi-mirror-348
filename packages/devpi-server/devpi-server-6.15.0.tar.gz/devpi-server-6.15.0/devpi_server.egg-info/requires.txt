@@ -1,0 +1,19 @@
+py>=1.4.23
+httpx
+argon2-cffi
+attrs>=22.2.0
+defusedxml
+devpi_common<5,>3.6.0
+itsdangerous>=0.24
+platformdirs
+pyramid>=2
+waitress>=1.0.1
+repoze.lru>=0.6
+passlib[argon2]
+pluggy<2.0,>=0.6.0
+ruamel.yaml
+strictyaml
+lazy
+
+[:python_version >= "3.13"]
+legacy-cgi
