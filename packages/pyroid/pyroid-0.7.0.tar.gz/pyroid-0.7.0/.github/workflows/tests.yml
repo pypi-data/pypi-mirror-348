@@ -1,0 +1,72 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  rust-tests:
+    name: Rust Tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+    
+    - name: Install Rust dependencies
+      run: |
+        cargo --version
+        
+        # Install additional dependencies if needed
+        if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev
+        fi
+    
+    - name: Run Rust tests
+      run: |
+        # Run all Rust tests with verbose output
+        cargo test --test test_rust_* -- --nocapture
+        
+        # If any test fails, print more detailed information
+        if [ $? -ne 0 ]; then
+          echo "Rust tests failed. Running with backtrace enabled..."
+          RUST_BACKTRACE=1 cargo test --test test_rust_*
+          exit 1
+        fi
+
+  python-tests:
+    name: Python Tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.11']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest numpy
+    
+    - name: Run Python implementation tests
+      run: |
+        # Run only the implementation tests that don't require the Rust extension
+        pytest python/tests/test_*_impl.py -v
