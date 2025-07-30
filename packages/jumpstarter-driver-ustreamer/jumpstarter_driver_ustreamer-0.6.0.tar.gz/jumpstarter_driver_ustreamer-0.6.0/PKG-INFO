@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: jumpstarter-driver-ustreamer
+Version: 0.6.0
+Project-URL: Homepage, https://jumpstarter.dev
+Project-URL: source_archive, https://github.com/jumpstarter-dev/repo/archive/c2927a2abac82d224c7bd28f9ed83c57b5222e65.zip
+Author-email: Nick Cao <ncao@redhat.com>, Miguel Angel Ajo Pelayo <majopela@redhat.com>, Kirk Brauer <kbrauer@hatci.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: jumpstarter
+Requires-Dist: pillow>=10.4.0
+Description-Content-Type: text/markdown
+
+# Ustreamer driver
+
+`jumpstarter-driver-ustreamer` provides functionality for using the ustreamer
+video streaming server driven by the jumpstarter exporter. This driver takes a
+video device and exposes both snapshot and streaming interfaces.
+
+## Installation
+
+```shell
+pip3 install --extra-index-url https://pkg.jumpstarter.dev/simple/ jumpstarter-driver-ustreamer
+```
+
+## Configuration
+
+Example configuration:
+
+```{literalinclude} ustreamer.yaml
+:language: yaml
+```
+
+```{doctest}
+:hide:
+>>> from jumpstarter.config.exporter import ExporterConfigV1Alpha1DriverInstance
+>>> ExporterConfigV1Alpha1DriverInstance.from_path("source/reference/package-apis/drivers/ustreamer.yaml").instantiate()
+Traceback (most recent call last):
+...
+io.UnsupportedOperation: fileno
+```
+
+## API Reference
+
+```{eval-rst}
+.. autoclass:: jumpstarter_driver_ustreamer.client.UStreamerClient()
+    :members:
+```
