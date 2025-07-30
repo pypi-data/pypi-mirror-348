@@ -1,0 +1,33 @@
+root: intro
+subtrees:
+- caption: User Guide
+  entries:
+    - file: user_guide/why
+    - file: user_guide/sphinx
+    - file: user_guide/cli
+    - file: user_guide/api
+    - file: user_guide/regressions.md
+- entries:
+  - file: code/index
+    entries:
+    - glob: code/*
+- entries:
+  - file: example/index
+    entries:
+      - file: example/subfolder/page
+      - glob: example/globfolder/*
+- caption: Links
+  entries:
+  - title: PyPI
+    url: https://pypi.org/project/sphinx-external-toc-strict
+  - title: Source code
+    url: https://github.com/msftcangoblowm/sphinx-external-toc-strict
+  - title: Issue tracker
+    url: https://github.com/msftcangoblowm/sphinx-external-toc-strict/issues
+  - title: Change log
+    url: https://raw.githubusercontent.com/msftcangoblowm/sphinx-external-toc-strict/main/CHANGES.rst
+  - title: Contact
+    url: https://mastodon.social/@msftcangoblowme
+meta:
+  exclude_missing: true
+  regress: intro
