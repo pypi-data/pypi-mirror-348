@@ -1,0 +1,54 @@
+[project]
+name = "shamir-ss"
+version = "0.2.3"
+description = "Shamir's Secret Sharing implementation using Cython"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["cryptography", "shamir", "secret sharing"]
+license-files = [
+    "LICENSE*",
+]
+dependencies = [
+    "click >=8.1.8,<9.0.0"
+]
+authors = [
+    {name = "peplxx",email = "91543105+peplxx@users.noreply.github.com"}
+]
+
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    "Programming Language :: Python :: 3",
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Security :: Cryptography"
+]
+
+[tool.poetry]
+name = "shamir-ss"
+version = "0.2.2"
+description = "Shamir's Secret Sharing implementation using Cython"
+authors = [
+    "peplxx <91543105+peplxx@users.noreply.github.com>",
+]
+license = "MIT"
+packages = [{include = "shamir_ss"}]
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+setuptools = "^79.0.0"
+pre-commit = "^4.0.1"
+nox = "^2025.2.9"
+twine = "^6.1.0"
+
+
+[tool.poetry.dependencies]
+click = "^8.1.8"
+[build-system]
+requires = ["setuptools", "cython", "wheel"]
+build-backend = "setuptools.build_meta"
