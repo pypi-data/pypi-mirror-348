@@ -1,0 +1,19 @@
+import numpy as np
+x1 = list(map(float, input().split(',')))
+y1 = list(map(float, input().split(',')))
+x2 = list(map(float, input().split(',')))
+y2 = list(map(float, input().split(',')))
+px, py = map(float, input().split(','))
+w1 = np.array([x1, y1]).T
+w2 = np.array([x2, y2]).T
+wp = np.array([px, py])
+
+dist_w1 = np.linalg.norm(w1 - wp, axis = 1)
+dist_w2 = np.linalg.norm(w2 - wp, axis = 1)
+min_dist_w1 = np.min(dist_w1)
+min_dist_w2 = np.min(dist_w2)
+
+if min_dist_w1 < min_dist_w2:
+    print("该点属于第一类")
+else:
+    print("该点属于第二类")

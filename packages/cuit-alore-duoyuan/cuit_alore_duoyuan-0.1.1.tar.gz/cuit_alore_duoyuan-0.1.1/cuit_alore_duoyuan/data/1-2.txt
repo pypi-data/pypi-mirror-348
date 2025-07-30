@@ -1,0 +1,8 @@
+import numpy as np
+
+a = input().split(" ")
+c = input().split(" ")
+m = [float(i) for i in a]
+n = [int(i) for i in c]
+X = np.array(m).reshape(n[0],n[1])
+print(np.corrcoef(X))
