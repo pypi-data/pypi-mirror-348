@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling >= 1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netwatcher-cli"
+version = "0.1.2"
+dependencies = [
+    "click~=8.1.8",
+    "httpx~=0.28.1",
+    "loguru~=0.7.3",
+    "psutil~=7.0.0",
+    "pydantic~=2.11.4",
+    "pydantic_settings~=2.9.1",
+    "rich~=14.0.0",
+    "typer~=0.15.3",
+    "yarl~=1.20.0"
+]
+requires-python = ">= 3.9"
+authors = [
+    {name = "Paul Fischer", email = "paulfischerdev@gmail.com"}
+]
+maintainers = [
+  {name = "Paul Fischer", email = "paulfischerdev@gmail.com"}
+]
+description = "Monitor and track active network connections"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E.*"]
+keywords = ["network", "monitoring", "CLI", "security", "Typer"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pre-commit~=4.2.0",
+    "pyright[nodejs]~=1.1.400",
+    "pytest~=8.3.5",
+    "pytest-asyncio~=0.26.0",
+    "ruff~=0.11.8"
+]
+
+[project.urls]
+Documentation = "https://github.com/pfischer1687/netwatcher/blob/main/docs/cli.md"
+Repository = "https://github.com/pfischer1687/netwatcher"
+Issues = "https://github.com/pfischer1687/netwatcher/issues"
+Changelog = "https://github.com/pfischer1687/netwatcher/blob/main/CHANGELOG.md"
+
+[project.scripts]
+nw = "netwatcher_cli.main:app"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.ruff]
+line-length = 120
+target-version = 'py313'
+
+[tool.ruff.lint]
+extend-select = [
+  "A",
+  "B",
+  "D",
+  "I",
+  "ISC",
+  "RUF",
+  "T",
+  "UP",
+  "Q"
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
