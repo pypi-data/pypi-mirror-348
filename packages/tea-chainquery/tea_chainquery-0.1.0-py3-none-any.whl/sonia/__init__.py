@@ -1,0 +1,1 @@
+from sonia.cli import cli
