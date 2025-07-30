@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "clippings-cli"
+version = "1.0.2"
+description = "A CLI tool for managing Kindle clippings"
+authors = ["Dawid Mateusiak <mateusiakdawid@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/MateDawid/Kindle-Clippings-CLI"
+repository = "https://github.com/MateDawid/Kindle-Clippings-CLI"
+packages = [
+    { include = "clippings_cli" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+click = "^8.1.8"
+openpyxl = "^3.1.5"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0.1"
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
+pyinstaller = "^6.11.1"
+black = "^25.1.0"
+isort = "^6.0.0"
+flake8 = "^7.1.1"
+safety = "^3.2.14"
+bandit = "^1.8.2"
+
+[tool.pytest.ini_options]
+minversion = "8.3.4"
+testpaths = [
+    "tests"
+]
+pythonpath  = [
+    "clippings_cli",
+    "tests"
+]
+
+[tool.black]
+line-length = 120
+extend-exclude = '''
+(
+  ^/.git
+  |./venv/*
+  |./__pycache__/*
+  |./.pytest_cache/*
+  |./htmlcov/*
+  |./docs/*
+  |./dist/*
+  |./.github/*"
+)
+'''
+
+[tool.isort]
+profile = 'black'
+line_length = 120
+skip_glob = [
+    ".git",
+    "venv/*",
+    "*/__pycache__/*",
+    "*/.pytest_cache/*",
+    "htmlcov/*",
+    "*/docs/*",
+    "*/dist/*",
+    "*/.github/*"
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv", "__pycache__", ".pytest_cache", "htmlcov", "dist", ".github"]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+clippings = "clippings_cli.entrypoint:cli"
