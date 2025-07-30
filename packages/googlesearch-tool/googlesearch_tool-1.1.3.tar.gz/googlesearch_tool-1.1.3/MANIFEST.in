@@ -1,0 +1,23 @@
+include LICENSE.txt
+include README.md
+include README_EN.md
+include googlesearch/config/data/*.txt
+
+# 排除Python编译文件
+recursive-exclude * __pycache__
+recursive-exclude * *.py[cod]
+
+# 排除IDE和编辑器生成的文件和目录
+recursive-exclude * .idea
+recursive-exclude * .vscode
+recursive-exclude * *.iml
+
+# 排除版本控制相关文件
+recursive-exclude * .git
+recursive-exclude * .gitignore
+recursive-exclude * .svn
+
+# 排除临时文件和日志
+recursive-exclude * *.log
+recursive-exclude * *.swp
+recursive-exclude * .DS_Store

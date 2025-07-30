@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "googlesearch-tool"
+version = "1.1.3"
+authors = [
+  { name = "huazz233", email = "huazz233@163.com" }
+]
+description = "A Python library for performing Google searches with support for dynamic query parameters, result deduplication, and custom proxy configuration."
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["google", "search", "web-scraping", "async", "proxy"]
+license = "MIT"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# 添加依赖
+dependencies = [
+    "httpx>=0.24.0",
+    "beautifulsoup4>=4.9.3",
+    "requests>=2.25.1",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/huazz233/googlesearcher"
+"Bug Tracker" = "https://github.com/huazz233/googlesearcher/issues"
+"Documentation" = "https://github.com/huazz233/googlesearcher#readme"
+"Source Code" = "https://github.com/huazz233/googlesearcher"
+
+[tool.hatch.build.targets.wheel]
+packages = ["googlesearch"]
