@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: viperleed
+Version: 0.13.2
+Summary: Tools for quantitative low-energy electron diffraction
+Author: Michele Riva, Florian Kraushofer, Alexander M. Imre, Florian Dörr
+Maintainer: ViPErLEED Developers
+License-Expression: GPL-3.0-or-later
+Project-URL: Homepage, https://viperleed.org
+Project-URL: Documentation, https://viperleed.org
+Project-URL: Download, https://github.com/viperleed/viperleed/releases
+Project-URL: Source, https://github.com/viperleed/viperleed
+Project-URL: Issues, https://github.com/viperleed/viperleed/issues
+Keywords: LEED,electron,diffraction,IV,I(V),surface,science,physics
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: fortranformat
+Requires-Dist: importlib_resources; python_version < "3.10"
+Requires-Dist: matplotlib>=3.5
+Requires-Dist: numpy
+Requires-Dist: psutil
+Requires-Dist: quicktions
+Requires-Dist: scipy
+Requires-Dist: scikit-learn
+Requires-Dist: typing-extensions; python_version < "3.12"
+Requires-Dist: wrapt
+Provides-Extra: gui
+Requires-Dist: PyQt5; extra == "gui"
+Requires-Dist: mplcairo; python_version < "3.11" and extra == "gui"
+Provides-Extra: hardware
+Requires-Dist: requests; extra == "hardware"
+Dynamic: license-file
+
+
+# ViPErLEED
+
+ViPErLEED is an open-source package for quantitative low-energy electron
+diffraction, also known as LEED-*I*(*V*). It comprises tools for measurement,
+processing, and analysis of LEED-*I*(*V*) results, calculation of theoretical
+*I*(*V*) curves based on a structural model of a surface, and optimization of
+such a model to best fit the experimental results.
+
+You can find the full documentation under <https://www.viperleed.org>.
+
+This repository contains the `viperleed.calc` package, the graphical user
+interface (GUI) and the software related to the ViPErLEED electronics.
+
+The ViPErLEED ImageJ plugins are available under
+<https://github.com/viperleed/viperleed-imagej>
+
+The TensErLEED back-end code used by `viperleed.calc` is available under
+<https://github.com/viperleed/viperleed-tensorleed>
+
+For installation instructions see
+<https://www.viperleed.org/stable/content/installation.html>
+
+For a documentation of the `viperleed` Python API see
+<https://www.viperleed.org/stable/content/api.html>
+
+[![Documentation Status](https://readthedocs.org/projects/viperleed/badge/?version=stable)](https://viperleed.readthedocs.io/stable/?badge=stable)
+
+
+#### Reporting bugs
+You can ask questions, report bugs, and propose new features by creating
+a new issue under <https://github.com/viperleed/viperleed/issues>. This
+is the preferred means of communication with us.
+
+Alternatively, you can contact us via email at <riva@iap.tuwien.ac.at>.
