@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: kodi-rename
+Version: 0.0.4
+Author-email: Duncan Fraser <dfraser@thedrunkencoder.uk>
+License-Expression: MIT
+Project-URL: Homepage, https://gitlab.com/thedrunkencoder/kodi-rename
+Project-URL: Repository, https://gitlab.com/thedrunkencoder/kodi-rename
+Project-URL: Issues, https://gitlab.com/thedrunkencoder/kodi-rename/-/issues
+Project-URL: Changelog, https://gitlab.com/thedrunkencoder/kodi-rename/-/blob/main/CHANGELOG.md?ref_type=heads
+Project-URL: Documentation, https://gitlab.com/thedrunkencoder/kodi-rename
+Classifier: Development Status :: 3 - Alpha
+Classifier: Natural Language :: English
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests==2.32.3
+Dynamic: license-file
+
+# Kodi Rename
+
+## todo
+ - configure logging
+ - implement a simple cache for src.parentPath in clean

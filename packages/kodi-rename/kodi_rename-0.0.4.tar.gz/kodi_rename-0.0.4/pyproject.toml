@@ -1,0 +1,50 @@
+[project]
+name = "kodi-rename"
+description = ""
+dynamic = ["version"]
+readme = {file = "README.md", content-type = "text/markdown"}
+authors = [
+    { name="Duncan Fraser", email="dfraser@thedrunkencoder.uk" }
+]
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+
+    "Natural Language :: English",
+    "Topic :: Utilities",
+    "Typing :: Typed"
+]
+
+dependencies = [
+    "requests==2.32.3"
+]
+
+[project.scripts]
+kodiRename = "kodiRename:main"
+
+[project.urls]
+Homepage="https://gitlab.com/thedrunkencoder/kodi-rename"
+Repository="https://gitlab.com/thedrunkencoder/kodi-rename"
+Issues="https://gitlab.com/thedrunkencoder/kodi-rename/-/issues"
+Changelog="https://gitlab.com/thedrunkencoder/kodi-rename/-/blob/main/CHANGELOG.md?ref_type=heads"
+Documentation="https://gitlab.com/thedrunkencoder/kodi-rename"
+
+[build-system]
+requires = ["setuptools", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"
+
+[[tool.mypy.overrides]]
+module = ["alive_progress.*"]
+follow_untyped_imports = true
+
+[tool.isort]
+profile = "black"
+
+[tool.versioneer]
+VCS = "git"
+style = "pep440-branch"
+versionfile_source = "kodiRename/_version.py"
+versionfile_build = "kodiRename/_version.py"
+tag_prefix = "v"
