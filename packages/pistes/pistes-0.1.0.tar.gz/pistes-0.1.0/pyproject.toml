@@ -1,0 +1,30 @@
+[project]
+name = "pistes"
+version = "0.1.0"
+description = "👣 pistes: jouer means to play 👣"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.6",
+    "pyaudio>=0.2.14",
+    "requests>=2.32.3",
+    "sounddevice>=0.5.2",
+    "soundfile>=0.13.1",
+    "textual>=3.2.0",
+    "tomlkit>=0.13.2",
+    "typer>=0.15.4",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.10",
+    "tdir>=1.8.2",
+]
+
+[tool.setuptools]
+py-modules = ["pistes"]
+
+[project.scripts]
+lespistes = 'lespistes:run'
