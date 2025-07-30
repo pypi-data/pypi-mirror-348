@@ -1,0 +1,15 @@
+rich>=13.0
+typer>=0.9
+
+[dashboard]
+dash>=2.15
+plotly>=5.22
+dash-bootstrap-components>=1.6
+
+[dev]
+pyxtrace[dashboard]
+black
+ruff
+mypy
+pytest>=7
+pre-commit
