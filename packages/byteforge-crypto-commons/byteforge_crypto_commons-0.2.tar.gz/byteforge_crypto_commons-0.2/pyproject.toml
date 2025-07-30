@@ -1,0 +1,31 @@
+[project]
+name = "byteforge-crypto-commons"
+version = "0.2"
+description = "Common models and dependencies for crypto projects."
+readme = "README.md"
+license = { file="LICENSE" }
+keywords = ["cryptocurrency", "API", "byteforge-coinmarketcap", "crytpo", "byteforge"]
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+authors = [
+  { name = "Jason Byteforge"}
+]
+dependencies = [
+  "python-dateutil"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project.urls]
+Homepage = "https://github.com/jmazzahacks/byteforge-crypto-commons"
+Issues = "https://github.com/jmazzahacks/byteforge-crypto-commons/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["crypto_commons"]
