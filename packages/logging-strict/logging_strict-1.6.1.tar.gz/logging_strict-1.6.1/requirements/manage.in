@@ -1,0 +1,11 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/msftcangoblowm/logging-strict/blob/master/NOTICE.txt
+
+# packaging and kitting
+
+-c pins.in
+-c pins-cffi.in
+-c pins-virtualenv-cve-2024-53899.in
+-c prod.unlock
+
+pre-commit

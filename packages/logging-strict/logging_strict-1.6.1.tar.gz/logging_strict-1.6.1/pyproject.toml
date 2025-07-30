@@ -1,0 +1,290 @@
+[build-system]
+requires = ["setuptools>=80.7.1", "wheel", "build", "setuptools_scm>=8.3.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logging-strict"
+dynamic = [
+    "optional-dependencies",
+    "dependencies",
+    "version",
+]
+
+license = "Apache-2.0"
+license-files = [
+    "LICEN[CS]E*",
+    "NOTICE*",
+]
+description = "logging.config yaml strict typing and editable"
+keywords = [
+    "strictyaml",
+    "pre-commit",
+    "yaml",
+    "logging.config",
+]
+readme = "README.rst"
+requires-python = ">=3.9"
+classifiers = [
+  "Environment :: Console",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: System :: Logging",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Software Development :: Quality Assurance",
+  "Natural Language :: English",
+  "Typing :: Typed",
+]
+# Contact by mastodon please
+authors = [
+    { name = "Dave Faulkmore", email = "faulkmore@protonmail.com" },
+]
+maintainers = [
+    {name = "Dave Faulkmore", email = "faulkmore@protonmail.com"},
+]
+
+[project.urls]
+Documentation = 'https://logging-strict.readthedocs.io/en/stable'
+Changes = 'https://raw.githubusercontent.com/msftcangoblowm/logging-strict/master/CHANGES.rst'
+"PyPI Releases" = 'https://pypi.org/project/logging-strict'
+"Source code" = 'https://github.com/msftcangoblowm/logging-strict'
+"Issue tracker" = 'https://github.com/msftcangoblowm/logging-strict/issues'
+Mastodon = 'https://mastodon.social/@msftcangoblowme'
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["logging_strict*"]
+exclude = [
+    "junk",
+    "retired",
+]
+
+# https://setuptools.pypa.io/en/latest/userguide/datafiles.html#subdirectory-for-data-files
+# https://github.com/abravalheri/experiment-setuptools-package-data
+[tool.setuptools.package-data]
+"*" = [
+    "logging_strict.yml",
+    "*.app.logging.config.yaml",
+    "*.worker.logging.config.yaml",
+]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements/prod.unlock"] }
+optional-dependencies.pip = { file = ["requirements/pip.lock"] }
+optional-dependencies.pip_tools = { file = ["requirements/pip-tools.lock"] }
+optional-dependencies.dev = { file = ["requirements/dev.lock"] }
+optional-dependencies.manage = { file = ["requirements/manage.lock"] }
+optional-dependencies.docs = { file = ["docs/requirements.lock"] }
+version = {attr = "logging_strict._version.__version__"}
+
+[project.scripts]
+logging_strict_validate_yaml = "logging_strict.ep_validate_yaml:main"
+
+[tool.pip-tools]
+no_header = true
+resolver = "backtracking"
+no_allow_unsafe = true
+generate_hashes = false  # From setuptools 69.0.2, parsing dependencies with hashes is broken
+
+[tool.setuptools_scm]
+# can be empty if no extra settings are needed, presence enables setuptools_scm
+# SETUPTOOLS_SCM_PRETEND_VERSION_FOR_LOGGING_STRICT="0.0.1" python -m setuptools_scm
+# fallback_version = "0.0.1"
+version_file = "src/logging_strict/_version.py"
+
+[tool.mypy]
+mypy_path = "src"
+strict = true
+namespace_packages = true
+check_untyped_defs = true
+warn_unused_ignores = true
+no_implicit_optional = true
+show_error_codes = true
+
+# These packages do not have stubs
+[[tool.mypy.overrides]]
+module = [
+    "strictyaml.*"
+]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source_pkgs = ["logging_strict"] # **REQUIRED** to be set correctly. Your package name
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "@abc.abstractmethod",
+    "@abc.abstractproperty",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
+]
+precision = 2
+ignore_errors = true
+skip_covered = true
+skip_empty = true
+fail_under = 98
+show_missing = true
+
+[tool.sphinx-pyproject]
+language = "en"
+needs_sphinx = "1.7"
+master_doc = "index"
+templates_path = ["_templates",]
+html_static_path = ["_static",]
+source_suffix = [".md", ".rst"]
+pygments_style = "sphinx"
+nitpicky = true
+numfig = true
+html_theme = "alabaster"
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.todo",
+    "sphinx.ext.doctest",
+    "sphinx.ext.githubpages",
+    "sphinx_paramlinks",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.extlinks",
+    "sphinx_external_toc_strict",
+    "myst_parser",  # required by sphinx_external_toc_strict
+]
+autodoc_typehints = 'signature'
+autosectionlabel_prefix_document = true
+todo_include_todos = true
+doctest_show_successes = false
+doctest_test_doctest_blocks = "Yes please!"
+external_toc_exclude_missing = true  # sphinx_external_toc_strict
+myst_enable_extensions = ["colon_fence", "html_image"]  # myst-parser
+linkcheck_ignore = [
+    "https://github.com/python/cpython/blob/db6f297d448ce46e58a5b90239a4779553333198/Lib/asyncio/base_events.py#L1894",  # asyncio.base_events._run_once
+    "https://github.com/csachs/pyproject-flake8/blob/16b9dd4d2f19dcf0bfb3a3110f98227627cd67fe/pflake8/__init__.py#L86",  # pyproject_flake8 FixFilenames.apply
+    "https://github.com/PyCQA/flake8/blob/fb9a02aaf77b56fcad4320971e7edca0cea93489/src/flake8/options/config.py#L56",  # flake8.options.config.load_config
+    "https://github.com/csachs/pyproject-flake8/blob/16b9dd4d2f19dcf0bfb3a3110f98227627cd67fe/pflake8/__init__.py#L22",  # pyproject_flake8 ConfigParserTomlMixin
+    "https://github.com/psf/black/blob/e11eaf2f44d3db5713fb99bdec966ba974b60c8c/src/black/files.py#L46",  # block.files.find_project_root
+    "https://github.com/python/cpython/blob/db6f297d448ce46e58a5b90239a4779553333198/Lib/unittest/case.py#L193",  # unittest.case._BaseTestCaseContext
+    "https://github.com/python/cpython/blob/db6f297d448ce46e58a5b90239a4779553333198/Lib/unittest/case.py#L816",  # unittest.case.assertLogs
+    "https://stackoverflow.com/a/69994813",  # redirect
+    "https://github.com/crdoconnor/strictyaml/blob/dfd93f9740ebd5e7150029bc3d89ea102bcddf00/strictyaml/representation.py#L48",  # strictyaml.YAML
+    "https://github.com/psf/black/blob/ea66d40dd7f1eaa20256e6fccaf6d7b853ccc541/src/black/files.py#L57",  # black.files.find_project_root
+]
+exclude_patterns = [
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+]
+
+[tool.sphinx-pyproject.linkcheck_allowed_redirects]
+"https://stackoverflow.com/a/53677481" = "https://stackoverflow.com/questions/45110287/workaround-for-using-name-main-in-python-multiprocessing/53677481#53677481"
+"https://stackoverflow.com/a/72490867" = "https://stackoverflow.com/questions/2046603/is-it-possible-to-run-function-in-a-subprocess-without-threading-or-writing-a-se/72490867#72490867"
+"https://stackoverflow.com/a/56469201" = "https://stackoverflow.com/questions/53223246/local-variable-for-unit-testing-in-python-to-verify-functionality-of-test-functi/56469201#56469201"
+"https://stackoverflow.com/a/69202374" = "https://stackoverflow.com/questions/69200881/how-to-get-python-unittest-to-show-log-messages-only-on-failed-tests/69202374#69202374"
+"https://stackoverflow.com/a/75276342" = "https://stackoverflow.com/questions/75263023/how-can-i-use-pythons-concurrent-futures-to-queue-tasks-across-multiple-process/75276342#75276342"
+"https://stackoverflow.com/q/69200881" = "https://stackoverflow.com/questions/69200881/how-to-get-python-unittest-to-show-log-messages-only-on-failed-tests"
+"https://stackoverflow.com/q/66727458" = "https://stackoverflow.com/questions/66727458/warnings-filterwarningsignore-doesnt-ignore-logging-warning"
+"https://stackoverflow.com/a/11383064" = "https://stackoverflow.com/questions/11382919/relative-path-regular-expression/11383064#11383064"
+"https://stackoverflow.com/a/25959545" = "https://stackoverflow.com/questions/3589311/get-defining-class-of-unbound-method-object-in-python-3/25959545#25959545"
+
+[tool.black]
+include = '\.pyi?$'
+
+[tool.blackdoc]
+skip_string_normalization = true
+color = false  # affects diffs only
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+force_grid_wrap = 2
+use_parentheses = true
+include_trailing_comma = true
+ensure_newline_before_comments = true
+line_length = 88
+supported_extensions = ["py", "pyi"]
+
+[tool.flake8]
+max_line_length = 88
+extend_ignore = [
+    "E203",
+    "W503",
+    "W605",
+    "W293",
+    "W291",
+    "E501",
+]
+
+[tool.twine]
+sign = true
+
+[tool.interrogate]
+omit_covered_files = true
+fail_under = 100
+verbose = 2
+ignore_init_module = true
+exclude = [
+    "src/logging_strict/_version.py",
+]
+
+[tool.asz.unittest]
+"test_util_root.py" = 1
+"test_xdg_folders.py" = 2
+"tech_niques/test_context_locals.py" = 3
+"test_util_package_resource.py" = 4
+"test_check_type.py" = 11
+"tech_niques/test_logging_capture.py" = 12
+"test_pep518_read" = 14  # Required by docs/conf.py
+"tech_niques/test_docs_logging_capture.py" = 30
+"test_versioning.py" = 31
+"test_check_logging.py" = 32
+"test_logging_api.py" = 33
+"test_abc.py" = 41
+"tech_niques/test_uncategorized_underappreciated.py" = 42
+"test_validate.py" = 43
+"test_ep.py" = 44
+
+[tool.asz.recipe]
+"util/util_root" = [1]
+"util/xdg_folders" = [2]
+"tech_niques/context_locals" = [3]
+"util/package_resource" = [4]
+"util/check_type" = [11]
+"constants" = [31]
+"_version" = [31]
+"util/check_logging" = [32]
+"logging_api" = [33]
+"logging_yaml_abc" = [33, 41]
+"tech_niques/__init__" = [42]
+"logging_yaml_validate" = [43]
+"ep_validate_yaml" = [44]
+"tech_niques/logging_capture" = [12, 30, 32]
+
+[tool.wreck]
+create_pins_unlock = false
+
+[[tool.wreck.venvs]]
+venv_base_path = '.venv'
+reqs = [
+    'requirements/dev',
+    'requirements/kit',
+    'requirements/pip',
+    'requirements/pip-tools',
+    'requirements/prod',
+    'requirements/manage',
+    'requirements/mypy',
+    'requirements/tox',
+]
+
+[[tool.wreck.venvs]]
+venv_base_path = '.doc/.venv'
+reqs = [
+    'docs/requirements',
+]

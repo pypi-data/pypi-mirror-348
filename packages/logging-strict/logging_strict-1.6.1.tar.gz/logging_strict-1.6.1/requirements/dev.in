@@ -1,0 +1,21 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/msftcangoblowm/logging-strict/blob/master/NOTICE.txt
+
+# dev tooling
+#   - tox: lint
+
+-c pins.in
+-c pins-cffi.in
+-c prod.unlock
+
+# click==8.1.7; python_version < "3.10"
+# click==8.2.0; python_version >= "3.10"
+black
+
+blackdoc
+isort
+flake8
+flake8-pyproject
+mypy
+coverage
+validate-pyproject

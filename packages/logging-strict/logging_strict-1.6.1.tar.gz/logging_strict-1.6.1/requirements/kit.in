@@ -1,0 +1,22 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/msftcangoblowm/logging-strict/blob/master/NOTICE.txt
+
+-c pins.in
+
+# Build environment top level dependencies
+# Necessary to produce both .lock .unlock files. Afterwards would be removed
+build
+setuptools
+setuptools-scm  # versioning
+wheel
+
+# Things needed to make distribution kits.
+# "make upgrade" turns this into requirements/kit.lock.
+auditwheel
+cibuildwheel
+
+# Build has a windows-only dependency on colorama:
+# https://github.com/pypa/build/blob/main/setup.cfg#L32
+#   colorama;os_name == "nt"
+# We copy it here so it can get pinned.
+colorama

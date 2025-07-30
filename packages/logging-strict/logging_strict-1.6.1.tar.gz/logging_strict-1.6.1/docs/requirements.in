@@ -1,0 +1,18 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/msftcangoblowm/logging-strict/blob/master/NOTICE.txt
+
+-c ../requirements/pins.in
+-c ../requirements/prod.unlock
+-c myst-parser.in
+
+scriv       # for writing GitHub releases
+sphobjinv   # cross-references inventories, objects.inv
+sphinx
+sphinx-pyproject
+sphinx-autobuild
+sphinx-paramlinks
+# sphinx-licenseinfo unmaintained; has maximum versions dependencies
+# this is a testing dependency?!
+aiologger
+# alternative to: sphinxcontrib-fulltoc and sphinx_external_toc
+sphinx_external_toc_strict
