@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: agenticrag
+Version: 0.1.2
+Summary: Modular and extensible Agentic RAG framework
+Author-email: Sudarshan Poudel <mailto.supo@email.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: SQLAlchemy>=2.0.0
+Requires-Dist: numpy>=1.24
+Requires-Dist: pydantic>=2.0
+Requires-Dist: beautifulsoup4
+Requires-Dist: langchain>=0.3.25
+Requires-Dist: langchain-text-splitters
+Requires-Dist: Markdown>=3.4
+Provides-Extra: default
+Requires-Dist: chromadb>=1.0.9; extra == "default"
+Requires-Dist: sentence-transformers>=2.2.0; extra == "default"
+Requires-Dist: pandas>=2.2.0; extra == "default"
+Requires-Dist: Scrapy>=2.13.0; extra == "default"
+Requires-Dist: markdownify>=1.1.0; extra == "default"
+Requires-Dist: matplotlib>=3.8.0; extra == "default"
+Requires-Dist: langchain-google-genai>=2.1.4; extra == "default"
+Provides-Extra: minimal
+Dynamic: license-file
+
+# Agentic RAG
+
+Creating some stuff..
