@@ -1,0 +1,14 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "gpb-models"
+version="0.0.1"
+description=""
+packages=[
+    {include = "*", from=".", to="gpb_models"}
+]
+
+[tool.poetry.dependencies]
+pydantic = "^2.10.6"
