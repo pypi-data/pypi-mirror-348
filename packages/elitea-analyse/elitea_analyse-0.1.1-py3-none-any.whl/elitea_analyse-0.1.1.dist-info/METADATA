@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: elitea-analyse
+Version: 0.1.1
+Summary: Analyse integration for Elitea
+Author: adaptations by Olga Prykhodko
+Author-email: olga_prykhodko@epam.com
+Requires-Python: >=3.10.5
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: numpy>=1.23.1
+Requires-Dist: pandas>=1.5.3
+Requires-Dist: jira>=3.3.0
+Requires-Dist: aiohttp>=3.9.3
+Requires-Dist: boto3>=1.28.48
+Requires-Dist: sqlalchemy>=2.0.20
+Requires-Dist: botocore>=1.31.48
+Requires-Dist: azure-functions>=1.18.0
+Requires-Dist: azure-identity>=1.15.0
+Requires-Dist: azure-keyvault-secrets>=4.7.0
+Requires-Dist: azure-storage-blob>=12.19.0
+Requires-Dist: Office365-REST-Python-Client>=2.4.4
+Requires-Dist: six~=1.16.0
+Requires-Dist: openpyxl>=3.1.2
+Requires-Dist: retry-extended
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
