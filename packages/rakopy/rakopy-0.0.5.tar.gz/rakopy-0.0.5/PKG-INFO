@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: rakopy
+Version: 0.0.5
+Summary: RakoPy is a Python library that allows you to control Rako Controls system programmatically.
+Project-URL: Homepage, https://github.com/princekama/rakopy
+Project-URL: Issues, https://github.com/princekama/rakopy/issues
+Author: @princekama
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# RakoPy
+RakoPy is a Python library that allows you to control [Rako Controls](https://rakocontrols.com) system programmatically.
+
+The library has been tested with Rako [WK-HUB](https://rakocontrols.com/wkhub/) but it should also work with [RK-HUB](https://rakocontrols.com/rkhub/).
+
+
+## Installation
+```
+pip install rakopy
+```
+
+## Usage
+```python
+import asyncio
+
+from rakopy.hub import Hub
+
+async def main():
+    client_name = "client_name"
+    host = "192.168.1.42"
+    hub = Hub(client_name, host)
+    response = await hub.get_rooms()
+
+asyncio.run(main())
+```
+
+## License
+RakoPy is released under the [MIT license](https://github.com/princekama/rakopy/blob/main/LICENSE).
