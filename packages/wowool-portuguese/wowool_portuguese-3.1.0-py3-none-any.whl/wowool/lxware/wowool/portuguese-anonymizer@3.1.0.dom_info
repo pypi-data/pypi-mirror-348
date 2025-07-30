@@ -1,0 +1,93 @@
+{
+  "dependencies": [
+    "wowool/portuguese-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "BankAccount",
+    "City",
+    "Company",
+    "Country",
+    "Day",
+    "Date",
+    "Email",
+    "IPAddress",
+    "Month",
+    "MoneyAmount",
+    "Organization",
+    "PersonFam",
+    "PersonGiv",
+    "Person",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "Publisher",
+    "Street",
+    "Url",
+    "Year"
+  ],
+  "short_description": "Contact information annotations, such as: Person name, City, Country, Address, PhoneNr, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Avenida das Oliveiras 45, 1200-250 Lisboa",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Lisboa, Bruxelas",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Grupo Esp\u00edrito Santo",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Portugal, Ucr\u00e2nia",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Person",
+      "sample": "Eduardo Bolsonaro",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Queiroz",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Fernanda",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+351 912 345 678",
+      "desc": "A phone number"
+    },
+    {
+      "concept": "Position",
+      "sample": "ministro",
+      "desc": "Subclass of PersonMention. The professional ocupation of a person."
+    },
+    {
+      "concept": "Street",
+      "sample": "Avenida das Oliveiras",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    }
+  ],
+  "instances": true
+}

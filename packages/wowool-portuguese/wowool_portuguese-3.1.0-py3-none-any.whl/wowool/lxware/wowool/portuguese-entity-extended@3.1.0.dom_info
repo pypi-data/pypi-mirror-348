@@ -1,0 +1,224 @@
+{
+  "dependencies": [
+    "wowool/portuguese-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "Animal",
+    "Automobile",
+    "City",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "Date",
+    "Drink",
+    "Email",
+    "Event",
+    "Facility",
+    "Food",
+    "GivenName",
+    "HealthIssue",
+    "Measure",
+    "MoneyAmount",
+    "Month",
+    "Organization",
+    "Pathology",
+    "Percent",
+    "Person",
+    "PersonFam",
+    "PersonGiv",
+    "PersonMention",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "Product",
+    "SoccerTeam",
+    "Sports",
+    "Street",
+    "Url",
+    "Vehicle",
+    "Weapon",
+    "WeekDay",
+    "WorldRegion"
+  ],
+  "short_description": "All annotations in the entity domain plus others, such as Automobile, BaseballTeam or Measure",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "R. Filipe da Mata 666, 1600-072 Lisboa",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "Animal",
+      "sample": "urso, tigre, ovelha",
+      "desc": "Names of common animals."
+    },
+    {
+      "concept": "Automobile",
+      "sample": "BMW 1 - series, Tesla",
+      "desc": "A car brand or reference to a car."
+    },
+    {
+      "concept": "City",
+      "sample": "Lisboa, Teer\u00e3o",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "TAP, Galp",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Portugal, Brasil, Pa\u00edses Baixos",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "CurrencyUnit",
+      "sample": "euros, d\u00f3lares   ",
+      "desc": "Name of a currency"
+    },
+    {
+      "concept": "Date",
+      "sample": "24 de fevereiro de 1904",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Drink",
+      "sample": "martini, vinho branco, champanhe",
+      "desc": "Name of a drink"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "exposi\u00e7\u00e3o, campanha eleitoral",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "escola, Hospital de Viana do Castelo",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "Food",
+      "sample": "batata, sobremesa, bacalhau",
+      "desc": "Name of food, ingredients as well as dishes"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Ant\u00f3nio, F\u00e1tima",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Measure",
+      "sample": "218 kWh, 6,35 mm",
+      "desc": "Unit of measure"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "cinco mil euros",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "mar\u00e7o",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Tribunal de Contas, Juventus",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Percent",
+      "sample": "52,1%",
+      "desc": "Percentage"
+    },
+    {
+      "concept": "Person",
+      "sample": "Marcelo Rebelo De Sousa",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Rodrigues",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Beatriz",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "irm\u00e3o, suspeito, motorista",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "PlaceAdj",
+      "sample": "portugu\u00eas, australiano",
+      "desc": "Adjective of geographical origin."
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+351 21 755 0269",
+      "desc": "Phone number"
+    },
+    {
+      "concept": "Position",
+      "sample": "presidente executiva, ministro das Finan\u00e7as",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Product",
+      "sample": "PlayStation 5, videojogo, frigor\u00edfico",
+      "desc": "Name of a product in general (just a few brands)"
+    },
+    {
+      "concept": "SoccerTeam",
+      "sample": "Benfica, PSG, Juventus",
+      "desc": "European soccer team"
+    },
+    {
+      "concept": "Sports",
+      "sample": "golfe, futebol, atletismo",
+      "desc": "Sports"
+    },
+    {
+      "concept": "Street",
+      "sample": "Alameda das Antas",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "Vehicle",
+      "sample": "tanques, carro",
+      "desc": "Name of a vehicle"
+    },
+    {
+      "concept": "Weapon",
+      "sample": "arma, espingarda",
+      "desc": "Name of a weapon"
+    },
+    {
+      "concept": "WeekDay",
+      "sample": "sexta-feira, s\u00e1bado",
+      "desc": "Day of the week"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Europa, M\u00e9dio Oriente, A\u00e7ores",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

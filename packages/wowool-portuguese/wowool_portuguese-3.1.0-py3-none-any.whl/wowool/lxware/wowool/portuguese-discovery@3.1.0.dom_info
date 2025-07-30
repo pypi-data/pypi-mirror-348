@@ -1,0 +1,28 @@
+{
+  "dependencies": [
+    "wowool/portuguese-syntax@3.1.0"
+  ],
+  "concepts": [
+    "Definition",
+    "Descriptor",
+    "DescriptorMarker"
+  ],
+  "short_description": "Descriptors for knowledge discovery. A descriptor is something like 'painter' to classify an item as a Person. ",
+  "examples": [
+    {
+      "concept": "Definition",
+      "sample": "Napoleonville \u00e9 uma vila",
+      "desc": "A definition. A sentence that explains what something or someone is."
+    },
+    {
+      "concept": "Descriptor",
+      "sample": "Trevignano \u00e9 uma comuna italiana da regi\u00e3o do V\u00eaneto",
+      "desc": " descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'comuna' is the descriptor"
+    },
+    {
+      "concept": "DescriptorMarker",
+      "sample": "pr\u00e9mio, regi\u00e3o, aster\u00f3ide",
+      "desc": "A DescriptorMarker is a descriptor no matter the context"
+    }
+  ]
+}

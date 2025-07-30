@@ -1,0 +1,185 @@
+Metadata-Version: 2.4
+Name: wowool-portuguese
+Version: 3.1.0
+Summary: Wowool NLP portuguese Package
+Description-Content-Type: text/markdown
+
+# Wowool NLP portuguese Package
+This package contains the language file and domains for portuguese.
+To use this package, you need to install the wowool-sdk package and request a license file at info@wowool.com
+
+## Usage
+
+```python
+from wowool.sdk import Pipeline
+from pathlib import Path
+input_text = Path("input.txt").read_text()
+pipeline = Pipeline("portuguese,entity")
+doc = pipeline(input_text)
+print(doc)
+```
+
+## Domains
+
+### portuguese-sentiment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| AdjPos |Positive adjective. | adequado |
+| AdjNeg |Negative adjective. | terrível |
+
+
+### portuguese-event.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Event |An event, in very general terms. | eleição |
+
+
+### portuguese-discovery.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | Napoleonville é uma vila |
+| Descriptor | descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'comuna' is the descriptor | Trevignano é uma comuna italiana da região do Vêneto |
+| DescriptorMarker |A DescriptorMarker is a descriptor no matter the context | prémio, região, asteróide |
+
+
+### portuguese-contact-info.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | R. Filipe da Mata 666, 1600-072 Lisboa |
+| City |Name of a City | Lisboa, Teerão |
+| Company |Name of a Company | TAP, Galp |
+| Country |Name of a Country | Portugal, Brasil, Países Baixos |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Marcelo Rebelo De Sousa |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Rodrigues |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Beatriz |
+| PhoneNr |A phone number | +351 21 755 0269 |
+| PhoneNrCandidate |A possible phone number, but we do not have enough evidence | 0330 333 1212 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | presidente executiva, ministro das Finanças |
+| Street |The name of a street with or without number. | Alameda das Antas |
+| Url |Url | https://www.wowool.com |
+
+
+### portuguese-syntax.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| NP |Noun phrase. | os traços linguísticos mais interessantes |
+| PronPhrase |Pronoun phrase. | isto, lhe |
+| VP |Verb phrase. | ajudar, não estão trabalhando |
+
+
+### portuguese-anonymizer.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Avenida das Oliveiras 45, 1200-250 Lisboa |
+| City |Name of a City | Lisboa, Bruxelas |
+| Company |Name of a Company | Grupo Espírito Santo |
+| Country |Name of a Country | Portugal, Ucrânia |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Eduardo Bolsonaro |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Queiroz |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Fernanda |
+| PhoneNr |A phone number | +351 912 345 678 |
+| Position |Subclass of PersonMention. The professional ocupation of a person. | ministro |
+| Street |The name of a street with or without number. | Avenida das Oliveiras |
+| Url |Url | https://www.wowool.com |
+
+
+### portuguese-topics.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| TopicCandidate |Possible topics | inteligência artificial, Cristiano Ronaldo |
+
+
+### portuguese-unknown.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| UnknownThing |Unknown concept | Yttrium  |
+
+
+### portuguese-entity.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| City |Name of a City | Lisboa, Bruxelas |
+| Company |Name of a Company | Grupo Espírito Santo |
+| Country |Name of a Country | Bélgica, Inglaterra, Alemanha, Dinamarca, Suécia |
+| Date |Date and Month | 24 de julho de 1954 |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | casamento |
+| Facility |A building or place that provides a particular service or is used for a particular industry | Hospital Distrital de Bragança |
+| MoneyAmount |Amount of money | 83 euros |
+| Month |Name of a month | fevereiro |
+| Organization |Name of an Organization | Ministério da Defesa Nacional |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Luís Filipe Vieira |
+| PersonMention |A mention of a person in a general way | militante, estudante |
+| Position |Subclass of PersonMention. The professional occupation of a person. | procuradora - geral |
+| Url |Url | https://www.wowool.com |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Açores |
+
+
+### portuguese-semantic-theme.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Theme |Theme. | críquete |
+
+
+### portuguese-entity-extended.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | R. Filipe da Mata 666, 1600-072 Lisboa |
+| Animal |Names of common animals. | urso, tigre, ovelha |
+| Automobile |A car brand or reference to a car. | BMW 1 - series, Tesla |
+| City |Name of a City | Lisboa, Teerão |
+| Company |Name of a Company | TAP, Galp |
+| Country |Name of a Country | Portugal, Brasil, Países Baixos |
+| CurrencyUnit |Name of a currency | euros, dólares    |
+| Date |Date and Month | 24 de fevereiro de 1904 |
+| Drink |Name of a drink | martini, vinho branco, champanhe |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | exposição, campanha eleitoral |
+| Facility |A building or place that provides a particular service or is used for a particular industry | escola, Hospital de Viana do Castelo |
+| Food |Name of food, ingredients as well as dishes | batata, sobremesa, bacalhau |
+| GivenName |First name of a Person | António, Fátima |
+| Measure |Unit of measure | 218 kWh, 6,35 mm |
+| MoneyAmount |Amount of money | cinco mil euros |
+| Month |Name of a month | março |
+| Organization |Name of an Organization | Tribunal de Contas, Juventus |
+| Percent |Percentage | 52,1% |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Marcelo Rebelo De Sousa |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Rodrigues |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Beatriz |
+| PersonMention |A mention of a person in a general way | irmão, suspeito, motorista |
+| PlaceAdj |Adjective of geographical origin. | português, australiano |
+| PhoneNr |Phone number | +351 21 755 0269 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | presidente executiva, ministro das Finanças |
+| Product |Name of a product in general (just a few brands) | PlayStation 5, videojogo, frigorífico |
+| SoccerTeam |European soccer team | Benfica, PSG, Juventus |
+| Sports |Sports | golfe, futebol, atletismo |
+| Street |The name of a street with or without number. | Alameda das Antas |
+| Url |Url | https://www.wowool.com |
+| Vehicle |Name of a vehicle | tanques, carro |
+| Weapon |Name of a weapon | arma, espingarda |
+| WeekDay |Day of the week | sexta-feira, sábado |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Europa, Médio Oriente, Açores |
+
+
+### portuguese-dates.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Date |An attribute will resolve the absolute date from the date that has been set | 24 de fevereiro de 2022 |
+| TimePhrase |A phrase expressing time, including dates | sete dias depois |
+
+
+

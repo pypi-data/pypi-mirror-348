@@ -1,0 +1,32 @@
+{
+  "concepts": [
+    "PositiveSentiment",
+    "NegativeSentiment",
+    "SentimentObject",
+    "AdjPos",
+    "AdjNeg",
+    "NounNeg",
+    "NounPos",
+    "VerbNeg",
+    "VerbPos",
+    "ExprNeg",
+    "ExprPos"
+  ],
+  "dependencies": [
+    "wowool/portuguese-syntax@3.1.0",
+    "wowool/portuguese-entity@3.1.0"
+  ],
+  "short_description": "The Portuguese sentiment domain offers annotations that support sentiment analysis in a general way. ",
+  "examples": [
+    {
+      "concept": "AdjPos",
+      "sample": "adequado",
+      "desc": "Positive adjective."
+    },
+    {
+      "concept": "AdjNeg",
+      "sample": "terr\u00edvel",
+      "desc": "Negative adjective."
+    }
+  ]
+}

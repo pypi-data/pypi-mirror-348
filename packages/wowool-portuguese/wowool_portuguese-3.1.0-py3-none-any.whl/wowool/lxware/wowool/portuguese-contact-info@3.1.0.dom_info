@@ -1,0 +1,89 @@
+{
+  "dependencies": [
+    "wowool/portuguese-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "City",
+    "Company",
+    "Country",
+    "Email",
+    "PersonFam",
+    "PersonGiv",
+    "Person",
+    "PhoneNr",
+    "PhoneNrCandidate",
+    "Position",
+    "Street",
+    "Url"
+  ],
+  "short_description": "Contact information annotations, such as: Person name, City, Country, Address, PhoneNr, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "R. Filipe da Mata 666, 1600-072 Lisboa",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Lisboa, Teer\u00e3o",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "TAP, Galp",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Portugal, Brasil, Pa\u00edses Baixos",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Person",
+      "sample": "Marcelo Rebelo De Sousa",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Rodrigues",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Beatriz",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "+351 21 755 0269",
+      "desc": "A phone number"
+    },
+    {
+      "concept": "PhoneNrCandidate",
+      "sample": "0330 333 1212",
+      "desc": "A possible phone number, but we do not have enough evidence"
+    },
+    {
+      "concept": "Position",
+      "sample": "presidente executiva, ministro das Finan\u00e7as",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Street",
+      "sample": "Alameda das Antas",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    }
+  ],
+  "instances": true
+}

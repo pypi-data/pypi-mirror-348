@@ -1,0 +1,30 @@
+{
+  "tokenizer": "wowool/portuguese@3.1.0.tkz",
+  "abbreviations": "wowool/portuguese@3.1.0.abbrev",
+  "apostrophe": "wowool/portuguese@3.1.0.apostrophe",
+  "measure": "wowool/portuguese@3.1.0.measure",
+  "hmm": "wowool/portuguese@3.1.0.hmm",
+  "postagger": "wowool/portuguese@3.1.0.postagger",
+  "morph_chain": [
+    {
+      "file": "wowool/portuguese@3.1.0.morph",
+      "lookup": "plain"
+    }
+  ],
+  "property_chain": {
+    "abbrev": [
+      {
+        "file": "wowool/portuguese-abbreviation@3.1.0.morph",
+        "lookup": "plain"
+      }
+    ]
+  },
+  "not_found": [
+    {
+      "file": "wowool/portuguese@3.1.0.morph",
+      "lookup": "cleaner",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for portuguese"
+}

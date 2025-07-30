@@ -1,0 +1,107 @@
+{
+  "concepts": [
+    "City",
+    "Continent",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "WorldRegion",
+    "Address",
+    "Date",
+    "Email",
+    "Event",
+    "Facility",
+    "MoneyAmount",
+    "Nationality",
+    "Product",
+    "Measure",
+    "Month",
+    "Organization",
+    "Person",
+    "PersonMention",
+    "PhoneNr",
+    "Position",
+    "Street",
+    "Url"
+  ],
+  "short_description": "Named entity annotations, such as: Person, City, Country, Company, Organization, etc.",
+  "examples": [
+    {
+      "concept": "City",
+      "sample": "Lisboa, Bruxelas",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Grupo Esp\u00edrito Santo",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "B\u00e9lgica, Inglaterra, Alemanha, Dinamarca, Su\u00e9cia",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "24 de julho de 1954",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "casamento",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "Hospital Distrital de Bragan\u00e7a",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "83 euros",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "fevereiro",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "Minist\u00e9rio da Defesa Nacional",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Lu\u00eds Filipe Vieira",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "militante, estudante",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "Position",
+      "sample": "procuradora - geral",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "A\u00e7ores",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}
