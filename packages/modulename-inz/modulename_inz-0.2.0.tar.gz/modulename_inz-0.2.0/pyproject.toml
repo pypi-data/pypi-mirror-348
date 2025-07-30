@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modulename_inz"
+version = "0.2.0"
+requires-python = ">=3.9"
+description = "My first package!"
+readme = "README.md"
+authors = [
+    {name = "Inzamam", email = "inzamamshajahan@gmail.com"},
+]
+maintainers = [
+  {name = "Inzamam", email = "inzamamshajahan@gmail.com"}
+]
+license = {file = "LICENSE.txt"}
+keywords = [
+    "Furuness"
+]
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "License :: OSI Approved :: BSD License",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: MacOS :: MacOS X",
+]
+dependencies = [
+    "colorama~=0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "twine",
+    "build"
+]
+
+[project.urls]
+Homepage = "https://github.com/inzamamshajahan"
+Documentation = "https://github.com/inzamamshajahan"
+
+[project.scripts]
+module_name_inz = "module_name_inz.__main__:main"
