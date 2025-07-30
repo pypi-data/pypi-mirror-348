@@ -1,0 +1,6 @@
+[console_scripts]
+imgconvert = libsrd.image_convert:_script
+libsrd = libsrd.__init__:_script
+markhtml = libsrd.markhtml:_script
+mergepdfs = libsrd.merge_pdf:_script
+pdfresize = libsrd.pdf_resizer:_script
