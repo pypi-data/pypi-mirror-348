@@ -1,0 +1,14 @@
+[project]
+name = "fastpluggy-official-plugins"
+version = "0.1.9"
+description = "Official plugin bundle for FastPluggy"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+packages = ["fastpluggy_official_plugins", "fastpluggy_official_plugins.plugins"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"fastpluggy_official_plugins" = ["plugins/**/*"]
