@@ -1,0 +1,14 @@
+[project]
+name = "hquery"
+version = "1.0.0"
+description = "HTML DSL Language"
+authors = [{ name = "Sarthak Ghoshal", email = "sarthak22.ghoshal@gmail.com" }]
+dependencies = [
+    "typer[all]",
+    "colorama"
+]
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.scripts]
+hquery = "hquery.cli:app"
