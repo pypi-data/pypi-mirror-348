@@ -1,0 +1,8 @@
+include *.md
+include requirements.txt
+include db.sqlite3
+recursive-include myapp/assets *
+recursive-include myapp/templates *
+recursive-include myapp/stylesheets *
+recursive-include myproject *
+recursive-include myapp/templatetags *
