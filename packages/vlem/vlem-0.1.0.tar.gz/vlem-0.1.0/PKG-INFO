@@ -1,0 +1,23 @@
+Metadata-Version: 2.3
+Name: vlem
+Version: 0.1.0
+Summary: Vulnerable Lab Environment Manager (vLEM)
+License: MIT
+Author: Subhomoy Roy Choudhury
+Author-email: subhomoyrchoudhury@gmail.com
+Requires-Python: >=3.12
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: docker (>=7.1.0,<8.0.0)
+Requires-Dist: rich (>=14.0.0,<15.0.0)
+Requires-Dist: typer[all] (>=0.15.4,<0.16.0)
+Description-Content-Type: text/markdown
+
+# Vulnerable Lab Environment Manager (vLEM)
+
+## install vlem package locally
+```bash
+pip install -e .
+```
