@@ -1,0 +1,88 @@
+[tool.poetry]
+name = "wedge-lib"
+version = "3.1.18"
+description = "Wedge library for django application"
+authors = ["François Schneider <francois.schneider@wedge-digital.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "w" }]
+exclude = ["w/tests/fixtures/resultsets", "w/tests/fixtures/sandbox", "w/tests/services"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+arrow = "*"
+cloudinary = "*"
+cryptography = "*"
+django = "*"
+djangorestframework = "*"
+djangorestframework-api-key = "*"
+factory-boy = "*"
+mergedeep = "*"
+openpyxl = "*"
+pandas = "*"
+python-dateutil = "*"
+python-keycloak = "*"
+pyyaml = "*"
+pyzstd = "*"
+requests = "*"
+serpy = "*"
+validators = "*"
+var-dump = "*"
+weasyprint = "*"
+boto3 = "*"
+botocore = "*"
+moto = "==4.1.10"
+argon2-cffi = "*"
+pydantic = "^2.11.4"
+
+
+[tool.poetry.group.dev.dependencies]
+django-extensions = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+setuptools = "*"
+twine = "*"
+wheel = "*"
+ruff = "^0.9.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+python_files = "test_*.py"
+addopts = "--reuse-db --nomigrations -p no:warnings --tb=short"
+testpaths = "w/tests"
+
+[tool.coverage.run]
+omit = [
+    "*/.local/*",
+    "w/debug.py",
+    "w/utils.py",
+    "w/tests/*",
+    "w/django/models.py",
+    "w/django/tests/*",
+    "w/drf/viewsets.py",
+    "w/drf/tests/*",
+    "w/drf/exception_handler.py",
+    "w/**/*mixin.py",
+    "w/exceptions.py",
+    # may be on day we will have to test this to avoid O% coverage
+    "show_urls.py",
+    "w/django/commands/abstract_maintenance_mode_command.py",
+    "w/django/services/business/user_service.py",
+    "w/django/templatetags/util_filters.py",
+    "w/django/w_command.py",
+    "w/drf/decorators/group_required.py",
+    "w/drf/jwt/jwt_authentication_backend.py",
+    "w/drf/jwt/jwt_viewset.py",
+    "w/drf/jwt/login_viewset.py",
+    "w/drf/serializers/fields.py",
+    "w/drf/validators/drf_validator.py",
+    "w/services/technical/backends/hasher/fake_hasher_backend.py",
+    "w/services/technical/db_service.py",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"w/serializers/serializer.py" = ["F403", "F405"]
