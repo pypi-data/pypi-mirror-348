@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: getgauge
+Version: 0.4.10
+Summary: Enables Python support for Gauge
+Home-page: https://github.com/getgauge/gauge-python
+Download-URL: https://github.com/getgauge/gauge-python/archive/v0.4.10.zip
+Author: Gauge Team
+Author-email: getgauge@googlegroups.com
+License: MIT
+Keywords: testing,gauge,gauge-python,getgauge,automation
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+License-File: LICENSE.txt
+Requires-Dist: redBaron
+Requires-Dist: debugpy
+Requires-Dist: grpcio>=1.39.0
+Requires-Dist: protobuf>=3.5.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: download-url
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary

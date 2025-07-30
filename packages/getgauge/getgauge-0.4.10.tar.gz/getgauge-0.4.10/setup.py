@@ -1,0 +1,21 @@
+from setuptools import setup
+
+setup(
+    name='getgauge',
+    packages=['getgauge', 'getgauge/messages'],
+    version='0.4.10',
+    description='Enables Python support for Gauge',
+    author='Gauge Team',
+    author_email='getgauge@googlegroups.com',
+    url='https://github.com/getgauge/gauge-python',
+    download_url='https://github.com/getgauge/gauge-python/archive/v0.4.10.zip',
+    keywords=['testing', 'gauge', 'gauge-python', 'getgauge', 'automation'],
+    license='MIT',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+    ],
+    install_requires=['redBaron', 'debugpy', 'grpcio>=1.39.0', 'protobuf>=3.5.2'],
+)
