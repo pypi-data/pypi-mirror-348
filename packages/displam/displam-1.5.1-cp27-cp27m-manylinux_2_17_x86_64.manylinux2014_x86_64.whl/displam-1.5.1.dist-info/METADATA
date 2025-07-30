@@ -1,0 +1,175 @@
+Metadata-Version: 2.1
+Name: displam
+Version: 1.5.1
+Summary: Calculation of the phase velocity of Lamb waves in plate composite structures
+Home-page: https://gitlab.com/dlr-sy/displam
+License: MIT
+Keywords: analysis,monitoring,composite
+Author: Baaran, Jens
+Author-email: jens.baaran@haw-hamburg.de
+Maintainer: Garbade, Marc
+Maintainer-email: marc.garbade@dlr.de
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*
+Classifier: Development Status :: 7 - Inactive
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Scientific/Engineering
+Project-URL: Repository, https://gitlab.com/dlr-sy/displam
+Description-Content-Type: text/markdown
+
+[![PyPi](https://img.shields.io/pypi/v/displam?label=PyPi)](https://pypi.org/project/displam/)
+[![doi](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.12628293-red.svg)](https://zenodo.org/records/12628293)
+[![pipeline status](https://gitlab.com/dlr-sy/displam/badges/disp_python/pipeline.svg)]()
+
+# Displam
+Displam is a legacy Fortran-based program for the calculation of the phase velocity of Lamb waves of plate composite structures.
+> Installation from source requires an active open source fortran compiler (gfortran). Intel Fortran is not yet supported. 
+## Downloading
+Use GIT to get the latest code base. From the command line, use
+```
+git clone https://gitlab.dlr.de/fa_sw/displam displam
+```
+If you check out the repository for the first time, you have to initialize all submodule dependencies first. Execute the following from within the repository. 
+```
+git submodule update --init --recursive
+```
+To update all refererenced submodules to the latest production level, use
+```
+git submodule foreach --recursive 'git pull origin $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'
+```
+
+## Installation
+Displam can be installed directly using pip
+```
+pip install displam
+```
+or from source using [poetry](https://python-poetry.org). If you don't have [poetry](https://python-poetry.org) installed, run
+```
+pip install poetry --pre --upgrade
+```
+to install the latest version of [poetry](https://python-poetry.org) within your python environment. Use
+```
+poetry update
+```
+to update all dependencies in the lock file or directly execute
+```
+poetry install
+```
+to install all dependencies from the lock file. Last, you should be able to use Displam as a CLI tool:
+```cmd
+displam <Input file>
+```  
+If you omit the input file name displam will try to read the input data from a file named sample.inp. An output file disp.txt and a log file log.txt will be created. 
+
+## Output
+The output file contains the dispersion data for the problem defined in the input file. A header line is followed by one record per line. Each record consists of the following data:
+```
+  1. fd/(MHz*mm)  - frequency * plate thickness
+  2. cp/(km/sec)  - phase velocity
+  3. w/(1/�sec)   - circular frequency
+  4. k/(1/m)      - wave number
+  5. mode         - wave mode ('S' for symmetric, 'A' for antisymmetric
+                    and 'H' for quasi-horizontal shear mode)
+  6. uu0 - uu2    - complex displacement vector at the upper surface of
+                    the laminate
+  7. ul0 - ul2    - complex displacement vector at the lower surface of
+                    the laminate
+```
+The columns are seperated by tab-characters. You can open the output file with Excel or any text editor.
+
+## Example
+Copy and paste the following text up to the end of this file to a new text file to use it as a sample input file as explained under [Installation](#Installation)
+```
+#
+# Input file for displam
+#
+############################################################### File format ###
+#
+#   Input is parsed line by line. Everything after a '#' character is ignored,
+#   so it's possible to append comments to input lines. Empty lines are 
+#   ignored. White space separates keywords and input parameters and may be
+#   entered as spaces or tabs. Lines may not be longer than 1000 characters
+#   (excluding comments).
+#
+#   The following four sections must be present in this file. Each section is
+#   initiated with its keyword in capital letters in an otherwise empty line.
+#
+#     LAYUP    - stacking sequence of the plate
+#     WAVE     - wave propagation parameters
+#     RANGE    - parameter ranges for circular frequency and phase velocity
+#     MATERIAL - material database
+#
+#   The format of the input lines in each section is explained in the comments
+#   above each section.
+
+############################################################# LAYUP section ###
+#
+#   The layers of the stacking sequence are specified from top to bottom
+#   of the laminate. Three parameters must be specified per line:
+#
+#     1. material id string as specified in the MATERIAL section
+#     2. layer thickness in mm
+#     3. layer orientation in degrees
+#
+#   A layer orientation of 0 degree means that the 1-direction of local (layer
+#   material) and global (laminate) direction coincide.
+#
+LAYUP
+	cfrp_generic   		0.250	 0.
+	titanium    		0.500	90.
+	cfrp_generic		0.250	 0.
+
+############################################################## WAVE section ###
+#
+#   pa - angle of wave propagation w.r.t. global coordinates in degrees.
+#   ia - angle of incident wave w.r.t. transverse axis in degrees.
+#        90.0 is horizontal (in-plane) incident wave.
+WAVE
+	pa		 0.01
+	ia		90.00		# values other than 90� are not validated yet
+
+############################################################# RANGE section ###
+#
+#   cp - 3 values for start, end, and number of increments for phase velocity.
+#        Unit of phase velocity is in km / s.
+#   fq - 3 values for start, end, and number of increments for frequency.
+#        Unit of frequencies must be MHz.
+RANGE
+	cp		0.1		14.0	 200	# unit is km/s
+	fq		0.1		 3.0	 200	# unit is MHz
+
+########################################################## MATERIAL section ###
+#
+#   Each line starts with an identification string of up to 12 alphanumeric
+#   characters and '_'. It is followed by the number of independent stiffness
+#   constants (nsc) and the density in g / cm^3.
+#
+#   Transversely isotropic (nsc = 5) and orthotropic (nsc = 9) materials are
+#   supported. After the density the stiffness parameters must be specified
+#   in GPa for Young's and shear moduli in the following order
+#
+#     transversely isotropic  E1, E2, G12, G23, nu12
+#     orthotropic             E1, E2, E3, G12, G23, G31, nu12, nu23, nu31
+#
+#   The 3-direction is the out-of-plane direction.
+#
+MATERIAL
+#	123456789012  nsc		 rho		stiffness coefficients
+	alu             5		2.70		 69.9	 70.1	26.30	26.20	0.33
+	titanium        5		4.50		115.9	116.1	43.95	43.85	0.32
+	cfrp_generic    5		1.55		150.0	  9.00	 5.00	 4.00	0.30
+	cfrp_rose       5		1.58		123.9	 11.256	 6.73	 3.81	0.31
+```
+
+## Contact
+* [Marc Garbade](mailto:marc.garbade@dlr.de)
+
