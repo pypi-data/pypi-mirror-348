@@ -1,0 +1,29 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=77.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "db-fds"
+version = "0.3.1"
+description = "Computations and Utility Functions for Database/Relation Functional Dependencies"
+readme = "README.md"
+authors = [{ name = "Mmaimer33", email = "mmaimer33@gmail.com" }]
+license = "Apache-2.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Database",
+    "Topic :: Education",
+    "Topic :: Utilities"
+]
+keywords = ["database", "dbms", "relations", "functional dependency", "closure", "education", "design"]
+requires-python = ">=3.0"
+
+# [project.urls]
+# Documentation = "<ADD_LINK>"
