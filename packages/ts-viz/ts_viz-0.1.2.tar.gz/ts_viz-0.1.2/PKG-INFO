@@ -1,0 +1,45 @@
+Metadata-Version: 2.4
+Name: ts-viz
+Version: 0.1.2
+Summary: Visualization utilities for time series analysis including outlier detection, trendlines, and correlation analysis.
+Author: Your Name
+Author-email: Chitra Kumar Sai <chitrakumarsai@gmail.com>
+License: MIT
+Keywords: time-series,visualization,outliers,matplotlib,seaborn
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy<1.26.0,>=1.21.0
+Requires-Dist: pandas<=2.1.4
+Requires-Dist: matplotlib>=3.10.3
+Requires-Dist: seaborn>=0.13.2
+Requires-Dist: datetime>=5.5
+Requires-Dist: build>=1.2.2.post1
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-python
+
+# ts-viz
+
+**ts-viz** is a Python package for **visualizing and analyzing time series data**, with a focus on:
+- Outlier detection
+- Histogram overlays
+- Time series trend analysis
+- Feature correlation plots
+
+Built using `pandas`, `matplotlib`, and `seaborn`.
+
+## 🚀 Features
+
+- Plot histograms with mean and ±3σ lines
+- Identify and visualize outliers by month
+- Line plots over time with rolling averages and custom highlights
+- Correlation scatter plots with outlier/trendline detection
+
+## 📦 Installation
+
+```bash
+pip install ts-viz
