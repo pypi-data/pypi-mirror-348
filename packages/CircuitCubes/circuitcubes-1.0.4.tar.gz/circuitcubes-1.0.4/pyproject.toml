@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CircuitCubes"
+version = "1.0.4"
+description = "A simple package for controlling Bluetooth Battery Circuit Cubes. "
+authors = [
+    {name = "Simon Wong", email = "simon@simonwong.site"}
+]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bleak>=0.22.3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/simon-code-git/CircuitCubes"
