@@ -1,0 +1,44 @@
+auditwheel==6.0.0
+    # via -r requirements/kit.in
+bashlex==0.18
+    # via cibuildwheel
+bracex==2.4
+    # via cibuildwheel
+build==1.2.2.post1
+    # via -r requirements/kit.in
+certifi==2024.8.30
+    # via cibuildwheel
+cibuildwheel==2.17.0
+    # via -r requirements/kit.in
+filelock==3.13.4
+    # via cibuildwheel
+importlib-metadata==8.7.0; python_version < "3.10"
+    # via setuptools-scm
+packaging==25.0
+    # via
+    #   auditwheel
+    #   build
+    #   cibuildwheel
+    #   setuptools-scm
+platformdirs==4.3.6
+    # via cibuildwheel
+pyelftools==0.31
+    # via auditwheel
+pyproject-hooks==1.0.0
+    # via build
+setuptools-scm==8.3.1
+    # via -r requirements/kit.in
+tomli==2.2.1; python_version < "3.11"
+    # via
+    #   -c requirements/pins.pip
+    #   build
+    #   cibuildwheel
+    #   pyproject-hooks
+    #   setuptools-scm
+typing-extensions==4.12.2; python_version<"3.10"
+    # via
+    #   -c requirements/pins.pip
+    #   cibuildwheel
+    #   setuptools-scm
+wheel==0.43.0
+    # via -r requirements/kit.in

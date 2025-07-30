@@ -1,0 +1,8 @@
+# myst-parser might be abandonware
+#    pinned restrictions on docutils and sphinx.
+#    sphinx major version change overrides myst-parser desires
+# python -m pip install -U --upgrade-strategy=eager Sphinx docutils
+-c myst-parser.pins
+
+click
+strictyaml
