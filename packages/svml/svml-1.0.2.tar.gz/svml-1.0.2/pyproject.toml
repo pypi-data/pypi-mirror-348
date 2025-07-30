@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "svml"
+version = "1.0.2"
+authors = [
+  { name="Jasdeep Jaitla", email="jasdeep@svml.dev" },
+]
+description = "Python SDK for the SVML.dev API, enabling generation, validation, correction, and analysis of Semantic Vector Markup Language documents."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup",
+]
+dependencies = [
+    "requests",
+    "pydantic"
+]
+
+[project.urls]
+"Homepage" = "https://svml.dev"
+"Repository" = "https://github.com/svml-dev/svml-python"   
