@@ -1,0 +1,7 @@
+avocado-framework==111.0
+
+[:python_version < "3.8"]
+robotframework<=6.1.1,>=4.1
+
+[:python_version >= "3.8"]
+robotframework<7.0,>=4.1
