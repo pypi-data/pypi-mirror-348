@@ -1,0 +1,202 @@
+Metadata-Version: 2.4
+Name: mimic_iv_analysis
+Version: 1.1.0
+Summary: A data science and machine learning framework for nursing research
+Home-page: https://github.com/artinmajdi/mimic_iv_analysis
+Author: Artin Majdi
+Author-email: Artin Majdi <msm2024@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/artinmajdi/mimic_iv_analysis
+Project-URL: Documentation, https://github.com/artinmajdi/mimic_iv_analysis/docs
+Project-URL: Repository, https://github.com/artinmajdi/mimic_iv_analysis.git
+Project-URL: Issues, https://github.com/artinmajdi/mimic_iv_analysis/issues
+Keywords: nursing research,healthcare,AI,medical analysis
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10,<3.13
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: dask[distributed]
+Requires-Dist: pyarrow
+Requires-Dist: scipy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: plotly
+Requires-Dist: streamlit
+Requires-Dist: umap-learn
+Requires-Dist: jupyter
+Requires-Dist: ipywidgets
+Requires-Dist: notebook
+Requires-Dist: dask-labextension
+Requires-Dist: tqdm
+Requires-Dist: python-dotenv
+Requires-Dist: pyyaml
+Requires-Dist: joblib
+Requires-Dist: watchdog
+Requires-Dist: dotenv
+Requires-Dist: humanize
+Requires-Dist: pytest
+Requires-Dist: sphinx
+Requires-Dist: sphinx-rtd-theme
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=22.0; extra == "dev"
+Requires-Dist: isort>=5.0; extra == "dev"
+Requires-Dist: flake8>=3.9; extra == "dev"
+Requires-Dist: mypy>=0.9; extra == "dev"
+Requires-Dist: sphinx>=4.0; extra == "dev"
+Requires-Dist: sphinx-rtd-theme>=1.0; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: wheel; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest>=6.0; extra == "test"
+Requires-Dist: pytest-cov>=2.0; extra == "test"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0; extra == "docs"
+Requires-Dist: sphinx-autodoc-typehints>=1.12; extra == "docs"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# MIMIC-IV Analysis
+
+A comprehensive analytical toolkit for exploring and modeling data from the MIMIC-IV clinical database.
+
+## Features
+
+- Exploratory Data Analysis
+- Patient Trajectory Visualization
+- Order Pattern Analysis
+- Predictive Modeling
+
+## Installation
+
+### Prerequisites
+
+- Python 3.12 or higher
+- pip or conda package manager
+
+### Option 1: Using pip
+
+```bash
+pip install -e ".[dev]"  # Install with development dependencies
+```
+
+
+### Option 3: Manual Installation
+
+1. Create a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+2. Install dependencies:
+
+```bash
+pip install -e ".[dev]"  # Install with development dependencies
+```
+
+## Development
+
+### Code Style
+
+This project uses:
+
+- black for code formatting
+- isort for import sorting
+- flake8 for style guide enforcement
+- mypy for static type checking
+
+To format code:
+
+```bash
+black .
+isort .
+```
+
+To check code:
+
+```bash
+flake8 .
+mypy .
+```
+
+### Running Tests
+
+```bash
+pytest tests/
+pytest --cov=mimic_iv_analysis tests/  # With coverage
+```
+
+## Project Structure
+
+```
+mimic_iv_analysis/
+├── src/                     # Source code directory
+│   ├── __init__.py         # Package initialization
+│   ├── analysis/           # Analysis modules
+│   ├── data/               # Data handling modules
+│   ├── core/               # Core functionality
+│   ├── utils/              # Utility functions
+│   └── visualization/      # Visualization modules
+├── tests/                  # Test suite
+│   ├── unit/              # Unit tests
+│   └── integration/       # Integration tests
+├── docs/                   # Documentation
+├── scripts/                # Utility scripts
+│   └── install.sh         # Installation script
+├── setup_config/          # Configuration files
+├── .env.example           # Example environment variables
+├── .gitignore             # Git ignore rules
+├── LICENSE                # Project license
+├── pyproject.toml         # Project configuration
+├── README.md              # Project documentation
+└── setup.py               # Setup configuration
+```
+
+## Usage
+
+### Install the package from testpypi
+
+```bash
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ mimic_iv_analysis==0.5.8
+```
+
+### Run the Streamlit dashboard:
+
+```bash
+# If installed with pip:
+mimic-iv
+
+# Or directly:
+streamlit run src/visualization/app.py
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+## License
+
+MIT
