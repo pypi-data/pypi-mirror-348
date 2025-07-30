@@ -1,0 +1,1 @@
+from .UzbekTagger import pos
