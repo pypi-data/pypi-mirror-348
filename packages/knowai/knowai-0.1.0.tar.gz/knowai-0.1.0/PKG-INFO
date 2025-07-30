@@ -1,0 +1,231 @@
+Metadata-Version: 2.4
+Name: knowai
+Version: 0.1.0
+Summary: A conversational RAG agent pipeline using LangGraph
+Project-URL: Repository, https://github.com/crvernon/knowai
+Author-email: "Chris R. Vernon" <chris.vernon@pnnl.gov>
+Maintainer-email: Chris Vernon <chris.vernon@pnnl.gov>
+License: BSD 3-Clause License
+        
+        Copyright (c) 2025, Chris Vernon
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its
+           contributors may be used to endorse or promote products derived from
+           this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+License-File: LICENSE
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.13
+Requires-Dist: boto3>=1.38.18
+Requires-Dist: faiss-cpu>=1.10.0
+Requires-Dist: fastapi>=0.115.9
+Requires-Dist: langchain-community>=0.3.21
+Requires-Dist: langchain-core>=0.3.55
+Requires-Dist: langchain-openai>=0.3.14
+Requires-Dist: langchain>=0.3.23
+Requires-Dist: langgraph>=0.3.31
+Requires-Dist: pydantic>=2.11.3
+Requires-Dist: pymupdf>=1.25.5
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: streamlit>=0.9.0
+Requires-Dist: tiktoken>=0.5.0
+Requires-Dist: uvicorn>=0.34.2
+Provides-Extra: deploy
+Requires-Dist: twine>=4.0.1; extra == 'deploy'
+Provides-Extra: dev
+Requires-Dist: pytest-cov>=2.12.1; extra == 'dev'
+Requires-Dist: pytest>=6.0; extra == 'dev'
+Requires-Dist: trio>=0.30.0; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: autodoc>=0.5.0; extra == 'docs'
+Requires-Dist: build>=0.5.1; extra == 'docs'
+Requires-Dist: ipykernel>=6.15.1; extra == 'docs'
+Requires-Dist: nbsphinx~=0.8.6; extra == 'docs'
+Requires-Dist: setuptools>=57.0.0; extra == 'docs'
+Requires-Dist: sphinx~=7.2.6; extra == 'docs'
+Description-Content-Type: text/markdown
+
+[![test](https://github.com/crvernon/knowai/actions/workflows/build.yml/badge.svg)](https://github.com/crvernon/knowai/actions/workflows/build.yml)
+
+## knowai
+#### An agentic AI pipeline for multiple, large PDF reports interrogation
+
+### Set up
+- Clone this repostiory into a local directory of your choosing
+- Build a virtual environment 
+- Install `knowai` by running:  `pip install .` from the root directory of your clone
+- Configure a `.env` file with the following:
+    - `AZURE_OPENAI_API_KEY` - Your API key
+    - `AZURE_OPENAI_ENDPOINT` - Your Azure endpoint
+    - `AZURE_OPENAI_DEPLOYMENT` - Your LLM deployment name (e.g., "gpt-4o")
+    - `AZURE_EMBEDDINGS_DEPLOYMENT` - Your embeddings model deployment name (e.g., "text-embedding-3-large")
+    - `AZURE_OPENAI_API_VERSION` - Your Azure LLM deployment version (e.g., "2024-02-01")
+
+### Building the vectorstore
+From the root directory of this repository, run the following from a the terminal (ensuring that your virtual environment is active) to build the vectorstore:
+
+`python scripts/build_vectorstore.py <directory_containing_your_input_pdf_files> --vectorstore_path <directory_name_for_vectorstore>`
+
+By default, this will create a vectorstore using FAISS named "test_faiss_store" in the root directory of your repository.  
+
+### Running the knowai in a simple chatbot example via streamlit
+From the root directory, run the following in a terminal after you have your virtual environment active:  
+
+`streamlit run app_chat_simple.py`
+
+This will open the app in your default browser.
+
+### Using knowai
+
+Once your vector store is built, you can use **knowai** either programmatically or through the provided Streamlit interface.
+
+#### Python quick‑start
+
+The package ships with the `KnowAIAgent` class for fully programmatic access
+inside notebooks or scripts:
+
+```python
+from knowai.core import KnowAIAgent
+
+# Path that you supplied with --vectorstore_path when building
+VSTORE_PATH = "test_faiss_store"
+
+agent = KnowAIAgent(vectorstore_path=VSTORE_PATH)
+
+# A single conversational turn
+response = await agent.process_turn(
+    user_question="Summarize the key findings in the 2025 maritime report",
+    selected_files=["my_report.pdf"],
+)
+
+print(response["generation"])
+```
+
+The returned dictionary contains:
+
+| Key                           | Description                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| `generation`                  | Final answer synthesised from the selected documents.        |
+| `individual_answers`          | Per‑file answers (when *bypass_individual_gen=False*).       |
+| `documents_by_file`           | Retrieved document chunks keyed by filename.                 |
+| `raw_documents_for_synthesis` | Raw text block used when bypassing individual generation.    |
+| `bypass_individual_generation`| Whether the bypass mode was used for this turn.              |
+
+#### Streamlit chat app
+
+If you prefer a ready‑made UI, launch the demo:
+
+```bash
+streamlit run app_chat_simple.py
+```
+
+Upload or select PDF files, ask questions in the sidebar, and inspect per‑file
+answers or the combined response in the main panel.
+
+---
+
+For advanced configuration options (e.g., conversation history length,
+retriever *k* values, or combine thresholds) see the docstrings in
+`knowai/core.py` and `knowai/agent.py`.
+
+## Containerization
+
+To build and run both the knowai service and the Svelte UI using Docker Compose:
+
+1. Ensure Docker and Docker Compose are installed on your machine.
+2. From the directory containing this README (the repo root), navigate to the Svelte example folder:
+   ```bash
+   cd example_apps/svelte
+   ```
+2a. Compile the Svelte app and package the build as `svelte-example`:
+   ```bash
+   npm install
+   npm run build
+   mv dist svelte-example
+   ```
+3. Start the services and build images:
+   ```bash
+   docker compose up --build
+   ```
+   This will:
+   - Build the `knowai` service (listening on port 8000).
+   - Build the `ui` service (Svelte app, listening on port 5173).
+4. Open your browser and visit:
+   - FastAPI docs: http://localhost:8000/docs
+   - Svelte UI:      http://localhost:5173
+5. To stop and remove containers, press `CTRL+C` and then run:
+   ```bash
+   docker compose down
+   ```
+
+## Running the knowai CLI Locally
+
+You can start the FastAPI micro-service locally without Docker and point it to either a local vectorstore or one hosted on S3.
+
+### Using a Local Vectorstore
+
+1. Ensure you have a built FAISS vectorstore on disk (e.g., `test_faiss_store`).
+2. Start the service:
+   ```bash
+   python -m knowai.cli
+   ```
+3. In another terminal, initialize the session:
+   ```bash
+   curl -X POST http://127.0.0.1:8000/initialize \
+     -H "Content-Type: application/json" \
+     -d '{"vectorstore_s3_uri":"/absolute/path/to/your/vectorstore"}'
+   ```
+4. Ask a question:
+   ```bash
+   curl -X POST http://127.0.0.1:8000/ask \
+     -H "Content-Type: application/json" \
+     -d '{
+       "session_id":"<session_id>",
+       "question":"Your question here",
+       "selected_files":["file1.pdf","file2.pdf"]
+     }'
+   ```
+
+### Using an S3-Hosted Vectorstore
+
+1. Start the service:
+   ```bash
+   python -m knowai.cli
+   ```
+2. Initialize the session against your S3 bucket:
+   ```bash
+   curl -X POST http://127.0.0.1:8000/initialize \
+     -H "Content-Type: application/json" \
+     -d '{"vectorstore_s3_uri":"s3://your-bucket/path"}'
+   ```
+3. Ask a question in a similar way:
+   ```bash
+   curl -X POST http://127.0.0.1:8000/ask \
+     -H "Content-Type: application/json" \
+     -d '{
+       "session_id":"<session_id>",
+       "question":"Another question example",
+       "selected_files":[]
+     }'
+   ```
