@@ -1,0 +1,8 @@
+[console_scripts]
+
+[gui_scripts]
+
+[pdm]
+release = mex.release.release:release
+setup-commit-signing = mex.release.setup_commit_signing:setup_commit_signing
+
