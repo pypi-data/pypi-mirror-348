@@ -1,0 +1,66 @@
+Metadata-Version: 2.4
+Name: sagenetgw
+Version: 0.1.0
+Summary: A Python package for gravitational wave analysis using neural networks
+Project-URL: Homepage, https://github.com/luoyifang/sagenet
+Project-URL: Repository, https://github.com/luoyifang/sagenet
+Author-email: Yifang Luo <luoyifang@bupt.cn>
+License: MIT License
+        
+        Copyright (c) 2025 [Your Name]
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: gravitational waves,machine learning,neural networks
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: scikit-learn>=1.6.1
+Requires-Dist: torch>=1.9.0
+Description-Content-Type: text/markdown
+
+# SageNetGW
+SageNetGW is a Python package for generating GW power-frequency curves.
+See https://github.com/YifangLuo/SageNet and https://github.com/bohuarolandli/stiffGWpy
+
+## Installation
+```bash
+pip install sagenetgw
+```
+## Usage Example
+```python
+from sagenetgw import FormerGenerator
+import numpy as np
+from matplotlib import pyplot as plt
+
+generator = FormerGenerator()
+curve = generator.generate(r=3.9585109e-05, 
+                   n_t=1.0116972, 
+                   kappa10=110.42477, 
+                   T_re=0.17453859, 
+                   DN_re=39.366618,
+                   Omega_bh2=0.0223828, 
+                   Omega_ch2=0.1201075, 
+                   H0=67.32117, 
+                   A_s=2.100549e-9)
+coords = np.array(curve)
+plt.plot(coords[:, 0], coords[:, 1], '--', color="royalblue", marker='.')
+```
