@@ -1,0 +1,65 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools >= 61", "setuptools_scm>=7"]
+
+[project]
+classifiers = [
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11"
+]
+dependencies = [
+  "dvc >= 2.12",
+  "pandas >= 0.20",
+  "pyyaml >= 5"
+]
+description = ""
+dynamic = ["version"]
+license = {text = "GPLv3"}
+name = "dvc-stage"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+develop = [
+  'commitizen',
+  'ipykernel',
+  'pre-commit',
+  'pylsp-rope',
+  'python-lsp-ruff',
+  'python-lsp-server[all]',
+  'ruff'
+]
+docs = [
+  'pdoc'
+]
+
+[project.scripts]
+dvc-stage = "dvc_stage.cli:cli"
+
+[project.urls]
+Changelog = "https://github.com/MArpogaus/dvc-stage/blob/dev/CHANGELOG.md"
+Documentation = "https://marpogaus.github.io/dvc-stage"
+Issues = "https://github.com/MArpogaus/dvc-stage/issues"
+Repository = "https://github.com/MArpogaus/dvc-stage"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+update_changelog_on_bump = true
+version_provider = "scm"
+version_scheme = "pep440"
+
+[tool.ruff]
+indent-width = 4
+line-length = 88
+target-version = "py37"
+
+[tool.ruff.lint]
+select = ["I", "E", "F", "D"]
+
+[tool.setuptools_scm]
+# https://stackoverflow.com/a/74404703
+# omits local version, useful because pypi does not support it
+local_scheme = "no-local-version"
