@@ -1,0 +1,62 @@
+Metadata-Version: 2.4
+Name: binmod-runtime
+Version: 0.1.0
+Summary: WASM based plugin runtime for Python
+Project-URL: repository, https://gitlab.com/binmod/binmod-runtime-py
+Author-email: Tim Pogue <me@pogue.dev>
+License: MIT
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: orjson>=3.10.18
+Requires-Dist: pydantic>=2.11.4
+Requires-Dist: wasmtime>=32.0.0
+Description-Content-Type: text/markdown
+
+# Binmod
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/binmod-runtime?style=flat-square)
+
+
+## Quick Start
+
+### Installation
+
+```bash
+pip install binmod-runtime
+```
+
+### Basic Usage
+
+```python
+from binmod import Module, ModuleEnv
+
+# Load a WebAssembly module
+mod = Module.from_file(
+    "my_module.wasm",
+    name="example",
+    environment=ModuleEnv.inherit(),
+    host_fns={
+        "host_log": lambda msg: print(f"Host log: {msg}"),
+        "host_add": lambda a, b: a + b,
+    }
+)
+
+# Call a function from the module. Note: All parameters and outputs must be
+# serializable to JSON.
+result = mod.api.greet("Alice", 5)
+print(result)  # Output: Hello, Alice you are 5 years old!
+```
+
+Note: The WebAssembly module must be compiled with the WASI Preview 1 target.
+
+## License
+This project is licensed under MIT License.
+
+## Support & Feedback
+If you encounter any issues or have feedback, please open an issue.
+
+Made with ❤️ by Tim Pogue
+
+
+
+
