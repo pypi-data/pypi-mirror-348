@@ -1,0 +1,2 @@
+from .translate_page import TranslateFuiPage
+from .translate_support_language import MymemoryTranslateLanguage,GoogleTranslateLanguage

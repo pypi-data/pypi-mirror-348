@@ -1,0 +1,1 @@
+from fui.core.flashlight import Flashlight

@@ -1,0 +1,1 @@
+from fui.core.lottie import Lottie
