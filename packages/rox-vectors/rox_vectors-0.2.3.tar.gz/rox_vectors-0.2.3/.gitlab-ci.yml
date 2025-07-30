@@ -1,0 +1,22 @@
+image: python:3-slim
+
+stages:
+  - test_package
+  - build_package
+
+before_script:
+  - python --version
+
+lint_and_test:
+  stage: test_package
+  before_script:
+    - pip install pylint mypy pytest
+  script:
+    - pip install .
+    - pylint -E src
+    - mypy src
+    - pytest -v tests
+  only:
+    changes:
+      - src/**/*
+      - .gitlab-ci.yml
