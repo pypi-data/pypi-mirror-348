@@ -1,0 +1,20 @@
+[project]
+name = "pubstomp"
+version = "0.1.1"
+description = "Advanced async pentesting toolkit with crawling, fuzzing, and reporting"
+authors = [
+    { name="Nolan Coe", email="nolancoe@proton.me" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+dependencies = [
+    "aiohttp",
+    "beautifulsoup4",
+    "colorama",
+    "tqdm",
+    "validators"
+]
+
+[project.scripts]
+pubstomp = "pubstomp.cli:cli"
