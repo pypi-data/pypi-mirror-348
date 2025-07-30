@@ -1,0 +1,38 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.login-form, .register-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.request-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.status-new {
+    color: #007bff;
+}
+
+.status-in_progress {
+    color: #fd7e14;
+}
+
+.status-completed {
+    color: #28a745;
+}
+
+.status-rejected {
+    color: #dc3545;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
