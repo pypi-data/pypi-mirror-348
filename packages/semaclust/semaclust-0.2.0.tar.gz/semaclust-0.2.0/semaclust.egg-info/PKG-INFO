@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: semaclust
+Version: 0.2.0
+Summary: Semantic text clustering using sentence embeddings and agglomerative clustering
+Author-email: Mert Cobanov <mertcobanov@gmail.com>
+Maintainer-email: Mert Cobanov <mertcobanov@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/cobanov/semaclust
+Project-URL: Repository, https://github.com/cobanov/semaclust.git
+Project-URL: Documentation, https://github.com/cobanov/semaclust#readme
+Project-URL: Changelog, https://github.com/cobanov/semaclust/releases
+Project-URL: Issues, https://github.com/cobanov/semaclust/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Text Processing :: General
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: scikit-learn>=1.0
+Requires-Dist: sentence-transformers>=2.2
+Requires-Dist: numpy>=1.20
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=21.12b0; extra == "dev"
+Requires-Dist: isort>=5.10.0; extra == "dev"
+Requires-Dist: mypy>=0.910; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Requires-Dist: pre-commit>=2.15.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+Requires-Dist: myst-parser>=0.15.0; extra == "docs"
+Dynamic: license-file
+
+# semaclust
+
+**semaclust** (semantic + clustering) is a lightweight Python package for semantic text clustering using sentence embeddings and agglomerative clustering.
+
+## Features
+
+- SentenceTransformer-based text encoding
+- Agglomerative clustering with configurable thresholds
+- Easily map or replace similar text values
+
+## Installation
+
+```bash
+pip install git+https://github.com/cobanov/semaclust.git
+```
+
+## Usage
+
+```python
+# Create clusterer
+clusterer = TextClusterer()
+
+texts = ["New York", "Los Angeles", "San Francisco", "new york city", "LA", "San Fran"]
+```
+
+```python
+# Get clusters
+clusters = clusterer.cluster(texts)
+print("Clusters:", clusters)
+
+# Clusters: {1: ['New York', 'new york city'], 2: ['Los Angeles', 'LA'], 0: ['San Francisco', 'San Fran']}
+```
+
+```python
+# Get replacement map
+replacement_map = clusterer.get_replacement_map(texts)
+print("\nReplacement map:", replacement_map)
+
+# Replacement map: {'New York': 'New York', 'new york city': 'New York', 'Los Angeles': 'Los Angeles', 'LA': 'Los Angeles', 'San Francisco': 'San Francisco', 'San Fran': 'San Francisco'}
+```
+
+```python
+# Replace values
+replaced_texts = clusterer.replace_values(texts)
+print("\nReplaced texts:", replaced_texts)
+
+# Replaced texts: ['New York', 'Los Angeles', 'San Francisco', 'New York', 'Los Angeles', 'San Francisco']
+```

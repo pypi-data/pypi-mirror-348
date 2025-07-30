@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semaclust"
+version = "0.2.0"
+description = "Semantic text clustering using sentence embeddings and agglomerative clustering"
+readme = "readme.md"
+authors = [
+    {name = "Mert Cobanov", email = "mertcobanov@gmail.com"}
+]
+maintainers = [
+    {name = "Mert Cobanov", email = "mertcobanov@gmail.com"}
+]
+license = "MIT"
+requires-python = ">=3.7"
+classifiers = [
+    # Development Status
+    "Development Status :: 4 - Beta",
+    
+    # Intended Audience
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    
+    # Operating System
+    "Operating System :: OS Independent",
+    
+    # Python versions
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    
+    # Topics
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: General",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "scikit-learn>=1.0",
+    "sentence-transformers>=2.2",
+    "numpy>=1.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.12b0",
+    "isort>=5.10.0",
+    "mypy>=0.910",
+    "flake8>=4.0.0",
+    "pre-commit>=2.15.0",
+]
+
+docs = [
+    "sphinx>=4.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "myst-parser>=0.15.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/cobanov/semaclust"
+Repository = "https://github.com/cobanov/semaclust.git"
+Documentation = "https://github.com/cobanov/semaclust#readme"
+Changelog = "https://github.com/cobanov/semaclust/releases"
+Issues = "https://github.com/cobanov/semaclust/issues"
+
+[tool.setuptools]
+packages = ["semaclust"]
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\\.pyi?$'
+skip-string-normalization = true
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | build
+  | dist
+  | venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[project.scripts]
+semaclust = "semaclust.cli:main"
