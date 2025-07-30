@@ -1,0 +1,19 @@
+[project]
+name = "UzbekTagger"
+version = "1.1"
+authors = [
+  { name="Sharipov Maksud,Yuldashov Ollabergan", email="maqsbek72@gmail.com" },
+]
+description = "Part of Speech Tagger for Uzbek Language."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "nltk>=3.5",
+]
+[project.urls]
+"Homepage" = "https://github.com/MaksudSharipov/UzbekTagger"
