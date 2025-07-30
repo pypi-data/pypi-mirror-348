@@ -1,0 +1,60 @@
+[project]
+name = "nativepy"
+version = "0.0.7"
+
+description = "Build native apps with Python"
+readme = "README.md"
+
+authors = [
+    { name = "Avetik Kazhoyan", email = "kazhoyan@gmail.com" }
+]
+
+requires-python = ">= 3.13"
+dependencies = []
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/kazhoyan/nativepy"
+Issues = "https://github.com/kazhoyan/nativepy/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+exclude = [
+    ".*",
+    "pyproject.toml",
+    "requirements*",
+    "tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/r"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+addopts = "--ignore=projects --ignore=tests/projects --tb=short"
+
+[tool.ruff]
+exclude = [
+    "projects",
+    "tests/projects",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.uv]
+managed = true
+dev-dependencies = [
+    "pytest>=8.3.3",
+]
