@@ -1,0 +1,38 @@
+Metadata-Version: 2.3
+Name: webdevaccess
+Version: 0.1.0
+Summary: some scripts using the domible package to help with web development
+License: MIT
+Keywords: html,accessibility,a11y,web development,frontend
+Author: Joel Dodson
+Author-email: joeldodson@gmail.com
+Requires-Python: >=3.11, <4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Text Processing :: Markup :: HTML
+Requires-Dist: beautifulsoup4 (>=4.13.4,<5.0.0)
+Requires-Dist: domible (>=0.1.17,<0.2.0)
+Requires-Dist: jsonloggeriso8601datetime (>=3.0.0,<4.0.0)
+Requires-Dist: requests (>=2.32.3,<3.0.0)
+Project-URL: Documentation, https://joeldodson.github.io/webdevaccess
+Project-URL: Homepage, https://joeldodson.github.io/webdevaccess
+Project-URL: Repository, https://github.com/joeldodson/webdevaccess
+Project-URL: issues, https://github.com/joeldodson/webdevaccess/issues
+Description-Content-Type: text/markdown
+
+# webdevaccess
+
+simple scripts using 
+[domible](https://joeldodson.github.io/domible)
+to help develop accessible web content.
+
+In an effort to minimize domible's footprint,
+I wanted to pull any scripts out of domible requiring dependencies not also required by domible.
+Thus I created webdevaccess to host more complex scripts showing arguably more interesting usage of domible.
+The scripts should all be runnable using ```pipx```.
+
+For complete documentation, read the
+[github pages for webdevaccess](https://joeldodson.github.io/webdevaccess).
+
