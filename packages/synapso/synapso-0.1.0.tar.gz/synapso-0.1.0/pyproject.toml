@@ -1,0 +1,31 @@
+[project]
+name = "synapso"
+version = "0.1.0"
+description = "Synapso: local-first semantic search and knowledge cortex for markdown and text files"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Ganesh Palanikumar" }
+]
+dependencies = [
+    "typer[all]>=0.9.0",
+    "pgvector",
+    "sqlalchemy",
+    "watchdog",
+    "psycopg[binary]",
+    "fastapi",
+    "uvicorn",
+    "tqdm"
+]
+
+[project.scripts]
+synapso = "synapso.__main__:app"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["synapso"]
+package-dir = {"" = "src"}
