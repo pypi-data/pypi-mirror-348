@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=65.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spec2chat"
+version = "0.1.6"
+description = "API-driven chatbot generation from OpenAPI service specifications"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+authors = [
+    { name = "María Jesús Rodríguez Sánchez", email = "mjesusrodriguez@ugr.es" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
