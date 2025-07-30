@@ -1,0 +1,30 @@
+name: Regenerate Parser
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install Tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+      - name: Generate Parser
+        run: tree-sitter generate
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: regenerate parser'
+          title: 'chore: regenerate parser'
+          body: |
+            This PR regenerates the Tree-sitter parser.
+            
+            This is an automated PR created by the regenerate workflow.
+          branch: regenerate-parser
+          delete-branch: true
