@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: NSK-Bot
+Version: 1.1.0
+Summary: A Python library for NSK automation
+Author-email: Văn Ngoc Nhât Huy <nhathuyd4hp@gmail.com>
+License: MIT
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: pre-commit>=4.2.0
+Requires-Dist: pydantic-settings>=2.9.1
+Requires-Dist: selenium>=4.32.0
+Requires-Dist: twine>=6.1.0
+Dynamic: license-file
+
+# NSKBot - Selenium Automation Bot
+
+NSKBot là một bộ công cụ tự động hóa (RPA) được phát triển để hỗ trợ các quy trình làm việc của NSK.
+
+## Yêu cầu Hệ thống
+
+- Python 3.12+
+- Các thư viện cần thiết được quản lý trong `pyproject.toml`
+
+## Các chức năng hỗ trợ hiện tại
+
+- [x] SharePoint 365
+
+  - [x] Tải **File** theo **URL**
+
+- [x] Web Access
+
+  - [x] Cập nhật thông tin đơn hàng
+  - [x] Lấy thông tin đơn hàng
+
+- [x] Mail Dealer
+
+  - [x] Gửi **Email**
+  - [x] Trả lời **Email**
