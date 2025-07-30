@@ -1,0 +1,98 @@
+Metadata-Version: 2.1
+Name: elastory
+Version: 0.1.0
+Summary: Tools for studying long ranged —allosteric— effects in elastic networks (e.g. of proteins) on a mechanical basis.
+Home-page: https://github.com/maxvossel/elastory
+License: MIT
+Keywords: physics,biophysics,allostery,elastic networks,proteins,computational biology
+Author: Maximilian Alexander Vossel
+Author-email: mvossel@pm.me
+Requires-Python: >=3.11,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: biopython (>=1.85,<2.0)
+Requires-Dist: dcor (>=0.6,<0.7)
+Requires-Dist: fastdtw (>=0.3.4,<0.4.0)
+Requires-Dist: h5py (>=3.13.0,<4.0.0)
+Requires-Dist: ipykernel (>=6.29.2,<7.0.0)
+Requires-Dist: ipywidgets (>=8.1.7,<9.0.0)
+Requires-Dist: jupyterthemes (>=0.20.0,<0.21.0)
+Requires-Dist: kaleido (==0.2.1)
+Requires-Dist: matplotlib (>=3.10.3,<4.0.0)
+Requires-Dist: networkx (>=3.4.2,<4.0.0)
+Requires-Dist: numba (>=0.61.2,<0.62.0)
+Requires-Dist: numpy (>=2.2.6,<3.0.0)
+Requires-Dist: pandas (>=2.0.3,<3.0.0)
+Requires-Dist: parmap (>=1.7.0,<2.0.0)
+Requires-Dist: pillow (>=11.2.1,<12.0.0)
+Requires-Dist: plotly (>=6.1.0,<7.0.0)
+Requires-Dist: pre-commit (>=4.2.0,<5.0.0)
+Requires-Dist: pydantic (>=2.11.4,<3.0.0)
+Requires-Dist: rmsd (>=1.6.4,<2.0.0)
+Requires-Dist: ruff (>=0.11.10,<0.12.0)
+Requires-Dist: scikit-learn (>=1.6.1,<2.0.0)
+Requires-Dist: scipy (>=1.15.3,<2.0.0)
+Requires-Dist: seaborn (>=0.13.2,<0.14.0)
+Requires-Dist: tables (>=3.10.2,<4.0.0)
+Requires-Dist: tqdm (>=4.67.1,<5.0.0)
+Requires-Dist: widgetsnbextension (>=4.0.14,<5.0.0)
+Project-URL: Repository, https://github.com/maxvossel/elastory
+Description-Content-Type: text/markdown
+
+<p align="center">
+  <a href="https://arxiv.org/pdf/2311.12025">
+    <img src="./net.png" alt="network" width="400">
+  </a>
+</p>
+
+<h1 align="center">elastory</h1>
+
+<p align="center">
+  Tools for studying long ranged <i><b>—allosteric—</b></i> effects in elastic networks (e.g. of proteins) on a mechanical basis.
+  <br>
+  <a href="https://arxiv.org/pdf/2311.12025"><strong>Read our paper »</strong></a>
+  <br>
+  <br>
+  <a href="./notebooks/examples">Look at our Examples</a>
+  ·
+  <a href="./notebooks/results">Reproduce our results</a>
+
+</p>
+
+## Installation
+
+Will be available as package on PyPI soon.
+
+```bash
+pip install elastory
+```
+
+## Usage
+
+You might wan't to have a look at the [examples](./notebooks/examples).
+
+## Publication
+
+Please have a look at our [paper 📜](https://arxiv.org/pdf/2311.12025) and cite us [<img alt="orcid" width="20px" src="https://orcid.org/assets/vectors/orcid.logo.icon.svg">](https://orcid.org/0009-0007-0723-8109) when using my code.
+
+```bibtex
+@misc{vossel2023allosteric,
+    title={The allosteric lever: towards a principle of specific allosteric response},
+    author={Maximilian Vossel and Bert L. de Groot and Aljaž Godec},
+    year={2023},
+    eprint={2311.12025},
+    archivePrefix={arXiv},
+    primaryClass={physics.bio-ph}
+}
+```
+
+## Contributing
+
+Pull requests are more than welcome. For major changes, please open an [issue](https://github.com/maxvossel/elastory/issues) first to discuss what you would like to change or add.
+
+## Project status
+
+Work on this project has slowed down since I left academia for an [AI startup](https://lector.ai). I still like this project however and would be happy to help anyone using the code. I can not promise anything but will do my best to provide support. :)
+
