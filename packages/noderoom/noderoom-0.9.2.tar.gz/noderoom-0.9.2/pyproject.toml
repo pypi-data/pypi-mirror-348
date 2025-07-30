@@ -1,0 +1,13 @@
+[project]
+name = "noderoom"
+version = "0.9.2"
+description = "A collaborative chatroom framework for local AI experiments"
+authors = [{ name = "Henry Jones" }]
+license = { text = "MIT" }
+dependencies = [
+    "requests>=2.31"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
