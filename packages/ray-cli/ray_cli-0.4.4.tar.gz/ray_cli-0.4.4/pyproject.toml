@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "ray-cli"
+version = "0.4.4"
+description = "Command-line utility for generating and broadcasting DMX over sACN"
+authors = ["Norbert Batiuk <norbert@batiuk.se>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/nobbmaestro/ray-cli"
+keywords = ["dmx", "sacn", "cli", "utility", "python"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry-dynamic-versioning]
+enable = false
+bump = true
+dirty = true
+
+[tool.poetry.scripts]
+ray-cli = "ray_cli.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+sacn = "^1.10.0"
+numpy = "==1.24.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "==24.3.0"
+flake8 = "==5.0.4"
+flake8-pyproject= "==1.2.3"
+isort = "==5.13.2"
+pre-commit = "==3.5.0"
+pylint = "==3.1.0"
+pytype = "==2024.2.27"
+pytest = "^8.3.2"
+tox = "^4.16.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.flake8]
+max-line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint]
+max-line-length = 88
+disable = [
+    'C0114',    # missing-module-docstring
+    'C0115',    # missing-class-docstring
+    'C0116',    # missing-function-docstring
+    'R0902',    # too-many-instance-attributes
+    'R0903',    # too-few-public-methods
+    'R0913',    # (too-many-arguments)
+    'W0511',    # allow TODO, FIXME etc
+]
