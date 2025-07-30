@@ -1,0 +1,14 @@
+[flake8]
+max-line-length = 100
+exclude = .git,__pycache__,build,dist
+ignore = 
+    # Ignoring whitespace related errors for now
+    W291,  # trailing whitespace
+    W293,  # blank line contains whitespace
+    W504,  # line break after binary operator
+    F401,  # imported but unused
+    E226,  # missing whitespace around arithmetic operator
+    E741   # ambiguous variable name
+per-file-ignores =
+    __init__.py: F401
+max-complexity = 10 
