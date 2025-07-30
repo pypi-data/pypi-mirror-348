@@ -1,0 +1,73 @@
+Metadata-Version: 2.4
+Name: mqttsensor
+Version: 0.2.0
+Summary: A standard library for MQTT sensors within a home -> Given the topic and payload, it will create a sensor object. The payload will be inot the format expected by the [mqtt-influxdb](https://github.com/yfredrix/mqtt-influxdb) container.
+Author-email: yfredrix <skier@live.nl>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: paho-mqtt>=2.1.0
+Requires-Dist: toml>=0.10.2
+Description-Content-Type: text/markdown
+
+# mqttsensor
+
+A Python package for sending sensor data over MQTT with message persistence and reconnection support.
+
+## Features
+
+- MQTT client with TLS support
+- Automatic message storage and resend on connection loss
+- Configurable via TOML file
+- Logging with loguru
+
+## Installation
+
+```bash
+pip install .
+```
+
+## Configuration
+
+Create a `config.toml` file in your project directory:
+
+```toml
+[mqtt]
+broker = "localhost"
+port = 1883
+client_id = "your_client_id"
+ca_certs = "ca.pem"
+certfile = "cert.pem"
+key = "key.pem"
+max_times = 3
+```
+
+## Usage
+
+```python
+from mqttsensor.main import init_client
+
+config, mqtt_client = init_client("config.toml")
+mqtt_client.start()
+# Send sensor data
+mqtt_client.send_sensor_data(
+    measurement="temperature",
+    location="office",
+    sensor_id="sensor01",
+    unit="C",
+    value=23.5
+)
+mqtt_client.stop()
+```
+
+## Testing
+
+Run all tests with:
+
+```bash
+pytest
+```
+
+## License
+
+MIT License
