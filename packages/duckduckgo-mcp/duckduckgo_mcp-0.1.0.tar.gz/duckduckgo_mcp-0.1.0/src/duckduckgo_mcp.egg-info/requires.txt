@@ -1,0 +1,17 @@
+mcp>=1.9.0
+fastmcp>=2.3.4
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+
+[dev]
+pytest>=7.0.0
+black>=23.0.0
+isort>=5.0.0
+mypy>=1.0.0
+pytest-cov>=4.0.0
+
+[uvicorn]
+uvicorn>=0.15.0
+
+[uvx]
+uvx>=0.1.0
