@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: atcoder-schedule
+Version: 0.2.1
+Summary: CLI tool to get the schedule of AtCoder contests.
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: beautifulsoup4[lxml]>=4.13.4
+Requires-Dist: requests>=2.32.3
+
+# atcoder-schedule
+
+CLI tool to get the schedule of AtCoder contests.
+
+## Installation
+
+```bash
+pip install atcoder-schedule
+```
+
+## Usage
+
+```
+usage: acschedule.py [-h] [-l {ja,en}] [-z TIMEZONE]
+
+Get upcoming AtCoder contests
+
+options:
+  -h, --help            show this help message and exit
+  -l {ja,en}, --lang {ja,en}
+                        Language for the contest page
+  -z TIMEZONE, --timezone TIMEZONE
+                        Timezone for the contest start time
+```
+
