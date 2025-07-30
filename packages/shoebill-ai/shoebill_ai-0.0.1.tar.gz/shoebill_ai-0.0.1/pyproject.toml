@@ -1,0 +1,41 @@
+   [build-system]
+   requires = ["setuptools>=61.0"]
+   build-backend = "setuptools.build_meta"
+
+   [project]
+   name = "shoebill_ai"
+   version = "0.0.1"
+   authors = [
+       {name = "shoebill", email = "shoebill.hai@gmail.com"},
+   ]
+   description = "AI Agent Framework"
+   readme = "README.md"
+   requires-python = ">=3.10"
+   classifiers = [
+       "Programming Language :: Python :: 3",
+       "License :: OSI Approved :: Apache Software License",
+       "Operating System :: OS Independent",
+   ]
+   dependencies = [
+       "requests~=2.32.3",
+       "jinja2~=3.1.3"
+   ]
+
+   [project.optional-dependencies]
+   dev = [
+       "pytest",
+       # Other development dependencies
+   ]
+
+   [tool.setuptools]
+   # Include package data
+   package-dir = {"" = "src"}
+
+   [tool.setuptools.packages.find]
+   where = ["src"]
+   include = ["shoebill_ai*"]
+
+   [tool.setuptools.package-data]
+   "shoebill_ai" = ["resources/*.json", "resources/templates/*.j2"]
+   "shoebill_ai.resources" = ["*.json", "templates/*.j2"]
+   "shoebill_ai.resources.templates" = ["*.j2"]

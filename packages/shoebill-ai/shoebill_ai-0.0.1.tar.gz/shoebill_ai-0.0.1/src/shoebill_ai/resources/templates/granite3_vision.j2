@@ -1,0 +1,47 @@
+{# ------ Tools ------ #}
+{% if Tools %}
+<|start_of_role|>available_tools<|end_of_role|>
+{% for index, tool in Tools %}
+{{ tool }}
+{% if index < Tools|length - 1 %}
+{% endif %}
+{% endfor %}
+<|end_of_text|>
+{% endif %}
+
+{# ------ System Prompt ------ #}
+{% if Messages|length > 0 and Messages[0].Role == "system" %}
+<|system|>
+{{ Messages[0].Content }}
+{% else %}
+<|system|>
+A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions.
+{% endif %}
+
+{# ------ Main Message Loop ------ #}
+{% for index, message in Messages %}
+{% set last = (index == Messages|length - 1) %}
+{% if message.Role == "system" %}
+{# Skip system message as it's handled above #}
+{% elif message.Role == "user" %}
+<|user|>
+{{ message.Content }}
+{% elif message.Role == "assistant" %}
+<|assistant|>
+{% if message.Content %}
+{{ message.Content }}
+<|end_of_text|>
+{% endif %}
+{% elif message.Role == "assistant_tool_call" %}
+<|start_of_role|>assistant<|end_of_role|><|tool_call|>{{ message.Content }}<|end_of_text|>
+{% elif message.Role == "tool_response" %}
+<|start_of_role|>tool_response<|end_of_role|>{{ message.Content }}<|end_of_text|>
+{% endif %}
+
+{# Add generation prompt #}
+{% if last %}
+{% if message.Role != "assistant" %}
+<|assistant|>
+{% endif %}
+{% endif %}
+{% endfor %}
