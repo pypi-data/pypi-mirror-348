@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: text-analyzer-toolkit
+Version: 0.1.0
+Summary: A simple text analysis toolkit for basic text processing tasks
+Home-page: https://github.com/ZoeDuan/text-analyzer-toolkit
+Author: Zoe Duan
+Author-email: Zoe Duan <zoe_dyh@hotmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 Zoe Duan
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/ZoeDuan/text-analyzer-toolkit
+Project-URL: Repository, https://github.com/ZoeDuan/text-analyzer-toolkit.git
+Project-URL: Bug Tracker, https://github.com/ZoeDuan/text-analyzer-toolkit/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# Text Analyzer Toolkit
+
+A simple yet powerful text analysis toolkit for Python that provides basic text processing and analysis capabilities.
+
+## Features
+
+- Word and character counting
+- Sentence analysis
+- Reading time estimation
+- Most common words identification
+- Text cleaning utilities
+- Email and URL extraction
+
+## Installation
+
+```bash
+pip install text-analyzer-toolkit
