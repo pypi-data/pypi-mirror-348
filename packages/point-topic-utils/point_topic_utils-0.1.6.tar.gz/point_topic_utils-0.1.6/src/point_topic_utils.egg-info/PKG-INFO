@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: point-topic-utils
+Version: 0.1.6
+Summary: Utilities for Point Topic projects
+Author: Peter Donaghey
+Requires-Dist: pymongo>=4.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: isort>=5.0.0; extra == "dev"
