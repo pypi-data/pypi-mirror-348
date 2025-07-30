@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "electricity_network_file_parser"
+version = "0.0.2"
+authors = [
+  { name="Leo van Schooten", email="l.g.t.v.schooten@tue.nl" },
+]
+description = "A Python package for parsing gaia and vision files. "
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'pandas==2.2.3',
+  'openpyxl==3.1.5'
+]
+
+[project.urls]
+Homepage = "https://github.com/EES-TUe/network-file-parser"
+Issues = "https://github.com/EES-TUe/network-file-parser/issues"
