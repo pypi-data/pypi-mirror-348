@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: frprint
+Version: 1.2.2
+Summary: more easier to use for-print
+Author-email: howShouldIChosseMyUsername <trademark2179@gmail.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Introducing "frprint"!
+
+If we want to repeat using "print()" before,<br>
+We should use "for()" or spam "print()".<br>
+But now! we can use "frprint()"!
+
+## how to use
+
+It is very easy to use.<br>
+Just type frprint(), and put two variables in the "frprint()".<br>
+There's a 2 Type of frprint must need.<br>
+frprint() needs "text" and "int".<br>
+for an example,<br>
+&nbsp; frprint("Hello python!",4)<br>
+&nbsp; It is same with...<br>
+```
+for i in range(4) :
+    print("Hello python!")
+```
+Is same with,<br>
+```
+frprint("Hello python!")
+```
+Yup. It goes like frprint(text,int,boolean(optional,Default value is True) )
+If you write frprint like this...
+```
+frprint("Hello python!",4,False)
+```
+It goes like...
+```
+for i in range(4) :
+    print("Hello word!", end=" ")
+```
+
+And this is all to use frprint()!<br>
+Ps.<br>
+you can also print variables.()
