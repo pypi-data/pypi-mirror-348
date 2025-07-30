@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openembed"
+version = "0.1.0"
+description = "A unified interface for vector embeddings from different providers"
+readme = "README.md"
+authors = [
+    {name = "OpenEmbed Team", email = "info@openembed.example.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["embeddings", "vectors", "nlp", "ai", "machine learning"]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "requests",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+cohere = ["cohere"]
+huggingface = ["transformers", "torch"]
+voyageai = ["voyageai"]
+amazon = ["boto3"]
+all = [
+    "openai>=1.0.0",
+    "cohere",
+    "transformers",
+    "torch",
+    "voyageai",
+    "boto3",
+]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "black",
+    "isort",
+    "flake8",
+    "mypy",
+    "sphinx",
+    "sphinx_rtd_theme",
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/username/openembed/issues"
+"Documentation" = "https://openembed.readthedocs.io/"
+"Source Code" = "https://github.com/username/openembed"
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+python_classes = "Test*"
+addopts = "--cov=openembed --cov-report=term-missing"
