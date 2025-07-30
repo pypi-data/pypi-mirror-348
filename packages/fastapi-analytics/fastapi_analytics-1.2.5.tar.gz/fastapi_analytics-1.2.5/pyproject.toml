@@ -1,0 +1,27 @@
+[project]
+name = "fastapi-analytics"
+version = "1.2.5"
+description = "Monitoring and analytics for FastAPI applications."
+readme = "README.md"
+authors = [{name = "Tom Draper", email = "tomjdraper1@gmail.com"}]
+license = {file = "LICENSE"}
+requires-python = ">=3.6"
+keywords = ["analytics", "api", "dashboard", "fastapi", "middleware"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+]
+dependencies = ["fastapi", "requests"]
+
+[project.optional-dependencies]
+build = ["build", "twine"]
+dev = ["pytest"]
+
+[project.urls]
+repository = "https://github.com/tom-draper/api-analytics"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = "."
+python_files = "test*.py"
