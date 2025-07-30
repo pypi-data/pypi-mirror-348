@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: perceptron-prasath
+Version: 0.0.1
+Summary: A small package for perceptron
+Project-URL: Homepage, https://github.com/prasath/perceptron_pkg
+Project-URL: Issues, https://github.com/prasath/perceptron_pkg/issues
+Author-email: prasath <prasathks20@gmail.com>
+License: MIT
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6
+Requires-Dist: joblib
+Requires-Dist: numpy
+Requires-Dist: pandas
+Description-Content-Type: text/markdown
+
+# Perceptron Python Package
+
+## References - 
+
+* [Official python docs from PYPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+
+A simple implementation of the Perceptron algorithm using only Python and NumPy. This notebook demonstrates the foundational concepts behind binary classification through a hands-on example using the AND logic gate.
+
+🧠 What is a Perceptron?
+The Perceptron is one of the earliest types of artificial neural networks, used for binary classifiers. It performs classification by computing a weighted sum of inputs and applying an activation function.
+
+📁 Project Structure
+Perceptron.ipynb: Main notebook with complete implementation and usage demonstration.
+
+Trains the model on the AND logic gate dataset.
+
+Includes methods for:
+
+Forward propagation
+
+Weight updates
+
+Loss calculation
+
+Model saving/loading
+
+🚀 Features
+Implementation of the perceptron class from scratch (no ML libraries).
+
+Visual inspection of the training process.
+
+Save and reload trained models using joblib.
