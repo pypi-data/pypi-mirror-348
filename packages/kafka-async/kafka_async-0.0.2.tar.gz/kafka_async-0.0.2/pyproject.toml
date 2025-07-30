@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools >= 61.0", "setuptools-scm >= 8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "kafka-async"
+requires-python = ">=3.10"
+authors = [{ name = "Timofei Kukushkin", email = "tima@kukushkin.me" }]
+description = "Thin async wrapper for Confluent Kafka Python client"
+readme = "README.md"
+dependencies = [
+  "anyio",
+  "confluent-kafka>=2.10.0",
+  "exceptiongroup; python_version < '3.11'",
+]
+license = { file = "LICENSE" }
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Framework :: AsyncIO",
+  "Framework :: Trio",
+]
+
+[dependency-groups]
+test = [
+  "pytest",
+  "pytest-anyio",
+  "pytest-cov",
+  "lovely-pytest-docker",
+]
+lint = [
+  { include-group = "test" },
+  "pyright",
+  "ruff",
+  "kafka-stubs",
+]
+docs = [
+  "furo",
+  "sphinx",
+  "sphinx-autodoc-typehints",
+  "myst-parser",
+]
+dev = [
+  { include-group = "test" },
+  { include-group = "lint" },
+  { include-group = "docs" },
+  "pytest-sugar",
+  "tox",
+  "tox-uv",
+  "uv",
+]
+
+[project.urls]
+Homepage = "https://github.com/tkukushkin/kafka-async"
+Repository = "https://github.com/tkukushkin/kafka-async.git"
+Issues = "https://github.com/tkukushkin/kafka-async/issues"
+Documentation = "https://kafka-async.readthedocs.io/stable"
+Changelog = "https://github.com/tkukushkin/kafka-async/releases"
+
+[tool.setuptools_scm]
+version_file = "src/kafka_async/_version.py"

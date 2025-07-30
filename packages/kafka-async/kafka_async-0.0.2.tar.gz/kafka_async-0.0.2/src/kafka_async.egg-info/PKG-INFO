@@ -1,0 +1,79 @@
+Metadata-Version: 2.4
+Name: kafka-async
+Version: 0.0.2
+Summary: Thin async wrapper for Confluent Kafka Python client
+Author-email: Timofei Kukushkin <tima@kukushkin.me>
+License: MIT License
+        
+        Copyright (c) 2024 Timofei Kukushkin
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/tkukushkin/kafka-async
+Project-URL: Repository, https://github.com/tkukushkin/kafka-async.git
+Project-URL: Issues, https://github.com/tkukushkin/kafka-async/issues
+Project-URL: Documentation, https://kafka-async.readthedocs.io/stable
+Project-URL: Changelog, https://github.com/tkukushkin/kafka-async/releases
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Framework :: AsyncIO
+Classifier: Framework :: Trio
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: anyio
+Requires-Dist: confluent-kafka>=2.10.0
+Requires-Dist: exceptiongroup; python_version < "3.11"
+Dynamic: license-file
+
+# kafka-async
+
+[![PyPI - Status](https://img.shields.io/pypi/status/kafka-async)](https://pypi.org/project/kafka-async)
+[![PyPI](https://img.shields.io/pypi/v/kafka-async)](https://pypi.org/project/kafka-async)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kafka-async)](https://pypi.org/project/kafka-async)
+[![PyPI - License](https://img.shields.io/pypi/l/kafka-async)](https://pypi.org/project/kafka-async)
+[![CI Status](https://github.com/tkukushkin/kafka-async/actions/workflows/check.yml/badge.svg)](https://github.com/tkukushkin/kafka-async/actions/workflows/check.yml)
+[![codecov](https://codecov.io/gh/tkukushkin/kafka-async/graph/badge.svg?token=376OQ1J9YH)](https://codecov.io/gh/tkukushkin/kafka-async)
+[![docs](https://readthedocs.org/projects/kafka-async/badge/?version=latest)](https://kafka-async.readthedocs.io/stable/)
+
+Thin async wrapper for [Confluent Kafka Python Client](https://pypi.org/project/confluent-kafka/).
+
+## Installation
+
+```bash
+pip install kafka-async
+```
+
+## Usage
+
+At the moment, only `Producer`, `Consumer`, and `AdminClient` are supported.
+
+API is similar to the original `confluent-kafka` library, but with async/await syntax.
+
+## License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
