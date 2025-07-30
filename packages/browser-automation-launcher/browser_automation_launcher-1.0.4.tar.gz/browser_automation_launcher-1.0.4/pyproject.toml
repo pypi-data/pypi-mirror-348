@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "browser-automation-launcher"
+version = "1.0.4"
+description = "Browser automation launcher"
+authors = ["martianbugs"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "BrowserAutomationLauncher", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+drissionpage = "^4.1.0.17"
+
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
