@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77", "wheel", "rtctree-build-idl"]
+build-backend = "setuptools.build_meta" 
+
+[project]
+name = "rtctree-aist" 
+description = "API for interacting with running RT Components and managing RTM-based systems." 
+readme = "README.md"
+authors = [
+  {name = "Geoffrey Biggs", email = "openrtm@openrtm.org"}
+]
+license = {text = "LGPL3"}
+requires-python = ">=3.9" 
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development" 
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rtctree.__init__.RTCTREE_VERSION"}
+
+[project.urls]
+Source = "https://github.com/OpenRTM/rtctree" 
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
