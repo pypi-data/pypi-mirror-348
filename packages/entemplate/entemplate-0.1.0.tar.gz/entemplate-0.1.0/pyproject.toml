@@ -1,0 +1,21 @@
+[project]
+name = "entemplate"
+version = "0.1.0"
+description = "Template string utilities"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+]
+
+[tool.ruff]
+target-version = "py313"  # This should be set to py314, but ruff doesn't support it yet
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
