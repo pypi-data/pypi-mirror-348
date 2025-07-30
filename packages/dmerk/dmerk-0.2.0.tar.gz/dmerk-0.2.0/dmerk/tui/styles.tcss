@@ -1,0 +1,78 @@
+Screen #files {
+    height: 4fr;
+}
+Screen #generate {
+    height: 1fr;
+}
+
+Screen FavoritesSidebar {
+    width: 1fr;
+    margin: 0 2;
+}
+Screen FavoritesSidebar SidebarButton {
+    width: 100%;
+    margin: 1 0;
+    height: 5;
+}
+Screen FileManager {
+    width: 4fr;
+    overflow: auto;
+    align: center top;
+}
+Screen FileManager DataTable {
+    width: 100%;
+}
+Screen FileManager DataTable:focus {
+    /* Essentially $surface-lighten-0.5 on dark theme*/
+    /* Doesn't work on light theme tho :( */
+    background: #262626; 
+}
+
+Screen RichLog {
+    width: 4fr;
+}
+Screen RichLog:focus {
+    /* Essentially $surface-lighten-0.5 on dark theme*/
+    /* Doesn't work on light theme tho :( */
+    background: #262626; 
+}
+Screen Button#generate {
+    width: 1fr;
+    height: 100%;
+    border: round $primary-lighten-3;
+}
+Screen Button#generate:hover {
+    border: round $primary;
+}
+
+Screen FilePicker {
+    margin: 0 2;
+    width: 4fr;
+    overflow: auto;
+    align: center top;
+}
+Screen Input {
+    width: 100%;
+    background:$surface-lighten-3; 
+}
+Screen Input.empty {
+    background:$surface; 
+}
+Screen Button#reset-compare {
+    width: 100%;
+}
+Screen CompareWidget {
+    width: 50%;
+}
+Screen CompareWidget Horizontal {
+    background: $panel-lighten-2;
+    width: 100%;
+    height: auto;
+}
+Screen CompareWidget Horizontal Label:hover {
+    text-style: underline;
+}
+Screen CompareWidget DataTable {
+    margin: 0 0 1 0;
+    width: 100%;
+}
