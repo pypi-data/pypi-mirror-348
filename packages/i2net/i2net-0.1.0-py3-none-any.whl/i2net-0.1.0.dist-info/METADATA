@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: i2net
+Version: 0.1.0
+Summary: A Python package to decode network traffic metadata from image representations (reverse of Net2i).
+Author-email: "Dr. Omesh Fernando" <omeshf@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/omeshf/i2net
+Project-URL: Issues, https://github.com/omeshf/i2net/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Security
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Dynamic: license-file
+
+# i2Net
+
+**i2Net** is a Python tool that **decodes network metadata from image representations**. It acts as the reverse pipeline of [Net2i](https://github.com/yourusername/net2i), which encodes network traffic data into images.
+
+This utility is ideal for reconstructing IP addresses, MAC addresses, and other network metadata from images produced by Net2i.
+
+---
+
+## 🔁 Purpose
+
+**i2Net = Image → Network data (CSV)**  
+**Net2i = Network data → Image**
+
+---
+
+## 📦 Requirements
+
+- Python 3.9+
+- [NumPy](https://pypi.org/project/numpy/)
+- [Pillow](https://pypi.org/project/Pillow/)
+
+Install dependencies:
+
+```bash
+pip install numpy pillow
+```
