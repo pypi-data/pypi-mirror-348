@@ -1,0 +1,139 @@
+[build-system]
+requires = ["setuptools", "setuptools_changelog_shortener", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+dynamic = ["version", "readme"]
+name = "devpi-common"
+description = "Utilities jointly used by devpi-server, devpi-client and others."
+dependencies = [
+    "lazy",
+    "packaging-legacy",
+    "requests>=2.3.0",
+]
+requires-python = ">=3.7"
+maintainers = [
+    {name = "Florian Schulze", email = "mail@pyfidelity.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+
+
+[project.urls]
+repository = "https://github.com/devpi/devpi"
+
+
+[tool.ruff]
+extend = "../pyproject.toml"
+
+
+[tool.ruff.format]
+exclude = [
+    "devpi_common/archive.py",
+    "devpi_common/contextlib.py",
+    "devpi_common/metadata.py",
+    "devpi_common/request.py",
+    "devpi_common/terminal.py",
+    "devpi_common/types.py",
+    "devpi_common/url.py",
+    "devpi_common/validation.py",
+    "devpi_common/viewhelp.py",
+    "testing/test_archive.py",
+    "testing/test_lazydecorator.py",
+    "testing/test_metadata.py",
+    "testing/test_request.py",
+    "testing/test_types.py",
+    "testing/test_url.py",
+]
+
+
+[tool.ruff.lint]
+extend-ignore = [
+    "A001", # cleanup later - variable name shadows builtin
+    "A002", # cleanup later - argument name shadows builtin
+    "ARG001", # maybe cleanup later - unused function argument
+    "ARG002", # maybe cleanup later - unused method argument
+    "B007", # maybe cleanup later
+    "B904", # maybe cleanup later
+    "BLE001", # cleanup soon - blind exception
+    "COM812", # cleanup later
+    "FBT002", # cleanup soon - boolean positional argument
+    "FIX003", # cleanup later - xxx
+    "G002", # cleanup soon - logging statement uses %
+    "I001", # maybe cleanup later - import block unsorted
+    "PERF401", # maybe cleanup later - list comprehension
+    "PLR0912", # maybe cleanup later
+    "PLW2901", # maybe cleanup later
+    "PT006", # maybe cleanup later - wrong type for pytest.mark.parametrize
+    "PT011", # cleanup soon - pytest.raises match
+    "PT018", # maybe cleanup later - composite assert
+    "RET503", # maybe cleanup later - missing return
+    "RUF005", # cleanup later
+    "RSE102", # maybe cleanup later
+    "SIM105", # cleanup soon
+    "SIM108", # cleanup later
+    "SIM115", # cleanup soon
+    "TRY004", # maybe cleanup later
+    "UP008", # cleanup later - super
+    "UP024", # maybe cleanup later - aliased errors
+]
+
+
+[tool.setuptools]
+packages = ['devpi_common']
+
+
+[tool.setuptools.dynamic]
+version = {attr = "devpi_common.__version__"}
+readme = {file = ["README.rst", "CHANGELOG.short.rst"]}
+
+
+[tool.setuptools_changelog_shortener]
+read_from = "CHANGELOG"
+write_to = "CHANGELOG.short.rst"
+count = 5
+delimiter = "^==+"
+title = "=========\nChangelog\n========="
+
+
+[tool.towncrier]
+package = "devpi_common"
+filename = "CHANGELOG"
+directory = "news/"
+title_format = "{version} ({project_date})"
+template = "news/_template.rst"
+
+  [[tool.towncrier.type]]
+  directory = "removal"
+  name = "Deprecations and Removals"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "feature"
+  name = "Features"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "bugfix"
+  name = "Bug Fixes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "other"
+  name = "Other Changes"
+  showcontent = true
