@@ -1,0 +1,88 @@
+/* Global styling */
+body {
+    padding: 20px;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* Center the title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--bs-body-color);
+}
+
+/* Dropdown styling */
+#ucode-dropdown {
+    width: 50%;
+    margin-bottom: 15px;
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-border-color);
+}
+
+.dash-checklist input[type="checkbox"] {
+    margin-right: 6px; /* Adjust the space between checkbox and text */
+}
+
+/* Checklist styling */
+#year-checklist {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--bs-body-color);
+}
+
+/* Inner container (stacked layout) */
+.scrollable-graph-container {
+    overflow-x: auto;
+    min-width: 1200px; /*  Ensures graphs extend beyond viewport */
+    padding-bottom: 10px;
+}
+
+/* Each graph container stacks below */
+.graph-container {
+    min-width: 1200px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    gap: 20px;
+}
+
+.grid-container {
+    min-width: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ag-theme-alpine {
+    flex: 1;
+    width: auto;
+    max-width: 100%;
+}
+
+#table-descr.grid-container {
+    flex: 2; 
+}
+
+/* Make the second table narrower */
+#table-country.grid-container {
+    flex: 1; 
+}
+
+.ag-theme-alpine .ag-cell:first-child {
+    font-weight: bold;
+}
+
+.ag-header-cell-label {
+    justify-content: center !important;
+    text-align: center !important;
+}

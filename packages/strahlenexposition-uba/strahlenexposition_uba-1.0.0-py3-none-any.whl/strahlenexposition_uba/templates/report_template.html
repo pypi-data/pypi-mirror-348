@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Report Dosiswerte</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 5mm 10mm 10mm 10mm; /* Custom print margins: top, right, bottom, left */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        h1 { /* header styling */
+            font-size: 16px;
+            margin-bottom: 3px; /* Space below heading */
+            margin-top: 20px; /* Space above heading */
+            margin-left: 140px; /* Avoid overlap with left-side logo (bfs) */
+            margin-right: 50px; /* Avoid overlap with right-side logo (ki-lab) */
+        }
+
+        .image-container { /* config for upper violin plot */
+            width: 100%;
+            display: flex;
+            align-items: flex-start; /* Align image to beginning of container */
+            margin-bottom: 5px; /* Space below this block */
+            margin-top: 5px;
+        }
+
+        .image-container img:first-child {
+            max-width: 100%; /* Prevent overflow */
+            max-height: 330px; /* Limit image height to fit content on page*/
+            object-fit: contain; /* Contain image inside box without cropping */
+        }
+
+        .image-table-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row; /* Explicit row direction, elements aligned horizontally  */
+            align-items: center;
+        }
+
+        .image-table-container img {
+            max-width: 100%;
+            max-height: 330px; /* Limit image height to fit content on page */
+            object-fit: contain; /* Contain image inside box without cropping */
+            display: inline-block;
+        }
+
+        .table-container {
+            display: flex;
+            width: 55%;
+            flex-direction: row; /* Tables aligned horizontally */
+            margin-left: auto;
+        }
+
+        .table-container > div:first-child {
+            flex: 3 1 60%; /* Wider first table (statistics): 60% initial, grows more */
+        }
+        .table-container > div:first-child table tr:nth-child(7) {
+            font-weight: bold; /* Make P75 bold */
+        }
+
+        .table-container > div:last-child {
+            flex: 1 1 40%; /* Narrower second table: 40% initial, grows less */
+        }
+
+        table {
+            width: auto; /* Table takes natural width */
+            max-width: 100%; /* Avoid overflowing container */
+            border-collapse: collapse; /* Merges adjacent borders */
+            font-size: 10px; /* Smaller font for compact table */
+            border: 1.5px solid #d1d2dc; /* Light border around entire table */
+        }
+
+        th, td { /* table header, table data style */
+            padding: 6px 8px; /* Padding inside cells */
+            text-align: left; /* Align text left inside cells */
+            border-bottom: 1.5px solid #d1d2dc; /* Light border between rows */
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: 600; /* Slightly bolder headers */
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa; /* Zebra-striping for readability */
+        }
+
+        .page-break {
+            position: relative; /* Needed for absolutely positioned children (logo bar) */
+            page-break-before: always; /* Starts a new page for each UCode (for PDF/print) */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            break-inside: avoid-page; /* Prevents this block from being split between pages */
+        }
+        .logo-bar {
+            position: absolute; /* Keeps logos fixed at top independently of flow */
+            top: 0mm;
+            left: 0mm;
+            right: 0mm;
+            height: 50px; /* Fixed height for logo section */
+            display: flex;
+            justify-content: space-between; /* Pushes logos to far left and right */
+            align-items: flex-start;
+            z-index: 10; /* Ensures logos are rendered on top */
+        }
+
+        .logo-bar img:first-child {
+            width: 150px; /* Wider logo (bfs) */
+        }
+        .logo-bar img:last-child {
+            margin-top: 10px; /* Adjust for logo height alignment */
+            width: 45px; /* Smaller logo (ki-lab) */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Loop to render each section for each ucode_data -->
+    {% for ucode_data in ucode_list %}
+    <div class="page-break">
+        <!-- Logos shown at top of every page -->
+        <div class="logo-bar">
+            <img src="data:image/png;base64,{{ logo_bfs }}" alt="Logo bfs">
+            <img src="data:image/png;base64,{{ logo_ki_lab }}" alt="Logo ki_lab">
+        </div>
+        <!-- Title of the report section for one UCode -->
+        <h1>{{ ucode_data['label'] }}</h1>
+        <!-- Upper violin plot image -->
+        <div class="image-container">
+            <img src="data:image/png;base64,{{ ucode_data['img_base64'] }}" alt="Violin Aerztl_stelle">
+        </div>
+        <!-- Lower part: second violin plot + two tables -->
+        <div class="image-table-container">
+            <img src="data:image/png;base64,{{ ucode_data['img_base64_2'] }}" alt="Violin years">
+            <div class="table-container">
+                <!-- Descriptive statistics table -->
+                <div>
+                    {{ ucode_data['table_descr_html'] }}
+                </div>
+                <!-- Country comparison table -->
+                <div>
+                    {{ ucode_data['table_country_html'] }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
