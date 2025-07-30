@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "uniqk"
+version = "1.0.1"
+description = "UniQK-Attention: Unifying Query-Key Projections for Parameter-Efficient Attention"
+authors = ["Anonymous"]
+readme = "README.md"
+packages = [
+    {include = "uniqk", from = "src"},
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
