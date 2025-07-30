@@ -1,0 +1,42 @@
+# Fichiers générés par setuptools
+dist/
+build/
+*.egg-info/
+
+# Environnement virtuel (si vous utilisez virtualenv)
+venv/
+
+# Fichiers de cache et de compilation Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers de log
+*.log
+
+# Fichiers d'environnement
+.env
+
+# Dépendances installées
+lib/
+lib64/
+bin/
+*.pyc
+*.pyo
+
+# Fichiers système et cache
+.DS_Store
+Thumbs.db
+
+# Fichiers spécifiques à l'éditeur/IDE (ajustez selon votre choix d'éditeur)
+.vscode/
+.idea/
+
+# Fichiers de configuration spécifiques à l'utilisateur
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de sauvegarde
+*~
+*.bak

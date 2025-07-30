@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stravawizard"
+version = "2025.05.18"
+authors = [
+    {name = "KrazyMax", email = "maxence.renaud@gmail.com"},
+]
+description = "Python client library for interacting with Strava API - handles OAuth2 authentication and provides a simple interface to access Strava endpoints for athletes and activities"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+    "requests>=2.25.0",
+]
+keywords = [
+    "strava", 
+    "api", 
+    "oauth2", 
+    "oauth", 
+    "athlete", 
+    "activities", 
+    "cycling", 
+    "running", 
+    "sports", 
+    "fitness", 
+    "authentication"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.4.5",
+]
+
+[project.urls]
+Homepage = "https://gitlab.com/KrazyMax/stravawizard"
+Repository = "https://gitlab.com/KrazyMax/stravawizard.git"
+Issues = "https://gitlab.com/KrazyMax/stravawizard/-/issues"
+Documentation = "https://gitlab.com/KrazyMax/stravawizard/-/blob/main/README.md"
+"Bug Tracker" = "https://gitlab.com/KrazyMax/stravawizard/-/issues"
+
+[tool.setuptools]
+packages = ["stravawizard"]
+
+[tool.setuptools.package-data]
+stravawizard = ["py.typed"]
