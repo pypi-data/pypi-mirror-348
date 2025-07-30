@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rdrpcatch"
+version = "0.0.7"
+authors = [
+    {name = "Dimitris Karapliafis", email = "dimitris.karapliafis@wur.nl"},
+    {name = "Uri Neri", email = "uneri@lbl.gov"},
+    {name = "RdRpCATCH contributors", email = "dimitris.karapliafis@wur.nl"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.12"
+dependencies = [
+    "pyhmmer==0.11.0",
+    "polars==1.26.0",
+    "rich==13.9.4",
+    "rich-click==1.8.8",
+    "upsetplot==0.9.0",
+    "matplotlib==3.10.1",
+    "altair==5.5.0",
+    "pandas==2.2.3",
+    "requests==2.32.3",
+    "needletail==0.6.3",
+]
+dynamic = ["description"]
+
+[project.urls]
+Home = "https://github.com/dimitris-karapliafis/RdRpCATCH"
+Source = "https://github.com/dimitris-karapliafis/RdRpCATCH"
+
+[project.scripts]
+rdrpcatch = "rdrpcatch.cli.args:cli"
+# [tool.setuptools.package-data] # TODO: add this once integrated with the download command.
+# rdrpcatch_data = ["data/*"] 
+
