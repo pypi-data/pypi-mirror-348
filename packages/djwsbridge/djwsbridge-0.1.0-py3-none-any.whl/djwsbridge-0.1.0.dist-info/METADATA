@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: djwsbridge
+Version: 0.1.0
+Summary: Real-time WebSocket bridge for Django (using Channels)
+Home-page: https://github.com/asadbek000002/djwsbridge
+Author: Asadbek
+Author-email: email@asadbektuygunov9@gmail.com
+Classifier: Framework :: Django
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Requires-Dist: Django >=4.0
+Requires-Dist: channels >=4.0
+Requires-Dist: asgiref >=3.5
+Requires-Dist: channels-redis >=4.0
+Requires-Dist: daphne >=4.0
+
