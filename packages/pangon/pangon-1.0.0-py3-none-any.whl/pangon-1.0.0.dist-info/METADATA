@@ -1,0 +1,44 @@
+Metadata-Version: 2.4
+Name: pangon
+Version: 1.0.0
+Summary: A simple module for self-encryption and Argon2 password hashing
+Home-page: https://github.com/vedustorm/pangon
+Author: Vedant Gandhi
+Author-email: vedant.storm@gmail.com
+License: Apache-2.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: cryptography==45.0.2
+Requires-Dist: argon2-cffi==23.1.0
+Requires-Dist: argon2-cffi-bindings==21.2.0
+Requires-Dist: cffi==1.17.1
+Requires-Dist: pycparser==2.22
+Dynamic: license-file
+
+# Pangon
+
+A simple Python package for secure password encryption and verification using AES-SIV and Argon2.
+
+## Features
+
+- Self-encryption using AES-SIV
+- Argon2 password hashing with peppering
+
+## Installation
+
+```bash
+pip install pangon
+```
+
+## Usage
+
+```python
+from pangon import hash_password, verify_password
+
+hashed = hash_password("my_password123")
+is_valid = verify_password("my_password123", hashed)
+```
