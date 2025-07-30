@@ -1,0 +1,31 @@
+site_name: napari-tomoslice
+site_url: https://alisterburt.github.io/napari-tomoslice/
+repo_url: https://github.com/alisterburt/napari-tomoslice
+theme:
+  name: material
+  palette:
+      scheme: default
+      primary: blue
+      accent: blue
+  icon:
+    logo: material/draw
+  features:
+    - navigation.expand
+
+nav:
+  - Overview: index.md
+  - Programs:
+    - annotate: annotate.md
+    - generate-poses: generate.md
+    - convert-poses: export.md
+  - Examples:
+    - Points: points.md
+    - Spheres: spheres.md
+    - Paths: paths.md
+    - Dipoles: dipoles.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
