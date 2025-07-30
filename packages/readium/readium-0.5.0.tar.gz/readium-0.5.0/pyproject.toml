@@ -1,0 +1,67 @@
+[project]
+name = "readium"
+version = "0.5.0"
+description = "A tool to extract and analyze documentation from repositories, directories, and URLs"
+authors = [
+    {name = "Pablo Toledo", email = "pablotoledo@users.noreply.github.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"  # Actualizado aquí también
+click = ">=8.1.8,<9.0.0"
+rich = ">=13.9.4,<14.0.0"
+black = ">=24.10.0,<25.0.0"
+isort = ">=5.12.0,<6.0.0"
+markitdown = ">=0.0.1a3,<0.0.2"
+pypdf = ">=4.3.1,<5.0.0"
+trafilatura = ">=1.6.0,<2.0.0"
+lxml = {extras = ["html-clean"], version = "^5.3.1"}
+tiktoken = ">=0.3.1"  # Ahora es dependencia base
+
+[tool.poetry.extras]
+tokenizers = []  # Ya no es necesario, tiktoken es base
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-mock = "*"
+mypy = "*"
+black = "*"
+isort = "*"
+pre-commit = "*"
+hatch = "*"
+
+[project.urls]
+Homepage = "https://github.com/pablotoledo/readium"
+Repository = "https://github.com/pablotoledo/readium.git"
+Issues = "https://github.com/pablotoledo/readium/issues"
+
+[project.scripts]
+readium = "readium.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
