@@ -1,0 +1,24 @@
+[project]
+name = "poetrypractice"
+version = "0.1.0"
+description = "first potrey practice project"
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest (>=8.3.5,<9.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "pydantic (>=2.11.4,<3.0.0)",
+    "allure-pytest (>=2.14.2,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
