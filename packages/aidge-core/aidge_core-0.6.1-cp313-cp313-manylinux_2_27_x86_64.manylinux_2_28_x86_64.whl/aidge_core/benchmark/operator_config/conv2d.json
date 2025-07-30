@@ -1,0 +1,112 @@
+{
+	"operator": "Conv",
+	"opset_version": 21,
+	"initializer_rank": 1,
+    "test_meta_data": {
+        "multiple_batchs": false
+    },
+	"base_configuration": {
+		"input_shapes": [
+			["input_0", [1, 10, 200, 200]],
+			["weight_1", [10, 10, 3, 3]],
+			["bias_2", [10]]
+		],
+		"attributes": {
+			"kernel_shape": [3, 3],
+			"strides": [1, 1],
+			"dilations": [1, 1]
+		}
+	},
+	"test_configuration": {
+		"main_parameters": {
+			"feature_map_size": [
+				10,100,500
+			],
+			"kernel_shape": [
+				[1, 1],
+				[3, 3],
+                [5, 5]
+			],
+			"strides": [
+				[1, 1],
+				[2, 2],
+				[3, 3]
+			],
+			"dilations": [
+				[1, 1],
+				[2, 2],
+				[3, 3]
+			]
+		},
+		"other_parameters": {
+			"feature_map_size": {
+				"10": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 10, 10]]
+					]
+				},
+				"100": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 100, 100]]
+					]
+				},
+				"500": {
+					"attributes": {},
+					"input_shapes": [
+						["input_0", [1, 10, 500, 500]]
+					]
+				}
+			},
+			"kernel_shape": {
+				"[1, 1]": {
+					"attributes": {},
+					"input_shapes": [
+						["weight_1", [10, 10, 1, 1]]
+					]
+				},
+				"[3, 3]": {
+					"attributes": {},
+					"input_shapes": [
+						["weight_1", [10, 10, 3, 3]]
+					]
+				},
+				"[5, 5]": {
+					"attributes": {},
+					"input_shapes": [
+						["weight_1", [10, 10, 5, 5]]
+					]
+				}
+			},
+			"strides": {
+				"[1, 1]": {
+					"attributes": {},
+					"input_shapes": []
+				},
+				"[2, 2]": {
+					"attributes": {},
+					"input_shapes": []
+				},
+				"[3, 3]": {
+					"attributes": {},
+					"input_shapes": []
+				}
+			},
+			"dilations": {
+				"[1, 1]": {
+					"attributes": {},
+					"input_shapes": []
+				},
+				"[2, 2]": {
+					"attributes": {},
+					"input_shapes": []
+				},
+				"[3, 3]": {
+					"attributes": {},
+					"input_shapes": []
+				}
+			}
+		}
+	}
+}
