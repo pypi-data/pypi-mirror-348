@@ -1,0 +1,88 @@
+# -*- coding: utf-8 -*-
+# This file is used to ignore files and directories in a Git repository.
+# It is a plain text file that specifies patterns for files and directories to be ignored by Git.
+# The patterns can include wildcards and directory names.
+# The following patterns are commonly used to ignore files and directories in a Git repository.
+# The patterns are case-sensitive and can be used to ignore specific files, directories, or file types.
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.whl
+*.db
+*.sqlite3
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+*.swn
+*.sublime-workspace
+*.sublime-project
+*.sublime-settings
+
+# Ignore IDE and editor specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.sublime-settings
+*.vscode/
+*.vscode-test/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore backup files
+*.bak
+*.<ext>
+*.bkp
+*.dist
+bkp/
+backup/
+bak/
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+~*
+
+# Ignore logs
+*.log
+
+# Ignore coverage reports
+.coverage
+.coverage.*
+*.cover
+*.cov
+
+# Ignore test results
+*.xml
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+*.whl
+*.tar.gz
+
+# Ignore VSCode built extension
+*.vsix
+
+# Ignore macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+bkp/simple_scan.py
