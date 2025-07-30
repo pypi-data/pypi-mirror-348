@@ -1,0 +1,656 @@
+Metadata-Version: 2.4
+Name: django-nepali-address-picker
+Version: 0.1.1
+Summary: A Django package for Nepali address selection with dynamic form fields
+Home-page: https://github.com/manishkumarrajak/nepali_address_picker
+Author: Manish Kumar Rajak
+Author-email: manish.rajak2055@gmail.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 4.2
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Django>=4.2.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Nepali Address Picker
+
+A Django package that provides a dynamic address picker for Nepali addresses, including provinces, districts, and local bodies (municipalities, sub-metropolitan cities, and rural municipalities).
+
+## Features
+
+- Dynamic form with cascading dropdowns
+- AJAX-based updates for better user experience
+- Bootstrap styling for a clean interface
+- Support for all Nepali administrative divisions
+- Easy integration with existing Django projects
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/nepali_address_picker.git
+```
+
+2. Install the package in your Django project:
+```bash
+pip install -e .
+```
+
+## Usage
+
+1. Add `address_picker` to your `INSTALLED_APPS` in `settings.py`:
+```python
+INSTALLED_APPS = [
+    ...
+    'address_picker',
+    ...
+]
+```
+
+2. Include the URLs in your project's `urls.py`:
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    ...
+    path('address/', include('address_picker.urls')),
+    ...
+]
+```
+
+3. Load the address data using the management command:
+```bash
+python manage.py load_nepali_addresses
+```
+
+4. Use the form in your views:
+```python
+from address_picker.forms import NepaliAddressForm
+
+def your_view(request):
+    form = NepaliAddressForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        province = form.cleaned_data['province']
+        district = form.cleaned_data['district']
+        local_body = form.cleaned_data['local_body']
+        # Process the data as needed
+    return render(request, 'your_template.html', {'form': form})
+```
+
+5. Include the form in your template:
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function() {
+    $('#id_province').change(function() {
+        var url = "{% url 'ajax_load_districts' %}";
+        var provinceId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'province': provinceId
+            },
+            success: function(data) {
+                var $district = $('#id_district');
+                $district.html('<option value="">Select District</option>');
+                $.each(data, function(i, item) {
+                    $district.append('<option value="' + item.id + '">' + item.name + '</option>');
+                });
+                $('#id_local_body').html('<option value="">Select Local Body</option>');
+            }
+        });
+    });
+
+    $('#id_district').change(function() {
+        var url = "{% url 'ajax_load_local_bodies' %}";
+        var districtId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'district': districtId
+            },
+            success: function(data) {
+                var $localBody = $('#id_local_body');
+                $localBody.html('<option value="">Select Local Body</option>');
+                $.each(data, function(i, item) {
+                    $localBody.append('<option value="' + item.id + '">' + item.name + ' (' + item.type + ')</option>');
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+```
+
+## Models
+
+The package includes the following models:
+
+- `Province`: Represents Nepali provinces
+- `District`: Represents districts within provinces
+- `Municipality`: Represents municipalities within districts
+- `SubMetropolitan`: Represents sub-metropolitan cities within districts
+- `RuralMunicipality`: Represents rural municipalities within districts
+
+## Forms
+
+The package provides a `NepaliAddressForm` that includes:
+- Province selection
+- District selection (dynamically updated based on province)
+- Local body selection (dynamically updated based on district)
+
+## Views
+
+The package includes the following views:
+- `address_picker`: Main view for the address picker form
+- `load_districts`: AJAX view for loading districts based on province
+- `load_local_bodies`: AJAX view for loading local bodies based on district
+
+## URLs
+
+The package includes the following URLs:
+- `/`: Main address picker form
+- `/ajax/load-districts/`: AJAX endpoint for loading districts
+- `/ajax/load-local-bodies/`: AJAX endpoint for loading local bodies
+
+## Dependencies
+
+- Django 4.2+
+- jQuery 3.6.0+
+- Bootstrap 5.3.0+
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Custom UI Implementation
+
+You can customize the UI while maintaining the functionality. Here's how to implement your own UI:
+
+1. Create your own template without using the default form rendering:
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post" id="address-form">
+    {% csrf_token %}
+    <div class="your-custom-class">
+        <label for="id_province">Province</label>
+        <select name="province" id="id_province" class="your-select-class">
+            <option value="">Select Province</option>
+            {% for province in provinces %}
+                <option value="{{ province.id }}">{{ province.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="your-custom-class">
+        <label for="id_district">District</label>
+        <select name="district" id="id_district" class="your-select-class">
+            <option value="">Select District</option>
+        </select>
+    </div>
+
+    <div class="your-custom-class">
+        <label for="id_local_body">Local Body</label>
+        <select name="local_body" id="id_local_body" class="your-select-class">
+            <option value="">Select Local Body</option>
+        </select>
+    </div>
+
+    <button type="submit" class="your-button-class">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// Your custom JavaScript for handling the dynamic updates
+$(function() {
+    $('#id_province').change(function() {
+        // Your custom AJAX call
+    });
+
+    $('#id_district').change(function() {
+        // Your custom AJAX call
+    });
+});
+</script>
+{% endblock %}
+```
+
+2. Update your view to pass the initial data:
+```python
+from address_picker.models import Province
+
+def your_custom_view(request):
+    provinces = Province.objects.all()
+    return render(request, 'your_custom_template.html', {
+        'provinces': provinces
+    })
+```
+
+## Data Handling
+
+### Getting Selected Values
+
+1. In your view, you can access the selected values:
+```python
+def your_view(request):
+    if request.method == 'POST':
+        province_id = request.POST.get('province')
+        district_id = request.POST.get('district')
+        local_body = request.POST.get('local_body')
+        
+        # Parse local body type and ID
+        local_body_type, local_body_id = local_body.split('-')
+        
+        # Get the actual objects
+        province = Province.objects.get(id=province_id)
+        district = District.objects.get(id=district_id)
+        
+        if local_body_type == 'municipality':
+            local_body_obj = Municipality.objects.get(id=local_body_id)
+        elif local_body_type == 'submetro':
+            local_body_obj = SubMetropolitan.objects.get(id=local_body_id)
+        else:
+            local_body_obj = RuralMunicipality.objects.get(id=local_body_id)
+```
+
+### Using in Models
+
+1. Add address fields to your model:
+```python
+from django.db import models
+from address_picker.models import Province, District, Municipality, SubMetropolitan, RuralMunicipality
+
+class YourModel(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.PROTECT)
+    district = models.ForeignKey(District, on_delete=models.PROTECT)
+    municipality = models.ForeignKey(Municipality, on_delete=models.PROTECT, null=True, blank=True)
+    sub_metropolitan = models.ForeignKey(SubMetropolitan, on_delete=models.PROTECT, null=True, blank=True)
+    rural_municipality = models.ForeignKey(RuralMunicipality, on_delete=models.PROTECT, null=True, blank=True)
+```
+
+2. Create a model form:
+```python
+from django import forms
+from .models import YourModel
+
+class YourModelForm(forms.ModelForm):
+    class Meta:
+        model = YourModel
+        fields = ['province', 'district', 'municipality', 'sub_metropolitan', 'rural_municipality']
+```
+
+### API Integration
+
+You can also use the address picker with your API endpoints:
+
+1. Create API views:
+```python
+from rest_framework import viewsets
+from address_picker.models import Province, District, Municipality, SubMetropolitan, RuralMunicipality
+from rest_framework.response import Response
+
+class ProvinceViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Province.objects.all()
+    serializer_class = ProvinceSerializer
+
+class DistrictViewSet(viewsets.ReadOnlyModelViewSet):
+    def get_queryset(self):
+        province_id = self.request.query_params.get('province')
+        return District.objects.filter(province_id=province_id)
+
+class LocalBodyViewSet(viewsets.ReadOnlyModelViewSet):
+    def get_queryset(self):
+        district_id = self.request.query_params.get('district')
+        municipalities = Municipality.objects.filter(district_id=district_id)
+        submetros = SubMetropolitan.objects.filter(district_id=district_id)
+        rurals = RuralMunicipality.objects.filter(district_id=district_id)
+        return list(municipalities) + list(submetros) + list(rurals)
+```
+
+2. Use with frontend frameworks:
+```javascript
+// Example using fetch API
+async function loadDistricts(provinceId) {
+    const response = await fetch(`/api/districts/?province=${provinceId}`);
+    const districts = await response.json();
+    // Update your UI with the districts
+}
+
+async function loadLocalBodies(districtId) {
+    const response = await fetch(`/api/local-bodies/?district=${districtId}`);
+    const localBodies = await response.json();
+    // Update your UI with the local bodies
+}
+```
+
+### Advanced Usage Examples
+
+#### 1. Custom Form with Validation
+```python
+from django import forms
+from address_picker.forms import NepaliAddressForm
+
+class CustomAddressForm(NepaliAddressForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add custom validation or field modifications
+        self.fields['province'].widget.attrs.update({
+            'class': 'custom-select',
+            'data-placeholder': 'Choose a province'
+        })
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        province = cleaned_data.get('province')
+        district = cleaned_data.get('district')
+        
+        # Add custom validation logic
+        if province and district and district.province != province:
+            raise forms.ValidationError("Selected district does not belong to the selected province")
+            
+        return cleaned_data
+```
+
+#### 2. Using with Django Formsets
+```python
+from django.forms import formset_factory
+from address_picker.forms import NepaliAddressForm
+
+AddressFormSet = formset_factory(NepaliAddressForm, extra=1)
+
+def multiple_addresses_view(request):
+    if request.method == 'POST':
+        formset = AddressFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                # Process each address form
+                province = form.cleaned_data['province']
+                district = form.cleaned_data['district']
+                local_body = form.cleaned_data['local_body']
+    else:
+        formset = AddressFormSet()
+    return render(request, 'multiple_addresses.html', {'formset': formset})
+```
+
+#### 3. Integration with Django Admin
+```python
+from django.contrib import admin
+from address_picker.models import Province, District, Municipality
+from address_picker.forms import NepaliAddressForm
+
+class AddressAdmin(admin.ModelAdmin):
+    form = NepaliAddressForm
+    list_display = ('province', 'district', 'get_local_body')
+    
+    def get_local_body(self, obj):
+        if hasattr(obj, 'municipality'):
+            return obj.municipality.name
+        elif hasattr(obj, 'sub_metropolitan'):
+            return obj.sub_metropolitan.name
+        elif hasattr(obj, 'rural_municipality'):
+            return obj.rural_municipality.name
+        return '-'
+    get_local_body.short_description = 'Local Body'
+```
+
+#### 4. Custom JavaScript with Error Handling
+```javascript
+// Example of enhanced JavaScript with error handling
+$(function() {
+    function showError(message) {
+        // Your custom error display logic
+        alert(message);
+    }
+
+    function updateDistricts(provinceId) {
+        $.ajax({
+            url: "{% url 'ajax_load_districts' %}",
+            data: { 'province': provinceId },
+            success: function(data) {
+                var $district = $('#id_district');
+                $district.html('<option value="">Select District</option>');
+                $.each(data, function(i, item) {
+                    $district.append(
+                        $('<option></option>').val(item.id).html(item.name)
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                showError('Failed to load districts: ' + error);
+            }
+        });
+    }
+
+    $('#id_province').change(function() {
+        var provinceId = $(this).val();
+        if (provinceId) {
+            updateDistricts(provinceId);
+        } else {
+            $('#id_district').html('<option value="">Select District</option>');
+            $('#id_local_body').html('<option value="">Select Local Body</option>');
+        }
+    });
+});
+```
+
+#### 5. Using with Django REST Framework Serializers
+```python
+from rest_framework import serializers
+from address_picker.models import Province, District, Municipality, SubMetropolitan, RuralMunicipality
+
+class ProvinceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Province
+        fields = ['id', 'name', 'code']
+
+class DistrictSerializer(serializers.ModelSerializer):
+    province = ProvinceSerializer(read_only=True)
+    
+    class Meta:
+        model = District
+        fields = ['id', 'name', 'province']
+
+class LocalBodySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Municipality
+        fields = ['id', 'name', 'type']
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if isinstance(instance, Municipality):
+            data['type'] = 'Municipality'
+        elif isinstance(instance, SubMetropolitan):
+            data['type'] = 'SubMetropolitan'
+        elif isinstance(instance, RuralMunicipality):
+            data['type'] = 'RuralMunicipality'
+        return data
+```
+
+#### 6. Handling Form Submission with AJAX
+```javascript
+// Example of AJAX form submission
+$('#address-form').on('submit', function(e) {
+    e.preventDefault();
+    
+    $.ajax({
+        url: $(this).attr('action'),
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            // Handle successful submission
+            if (response.success) {
+                // Update UI or redirect
+                window.location.href = response.redirect_url;
+            } else {
+                // Display validation errors
+                displayErrors(response.errors);
+            }
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            showError('Failed to submit form: ' + error);
+        }
+    });
+});
+
+function displayErrors(errors) {
+    // Clear previous errors
+    $('.error-message').remove();
+    
+    // Display new errors
+    Object.keys(errors).forEach(function(field) {
+        var errorMessage = errors[field].join(', ');
+        $('#' + field).after(
+            $('<div></div>')
+                .addClass('error-message')
+                .text(errorMessage)
+        );
+    });
+}
+```
+
+### Admin Panel Configuration
+
+To display and manage the address data in Django's admin panel, add the following to your `admin.py`:
+
+```python
+from django.contrib import admin
+from address_picker.models import Province, District, Municipality, SubMetropolitan, RuralMunicipality
+
+@admin.register(Province)
+class ProvinceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'code')
+    search_fields = ('name', 'code')
+    ordering = ('name',)
+
+@admin.register(District)
+class DistrictAdmin(admin.ModelAdmin):
+    list_display = ('name', 'province', 'code')
+    list_filter = ('province',)
+    search_fields = ('name', 'code')
+    ordering = ('province', 'name')
+    raw_id_fields = ('province',)
+
+@admin.register(Municipality)
+class MunicipalityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'district', 'province')
+    list_filter = ('district__province', 'district')
+    search_fields = ('name',)
+    ordering = ('district__province', 'district', 'name')
+    raw_id_fields = ('district',)
+
+    def province(self, obj):
+        return obj.district.province
+    province.short_description = 'Province'
+
+@admin.register(SubMetropolitan)
+class SubMetropolitanAdmin(admin.ModelAdmin):
+    list_display = ('name', 'district', 'province')
+    list_filter = ('district__province', 'district')
+    search_fields = ('name',)
+    ordering = ('district__province', 'district', 'name')
+    raw_id_fields = ('district',)
+
+    def province(self, obj):
+        return obj.district.province
+    province.short_description = 'Province'
+
+@admin.register(RuralMunicipality)
+class RuralMunicipalityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'district', 'province')
+    list_filter = ('district__province', 'district')
+    search_fields = ('name',)
+    ordering = ('district__province', 'district', 'name')
+    raw_id_fields = ('district',)
+
+    def province(self, obj):
+        return obj.district.province
+    province.short_description = 'Province'
+```
+
+This configuration provides:
+
+1. **List Views**:
+   - Province: Shows name and code
+   - District: Shows name, province, and code
+   - Local Bodies: Shows name, district, and province
+
+2. **Filtering**:
+   - Filter districts by province
+   - Filter local bodies by province and district
+
+3. **Search**:
+   - Search provinces by name and code
+   - Search districts by name and code
+   - Search local bodies by name
+
+4. **Ordering**:
+   - Hierarchical ordering (province → district → name)
+   - Alphabetical ordering within each level
+
+5. **Raw ID Fields**:
+   - Efficient selection of related objects
+   - Prevents loading all options in dropdowns
+
+To access the admin panel:
+1. Create a superuser if you haven't already:
+```bash
+python manage.py createsuperuser
+```
+
+2. Run the development server:
+```bash
+python manage.py runserver
+```
+
+3. Visit http://127.0.0.1:8000/admin/ and log in with your superuser credentials
+
+You'll see the following sections in the admin panel:
+- Provinces
+- Districts
+- Municipalities
+- Sub Metropolitan Cities
+- Rural Municipalities
+
+Each section provides:
+- List view with sortable columns
+- Search functionality
+- Filtering options
+- Add/Edit/Delete capabilities
+- Related object selection
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
