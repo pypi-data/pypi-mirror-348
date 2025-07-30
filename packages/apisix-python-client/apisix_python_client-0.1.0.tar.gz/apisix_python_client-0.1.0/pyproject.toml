@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apisix-python-client"
+version = "0.1.0"
+description = "A simple Python client for Apache APISIX"
+readme = "README.md"
+authors = [
+    {name = "Belhachemi Youcef", email = "Belhachemi.youcef16@gmail.com"},
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["apisix", "api", "gateway", "client"]
+dependencies = [
+    "requests>=2.25.0",
+]
+requires-python = ">=3.6"
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/apisix-python-client"
+"Bug Tracker" = "https://github.com/yourusername/apisix-python-client/issues"
