@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: synforge
+Version: 0.1.0
+Summary: A multi-agent framework for generating synthetic data using LLMS.
+Author-email: Pham Kinh Quoc <phamkinhquoc2002@gmail.com>
+License: MIT
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: faiss-cpu==1.10.0
+Requires-Dist: google-genai==1.2.0
+Requires-Dist: ipykernel==6.29.5
+Requires-Dist: langchain-community==0.3.19
+Requires-Dist: langchain-docling==0.2.0
+Requires-Dist: langchain==0.3.20
+Requires-Dist: langgraph==0.2.74
+Requires-Dist: openai==1.63.2
+Requires-Dist: pydantic==2.10.6
+Requires-Dist: pypdf==5.3.0
+Requires-Dist: pytest==8.3.4
+Requires-Dist: python-dotenv==1.0.1
+Requires-Dist: rich==13.9.4
+Requires-Dist: typing-extensions==4.12.2
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: isort>=5.12.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# ⚡️ Data Forge
+## The Ultimate Synthetic Data Generation Framework
+
+A comprehensive toolkit for generating high-quality synthetic datasets tailored for AI researchers and data scientists. Featuring a robust PDF parser and intelligent knowledge localization capabilities, DataForge strengthens your data generation pipeline with custom knowledge integration—providing a better approach to traditional knowledge distillation techniques.
+
+## Features
+* Multi-Agent Orchestration: Compose complex synthetic data pipelines with agentic collaboration.
+* LLM Powerhouse: Seamless integration with Google Gemini, OpenAI GPT, and more.
+* Human-in-the-Loop: Pause, review, and steer data generation interactively—no more black-box outputs!
+* Document-Aware Generation: Retrieve the necessary localized knowledge, chunk, and leverage it as context for synthetic data generation.
+* Auto-Save & Logging: All outputs and logs are organized, timestamped, and ready for audit.
