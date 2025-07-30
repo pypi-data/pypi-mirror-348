@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: pytest-prometheus-pushgw
+Version: 0.1.1
+Summary: Pytest plugin to export test metrics to Prometheus Pushgateway
+Home-page: https://github.com/mahsumakbas/pytest_prometheus_pushgw
+Author: mahsumakbas
+Author-email: mahsum@tigristest.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Framework :: Pytest
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pytest (>=6.0.0)
+Requires-Dist: prometheus-client (>=0.14.1)
+
+# pytest_prometheus_pushgw
+
+A lightweight **pytest plugin** to export test execution metrics to **Prometheus Pushgateway**.
+
+## 🚀 Features
+
+- Automatically tracks:
+  - Test pass/fail status
+  - Test duration
+  - Test execution counts
+  - Histogram and summary of durations
+- Pushes metrics to Prometheus Pushgateway after each test
+
+
+## 🧪 Installation
+
+```bash
+pip install pytest_prometheus_pushgw
+```
+
+- Variables
+    - `PUSH_GW_URL`: To set push gateway URL. Default is: `localhost:9091`
+    -  `JOB_NAME` : To set job name. Default is:  `pytest_execution_result_job`
+
+
