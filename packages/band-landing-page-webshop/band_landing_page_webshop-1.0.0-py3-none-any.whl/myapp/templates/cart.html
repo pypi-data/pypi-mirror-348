@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load discount_tags %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4 display-6">Your Cart</h2>
+
+  {% if cart_items %}
+  <div class="table-responsive border rounded shadow-sm">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Subtotal</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>{{ item.title }}</td>
+          {% if promo_data %}
+          <td class="card-text">
+            <span class="text-muted text-decoration-line-through">${{ item.price }}</span>
+            <span class="text-success fw-bold ms-2">
+              ${{ item.price|discounted_price:promo_data.discount_percent }}
+            </span>
+          </td>
+          {% else %}
+          <td>${{ item.price }}</td>
+          {% endif %}
+          <td>{{ item.quantity }}</td>
+
+          {% if promo_data %}
+          <td class="card-text">
+            <span class="text-muted text-decoration-line-through">${{ item.total }}</span>
+            <span class="text-success fw-bold ms-2">
+              ${{ item.total|discounted_price:promo_data.discount_percent }}
+            </span>
+          </td>
+          {% else %}
+          <td>${{ item.total }}</td>
+          {% endif %}
+          <td>
+            <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+              {% csrf_token %}
+              <button class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <!-- <a href="{% url 'create_checkout_session' %}" class="btn btn-success btn-lg">
+      Proceed to Checkout
+    </a> -->
+    <form id="checkout-form" method="POST" action="{% url 'create_checkout_session' %}">
+      {% csrf_token %}
+      <input type="hidden" name="promo_code" id="promo_code_input">
+      <button type="submit" class="btn btn-success btn-lg">Checkout</button>
+    </form>
+
+    <script>
+      const promoDataForCheckout = JSON.parse(sessionStorage.getItem('promo_data'));
+      if (promoDataForCheckout && promoDataForCheckout.promo_code) {
+        document.getElementById('promo_code_input').value = promoDataForCheckout.promo_code;
+      }
+    </script>
+  </div>
+
+  {% else %}
+  <div class="alert alert-info text-center">
+    Your cart is empty. <a href="{% url 'shop' %}">Go shopping</a>!
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

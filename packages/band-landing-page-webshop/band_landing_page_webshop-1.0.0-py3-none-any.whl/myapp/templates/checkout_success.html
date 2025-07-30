@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="display-6">🎉 Payment Successful!</h2>
+    <p>Thank you for your purchase. Your items will be shipped soon.</p>
+    <a href="{% url 'shop' %}" class="btn btn-primary">Continue Shopping</a>
+    <script>
+        if (sessionStorage.getItem('promo_data') !== null) {
+            sessionStorage.removeItem('promo_data');
+        }
+        if (sessionStorage.getItem('promo_code') !== null) {
+            sessionStorage.removeItem('promo_code');
+        }
+    </script>
+</div>
+{% endblock %}

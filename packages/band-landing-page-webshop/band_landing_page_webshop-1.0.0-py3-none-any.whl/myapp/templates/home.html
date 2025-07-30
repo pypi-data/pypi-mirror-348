@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% block title %} Home Page {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="p-4 rounded-3">
+    <img class="shadow-lg border rounded" id="mainHero" src="{% static 'coverhero.jpg' %}" alt="">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to our band's page!</h1>
+        <p class="col-md-8 fs-4 ">Years of experience. A diverse repertoire. We have been making music
+            together since 2009. Toured accross 3 countries, and recorded 4 studio albums and 2 EPs.
+        </p>
+        <a class="btn btn-primary btn-lg"  href="/contact" role="navigation" type="button">Contact Us</a>
+    </div>
+</div>
+
+<style>
+
+    #mainHero{
+        right: 150px;
+        top: 40px;
+        height: 450px;
+        position: absolute;
+        z-index: -1;
+        opacity: 0.6;
+        transform: rotateZ(7deg);
+    }
+    .member-img {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    @media (max-width: 991.5px) {
+        #mainHero {
+            top: 60px;
+            right: 30px;
+            opacity: 0.4;
+        }
+    }
+    /* Remove vertical margin between image rows on larger screens */
+    @media (min-width: 768px) {
+        .row.no-gap {
+            margin-bottom: 0;
+        }
+
+        .row.no-gap + .row.no-gap .col-md-6:first-child {
+            padding-top: 0;
+        }
+
+        .row.no-gap .col-md-6 {
+           padding: 0;
+        }
+        .right-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: right;
+            align-items: end;
+        }
+       
+    }
+
+    @media (max-width: 768px) {
+        .member-img {
+            margin-bottom: 64px;
+        }
+        #mainHero {
+            max-height: 350px;
+            top: 186px;
+            right: 44px;
+            opacity: 0.3;
+        }
+    }
+
+    @media(max-width: 421px) {
+        #mainHero {
+            display:flex;
+            right:0;
+            left:0;
+            transform: rotateZ(0deg);
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.3;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5">Meet the Band</h2>
+        <p class="lead">Get to know the people behind the music</p>
+    </div>
+
+    {% for member in members %}
+    <div class="row align-items-center no-gap">
+        {% if forloop.counter0|divisibleby:2 %}
+            <!-- Text Left, Image Right -->
+            <div class="col-md-6 order-1 order-md-1 text-container">
+                <h3>{{ member.name }}</h3>
+                <strong>Role: {{ member.role }}</strong>
+                <p style="max-width: 400px">{{ member.description }}</p>
+            </div>
+            <div class="col-md-6 order-2 order-md-2 text-center">
+                <img src="{% static member.photo_url %}" alt="{{ member.name }}" class="img-fluid rounded-0 shadow member-img">
+            </div>
+        {% else %}
+            <!-- Image Left, Text Right -->
+            <div class="col-md-6 order-2 order-md-1 text-center">
+                <img src="{% static member.photo_url %}" alt="{{ member.name }}" class="img-fluid rounded-0 shadow member-img">
+            </div>
+            <div class="col-md-6 order-1 order-md-2 right-text-container">
+                <h3>{{ member.name }}</h3>
+                <strong>Role: {{ member.role }}</strong>
+                <p style="max-width: 400px">{{ member.description }}</p>
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
