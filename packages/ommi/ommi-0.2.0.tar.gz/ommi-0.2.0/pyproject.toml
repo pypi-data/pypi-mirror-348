@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ommi"
+version = "v0.2.0"
+description = "A portable object model mapper that can work with any database and model library (dataclasses, Attrs, Pydantic, etc.). It is designed for the general case to support the largest possible number of databases."
+authors = ["Zech Zimmerman <hi@zech.codes>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/ZechCodes/Ommi"
+keywords = ["database", "orm", "object model mapper", "dataclasses", "attrs", "pydantic", "sqlite"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+tramp = "^0.1.17"
+
+[tool.poetry.group.dev.dependencies]
+pydantic = "^2.5.3"
+attrs = "^23.2.0"
+pytest = "^7.4.4"
+pytest-asyncio = "^0.23.4"
+motor = "^3.4.0"
+psycopg = {extras = ["binary"], version = "^3.1.19"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
