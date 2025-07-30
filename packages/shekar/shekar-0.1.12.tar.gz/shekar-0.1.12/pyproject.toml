@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shekar"
+version = "0.1.12"
+description = "Simplifying Persian NLP for Everyone"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Ahmad Amirivojdan", email = "amirivojdan@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = [
+    "emoji>=2.14.1",
+    "gensim>=4.3.3",
+    "regex>=2024.11.6",
+    "requests>=2.32.3",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.5.49",
+    "mkdocs>=1.6.1",
+    "mkdocstrings[python]>=0.26.1",
+    "pytest>=8.3.4",
+    "ipykernel>=6.29.5",
+    "coverage>=7.8.0",
+    "termynal>=0.13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/amirivojdan/shekar"
+Repository = "https://github.com/amirivojdan/shekar"
