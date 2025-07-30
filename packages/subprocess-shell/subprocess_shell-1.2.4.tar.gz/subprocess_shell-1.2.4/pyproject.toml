@@ -1,0 +1,32 @@
+[project]
+name = "subprocess_shell"
+version = "1.2.4"
+authors = [
+  { name="Andreas Rappold", email="not_evil@rappold1.at" },
+]
+description = "A shell for subprocess"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+"Homepage" = "https://gitlab.com/notEvil/subprocess_shell"
+"Bug Tracker" = "https://gitlab.com/notEvil/subprocess_shell/-/issues"
+
+[project.optional-dependencies]
+test = [
+  "hypothesis",
+  "pytest",
+]
+all = [
+  "hypothesis",
+  "pytest",
+  "rich",
+  "typer",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
