@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "specaudit"  # must match the uploaded name
+version = "0.1.1"  # bump this when re-uploading
+description = "A universal spec validator for electronics via CLI or Streamlit UI."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+  { name = "Yuvaraj S S", email = "your-email@example.com" }
+]
+keywords = ["validation", "electronics", "cli", "streamlit"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[tool.setuptools]
+packages = ["spec_checker"]
