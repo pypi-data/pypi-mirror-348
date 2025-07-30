@@ -1,0 +1,22 @@
+docker:
+  - image: mail-relay-postfix
+    fingerprint: 534w6354r53
+    name: mrp
+  - image: mail-relay-jumpbox
+    fingerprint: 23r2w43r43f
+    name: mrj
+    volumes:
+      memebox: /var/lib/memes
+      /tmp/test: /tmp/test+ro
+    ports:
+      - container: 25/tcp
+        host: [127.0.0.1:25, 192.168.1.2:25, 26]
+
+cron:
+  - expr: 0 * * * *
+    command: echo hello world
+    user: root
+
+files:
+  - src: test.txt
+    dest: /tmp/test.txt
