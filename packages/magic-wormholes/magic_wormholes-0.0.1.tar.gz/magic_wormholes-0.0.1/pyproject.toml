@@ -1,0 +1,23 @@
+[project]
+name = "magic-wormholes"
+version = "0.0.1"
+authors = []
+description = "A placeholder to prevent a malicious typo squatting"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+]
+license = "Unlicense"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
+
+[build-system]
+requires = ["setuptools >= 77"]
+build-backend = "setuptools.build_meta"
