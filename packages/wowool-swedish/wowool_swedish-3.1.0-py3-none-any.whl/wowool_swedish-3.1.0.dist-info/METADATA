@@ -1,0 +1,194 @@
+Metadata-Version: 2.4
+Name: wowool-swedish
+Version: 3.1.0
+Summary: Wowool NLP swedish Package
+Description-Content-Type: text/markdown
+
+# Wowool NLP swedish Package
+This package contains the language file and domains for swedish.
+To use this package, you need to install the wowool-sdk package and request a license file at info@wowool.com
+
+## Usage
+
+```python
+from wowool.sdk import Pipeline
+from pathlib import Path
+input_text = Path("input.txt").read_text()
+pipeline = Pipeline("swedish,entity")
+doc = pipeline(input_text)
+print(doc)
+```
+
+## Domains
+
+### swedish-anonymizer.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Storgatan 123, 111 22 Stockholm |
+| City |Name of a City | Göteborg |
+| Company |Name of a Company | IKEA |
+| Country |Name of a Country | Sverige |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Astrid Lindgren |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Lindgren |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Astrid |
+| PhoneNr |A phone number | +46 70-123 45 67 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | dataanalytiker, ingenjör |
+| Street |The name of a street with or without number. | Storgatan 15 |
+| Url |Url | https://www.wowool.com |
+
+
+### swedish-entity.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Kocksgatan 44, 11629 Stockholm, Sweden |
+| City |Name of a City | Malmö |
+| Company |Name of a Company | Swedbank, Telenor |
+| Country |Name of a Country | Belgien, England, Tyskland, Danmark, Sverige |
+| Date |Date and Month | 11 maj 2017 |
+| Time |Date and Month | kl 10:32 |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | sjukdom |
+| Facility |A building or place that provides a particular service or is used for a particular industry | restaurang |
+| MoneyAmount |Amount of money | 135 kronor |
+| Month |Name of a month | december |
+| Organization |Name of an Organization | EU |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Daniel Svensson |
+| PersonMention |A mention of a person in a general way | barn, turist |
+| Position |Subclass of PersonMention. The professional occupation of a person. | kulturminister |
+| Url |Url | https://www.wowool.com |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Skandinavien |
+
+
+### swedish-dates.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Date |An attribute will resolve the absolute date from the date that has been set | 23/11/2022 |
+| TimePhrase |A phrase expressing time, including dates | nästa vecka, på onsdagen, efter 50 dagar |
+
+
+### swedish-event.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Event |An event, in very general terms. | presskonferens |
+
+
+### swedish-topics.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| TopicCandidate |Possible topics | narkotikabrott, Grand Slam |
+
+
+### swedish-contact-info.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Sibyllegatan 81, 114 43 Stockholm |
+| City |Name of a City | Göteborg |
+| Company |Name of a Company | ABN AMRO, Eyonid |
+| Country |Name of a Country | Frankrike, Belgien,Sverige  |
+| Email |Email address | info@wowool.com |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Erik Andersson |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Andersson |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Erik |
+| PhoneNr |A phone number | +46 8 664 42 28 |
+| PhoneNrCandidate |A possible phone number, but we do not have enough evidence | 0330 333 1212 |
+| Position |Subclass of PersonMention. The professional occupation of a person. | ambassadör, digitaliseringsminister |
+| Street |The name of a street with or without number. | Sibyllegatan 81 |
+| Url |Url | https://www.wowool.com |
+
+
+### swedish-entity-extended.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Address |Captures the Street, City and the complete Address | Sibyllegatan 81, 114 43 Stockholm |
+| Animal |Names of common animals. | elefant, gorilla, papegoja |
+| Automobile |A car brand or reference to a car. | Jeep Renegade |
+| BaseballTeam |US baseball team | Houston Astros |
+| City |Name of a City | Göteborg |
+| Company |Name of a Company | ABN AMRO |
+| CurrencyUnit |A currency unit | chilensk pest |
+| Country |Name of a Country | Frankrike, Belgien,Sverige  |
+| Date |Date and Month | 31 augusti 2016 |
+| District |A district | Manhattan |
+| Drink |Name of a drink | martini, cappuccino |
+| Email |Email address | info@wowool.com |
+| Event |Something that happens | nominering, löneökningen |
+| Facility |A building or place that provides a particular service or is used for a particular industry | tunnelbana, Notre-Dame |
+| Food |Name of food, ingredients as well as dishes | avokado, gryta, persilja |
+| GivenName |First name of a Person | Willem |
+| Measure |Unit of measure | 1 dl, 2 centimeter |
+| MoneyAmount |Amount of money | 4,3 miljarder dollar, 61 NOK |
+| Month |Name of a month | oktober |
+| Organization |Name of an Organization | finansinspektionsmyndighet, European Union |
+| Percent |A percentage | 12 procent |
+| Person |Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name) | Hercule Poirot |
+| PersonFam |Surname of a Person. Subannotation of the Person annotation | Rubensson |
+| PersonGiv |Given name of a Person. Subannotation of the Person annotation | Elin |
+| PersonMention |A mention of a person in a general way | chefsekonom, barn |
+| PhoneNr |Phone number | 1-800-273-5555, 0800 977 8880  |
+| PlaceAdj |Adjective of geographical origin. | Svensk, koreansk |
+| Position |Subclass of PersonMention. The professional occupation of a person. | ambassadör, digitaliseringsminister |
+| SoccerTeam |European soccer team | Juventus, Ajax, Tottenham Hotspur, Malmö FF |
+| Street |The name of a street with or without number. | Sibyllegatan 81 |
+| Url |Url | https://www.wowool.com |
+| Vehicle |Name of a vehicle | drone, bil, Toyota Yaris |
+| Weapon |Name of a weapon | brevbomb, kruisraket |
+| WeekDay |Day of the week | onsdag |
+| WorldRegion |A geographical place, like a continent, a region, a county, etc. | Azorerna, Östergötland |
+
+
+### swedish-sentiment.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| PositiveSentiment |A positive opinion. | deras låtar är jättebra |
+| NegativeSentiment |A negative opinion. | EU som har blivit värst drabbat |
+| AdjPos |Positive adjective. | bra, fantastiskt |
+| AdjNeg |Negative adjective. | svårt, orolig, farlig |
+| NounPos |Positive Noun. | seger, hopp, kompetens |
+| NounNeg |Negative Noun. | kritik, våld, förbud |
+| ExprPos |Positive expression. | minska problemen med våld och har en chans att lyckas |
+| ExprNeg |Negative expression. | bli hårdare, ingen bryr sig |
+| Supportive |In a conversation, a supportive statement. | du har rätt |
+| UnSupportive |In a conversation, an antagonistic statement. | du har fel |
+
+
+### swedish-discovery.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Definition |A definition. A sentence that explains what something or someone is. | Tallberga är en småort i Gislaveds kommun |
+| Descriptor | descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'kyrka' is the descriptor |  Fámjins kirkja är en kyrka i Fámjin |
+
+
+### swedish-unknown.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| UnknownThing |Unknown concept | Yttrium  |
+
+
+### swedish-syntax.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| NP |Noun phrase. | 18 kilo metalaffald, møbler, SparEnergi.dk |
+| PronPhrase |Pronoun phrase. | du, man |
+| VP |Verb phrase. | kommer, vil blive brugt |
+
+
+### swedish-semantic-theme.dom_info
+
+| Entity | Description | Sample |
+| ------ | ----------- | ------ |
+| Theme |Theme. | tarantel, papegoja |
+
+
+

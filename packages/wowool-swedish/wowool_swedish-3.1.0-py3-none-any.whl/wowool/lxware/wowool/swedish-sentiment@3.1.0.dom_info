@@ -1,0 +1,74 @@
+{
+  "concepts": [
+    "PositiveSentiment",
+    "NegativeSentiment",
+    "SentimentObject",
+    "Supportive",
+    "UnSupportive",
+    "AdjPos",
+    "AdjNeg",
+    "NounNeg",
+    "NounPos",
+    "VerbNeg",
+    "VerbPos",
+    "ExprNeg",
+    "ExprPos"
+  ],
+  "dependencies": [
+    "wowool/swedish-syntax@3.1.0",
+    "wowool/swedish-entity@3.1.0"
+  ],
+  "short_description": "The Swedish sentiment domain offers annotations that support sentiment analysis in a general way. ",
+  "examples": [
+    {
+      "concept": "PositiveSentiment",
+      "sample": "deras l\u00e5tar \u00e4r j\u00e4ttebra",
+      "desc": "A positive opinion."
+    },
+    {
+      "concept": "NegativeSentiment",
+      "sample": "EU som har blivit v\u00e4rst drabbat",
+      "desc": "A negative opinion."
+    },
+    {
+      "concept": "AdjPos",
+      "sample": "bra, fantastiskt",
+      "desc": "Positive adjective."
+    },
+    {
+      "concept": "AdjNeg",
+      "sample": "sv\u00e5rt, orolig, farlig",
+      "desc": "Negative adjective."
+    },
+    {
+      "concept": "NounPos",
+      "sample": "seger, hopp, kompetens",
+      "desc": "Positive Noun."
+    },
+    {
+      "concept": "NounNeg",
+      "sample": "kritik, v\u00e5ld, f\u00f6rbud",
+      "desc": "Negative Noun."
+    },
+    {
+      "concept": "ExprPos",
+      "sample": "minska problemen med v\u00e5ld och har en chans att lyckas",
+      "desc": "Positive expression."
+    },
+    {
+      "concept": "ExprNeg",
+      "sample": "bli h\u00e5rdare, ingen bryr sig",
+      "desc": "Negative expression."
+    },
+    {
+      "concept": "Supportive",
+      "sample": "du har r\u00e4tt",
+      "desc": "In a conversation, a supportive statement."
+    },
+    {
+      "concept": "UnSupportive",
+      "sample": "du har fel",
+      "desc": "In a conversation, an antagonistic statement."
+    }
+  ]
+}

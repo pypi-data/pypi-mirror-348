@@ -1,0 +1,22 @@
+{
+  "dependencies": [
+    "wowool/swedish-syntax@3.1.0"
+  ],
+  "concepts": [
+    "Date",
+    "TimePhrase"
+  ],
+  "short_description": "Solving time adverbials into absolute dates.",
+  "examples": [
+    {
+      "concept": "Date",
+      "sample": "23/11/2022",
+      "desc": "An attribute will resolve the absolute date from the date that has been set"
+    },
+    {
+      "concept": "TimePhrase",
+      "sample": "n\u00e4sta vecka, p\u00e5 onsdagen, efter 50 dagar",
+      "desc": "A phrase expressing time, including dates"
+    }
+  ]
+}

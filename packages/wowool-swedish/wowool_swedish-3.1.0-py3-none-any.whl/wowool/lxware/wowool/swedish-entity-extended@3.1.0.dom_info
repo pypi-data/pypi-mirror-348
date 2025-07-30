@@ -1,0 +1,224 @@
+{
+  "dependencies": [
+    "wowool/swedish-entity@3.1.0"
+  ],
+  "concepts": [
+    "Address",
+    "Animal",
+    "Automobile",
+    "BaseballTeam",
+    "City",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "Date",
+    "District",
+    "Drink",
+    "Email",
+    "Event",
+    "Facility",
+    "Food",
+    "GivenName",
+    "Measure",
+    "MoneyAmount",
+    "Month",
+    "Organization",
+    "Percent",
+    "Person",
+    "PersonFam",
+    "PersonGiv",
+    "PersonMention",
+    "PlaceAdj",
+    "PhoneNr",
+    "Position",
+    "SoccerTeam",
+    "Sports",
+    "Street",
+    "Time",
+    "Url",
+    "Vehicle",
+    "Weapon",
+    "WeekDay",
+    "WorldRegion"
+  ],
+  "short_description": "All annotations in the entity domain plus others, such as Automobile, BaseballTeam, InsuranceCompany or Measure",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Sibyllegatan 81, 114 43 Stockholm",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "Animal",
+      "sample": "elefant, gorilla, papegoja",
+      "desc": "Names of common animals."
+    },
+    {
+      "concept": "Automobile",
+      "sample": "Jeep Renegade",
+      "desc": "A car brand or reference to a car."
+    },
+    {
+      "concept": "BaseballTeam",
+      "sample": "Houston Astros",
+      "desc": "US baseball team"
+    },
+    {
+      "concept": "City",
+      "sample": "G\u00f6teborg",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "ABN AMRO",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "CurrencyUnit",
+      "sample": "chilensk pest",
+      "desc": "A currency unit"
+    },
+    {
+      "concept": "Country",
+      "sample": "Frankrike, Belgien,Sverige ",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "31 augusti 2016",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "District",
+      "sample": "Manhattan",
+      "desc": "A district"
+    },
+    {
+      "concept": "Drink",
+      "sample": "martini, cappuccino",
+      "desc": "Name of a drink"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "nominering, l\u00f6ne\u00f6kningen",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "tunnelbana, Notre-Dame",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "Food",
+      "sample": "avokado, gryta, persilja",
+      "desc": "Name of food, ingredients as well as dishes"
+    },
+    {
+      "concept": "GivenName",
+      "sample": "Willem",
+      "desc": "First name of a Person"
+    },
+    {
+      "concept": "Measure",
+      "sample": "1 dl, 2 centimeter",
+      "desc": "Unit of measure"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "4,3 miljarder dollar, 61 NOK",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "oktober",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "finansinspektionsmyndighet, European Union",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Percent",
+      "sample": "12 procent",
+      "desc": "A percentage"
+    },
+    {
+      "concept": "Person",
+      "sample": "Hercule Poirot",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonFam",
+      "sample": "Rubensson",
+      "desc": "Surname of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonGiv",
+      "sample": "Elin",
+      "desc": "Given name of a Person. Subannotation of the Person annotation"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "chefsekonom, barn",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "PhoneNr",
+      "sample": "1-800-273-5555, 0800 977 8880 ",
+      "desc": "Phone number"
+    },
+    {
+      "concept": "PlaceAdj",
+      "sample": "Svensk, koreansk",
+      "desc": "Adjective of geographical origin."
+    },
+    {
+      "concept": "Position",
+      "sample": "ambassad\u00f6r, digitaliseringsminister",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "SoccerTeam",
+      "sample": "Juventus, Ajax, Tottenham Hotspur, Malm\u00f6 FF",
+      "desc": "European soccer team"
+    },
+    {
+      "concept": "Street",
+      "sample": "Sibyllegatan 81",
+      "desc": "The name of a street with or without number."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "Vehicle",
+      "sample": "drone, bil, Toyota Yaris",
+      "desc": "Name of a vehicle"
+    },
+    {
+      "concept": "Weapon",
+      "sample": "brevbomb, kruisraket",
+      "desc": "Name of a weapon"
+    },
+    {
+      "concept": "WeekDay",
+      "sample": "onsdag",
+      "desc": "Day of the week"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Azorerna, \u00d6sterg\u00f6tland",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}

@@ -1,0 +1,23 @@
+{
+  "tokenizer": "wowool/swedish@3.1.0.tkz",
+  "conditions": [
+    {
+      "type": "pos",
+      "value": "Num",
+      "action": "merge",
+      "input": "stem"
+    }
+  ],
+  "morph_chain": [
+    {
+      "file": "wowool/swedish-numbers-compound@3.1.0.morph",
+      "lookup": "plain"
+    },
+    {
+      "file": "wowool/swedish-numbers-compound@3.1.0.morph",
+      "lookup": "compound_v2",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for swedish-numbers"
+}

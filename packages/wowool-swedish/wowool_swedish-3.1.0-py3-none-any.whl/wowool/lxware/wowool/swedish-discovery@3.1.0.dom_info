@@ -1,0 +1,22 @@
+{
+  "dependencies": [
+    "wowool/swedish-entity@3.1.0"
+  ],
+  "concepts": [
+    "Definition",
+    "Descriptor"
+  ],
+  "short_description": "Descriptors for knowledge discovery. A descriptor is something like 'painter' to classify an item as a Person.",
+  "examples": [
+    {
+      "concept": "Definition",
+      "sample": "Tallberga \u00e4r en sm\u00e5ort i Gislaveds kommun",
+      "desc": "A definition. A sentence that explains what something or someone is."
+    },
+    {
+      "concept": "Descriptor",
+      "sample": " F\u00e1mjins kirkja \u00e4r en kyrka i F\u00e1mjin",
+      "desc": " descriptor is something like 'painter', which will allow us to classify an concept as a Person when it appears in certain definition context. In the sample above 'kyrka' is the descriptor"
+    }
+  ]
+}

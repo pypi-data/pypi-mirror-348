@@ -1,0 +1,66 @@
+{
+  "tokenizer": "wowool/swedish@3.1.0.tkz",
+  "abbreviations": "wowool/swedish@3.1.0.abbrev",
+  "apostrophe": "wowool/swedish@3.1.0.apostrophe",
+  "measure": "wowool/swedish@3.1.0.measure",
+  "hmm": "wowool/swedish@3.1.0.hmm",
+  "postagger": "wowool/swedish@3.1.0.postagger",
+  "morph_chain": [
+    {
+      "file": "wowool/swedish@3.1.0.morph",
+      "lookup": "plain"
+    },
+    {
+      "file": "wowool/swedish-compound@3.1.0.morph",
+      "lookup": "compound_v3"
+    },
+    {
+      "file": "wowool/swedish-verb-compound@3.1.0.morph",
+      "lookup": "compound_v3"
+    },
+    {
+      "file": "wowool/swedish-endings@3.1.0.morph",
+      "lookup": "endings"
+    }
+  ],
+  "property_chain": {
+    "abbrev": [
+      {
+        "file": "wowool/swedish-abbreviation@3.1.0.morph",
+        "lookup": "plain"
+      }
+    ],
+    "tag": [
+      {
+        "file": "wowool/swedish@3.1.0.morph",
+        "lookup": "tag",
+        "transform": "tolower"
+      }
+    ]
+  },
+  "not_found": [
+    {
+      "file": "wowool/swedish-educated-guesser@3.1.0.morph",
+      "lookup": "plain",
+      "transform": "none"
+    },
+    {
+      "file": "wowool/swedish@3.1.0.morph",
+      "lookup": "cleaner",
+      "transform": "none"
+    }
+  ],
+  "tokenizer_mapper": [
+    [
+      621,
+      "internet",
+      "+Url",
+      "-Nn-Std"
+    ],
+    [
+      1523,
+      "+Adj-Ord"
+    ]
+  ],
+  "short_description": "A language module that enriches words with root forms, part of speech and properties for swedish"
+}

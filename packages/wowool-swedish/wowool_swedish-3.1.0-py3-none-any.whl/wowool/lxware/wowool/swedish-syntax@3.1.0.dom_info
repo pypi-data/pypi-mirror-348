@@ -1,0 +1,28 @@
+{
+  "concepts": [
+    "NP",
+    "NPLong",
+    "PronPhrase",
+    "VP",
+    "AdjP",
+    "TimePhrase"
+  ],
+  "short_description": "The Swedish syntax domain offers syntax annotations: NP (), VP () and PronPhrase (man). ",
+  "examples": [
+    {
+      "concept": "NP",
+      "sample": "18 kilo metalaffald, m\u00f8bler, SparEnergi.dk",
+      "desc": "Noun phrase."
+    },
+    {
+      "concept": "PronPhrase",
+      "sample": "du, man",
+      "desc": "Pronoun phrase."
+    },
+    {
+      "concept": "VP",
+      "sample": "kommer, vil blive brugt",
+      "desc": "Verb phrase."
+    }
+  ]
+}

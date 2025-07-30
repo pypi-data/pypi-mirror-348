@@ -1,0 +1,20 @@
+{
+  "tokenizer": "wowool/swedish@3.1.0.tkz",
+  "conditions": [
+    {
+      "type": "property",
+      "value": "nf",
+      "action": "merge",
+      "input": "stem"
+    }
+  ],
+  "morph_chain": [
+    {
+      "guesser": "wowool/swedish-guesser@3.1.0.morph",
+      "file": "wowool/swedish@3.1.0.morph",
+      "lookup": "guesser",
+      "transform": "none"
+    }
+  ],
+  "short_description": "A language module that guesses word that have not been found."
+}

@@ -1,0 +1,120 @@
+{
+  "concepts": [
+    "Address",
+    "City",
+    "Continent",
+    "Company",
+    "Country",
+    "CurrencyUnit",
+    "WorldRegion",
+    "Date",
+    "Time",
+    "Email",
+    "Event",
+    "Facility",
+    "MoneyAmount",
+    "Nationality",
+    "Measure",
+    "Month",
+    "Organization",
+    "Person",
+    "PersonMention",
+    "PhoneNr",
+    "Position",
+    "Street",
+    "Url"
+  ],
+  "dependencies": [
+    "wowool/swedish-syntax@3.1.0"
+  ],
+  "short_description": "The Swedish entity domain offers name entity annotations, such as: Person, City, Country, Company, Organization, etc.",
+  "examples": [
+    {
+      "concept": "Address",
+      "sample": "Kocksgatan 44, 11629 Stockholm, Sweden",
+      "desc": "Captures the Street, City and the complete Address"
+    },
+    {
+      "concept": "City",
+      "sample": "Malm\u00f6",
+      "desc": "Name of a City"
+    },
+    {
+      "concept": "Company",
+      "sample": "Swedbank, Telenor",
+      "desc": "Name of a Company"
+    },
+    {
+      "concept": "Country",
+      "sample": "Belgien, England, Tyskland, Danmark, Sverige",
+      "desc": "Name of a Country"
+    },
+    {
+      "concept": "Date",
+      "sample": "11 maj 2017",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Time",
+      "sample": "kl 10:32",
+      "desc": "Date and Month"
+    },
+    {
+      "concept": "Email",
+      "sample": "info@wowool.com",
+      "desc": "Email address"
+    },
+    {
+      "concept": "Event",
+      "sample": "sjukdom",
+      "desc": "Something that happens"
+    },
+    {
+      "concept": "Facility",
+      "sample": "restaurang",
+      "desc": "A building or place that provides a particular service or is used for a particular industry"
+    },
+    {
+      "concept": "MoneyAmount",
+      "sample": "135 kronor",
+      "desc": "Amount of money"
+    },
+    {
+      "concept": "Month",
+      "sample": "december",
+      "desc": "Name of a month"
+    },
+    {
+      "concept": "Organization",
+      "sample": "EU",
+      "desc": "Name of an Organization"
+    },
+    {
+      "concept": "Person",
+      "sample": "Daniel Svensson",
+      "desc": "Name of a Person, it captures as well the PersonGiv (first name) and PersonFam (family name)"
+    },
+    {
+      "concept": "PersonMention",
+      "sample": "barn, turist",
+      "desc": "A mention of a person in a general way"
+    },
+    {
+      "concept": "Position",
+      "sample": "kulturminister",
+      "desc": "Subclass of PersonMention. The professional occupation of a person."
+    },
+    {
+      "concept": "Url",
+      "sample": "https://www.wowool.com",
+      "desc": "Url"
+    },
+    {
+      "concept": "WorldRegion",
+      "sample": "Skandinavien",
+      "desc": "A geographical place, like a continent, a region, a county, etc."
+    }
+  ],
+  "unknown_things": true,
+  "instances": true
+}
