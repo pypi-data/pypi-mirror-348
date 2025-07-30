@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: mork-ork
+Version: 0.10.0
+Summary: Mork, an HTTP API to notify and delete accounts of inactive users.
+Author-email: "Open FUN (France Université Numérique)" <fun.dev@fun-mooc.fr>
+Project-URL: Homepage, https://openfun.github.io/mork/
+Project-URL: Bug Tracker, https://github.com/openfun/mork/issues
+Project-URL: Changelog, https://github.com/openfun/mork/blob/main/CHANGELOG.md
+Project-URL: Repository, https://github.com/openfun/mork
+Keywords: FastAPI,Celery,emails,Open edX
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: alembic==1.14.1
+Requires-Dist: alembic-postgresql-enum==1.7.0
+Requires-Dist: celery[redis]==5.4.0
+Requires-Dist: fastapi[standard]==0.115.11
+Requires-Dist: Jinja2==3.1.5
+Requires-Dist: jinja2-simple-tags==0.6.1
+Requires-Dist: mongoengine==0.29.1
+Requires-Dist: mongomock==4.3.0
+Requires-Dist: psycopg2-binary==2.9.10
+Requires-Dist: pydantic==2.10.6
+Requires-Dist: pydantic_settings==2.8.1
+Requires-Dist: python-datauri==3.0.2
+Requires-Dist: pymongo==3.13.0
+Requires-Dist: pymysql==1.1.1
+Requires-Dist: redis==5.2.1
+Requires-Dist: sentry-sdk[celery,fastapi]==2.22.0
+Requires-Dist: SQLAlchemy==2.0.38
+Provides-Extra: ci
+Requires-Dist: twine==6.1.0; extra == "ci"
+Provides-Extra: dev
+Requires-Dist: black==25.1.0; extra == "dev"
+Requires-Dist: build==1.2.2.post1; extra == "dev"
+Requires-Dist: factory_boy==3.3.3; extra == "dev"
+Requires-Dist: flower==2.0.1; extra == "dev"
+Requires-Dist: pytest==8.3.5; extra == "dev"
+Requires-Dist: pytest-cov==6.0.0; extra == "dev"
+Requires-Dist: pytest-httpx==0.35.0; extra == "dev"
+Requires-Dist: ruff==0.9.9; extra == "dev"

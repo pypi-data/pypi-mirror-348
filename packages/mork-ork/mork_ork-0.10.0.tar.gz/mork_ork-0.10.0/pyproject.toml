@@ -1,0 +1,148 @@
+#
+# Mork package
+#
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mork-ork"
+description = "Mork, an HTTP API to notify and delete accounts of inactive users."
+readme = "README.md"
+authors = [
+    { "name" = "Open FUN (France Université Numérique)", "email" = "fun.dev@fun-mooc.fr" }
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12"
+]
+requires-python = ">=3.12"
+license = { file = "LICENSE.md" }
+keywords = ["FastAPI", "Celery", "emails", "Open edX"]
+dependencies = [
+    "alembic==1.14.1",
+    "alembic-postgresql-enum==1.7.0",
+    "celery[redis]==5.4.0",
+    "fastapi[standard]==0.115.11",
+    "Jinja2==3.1.5",
+    "jinja2-simple-tags==0.6.1",
+    "mongoengine==0.29.1",
+    "mongomock==4.3.0",
+    "psycopg2-binary==2.9.10",
+    "pydantic==2.10.6",
+    "pydantic_settings==2.8.1",
+    "python-datauri==3.0.2",
+    "pymongo==3.13.0", # pin as it is the last version compatible with MongoDB 3.0
+    "pymysql==1.1.1",
+    "redis==5.2.1",
+    "sentry-sdk[celery,fastapi]==2.22.0",
+    "SQLAlchemy==2.0.38", 
+]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://openfun.github.io/mork/"
+"Bug Tracker" = "https://github.com/openfun/mork/issues"
+"Changelog" = "https://github.com/openfun/mork/blob/main/CHANGELOG.md"
+"Repository" = "https://github.com/openfun/mork"
+
+[project.optional-dependencies]
+ci = [
+    "twine==6.1.0",
+]
+dev = [
+    "black==25.1.0",
+    "build==1.2.2.post1",
+    "factory_boy==3.3.3",
+    "flower==2.0.1",
+    "pytest==8.3.5",
+    "pytest-cov==6.0.0",
+    "pytest-httpx==0.35.0",
+    "ruff==0.9.9",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "mork.__version__" }
+
+#
+# Third-party packages configuration
+#
+[tool.ruff]
+exclude = [
+    ".conda",
+    ".git",
+    ".venv",
+    "build",
+    "scripts",
+    "venv",
+    "__pycache__",
+    "node_modules",
+    "*/migrations/*",
+]
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "ARG",  # flake8-unused-arguments
+    "B",  # flake8-bugbear
+    "BLE",  # flake8-blind-except
+    "C4",  # flake8-comprehensions
+    "D",  # pydocstyle
+    "E",  # pycodestyle error
+    "F",  # Pyflakes
+    "FIX",  # flake8-fixme
+    "I",  # isort
+    "PLC",  # Pylint Convention
+    "PLE",  # Pylint Error
+    "PLR",  # Pylint Refactor
+    "PLW",  # Pylint Warning
+    "RUF100",  # Ruff unused-noqa
+    "S",  # flake8-bandit
+    "SLF",  # flake8-self
+    "T20",  # flake8-print
+    "W",  # pycodestyle warning
+]
+ignore = [
+    "B008",  # function-call-in-default-argument
+    "N806",  # non-lowercase-variable-in-function
+    "N815",  # mixed-case-variable-in-class-scope
+    "N818",  # error-suffix-on-exception-name
+]
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library", "third-party", "mork", "first-party", "local-folder"]
+[tool.ruff.lint.isort.sections]
+mork = ["mork"]
+
+[tool.ruff.lint.per-file-ignores]
+"mork/**/tests/*" = [
+    "ARG",  # flake8-unused-arguments
+    "D",  # pydocstyle
+    "S",  # flake8-bandit
+    "SLF",  # flake8-self
+    "PLR2004",  # Pylint magic-value-comparison
+]
+"setup.py" = [
+    "D" # Pydocstyle rules
+]
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings.
+convention = "google"
+
+[tool.pytest.ini_options]
+addopts = "-v --cov-report term-missing --cov-config=.coveragerc --cov=mork"
+python_files = [
+    "test_*.py",
+    "tests.py",
+]
+testpaths = "**/tests"
+
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+]
