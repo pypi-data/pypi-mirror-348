@@ -1,0 +1,12 @@
+src:
+  main.py: "def main():\n    print(\"Hello, world!\")\n\nif __name__ == \"__main__\"\
+    :\n    main()"
+  utils:
+    helpers.py: "def add(a, b):\n    return a + b"
+docs:
+  README.md: '# My Project
+
+
+    This is a sample project.'
+tests:
+  test_main.py: "def test_sample():\n    assert True"
