@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: pkgmgr
+Version: 1.1.0
+Summary: Extensible package and configuration manager
+Author: soraxas
+License: MIT License
+        
+        Copyright (c) 2025, soraxas
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: typer==0.15.4
+Provides-Extra: dev
+Requires-Dist: build; extra == "dev"
+Requires-Dist: dapperdata; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-pretty; extra == "dev"
+Requires-Dist: ruamel.yaml; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: toml-sort; extra == "dev"
+Dynamic: license-file
+
+# pkgmgr
+
+<a href="https://pypi.org/project/pkgmgr/">
+<img src="https://img.shields.io/pypi/v/pkgmgr.svg?label=PyPI&color=blue" alt="PyPI version">
+</a>
+<a href="https://pypi.org/project/pkgmgr/">
+<img src="https://img.shields.io/pypi/dm/pkgmgr.svg?label=Downloads&color=blue" alt="PyPI downloads">
+</a>
+<a href="https://github.com/soraxas/pkgmgr/blob/main/LICENSE">
+<img src="https://img.shields.io/github/license/soraxas/pkgmgr.svg" alt="License">
+</a>
+<a href="https://www.python.org/downloads/">
+<img src="https://img.shields.io/pypi/pyversions/pkgmgr.svg?logo=python&logoColor=white" alt="Python versions">
+</a>
+<a href="https://github.com/astral-sh/ruff">
+<img src="https://img.shields.io/badge/linter-ruff-0f172a?logo=ruff&logoColor=white" alt="Linter: Ruff">
+</a>
+
+A repeatable and self-documenting OS package manager.
+
+A wannabe [nixos](https://nixos.org/) and [aconfmgr](https://github.com/CyberShadow/aconfmgr), `pkgmgr` aims to bring declarative package management to your system—without the intrusiveness or complexity of NixOS. Manage your system configuration and installed packages in a reproducible, version-controlled way.
+
+## Features
+
+- Declarative package management
+- Less intrusive than NixOS
+- Inspired by tools like aconfmgr
+
+## Examples
+
+1. Get differences between system state and saved config
+
+  <div align="center">
+    <img width="986" alt="Screenshot diff" src="https://github.com/user-attachments/assets/38e55646-32b6-4fb2-8bc6-07e6ae3e15c4" />
+  </div>
+
+
+2. Apply the changes to make system state match the saved config
+
+  <div align="center">
+    <img width="986" alt="Screenshot apply" src="https://github.com/user-attachments/assets/f82f58f9-f470-4452-9b98-805f77330185" />
+  </div>
