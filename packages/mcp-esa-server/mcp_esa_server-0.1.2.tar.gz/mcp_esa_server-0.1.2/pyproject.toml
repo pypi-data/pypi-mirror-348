@@ -1,0 +1,69 @@
+[project]
+name = "mcp-esa-server"
+version = "0.1.2"
+description = "MCP server for esa.io API"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "requests",
+    "python-dotenv",
+    "mcp[cli]>=1.7.1",
+]
+
+[[project.authors]]
+name = "scnsh"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.5",
+    "ruff>=0.11.8",
+    "httpx>=0.28.1", # Keep httpx for potential future testing needs
+    "pytest-mock>=3.14.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/scnsh/mcp-esa-server-python"
+Repository = "https://github.com/scnsh/mcp-esa-server-python"
+
+[project.scripts]
+mcp-esa-server = "mcp_esa_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_esa_server"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313" # プロジェクトで使用するPythonバージョンに合わせてください
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"] # 基本的なルールセットを選択
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "ruff",
+    "python-dotenv",
+    "uv>=0.7.3",
+    "pytest-cov>=6.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
+markers = [
+    "integration: mark test as integration test (requires network and .env)",
+]
