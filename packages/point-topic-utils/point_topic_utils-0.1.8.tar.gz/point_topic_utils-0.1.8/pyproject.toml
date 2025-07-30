@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "point-topic-utils"
+version = "0.1.8"
+description = "Utilities for Point Topic projects"
+authors = [{ name = "Peter Donaghey" }]
+dependencies = [
+    "pymongo>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "isort>=5.0.0",
+]
+
+[project.scripts]
+pt-update-status = "point_topic_utils.update_status:main" 
