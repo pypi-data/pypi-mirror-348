@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: bcf-client
+Version: 0.0.250519
+Summary: BCF-XML file handler.
+Project-URL: Source, https://github.com/IfcOpenShell/IfcOpenShell
+Project-URL: Issues, https://github.com/IfcOpenShell/IfcOpenShell/issues
+Keywords: IFC,BCF,BIM
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Utilities
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: COPYING
+License-File: COPYING.LESSER
+Requires-Dist: xsdata>=24.4
+Requires-Dist: numpy
+Requires-Dist: ifcopenshell
+Dynamic: license-file
+
+# bcf
+
+A simple Python implementation of the BCF standard. Manipulation of BCF-XML is
+available via `bcfxml.py` and manipulation of BCF-API is available via
+`bcfapi.py`.
