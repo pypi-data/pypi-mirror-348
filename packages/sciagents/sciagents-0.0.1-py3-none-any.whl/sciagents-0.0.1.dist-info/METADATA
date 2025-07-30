@@ -1,0 +1,108 @@
+Metadata-Version: 2.4
+Name: sciagents
+Version: 0.0.1
+Summary: Agents
+Author-email: OPENAGS <pengsong.zhang@mail.utoronto.ca>
+License: MIT License
+        
+        Copyright (c) 2025 OPENAGS
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/openags/SciAgents
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic>=2.0
+Requires-Dist: litellm
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Requires-Dist: numpy
+Dynamic: license-file
+
+# SciAgents
+
+SciAgents is an extensible multi-agent framework designed for scientific research scenarios. It leverages large language models (LLMs) to automate research tasks and can be integrated with robotic systems for advanced scientific workflows.
+
+## Features
+
+- Supports various LLM providers (OpenAI, Azure, Gemini, etc.)
+- Modular agent and tool system for easy extension
+- Flexible configuration for different research needs
+- Ready-to-use test scripts and Jupyter notebooks
+- Can be combined with robots for automated scientific experiments
+
+## Installation
+
+```bash
+pip install sciagents
+```
+
+## Quick Start
+
+Below is a minimal example of using `ChatAgent` in your project.  
+**Note:** Make sure you have a valid `config/config.yml` with your LLM API keys and model info.
+
+```python
+import os
+from sciagents.agents.chat_agent import ChatAgent
+from sciagents.agents.message import AgentInput, Message, Role
+import yaml
+
+# Load config
+config_path = os.path.join("config", "config.yml")
+with open(config_path, "r", encoding="utf-8") as f:
+    config = yaml.safe_load(f)
+chat_agent_config = config["agents"]["ChatAgent"]
+
+# Build agent input
+messages = [Message(role=Role.USER, content="Introduce yourself, please.")]
+agent_input = AgentInput(messages=messages)
+
+# Create ChatAgent instance
+agent = ChatAgent(
+    name="DemoChatAgent",
+    llm_config={
+        "model": chat_agent_config["model"],
+        "api_key": chat_agent_config["api_key"],
+        "api_base": chat_agent_config["url"],
+        **chat_agent_config.get("model_config_dict", {})
+    },
+    stream=True
+)
+
+# Get response
+output = agent.step(agent_input)
+if hasattr(output.content, "__iter__") and not isinstance(output.content, str):
+    for chunk in output.content:
+        print(chunk, end="", flush=True)
+    print()
+else:
+    print(output.content)
+```
+
+## Project Structure
+
+- `sciagents/`: Core code (agents, tools, LLM interfaces)
+- `config/`: Configuration files
+- `test/`: Test scripts and examples
+
+## License
+
+This project is licensed under the MIT License.
