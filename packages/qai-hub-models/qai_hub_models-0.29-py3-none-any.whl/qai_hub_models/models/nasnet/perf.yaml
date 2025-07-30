@@ -1,0 +1,130 @@
+supported_devices:
+- Snapdragon 8 Elite QRD
+- Samsung Galaxy S24
+- Samsung Galaxy S24 Ultra
+- Samsung Galaxy S24+
+- Samsung Galaxy S23
+- Samsung Galaxy S23 Ultra
+- Samsung Galaxy S23+
+- Samsung Galaxy S22 5G
+- Samsung Galaxy S22 Ultra 5G
+- Samsung Galaxy S22+ 5G
+- Samsung Galaxy Tab S8
+- Xiaomi 12
+- Xiaomi 12 Pro
+- Samsung Galaxy S21
+- Samsung Galaxy S21 Ultra
+- Samsung Galaxy S21+
+- QCS8550 (Proxy)
+- QCS8275 (Proxy)
+- QCS8450 (Proxy)
+- XR2 Gen 2 (Proxy)
+- QCS9075 (Proxy)
+supported_chipsets:
+- qualcomm-snapdragon-8-elite
+- qualcomm-snapdragon-8gen3
+- qualcomm-snapdragon-8gen2
+- qualcomm-snapdragon-8gen1
+- qualcomm-snapdragon-888
+- qualcomm-qcs8550-proxy
+- qualcomm-qcs8275-proxy
+- qualcomm-qcs8450-proxy
+- qualcomm-qcs9075-proxy
+precisions:
+  float:
+    components:
+      NASNet:
+        universal_assets:
+          tflite: mmrwkwwrn
+        performance_metrics:
+          QCS8275 (Proxy):
+            tflite:
+              job_id: jp4k1991g
+              job_status: Passed
+              inference_time_milliseconds: 38.03
+              inferences_per_second: 26.295030239284774
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 291
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          QCS8450 (Proxy):
+            tflite:
+              job_id: jpyrx77l5
+              job_status: Passed
+              inference_time_milliseconds: 15.525
+              inferences_per_second: 64.4122383252818
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 301
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          QCS8550 (Proxy):
+            tflite:
+              job_id: jp20wvvqg
+              job_status: Passed
+              inference_time_milliseconds: 7.648
+              inferences_per_second: 130.7531380753138
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 18
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          QCS9075 (Proxy):
+            tflite:
+              job_id: jpr80nn75
+              job_status: Passed
+              inference_time_milliseconds: 10.989
+              inferences_per_second: 182.00018200018198
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 291
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          Samsung Galaxy S23:
+            tflite:
+              job_id: jp1yjvv7p
+              job_status: Passed
+              inference_time_milliseconds: 7.668
+              inferences_per_second: 130.41210224308816
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 22
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          Samsung Galaxy S24:
+            tflite:
+              job_id: jgde3zzz5
+              job_status: Passed
+              inference_time_milliseconds: 5.586
+              inferences_per_second: 179.0189760114572
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 347
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776
+          Snapdragon 8 Elite QRD:
+            tflite:
+              job_id: j5704779g
+              job_status: Passed
+              inference_time_milliseconds: 5.323
+              inferences_per_second: 187.86398647379295
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 292
+              primary_compute_unit: NPU
+              layer_counts:
+                total: 776
+                npu: 776

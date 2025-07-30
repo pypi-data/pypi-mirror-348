@@ -1,0 +1,217 @@
+supported_devices:
+- Snapdragon 8 Elite QRD
+- Samsung Galaxy S24
+- Samsung Galaxy S24 Ultra
+- Samsung Galaxy S24+
+- Samsung Galaxy S23
+- Samsung Galaxy S23 Ultra
+- Samsung Galaxy S23+
+- Samsung Galaxy S22 5G
+- Samsung Galaxy S22 Ultra 5G
+- Samsung Galaxy S22+ 5G
+- Samsung Galaxy Tab S8
+- Xiaomi 12
+- Xiaomi 12 Pro
+- Samsung Galaxy S21
+- Samsung Galaxy S21 Ultra
+- Samsung Galaxy S21+
+- QCS8550 (Proxy)
+- SA8775P ADP
+- SA8650 (Proxy)
+- SA8255 (Proxy)
+- QCS8275 (Proxy)
+- QCS8450 (Proxy)
+- XR2 Gen 2 (Proxy)
+- QCS9075 (Proxy)
+- SA7255P ADP
+- SA8295P ADP
+supported_chipsets:
+- qualcomm-snapdragon-8-elite
+- qualcomm-snapdragon-8gen3
+- qualcomm-snapdragon-8gen2
+- qualcomm-snapdragon-8gen1
+- qualcomm-snapdragon-888
+- qualcomm-qcs8550-proxy
+- qualcomm-sa8775p
+- qualcomm-sa8650p-proxy
+- qualcomm-sa8255p-proxy
+- qualcomm-qcs8275-proxy
+- qualcomm-qcs8450-proxy
+- qualcomm-qcs9075-proxy
+- qualcomm-sa7255p
+- qualcomm-sa8295p
+precisions:
+  float:
+    components:
+      DeepLabV3-ResNet50:
+        universal_assets:
+          tflite: mm651p7vn
+        performance_metrics:
+          QCS8275 (Proxy):
+            tflite:
+              job_id: jgokrdj1p
+              job_status: Passed
+              inference_time_milliseconds: 1567.599
+              inferences_per_second: 0.637918243122125
+              estimated_peak_memory_range_mb:
+                min: 21
+                max: 41
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          QCS8450 (Proxy):
+            tflite:
+              job_id: jg9jmo6m5
+              job_status: Passed
+              inference_time_milliseconds: 453.237
+              inferences_per_second: 2.2063512025717227
+              estimated_peak_memory_range_mb:
+                min: 23
+                max: 53
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          QCS8550 (Proxy):
+            tflite:
+              job_id: j5w27yj45
+              job_status: Passed
+              inference_time_milliseconds: 317.153
+              inferences_per_second: 3.153052312290913
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 199
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          QCS9075 (Proxy):
+            tflite:
+              job_id: jgzomz145
+              job_status: Passed
+              inference_time_milliseconds: 593.132
+              inferences_per_second: 3.3719307000802523
+              estimated_peak_memory_range_mb:
+                min: 23
+                max: 39
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          SA7255P ADP:
+            tflite:
+              job_id: jgokrdj1p
+              job_status: Passed
+              inference_time_milliseconds: 1567.599
+              inferences_per_second: 0.637918243122125
+              estimated_peak_memory_range_mb:
+                min: 21
+                max: 41
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          SA8255 (Proxy):
+            tflite:
+              job_id: jpv0d2jz5
+              job_status: Passed
+              inference_time_milliseconds: 292.309
+              inferences_per_second: 3.421037326938274
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 167
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          SA8295P ADP:
+            tflite:
+              job_id: jgjz73j15
+              job_status: Passed
+              inference_time_milliseconds: 266.633
+              inferences_per_second: 3.7504734972790317
+              estimated_peak_memory_range_mb:
+                min: 22
+                max: 43
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          SA8650 (Proxy):
+            tflite:
+              job_id: jpeez6j8p
+              job_status: Passed
+              inference_time_milliseconds: 293.043
+              inferences_per_second: 3.4124684773224407
+              estimated_peak_memory_range_mb:
+                min: 0
+                max: 205
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          SA8775P ADP:
+            tflite:
+              job_id: jgzomz145
+              job_status: Passed
+              inference_time_milliseconds: 593.132
+              inferences_per_second: 1.6859653500401262
+              estimated_peak_memory_range_mb:
+                min: 23
+                max: 39
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          Samsung Galaxy S23:
+            tflite:
+              job_id: jgl6xwj2g
+              job_status: Passed
+              inference_time_milliseconds: 592.51
+              inferences_per_second: 1.687735228097416
+              estimated_peak_memory_range_mb:
+                min: 2
+                max: 189
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          Samsung Galaxy S24:
+            tflite:
+              job_id: j56e7okng
+              job_status: Passed
+              inference_time_milliseconds: 214.819
+              inferences_per_second: 4.655081719959594
+              estimated_peak_memory_range_mb:
+                min: 22
+                max: 52
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
+          Snapdragon 8 Elite QRD:
+            tflite:
+              job_id: jp3v9oymg
+              job_status: Passed
+              inference_time_milliseconds: 222.349
+              inferences_per_second: 4.497434213781038
+              estimated_peak_memory_range_mb:
+                min: 21
+                max: 40
+              primary_compute_unit: GPU
+              layer_counts:
+                total: 100
+                gpu: 98
+                cpu: 2
