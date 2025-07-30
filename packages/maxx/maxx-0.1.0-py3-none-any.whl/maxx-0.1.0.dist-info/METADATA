@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: maxx
+Version: 0.1.0
+Summary: Signatures for MATLAB projects
+Author-email: Mark Hu <watermarkhu@gmail.com>
+License-Expression: GPL-3.0
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: Documentation
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Requires-Dist: charset-normalizer~=3.4
+Requires-Dist: griffe~=1.7.2
+Requires-Dist: tree-sitter-matlab~=1.0
+Requires-Dist: tree-sitter~=0.24
+Requires-Dist: typing-extensions>=4.0; python_version < '3.11'
