@@ -1,0 +1,5 @@
+- [information](foundamental/information)
+- [problem](problem/problem)
+- [criterion](problem/criterion)
+- [algorithm](problem/algorithm/algorithm)
+- [subproblem](problem/algorithm/subproblem)
