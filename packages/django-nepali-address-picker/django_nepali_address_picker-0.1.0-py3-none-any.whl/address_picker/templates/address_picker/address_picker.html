@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Nepali Address Picker</h2>
+    <form method="post" id="address-form">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.province.label_tag }}
+            {{ form.province }}
+        </div>
+        <div class="mb-3">
+            {{ form.district.label_tag }}
+            {{ form.district }}
+        </div>
+        <div class="mb-3">
+            {{ form.local_body.label_tag }}
+            {{ form.local_body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function() {
+    $('#id_province').change(function() {
+        var url = "{% url 'ajax_load_districts' %}";
+        var provinceId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'province': provinceId
+            },
+            success: function(data) {
+                var $district = $('#id_district');
+                $district.html('<option value="">Select District</option>');
+                $.each(data, function(i, item) {
+                    $district.append('<option value="' + item.id + '">' + item.name + '</option>');
+                });
+                $('#id_local_body').html('<option value="">Select Local Body</option>');
+            }
+        });
+    });
+    $('#id_district').change(function() {
+        var url = "{% url 'ajax_load_local_bodies' %}";
+        var districtId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'district': districtId
+            },
+            success: function(data) {
+                var $localBody = $('#id_local_body');
+                $localBody.html('<option value="">Select Local Body</option>');
+                $.each(data, function(i, item) {
+                    $localBody.append('<option value="' + item.id + '">' + item.name + ' (' + item.type + ')</option>');
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 
