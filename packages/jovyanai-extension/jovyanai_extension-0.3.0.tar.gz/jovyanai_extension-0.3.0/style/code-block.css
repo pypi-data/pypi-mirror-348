@@ -1,0 +1,160 @@
+.code-block {
+  margin: 12px 0;
+  border-radius: 6px;
+  overflow-wrap: break-word;
+  background-color: #f5f7f9;
+  border: 1px solid #e0e0e0;
+  max-width: 100%;
+}
+
+.code-header {
+  background-color: #e8eaed;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #5f6368;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.language-tag {
+  font-family: monospace;
+  font-weight: 500;
+}
+
+.code-content {
+  margin: 0;
+  padding: 12px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #24292e;
+}
+
+/* CodeMirror specific styles */
+.code-content .cm-editor {
+  height: auto;
+  background: transparent !important;
+}
+
+.code-content .cm-editor.cm-focused {
+  outline: none !important;
+}
+
+.code-content .cm-content {
+  padding: 0 !important;
+}
+
+.code-content .cm-line {
+  padding: 0 4px 0 8px !important;
+}
+
+/* Dark theme support */
+[data-jp-theme-light='false'] .code-block {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+[data-jp-theme-light='false'] .code-header {
+  background-color: #252526;
+  border-color: #333;
+  color: #ccc;
+}
+
+[data-jp-theme-light='false'] .code-content {
+  color: #d4d4d4;
+}
+
+[data-jp-theme-light='false'] .copy-button {
+  color: #ccc;
+}
+
+.code-content code {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  display: block;
+  max-width: 100%;
+}
+
+/* Python syntax highlighting */
+.code-content .python {
+  color: #24292e;
+}
+
+.code-content .python .keyword {
+  color: #0033b3;
+  font-weight: bold;
+}
+
+.code-content .python .string {
+  color: #067d17;
+}
+
+.code-content .python .number {
+  color: #1750eb;
+}
+
+.code-content .python .comment {
+  color: #8c8c8c;
+  font-style: italic;
+}
+
+.code-content .python .function {
+  color: #6f42c1;
+}
+
+.code-content .python .class {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+.code-content .python .decorator {
+  color: #0033b3;
+  font-style: italic;
+}
+
+.code-content .python .builtin {
+  color: #0033b3;
+}
+
+.code-content .python .operator {
+  color: #24292e;
+}
+
+.code-content .python .punctuation {
+  color: #24292e;
+}
+
+/* Style for action buttons like Apply and Insert */
+.code-action-button {
+  float: right;
+  background-color: inherit;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: inherit;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-action-button:hover {
+  background-color: #c8cbd1;
+}
+
+[data-jp-theme-light='false'] .code-action-button {
+  color: #ccc;
+  background-color: #3a3a3c;
+}
+
+[data-jp-theme-light='false'] .code-action-button:hover {
+  background-color: #4a4a4c;
+}
+
+.code-header-buttons {
+  display: flex;
+  gap: 8px;
+}

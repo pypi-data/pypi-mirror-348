@@ -1,0 +1,107 @@
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  background: var(--jp-layout-color1);
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 300px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--jp-ui-font-color1);
+}
+
+.popup-title {
+  margin: 0 0 15px;
+  color: var(--jp-ui-font-color1);
+  font-size: var(--jp-ui-font-size2);
+}
+
+.popup-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid var(--jp-border-color1);
+  border-radius: 3px;
+  background: var(--jp-layout-color1);
+  color: var(--jp-ui-font-color1);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.popup-input:focus {
+  outline: none;
+  border-color: var(--jp-brand-color1);
+}
+
+.popup-drop-area {
+  border: 2px dashed var(--jp-border-color1);
+  padding: 20px;
+  text-align: center;
+  margin: 15px 0;
+  color: var(--jp-content-font-color2);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.popup-drop-area:hover {
+  border-color: var(--jp-brand-color1);
+  color: var(--jp-ui-font-color1);
+}
+
+.popup-divider {
+  text-align: center;
+  margin: 10px 0;
+  color: var(--jp-content-font-color2);
+}
+
+.popup-submit-button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 15px;
+  background: var(--jp-brand-color1);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: var(--jp-ui-font-size1);
+  transition: background-color 0.2s ease;
+}
+
+.popup-submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: var(--jp-brand-color1);
+}
+
+.popup-submit-button:hover:not(:disabled) {
+  background-color: var(--jp-brand-color2);
+}
+
+.popup-status {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--jp-ui-font-color1);
+}
+
+.popup-status h4 {
+  margin: 0 0 10px;
+  font-size: var(--jp-ui-font-size2);
+}
