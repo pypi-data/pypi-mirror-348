@@ -1,0 +1,22 @@
+#setuptools
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+# Metadata
+[project]
+name = "coderzparadise"
+version = "0.9.16"
+authors = [
+  { name="Coderz Paradise", email="coderzparadise@gmail.com"},
+]
+description = "A package made from scratch by CoderzParadise that makes using Data Structures as easy as possible for humans and AI."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/coderzparadise/coderzparadise/tree/main/src/coderzparadise"
