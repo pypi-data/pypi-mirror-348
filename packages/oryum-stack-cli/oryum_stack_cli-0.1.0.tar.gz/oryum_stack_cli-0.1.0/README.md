@@ -1,0 +1,42 @@
+# ORYUM STACK CLI
+
+Este repositório contém a documentação e exemplos de código para a ORYUM STACK CLI, uma ferramenta de linha de comando para geração de projetos Flask com autenticação e painel administrativo.
+
+## Estrutura do Repositório
+
+- `/docs/` - Documentação técnica e estratégica
+  - `plano_tecnico.md` - Plano técnico de implementação
+  - `comparativo_frameworks.md` - Comparação entre frameworks CLI
+  - `organizacao_modular.md` - Organização modular e fluxo de geração
+  - `versionamento_deploy.md` - Boas práticas de versionamento e deploy
+  - `publico_vs_privado.md` - Análise de estratégias de distribuição
+
+- `/exemplos/` - Exemplos de código
+  - `/cli/` - Código da CLI
+  - `/templates/` - Templates para geração de projetos
+  - `/projeto_exemplo/` - Projeto Flask completo gerado pela CLI
+
+## Documentação Rápida
+
+### Instalação
+
+```bash
+pip install oryum-stack
+```
+
+### Uso Básico
+
+```bash
+# Criar novo projeto
+oryum new meu-projeto
+
+# Gerar modelo
+cd meu-projeto
+oryum make:model Usuario
+
+# Gerar rotas CRUD
+oryum make:route usuario --crud
+```
+
+Para mais detalhes, consulte a documentação completa nos arquivos específicos.
+# Oryum_stack_cli

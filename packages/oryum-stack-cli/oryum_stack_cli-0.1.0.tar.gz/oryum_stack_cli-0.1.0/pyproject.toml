@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oryum-stack-cli"
+version = "0.1.0"
+description = "CLI para gerar projetos Flask com autenticação e painel administrativo"
+authors = [
+    { name="Kalleby Evangelho", email="kallebyevangelho03@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+dependencies = [
+    "typer[all]",
+    "cookiecutter",
+    "Jinja2",
+    "SQLAlchemy",
+    "Flask",
+    "Flask-Login"
+]
+
+[project.scripts]
+oryum = "oryum_stack.cli.cli:app"
