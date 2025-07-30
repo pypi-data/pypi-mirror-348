@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: UzbekTagger
+Version: 0.0.9
+Summary: Part of Speech Tagger for Uzbek Language.
+Home-page: https://github.com/MaksudSharipov/UzbekTagger
+Author: Maksud Sharipov, Ollabergan Yuldashov
+Author-email: "Sharipov Maksud,Yuldashov Ollabergan" <maqsbek72@gmail.com>
+Project-URL: Homepage, https://github.com/MaksudSharipov/UzbekTagger
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# UzbekTagger
+
+**UzbekTagger** is a part-of-speech (POS) tagging library for text in the Uzbek language. This library allows you to automatically assign grammatical categories (such as noun, verb, adjective, etc.) to each word in a given text.
+
+##  Features
+
+- Tokenizes and tags Uzbek sentences with grammatical categories
+- Supports basic POS tagging (NOUN, VERB, ADJ, PRON, etc.)
+- Simple and lightweight interface
+
+##  Installation
+
+You can install the library using pip:
+
+```
+pip install UzbekTagger
+```
+
+## Example
+```
+from UzbekTagger import UzbekTagger as tg
+
+print(tg.pos("Men bugun uyga ertaroq ketdim. Boshqa bolalar bugun maktabdan kech kelar emish."))
+```
