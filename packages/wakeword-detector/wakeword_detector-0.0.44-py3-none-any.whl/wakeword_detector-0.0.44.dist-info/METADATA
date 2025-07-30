@@ -1,0 +1,135 @@
+Metadata-Version: 2.4
+Name: wakeword-detector
+Version: 0.0.44
+Summary: A Python package for wakeword detection
+Author-email: Lara Whybrow <lara.whybrow@gmail.com>
+Maintainer-email: Lara Whybrow <lara.whybrow@gmail.com>
+Project-URL: Homepage, https://github.com/larawhybrow/wakeword-detector
+Project-URL: Repository, https://github.com/larawhybrow/wakeword-detector.git
+Project-URL: Issues, https://github.com/larawhybrow/wakeword-detector/issues
+Project-URL: Changelog, https://github.com/larawhybrow/wakeword-detector/blob/main/CHANGELOG.md
+Keywords: wakeword,speech recognition,AI,machine learning
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy<=1.26.4,>=1.19.0
+Requires-Dist: torch<2.7,>=2.0.0
+Requires-Dist: librosa<0.9.1,>=0.8.0
+Requires-Dist: pyaudio<=0.2.14,>=0.2.11
+Requires-Dist: requests<3,>=2.21.0
+Requires-Dist: certifi>=2025.1.31
+Requires-Dist: cffi>=1.17.1
+Requires-Dist: charset-normalizer>=3.4.1
+Requires-Dist: cryptography>=44.0.2
+Requires-Dist: docutils>=0.21.2
+Requires-Dist: flask>=2.2.0
+Requires-Dist: id>=1.5.0
+Requires-Dist: idna>=3.10
+Requires-Dist: jaraco.classes>=3.4.0
+Requires-Dist: jaraco.context>=6.0.1
+Requires-Dist: jaraco.functools>=4.1.0
+Requires-Dist: jeepney>=0.9.0
+Requires-Dist: keyring>=25.6.0
+Requires-Dist: markdown-it-py>=3.0.0
+Requires-Dist: matplotlib>=3.8.0
+Requires-Dist: mdurl>=0.1.2
+Requires-Dist: more-itertools>=10.6.0
+Requires-Dist: nh3>=0.2.21
+Requires-Dist: onnx>=1.17.0
+Requires-Dist: packaging>=24.2
+Requires-Dist: pycparser>=2.22
+Requires-Dist: Pygments>=2.19.1
+Requires-Dist: pyproject_hooks>=1.2.0
+Requires-Dist: readme_renderer>=44.0
+Requires-Dist: requests-toolbelt>=1.0.0
+Requires-Dist: rfc3986>=2.0.0
+Requires-Dist: rich>=13.9.4
+Requires-Dist: SecretStorage>=3.3.3
+Requires-Dist: setuptools>=76.1.0
+Requires-Dist: sounddevice>=0.4.6
+Requires-Dist: soundfile>=0.10.2
+Requires-Dist: tensorflow>=2.15.0
+Requires-Dist: twine>=6.1.0
+Requires-Dist: urllib3>=2.3.0
+Requires-Dist: websockets>=10.0
+Requires-Dist: wheel>=0.45.1
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Dynamic: license-file
+
+# Wakeword Detector
+
+A Python package for training and running real-time wakeword detection using PyTorch and TensorFlow, with GPU acceleration support.
+
+---
+
+## 🚀 Features
+
+- Real-time wakeword detection with microphone input
+- Torch-based inference with optional TensorFlow model support
+- CLI tools for recording audio and training models
+- Supports GPU acceleration (CUDA 12.4+)
+
+---
+
+## 🧱 Requirements
+
+- Python 3.8 – 3.12
+- Linux (recommended for PyAudio + GPU)
+- NVIDIA GPU with CUDA support (for training/inference speedup)
+
+---
+
+## 📦 Installation
+
+Make sure you are not mixing environments:
+
+python3 -m venv testenv
+source testenv/bin/activate
+
+```bash
+# Use TestPyPI if installing dev builds:
+pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple wakeword-detector
+
+⚡ Enabling GPU Acceleration
+If you want to use GPU-based training/inference (recommended):
+
+1. Install the CUDA 12.4 runtime:
+bash
+Copy
+Edit
+# Download keyring (Ubuntu 22.04 shown here)
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+
+# Install CUDA runtime (no full toolkit needed)
+sudo apt-get install cuda-runtime-12-4
+2. Set CUDA path (if needed)
+bash
+Copy
+Edit
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+You can add this line to your ~/.bashrc or ~/.zshrc for persistence.
+
+3. Verify PyTorch sees your GPU:
+bash
+Copy
+Edit
+python -c "import torch; print(torch.cuda.is_available())"
+```
+
+## 📮 Feedback & Issues
+
+Submit here, but please note that this package is still under development, when version reaches 0.1.0 version is stable enough for prerelease. ETA: Early April 2025
+https://github.com/larawhybrow/wakeword-detector/issues
