@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm_inference"
+version = "0.1.5"
+description = "Vision language models for robotics"
+authors = [
+    { name = "Edison Bejarano", email = "edison.bejarano@upc.edu" }
+]
+license = { text = "MIT" }
+dependencies = []
+
+
+[tool.setuptools]
+packages = ["vlm_navigation"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+# Esto incluye los .txt dentro del paquete al instalarlo
+"vlm_navigation.prompt_manager" = ["*.txt"]
