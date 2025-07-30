@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: hmfsv2
+Version: 1.2.4.6
+Summary: Distributed filesystem for Hamuna AI
+Home-page: https://www.hamuna.club
+Author: O.Push
+Author-email: opush.developer@outlook.com
+License: MIT
+Description-Content-Type: text/plain
+Requires-Dist: minio
+Requires-Dist: redis==4.3.4
+Requires-Dist: paho-mqtt
+Requires-Dist: gnsq
+Requires-Dist: ansq
+Requires-Dist: qiniu
+Requires-Dist: boto
+Requires-Dist: diskcache
+Requires-Dist: httpx
+Requires-Dist: aiofile
+Requires-Dist: aiohttp
+Requires-Dist: aiohttp_retry
+Requires-Dist: aiobotocore
+Requires-Dist: nos-python3-sdk
+Requires-Dist: miniopy_async
+Requires-Dist: aiodecorators
+Requires-Dist: wget
+
+Distributed filesystem for Hamuna AI with multiple third party middleware transfer points
