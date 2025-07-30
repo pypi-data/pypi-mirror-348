@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "dinero"
+version = "0.4.0"
+description = "Dinero is a library for working with monetary values in Python."
+license = "MIT"
+authors = ["Carlos Montecinos Geisse <carlos@pythoncheatsheet.org>"]
+readme = "README.md"
+repository = "https://github.com/wilfredinni/dinero"
+keywords = ["python3", "money", "decimals", "calculations", "currency"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typing-extensions = "^4.12.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+mypy = "^1.13.0"
+ipykernel = "^6.29.5"
+pandas = "^2.2.3"
+coverage = "^7.6.4"
+pytest-cov = "^6.0.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocstrings = {extras = ["python"], version = "^0.26.2"}
+mkdocs-material = "^9.5.43"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
