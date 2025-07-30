@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: nostr-agent-tools
+Version: 0.5.0
+Summary: Model Context Protocol (MCP) communication through NOSTR.
+Project-URL: Homepage, https://github.com/ehallmark/nostr-agent-tools
+Project-URL: Issues, https://github.com/ehallmark/nostr-agent-tools/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: bolt11>=2.1.1
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: pycryptodome==3.10.1
+Requires-Dist: pynostr[websocket-client]>=0.6.2
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: secp256k1>=0.14.0
+Dynamic: license-file
+
+# nostr-agent-tools
