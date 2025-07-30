@@ -1,0 +1,38 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=61.0",
+  "wheel",
+]
+
+[project]
+name = "api-analytics"
+version = "1.2.7"
+description = "Monitoring and analytics for Python API frameworks."
+readme = "README.md"
+authors = [{name = "Tom Draper", email = "tomjdraper1@gmail.com"}]
+license = {file = "LICENSE"}
+requires-python = ">=3.6"
+keywords = ["analytics", "api", "dashboard", "django", "fastapi", "flask", "tornado", "middleware"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+]
+dependencies = ["requests"]
+
+[project.optional-dependencies]
+build = ["build", "twine"]
+dev = ["pytest"]
+django = ["Django"]
+fastapi = ["fastapi"]
+flask = ["Flask"]
+tornado = ["tornado"]
+
+[project.urls]
+repository = "https://github.com/tom-draper/api-analytics"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = "."
+python_files = "test*.py"
