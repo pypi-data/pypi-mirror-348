@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "portfolio-opt"
+version = "0.1.0"
+description = ""
+authors = ["ohmji <53232225+ohmji@users.noreply.github.com>"]
+readme = "README.md"
+packages = [
+  { include = "portfolio_opt", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+vectorbt = "^0.27.3"
+numpy = "^2.2.5"
+pandas = "^2.2.3"
+matplotlib = "^3.10.3"
+scipy = "^1.15.3"
+yfinance = "^0.2.61"
+cvxpy = "^1.6.5"
+mplfinance = "^0.12.10b0"
+mkdocs-material = "^9.6.14"
+pymdown-extensions = "^10.15"
+mkdocs-mermaid2-plugin = "^1.2.1"
+
+
+[tool.poetry.scripts]
+portfolio-opt = "portfolio_opt.main:main"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
