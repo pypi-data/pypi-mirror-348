@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42"]
+
+[project]
+name = "sputchedtools"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Sputchik", email = "sputchik@gmail.com"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Repository = "https://github.com/Sputchik/sputchedtools"
+Issues = "https://github.com/Sputchik/sputchedtools/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "sputchedtools.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --capture=no --tb=short"
+pythonpath = ["src"]
