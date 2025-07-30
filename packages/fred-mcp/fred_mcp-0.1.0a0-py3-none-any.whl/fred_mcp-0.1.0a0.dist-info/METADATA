@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: fred-mcp
+Version: 0.1.0a0
+Summary:  FRED Python MCP server with fred-py-api.
+Author-email: Zachary Spar <zachspar@gmail.com>
+Project-URL: Homepage, https://github.com/zachspar/fred-mcp
+Project-URL: Bug Tracker, https://github.com/zachspar/fred-mcp/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Programming Language :: Python :: 3.15
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastmcp~=2.3.4
+Requires-Dist: fred-py-api~=1.2.0
+Dynamic: license-file
+
+# fred-mcp
+FRED Python MCP server with fred-py-api
+
+## Installation
+```bash
+pip install fred-mcp
+```
+
+## Run Server
+### Command Line
+```bash
+fred-mcp
+```
+
+### Run with Docker
+```bash
+docker run -d -p 8000:8000 -e FRED_API_KEY=your_api_key --name fred-mcp-server ghcr.io/zachspar/fred-mcp/fred-mcp-server:latest
+```
