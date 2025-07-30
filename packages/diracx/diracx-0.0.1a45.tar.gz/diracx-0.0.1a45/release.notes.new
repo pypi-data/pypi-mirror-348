@@ -1,0 +1,55 @@
+27c5422 build(deps): bump the actions group with 2 updates
+ef04d27 fix: Fixed verify_token error
+e2e4552 [pre-commit.ci] pre-commit autoupdate
+63daa8d feat: expose Content-Range response header for diracx-web running locally
+d530011 Prevent trying to generate the client from non-editable installs
+f44bb7a Add machinery for being able to freeze time
+cd99e1e Use non-editable installs for CI and show annotations in GHA
+1ff45f0 Add cleanup method for S3-backed sandboxes
+25d3375 Add machinery for being able to freeze time
+1e280f6 Add workaround for https://github.com/fastapi/typer/discussions/1215
+8c33fac Unify gubbins tests into diracx tests
+28ba2e2 Unify running the pytest-integration CI for diracx and extensions
+79f22f5 Adapt CI to use pixi
+0c75f29 Move to using pixi for environment management
+8b036d4 feat: create doc navigation
+d78d07d refactor: Refactored the config cli
+e8554f7 ongoing
+fce777c Move client generation to pixi
+51cbc2e Add gubbins-api
+aa40403 Add dummy tests for *-logic
+5cfaf9c Fix missing dependencies
+3f7138b feat: make AuthSettings compatible with single key
+98af69f feat: adapt clients
+eff96b6 feat: introduce jwks
+a1d08ed regenerate client
+b50c1f1 finish doc spliting
+120b0ad Split developer documentation
+ecdaf86 Use mkdocs for documentation
+2332ee5 fix: removed unnecessary empty comments
+818e5ef Add README to gubbins
+6eb03dc Switch to hatchling
+b51b02b fix: add sleep before heartbeat to avoid unique constraint
+371f9bc fix: remove breakpoint
+294b95f feat: heartbeat job commands test
+65083da fix: regenerated client
+cad67ed fix: ignore spell-checking for fastapi Dependant
+a9bb18a fix: spelling in deployment.yml
+1d1a73a fix: spelling
+e8d2b73 feat: modify relative paths in --skip
+7ed568d feat: add the -w option to correct in place where possible
+327f281 feat: skip certain (i.e. generated) files and tests
+11e9561 feat: add spellchecker (codespell) to pre-commit
+01ba3cc [pre-commit.ci] pre-commit autoupdate
+c1185a6 [pre-commit.ci] auto fixes from pre-commit.com hooks
+7de6173 [pre-commit.ci] auto fixes from pre-commit.com hooks
+48941b6 feat: add mdformat
+f0055a4 feat: add --show-fixes to ruff args
+c5dec3f feat: use black-pre-commit-mirror
+990f9b1 feat: group updates (GH212)
+61904ac feat: modify upload-artifact name to be a variable
+a03a91f feat: add concurency
+e437da5 feat: address pyproject.toml suggestions from repo review
+a95de01 [pre-commit.ci] pre-commit autoupdate
+67db5b2 fix: Fixed current errors
+01b5193 updated coding conventions to shun naive datetimes
