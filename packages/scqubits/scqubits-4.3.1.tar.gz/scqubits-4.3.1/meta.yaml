@@ -1,0 +1,76 @@
+{% set name = "scqubits" %}
+{% set version = "4.3.1" %}
+{% set python_min = "3.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  # url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  # sha256: ac6e86777299411c1b8746c744a37f96647093b344fede137d2161d2886ae0de
+  path: .
+
+build:
+  number: 1
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python {{ python_min }}
+    - setuptools
+    - setuptools-scm
+    - pip
+    - wheel
+  run:
+    - python >={{ python_min }}
+    - cycler
+    - dill
+    - pathos >=0.3.0
+    - matplotlib-base >=3.5.1
+    - numpy >=1.14.2
+    - qutip >=4.3.1
+    - scipy >=1.5
+    - sympy
+    - tqdm
+    - typing_extensions
+  # Optional dependencies
+    - ipywidgets >=7.5
+    - ipyvuetify
+    - matplotlib-label-lines >=0.3.6
+    - h5py >=2.10
+
+test:
+  imports:
+    - scqubits
+  requires:
+    - pytest
+    - pip
+    - python {{ python_min }}
+  commands:
+    - pytest --pyargs scqubits
+    - pip check
+
+about:
+  home: https://github.com/scqubits/scqubits
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Superconducting qubits in Python
+
+
+  description: |
+    scqubits is an open-source Python library for simulating superconducting qubits. It is meant to give the user a
+    convenient way to obtain energy spectra of common superconducting qubits, plot energy levels as a function of
+    external parameters, calculate matrix elements etc. The library further provides an interface to QuTiP, making it
+    easy to work with composite Hilbert spaces consisting of coupled superconducting qubits and harmonic modes.
+    Internally, numerics within scqubits is carried out with the help of Numpy and Scipy; plotting capabilities rely
+    on Matplotlib.
+  doc_url: https://scqubits.readthedocs.io/
+  dev_url: https://github.com/scqubits/scqubits
+
+extra:
+  recipe-maintainers:
+    - jkochNU
+    - petergthatsme
