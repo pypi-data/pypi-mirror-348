@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packedtrie"
+version = "0.1.0"
+description = "Flat-packed memory-efficient prefix trie"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "VArgenti", email="viktor.silwer@gmail.com" }]
+dependencies = []
+
+[tool.setuptools]
+py-modules = ["packedtrie"]
+
+[project.urls]
+Homepage = "https://github.com/VArgenti/PackedTrie"
