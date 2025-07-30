@@ -1,0 +1,74 @@
+// src/components/Sidebar.tsx
+import React, { useState } from "react";
+import SidebarHeader from "./SidebarHeader";
+// import ButtonGroup from "./ButtonGroup";
+// import SavedSearchList from "./SavedSearchList";
+
+interface SidebarProps {
+  title: string;
+  apiUrl: string;
+}
+
+export default function Sidebar({ title, apiUrl }: SidebarProps) {
+  const [activeTab, setActiveTab] = useState<'filter' | 'settings'>('filter');
+
+  return (
+    <div style={{
+      width: 288,
+      height: "100vh",
+      minHeight: "100vh",
+      background: "#161616",
+      color: "#FFFFFF",
+      padding: "40px 24px 0 24px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      flexShrink: 0,
+      boxSizing: "border-box",
+      position: "fixed",
+      left: 0,
+      top: 0,
+      bottom: 0,
+      zIndex: 100,
+    }}>
+      <SidebarHeader title={title} />
+      {/* <div style={{ marginTop: 20, width: "100%", display: "flex", justifyContent: "center" }}>
+        <ButtonGroup activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
+      <div
+        style={{
+          background: 'rgba(34,34,34,0.7)',
+          borderRadius: 8,
+          padding: '16px 0',
+          width: '100%',
+          marginTop: 50,
+          flex: 1,
+          overflow: "auto",
+          marginBottom: 0,
+          paddingBottom: 24
+        }}
+      >
+        {activeTab === 'filter' ? (
+          <>
+            <SavedSearchList />
+          </>
+        ) : (
+          <div
+            style={{
+              color: '#aaa',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 120,
+              width: '100%',
+              fontSize: 16,
+              fontWeight: 500,
+            }}
+          >
+            此功能還在開發中
+          </div>
+        )}
+      </div> */}
+    </div>
+  );
+}
