@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Startic - {{startic: version}}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: "Segoe UI", sans-serif;
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        width: 100%;
+        max-width: 400px;
+      }
+      .card {
+        border: 1px solid #2de865;
+        background-color: #1e1e1e;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      }
+      @media (max-width: 480px) {
+        .card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">((...))</div>
+    </div>
+  </body>
+</html>
