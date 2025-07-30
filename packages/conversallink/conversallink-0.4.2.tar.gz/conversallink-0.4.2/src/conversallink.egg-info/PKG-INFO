@@ -1,0 +1,165 @@
+Metadata-Version: 2.4
+Name: conversallink
+Version: 0.4.2
+Summary: Lightweight CLI for Recording & Transcribing with Whisper Accuracy
+Author: jojihatzz
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: sounddevice
+Requires-Dist: soundfile
+Requires-Dist: faster-whisper
+Requires-Dist: rich
+Requires-Dist: pydub
+Dynamic: requires-python
+
+![cover](https://raw.githubusercontent.com/gchatzigianniss/ConversalLink/refs/heads/main/assets/cover.png?token=GHSAT0AAAAAADC4YPPQ3T6BJL2TZVX4YGEO2BHYDLA)
+
+
+# ConversalLink
+
+**Conversation Recorder & Transcriber**
+
+
+
+---
+
+## 🎯 Features
+
+* 🎙️ Record audio in 16kHz mono WAV format
+* ✍️ Take timestamped notes while recording
+* 📂 Use existing audio files (WAV, MP3, FLAC, OGG…)
+* 🧠 Transcribe using **Faster-Whisper** (select model: tiny → large)
+* 🔗 Auto-align notes with transcript segments
+* 📤 Export as:
+  - Markdown
+  - JSON
+  - Plain text
+  - Beautiful HTML (with dark mode, audio player, jump-to-note)
+
+---
+
+## 📦 Installation
+
+### From PyPI (Recommended)
+
+```bash
+pip install conversallink
+```
+
+### From Source
+
+- Clone the repository
+```bash
+git clone https://github.com/gchatzigianniss/ConversalLink
+```
+
+- Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+- Run the script
+```bash
+python conversallink.py --file conversation.wav --notes conversation_notes.json
+```
+
+---
+
+## 🚀 Quick Usage Examples
+
+### 1. Record + Take Notes
+
+```bash
+# Run as a command-line tool
+conversallink --record conversation.wav --model small --out markdown
+
+# Or using Python module syntax
+python -m conversallink --record conversation.wav --model small --out markdown
+```
+
+### 2. Transcribe an Existing File + Merge Notes
+
+```bash
+python conversallink.py --file conversation.wav --notes conversation_notes.json
+```
+
+### 3. Transcribe Only
+
+```bash
+python conversallink.py --file podcast.mp3 --model medium --out html
+```
+
+
+## 🤖 Transcription Models
+
+ConversalLink uses Faster-Whisper models for transcription. You can select the model size based on your needs for accuracy vs. speed and resource usage.
+
+| Model Size | Parameters | Accuracy | Speed | VRAM Usage | Disk Space | Use Case |
+|------------|------------|----------|------|------------|------------|----------|
+| `tiny`     | 39M        | Low      | Very Fast | ~1GB      | ~80MB     | Quick drafts, low-resource environments |
+| `base`     | 74M        | Basic    | Fast | ~1GB      | ~150MB    | Simple recordings, clear speech |
+| `small`    | 244M       | Good     | Medium | ~1GB      | ~500MB    | General purpose, good balance |
+| `medium`   | 769M       | Very Good | Medium-Slow | ~2GB      | ~1.5GB    | Professional transcripts |
+| `large-v2` | 1550M      | Excellent | Slow | ~3GB      | ~3GB      | Highest accuracy needs |
+| `large-v3` | 1550M      | Best     | Slow | ~3GB      | ~3GB      | Latest model with best results |
+
+To select a model, use the `--model` parameter:
+
+```bash
+conversallink --file recording.wav --model medium
+```
+
+> **Note**: Larger models provide better accuracy but require more computational resources and run slower. The `small` model offers a good balance for most use cases.
+
+---
+
+
+---
+
+## 📦 Dependencies
+
+Install everything with:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Core:**
+- `sounddevice`
+- `soundfile`
+- `faster-whisper`
+- `rich`
+
+**Optional (for non-WAV input):**
+- `pydub`
+- `ffmpeg` (must be available in your system PATH)
+
+---
+
+
+## ✅ Output Files
+
+```
+conversation_transcript.md     # 📝 Markdown
+conversation_transcript.json   # 🗄️ JSON (full data)
+conversation_transcript.html   # 🌐 Interactive HTML player
+conversation_transcript.txt    # 📄 Plain text
+conversation_notes.json        # 🧷 Timestamped notes
+```
+
+---
+
+
+## 📄 License
+
+This project is open source under the [MIT License](https://github.com/gchatzigianniss/ConversalLink/blob/main/LICENSE).
+
+---
+
+## 👨‍💻 Author
+
+**gchatzigianniss**
