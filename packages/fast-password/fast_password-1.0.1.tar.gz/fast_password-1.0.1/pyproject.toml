@@ -1,0 +1,18 @@
+[project]
+name = "fast-password"
+version = "1.0.1"
+description = "Generate secure password fast"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = ["click>=8.2.0"]
+
+[project.scripts]
+fp = "fast_password.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = ["pytest>=8.3.5"]
