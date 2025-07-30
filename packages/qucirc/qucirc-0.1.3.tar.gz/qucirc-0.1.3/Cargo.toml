@@ -1,0 +1,60 @@
+[package]
+name = "qucirc"
+version = "0.1.3"
+edition = "2024"
+authors = ["YuantianDing <work.yt.ding@gmail.com>"]
+license = "MIT"
+description = "A lightweight and extensible quantum circuit representation for Python and Rust."
+homepage = "https://github.com/YuantianDing/qucirc"
+repository = "https://github.com/YuantianDing/qucirc"
+readme = "README.md"
+keywords = ["quantum", "circuit", "visualization", "python", "dyn"]
+include = ["/src", "/stub_gen.rs", "/Cargo.toml", "/Cargo.lock"]
+
+[lib]
+name = "qucirc"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "stub_gen"
+doc = false
+path = "stub_gen.rs"
+
+[features]
+default = []
+python_api = ["dep:pyo3", "dep:pyo3-stub-gen"]
+typst = [
+    "dep:typst-as-lib",
+    "dep:typst-svg",
+    "typst-as-lib/packages",
+    "typst-as-lib/ureq",
+]
+
+[dependencies]
+by_address = "1.2.1"
+dyn-clone = "1.0.19"
+dyn-eq = "0.1.3"
+dyn-hash = "0.2.2"
+petgraph = "0.8.1"
+thiserror = "2.0.12"
+pyo3 = { version = "0.23.5", optional = true, features = ["either"] }
+typst-as-lib = { version = "0.14.3", optional = true, features = [
+    "packages",
+    "ureq",
+] }
+derive_more = { version = "2.0.1", features = [
+    "debug",
+    "deref",
+    "deref_mut",
+    "display",
+    "index",
+    "index_mut",
+] }
+num-rational = "0.4.2"
+typst-svg = { version = "0.13.1", optional = true }
+typst-library = "0.13.1"
+downcast-rs = "2.0.1"
+lazy_static = "1.5.0"
+ureq = "3.0.11"
+pyo3-stub-gen = { version = "0.8.2", optional = true }
+either = "1.15.0"
