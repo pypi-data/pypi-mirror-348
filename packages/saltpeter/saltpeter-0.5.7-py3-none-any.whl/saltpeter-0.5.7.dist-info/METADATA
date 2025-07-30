@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: saltpeter
+Version: 0.5.7
+Summary: Distributed cron based on salt
+Home-page: http://github.com/syscollective/saltpeter
+Author: Marin Vintila
+Author-email: marin.vintila@syscollective.com
+License: MIT
+Requires-Dist: salt
+Requires-Dist: crontab
+Requires-Dist: pyyaml
+Requires-Dist: tornado
+Requires-Dist: elasticsearch
+Requires-Dist: opensearch-py
+
+Distributed cron based on salt
