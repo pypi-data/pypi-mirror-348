@@ -1,0 +1,15 @@
+## 0.4.0 (2025-05-19)
+
+### Feat
+
+- **Add-github-actions-for-linting-and-testing**: writing actions for automated linting and testing
+
+### Fix
+
+- rename action file
+
+## 0.3.0 (2025-05-19)
+
+### Feat
+
+- **Added-commitizen-for-automated-versioning**: added the necessary dependencies
