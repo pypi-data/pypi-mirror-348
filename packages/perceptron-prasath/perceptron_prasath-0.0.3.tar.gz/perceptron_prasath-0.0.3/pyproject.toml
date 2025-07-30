@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "perceptron-prasath"
+version = "0.0.3"
+authors = [
+  { name = "prasath", email = "prasathks20@gmail.com" },
+]
+description = "A small package for perceptron"
+readme = "README.md"
+requires-python = ">=3.6"
+license = { text = "MIT" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "joblib"
+]
+
+[project.urls]
+Homepage = "https://github.com/prasath/perceptron_pkg"
+Issues = "https://github.com/prasath/perceptron_pkg/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/perceptron_pkg"]
