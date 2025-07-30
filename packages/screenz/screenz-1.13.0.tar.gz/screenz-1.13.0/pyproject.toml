@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "screenz"
+version = "1.13.0"
+description = "ScreenZ"
+license = "MIT"
+authors = ["deadmaster <deadmaster@noreply.codeberg.org>"]
+readme = "README.md"
+repository = "https://codeberg.org/deadmaster/screenz"
+classifiers = ["Topic :: Multimedia :: Video"]
+packages = [{ include = "scrz" }]
+exclude = ["scrz/binary/.gitignore", "scrz/**/*.sh", "scrz/icon"]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+Pillow = "^11.2.1"
+colorama = {version = "^0.4.6", platform = "win32"}
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.15.0"
+ruff = "^0.11.10"
+pyinstaller = {version = "^6.13.0", platform = "win32", python = "<3.14"}
+types-pyinstaller = {version = "^6.13.0", platform = "win32", python = "<3.14"}
+
+[tool.poetry.scripts]
+screenz = "scrz.__main__:main"
+
+[tool.ruff]
+include = ["scrz/**/*.py", "spec/**/*.py", "spec/**/*.spec"]
+target-version = "py313"
+line-length = 100
+indent-width = 4
+
+[tool.ruff.lint]
+select = ["F", "I", "UP", "G"]
+ignore = ["UP006", "UP007", "UP015", "UP032", "UP038", "UP040"]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
+skip-magic-trailing-comma = true
+
+[tool.mypy]
+python_version = "3.13"
+show_error_codes = true
+show_absolute_path = true
+files = ["scrz", "spec", "spec/**/*.spec"]
+strict = true
+
+[[tool.mypy.overrides]]
+module = "PyInstaller.*"
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
