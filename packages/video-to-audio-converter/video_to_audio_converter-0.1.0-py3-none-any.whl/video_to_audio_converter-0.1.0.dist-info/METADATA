@@ -1,0 +1,191 @@
+Metadata-Version: 2.3
+Name: video-to-audio-converter
+Version: 0.1.0
+Summary: 
+Author: Your Name
+Author-email: you@example.com
+Requires-Python: >=3.9
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: decorator (>=4.4.2,<5.0.0)
+Requires-Dist: imageio-ffmpeg (>=0.6.0,<0.7.0)
+Requires-Dist: moviepy (==1.0.3)
+Requires-Dist: numpy (>=1.24.0,<2.0.0)
+Description-Content-Type: text/markdown
+
+
+# Video to Audio Converter / 视频转音频转换器
+
+![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+A lightweight Python tool for extracting audio from video files with format conversion support.  
+轻量级Python工具，用于从视频文件中提取音频并支持格式转换。
+
+## Features / 功能特性
+
+- **Multi-format Support** / **多格式支持**: Convert to WAV, MP3, OGG, AAC, M4A  
+  支持转换为WAV、MP3、OGG、AAC、M4A格式
+- **Customizable Output** / **可定制输出**: Control output path, format, codec and bitrate  
+  可控制输出路径、格式、编码器和比特率
+- **Progress Display** / **进度显示**: Visual conversion progress with optional verbosity  
+  可选的详细进度显示
+- **Preserves Quality** / **保持质量**: Maintains original audio quality during conversion  
+  转换过程中保持原始音频质量
+- **Easy Integration** / **易于集成**: Simple API for Python applications  
+  提供简单API便于集成到Python应用中
+
+## Installation / 安装
+
+### Requirements / 先决条件
+- Python 3.6 or higher / Python 3.6及以上版本
+- FFmpeg (will be automatically installed with MoviePy)  
+  FFmpeg (将随MoviePy自动安装)
+
+### Install Package / 安装包
+
+```bash
+pip install video-to-audio-converter
+```
+
+### Additional Dependencies / 额外依赖
+For MP3 support, you may need to install LAME MP3 encoder:  
+如需MP3支持，可能需要安装LAME MP3编码器:
+
+**Linux:**
+```bash
+sudo apt-get install lame
+```
+
+**MacOS:**
+```bash
+brew install lame
+```
+
+**Windows:**  
+Download from [lame.buanzo.org](https://lame.buanzo.org/)
+
+## Usage / 使用说明
+
+### Python API / Python接口
+
+#### Basic Conversion / 基本转换
+```python
+from video_to_audio import convert_video_to_audio
+
+# Convert to default WAV format / 转换为默认WAV格式
+audio_path = convert_video_to_audio("input.mp4")
+```
+
+#### Advanced Options / 高级选项
+```python
+audio_path = convert_video_to_audio(
+    "input.mp4",
+    output_audio_path="custom_output.mp3",  # Custom path / 自定义路径
+    output_format="mp3",                   # Output format / 输出格式
+    codec="libmp3lame",                   # Audio codec / 音频编码器
+    bitrate="320k",                       # Bitrate / 比特率
+    verbose=True                          # Show progress / 显示进度
+)
+```
+
+### Command Line Interface / 命令行界面
+
+```bash
+video2audio [INPUT_FILE] [OPTIONS]
+```
+
+#### Options / 参数选项
+| Option / 参数 | Description / 描述 |
+|--------------|-------------------|
+| `-o`, `--output` | Output file path / 输出文件路径 |
+| `-f`, `--format` | Output format (wav, mp3, etc.) / 输出格式 |
+| `-c`, `--codec`  | Audio codec / 音频编码器 |
+| `-b`, `--bitrate`| Audio bitrate / 音频比特率 |
+| `-q`, `--quiet`  | Disable progress output / 禁用进度输出 |
+| `-h`, `--help`   | Show help message / 显示帮助信息 |
+
+#### Example / 示例
+```bash
+video2audio input.mp4 -o output.mp3 -f mp3 -b 192k
+```
+
+## Supported Formats / 支持格式
+
+| Format | Description | Notes |
+|--------|-------------|-------|
+| WAV | Uncompressed audio | 无损音频 |
+| MP3 | MPEG Audio Layer III | 需要LAME编码器 |
+| OGG | Ogg Vorbis format | 开源格式 |
+| AAC | Advanced Audio Coding | 高质量有损压缩 |
+| M4A | MPEG-4 Audio | Apple常用格式 |
+
+## Development / 开发
+
+### Running Tests / 运行测试
+```bash
+python -m unittest discover tests
+```
+
+### Building from Source / 从源码构建
+```bash
+git clone https://github.com/yourrepo/video-to-audio-converter.git
+cd video-to-audio-converter
+pip install -e .
+```
+
+## FAQ / 常见问题
+
+**Q: Why is MP3 conversion not working?**  
+**问: 为什么MP3转换不起作用?**  
+A: Ensure LAME MP3 encoder is installed on your system.  
+答: 请确保系统已安装LAME MP3编码器。
+
+**Q: How to improve output quality?**  
+**问: 如何提高输出质量?**  
+A: Use higher bitrate (e.g., 320k) and appropriate codec.  
+答: 使用更高比特率(如320k)和合适的编码器。
+
+**Q: Can I convert multiple files at once?**  
+**问: 可以批量转换多个文件吗?**  
+A: Currently only single file conversion is supported.  
+答: 当前仅支持单个文件转换。
+
+## Contributing / 贡献指南
+
+We welcome contributions! Please follow these steps:  
+欢迎贡献！请按以下步骤操作:
+
+1. Fork the repository / 复刻仓库
+2. Create your feature branch / 创建特性分支
+3. Commit your changes / 提交更改
+4. Push to the branch / 推送到分支
+5. Create a Pull Request / 创建拉取请求
+
+## License / 许可证
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.  
+本项目采用MIT许可证 - 详见[LICENSE](LICENSE)文件。
+
+## Contact / 联系方式
+
+For questions or suggestions, please contact:  
+如有问题或建议，请联系:
+
+- Email: your.email@example.com
+- GitHub Issues: [github.com/yourrepo/issues](https://github.com/yourrepo/issues)
+```
+
+This README includes:
+1. Comprehensive bilingual documentation
+2. Installation instructions for all platforms
+3. Usage examples for both API and CLI
+4. Development and contribution guidelines
+5. FAQ section
+6. License and contact information
+
+The formatting uses clear markdown structure with proper headers and consistent bilingual presentation.
