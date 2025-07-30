@@ -1,0 +1,53 @@
+Metadata-Version: 2.4
+Name: wheke-auth
+Version: 0.0.1a3
+Summary: A Pod that adds auth to Wheke
+Project-URL: Documentation, https://github.com/humrochagf/wheke-auth#readme
+Project-URL: Issues, https://github.com/humrochagf/wheke-auth/issues
+Project-URL: Source, https://github.com/humrochagf/wheke-auth
+Author-email: Humberto Rocha <humrochagf@gmail.com>
+License-Expression: MIT
+License-File: LICENSE.txt
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.12
+Requires-Dist: aiotinydb
+Requires-Dist: bcrypt==4.0.1
+Requires-Dist: email-validator
+Requires-Dist: passlib[bcrypt]
+Requires-Dist: python-jose[cryptography]
+Requires-Dist: python-multipart
+Requires-Dist: wheke>=0.1.1
+Description-Content-Type: text/markdown
+
+<h1 align="center" style="font-size: 3rem">
+  wheke-auth
+</h1>
+
+<p align="center">
+  <em>A Pod that adds auth to Wheke</em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/humrochagf/wheke-auth/actions">
+    <img src="https://github.com/humrochagf/wheke-auth/workflows/Test%20Suite/badge.svg" alt="Test Suite">
+  </a>
+  <a href="https://pypi.org/project/wheke-auth">
+    <img src="https://img.shields.io/pypi/v/wheke-auth.svg" alt="PyPI - Version">
+  </a>
+  <a href="https://pypi.org/project/wheke-auth">
+    <img src="https://img.shields.io/pypi/pyversions/wheke-auth.svg" alt="PyPI - Python Version">
+  </a>
+</p>
+
+---
+
+## Installation
+
+```console
+pip install wheke-auth
+```
