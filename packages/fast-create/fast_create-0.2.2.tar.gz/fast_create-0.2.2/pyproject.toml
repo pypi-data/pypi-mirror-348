@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-create"  
+version = "0.2.2"  # Missing closing quote fixed
+description = "A CLI tool to quickly generate FastAPI project structures"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Joseph Chukwuma Christopher", email = "joechristophersc@email.com" }]
+requires-python = ">=3.7"
+dependencies = [
+    "fastapi[all]", "uvicorn", "alembic", "python-dotenv", "psycopg2-binary", 
+    "sqlmodel", "fastapi_mail", "pydantic", "python-jose[cryptography]", 
+    "oauth2", "passlib", "sqlalchemy"
+]
+
+[project.scripts]
+fast-create = "fast_create:main"
+
+[tool.setuptools.package-data]
+fast_create = ["temp/**", "temp/*.*", "temp/**/*.*"]

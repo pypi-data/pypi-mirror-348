@@ -1,0 +1,2 @@
+from securities.oauth2 import get_current_user_cookie as current_cookie_user
+from securities.oauth2 import  get_current_user_oauth as current_auth_bearer
