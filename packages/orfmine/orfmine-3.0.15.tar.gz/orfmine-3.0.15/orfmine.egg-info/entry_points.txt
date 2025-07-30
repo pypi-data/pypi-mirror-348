@@ -1,0 +1,14 @@
+[console_scripts]
+bam2reads = orfmine.orfribo.scripts.BAM2Reads:main
+concatenate = orfmine.orfribo.scripts.concatenate:main
+gff2prot = orfmine.orftrack.scripts.gff2prot:main
+orfdate = orfmine.orfdate.orfdate:main
+orfget = orfmine.orftrack.scripts.ORFget:main
+orfmine = orfmine.scripts:main
+orfold = orfmine.orfold.orfold:main
+orfplot = orfmine.orfold.scripts.orfplot:main
+orfribo = orfmine.orfribo.orfribo:main
+orfstats = orfmine.orfribo.scripts.ORFstats:main
+orftrack = orfmine.orftrack.orftrack:main
+report = orfmine.orfribo.scripts.report:main
+selected_length = orfmine.orfribo.scripts.selected_length:main
