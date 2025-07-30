@@ -1,0 +1,1 @@
+from d365_relations_cli.table_relationships import AdvancedTableRelationshipFinder
