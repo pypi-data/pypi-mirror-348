@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 OpenSynergy Indonesia
+     Copyright 2022 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="stock_valuation_layer_view_search" model="ir.ui.view">
+    <field name="name">stock.valuation.layer - search</field>
+    <field name="model">stock.valuation.layer</field>
+    <field name="inherit_id" ref="stock_account.view_inventory_valuation_search" />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//separator[1]" position="after">
+                <filter
+                        name="incoming_quant"
+                        string="Incoming"
+                        domain="[('quantity','&gt;',0.0)]"
+                    />
+                <filter
+                        name="incoming_quant"
+                        string="Outgoing"
+                        domain="[('quantity','&lt;',0.0)]"
+                    />
+                <filter
+                        name="adjustment_quant"
+                        string="Value Adjustment"
+                        domain="[('quantity','=',0.0),('value','!=',0.0)]"
+                    />
+                <separator />
+                <filter
+                        name="usage_diff"
+                        string="Usage Diff."
+                        domain="[('usage_quantity_diff','!=',0.0)]"
+                    />
+                <filter
+                        name="incoming_diff"
+                        string="Incoming Diff."
+                        domain="[('incoming_usage_quantity_diff','!=',0.0)]"
+                    />
+                <separator />
+                <filter
+                        name="dom_am_set"
+                        string="Journal Entry Exist"
+                        domain="[('account_move_id','!=',False)]"
+                    />
+                <filter
+                        name="dom_am_not_set"
+                        string="Journal Entry Not Exist"
+                        domain="[('account_move_id','=',False)]"
+                    />
+                <separator />
+                <filter
+                        name="dom_date_equal_sm"
+                        string="Date Equal to Stock Move"
+                        domain="[('datetime_is_equal','=',True)]"
+                    />
+                <filter
+                        name="dom_date_diff_sm"
+                        string="Date Different to Stock Move"
+                        domain="[('datetime_is_equal','=',False)]"
+                    />
+                <separator />
+                <filter
+                        name="dom_date_equal_am"
+                        string="Date Equal to Account Move"
+                        domain="[('date_is_equal','=',True)]"
+                    />
+                <filter
+                        name="dom_date_diff_am"
+                        string="Date Different to Account Move"
+                        domain="[('date_is_equal','=',False)]"
+                    />
+            </xpath>
+            <xpath expr="//group[1]" position="inside">
+                <filter
+                        name="grp_sm_date"
+                        string="Stock Move Date"
+                        context="{'group_by':'datetime_is_equal'}"
+                    />
+                <filter
+                        name="grp_am_date"
+                        string="Account Move Date"
+                        context="{'group_by':'date_is_equal'}"
+                    />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="stock_valuation_layer_view_tree" model="ir.ui.view">
+    <field name="name">stock.valuation.layer - tree</field>
+    <field name="model">stock.valuation.layer</field>
+    <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree" />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='create_date']" position="before">
+                <header>
+                    <button
+                            name="action_create_accounting_entry"
+                            type="object"
+                            string="Create Accounting Entry"
+                            class="oe_highlight"
+                            confirm="Create accounting entries. Are you sure?"
+                            groups="base.group_system"
+                        />
+                    <button
+                            name="action_delete_accounting_entry"
+                            type="object"
+                            string="Delete Accounting Entry"
+                            class="oe_highlight"
+                            confirm="Delete accounting entries. Are you sure?"
+                            groups="base.group_system"
+                        />
+                    <button
+                            name="action_sync_date_with_stock_move"
+                            type="object"
+                            string="Sync Date With Stock Move"
+                            class="oe_highlight"
+                            groups="base.group_system"
+                            confirm="Sync date with stock move. Are you sure?"
+                        />
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='quantity']" position="attributes">
+                <attribute name="sum">Total Quantity</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value']" position="after">
+                <field name="usage_quantity" sum="Total Usage Quantity" />
+                <field name="usage_value" sum="Total Usage Value" />
+                <field name="incoming_usage_quantity" sum="Incoming Usage Quantity" />
+                <field name="incoming_usage_value" sum="Incoming Usage Value" />
+            </xpath>
+
+        </data>
+    </field>
+</record>
+
+
+<record id="stock_valuation_layer_view_form" model="ir.ui.view">
+    <field name="name">stock.valuation.layer - form</field>
+    <field name="model">stock.valuation.layer</field>
+    <field name="inherit_id" ref="stock_account.stock_valuation_layer_form" />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">1</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button
+                            name="action_create_accounting_entry"
+                            type="object"
+                            string="Create Accounting Entry"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('account_move_id','!=',False)]}"
+                        />
+                    <button
+                            name="action_delete_accounting_entry"
+                            type="object"
+                            string="Delete Accounting Entry"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('account_move_id','=',False)]}"
+                        />
+                    <button
+                            name="action_sync_date_with_stock_move"
+                            type="object"
+                            string="Sync Date With Stock Move"
+                            class="oe_highlight"
+                            groups="base.group_system"
+                        />
+
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='stock_move_id']" position="before">
+                <separator string="Stock Move" colspan="2" />
+            </xpath>
+            <xpath expr="//field[@name='stock_move_id']" position="after">
+                <field name="stock_move_date" string="Date" />
+                <field name="datetime_is_equal" string="Date is equal?" />
+            </xpath>
+            <xpath expr="//field[@name='account_move_id']" position="after">
+                <field name="date_method" />
+                <field name="final_date" invisible="1" />
+                <field
+                        name="date"
+                        string="Date"
+                        attrs="{'invisible':[('date_method','!=','auto')]}"
+                    />
+                <field
+                        name="manual_date"
+                        string="Date"
+                        attrs="{'invisible':[('date_method','!=','manual')]}"
+                    />
+                <field name="date_is_equal" />
+                <field name="debit_account_id" />
+                <field name="credit_account_id" />
+                <field name="analytic_account_id" />
+                <field name="journal_id" />
+                <field name="account_move_id" />
+                <field name="account_move_date" />
+                <field name="debit_move_line_id" />
+                <field name="credit_move_line_id" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="usage" string="Usage">
+                    <group name="usage_1" colspan="4" col="2">
+                        <group name="usage_1_1" string="Usage" colspan="1" col="2">
+                            <field name="usage_quantity" string="Qty" />
+                            <field name="usage_value" string="Value" />
+                            <field name="usage_quantity_diff" string="Qty Diff" />
+                        </group>
+                        <group name="usage_1_2" string="Incoming" colspan="1" col="2">
+                            <field name="incoming_usage_quantity" string="Qty" />
+                            <field name="incoming_usage_value" string="Value" />
+                            <field
+                                    name="incoming_usage_quantity_diff"
+                                    string="Qty Diff"
+                                />
+                        </group>
+                    </group>
+                    <field name="usage_ids">
+                        <tree>
+                            <field name="dest_stock_valuation_layer_id" />
+                            <field name="quantity" />
+                            <field name="value" />
+                        </tree>
+                        <form>
+                            <group name="usage_form" colspan="4" col="2">
+                                <field name="dest_stock_valuation_layer_id" />
+                                <field name="quantity" />
+                                <field name="value" />
+                            </group>
+                        </form>
+                    </field>
+                    <field name="incoming_usage_ids">
+                        <tree>
+                            <field name="dest_stock_valuation_layer_id" />
+                            <field name="quantity" />
+                            <field name="value" />
+                        </tree>
+                        <form>
+                            <group name="usage_form" colspan="4" col="2">
+                                <field name="dest_stock_valuation_layer_id" />
+                                <field name="quantity" />
+                                <field name="value" />
+                            </group>
+                        </form>
+                    </field>
+
+                </page>
+            </xpath>
+        </data>
+    </field>
+</record>
+
+
+
+</odoo>
