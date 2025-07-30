@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: calculadora_test
+Version: 0.0.1
+Summary: Um pacote simples de calculadora em Python
+Home-page: 
+Author: Pablo
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-python
+Dynamic: summary
+
+# Calculadora
+
+## DescriÃ§Ã£o
+A biblioteca **calculadora** permite realizar operaÃ§Ãµes matemÃ¡ticas bÃ¡sicas, como soma, subtraÃ§Ã£o, multiplicaÃ§Ã£o e divisÃ£o, de forma simples e eficiente.
+
+## InstalaÃ§Ã£o
+Para instalar o pacote, utilize o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/):
+
+```bash
+pip install calculadora
+````
+
+# Uso
+Aqui estÃ¡ um exemplo de como utilizar a biblioteca:
+```
+from calculadora_test import soma, subtracao, multiplicacao, divisao
+
+# Exemplo de uso:
+resultado = soma(3, 4)
+print(resultado)  # SaÃ­da: 7
+```
+
+# Autor
+Pablo
+
+# LicenÃ§a
+MIT
