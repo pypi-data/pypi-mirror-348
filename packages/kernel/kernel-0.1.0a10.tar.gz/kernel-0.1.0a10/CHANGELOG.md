@@ -1,0 +1,95 @@
+# Changelog
+
+## 0.1.0-alpha.10 (2025-05-19)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Features
+
+* **api:** update via SDK Studio ([a382570](https://github.com/onkernel/kernel-python-sdk/commit/a382570e96f3bae625cb176e746038fcdf0e8e73))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([c897375](https://github.com/onkernel/kernel-python-sdk/commit/c8973750a1ae58f7c8eee588bbe874862dbbb46d))
+* **ci:** upload sdks to package manager ([03d0f7f](https://github.com/onkernel/kernel-python-sdk/commit/03d0f7f19be9614f5a81bd5c31117febd68ec5e9))
+* **internal:** codegen related update ([49143bd](https://github.com/onkernel/kernel-python-sdk/commit/49143bdcb6635ae79b1c4c5fddc9017d8d81b4d7))
+
+## 0.1.0-alpha.9 (2025-05-14)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Features
+
+* **api:** update via SDK Studio ([472443c](https://github.com/onkernel/kernel-python-sdk/commit/472443c0fc689a2a1e6e5177fc74ca78e556a0d6))
+
+## 0.1.0-alpha.8 (2025-05-12)
+
+Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
+
+### Features
+
+* **api:** update via SDK Studio ([68c2cc8](https://github.com/onkernel/kernel-python-sdk/commit/68c2cc821cf9c31f8e5e054ba69780cbba2449db))
+
+## 0.1.0-alpha.7 (2025-05-11)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Features
+
+* **api:** update via SDK Studio ([2810c5c](https://github.com/onkernel/kernel-python-sdk/commit/2810c5c0e0e0e89e03a00b27fb1d2ab355f3a8ff))
+
+## 0.1.0-alpha.6 (2025-05-11)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **api:** update via SDK Studio ([d2d465e](https://github.com/onkernel/kernel-python-sdk/commit/d2d465ee112484eb9acd1b5f8714bc5650f2b4de))
+
+## 0.1.0-alpha.5 (2025-05-10)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** update via SDK Studio ([8bceece](https://github.com/onkernel/kernel-python-sdk/commit/8bceece9fb86d9dbc0446abd1018788ff4fbda80))
+
+## 0.1.0-alpha.4 (2025-05-10)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** update via SDK Studio ([d93116e](https://github.com/onkernel/kernel-python-sdk/commit/d93116e633eb9503647acfbe3e9769f33fdd19ed))
+
+## 0.1.0-alpha.3 (2025-05-10)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([679b117](https://github.com/onkernel/kernel-python-sdk/commit/679b11723a5699be2b6b50ccce2b84a88d1e0a7b))
+* **tests:** skip broken binary tests for now ([69638c0](https://github.com/onkernel/kernel-python-sdk/commit/69638c0d0da19a74a91e182a209c3de06985e112))
+
+## 0.1.0-alpha.2 (2025-05-09)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/onkernel/kernel-python-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** update via SDK Studio ([fb257f7](https://github.com/onkernel/kernel-python-sdk/commit/fb257f70bd5bb606766adc0f27e96b7a8d537680))
+
+## 0.1.0-alpha.1 (2025-05-08)
+
+Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/onkernel/kernel-python-sdk/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
+
+### Features
+
+* **api:** update via SDK Studio ([e093d2c](https://github.com/onkernel/kernel-python-sdk/commit/e093d2cd1058d442533e4783184ae63ee7007230))
+
+
+### Chores
+
+* update SDK settings ([87f35dd](https://github.com/onkernel/kernel-python-sdk/commit/87f35dd263016821b8691906afea82ba45d68c99))
+* update SDK settings ([1553626](https://github.com/onkernel/kernel-python-sdk/commit/1553626491d7fcffa12ca52e9e9b0d468ab8151a))
