@@ -1,0 +1,72 @@
+# pre-commit
+- id: safety-guard
+  name: Safety guard phrase
+  description: Ensure no line in the changeset to be committed includes a safety phrase.
+  entry: safety-guard
+  language: python
+  files: .*
+  pass_filenames: false
+  stages:
+  - pre-commit
+  - pre-merge-commit
+  - manual
+- id: enforce-committing-to-issue
+  name: Enforce committing to issue
+  description: Enforces changes are only committed to issue branches.
+  entry: enforce-committing-to-issue
+  language: python
+  files: .*
+  pass_filenames: false
+  stages:
+  - pre-commit
+  - pre-merge-commit
+  - manual
+- id: enforce-merge-directions
+  name: Enforce merge directions
+  description: Enforces the correct directions when merging branches.
+  entry: enforce-merge-directions
+  language: python
+  files: .*
+  pass_filenames: false
+  stages:
+  - pre-commit
+  - pre-merge-commit
+  - manual
+# prepare-commit-msg
+- id: add-gl-issue-ref
+  name: Add GitLab issue reference
+  description: When in an issue branch, add a GitLab reference to it if none is provided in the commit message.
+  entry: add-gl-issue-ref
+  language: python
+  files: .*
+  stages:
+  - prepare-commit-msg
+  - manual
+- id: ellipsize-subject
+  name: Ellipsize commit message subject
+  description: When the subject of the commit message exceeds a given length, ellipsize it.
+  entry: ellipsize-subject
+  language: python
+  files: .*
+  stages:
+  - prepare-commit-msg
+  - manual
+# commit-msg
+- id: enforce-subject-length
+  name: Enforce subject length
+  description: Enforce the subject length to be between 4 and a given length.
+  entry: enforce-subject-length
+  language: python
+  files: .*
+  stages:
+  - commit-msg
+  - manual
+- id: enforce-gl-issue-ref
+  name: Enforce GitLab issue reference
+  description: Enforce the commit message contains a reference to a GitLab issue. If the active branch refers to an issue, that issue must be referenced in the commit message.
+  entry: enforce-gl-issue-ref
+  language: python
+  files: .*
+  stages:
+  - commit-msg
+  - manual

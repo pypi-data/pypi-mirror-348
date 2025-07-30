@@ -1,0 +1,8 @@
+[console_scripts]
+add-gl-issue-ref = hooks.prepare_commit_msg.prepare_commit_msg_tk:add_gl_issue_ref
+ellipsize-subject = hooks.prepare_commit_msg.prepare_commit_msg_tk:ellipsize_subject
+enforce-committing-to-issue = hooks.pre_commit.pre_commit_tk:enforce_committing_to_issue
+enforce-gl-issue-ref = hooks.commit_msg.commit_msg_tk:enforce_gl_issue_ref
+enforce-merge-directions = hooks.pre_commit.pre_commit_tk:enforce_merge_directions
+enforce-subject-length = hooks.commit_msg.commit_msg_tk:enforce_subject_length
+safety-guard = hooks.pre_commit.pre_commit_tk:safety_guard
