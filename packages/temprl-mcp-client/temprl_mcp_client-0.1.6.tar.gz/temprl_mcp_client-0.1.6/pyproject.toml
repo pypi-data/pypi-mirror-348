@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "temprl-mcp-client"
+version = "0.1.6"
+description = "A Python client for temporal reasoning and learning using Model Context Protocol (MCP) servers"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Temprl Labs Team"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "openai",
+    "mcp[cli]",
+    "python-dotenv",
+    "anthropic",
+    "ollama",
+    "jsonschema",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-mock",
+    "uv",
+]
+demo = [
+    "mcp-server-sqlite",
+]
+
+[project.scripts]
+temprl-mcp-client = "temprl_mcp_client.cli:main"
+temprl-setup-postgres = "temprl_mcp_client.setup_postgres:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
