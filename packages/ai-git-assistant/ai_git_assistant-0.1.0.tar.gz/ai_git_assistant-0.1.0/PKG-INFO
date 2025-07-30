@@ -1,0 +1,186 @@
+Metadata-Version: 2.4
+Name: ai-git-assistant
+Version: 0.1.0
+Summary: Asistente inteligente para atuomatizar tareas de Git y GitHub
+Home-page: https://github.com/LuisGH28/git_assitant
+Author: Luis Gonzalez
+Author-email: Luis Gonzalez <luisgnzhdz@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/LuisGH28/git_assitant
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: scikit-learn
+Requires-Dist: numpy
+Requires-Dist: joblib
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# 🤖 GitGPT - Intelligent Commit Assistant
+
+📄 This README is also available in: [Español](README.es.md)
+
+GitGPT is an intelligent tool that automatically suggests **commit messages**, and also provides a basic **pull request template**, combining heuristics, project structure, and a Machine Learning model. It's perfect for developers who want to keep their commits consistent and clear without wasting time.
+
+---
+
+## 🚀 Features
+
+- Detects changes in **staged**, **unstaged**, and **untracked** files.
+- Suggests commit messages based on:
+  - The diff content (`git diff`)
+  - The current branch name
+  - The file type (code, documentation, style, test, etc.)
+  - A **Machine Learning** model trained with common examples.
+- Supports multiple approaches for message suggestions:
+  - 🔬 ML Model
+  - ⚙️ Heuristic approach
+  - 🎯 Thematic approach
+  - 🔍 Descriptive approach
+- Option to create a new branch before committing.
+- Clean and easy-to-use CLI interface.
+
+---
+
+## 📦 Requirements
+
+- Python 3.7 or higher
+- Git installed and configured
+- Python dependencies (install via pip):
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+
+
+## 🛠 Installation
+
+Clone the repository and copy `git_gpt.py` into the project repository you're working on:
+
+```
+git clone https://github.com/yourusername/gitgpt.git
+cd gitgpt
+```
+
+Then run the assistant:
+
+```
+python3 git_gpt.py
+
+```
+
+---
+
+
+
+## 🧠 How It Works
+
+1. Detects modified files in the repository using `git status`.
+2. Classifies the files by type (documentation, code, tests, etc.).
+3. Extracts diffs (`git diff`) and relevant keywords.
+4. Generates several commit suggestions using different strategies.
+5. Allows you to select the most suitable message or write your own.
+6. Creates a `.md` file with a basic PR suggestion template.
+
+---
+
+💬 Example
+
+```
+$ ./gitgpt.py
+
+Do you want to create a new branch? (Y/y): n
+ℹ️ You will continue working on the current branch: fix/login-issue
+
+Adding files:
++ login.py
+Files added successfully.
+
+💡 Commit suggestion #1:
+
+fix: fixed issue in login.py
+
+Do you want to use this message? (Y/y), (N/n) for another option, or press enter to write your own: n
+
+💡 Commit suggestion #2:
+
+fix(login): authentication error corrected
+
+Do you want to use this message? (Y/y), (N/n) for another option, or press enter to write your own: y
+
+✅ Commit successfully created.
+
+```
+
+---
+
+
+
+## 🧪 Model Training
+
+The ML model is based on Naive Bayes with TF-IDF vectorization. You can retrain it manually if desired:
+
+```
+python3 -c "import gitgpt; gitgpt.train_model()"
+
+```
+
+This will generate the `gitgpt_model.pkl` file.
+
+> The model is automatically trained if it doesn't exist or is corrupted.
+>
+
+---
+
+
+
+## 📁 Project Structure
+
+```
+├── README.md
+├── README.es.md
+└── git_assistant
+    ├── git_gpt.py
+    ├── gitgpt_model.pkl
+    └── requirements.txt
+
+```
+
+---
+
+
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or a pull request with improvements, new strategies, or enhancements to the model.
+
+---
+
+
+
+## 📄 License
+
+This project is licensed under the MIT License. Use it, modify it, and contribute freely!
+
+---
+
+
+
+## 🧑‍💻 Author
+
+Created with ❤️ by [Luigi](https://github.com/LuisGH28)
+
+---
+
+
+
+## 🌟 Like this project?
+
+Give it a ⭐ on GitHub and share it with your team!
