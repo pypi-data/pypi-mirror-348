@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tl-emailtools"
+version = "1.1.1"
+authors = [{ name = "TongLeen", email = "Tong.Leen@outlook.com" }]
+
+dependencies = []
+requires-python = ">=3.12"
+
+description = "A email-tool package simplified sending email."
+keywords = ["email"]
+readme = "README_en.md"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/TongLeen/emailtools-python3"
+Repository = "https://github.com/TongLeen/emailtools-python3.git"
