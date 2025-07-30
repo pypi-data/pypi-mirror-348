@@ -1,0 +1,110 @@
+Metadata-Version: 2.1
+Name: groupdocs-assembly-net
+Version: 25.5.1
+Summary: GroupDocs.Assembly for Python via .NET solution for automating document creation with advanced data integration.
+Home-page: https://products.groupdocs.com/assembly
+Author: GroupDocs
+License: Other/Proprietary License
+Keywords: assembly,file,render,api,pdf,docx,xlsx,pptx,html,png,word,excel,powerpoint,visio,opendocument,photoshop
+Platform: win_amd64
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities
+Requires-Python: >=3.5,<3.14
+Description-Content-Type: text/markdown
+
+# File Assembly Python API
+
+[![banner](https://raw.githubusercontent.com/groupdocs/groupdocs.github.io/master/img/banners/groupdocs-assembly-net-banner.png)](https://downloads.groupdocs.com/assembly/net)
+
+[Product Page](https://products.groupdocs.com/assembly/python-net/) | [Docs](https://docs.groupdocs.com/assembly/python-net/) | [Demo](https://products.groupdocs.app/assembly/family) | [API Reference](https://reference.groupdocs.com/assembly/python-net/) | [Examples](https://github.com/groupdocs-assembly/GroupDocs.Assembly-for-Python-via-.NET) | [Blog](https://blog.groupdocs.com/category/assembly/) | [Releases](https://releases.groupdocs.com/assembly/python-net/) | [Free Support](https://forum.groupdocs.com/c/assembly) | [Temporary License](https://purchase.groupdocs.com/temporary-license/)
+
+An on-premise [API to generate documents of various formats](https://products.groupdocs.com/assembly/python-net/) based on user-defined templates as well as from other data sources, such as XML, OData, JSON, etc.
+
+## Document Assembly Processing Features
+
+- Support for [multiple data formats](https://docs.groupdocs.com/assembly/python-net/supported-document-formats/).
+- Perform [sequential data](https://docs.groupdocs.com/assembly/python-net/template-syntax-part-2-of-2/) operations.
+- Supports upper, lower, capital, first-cap formatting to template syntax strings.
+- Apply ordinal, cardinal, alphabetic, numeric formatting in template syntax.
+- Use custom variables in the template documents.
+- Support for text comments within template syntax tags.
+- Dynamically insert document content & hyperlinks in reports.
+- Apply attributes to the email message body.
+- Dynamically apply email attachments.
+- [Generate barcode](https://docs.groupdocs.com/assembly/python-net/working-with-barcode-image-generation/) in reports.
+- Dynamically set background color of HTML documents.
+- Supports formatting of numeric, text, image, date-time, chart elements in the template.
+- Apply conditional formatting on template text elements.
+- Linq-based template syntax.
+- Use explicit specifications or file extensions to change the format of the assembled files.
+- Supports the next field analog of Microsoft Word.
+- Update fields during word processing document assembly.
+- Support for applying formula during spreadsheet file assembly.
+- Automatically remove empty paragraphs.
+- Generate various report types, such as charts, lists, tables, etc.
+- Instead of exception throwing, support for inline template syntax errors in generated docs.
+- Load template documents from HTML with resources.
+- Save assembled documents to HTML with resources.
+
+
+## Read & Write Microsoft Office Formats
+
+**Microsoft Word:** DOC, DOT, DOCX, DOCM, DOTX, DOTM, RTF\
+**Microsoft Excel:** XLSX, XLSM, XLTX, XLTM, XLSB, XLS, XLT\
+**Microsoft PowerPoint:** PPTX, PPTM, PPSX, PPSM, POTX, POTM, PPT, PPS
+
+## Read & Write Other Formats
+
+**OpenOffice:** ODS, ODT, OTT, OTP, ODP, OXPS\
+**Email:** EML, MSG, EMLX\
+**Fixed Layout:** PDF, XPS\
+**Markup:** HTML, MHTML, XML, XAML\
+**Images:** TIFF, SVG\
+**eBook:** EPUB\
+**PostScript:** PS\
+**Printer Control:** PCL\
+**Markdown:** MD\
+**Text:** TXT
+
+Please visit the [Supported Document Formats](https://docs.groupdocs.com/assembly/python-net/supported-document-formats/) for details.
+
+## Platform Independence
+
+GroupDocs.Assembly for .Net can be used to build applications for Windows, Mac OS X x64 as well as Linux x64. Developers may also code in PHP, VBScript, Delphi & C++ programming languages while using GroupDocs.Assembly for .Net via COM Interop.
+
+## Get Started
+
+Ready to try GroupDocs.Assembly for Python via .NET?
+
+Fetch the package and install **GroupDocs.Assembly**. Run this command: `pip install groupdocs-assembly-net`
+
+If you already have **GroupDocs.Assembly** installed and want to get the latest version, 
+you have to run `pip install --upgrade groupdocs-assembly-net` instead. 
+
+Check out GroupDocs.Assembly for Python for .NET [documentation](http://docs.groupdocs.com/assembly/python-net/).  
+
+## Generate email report with common list
+
+```py
+import groupdocs.assembly as ga
+import constants
+
+def run():
+	assembler = ga.DocumentAssembler()
+    dataSource = ga.data.JsonDataSource(constants.customerJsonFile)
+    DataSourceInfo = ga.DataSourceInfo(dataSource, "customers")
+    array = [DataSourceInfo, ga.DataSourceInfo(["test@test.mail", "groupdocs@groupdocs.mail"], "recipients"), ga.DataSourceInfo("sender@sender.mail", "sender"), ga.DataSourceInfo("cc@example.com", "cc"), ga.DataSourceInfo("groupdocs", "subject")]
+    print(assembler.assemble_document(constants.input_common_list_msg, constants.output_common_list_msg, array))
+```
+
+
+[Product Page](https://products.groupdocs.com/assembly/python-net/) | [Docs](https://docs.groupdocs.com/assembly/python-net/) | [Demos](https://products.groupdocs.app/assembly/family) | [API Reference](https://references.groupdocs.com/assembly/) | [Blog](https://blog.groupdocs.com/category/assembly/) | [Search](https://search.groupdocs.com/) | [Free Support](https://forum.groupdocs.com/c/assembly) | [Temporary License](https://purchase.groupdocs.com/temporary-license)
+
