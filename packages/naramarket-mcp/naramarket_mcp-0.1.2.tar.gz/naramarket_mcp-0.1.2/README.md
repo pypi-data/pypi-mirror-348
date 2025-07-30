@@ -1,0 +1,88 @@
+# naramarket-mcp
+
+## Overview
+
+조달청의 조달데이터허브가 제공하는 API를 연동해 나라장터 입찰공고목록을 검색하는 MCP 서버입니다.
+
+### Tools
+
+1. `search_bids`
+    - 나라장터에서 입찰 공고를 검색합니다.
+    - Input:
+        - keyword: 검색할 키워드 (입찰공고명에 포함될 단어) [required]
+        - bid_type: 입찰 종류 (공사, 용역, 외자, 물품) [기본값: 물품]
+        - page: 페이지 번호 [기본값: 1]
+        - rows: 한 페이지 결과 수 [기본값: 10]
+        - start_date: 조회 시작일 (YYYYMMDD 형식) [optional]
+        - end_date: 조회 종료일 (YYYYMMDD 형식) [optional]
+
+2. `get_bid_details` 
+    - 특정 입찰 공고의 상세 정보를 조회합니다.
+    - Input:
+        - bid_notice_no: 입찰공고번호 [required]
+        - bid_notice_ord: 입찰공고차수 [기본값: 01]
+
+3. `search_by_organization` 
+    - 특정 기관이 등록한 입찰 공고를 검색합니다.
+    - Input:
+        - organization_name: 기관명 [required]
+        - bid_type: 입찰 종류 (공사, 용역, 외자, 물품) [기본값: 물품]
+        - is_demand_org: True면 수요기관, False면 공고기관으로 검색 [기본값: false]
+        - page: 페이지 번호 [기본값: 1]
+        - rows: 한 페이지 결과 수 [기본값: 10]
+
+4. `search_by_price_range` 
+    - 특정 가격 범위의 입찰 공고를 검색합니다.
+    - Input:
+        - min_price: 최소 추정가격 (원) [required]
+        - max_price: 최대 추정가격 (원) [required]
+        - bid_type: 입찰 종류 (공사, 용역, 외자, 물품) [기본값: 물품]
+        - page: 페이지 번호 [기본값: 1]
+        - rows: 한 페이지 결과 수 [기본값: 10]
+
+## Installation
+
+### Using uv (recommended)
+
+[`uv`](https://docs.astral.sh/uv/)를 사용하면 별도의 설치가 필요하지 않습니다.
+
+[`uvx`](https://docs.astral.sh/uv/guides/tools/)로 *naramarket-mcp*를 곧바로 사용합니다.
+
+
+## Configuration
+
+### Usage with Claude Desktop
+
+`claude_desktop_config.json`에 다음을 추가하세요.
+
+<details>
+<summary>Using uvx</summary>
+
+```json
+"mcpServers": {
+  "naramarket": {
+    "command": "uvx",
+    "args": [
+    "naramarket-mcp",
+    "--service-key",
+    "<YOUR_SERVICE_KEY>"
+    ]
+  }
+}
+```
+</details>
+
+
+
+## Debugging
+
+You can use the MCP inspector to debug the server. For uvx installations:
+
+```
+npx @modelcontextprotocol/inspector uvx naramarket-mcp --service-key YOUR_SERVICE_KEY
+```
+
+
+## LICENSE
+
+MIT

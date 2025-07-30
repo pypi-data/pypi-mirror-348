@@ -1,0 +1,21 @@
+[project]
+name = "naramarket-mcp"
+version = "0.1.2"
+description = "나라장터 입찰 공고 검색을 위한 MCP 서버"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.9.0",
+    "httpx>=0.28.1",
+    "python-dotenv>=1.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = ["pyright>=1.1.389", "pytest>=8.3.3", "ruff>=0.8.0"]
+
+[project.scripts]
+naramarket-mcp = "naramarket_mcp:main"
