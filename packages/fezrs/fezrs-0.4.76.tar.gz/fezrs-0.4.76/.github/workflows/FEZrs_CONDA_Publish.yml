@@ -1,0 +1,45 @@
+name: Conda Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-conda:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: "3.10"
+          miniforge-variant: Miniforge3  # use a valid variant
+
+      - name: Install conda-build and anaconda-client
+        run: |
+          conda install -y conda-build anaconda-client
+
+      - name: Extract version and sha256 from .bumpversion.cfg and PyPI
+        run: |
+          VERSION=$(python -c "from configparser import ConfigParser; cfg=ConfigParser(); cfg.read('.bumpversion.cfg'); print(cfg['bumpversion']['current_version'])")
+          SHA256=$(curl -sL https://pypi.io/packages/source/f/fezrs/fezrs-${VERSION}.tar.gz | sha256sum | awk '{print $1}')
+          echo "FEZRS_VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "SHA256_HASH=${SHA256}" >> $GITHUB_ENV
+
+      - name: Build Conda package
+        env:
+          FEZRS_VERSION: ${{ env.FEZRS_VERSION }}
+          SHA256_HASH: ${{ env.SHA256_HASH }}
+        run: |
+          conda-build recipe/
+
+      - name: Upload to Anaconda Cloud
+        env:
+          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+        run: |
+          anaconda --token $ANACONDA_API_TOKEN upload $(conda-build recipe/ --output) --force
