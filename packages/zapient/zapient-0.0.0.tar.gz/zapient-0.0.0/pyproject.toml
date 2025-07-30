@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zapient"
+version = "0.0.0"
+description = "Lightweight web stack"
+license = { text = "MIT" }
+
+[project.urls]
+Source = "https://github.com/zensical/zapient"
