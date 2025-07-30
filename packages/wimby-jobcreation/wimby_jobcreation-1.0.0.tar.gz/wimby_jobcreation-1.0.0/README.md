@@ -1,0 +1,89 @@
+# wimby_jobcreation
+
+**Estimate wind farm job creation across all project stages using publicly available data and models.**
+
+---
+
+## Overview
+
+The `wimby_jobcreation` package provides a model to estimate **job creation** throughout the **lifetime of individual wind farms**. It draws from scientific and grey literature to offer robust, stage-specific employment estimations.
+
+---
+
+## Key Features
+
+- 🔹 Estimates **direct**, **indirect**, and **induced** job creation.
+- 🔹 Covers **all life stages**: development, construction, manufacturing, operation & maintenance, and decommissioning.
+- 🔹 Calculates **employment factors** in **job-years per megawatt (job-years/MW)** for individual wind farms.
+
+---
+
+## Installation
+
+Install the latest version from PyPI:
+
+```bash
+pip install wimby_jobcreation
+```
+
+---
+
+## Usage
+
+```python
+import wimby_jobcreation as wjc
+
+# Example usage
+turbine_capacity = 3  # Capacity in MW
+onshore_offshore = 'Onshore'  # Type of wind farm
+statistics = wjc.calculate_job_creation_statistics(jobcreation_review_data.csv)  # Load model statistics
+country = 'UK'  # Country context
+number_of_turbines = 5  # Number of turbines
+
+# Calculate employment factors
+results = wjc.calculate_employment_factors_with_regression(
+    turbine_capacity, 
+    onshore_offshore, 
+    statistics, 
+    country, 
+    number_of_turbines
+)
+
+print(results)
+```
+
+---
+
+## Documentation
+
+Full documentation and additional examples are available on the [GitHub repository](https://github.com/leramirezca/WIMBY_UU_models).
+
+---
+
+## License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Authors
+
+**Andrei del Villar** and **Luis Ramirez Camargo**  
+Based on the master thesis of **Sam Klap**
+
+GitHub: [@leramirezca](https://github.com/leramirezca)  
+Contact: [l.e.ramirezcamargo@uu.nl](mailto:l.e.ramirezcamargo@uu.nl)
+
+---
+
+## Contributing
+
+We welcome contributions! Please fork the repository and submit pull requests, or open an issue to report bugs and suggest features.
+We are also looking to grow the underlying data base: jobcreation_review_data.csv if you are interested to contribute please have a look of https://wimby.eu/resource/d2-9-data-on-regulatory-and-socio-economic-conditions-and-impacts-a/ to see how that data was gathered.
+
+---
+
+
+## Related Projects
+
+- [wimby_sf](https://github.com/leramirezca/WIMBY_UU_models) — An open source tool to estimate shadow flicker of individual turbines

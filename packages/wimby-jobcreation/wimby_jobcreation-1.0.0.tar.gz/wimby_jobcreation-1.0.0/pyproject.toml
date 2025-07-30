@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wimby_jobcreation"
+version = "1.0.0"
+dependencies = [
+  "pandas"
+]
+requires-python = ">=3.8"
+authors = [
+  {name = "Andrei del Villar"},
+  {name = "Sam Klap"},
+  {name = "Luis Ramirez Camargo", email = "l.e.ramirezcamargo@uu.nl"}
+]
+maintainers = [
+  {name = "Luis Ramirez Camargo", email = "l.e.ramirezcamargo@uu.nl"}
+]
+description = "A package for the WIMBY job creation functions"
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[tool.setuptools]
+packages = ["wimby_jobcreation"]
+
+[tool.setuptools.package-data]
+"wimby_jobcreation" = ["data/*.csv"]
