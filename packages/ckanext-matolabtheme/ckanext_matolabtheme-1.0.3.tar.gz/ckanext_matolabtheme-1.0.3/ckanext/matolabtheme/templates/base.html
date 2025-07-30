@@ -1,0 +1,22 @@
+{% ckan_extends %}
+
+{% block meta %}
+{{ super() }}
+{%- endblock -%}
+
+{%- block styles %}
+{{ super() }}
+{% asset 'matolabtheme/style' %}
+{% if config.get('ckanext.matolabtheme.dark_mode') %}
+{% asset 'matolabtheme/dark' %}
+{% endif %}
+{% endblock %}
+
+{% block bodytag %}
+{{ super() }}
+{% endblock %}
+
+{%- block scripts %}
+{{ super() }}
+{% asset 'matolabtheme/js' %}
+{% endblock %}
