@@ -1,0 +1,14 @@
+[project]
+name = "definit-db-py"
+version = "0.1.0"
+description = "DefinIT Markdown database"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"definit_db_py" = ["*.py"]
