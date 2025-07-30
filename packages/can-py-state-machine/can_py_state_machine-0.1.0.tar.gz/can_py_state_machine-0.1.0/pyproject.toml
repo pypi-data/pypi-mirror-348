@@ -1,0 +1,29 @@
+[project]
+name = "can_py_state_machine"
+version = "0.1.0"
+description = "A lightweight Python implementation of a generic, event-driven state machine inspired by can-state-machine."
+authors = [
+  { name = "Eren Havuc", email = "e.havuc@draykant.eu" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["state-machine", "workflow", "finite-state-machine"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries"
+]
+
+[project.urls]
+Homepage = "https://github.com/hayde/ocr-state-machine.git"
+Repository = "https://github.com/hayde/ocr-state-machine.git"
+
+[tool.setuptools]
+packages = ["can_state_machine"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
