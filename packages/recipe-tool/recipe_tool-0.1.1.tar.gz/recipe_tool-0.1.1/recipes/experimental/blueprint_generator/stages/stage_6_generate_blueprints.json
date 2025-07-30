@@ -1,0 +1,128 @@
+{
+  "steps": [
+    {
+      "type": "read_files",
+      "config": {
+        "path": "{{output_dir}}/analysis/ordered_components.json",
+        "content_key": "ordered_components",
+        "merge_mode": "dict"
+      }
+    },
+    {
+      "type": "read_files",
+      "config": {
+        "path": "ai_context/COMPONENT_DOCS_SPEC_GUIDE.md",
+        "content_key": "component_docs_spec_guide",
+        "optional": false
+      }
+    },
+    {
+      "type": "loop",
+      "config": {
+        "items": "ordered_components",
+        "item_key": "component",
+        "max_concurrency": 0,
+        "substeps": [
+          {
+            "type": "conditional",
+            "config": {
+              "condition": "file_exists('{{output_dir}}/blueprints/{{component.component_id}}/blueprint.md')",
+              "if_false": {
+                "steps": [
+                  {
+                    "type": "read_files",
+                    "config": {
+                      "path": "{{output_dir}}/components/{{component.component_id}}_spec.md",
+                      "content_key": "component_spec"
+                    }
+                  },
+                  {
+                    "type": "llm_generate",
+                    "config": {
+                      "prompt": "Generate clarification questions for this component specification.\n\nComponent ID: {{component.component_id}}\n\nComponent Specification:\n{{component_spec}}\n\nIdentify any ambiguities, missing details, or areas that need further clarification. Generate a list of specific questions that would help refine the specification.\n\nOutput the questions as a Markdown file. For guidance, these are the guidelines for what will be required when later writing the docs & spec files:\n{{component_docs_spec_guide}}\n\nMake sure to include questions that will help provide the information needed.",
+                      "model": "{{model|default:'openai/o4-mini'}}",
+                      "output_format": "files",
+                      "output_key": "clarification_questions"
+                    }
+                  },
+                  {
+                    "type": "write_files",
+                    "config": {
+                      "files_key": "clarification_questions",
+                      "root": "{{output_dir}}/clarification/{{component.component_id}}"
+                    }
+                  },
+                  {
+                    "type": "llm_generate",
+                    "config": {
+                      "prompt": "Provide answers to these requests for clarification and create a revised specification.\n\nComponent ID: {{component.component_id}}\n\nOriginal Specification:\n{{component_spec}}\n\nClarification Questions:\n{{clarification_questions}}\n\nProvide answers to each question and then create a revised, more detailed specification for the component. The revised specification should incorporate the clarifications and provide a comprehensive guide for implementation. Here are the originally provided details for the overall project, to assist in the context:\n{{initial_project_spec}}\n\nAdditional context files:\n{{context}}\n\nExternal library references:\n{{references}}",
+                      "model": "{{model|default:'openai/o4-mini'}}",
+                      "output_format": "files",
+                      "output_key": "revised_spec"
+                    }
+                  },
+                  {
+                    "type": "write_files",
+                    "config": {
+                      "files_key": "revised_spec",
+                      "root": "{{output_dir}}/clarification/{{component.component_id}}"
+                    }
+                  },
+                  {
+                    "type": "llm_generate",
+                    "config": {
+                      "prompt": "Evaluate the revised specification for completeness and implementability and readiness for the generation of docs and spec files.\n\nComponent ID: {{component.component_id}}\n\nRevised Specification:\n{{revised_spec}}\n\nEvaluate whether the specification is complete, clear, and ready for implementation. Consider aspects such as:\n- Clear purpose and responsibilities\n- Well-defined interfaces\n- Comprehensive requirements\n- Sufficient implementation guidance\n- Identified dependencies\n\nOutput an evaluation report with a final determination of whether the specification is ready for blueprint generation. Here is the guide for what will be required when later writing the docs & spec files:\n{{component_docs_spec_guide}}",
+                      "model": "{{model|default:'openai/o4-mini'}}",
+                      "output_format": "files",
+                      "output_key": "evaluation_result"
+                    }
+                  },
+                  {
+                    "type": "write_files",
+                    "config": {
+                      "files_key": "evaluation_result",
+                      "root": "{{output_dir}}/evaluation/{{component.component_id}}"
+                    }
+                  },
+                  {
+                    "type": "llm_generate",
+                    "config": {
+                      "prompt": "Generate a comprehensive blueprint for this component based on its specification.\n\nComponent ID: {{component.component_id}}\n\nRevised Specification:\n{{revised_spec}}\n\nEvaluation:\n{{evaluation_result}}\n\nCreate a complete blueprint by following this guidance for creating a docs and spec file structure:\n{{component_docs_spec_guide}}",
+                      "model": "{{model|default:'openai/o4-mini'}}",
+                      "output_format": "files",
+                      "output_key": "component_blueprint"
+                    }
+                  },
+                  {
+                    "type": "write_files",
+                    "config": {
+                      "files_key": "component_blueprint",
+                      "root": "{{output_dir}}/blueprints/{{component.component_id}}"
+                    }
+                  },
+                  {
+                    "type": "llm_generate",
+                    "config": {
+                      "prompt": "Generate a summary of the blueprint.\n\nComponent ID: {{component.component_id}}\n\nBlueprint:\n{{component_blueprint}}\n\nCreate a concise summary of the blueprint, including key implementation details, interfaces, and integration points with other components.",
+                      "model": "{{model|default:'openai/o4-mini'}}",
+                      "output_format": "files",
+                      "output_key": "blueprint_summary"
+                    }
+                  },
+                  {
+                    "type": "write_files",
+                    "config": {
+                      "files_key": "blueprint_summary",
+                      "root": "{{output_dir}}/blueprints/{{component.component_id}}"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "result_key": "generated_blueprints"
+      }
+    }
+  ]
+}
