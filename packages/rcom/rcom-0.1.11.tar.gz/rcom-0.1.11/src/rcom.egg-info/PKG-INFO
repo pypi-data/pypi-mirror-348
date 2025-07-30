@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: rcom
+Version: 0.1.11
+Summary: The Python interface for the librcom communication library
+Author-email: "Peter Hanappe, Doug Boari" <peter.hanappe@sony.com>
+License-Expression: LGPL-2.1
+Project-URL: Homepage, https://github.com/romi/rcom
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: websocket-client
+Requires-Dist: websockets
+Dynamic: license-file
+
+
+The Python interface for the librcom communication library.
+
+Please check https://github.com/romi/rcom
