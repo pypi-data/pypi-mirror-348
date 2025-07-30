@@ -1,0 +1,29 @@
+[project]
+name = "ts-viz"
+version = "0.1.3"
+description = "Visualization utilities for time series analysis including outlier detection, trendlines, and correlation analysis."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Chitra Kumar Sai", email = "chitrakumarsai@gmail.com"}
+]
+keywords = ["time-series", "visualization", "outliers", "matplotlib", "seaborn"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.21.0,<1.26.0",
+    "pandas<=2.1.4",
+    "matplotlib>=3.10.3",
+    "seaborn>=0.13.2",
+    "datetime>=5.5",
+    "build>=1.2.2.post1",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
